@@ -1,0 +1,1098 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Terenzio — Le innovazioni drammaturgiche | Lezione Interattiva</title>
+<link rel="stylesheet" href="css/style.css">
+<style>
+  /* ═══ STILI SPECIFICI LEZIONE TERENZIO ═══ */
+
+  .lesson-intro {
+    background: var(--card);
+    border: 2px solid var(--border);
+    border-radius: 16px;
+    padding: 30px;
+    margin-bottom: 30px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  }
+
+  .lesson-intro h2 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 22px;
+    color: var(--gold);
+    margin-bottom: 14px;
+  }
+
+  .lesson-intro p {
+    font-size: 16px;
+    line-height: 1.8;
+    margin-bottom: 10px;
+  }
+
+  .context-badge {
+    display: inline-block;
+    padding: 4px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 700;
+    margin-right: 8px;
+    margin-bottom: 6px;
+  }
+
+  .context-badge.autore { background: rgba(184,145,90,0.15); color: var(--gold); }
+  .context-badge.opera { background: rgba(45,106,79,0.12); color: var(--eulalia); }
+  .context-badge.data { background: rgba(107,100,86,0.12); color: var(--text-dim); }
+
+  /* ═══ TLAC BOXES ═══ */
+  .tlac-box {
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin: 24px 0;
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  .tlac-box .tlac-label {
+    font-family: 'Libre Baskerville', serif;
+    font-weight: 700;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .tlac-donow {
+    background: rgba(232, 93, 93, 0.08);
+    border-left: 4px solid var(--latino1);
+  }
+
+  .tlac-donow .tlac-label { color: var(--latino1); }
+
+  .tlac-coldcall {
+    background: rgba(109, 181, 212, 0.1);
+    border-left: 4px solid var(--latino3);
+  }
+
+  .tlac-coldcall .tlac-label { color: #1a6b8a; }
+
+  .tlac-turntalk {
+    background: rgba(120, 200, 120, 0.08);
+    border-left: 4px solid var(--latino2);
+  }
+
+  .tlac-turntalk .tlac-label { color: #2a7a2a; }
+
+  .tlac-stretch {
+    background: rgba(192, 132, 212, 0.08);
+    border-left: 4px solid var(--latino5);
+  }
+
+  .tlac-stretch .tlac-label { color: #7a3a9a; }
+
+  .tlac-exit {
+    background: rgba(244, 211, 94, 0.12);
+    border-left: 4px solid var(--latino4);
+  }
+
+  .tlac-exit .tlac-label { color: #8a6a0a; }
+
+  .tlac-reveal-btn {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 7px 16px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--card);
+    font-family: 'Cardo', serif;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s;
+    color: var(--text-dim);
+  }
+
+  .tlac-reveal-btn:hover {
+    border-color: var(--gold);
+    color: var(--gold);
+  }
+
+  .tlac-hint {
+    display: none;
+    margin-top: 10px;
+    padding: 12px 16px;
+    background: rgba(184,145,90,0.06);
+    border-radius: 8px;
+    font-style: italic;
+    color: var(--text-dim);
+    line-height: 1.6;
+  }
+
+  .tlac-hint.visible { display: block; }
+
+  /* ═══ SEZIONE CONTENUTO ═══ */
+  .content-section {
+    background: var(--card);
+    border: 2px solid var(--border);
+    border-radius: 16px;
+    margin-bottom: 30px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  }
+
+  .content-header {
+    background: linear-gradient(135deg, #2c2416 0%, #5a4e3c 100%);
+    color: #f5f0e8;
+    padding: 24px 30px;
+  }
+
+  .content-header h2 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 24px;
+    margin-bottom: 4px;
+  }
+
+  .content-header .section-ref {
+    font-size: 15px;
+    color: var(--gold-light);
+    font-style: italic;
+  }
+
+  .content-body {
+    padding: 30px;
+  }
+
+  .content-body h3 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 19px;
+    color: var(--text);
+    margin: 24px 0 12px;
+  }
+
+  .content-body h3:first-child { margin-top: 0; }
+
+  .content-body p {
+    font-size: 16px;
+    line-height: 1.8;
+    margin-bottom: 12px;
+  }
+
+  .lat-cite {
+    font-family: 'Libre Baskerville', serif;
+    font-style: italic;
+    color: var(--gold);
+    font-weight: 600;
+  }
+
+  .nota-fonte {
+    display: block;
+    font-size: 13px;
+    color: var(--text-dim);
+    font-style: italic;
+    margin-top: 4px;
+  }
+
+  /* ═══ TIMELINE ═══ */
+  .timeline {
+    position: relative;
+    padding: 20px 0 20px 40px;
+    margin: 24px 0;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 16px;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: linear-gradient(to bottom, var(--latino3), var(--gold));
+    border-radius: 3px;
+  }
+
+  .timeline-item {
+    position: relative;
+    margin-bottom: 20px;
+    padding: 16px 20px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -32px;
+    top: 20px;
+    width: 14px;
+    height: 14px;
+    background: var(--card);
+    border: 3px solid var(--latino3);
+    border-radius: 50%;
+    z-index: 1;
+    transition: all 0.3s;
+  }
+
+  .timeline-item:hover {
+    border-color: var(--gold);
+    transform: translateX(4px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  }
+
+  .timeline-item:hover::before {
+    background: var(--latino3);
+  }
+
+  .timeline-item.active {
+    border-color: var(--gold);
+    background: rgba(184,145,90,0.06);
+  }
+
+  .timeline-item.active::before {
+    background: var(--gold);
+    border-color: var(--gold);
+  }
+
+  .timeline-date {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--latino3);
+    margin-bottom: 4px;
+  }
+
+  .timeline-title {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+
+  .timeline-subtitle {
+    font-size: 14px;
+    color: var(--text-dim);
+  }
+
+  .timeline-detail {
+    display: none;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid var(--border);
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--text);
+  }
+
+  .timeline-item.active .timeline-detail {
+    display: block;
+  }
+
+  .timeline-model {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 700;
+    background: rgba(45,106,79,0.1);
+    color: var(--eulalia);
+    margin-top: 6px;
+  }
+
+  /* ═══ CONFRONTO TABLE ═══ */
+  .confronto-grid {
+    display: grid;
+    grid-template-columns: auto 1fr 1fr;
+    gap: 0;
+    border: 2px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    margin: 24px 0;
+  }
+
+  .confronto-grid .cg-header {
+    background: linear-gradient(135deg, #2c2416, #5a4e3c);
+    color: #f5f0e8;
+    padding: 14px 18px;
+    font-family: 'Libre Baskerville', serif;
+    font-size: 15px;
+    font-weight: 700;
+    text-align: center;
+  }
+
+  .confronto-grid .cg-label {
+    padding: 14px 18px;
+    font-family: 'Libre Baskerville', serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--gold);
+    background: rgba(184,145,90,0.06);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+  }
+
+  .confronto-grid .cg-cell {
+    padding: 14px 18px;
+    font-size: 15px;
+    line-height: 1.6;
+    border-bottom: 1px solid var(--border);
+    background: var(--card);
+  }
+
+  .confronto-grid .cg-cell.plauto {
+    border-right: 1px solid var(--border);
+  }
+
+  .confronto-grid .cg-cell:last-child {
+    border-bottom: none;
+  }
+
+  .cg-highlight {
+    font-weight: 700;
+    color: var(--gold);
+  }
+
+  /* ═══ MAPPA CONCETTUALE ═══ */
+  .mappa-container {
+    margin: 24px 0;
+    padding: 30px;
+    background: var(--bg);
+    border: 2px solid var(--border);
+    border-radius: 16px;
+    overflow-x: auto;
+  }
+
+  .mappa-svg {
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+    height: auto;
+  }
+
+  .mappa-node {
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+
+  .mappa-node:hover rect,
+  .mappa-node:hover ellipse {
+    filter: brightness(0.92);
+    stroke-width: 3;
+  }
+
+  .mappa-tooltip {
+    display: none;
+    position: fixed;
+    background: #2c2416;
+    color: #f5f0e8;
+    padding: 12px 16px;
+    border-radius: 10px;
+    font-size: 14px;
+    line-height: 1.5;
+    max-width: 300px;
+    z-index: 200;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+    font-family: 'Cardo', serif;
+    pointer-events: none;
+  }
+
+  /* ═══ QUIZ ═══ */
+  .esercizio-section {
+    background: var(--card);
+    border: 2px solid var(--eulalia);
+    border-radius: 16px;
+    padding: 30px;
+    margin-bottom: 30px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  }
+
+  .esercizio-section h2 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 22px;
+    color: var(--eulalia);
+    margin-bottom: 20px;
+  }
+
+  .esercizio-section h3 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 17px;
+    color: var(--text);
+    margin: 20px 0 12px;
+  }
+
+  .quiz-item {
+    background: rgba(45,106,79,0.05);
+    border-radius: 10px;
+    padding: 18px;
+    margin-bottom: 14px;
+  }
+
+  .quiz-item .quiz-q {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    line-height: 1.5;
+  }
+
+  .quiz-options {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .quiz-option {
+    padding: 12px 16px;
+    border: 2px solid var(--border);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 15px;
+    background: var(--card);
+  }
+
+  .quiz-option:hover { border-color: var(--eulalia); background: rgba(45,106,79,0.04); }
+  .quiz-option.correct { border-color: #28a745; background: rgba(40,167,69,0.1); color: #155724; }
+  .quiz-option.wrong { border-color: #dc3545; background: rgba(220,53,69,0.08); color: #721c24; }
+  .quiz-option.disabled { pointer-events: none; opacity: 0.6; }
+
+  .quiz-feedback {
+    margin-top: 10px;
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-size: 14px;
+    line-height: 1.5;
+    display: none;
+  }
+
+  .quiz-feedback.show { display: block; }
+  .quiz-feedback.correct-fb { background: rgba(40,167,69,0.1); border-left: 3px solid #28a745; color: #155724; }
+  .quiz-feedback.wrong-fb { background: rgba(220,53,69,0.08); border-left: 3px solid #dc3545; color: #721c24; }
+
+  /* ═══ SCORE BAR ═══ */
+  .score-bar {
+    background: var(--card);
+    border: 2px solid var(--border);
+    border-radius: 12px;
+    padding: 16px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    position: sticky;
+    top: 60px;
+    z-index: 50;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  }
+
+  .score-label {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 15px;
+    font-weight: 700;
+  }
+
+  .score-value {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--eulalia);
+  }
+
+  /* ═══ RESPONSIVE ═══ */
+  @media (max-width: 768px) {
+    .content-body { padding: 20px; }
+    .content-header { padding: 18px 20px; }
+    .confronto-grid { grid-template-columns: 1fr; }
+    .confronto-grid .cg-header { display: block; }
+    .timeline { padding-left: 30px; }
+    .timeline-item::before { left: -22px; }
+    .score-bar { flex-direction: column; gap: 6px; top: 50px; }
+    .mappa-container { padding: 16px; }
+  }
+</style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="container">
+      <a href="index.html" class="site-name">Lingua e Cultura Latina</a>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="latino3-classico.html">Latino 3</a>
+        <a href="raccoglitore-testi.html">Testi</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Header -->
+  <div class="page-header">
+    <h1>Terenzio &mdash; Le innovazioni drammaturgiche</h1>
+    <div class="divider"></div>
+    <p class="subtitle">Lezione interattiva &mdash; Latino 3 Classico</p>
+  </div>
+
+  <div class="container">
+    <a href="latino3-classico.html" class="back-link">&larr; Torna a Latino 3 Classico</a>
+
+    <!-- Punteggio -->
+    <div class="score-bar">
+      <span class="score-label">Punteggio</span>
+      <span class="score-value" id="scoreDisplay">0 / 10</span>
+    </div>
+
+    <!-- ═══════════════════ DO NOW ═══════════════════ -->
+    <div class="tlac-box tlac-donow">
+      <div class="tlac-label">Do Now &mdash; Attivit&agrave; di avvio (2 min)</div>
+      <p>Scrivi sul quaderno una risposta in 2&ndash;3 righe: <strong>&laquo;Cosa ricordi di Plauto? Come funzionavano i suoi prologhi e cosa li rendeva divertenti?&raquo;</strong></p>
+      <p>Questa lezione esplorer&agrave; come Terenzio abbia rivoluzionato il teatro comico latino &mdash; e per capirlo, dobbiamo partire dal modello che ha trasformato.</p>
+    </div>
+
+    <!-- ═══════════════════ INTRODUZIONE ═══════════════════ -->
+    <div class="lesson-intro">
+      <h2>Chi era Terenzio?</h2>
+      <div style="margin-bottom: 14px;">
+        <span class="context-badge autore">P. Terentius Afer</span>
+        <span class="context-badge opera">6 commedie (166&ndash;160 a.C.)</span>
+        <span class="context-badge data">II sec. a.C. &mdash; Et&agrave; degli Scipioni</span>
+      </div>
+      <p>Publio Terenzio Afro nasce a Cartagine intorno al 195&ndash;185 a.C. Condotto schiavo a Roma, viene educato dal senatore Terenzio Lucano, che lo affranca. Entra nel circolo di Scipione Emiliano e Gaio Lelio, l'&eacute;lite culturale che promuove l'incontro tra cultura romana e valori greci. Muore giovanissimo, intorno al 159 a.C., durante un viaggio in Grecia.</p>
+      <p>In soli sei anni (166&ndash;160 a.C.) produce sei commedie &mdash; tutte pervenute &mdash; che rivoluzionano il genere comico. Dove Plauto cercava il riso, Terenzio cerca la <em>veritas</em>: la rappresentazione credibile dei rapporti umani.</p>
+      <span class="nota-fonte">Fonte principale: Svetonio, Vita Terenti (De viris illustribus)</span>
+    </div>
+
+    <!-- ═══════════════════ COLD CALL 1 ═══════════════════ -->
+    <div class="tlac-box tlac-coldcall">
+      <div class="tlac-label">Fermati e rispondi</div>
+      <p><strong>Terenzio viene da Cartagine, la nemica di Roma. Come pu&ograve; un ex schiavo straniero entrare nell'&eacute;lite culturale romana?</strong> Pensa al concetto di <em>humanitas</em> che caratterizza il circolo scipionico.</p>
+      <button class="tlac-reveal-btn" onclick="toggleHint(this)">Mostra spunto</button>
+      <div class="tlac-hint">L'<em>humanitas</em> del circolo scipionico &egrave; un ideale di apertura culturale: ci&ograve; che conta non &egrave; l'origine ma il valore intellettuale e morale della persona. Terenzio ne &egrave; la dimostrazione vivente &mdash; e lo far&agrave; dire a un suo personaggio: <span class="lat-cite">&laquo;Homo sum: humani nihil a me alienum puto&raquo;</span> (Heaut. 77).</div>
+    </div>
+
+    <!-- ═══════════════════ TIMELINE ═══════════════════ -->
+    <div class="content-section">
+      <div class="content-header">
+        <h2>Le sei commedie: una cronologia</h2>
+        <span class="section-ref">Clicca su ciascuna opera per i dettagli</span>
+      </div>
+      <div class="content-body">
+        <div class="timeline" id="timeline">
+
+          <div class="timeline-item" onclick="toggleTimeline(this)">
+            <div class="timeline-date">166 a.C.</div>
+            <div class="timeline-title">Andria</div>
+            <div class="timeline-subtitle">La ragazza di Andro &mdash; esordio a 19&ndash;29 anni</div>
+            <div class="timeline-detail">
+              Prima commedia di Terenzio, rappresentata ai <em>Ludi Megalenses</em>. Un giovane ama una ragazza straniera di Andro; il padre ha altri piani matrimoniali. Nel prologo, Terenzio difende gi&agrave; la propria tecnica della <em>contaminatio</em> combinando due commedie di Menandro (<em>Andria</em> e <em>Perinthia</em>).
+              <span class="timeline-model">Modello: Menandro</span>
+            </div>
+          </div>
+
+          <div class="timeline-item" onclick="toggleTimeline(this)">
+            <div class="timeline-date">165 a.C. (ripresa 160)</div>
+            <div class="timeline-title">Hecyra</div>
+            <div class="timeline-subtitle">La suocera &mdash; due volte &laquo;caduta&raquo;</div>
+            <div class="timeline-detail">
+              La commedia pi&ugrave; sfortunata: il pubblico abbandona due volte la rappresentazione, attratto da spettacoli di funamboli e gladiatori. Terenzio la ripropone nel 160 a.C. con un prologo che racconta il fallimento precedente. Trama sottile e psicologicamente complessa: una suocera accusata ingiustamente.
+              <span class="timeline-model">Modello: Apollodoro di Caristo</span>
+            </div>
+          </div>
+
+          <div class="timeline-item" onclick="toggleTimeline(this)">
+            <div class="timeline-date">163 a.C.</div>
+            <div class="timeline-title">Heautontimorumenos</div>
+            <div class="timeline-subtitle">Il punitore di s&eacute; stesso</div>
+            <div class="timeline-detail">
+              Un padre si punisce con il lavoro estenuante per aver cacciato il figlio. Contiene la celebre battuta <span class="lat-cite">&laquo;Homo sum: humani nihil a me alienum puto&raquo;</span> (v. 77): manifesto dell'<em>humanitas</em> terenziana. Il titolo traduce il greco di Menandro.
+              <span class="timeline-model">Modello: Menandro</span>
+            </div>
+          </div>
+
+          <div class="timeline-item" onclick="toggleTimeline(this)">
+            <div class="timeline-date">161 a.C.</div>
+            <div class="timeline-title">Eunuchus</div>
+            <div class="timeline-subtitle">L'eunuco &mdash; il pi&ugrave; grande successo</div>
+            <div class="timeline-detail">
+              L'unica commedia terenziana con grande successo di pubblico: viene replicata due volte nello stesso giorno (caso unico!). Un giovane si traveste da eunuco per avvicinare la donna amata. &Egrave; la commedia pi&ugrave; &laquo;plautina&raquo; di Terenzio: ritmo pi&ugrave; vivace, situazioni di <em>vis comica</em>.
+              <span class="timeline-model">Modello: Menandro + Menandro (contaminatio)</span>
+            </div>
+          </div>
+
+          <div class="timeline-item" onclick="toggleTimeline(this)">
+            <div class="timeline-date">161 a.C.</div>
+            <div class="timeline-title">Phormio</div>
+            <div class="timeline-subtitle">Il parassita astuto</div>
+            <div class="timeline-detail">
+              L'intrigo &egrave; costruito attorno al parassita Formione, che con arguzia manipola le situazioni a vantaggio dei due giovani protagonisti. Struttura a doppio intreccio: due coppie di innamorati, due padri da ingannare.
+              <span class="timeline-model">Modello: Apollodoro di Caristo</span>
+            </div>
+          </div>
+
+          <div class="timeline-item" onclick="toggleTimeline(this)">
+            <div class="timeline-date">160 a.C.</div>
+            <div class="timeline-title">Adelphoe</div>
+            <div class="timeline-subtitle">I fratelli &mdash; l'ultima commedia</div>
+            <div class="timeline-detail">
+              Due fratelli allevano ciascuno un figlio: Demea con severit&agrave;, Micione con indulgenza. Chi ha ragione? Terenzio non d&agrave; una risposta univoca &mdash; la commedia resta aperta, lasciando riflettere lo spettatore. Rappresentata ai funerali di Emilio Paolo (padre di Scipione Emiliano). &Egrave; il testamento artistico di Terenzio.
+              <span class="timeline-model">Modello: Menandro + Difilo (contaminatio)</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════ TURN AND TALK ═══════════════════ -->
+    <div class="tlac-box tlac-turntalk">
+      <div class="tlac-label">Turn and Talk &mdash; Discuti con il compagno (3 min)</div>
+      <p><strong>Osserva la timeline: tutti i modelli di Terenzio sono greci (Menandro, Apollodoro). Perch&eacute; un commediografo romano rielabora i Greci invece di inventare trame nuove?</strong> Pensate insieme a che cosa significhi &laquo;imitazione creativa&raquo; nel mondo antico.</p>
+    </div>
+
+    <!-- ═══════════════════ INNOVAZIONI DRAMMATURGICHE ═══════════════════ -->
+    <div class="content-section">
+      <div class="content-header">
+        <h2>Le innovazioni drammaturgiche</h2>
+        <span class="section-ref">Il cuore della lezione</span>
+      </div>
+      <div class="content-body">
+
+        <h3>1. Il prologo polemico</h3>
+        <p>In Plauto, il prologo aveva funzione <strong>espositiva</strong>: un personaggio (spesso un dio) rivelava la trama al pubblico, creando <em>ironia drammatica</em> &mdash; gli spettatori sapevano gi&agrave; tutto, i personaggi no. Terenzio compie una rivoluzione: elimina il prologo espositivo e lo trasforma in uno spazio di <strong>polemica letteraria</strong>.</p>
+        <p>Nei suoi prologhi, Terenzio risponde agli attacchi del rivale Luscio Lanuvino, difende la <em>contaminatio</em>, chiede la benevolenza del pubblico. Il risultato &egrave; duplice: da un lato, lo spettatore non conosce in anticipo lo scioglimento; dall'altro, il prologo diventa un documento di critica letteraria antica, unico nel suo genere.</p>
+
+        <div class="tlac-box tlac-coldcall">
+          <div class="tlac-label">Fermati e rispondi</div>
+          <p><strong>Se il pubblico non conosce la trama in anticipo, che effetto ha sulla narrazione?</strong></p>
+          <button class="tlac-reveal-btn" onclick="toggleHint(this)">Mostra spunto</button>
+          <div class="tlac-hint">Senza prologo espositivo, il pubblico scopre la vicenda <em>insieme</em> ai personaggi. Si passa dall'ironia drammatica alla <strong>suspense</strong>: non sappiamo come andr&agrave; a finire. Terenzio anticipa cos&igrave; una tecnica narrativa moderna.</div>
+        </div>
+
+        <h3>2. La contaminatio</h3>
+        <p>Terenzio combina (<span class="lat-cite">contaminare</span>) elementi di due o pi&ugrave; commedie greche in un'opera unica. Ad esempio, nell'<em>Andria</em> fonde la <em>Andria</em> e la <em>Perinthia</em> di Menandro; negli <em>Adelphoe</em> inserisce una scena di Difilo. Il termine <em>contaminare</em> era usato dai detrattori con tono negativo (&laquo;inquinare&raquo;), ma Terenzio lo rivendica come procedimento creativo legittimo, citando i precedenti di Nevio, Plauto ed Ennio.</p>
+
+        <h3>3. L'illusione scenica</h3>
+        <p>In Plauto, i personaggi si rivolgono spesso al pubblico: rompono la cosiddetta &laquo;quarta parete&raquo;. Il servo plautino commenta, ammica, chiede complicit&agrave;. &Egrave; il <strong>metateatro</strong>: il teatro che parla di s&eacute; stesso.</p>
+        <p>Terenzio fa il contrario: mantiene una <strong>coerenza illusionistica</strong> costante. I personaggi non sanno di essere in scena. Dialoghi e monologhi simulano una conversazione reale. Il mondo della commedia si presenta come autonomo, chiuso in s&eacute; &mdash; anticipando ci&ograve; che nel teatro moderno si chiamer&agrave; &laquo;realismo&raquo;.</p>
+
+        <h3>4. Commedia <em>stataria</em> vs <em>motoria</em></h3>
+        <p>Nell'antichit&agrave; si distinguevano due tipi di commedia: la <em>motoria</em>, agitata, ricca di colpi di scena e azione fisica (tipica di Plauto), e la <em>stataria</em>, misurata, concentrata sui dialoghi e l'analisi psicologica. Terenzio stesso, nel prologo dell'<em>Hecyra</em>, definisce la propria commedia <span class="lat-cite">stataria</span>: il conflitto non &egrave; esteriore (furti, travestimenti, inseguimenti) ma interiore &mdash; dilemmi morali, rapporti familiari, scelte educative.</p>
+
+        <h3>5. Stile e lingua</h3>
+        <p>Cesare defin&igrave; Terenzio <span class="lat-cite">&laquo;puri sermonis amator&raquo;</span> (&laquo;amante della lingua pura&raquo;), pur lamentando la mancanza di <em>vis</em> comica. Lo stile terenziano &egrave; caratterizzato da una <strong>sermocinatio</strong> elegante e sobria: il latino di Terenzio suona come una conversazione colta, senza gli eccessi verbali, i <em>cantica</em> (parti cantate) e le deformazioni comiche di Plauto. Il registro &egrave; uniforme &mdash; padroni e servi parlano con differenze minime &mdash; e la sintassi tende alla chiarezza e all'equilibrio.</p>
+      </div>
+    </div>
+
+    <!-- ═══════════════════ STRETCH IT ═══════════════════ -->
+    <div class="tlac-box tlac-stretch">
+      <div class="tlac-label">Stretch It &mdash; Approfondisci</div>
+      <p><strong>Terenzio elimina i <em>cantica</em> (le parti cantate). Che conseguenza ha questa scelta per il ritmo dello spettacolo?</strong></p>
+      <button class="tlac-reveal-btn" onclick="toggleHint(this)">Mostra spunto</button>
+      <div class="tlac-hint">Senza cantica, la commedia perde la dimensione musicale e &laquo;carnevalesca&raquo; di Plauto. Diventa un'esperienza pi&ugrave; vicina al teatro di parola: il pubblico deve seguire i dialoghi con attenzione, non pu&ograve; lasciarsi trasportare dal ritmo. &Egrave; una scelta coerente con la <em>stataria</em>: meno spettacolo, pi&ugrave; riflessione.</div>
+    </div>
+
+    <!-- ═══════════════════ CONFRONTO PLAUTO-TERENZIO ═══════════════════ -->
+    <div class="content-section">
+      <div class="content-header">
+        <h2>Plauto vs Terenzio &mdash; Due mondi a confronto</h2>
+        <span class="section-ref">Tabella comparativa</span>
+      </div>
+      <div class="content-body">
+        <div class="confronto-grid">
+          <div class="cg-header">Aspetto</div>
+          <div class="cg-header">Plauto</div>
+          <div class="cg-header">Terenzio</div>
+
+          <div class="cg-label">Prologo</div>
+          <div class="cg-cell plauto"><span class="cg-highlight">Espositivo:</span> rivela la trama, crea ironia drammatica</div>
+          <div class="cg-cell"><span class="cg-highlight">Polemico:</span> difesa letteraria, nessuna anticipazione della trama</div>
+
+          <div class="cg-label">Rapporto con il pubblico</div>
+          <div class="cg-cell plauto"><span class="cg-highlight">Metateatro:</span> i personaggi si rivolgono al pubblico, rompono la quarta parete</div>
+          <div class="cg-cell"><span class="cg-highlight">Illusione scenica:</span> mondo chiuso, nessuna rottura della quarta parete</div>
+
+          <div class="cg-label">Tipo di commedia</div>
+          <div class="cg-cell plauto"><span class="cg-highlight">Motoria:</span> azione frenetica, colpi di scena, equivoci, inseguimenti</div>
+          <div class="cg-cell"><span class="cg-highlight">Stataria:</span> dialoghi misurati, conflitti psicologici, ritmo piano</div>
+
+          <div class="cg-label">Personaggi</div>
+          <div class="cg-cell plauto">Tipi fissi (<em>servus callidus</em>, <em>senex iratus</em>, <em>miles gloriosus</em>) con tratti esagerati</div>
+          <div class="cg-cell">Personaggi sfumati, con dilemmi interiori; nessun &laquo;cattivo&raquo; assoluto</div>
+
+          <div class="cg-label">Lingua e stile</div>
+          <div class="cg-cell plauto">Ricca di neologismi, giochi di parole, <em>cantica</em> (parti cantate); registro variabile</div>
+          <div class="cg-cell"><span class="lat-cite">Puri sermonis amator</span> (Cesare): lingua sobria, elegante; assenza di cantica</div>
+
+          <div class="cg-label">Modelli greci</div>
+          <div class="cg-cell plauto">Rielaborazione libera, inserimento di elementi romani (<em>vertere</em>)</div>
+          <div class="cg-cell"><em>Contaminatio</em> dichiarata: fusione ragionata di pi&ugrave; originali greci</div>
+
+          <div class="cg-label">Effetto comico</div>
+          <div class="cg-cell plauto"><span class="cg-highlight">Vis comica:</span> risata aperta, comicit&agrave; corporea e verbale</div>
+          <div class="cg-cell"><span class="cg-highlight">Sorriso riflessivo:</span> ironia sottile, umorismo di situazione</div>
+
+          <div class="cg-label">Ideale</div>
+          <div class="cg-cell plauto">Intrattenimento popolare, <em>ludus</em></div>
+          <div class="cg-cell"><span class="cg-highlight">Humanitas:</span> comprensione empatica dell'umano</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════ TURN AND TALK 2 ═══════════════════ -->
+    <div class="tlac-box tlac-turntalk">
+      <div class="tlac-label">Turn and Talk &mdash; Discuti con il compagno (2 min)</div>
+      <p><strong>Guardando la tabella, quale dei due commediografi &egrave; pi&ugrave; &laquo;moderno&raquo;? E quale avrebbe pi&ugrave; successo oggi al cinema?</strong> Motivate la risposta.</p>
+    </div>
+
+    <!-- ═══════════════════ MAPPA CONCETTUALE ═══════════════════ -->
+    <div class="content-section">
+      <div class="content-header">
+        <h2>Mappa concettuale interattiva</h2>
+        <span class="section-ref">Passa il mouse sui nodi per approfondire</span>
+      </div>
+      <div class="content-body">
+        <div class="mappa-container">
+          <svg class="mappa-svg" viewBox="0 0 900 520" xmlns="http://www.w3.org/2000/svg">
+            <!-- Linee di connessione -->
+            <line x1="450" y1="60" x2="160" y2="170" stroke="#d4c9b8" stroke-width="2"/>
+            <line x1="450" y1="60" x2="450" y2="170" stroke="#d4c9b8" stroke-width="2"/>
+            <line x1="450" y1="60" x2="740" y2="170" stroke="#d4c9b8" stroke-width="2"/>
+            <line x1="160" y1="220" x2="100" y2="320" stroke="#d4c9b8" stroke-width="2"/>
+            <line x1="160" y1="220" x2="250" y2="320" stroke="#d4c9b8" stroke-width="2"/>
+            <line x1="450" y1="220" x2="380" y2="320" stroke="#d4c9b8" stroke-width="2"/>
+            <line x1="450" y1="220" x2="520" y2="320" stroke="#d4c9b8" stroke-width="2"/>
+            <line x1="740" y1="220" x2="670" y2="320" stroke="#d4c9b8" stroke-width="2"/>
+            <line x1="740" y1="220" x2="810" y2="320" stroke="#d4c9b8" stroke-width="2"/>
+            <!-- Freccia humanitas verso il basso -->
+            <line x1="450" y1="370" x2="450" y2="440" stroke="#b8915a" stroke-width="2.5" stroke-dasharray="6,4"/>
+
+            <!-- Nodo centrale -->
+            <g class="mappa-node" data-info="Publio Terenzio Afro (195/185–159 a.C.), commediografo latino di origine cartaginese. Sei commedie, tutte conservate, che rivoluzionano il genere.">
+              <ellipse cx="450" cy="45" rx="130" ry="28" fill="#2c2416" stroke="#b8915a" stroke-width="2.5"/>
+              <text x="450" y="50" text-anchor="middle" fill="#f5f0e8" font-family="Libre Baskerville, serif" font-size="16" font-weight="700">TERENZIO</text>
+            </g>
+
+            <!-- 3 rami principali -->
+            <g class="mappa-node" data-info="Terenzio rinnova la forma drammatica: prologo polemico (non espositivo), contaminatio, illusione scenica ininterrotta.">
+              <rect x="60" y="170" width="200" height="50" rx="12" fill="#e8f4f8" stroke="#6db5d4" stroke-width="2"/>
+              <text x="160" y="200" text-anchor="middle" fill="#1a6b8a" font-family="Libre Baskerville, serif" font-size="14" font-weight="700">Innovazioni formali</text>
+            </g>
+
+            <g class="mappa-node" data-info="Commedia stataria: ritmo misurato, dialoghi psicologici, lingua sobria e pura (puri sermonis amator, Cesare). Assenza di cantica.">
+              <rect x="340" y="170" width="220" height="50" rx="12" fill="#fef3cd" stroke="#f4d35e" stroke-width="2"/>
+              <text x="450" y="200" text-anchor="middle" fill="#8a6a0a" font-family="Libre Baskerville, serif" font-size="14" font-weight="700">Stile e lingua</text>
+            </g>
+
+            <g class="mappa-node" data-info="Terenzio elabora i modelli greci (Menandro, Apollodoro) attraverso la contaminatio. Le sei commedie riprendono la Commedia Nuova con sensibilità romana.">
+              <rect x="630" y="170" width="220" height="50" rx="12" fill="#e8f0e8" stroke="#78c878" stroke-width="2"/>
+              <text x="740" y="200" text-anchor="middle" fill="#2a7a2a" font-family="Libre Baskerville, serif" font-size="14" font-weight="700">Modelli greci</text>
+            </g>
+
+            <!-- Sotto-nodi -->
+            <g class="mappa-node" data-info="Non rivela la trama, ma difende la poetica dell'autore contro i detrattori (Luscio Lanuvino). È un documento unico di critica letteraria antica.">
+              <rect x="20" y="320" width="165" height="50" rx="10" fill="#ffffff" stroke="#6db5d4" stroke-width="1.5"/>
+              <text x="102" y="350" text-anchor="middle" fill="#2c2416" font-family="Cardo, serif" font-size="13">Prologo polemico</text>
+            </g>
+
+            <g class="mappa-node" data-info="Mondo scenico coerente: nessuna rottura della quarta parete, a differenza del metateatro plautino. Anticipa il realismo teatrale.">
+              <rect x="170" y="320" width="165" height="50" rx="10" fill="#ffffff" stroke="#6db5d4" stroke-width="1.5"/>
+              <text x="252" y="350" text-anchor="middle" fill="#2c2416" font-family="Cardo, serif" font-size="13">Illusione scenica</text>
+            </g>
+
+            <g class="mappa-node" data-info="Commedia misurata, senza vis comica: il conflitto è interiore (dilemmi educativi, rapporti generazionali), non esteriore.">
+              <rect x="305" y="320" width="155" height="50" rx="10" fill="#ffffff" stroke="#f4d35e" stroke-width="1.5"/>
+              <text x="382" y="350" text-anchor="middle" fill="#2c2416" font-family="Cardo, serif" font-size="13">Stataria</text>
+            </g>
+
+            <g class="mappa-node" data-info="Lingua sobria, uniforme, vicina al parlato colto. Nessun cantica, nessun eccesso verbale. Cesare: puri sermonis amator.">
+              <rect x="465" y="320" width="155" height="50" rx="10" fill="#ffffff" stroke="#f4d35e" stroke-width="1.5"/>
+              <text x="542" y="350" text-anchor="middle" fill="#2c2416" font-family="Cardo, serif" font-size="13">Sermo purus</text>
+            </g>
+
+            <g class="mappa-node" data-info="Principale modello: Menandro (Andria, Heaut., Eunuchus, Adelphoe). Il maestro della Commedia Nuova attica.">
+              <rect x="590" y="320" width="165" height="50" rx="10" fill="#ffffff" stroke="#78c878" stroke-width="1.5"/>
+              <text x="672" y="350" text-anchor="middle" fill="#2c2416" font-family="Cardo, serif" font-size="13">Menandro</text>
+            </g>
+
+            <g class="mappa-node" data-info="Secondo modello: Apollodoro di Caristo (Hecyra, Phormio). Commediografo della Nea meno noto ma importante per Terenzio.">
+              <rect x="740" y="320" width="155" height="50" rx="10" fill="#ffffff" stroke="#78c878" stroke-width="1.5"/>
+              <text x="817" y="350" text-anchor="middle" fill="#2c2416" font-family="Cardo, serif" font-size="13">Apollodoro</text>
+            </g>
+
+            <!-- Nodo humanitas -->
+            <g class="mappa-node" data-info="Homo sum: humani nihil a me alienum puto (Heaut. 77). L'ideale di comprensione empatica dell'umano pervade tutta l'opera: nessun personaggio è del tutto negativo.">
+              <ellipse cx="450" cy="470" rx="120" ry="30" fill="#b8915a" stroke="#2c2416" stroke-width="2.5"/>
+              <text x="450" y="476" text-anchor="middle" fill="#ffffff" font-family="Libre Baskerville, serif" font-size="15" font-weight="700">HUMANITAS</text>
+            </g>
+
+          </svg>
+          <div class="mappa-tooltip" id="mappaTooltip"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════ QUIZ ═══════════════════ -->
+    <div class="esercizio-section" id="esercizi">
+      <h2>Check for Understanding &mdash; Quiz</h2>
+
+      <h3>A. Le innovazioni drammaturgiche</h3>
+
+      <!-- Quiz 1 -->
+      <div class="quiz-item" data-quiz="q1">
+        <div class="quiz-q">1. Quale funzione ha il prologo nelle commedie di Terenzio?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">Espositiva: rivela la trama al pubblico prima che inizi l'azione</div>
+          <div class="quiz-option" data-correct="true" onclick="checkQuiz(this)">Polemica: difende le scelte poetiche dell'autore contro i detrattori</div>
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">Religiosa: invoca gli d&egrave;i per la riuscita dello spettacolo</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <!-- Quiz 2 -->
+      <div class="quiz-item" data-quiz="q2">
+        <div class="quiz-q">2. Che cos'&egrave; la <em>contaminatio</em>?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">La traduzione letterale di una commedia greca in latino</div>
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">L'inserimento di scene originali latine in una trama greca</div>
+          <div class="quiz-option" data-correct="true" onclick="checkQuiz(this)">La fusione di elementi di due o pi&ugrave; commedie greche in un'opera unica</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <!-- Quiz 3 -->
+      <div class="quiz-item" data-quiz="q3">
+        <div class="quiz-q">3. Cosa distingue l'illusione scenica di Terenzio dal metateatro di Plauto?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="true" onclick="checkQuiz(this)">I personaggi non si rivolgono mai al pubblico: il mondo scenico resta chiuso e coerente</div>
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">Terenzio usa maschere pi&ugrave; elaborate per rendere i personaggi realistici</div>
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">Terenzio inserisce effetti scenografici pi&ugrave; complessi</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <!-- Quiz 4 -->
+      <div class="quiz-item" data-quiz="q4">
+        <div class="quiz-q">4. Cosa significa che la commedia di Terenzio &egrave; <em>stataria</em>?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">Che i personaggi restano fermi in scena senza muoversi</div>
+          <div class="quiz-option" data-correct="true" onclick="checkQuiz(this)">Che il ritmo &egrave; misurato, basato su dialoghi e conflitti psicologici</div>
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">Che la commedia ha un solo atto senza interruzioni</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <h3>B. Confronto e contesto</h3>
+
+      <!-- Quiz 5 -->
+      <div class="quiz-item" data-quiz="q5">
+        <div class="quiz-q">5. Chi era il principale avversario letterario di Terenzio?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">Plauto</div>
+          <div class="quiz-option" data-correct="true" onclick="checkQuiz(this)">Luscio Lanuvino</div>
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">Menandro</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <!-- Quiz 6 -->
+      <div class="quiz-item" data-quiz="q6">
+        <div class="quiz-q">6. Quale commedia ebbe un successo cos&igrave; grande da essere replicata due volte nello stesso giorno?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">Andria</div>
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">Adelphoe</div>
+          <div class="quiz-option" data-correct="true" onclick="checkQuiz(this)">Eunuchus</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <!-- Quiz 7 -->
+      <div class="quiz-item" data-quiz="q7">
+        <div class="quiz-q">7. La frase <em>&laquo;Homo sum: humani nihil a me alienum puto&raquo;</em> si trova in quale commedia?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="true" onclick="checkQuiz(this)">Heautontimorumenos</div>
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">Phormio</div>
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">Hecyra</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <!-- Quiz 8 -->
+      <div class="quiz-item" data-quiz="q8">
+        <div class="quiz-q">8. Come defin&igrave; Cesare lo stile di Terenzio?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)"><em>Magni ingenii comicus</em> &mdash; grande ingegno comico</div>
+          <div class="quiz-option" data-correct="true" onclick="checkQuiz(this)"><em>Puri sermonis amator</em> &mdash; amante della lingua pura</div>
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)"><em>Princeps eloquentiae</em> &mdash; principe dell'eloquenza</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <h3>C. Analisi critica</h3>
+
+      <!-- Quiz 9 -->
+      <div class="quiz-item" data-quiz="q9">
+        <div class="quiz-q">9. Perch&eacute; l'<em>Hecyra</em> fall&igrave; due volte?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">Perch&eacute; conteneva critiche politiche troppo esplicite</div>
+          <div class="quiz-option" data-correct="true" onclick="checkQuiz(this)">Perch&eacute; il pubblico abbandon&ograve; la rappresentazione, attratto da spettacoli di funamboli e gladiatori</div>
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">Perch&eacute; gli attori dimenticarono le battute</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <!-- Quiz 10 -->
+      <div class="quiz-item" data-quiz="q10">
+        <div class="quiz-q">10. Negli <em>Adelphoe</em>, il tema centrale &egrave; il confronto tra due modelli educativi (Demea severo, Micione indulgente). Quale posizione assume Terenzio?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">Sostiene chiaramente la severit&agrave; di Demea</div>
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">Sostiene chiaramente l'indulgenza di Micione</div>
+          <div class="quiz-option" data-correct="true" onclick="checkQuiz(this)">Non d&agrave; una risposta univoca: lascia il dilemma aperto alla riflessione dello spettatore</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════ EXIT TICKET ═══════════════════ -->
+    <div class="tlac-box tlac-exit">
+      <div class="tlac-label">Exit Ticket &mdash; Verifica finale (5 min)</div>
+      <p>Rispondi per iscritto su un foglio e consegna al professore:</p>
+      <p><strong>1.</strong> Spiega in 3&ndash;5 righe perch&eacute; il prologo di Terenzio rappresenta una rivoluzione rispetto a Plauto.</p>
+      <p><strong>2.</strong> Completa la frase: <em>&laquo;Homo sum: ..................&raquo;</em> e spiega in che modo questa battuta incarna l'ideale di <em>humanitas</em>.</p>
+      <p><strong>3.</strong> Indica una differenza tra commedia <em>stataria</em> e <em>motoria</em> e fai un esempio concreto tratto dalla lezione.</p>
+    </div>
+
+    <!-- Tools -->
+    <section class="tools-section">
+      <h2>Strumenti Correlati</h2>
+      <div class="tools-grid">
+        <a href="latino3-classico.html" class="tool-link">
+          <span class="tool-icon">&#x1F4D8;</span>
+          <span class="tool-name">Latino 3 Classico</span>
+        </a>
+        <a href="raccoglitore-testi.html" class="tool-link">
+          <span class="tool-icon">&#x1F4DA;</span>
+          <span class="tool-name">Raccoglitore Testi</span>
+        </a>
+        <a href="declinazioni_latine.html" class="tool-link">
+          <span class="tool-icon">&#x1F4CA;</span>
+          <span class="tool-name">Declinazioni</span>
+        </a>
+        <a href="strumenti/glossario-eulalia.html" class="tool-link">
+          <span class="tool-icon">&#x1F4D6;</span>
+          <span class="tool-name">Glossario Eulalia</span>
+        </a>
+      </div>
+    </section>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p><strong>Prof. Andrea Vaccaro</strong></p>
+    <p>Lingua e Cultura Latina &mdash; Liceo Classico e Liceo Scientifico</p>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="raccoglitore-testi.html">Raccoglitore Testi</a>
+      <a href="strumenti/glossario-eulalia.html">Strumenti</a>
+    </div>
+  </footer>
+
+<script>
+// ═══ TLAC HINT TOGGLE ═══
+function toggleHint(btn) {
+  var hint = btn.nextElementSibling;
+  hint.classList.toggle('visible');
+  btn.textContent = hint.classList.contains('visible') ? 'Nascondi spunto' : 'Mostra spunto';
+}
+
+// ═══ TIMELINE ═══
+function toggleTimeline(item) {
+  var wasActive = item.classList.contains('active');
+  // chiudi tutti
+  document.querySelectorAll('.timeline-item').forEach(function(el) {
+    el.classList.remove('active');
+  });
+  // apri se non era attivo
+  if (!wasActive) {
+    item.classList.add('active');
+  }
+}
+
+// ═══ MAPPA CONCETTUALE ═══
+(function() {
+  var tooltip = document.getElementById('mappaTooltip');
+  var nodes = document.querySelectorAll('.mappa-node');
+
+  nodes.forEach(function(node) {
+    node.addEventListener('mouseenter', function(e) {
+      var info = node.getAttribute('data-info');
+      if (!info) return;
+      tooltip.textContent = info;
+      tooltip.style.display = 'block';
+      positionTooltip(e);
+    });
+
+    node.addEventListener('mousemove', function(e) {
+      positionTooltip(e);
+    });
+
+    node.addEventListener('mouseleave', function() {
+      tooltip.style.display = 'none';
+    });
+  });
+
+  function positionTooltip(e) {
+    var x = e.clientX + 16;
+    var y = e.clientY - 10;
+    // evita overflow a destra
+    if (x + 320 > window.innerWidth) {
+      x = e.clientX - 320;
+    }
+    // evita overflow in basso
+    if (y + 100 > window.innerHeight) {
+      y = e.clientY - 100;
+    }
+    tooltip.style.left = x + 'px';
+    tooltip.style.top = y + 'px';
+  }
+})();
+
+// ═══ QUIZ ═══
+var score = 0;
+var totalQuiz = 10;
+
+function checkQuiz(option) {
+  var item = option.closest('.quiz-item');
+  if (item.classList.contains('answered')) return;
+
+  item.classList.add('answered');
+  var isCorrect = option.getAttribute('data-correct') === 'true';
+  var feedback = item.querySelector('.quiz-feedback');
+  var allOptions = item.querySelectorAll('.quiz-option');
+
+  allOptions.forEach(function(opt) {
+    opt.classList.add('disabled');
+    if (opt.getAttribute('data-correct') === 'true') {
+      opt.classList.add('correct');
+    }
+  });
+
+  if (isCorrect) {
+    option.classList.add('correct');
+    feedback.className = 'quiz-feedback show correct-fb';
+    feedback.textContent = 'Corretto!';
+    score++;
+  } else {
+    option.classList.add('wrong');
+    feedback.className = 'quiz-feedback show wrong-fb';
+    // No Opt Out (TLAC): redirect al contenuto giusto
+    var correctText = item.querySelector('.quiz-option[data-correct="true"]').textContent;
+    feedback.innerHTML = 'Non esatto. La risposta corretta \u00e8: <strong>' + correctText + '</strong>. Rileggila e assicurati di aver capito perch\u00e9.';
+  }
+
+  document.getElementById('scoreDisplay').textContent = score + ' / ' + totalQuiz;
+}
+</script>
+
+</body>
+</html>

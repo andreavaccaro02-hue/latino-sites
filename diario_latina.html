@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Diario di Apprendimento — Lingua e Cultura Latina</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap');
+
+  :root {
+    --cream: #f5f0e8;
+    --parchment: #ede6d6;
+    --ink: #2c2416;
+    --ink-light: #5a4e3c;
+    --gold: #b8915a;
+    --gold-light: #d4b088;
+    --rust: #a0533a;
+    --rust-light: #c47a5e;
+    --sage: #7a8c6e;
+    --border: #c9bba8;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    background: var(--cream);
+    font-family: 'EB Garamond', serif;
+    color: var(--ink);
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* ── PAGE ── */
+  .page {
+    width: 210mm;
+    min-height: 297mm;
+    margin: 0 auto 20px;
+    background: var(--parchment);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+  }
+
+  /* parchment texture overlay */
+  .page::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 20% 30%, rgba(180,160,120,0.15) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 70%, rgba(160,140,100,0.12) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .page > * { position: relative; z-index: 1; }
+
+  /* ── COVER ── */
+  .cover {
+    min-height: 297mm;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 60px 40px;
+  }
+
+  .cover-border {
+    position: absolute;
+    inset: 18px;
+    border: 1.5px solid var(--gold);
+    pointer-events: none;
+  }
+  .cover-border::before {
+    content: '';
+    position: absolute;
+    inset: 5px;
+    border: 0.5px solid var(--gold-light);
+  }
+
+  /* corner ornaments */
+  .corner {
+    position: absolute;
+    width: 32px;
+    height: 32px;
+    border-color: var(--gold);
+    border-style: solid;
+  }
+  .corner--tl { top: 14px; left: 14px; border-width: 2px 0 0 2px; }
+  .corner--tr { top: 14px; right: 14px; border-width: 2px 2px 0 0; }
+  .corner--bl { bottom: 14px; left: 14px; border-width: 0 0 2px 2px; }
+  .corner--br { bottom: 14px; right: 14px; border-width: 0 2px 2px 0; }
+
+  .cover-ornament {
+    font-size: 28px;
+    color: var(--gold);
+    letter-spacing: 12px;
+    margin-bottom: 28px;
+  }
+
+  .cover h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 42px;
+    font-weight: 700;
+    line-height: 1.15;
+    color: var(--ink);
+    margin-bottom: 10px;
+  }
+  .cover h1 em {
+    font-style: italic;
+    font-weight: 400;
+    color: var(--rust);
+  }
+
+  .cover-divider {
+    width: 80px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin: 18px auto;
+  }
+
+  .cover-sub {
+    font-size: 19px;
+    color: var(--ink-light);
+    font-style: italic;
+    margin-bottom: 6px;
+  }
+
+  .cover-latin {
+    font-size: 15px;
+    color: var(--gold);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-top: 30px;
+  }
+
+  .cover-year {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    color: var(--ink-light);
+    margin-top: 40px;
+  }
+
+  .cover-name-box {
+    margin-top: 50px;
+    border-top: 1px solid var(--border);
+    padding-top: 16px;
+    width: 260px;
+  }
+  .cover-name-box .label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    color: var(--ink-light);
+    margin-bottom: 4px;
+  }
+  .cover-name-box .line {
+    width: 100%;
+    border-bottom: 1px solid var(--border);
+    height: 28px;
+  }
+
+  /* ── INNER PAGES ── */
+  .inner-page {
+    min-height: 297mm;
+    padding: 34px 42px 34px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* page header */
+  .page-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    border-bottom: 1.5px solid var(--gold);
+    padding-bottom: 8px;
+    margin-bottom: 26px;
+  }
+  .page-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--ink);
+  }
+  .page-header .page-num {
+    font-size: 13px;
+    color: var(--ink-light);
+    font-style: italic;
+  }
+
+  /* ── SETTIMANA HEADER ── */
+  .week-header {
+    background: linear-gradient(135deg, var(--rust), var(--rust-light));
+    color: #fff;
+    border-radius: 8px;
+    padding: 14px 22px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .week-header h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 600;
+  }
+  .week-header .week-dates {
+    font-size: 14px;
+    opacity: 0.85;
+    font-style: italic;
+  }
+
+  /* ── OBIETTIVI SETTIMANALI ── */
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--rust);
+    text-transform: uppercase;
+    letter-spacing: 1.8px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .section-title .icon { font-size: 16px; }
+
+  .obiettivi-box {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 22px;
+    background: rgba(255,255,255,0.25);
+  }
+  .obiettivo-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  .obiettivo-row:last-child { margin-bottom: 0; }
+  .checkbox {
+    width: 20px;
+    height: 20px;
+    min-width: 20px;
+    border: 1.8px solid var(--gold);
+    border-radius: 4px;
+    margin-top: 2px;
+    background: rgba(184,145,90,0.06);
+  }
+  .obiettivo-line {
+    flex: 1;
+    border-bottom: 1px solid var(--border);
+    height: 24px;
+  }
+
+  /* ── GIORNO ── */
+  .giorni-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    flex: 1;
+  }
+
+  .giorno-card {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    background: rgba(255,255,255,0.2);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .giorno-header {
+    background: linear-gradient(135deg, rgba(184,145,90,0.18), rgba(184,145,90,0.08));
+    padding: 8px 14px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .giorno-header .day-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--ink);
+  }
+  .giorno-header .day-date {
+    font-size: 12px;
+    color: var(--ink-light);
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 2px;
+    min-width: 70px;
+  }
+
+  .giorno-body {
+    padding: 10px 14px 12px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .giorno-mini-label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--rust);
+    font-weight: 500;
+  }
+
+  .write-lines {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .write-line {
+    border-bottom: 1px solid rgba(201,187,168,0.7);
+    height: 22px;
+    width: 100%;
+  }
+
+  /* ── CHECKLIST PROGRESSI (pagina dedicata) ── */
+  .checklist-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    flex: 1;
+  }
+
+  .checklist-block {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    background: rgba(255,255,255,0.2);
+  }
+  .checklist-block-header {
+    background: linear-gradient(135deg, rgba(122,140,110,0.2), rgba(122,140,110,0.08));
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  .checklist-block-header h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    color: var(--sage);
+    font-weight: 600;
+  }
+  .checklist-block-body {
+    padding: 12px 16px;
+  }
+  .checklist-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 9px;
+  }
+  .checklist-item:last-child { margin-bottom: 0; }
+  .checklist-item .checkbox {
+    width: 18px;
+    height: 18px;
+    min-width: 18px;
+    border-color: var(--sage);
+    background: rgba(122,140,110,0.06);
+  }
+  .checklist-item span {
+    font-size: 14px;
+    color: var(--ink);
+  }
+
+  /* ── RIFLESSIONE SETTIMANALE ── */
+  .riflessione-box {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 18px 22px;
+    background: rgba(255,255,255,0.2);
+    margin-bottom: 18px;
+  }
+  .riflessione-box .write-lines { margin-top: 8px; }
+
+  /* ── VOCABOLARIO / NOTE ── */
+  .vocab-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 18px;
+  }
+  .vocab-table th {
+    font-family: 'Playfair Display', serif;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #fff;
+    background: var(--rust);
+    padding: 8px 12px;
+    text-align: left;
+  }
+  .vocab-table td {
+    border-bottom: 1px solid var(--border);
+    padding: 8px 12px;
+    height: 26px;
+    font-size: 14px;
+    color: var(--ink-light);
+  }
+  .vocab-table tr:nth-child(even) td {
+    background: rgba(255,255,255,0.18);
+  }
+
+  /* ── FOOTER ── */
+  .page-footer {
+    margin-top: auto;
+    padding-top: 12px;
+    border-top: 0.5px solid var(--border);
+    text-align: center;
+    font-size: 11px;
+    color: var(--ink-light);
+    font-style: italic;
+    letter-spacing: 1px;
+  }
+
+  /* ── PRINT ── */
+  @media print {
+    body { background: none; }
+    .page {
+      margin: 0;
+      box-shadow: none;
+      page-break-after: always;
+    }
+  }
+
+  @media screen {
+    body { padding: 30px 0; background: #d9d3c7; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ════════════════════════════════ COVER ════════════════════════════════ -->
+<div class="page">
+  <div class="cover">
+    <div class="cover-border"></div>
+    <div class="corner corner--tl"></div>
+    <div class="corner corner--tr"></div>
+    <div class="corner corner--bl"></div>
+    <div class="corner corner--br"></div>
+
+    <div class="cover-ornament">✦ ✦ ✦</div>
+    <h1>Diario di<br>Apprendimento<br><em>Lingua e Cultura Latina</em></h1>
+    <div class="cover-divider"></div>
+    <p class="cover-sub">Anno Scolastico</p>
+    <p class="cover-latin">Scola Superiore</p>
+    <p class="cover-year">2024 – 2025</p>
+
+    <div class="cover-name-box">
+      <p class="label">Nome e Cognome</p>
+      <div class="line"></div>
+      <p class="label" style="margin-top:14px;">Classe</p>
+      <div class="line"></div>
+      <p class="label" style="margin-top:14px;">Docente</p>
+      <div class="line"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════ SETTIMANA 1 — OBIETTIVI + GIORNI ════ -->
+<div class="page">
+  <div class="inner-page">
+    <div class="page-header">
+      <h2>Settimana 1</h2>
+      <span class="page-num">pag. 1</span>
+    </div>
+
+    <div class="week-header">
+      <h3>Obiettivi della Settimana</h3>
+      <span class="week-dates">dal _________ al _________</span>
+    </div>
+
+    <div class="obiettivi-box">
+      <div class="obiettivo-row"><div class="checkbox"></div><div class="obiettivo-line"></div></div>
+      <div class="obiettivo-row"><div class="checkbox"></div><div class="obiettivo-line"></div></div>
+      <div class="obiettivo-row"><div class="checkbox"></div><div class="obiettivo-line"></div></div>
+    </div>
+
+    <div class="giorni-grid">
+      <!-- Lunedì -->
+      <div class="giorno-card">
+        <div class="giorno-header">
+          <span class="day-name">Lunedì</span>
+          <span class="day-date"></span>
+        </div>
+        <div class="giorno-body">
+          <span class="giorno-mini-label">📖 Argomento</span>
+          <div class="write-lines"><div class="write-line"></div></div>
+          <span class="giorno-mini-label">✏️ Note & Appunti</span>
+          <div class="write-lines"><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div></div>
+        </div>
+      </div>
+      <!-- Martedì -->
+      <div class="giorno-card">
+        <div class="giorno-header">
+          <span class="day-name">Martedì</span>
+          <span class="day-date"></span>
+        </div>
+        <div class="giorno-body">
+          <span class="giorno-mini-label">📖 Argomento</span>
+          <div class="write-lines"><div class="write-line"></div></div>
+          <span class="giorno-mini-label">✏️ Note & Appunti</span>
+          <div class="write-lines"><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div></div>
+        </div>
+      </div>
+      <!-- Mercoledì -->
+      <div class="giorno-card">
+        <div class="giorno-header">
+          <span class="day-name">Mercoledì</span>
+          <span class="day-date"></span>
+        </div>
+        <div class="giorno-body">
+          <span class="giorno-mini-label">📖 Argomento</span>
+          <div class="write-lines"><div class="write-line"></div></div>
+          <span class="giorno-mini-label">✏️ Note & Appunti</span>
+          <div class="write-lines"><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div></div>
+        </div>
+      </div>
+      <!-- Giovedì -->
+      <div class="giorno-card">
+        <div class="giorno-header">
+          <span class="day-name">Giovedì</span>
+          <span class="day-date"></span>
+        </div>
+        <div class="giorno-body">
+          <span class="giorno-mini-label">📖 Argomento</span>
+          <div class="write-lines"><div class="write-line"></div></div>
+          <span class="giorno-mini-label">✏️ Note & Appunti</span>
+          <div class="write-lines"><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-footer">Diario di Apprendimento — Lingua e Cultura Latina</div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════ VOCABOLARIO + NOTE ════════════════════ -->
+<div class="page">
+  <div class="inner-page">
+    <div class="page-header">
+      <h2>Vocabolario & Note — Settimana 1</h2>
+      <span class="page-num">pag. 2</span>
+    </div>
+
+    <div class="section-title"><span class="icon">📚</span> Vocabolario Latino</div>
+    <table class="vocab-table">
+      <thead>
+        <tr>
+          <th style="width:30%">Parola Latina</th>
+          <th style="width:30%">Traduzione</th>
+          <th style="width:40%">Esempio / Contesto</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td></td><td></td><td></td></tr>
+        <tr><td></td><td></td><td></td></tr>
+        <tr><td></td><td></td><td></td></tr>
+        <tr><td></td><td></td><td></td></tr>
+        <tr><td></td><td></td><td></td></tr>
+        <tr><td></td><td></td><td></td></tr>
+        <tr><td></td><td></td><td></td></tr>
+        <tr><td></td><td></td><td></td></tr>
+      </tbody>
+    </table>
+
+    <div class="section-title"><span class="icon">🏛️</span> Cultura & Storia Romana</div>
+    <div class="riflessione-box">
+      <div class="write-lines">
+        <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+        <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+      </div>
+    </div>
+
+    <div class="section-title"><span class="icon">💡</span> Riflessione Settimanale</div>
+    <div class="riflessione-box">
+      <p style="font-size:13px; color: var(--ink-light); font-style:italic; margin-bottom:6px;">Cosa ho imparato questa settimana? Cosa mi è sembrato più difficile?</p>
+      <div class="write-lines">
+        <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+        <div class="write-line"></div><div class="write-line"></div>
+      </div>
+    </div>
+
+    <div class="page-footer">Diario di Apprendimento — Lingua e Cultura Latina</div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════ CHECKLIST PROGRESSI ═══════════════════ -->
+<div class="page">
+  <div class="inner-page">
+    <div class="page-header">
+      <h2>Checklist dei Progressi</h2>
+      <span class="page-num">pag. 3</span>
+    </div>
+
+    <div class="checklist-grid">
+      <!-- Grammatica -->
+      <div class="checklist-block">
+        <div class="checklist-block-header"><h4>📝 Grammatica</h4></div>
+        <div class="checklist-block-body">
+          <div class="checklist-item"><div class="checkbox"></div><span>Declensioni dei sostantivi (I – V)</span></div>
+          <div class="checklist-item"><div class="checkbox"></div><span>Coniugazioni dei verbi attivi</span></div>
+          <div class="checklist-item"><div class="checkbox"></div><span>Coniugazioni dei verbi passivi</span></div>
+          <div class="checklist-item"><div class="checkbox"></div><span>Proposizioni relative</span></div>
+          <div class="checklist-item"><div class="checkbox"></div><span>Congiunzioni e coordinazioni</span></div>
+          <div class="checklist-item"><div class="checkbox"></div><span>Complementi principali</span></div>
+        </div>
+      </div>
+      <!-- Traduzione -->
+      <div class="checklist-block">
+        <div class="checklist-block-header"><h4>🔤 Traduzione</h4></div>
+        <div class="checklist-block-body">
+          <div class="checklist-item"><div class="checkbox"></div><span>Traduzione di testi semplici</span></div>
+          <div class="checklist-item"><div class="checkbox"></div><span>Analisi del periodo</span></div>
+          <div class="checklist-item"><div class="checkbox"></div><span>Testi di Cornelio Nepos</span></div>
+          <div class="checklist-item"><div class="checkbox"></div><span>Testi di Fedro / Phaedrus</span></div>
+          <div class="checklist-item"><div class="checkbox"></div><span>Testi di Cesare</span></div>
+          <div class="checklist-item"><div class="checkbox"></div><span>Testi di Cicero</span></div>
+        </div>
+      </div>
+      <!-- Cultura Romana -->
+      <div class="checklist-block">
+        <div class="checklist-block-header"><h4>🏛️ Cultura Romana</h4></div>
+        <div class="checklist-block-body">
+          <div class="checklist-item"><div class="checkbox"></div><span>Storia della Repubblica</span></div>
+          <div class="checklist-item"><div class="checkbox"></div><span>Società e costumi romani</span></div>
+          <div class="checklist-item"><div class="checkbox"></div><span>Religion e miti romani</span></div>
+          <div class="checklist-item"><div class="checkbox"></div><span>Arte e architettura romana</span></div>
+          <div class="checklist-item"><div class="checkbox"></div><span>La famiglia e la vita quotidiana</span></div>
+          <div class="checklist-item"><div class="checkbox"></div><span>Il diritto romano</span></div>
+        </div>
+      </div>
+      <!-- Obiettivi Personali -->
+      <div class="checklist-block">
+        <div class="checklist-block-header"><h4>🎯 Obiettivi Personali</h4></div>
+        <div class="checklist-block-body">
+          <div class="checklist-item"><div class="checkbox"></div><div class="obiettivo-line" style="border-bottom:1px solid #c9bba8; height:22px;"></div></div>
+          <div class="checklist-item"><div class="checkbox"></div><div class="obiettivo-line" style="border-bottom:1px solid #c9bba8; height:22px;"></div></div>
+          <div class="checklist-item"><div class="checkbox"></div><div class="obiettivo-line" style="border-bottom:1px solid #c9bba8; height:22px;"></div></div>
+          <div class="checklist-item"><div class="checkbox"></div><div class="obiettivo-line" style="border-bottom:1px solid #c9bba8; height:22px;"></div></div>
+          <div class="checklist-item"><div class="checkbox"></div><div class="obiettivo-line" style="border-bottom:1px solid #c9bba8; height:22px;"></div></div>
+          <div class="checklist-item"><div class="checkbox"></div><div class="obiettivo-line" style="border-bottom:1px solid #c9bba8; height:22px;"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-footer">Diario di Apprendimento — Lingua e Cultura Latina</div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════ SETTIMANA 2 (ripetizione modello) ═════ -->
+<div class="page">
+  <div class="inner-page">
+    <div class="page-header">
+      <h2>Settimana 2</h2>
+      <span class="page-num">pag. 4</span>
+    </div>
+
+    <div class="week-header">
+      <h3>Obiettivi della Settimana</h3>
+      <span class="week-dates">dal _________ al _________</span>
+    </div>
+
+    <div class="obiettivi-box">
+      <div class="obiettivo-row"><div class="checkbox"></div><div class="obiettivo-line"></div></div>
+      <div class="obiettivo-row"><div class="checkbox"></div><div class="obiettivo-line"></div></div>
+      <div class="obiettivo-row"><div class="checkbox"></div><div class="obiettivo-line"></div></div>
+    </div>
+
+    <div class="giorni-grid">
+      <div class="giorno-card">
+        <div class="giorno-header"><span class="day-name">Lunedì</span><span class="day-date"></span></div>
+        <div class="giorno-body">
+          <span class="giorno-mini-label">📖 Argomento</span>
+          <div class="write-lines"><div class="write-line"></div></div>
+          <span class="giorno-mini-label">✏️ Note & Appunti</span>
+          <div class="write-lines"><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div></div>
+        </div>
+      </div>
+      <div class="giorno-card">
+        <div class="giorno-header"><span class="day-name">Martedì</span><span class="day-date"></span></div>
+        <div class="giorno-body">
+          <span class="giorno-mini-label">📖 Argomento</span>
+          <div class="write-lines"><div class="write-line"></div></div>
+          <span class="giorno-mini-label">✏️ Note & Appunti</span>
+          <div class="write-lines"><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div></div>
+        </div>
+      </div>
+      <div class="giorno-card">
+        <div class="giorno-header"><span class="day-name">Mercoledì</span><span class="day-date"></span></div>
+        <div class="giorno-body">
+          <span class="giorno-mini-label">📖 Argomento</span>
+          <div class="write-lines"><div class="write-line"></div></div>
+          <span class="giorno-mini-label">✏️ Note & Appunti</span>
+          <div class="write-lines"><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div></div>
+        </div>
+      </div>
+      <div class="giorno-card">
+        <div class="giorno-header"><span class="day-name">Giovedì</span><span class="day-date"></span></div>
+        <div class="giorno-body">
+          <span class="giorno-mini-label">📖 Argomento</span>
+          <div class="write-lines"><div class="write-line"></div></div>
+          <span class="giorno-mini-label">✏️ Note & Appunti</span>
+          <div class="write-lines"><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-footer">Diario di Apprendimento — Lingua e Cultura Latina</div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════ VOCABOLARIO + NOTE — SETT. 2 ═════════ -->
+<div class="page">
+  <div class="inner-page">
+    <div class="page-header">
+      <h2>Vocabolario & Note — Settimana 2</h2>
+      <span class="page-num">pag. 5</span>
+    </div>
+
+    <div class="section-title"><span class="icon">📚</span> Vocabolario Latino</div>
+    <table class="vocab-table">
+      <thead>
+        <tr>
+          <th style="width:30%">Parola Latina</th>
+          <th style="width:30%">Traduzione</th>
+          <th style="width:40%">Esempio / Contesto</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td></td><td></td><td></td></tr>
+        <tr><td></td><td></td><td></td></tr>
+        <tr><td></td><td></td><td></td></tr>
+        <tr><td></td><td></td><td></td></tr>
+        <tr><td></td><td></td><td></td></tr>
+        <tr><td></td><td></td><td></td></tr>
+        <tr><td></td><td></td><td></td></tr>
+        <tr><td></td><td></td><td></td></tr>
+      </tbody>
+    </table>
+
+    <div class="section-title"><span class="icon">🏛️</span> Cultura & Storia Romana</div>
+    <div class="riflessione-box">
+      <div class="write-lines">
+        <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+        <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+      </div>
+    </div>
+
+    <div class="section-title"><span class="icon">💡</span> Riflessione Settimanale</div>
+    <div class="riflessione-box">
+      <p style="font-size:13px; color: var(--ink-light); font-style:italic; margin-bottom:6px;">Cosa ho imparato questa settimana? Cosa mi è sembrato più difficile?</p>
+      <div class="write-lines">
+        <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+        <div class="write-line"></div><div class="write-line"></div>
+      </div>
+    </div>
+
+    <div class="page-footer">Diario di Apprendimento — Lingua e Cultura Latina</div>
+  </div>
+</div>
+
+</body>
+</html>

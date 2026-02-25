@@ -1,0 +1,1068 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Le Bucoliche di Virgilio — Lezione Interattiva</title>
+<link rel="stylesheet" href="css/style.css">
+<style>
+  /* ═══ STILI SPECIFICI LEZIONE BUCOLICHE ═══ */
+
+  .lesson-intro {
+    background: var(--card);
+    border: 2px solid var(--border);
+    border-radius: 16px;
+    padding: 30px;
+    margin-bottom: 30px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  }
+
+  .lesson-intro h2 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 22px;
+    color: var(--gold);
+    margin-bottom: 14px;
+  }
+
+  .lesson-intro p {
+    font-size: 16px;
+    line-height: 1.8;
+    margin-bottom: 10px;
+  }
+
+  .context-badge {
+    display: inline-block;
+    padding: 4px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 700;
+    margin-right: 8px;
+    margin-bottom: 6px;
+  }
+
+  .context-badge.autore { background: rgba(184,145,90,0.15); color: var(--gold); }
+  .context-badge.opera { background: rgba(45,106,79,0.12); color: var(--eulalia); }
+  .context-badge.data { background: rgba(107,100,86,0.12); color: var(--text-dim); }
+
+  /* ═══ BRANO ═══ */
+  .brano-section {
+    background: var(--card);
+    border: 2px solid var(--border);
+    border-radius: 16px;
+    margin-bottom: 30px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  }
+
+  .brano-header {
+    background: linear-gradient(135deg, #2c2416 0%, #5a4e3c 100%);
+    color: #f5f0e8;
+    padding: 24px 30px;
+  }
+
+  .brano-header h2 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 24px;
+    margin-bottom: 6px;
+  }
+
+  .brano-header .brano-ref {
+    font-size: 15px;
+    color: var(--gold-light);
+    font-style: italic;
+  }
+
+  .brano-body {
+    padding: 30px;
+  }
+
+  /* ═══ NOTA CRITICA ═══ */
+  .nota-critica {
+    background: rgba(184,145,90,0.06);
+    border-left: 4px solid var(--gold);
+    border-radius: 0 10px 10px 0;
+    padding: 18px 22px;
+    margin-bottom: 24px;
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  .nota-critica .nota-label {
+    font-family: 'Libre Baskerville', serif;
+    font-weight: 700;
+    color: var(--gold);
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+  }
+
+  .nota-critica cite {
+    font-style: italic;
+    color: var(--text-dim);
+    font-size: 13px;
+  }
+
+  /* ═══ VERSO INTERATTIVO ═══ */
+  .versi-container {
+    margin-bottom: 24px;
+  }
+
+  .verso-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 14px 0;
+    border-bottom: 1px solid rgba(212,201,184,0.3);
+    transition: background 0.2s;
+  }
+
+  .verso-row:last-child {
+    border-bottom: none;
+  }
+
+  .verso-row:hover {
+    background: rgba(184,145,90,0.04);
+  }
+
+  .verso-num {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 13px;
+    color: var(--text-dim);
+    min-width: 28px;
+    text-align: right;
+    padding-top: 3px;
+    font-weight: 700;
+  }
+
+  .verso-content {
+    flex: 1;
+  }
+
+  .verso-latino {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 19px;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1.5;
+    margin-bottom: 6px;
+    letter-spacing: 0.3px;
+  }
+
+  .verso-scansione {
+    font-family: 'Courier New', monospace;
+    font-size: 15px;
+    color: var(--text-dim);
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+    display: none;
+    background: rgba(44,36,22,0.04);
+    padding: 6px 10px;
+    border-radius: 6px;
+  }
+
+  .verso-scansione.visible {
+    display: block;
+  }
+
+  .verso-traduzione {
+    font-size: 16px;
+    color: var(--eulalia);
+    font-style: italic;
+    line-height: 1.6;
+    display: none;
+    padding: 6px 0;
+  }
+
+  .verso-traduzione.visible {
+    display: block;
+  }
+
+  .verso-note {
+    font-size: 14px;
+    color: var(--text-dim);
+    line-height: 1.5;
+    display: none;
+    padding: 6px 10px;
+    background: rgba(45,106,79,0.05);
+    border-radius: 6px;
+    margin-top: 4px;
+  }
+
+  .verso-note.visible {
+    display: block;
+  }
+
+  /* ═══ PAROLA EVIDENZIABILE ═══ */
+  .word {
+    cursor: pointer;
+    transition: all 0.2s;
+    padding: 1px 3px;
+    border-radius: 3px;
+    position: relative;
+  }
+
+  .word:hover {
+    background: rgba(184,145,90,0.2);
+  }
+
+  .word.highlighted {
+    background: var(--gold);
+    color: white;
+  }
+
+  .word-tooltip {
+    display: none;
+    position: absolute;
+    bottom: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: #2c2416;
+    color: #f5f0e8;
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 400;
+    white-space: nowrap;
+    z-index: 50;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    font-family: 'Cardo', serif;
+    letter-spacing: 0;
+  }
+
+  .word-tooltip::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 6px solid transparent;
+    border-top-color: #2c2416;
+  }
+
+  .word:hover .word-tooltip,
+  .word.highlighted .word-tooltip {
+    display: block;
+  }
+
+  .word-tooltip .wt-lemma {
+    font-weight: 700;
+    color: var(--gold-light);
+  }
+
+  .word-tooltip .wt-morph {
+    color: rgba(245,240,232,0.6);
+    font-size: 12px;
+  }
+
+  .word-tooltip .wt-trad {
+    margin-top: 4px;
+    font-style: italic;
+  }
+
+  /* ═══ CONTROLLI ═══ */
+  .controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+
+  .ctrl-btn {
+    padding: 10px 18px;
+    border: 2px solid var(--border);
+    border-radius: 10px;
+    background: var(--bg);
+    font-family: 'Cardo', serif;
+    font-size: 15px;
+    cursor: pointer;
+    transition: all 0.2s;
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  .ctrl-btn:hover {
+    border-color: var(--gold);
+    color: var(--gold);
+  }
+
+  .ctrl-btn.active {
+    background: var(--gold);
+    color: white;
+    border-color: var(--gold);
+  }
+
+  /* ═══ ESERCIZI ═══ */
+  .esercizio-section {
+    background: var(--card);
+    border: 2px solid var(--eulalia);
+    border-radius: 16px;
+    padding: 30px;
+    margin-bottom: 30px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  }
+
+  .esercizio-section h2 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 22px;
+    color: var(--eulalia);
+    margin-bottom: 20px;
+  }
+
+  .esercizio-section h3 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 17px;
+    color: var(--text);
+    margin: 20px 0 12px;
+  }
+
+  .quiz-item {
+    background: rgba(45,106,79,0.05);
+    border-radius: 10px;
+    padding: 18px;
+    margin-bottom: 14px;
+  }
+
+  .quiz-item .quiz-q {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    line-height: 1.5;
+  }
+
+  .quiz-options {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .quiz-option {
+    padding: 12px 16px;
+    border: 2px solid var(--border);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 15px;
+    background: var(--card);
+  }
+
+  .quiz-option:hover {
+    border-color: var(--eulalia);
+    background: rgba(45,106,79,0.04);
+  }
+
+  .quiz-option.correct {
+    border-color: #28a745;
+    background: rgba(40,167,69,0.1);
+    color: #155724;
+  }
+
+  .quiz-option.wrong {
+    border-color: #dc3545;
+    background: rgba(220,53,69,0.08);
+    color: #721c24;
+  }
+
+  .quiz-option.disabled {
+    pointer-events: none;
+    opacity: 0.6;
+  }
+
+  .quiz-feedback {
+    margin-top: 10px;
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-size: 14px;
+    line-height: 1.5;
+    display: none;
+  }
+
+  .quiz-feedback.show {
+    display: block;
+  }
+
+  .quiz-feedback.correct-fb {
+    background: rgba(40,167,69,0.1);
+    border-left: 3px solid #28a745;
+    color: #155724;
+  }
+
+  .quiz-feedback.wrong-fb {
+    background: rgba(220,53,69,0.08);
+    border-left: 3px solid #dc3545;
+    color: #721c24;
+  }
+
+  /* ═══ TRADUZIONE GUIDATA ═══ */
+  .trad-exercise {
+    margin-top: 16px;
+  }
+
+  .trad-verso-box {
+    background: rgba(44,36,22,0.04);
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin-bottom: 12px;
+  }
+
+  .trad-verso-box .trad-lat {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 17px;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+
+  .trad-input {
+    width: 100%;
+    padding: 12px 16px;
+    border: 2px solid var(--border);
+    border-radius: 8px;
+    font-family: 'Cardo', serif;
+    font-size: 15px;
+    background: var(--card);
+    color: var(--text);
+    resize: vertical;
+    min-height: 50px;
+  }
+
+  .trad-input:focus {
+    border-color: var(--eulalia);
+    outline: none;
+  }
+
+  .trad-reveal-btn {
+    margin-top: 8px;
+    padding: 8px 14px;
+    border: 1px solid var(--eulalia);
+    border-radius: 6px;
+    background: transparent;
+    color: var(--eulalia);
+    font-family: 'Cardo', serif;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .trad-reveal-btn:hover {
+    background: var(--eulalia);
+    color: white;
+  }
+
+  .trad-solution {
+    display: none;
+    margin-top: 8px;
+    padding: 10px 14px;
+    background: rgba(45,106,79,0.08);
+    border-radius: 6px;
+    font-style: italic;
+    color: var(--eulalia);
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  .trad-solution.visible {
+    display: block;
+  }
+
+  /* ═══ SCORE ═══ */
+  .score-bar {
+    background: var(--card);
+    border: 2px solid var(--border);
+    border-radius: 12px;
+    padding: 16px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    position: sticky;
+    top: 60px;
+    z-index: 50;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  }
+
+  .score-label {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 15px;
+    font-weight: 700;
+  }
+
+  .score-value {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--eulalia);
+  }
+
+  /* ═══ RESPONSIVE ═══ */
+  @media (max-width: 768px) {
+    .verso-latino { font-size: 16px; }
+    .brano-body { padding: 20px; }
+    .brano-header { padding: 18px 20px; }
+    .word-tooltip { font-size: 12px; }
+    .controls { gap: 6px; }
+    .ctrl-btn { padding: 8px 12px; font-size: 13px; }
+    .score-bar { flex-direction: column; gap: 6px; top: 50px; }
+  }
+</style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="container">
+      <a href="index.html" class="site-name">Lingua e Cultura Latina</a>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="latino4-classico.html">Latino 4</a>
+        <a href="raccoglitore-testi.html">Testi</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Header -->
+  <div class="page-header">
+    <h1>Le Bucoliche di Virgilio</h1>
+    <div class="divider"></div>
+    <p class="subtitle">Lettura, scansione metrica e traduzione guidata</p>
+  </div>
+
+  <div class="container">
+    <a href="latino4-classico.html" class="back-link">&larr; Torna a Latino 4 Classico</a>
+
+    <!-- Punteggio -->
+    <div class="score-bar">
+      <span class="score-label">Esercizi completati</span>
+      <span class="score-value" id="scoreDisplay">0 / 8</span>
+    </div>
+
+    <!-- ═══════════════════ INTRODUZIONE ═══════════════════ -->
+    <div class="lesson-intro">
+      <h2>Contesto dell'opera</h2>
+      <div style="margin-bottom: 14px;">
+        <span class="context-badge autore">Publio Virgilio Marone</span>
+        <span class="context-badge opera">Bucolica (Eclogae)</span>
+        <span class="context-badge data">42&ndash;39 a.C. ca.</span>
+      </div>
+      <p>Le <em>Bucoliche</em> sono la prima opera di Virgilio: dieci ecloghe in esametri dattilici che reinventano la poesia pastorale greca di Teocrito in chiave romana. Scritte negli anni turbolenti dopo l'assassinio di Cesare, mescolano il mondo idillico dei pastori con i drammi della storia: le confische terriere, la guerra civile, il sogno di pace.</p>
+      <p>In questa lezione leggeremo due brani fondamentali, tratti dall'<strong>Ecloga 4</strong> (la profezia dell'et&agrave; dell'oro) e dall'<strong>Ecloga 10</strong> (il congedo dal mondo bucolico), con scansione metrica e traduzione guidata.</p>
+    </div>
+
+    <!-- ═══════════════════ BRANO 1: ECL. 4, 1-5 ═══════════════════ -->
+    <div class="brano-section" id="brano1">
+      <div class="brano-header">
+        <h2>L'<em>aurea aetas</em></h2>
+        <span class="brano-ref">Virgilio, Ecloga 4, vv. 1&ndash;5</span>
+      </div>
+      <div class="brano-body">
+
+        <div class="nota-critica">
+          <div class="nota-label">Nota critica &mdash; da A. Cucchiarelli</div>
+          <p>Con l'Ecloga 4, dedicata al console Asinio Pollione (40 a.C.), Virgilio formula esplicitamente una deroga al registro bucolico: &laquo;Muse siciliane, cantiamo qualcosa di pi&ugrave; grande&raquo;. Il poeta annuncia il ritorno dell'et&agrave; dell'oro, legata alla profezia cumea della Sibilla, e la nascita di un misterioso <em>puer</em>. Come osserva Cucchiarelli, &laquo;in Dafni, cos&igrave; come nel <em>puer</em> dell'ecloga quarta, Virgilio ha tentato di porre in accordo d&egrave;i e valori divini che il dissidio civile aveva reso inconciliabili&raquo;. L'ecloga guarda soprattutto ad Asinio Pollione e al sogno di pace che il suo consolato aveva significato.</p>
+          <cite>Cfr. A. Cucchiarelli, Introduzione alle Bucoliche, &sect;&sect; 2&ndash;4</cite>
+        </div>
+
+        <!-- Controlli -->
+        <div class="controls">
+          <button class="ctrl-btn" onclick="toggleLayer('scansione1', this)">Mostra scansione</button>
+          <button class="ctrl-btn" onclick="toggleLayer('traduzione1', this)">Mostra traduzione</button>
+          <button class="ctrl-btn" onclick="toggleLayer('note1', this)">Mostra note</button>
+        </div>
+
+        <!-- Versi -->
+        <div class="versi-container" id="brano1-versi">
+
+          <!-- v. 1 -->
+          <div class="verso-row">
+            <span class="verso-num">1</span>
+            <div class="verso-content">
+              <div class="verso-latino">
+                <span class="word" data-lemma="Sicelides" data-morph="agg. nom. f. pl." data-trad="Siciliane">S&imacr;c&#277;l&#301;d&#275;s</span>
+                <span class="word" data-lemma="Musa, -ae" data-morph="nom. f. pl." data-trad="o Muse">M&umacr;sae,</span>
+                <span class="word" data-lemma="paulo" data-morph="avv." data-trad="un poco">paul&#333;</span>
+                <span class="word" data-lemma="maior, -ius" data-morph="agg. compar. n. pl." data-trad="cose pi&ugrave; grandi">m&#257;i&#333;ra</span>
+                <span class="word" data-lemma="cano, -is, cecini" data-morph="cong. pres. 1&ordf; pl." data-trad="cantiamo">can&#257;m&#365;s;</span>
+              </div>
+              <div class="verso-scansione scansione1">&mdash; &#x23d1;&#x23d1; | &mdash; &mdash; | &mdash; &mdash; | &mdash; &mdash; | &mdash; &#x23d1;&#x23d1; | &mdash; &#x23d1;</div>
+              <div class="verso-traduzione traduzione1">O Muse siciliane, cantiamo cose un poco pi&ugrave; grandi;</div>
+              <div class="verso-note note1"><strong>Sicelides Musae:</strong> Virgilio invoca le Muse &laquo;siciliane&raquo; di Teocrito, il poeta siracusano suo modello, ma annuncia subito che le innalzer&agrave; a un registro pi&ugrave; alto (<em>paulo maiora</em>). &Egrave; il segnale di una deroga programmatica al genere bucolico.</div>
+            </div>
+          </div>
+
+          <!-- v. 2 -->
+          <div class="verso-row">
+            <span class="verso-num">2</span>
+            <div class="verso-content">
+              <div class="verso-latino">
+                <span class="word" data-lemma="non" data-morph="avv." data-trad="non">n&#333;n</span>
+                <span class="word" data-lemma="omnis, -e" data-morph="acc. n. pl." data-trad="tutti">&#333;mn&#299;s</span>
+                <span class="word" data-lemma="arbustum, -i" data-morph="acc. n. pl." data-trad="gli arbusti">arb&#363;sta</span>
+                <span class="word" data-lemma="iuvo, -as, iuvi" data-morph="ind. pres. 3&ordf; pl." data-trad="piacciono">i&#365;vant</span>
+                <span class="word" data-lemma="humilis, -e" data-morph="agg. nom. f. pl." data-trad="e le umili">h&#365;m&#301;l&#275;sque</span>
+                <span class="word" data-lemma="myrica, -ae" data-morph="nom. f. pl." data-trad="tamerici">myr&#299;cae:</span>
+              </div>
+              <div class="verso-scansione scansione1">&mdash; &mdash; | &mdash; &mdash; | &mdash; &#x23d1;&#x23d1; | &mdash; &#x23d1;&#x23d1; | &mdash; &#x23d1;&#x23d1; | &mdash; &mdash;</div>
+              <div class="verso-traduzione traduzione1">non a tutti piacciono gli arbusti e le umili tamerici:</div>
+              <div class="verso-note note1"><strong>myricae:</strong> la tamerice &egrave; il cespuglio-simbolo della poesia bucolica &laquo;umile&raquo;. Virgilio la nomina anche in <em>Ecl.</em> 6, 10. Il verso giustifica la necessit&agrave; di alzare il tono.</div>
+            </div>
+          </div>
+
+          <!-- v. 3 -->
+          <div class="verso-row">
+            <span class="verso-num">3</span>
+            <div class="verso-content">
+              <div class="verso-latino">
+                <span class="word" data-lemma="si" data-morph="cong." data-trad="se">s&#299;</span>
+                <span class="word" data-lemma="cano, -is, cecini" data-morph="ind. pres. 1&ordf; pl." data-trad="cantiamo">can&#301;m&#365;s</span>
+                <span class="word" data-lemma="silva, -ae" data-morph="acc. f. pl." data-trad="le selve">silv&#257;s,</span>
+                <span class="word" data-lemma="silva, -ae" data-morph="nom. f. pl." data-trad="le selve">silv&#275;</span>
+                <span class="word" data-lemma="sum, es, fui" data-morph="cong. pres. 3&ordf; pl." data-trad="siano">s&#299;nt</span>
+                <span class="word" data-lemma="consul, -ulis" data-morph="abl. m. sing." data-trad="di un console">c&#333;ns&#365;le</span>
+                <span class="word" data-lemma="dignus, -a, -um" data-morph="agg. nom. f. pl." data-trad="degne">dignae.</span>
+              </div>
+              <div class="verso-scansione scansione1">&mdash; &#x23d1;&#x23d1; | &mdash; &mdash; | &mdash; &mdash; | &mdash; &#x23d1;&#x23d1; | &mdash; &#x23d1;&#x23d1; | &mdash; &mdash;</div>
+              <div class="verso-traduzione traduzione1">se cantiamo le selve, le selve siano degne di un console.</div>
+              <div class="verso-note note1"><strong>silvae / consule dignae:</strong> gioco di parole programmatico &mdash; le <em>silvae</em> (selve = poesia bucolica) dovranno essere &laquo;degne di un console&raquo;, cio&egrave; di Asinio Pollione, console nel 40 a.C. e dedicatario dell'ecloga. Notare la figura etimologica <em>silvas &hellip; silvae</em> (poliptoto).</div>
+            </div>
+          </div>
+
+          <!-- v. 4 -->
+          <div class="verso-row">
+            <span class="verso-num">4</span>
+            <div class="verso-content">
+              <div class="verso-latino">
+                <span class="word" data-lemma="ultimus, -a, -um" data-morph="agg. nom. f. sing." data-trad="L'ultima">&#362;lt&#301;ma</span>
+                <span class="word" data-lemma="Cumaeus, -a, -um" data-morph="agg. gen. n. sing." data-trad="cumeo (della Sibilla)">C&#363;mae&#299;</span>
+                <span class="word" data-lemma="venio, -is, veni" data-morph="ind. perf. 3&ordf; sing." data-trad="venne / &egrave; giunta">v&#275;n&#301;t</span>
+                <span class="word" data-lemma="iam" data-morph="avv." data-trad="ormai">iam</span>
+                <span class="word" data-lemma="carmen, -inis" data-morph="gen. n. sing." data-trad="del carme">c&#257;rm&#301;nis</span>
+                <span class="word" data-lemma="aetas, -atis" data-morph="nom. f. sing." data-trad="l'et&agrave;">aet&#257;s;</span>
+              </div>
+              <div class="verso-scansione scansione1">&mdash; &#x23d1;&#x23d1; | &mdash; &mdash; | &mdash; &mdash; | &mdash; &mdash; | &mdash; &#x23d1;&#x23d1; | &mdash; &mdash;</div>
+              <div class="verso-traduzione traduzione1">&Egrave; giunta ormai l'ultima et&agrave; del carme cumeo;</div>
+              <div class="verso-note note1"><strong>Cumaei carminis:</strong> il &laquo;carme cumeo&raquo; &egrave; la profezia della Sibilla di Cuma, che annunciava il ritorno ciclico delle et&agrave; del mondo. L'&laquo;ultima et&agrave;&raquo; coincide con il ritorno dell'et&agrave; dell'oro (l'<em>aurea aetas</em> esiodea).</div>
+            </div>
+          </div>
+
+          <!-- v. 5 -->
+          <div class="verso-row">
+            <span class="verso-num">5</span>
+            <div class="verso-content">
+              <div class="verso-latino">
+                <span class="word" data-lemma="magnus, -a, -um" data-morph="agg. nom. m. sing." data-trad="un grande">m&#257;gnus</span>
+                <span class="word" data-lemma="ab" data-morph="prep. + abl." data-trad="da">ab</span>
+                <span class="word" data-lemma="integro" data-morph="avv." data-trad="principio, da capo">integr&#333;</span>
+                <span class="word" data-lemma="saeculum, -i" data-morph="gen. n. pl." data-trad="dei secoli">saecl&#333;rum</span>
+                <span class="word" data-lemma="nascor, -eris, natus sum" data-morph="ind. pres. 3&ordf; sing." data-trad="nasce">n&#257;scitur</span>
+                <span class="word" data-lemma="ordo, -inis" data-morph="nom. m. sing." data-trad="l'ordine, il ciclo">ordo.</span>
+              </div>
+              <div class="verso-scansione scansione1">&mdash; &#x23d1;&#x23d1; | &mdash; &mdash; | &mdash; &mdash; | &mdash; &mdash; | &mdash; &#x23d1;&#x23d1; | &mdash; &#x23d1;</div>
+              <div class="verso-traduzione traduzione1">un grande ordine di secoli nasce da capo.</div>
+              <div class="verso-note note1"><strong>magnus &hellip; ordo:</strong> il &laquo;grande ordine dei secoli&raquo; allude alla dottrina stoica del <em>magnus annus</em>, il ciclo cosmico che riconduce il mondo al suo stato originario. <em>Ab integro</em> (&laquo;da principio&raquo;) segna l'idea di un rinnovamento radicale. La struttura del verso, con <em>magnus</em> in apertura e <em>ordo</em> in clausola, incornicia il concetto chiave.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════ BRANO 2: ECL. 10, 69-76 ═══════════════════ -->
+    <div class="brano-section" id="brano2">
+      <div class="brano-header">
+        <h2><em>Omnia vincit Amor!</em></h2>
+        <span class="brano-ref">Virgilio, Ecloga 10, vv. 69&ndash;77</span>
+      </div>
+      <div class="brano-body">
+
+        <div class="nota-critica">
+          <div class="nota-label">Nota critica &mdash; da A. Cucchiarelli</div>
+          <p>L'Ecloga 10, dedicata al poeta elegiaco Cornelio Gallo, &egrave; l'ultima del libro: un congedo dal mondo bucolico. Gallo soffre per l'amore non corrisposto di Licoride e vagheggia una vita arcadica tra i pastori, ma alla fine deve arrendersi: <em>omnia vincit Amor</em>. Come nota Cucchiarelli, la figura di Cornelio Gallo ha un &laquo;ruolo strutturante&raquo; nella seconda met&agrave; del libro, aprendola (Ecl. 6) e chiudendola (Ecl. 10). Il poeta, nell'atto di intrecciare &laquo;un canestro di esili giunchi&raquo;, si raffigura come pastore e al tempo stesso conclude il suo volume di canti.</p>
+          <cite>Cfr. A. Cucchiarelli, Introduzione alle Bucoliche, &sect;&sect; 5.1&ndash;5.2</cite>
+        </div>
+
+        <!-- Controlli -->
+        <div class="controls">
+          <button class="ctrl-btn" onclick="toggleLayer('scansione2', this)">Mostra scansione</button>
+          <button class="ctrl-btn" onclick="toggleLayer('traduzione2', this)">Mostra traduzione</button>
+          <button class="ctrl-btn" onclick="toggleLayer('note2', this)">Mostra note</button>
+        </div>
+
+        <!-- Versi -->
+        <div class="versi-container" id="brano2-versi">
+
+          <!-- v. 69 -->
+          <div class="verso-row">
+            <span class="verso-num">69</span>
+            <div class="verso-content">
+              <div class="verso-latino">
+                <span class="word" data-lemma="omnis, -e" data-morph="acc. n. pl." data-trad="tutte le cose">&#332;mnia</span>
+                <span class="word" data-lemma="vinco, -is, vici" data-morph="ind. pres. 3&ordf; sing." data-trad="vince">v&#299;ncit</span>
+                <span class="word" data-lemma="Amor, -oris" data-morph="nom. m. sing." data-trad="Amore">Amor:</span>
+                <span class="word" data-lemma="et" data-morph="cong." data-trad="e, anche">et</span>
+                <span class="word" data-lemma="nos" data-morph="pron. pers. nom. pl." data-trad="noi">n&#333;s</span>
+                <span class="word" data-lemma="cedo, -is, cessi" data-morph="cong. pres. 1&ordf; pl." data-trad="cediamo">c&#275;d&#257;mus</span>
+                <span class="word" data-lemma="Amor, -oris" data-morph="dat. m. sing." data-trad="ad Amore">Am&#333;r&#299;.&raquo;</span>
+              </div>
+              <div class="verso-scansione scansione2">&mdash; &#x23d1;&#x23d1; | &mdash; &#x23d1;&#x23d1; | &mdash; &#x23d1;&#x23d1; | &mdash; &mdash; | &mdash; &#x23d1;&#x23d1; | &mdash; &mdash;</div>
+              <div class="verso-traduzione traduzione2">&laquo;Tutto vince Amore: e anche noi cediamo ad Amore.&raquo;</div>
+              <div class="verso-note note2"><strong>Omnia vincit Amor:</strong> frase divenuta proverbiale. Gallo si arrende alla forza invincibile di Amore. L'<em>epifonema</em> (sentenza conclusiva) chiude il suo monologo. Notare la struttura circolare: <em>Amor &hellip; Amori</em> (epanalessi).</div>
+            </div>
+          </div>
+
+          <!-- v. 70 -->
+          <div class="verso-row">
+            <span class="verso-num">70</span>
+            <div class="verso-content">
+              <div class="verso-latino">
+                <span class="word" data-lemma="hic, haec, hoc" data-morph="acc. n. pl." data-trad="queste cose">Haec</span>
+                <span class="word" data-lemma="satis" data-morph="avv." data-trad="abbastanza">sat</span>
+                <span class="word" data-lemma="sum, es, fui" data-morph="fut. sempl. 3&ordf; sing." data-trad="sar&agrave;">erit,</span>
+                <span class="word" data-lemma="divus, -a, -um" data-morph="agg. voc. f. pl." data-trad="o divine">divae,</span>
+                <span class="word" data-lemma="vester, -ra, -rum" data-morph="agg. acc. m. sing." data-trad="il vostro">vestrum</span>
+                <span class="word" data-lemma="cano, -is, cecini" data-morph="inf. perf. att." data-trad="aver cantato">cecinisse</span>
+                <span class="word" data-lemma="poeta, -ae" data-morph="acc. m. sing." data-trad="il poeta">poetam</span>
+              </div>
+              <div class="verso-scansione scansione2">&mdash; &#x23d1;&#x23d1; | &mdash; &mdash; | &mdash; &mdash; | &mdash; &#x23d1;&#x23d1; | &mdash; &#x23d1;&#x23d1; | &mdash; &mdash;</div>
+              <div class="verso-traduzione traduzione2">Baster&agrave; questo, o divine, che il vostro poeta abbia cantato</div>
+              <div class="verso-note note2"><strong>divae:</strong> le Muse, invocate come &laquo;divine&raquo;. <em>Vestrum &hellip; poetam</em>: il poeta si definisce &laquo;vostro&raquo;, delle Muse &mdash; dichiarazione di appartenenza al mondo della poesia.</div>
+            </div>
+          </div>
+
+          <!-- v. 71 -->
+          <div class="verso-row">
+            <span class="verso-num">71</span>
+            <div class="verso-content">
+              <div class="verso-latino">
+                <span class="word" data-lemma="dum" data-morph="cong." data-trad="mentre">dum</span>
+                <span class="word" data-lemma="sedeo, -es, sedi" data-morph="ind. pres. 3&ordf; sing." data-trad="siede">sedet</span>
+                <span class="word" data-lemma="et" data-morph="cong." data-trad="e">et</span>
+                <span class="word" data-lemma="gracilis, -e" data-morph="agg. abl. m. sing." data-trad="di sottile">gracili</span>
+                <span class="word" data-lemma="fiscella, -ae" data-morph="acc. f. sing." data-trad="un cestino">fiscellam</span>
+                <span class="word" data-lemma="texo, -is, texui" data-morph="ind. pres. 3&ordf; sing." data-trad="intreccia">texit</span>
+                <span class="word" data-lemma="hibiscum, -i" data-morph="abl. n. sing." data-trad="di ibisco">hibisco,</span>
+              </div>
+              <div class="verso-scansione scansione2">&mdash; &#x23d1;&#x23d1; | &mdash; &#x23d1;&#x23d1; | &mdash; &mdash; | &mdash; &mdash; | &mdash; &#x23d1;&#x23d1; | &mdash; &mdash;</div>
+              <div class="verso-traduzione traduzione2">mentre siede e intreccia un canestro di sottile ibisco,</div>
+              <div class="verso-note note2"><strong>fiscellam texit hibisco:</strong> immagine-chiave: il poeta si raffigura come pastore che intreccia un canestro. Cucchiarelli vi legge una metafora del libro bucolico stesso, &laquo;fatto di mille fili che si collegano e richiamano&raquo;. L'<em>ibisco</em> (malvacea) serve per intrecciare cesti.</div>
+            </div>
+          </div>
+
+          <!-- v. 72 -->
+          <div class="verso-row">
+            <span class="verso-num">72</span>
+            <div class="verso-content">
+              <div class="verso-latino">
+                <span class="word" data-lemma="Pierides" data-morph="voc. f. pl." data-trad="o Pieridi (= Muse)">Pierides:</span>
+                <span class="word" data-lemma="vos" data-morph="pron. pers. nom. pl." data-trad="voi">vos</span>
+                <span class="word" data-lemma="hic, haec, hoc" data-morph="acc. n. pl." data-trad="queste cose">haec</span>
+                <span class="word" data-lemma="facio, -is, feci" data-morph="fut. sempl. 2&ordf; pl." data-trad="renderete">facietis</span>
+                <span class="word" data-lemma="maximus, -a, -um" data-morph="agg. acc. n. pl." data-trad="grandissime">maxima</span>
+                <span class="word" data-lemma="Gallus, -i" data-morph="dat. m. sing." data-trad="per Gallo">Gallo,</span>
+              </div>
+              <div class="verso-scansione scansione2">&mdash; &#x23d1;&#x23d1; | &mdash; &mdash; | &mdash; &#x23d1;&#x23d1; | &mdash; &mdash; | &mdash; &#x23d1;&#x23d1; | &mdash; &mdash;</div>
+              <div class="verso-traduzione traduzione2">Pieridi: voi renderete queste cose grandissime per Gallo,</div>
+              <div class="verso-note note2"><strong>Pierides:</strong> altro nome delle Muse, dalla Pieria (Tessaglia). Il poeta affida alle Muse il compito di rendere <em>maxima</em> (grandissimi) questi versi per Gallo.</div>
+            </div>
+          </div>
+
+          <!-- v. 73 -->
+          <div class="verso-row">
+            <span class="verso-num">73</span>
+            <div class="verso-content">
+              <div class="verso-latino">
+                <span class="word" data-lemma="Gallus, -i" data-morph="dat. m. sing." data-trad="per Gallo">Gallo,</span>
+                <span class="word" data-lemma="cuius" data-morph="pron. rel. gen. m. sing." data-trad="il cui">cuius</span>
+                <span class="word" data-lemma="amor, -oris" data-morph="nom. m. sing." data-trad="amore">amor</span>
+                <span class="word" data-lemma="tantum" data-morph="avv." data-trad="tanto">tantum</span>
+                <span class="word" data-lemma="ego" data-morph="dat. sing." data-trad="in me">mihi</span>
+                <span class="word" data-lemma="cresco, -is, crevi" data-morph="ind. pres. 3&ordf; sing." data-trad="cresce">crescit</span>
+                <span class="word" data-lemma="in" data-morph="prep. + acc." data-trad="di">in</span>
+                <span class="word" data-lemma="hora, -ae" data-morph="acc. f. pl." data-trad="ora in ora">horas,</span>
+              </div>
+              <div class="verso-scansione scansione2">&mdash; &mdash; | &mdash; &#x23d1;&#x23d1; | &mdash; &mdash; | &mdash; &#x23d1;&#x23d1; | &mdash; &#x23d1;&#x23d1; | &mdash; &mdash;</div>
+              <div class="verso-traduzione traduzione2">per Gallo, il cui amore tanto cresce in me di ora in ora,</div>
+              <div class="verso-note note2"><strong>cuius amor &hellip; crescit in horas:</strong> l'affetto del poeta per Gallo cresce come un organismo vivo. L'espressione <em>in horas</em> (&laquo;di ora in ora&raquo;) suggerisce un incremento continuo, quasi vegetale &mdash; come conferma la similitudine del verso successivo.</div>
+            </div>
+          </div>
+
+          <!-- v. 74 -->
+          <div class="verso-row">
+            <span class="verso-num">74</span>
+            <div class="verso-content">
+              <div class="verso-latino">
+                <span class="word" data-lemma="quantum" data-morph="avv." data-trad="quanto">quantum</span>
+                <span class="word" data-lemma="ver, veris" data-morph="abl. n. sing." data-trad="nella primavera">vere</span>
+                <span class="word" data-lemma="novus, -a, -um" data-morph="agg. abl. n. sing." data-trad="nuova">novo</span>
+                <span class="word" data-lemma="viridis, -e" data-morph="agg. nom. f. sing." data-trad="verde">viridis</span>
+                <span class="word" data-lemma="se" data-morph="pron. rifl. acc." data-trad="si">se</span>
+                <span class="word" data-lemma="subicio, -is, -ieci" data-morph="ind. pres. 3&ordf; sing." data-trad="innalza, slancia">subicit</span>
+                <span class="word" data-lemma="alnus, -i" data-morph="nom. f. sing." data-trad="l'ontano">alnus.</span>
+              </div>
+              <div class="verso-scansione scansione2">&mdash; &mdash; | &mdash; &#x23d1;&#x23d1; | &mdash; &#x23d1;&#x23d1; | &mdash; &mdash; | &mdash; &#x23d1;&#x23d1; | &mdash; &mdash;</div>
+              <div class="verso-traduzione traduzione2">quanto in primavera il verde ontano si slancia verso l'alto.</div>
+              <div class="verso-note note2"><strong>viridis &hellip; alnus:</strong> similitudine naturale tipicamente bucolica &mdash; il sentimento per l'amico cresce come un albero in primavera. L'<em>alnus</em> (ontano) &egrave; un albero che ama l'acqua e cresce rapidamente. La scelta di un'analogia vegetale, come nota Cucchiarelli, rivela l'<em>ethos</em> pastorale del poeta.</div>
+            </div>
+          </div>
+
+          <!-- v. 75 -->
+          <div class="verso-row">
+            <span class="verso-num">75</span>
+            <div class="verso-content">
+              <div class="verso-latino">
+                <span class="word" data-lemma="surgo, -is, surrexi" data-morph="cong. pres. 1&ordf; pl." data-trad="Alziamoci">Surgamus.</span>
+                <span class="word" data-lemma="soleo, -es, solitus sum" data-morph="ind. pres. 3&ordf; sing." data-trad="Suole">Solet</span>
+                <span class="word" data-lemma="sum, es, fui" data-morph="inf. pres." data-trad="essere">esse</span>
+                <span class="word" data-lemma="gravis, -e" data-morph="agg. nom. f. sing." data-trad="pesante, nociva">gravis</span>
+                <span class="word" data-lemma="canto, -as, -avi" data-morph="part. pres. dat. m. pl." data-trad="a chi canta">cantantibus</span>
+                <span class="word" data-lemma="umbra, -ae" data-morph="nom. f. sing." data-trad="l'ombra">umbra;</span>
+              </div>
+              <div class="verso-scansione scansione2">&mdash; &mdash; | &mdash; &#x23d1;&#x23d1; | &mdash; &#x23d1;&#x23d1; | &mdash; &mdash; | &mdash; &#x23d1;&#x23d1; | &mdash; &#x23d1;</div>
+              <div class="verso-traduzione traduzione2">Alziamoci. L'ombra suole essere nociva per chi canta;</div>
+              <div class="verso-note note2"><strong>Surgamus:</strong> il congiuntivo esortativo segna il passaggio dal canto all'azione &mdash; &egrave; tempo di smettere. L'ombra che &laquo;nuoce a chi canta&raquo; &egrave; un motivo topico della chiusura bucolica: il giorno finisce, i pastori devono rientrare.</div>
+            </div>
+          </div>
+
+          <!-- v. 76 -->
+          <div class="verso-row">
+            <span class="verso-num">76</span>
+            <div class="verso-content">
+              <div class="verso-latino">
+                <span class="word" data-lemma="iuniperus, -i" data-morph="gen. f. sing." data-trad="del ginepro">iuniperi</span>
+                <span class="word" data-lemma="gravis, -e" data-morph="agg. nom. f. sing." data-trad="nociva">gravis</span>
+                <span class="word" data-lemma="umbra, -ae" data-morph="nom. f. sing." data-trad="l'ombra">umbra,</span>
+                <span class="word" data-lemma="noceo, -es, nocui" data-morph="ind. pres. 3&ordf; pl." data-trad="nuocciono">nocent</span>
+                <span class="word" data-lemma="et" data-morph="avv." data-trad="anche">et</span>
+                <span class="word" data-lemma="fruges, -um" data-morph="dat. f. pl." data-trad="alle messi">frugibus</span>
+                <span class="word" data-lemma="umbra, -ae" data-morph="nom. f. pl." data-trad="le ombre">umbrae.</span>
+              </div>
+              <div class="verso-scansione scansione2">&mdash; &#x23d1;&#x23d1; | &mdash; &#x23d1;&#x23d1; | &mdash; &mdash; | &mdash; &mdash; | &mdash; &#x23d1;&#x23d1; | &mdash; &mdash;</div>
+              <div class="verso-traduzione traduzione2">nociva l'ombra del ginepro, e anche alle messi nuocciono le ombre.</div>
+              <div class="verso-note note2"><strong>iuniperi gravis umbra:</strong> la triplice ripetizione di <em>umbra</em> (vv. 75-76) crea un effetto di crescendo: l'ombra della sera avanza, il canto deve cessare. &Egrave; anche una metafora: ogni canto ha un limite.</div>
+            </div>
+          </div>
+
+          <!-- v. 77 -->
+          <div class="verso-row">
+            <span class="verso-num">77</span>
+            <div class="verso-content">
+              <div class="verso-latino">
+                <span class="word" data-lemma="eo, is, ivi/ii" data-morph="imp. pres. 2&ordf; pl." data-trad="Andate">Ite</span>
+                <span class="word" data-lemma="domus, -us" data-morph="acc. (loc.)" data-trad="a casa">domum</span>
+                <span class="word" data-lemma="satur, -ura, -urum" data-morph="agg. voc. f. pl." data-trad="sazie, satolle">saturae,</span>
+                <span class="word" data-lemma="venio, -is, veni" data-morph="ind. pres. 3&ordf; sing." data-trad="viene, arriva">venit</span>
+                <span class="word" data-lemma="Hesperus, -i" data-morph="nom. m. sing." data-trad="Espero (la stella della sera)">Hesperus,</span>
+                <span class="word" data-lemma="eo, is, ivi/ii" data-morph="imp. pres. 2&ordf; pl." data-trad="andate">ite</span>
+                <span class="word" data-lemma="capella, -ae" data-morph="voc. f. pl." data-trad="o caprette">capellae.</span>
+              </div>
+              <div class="verso-scansione scansione2">&mdash; &#x23d1;&#x23d1; | &mdash; &#x23d1;&#x23d1; | &mdash; &#x23d1;&#x23d1; | &mdash; &#x23d1;&#x23d1; | &mdash; &#x23d1;&#x23d1; | &mdash; &mdash;</div>
+              <div class="verso-traduzione traduzione2">Andate a casa, sazie; viene Espero: andate, caprette.</div>
+              <div class="verso-note note2"><strong>Ite domum &hellip; ite capellae:</strong> verso conclusivo dell'intero libro bucolico. L'iterazione di <em>ite</em> (epanalessi) e l'arrivo di Espero (la stella della sera = Venere) segnano la fine del giorno e della poesia. Il ritmo &egrave; interamente dattilico (raro), dando un effetto di leggerezza e commiato sereno. <em>Domum</em> &egrave; un accusativo di moto a luogo senza preposizione (arcaismo).</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════ ESERCIZI ═══════════════════ -->
+    <div class="esercizio-section" id="esercizi">
+      <h2>Esercizi interattivi</h2>
+
+      <h3>A. Comprensione del testo</h3>
+
+      <!-- Quiz 1 -->
+      <div class="quiz-item" data-quiz="q1">
+        <div class="quiz-q">1. Chi sono le <em>Sicelides Musae</em> invocate nel v. 1 dell'Ecloga 4?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">Le Muse dell'Arcadia, regione pastorale del Peloponneso</div>
+          <div class="quiz-option" data-correct="true" onclick="checkQuiz(this)">Le Muse &laquo;siciliane&raquo;, legate a Teocrito, poeta siracusano</div>
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">Le Muse della Pieria, regione della Tessaglia</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <!-- Quiz 2 -->
+      <div class="quiz-item" data-quiz="q2">
+        <div class="quiz-q">2. Cosa indica l'espressione <em>paulo maiora canamus</em> (v. 1)?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">Il desiderio di tornare al registro pi&ugrave; umile della poesia pastorale</div>
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">L'intenzione di scrivere un poema epico</div>
+          <div class="quiz-option" data-correct="true" onclick="checkQuiz(this)">La volont&agrave; di innalzare il tono restando nel genere bucolico</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <!-- Quiz 3 -->
+      <div class="quiz-item" data-quiz="q3">
+        <div class="quiz-q">3. Chi &egrave; il <em>consul</em> a cui le <em>silvae</em> devono essere degne (v. 3)?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">Cesare Ottaviano</div>
+          <div class="quiz-option" data-correct="true" onclick="checkQuiz(this)">Asinio Pollione, console nel 40 a.C.</div>
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">Cornelio Gallo</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <!-- Quiz 4 -->
+      <div class="quiz-item" data-quiz="q4">
+        <div class="quiz-q">4. Nell'Ecloga 10, v. 69, <em>Omnia vincit Amor</em>: chi pronuncia questa frase e perch&eacute;?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">Virgilio, per celebrare la potenza della poesia</div>
+          <div class="quiz-option" data-correct="true" onclick="checkQuiz(this)">Cornelio Gallo, arrendendosi alla forza invincibile dell'amore</div>
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">Titiro, ricordando la protezione divina ricevuta a Roma</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <h3>B. Analisi linguistica e stilistica</h3>
+
+      <!-- Quiz 5 -->
+      <div class="quiz-item" data-quiz="q5">
+        <div class="quiz-q">5. Nel v. 3 (<em>si canimus silvas, silvae sint consule dignae</em>), quale figura retorica si riconosce nella ripetizione di <em>silvas / silvae</em>?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">Anafora</div>
+          <div class="quiz-option" data-correct="true" onclick="checkQuiz(this)">Poliptoto</div>
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">Chiasmo</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <!-- Quiz 6 -->
+      <div class="quiz-item" data-quiz="q6">
+        <div class="quiz-q">6. Nei vv. 75-76 dell'Ecloga 10, la parola <em>umbra</em> compare tre volte. Quale effetto produce questa ripetizione?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">Un effetto comico, tipico della commedia</div>
+          <div class="quiz-option" data-correct="true" onclick="checkQuiz(this)">Un effetto di crescendo che sottolinea la fine del giorno e del canto</div>
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">Un errore di stile, segno di scarsa revisione</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <h3>C. Traduzione guidata</h3>
+      <p>Prova a tradurre ciascun verso, poi confronta con la soluzione.</p>
+
+      <div class="trad-exercise">
+        <div class="trad-verso-box">
+          <div class="trad-lat">Ultima Cumaei venit iam carminis aetas (Ecl. 4, 4)</div>
+          <textarea class="trad-input" placeholder="Scrivi qui la tua traduzione..."></textarea>
+          <button class="trad-reveal-btn" onclick="revealTrad(this)">Mostra soluzione</button>
+          <div class="trad-solution">&Egrave; giunta ormai l'ultima et&agrave; del carme cumeo (= della profezia della Sibilla di Cuma).</div>
+        </div>
+
+        <div class="trad-verso-box">
+          <div class="trad-lat">Ite domum saturae, venit Hesperus, ite capellae (Ecl. 10, 77)</div>
+          <textarea class="trad-input" placeholder="Scrivi qui la tua traduzione..."></textarea>
+          <button class="trad-reveal-btn" onclick="revealTrad(this)">Mostra soluzione</button>
+          <div class="trad-solution">Andate a casa, sazie; viene Espero (la stella della sera): andate, caprette.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tools -->
+    <section class="tools-section">
+      <h2>Strumenti Correlati</h2>
+      <div class="tools-grid">
+        <a href="lezione_virgilio.html" class="tool-link">
+          <span class="tool-icon">&#x1F3DB;</span>
+          <span class="tool-name">Lezione su Virgilio</span>
+        </a>
+        <a href="raccoglitore-testi.html" class="tool-link">
+          <span class="tool-icon">&#x1F4DA;</span>
+          <span class="tool-name">Raccoglitore Testi</span>
+        </a>
+        <a href="declinazioni_latine.html" class="tool-link">
+          <span class="tool-icon">&#x1F4CA;</span>
+          <span class="tool-name">Declinazioni</span>
+        </a>
+        <a href="strumenti/glossario-eulalia.html" class="tool-link">
+          <span class="tool-icon">&#x1F4D6;</span>
+          <span class="tool-name">Glossario Eulalia</span>
+        </a>
+      </div>
+    </section>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p><strong>Prof. Andrea Vaccaro</strong></p>
+    <p>Lingua e Cultura Latina &mdash; Liceo Classico e Liceo Scientifico</p>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="raccoglitore-testi.html">Raccoglitore Testi</a>
+      <a href="strumenti/glossario-eulalia.html">Strumenti</a>
+    </div>
+  </footer>
+
+<script>
+// ═══ TOGGLE LAYERS ═══
+function toggleLayer(className, btn) {
+  const elements = document.querySelectorAll('.' + className);
+  const isVisible = elements[0] && elements[0].classList.contains('visible');
+
+  elements.forEach(el => {
+    el.classList.toggle('visible');
+  });
+
+  btn.classList.toggle('active');
+  btn.textContent = isVisible
+    ? btn.textContent.replace('Nascondi', 'Mostra')
+    : btn.textContent.replace('Mostra', 'Nascondi');
+}
+
+// ═══ WORD TOOLTIPS ═══
+document.querySelectorAll('.word').forEach(word => {
+  const lemma = word.getAttribute('data-lemma');
+  const morph = word.getAttribute('data-morph');
+  const trad = word.getAttribute('data-trad');
+
+  if (lemma) {
+    const tooltip = document.createElement('span');
+    tooltip.className = 'word-tooltip';
+    tooltip.innerHTML =
+      '<span class="wt-lemma">' + lemma + '</span><br>' +
+      '<span class="wt-morph">' + morph + '</span><br>' +
+      '<span class="wt-trad">' + trad + '</span>';
+    word.appendChild(tooltip);
+  }
+});
+
+// ═══ QUIZ ═══
+let score = 0;
+const totalQuiz = 6;
+
+function checkQuiz(option) {
+  const item = option.closest('.quiz-item');
+  if (item.classList.contains('answered')) return;
+
+  item.classList.add('answered');
+  const isCorrect = option.getAttribute('data-correct') === 'true';
+  const feedback = item.querySelector('.quiz-feedback');
+  const allOptions = item.querySelectorAll('.quiz-option');
+
+  allOptions.forEach(opt => {
+    opt.classList.add('disabled');
+    if (opt.getAttribute('data-correct') === 'true') {
+      opt.classList.add('correct');
+    }
+  });
+
+  if (isCorrect) {
+    option.classList.add('correct');
+    feedback.className = 'quiz-feedback show correct-fb';
+    feedback.textContent = 'Corretto!';
+    score++;
+  } else {
+    option.classList.add('wrong');
+    feedback.className = 'quiz-feedback show wrong-fb';
+    feedback.textContent = 'Non esatto. La risposta corretta \u00e8 evidenziata in verde.';
+  }
+
+  document.getElementById('scoreDisplay').textContent = score + ' / ' + totalQuiz;
+}
+
+// ═══ TRADUZIONE REVEAL ═══
+function revealTrad(btn) {
+  const solution = btn.nextElementSibling;
+  solution.classList.toggle('visible');
+  btn.textContent = solution.classList.contains('visible') ? 'Nascondi soluzione' : 'Mostra soluzione';
+}
+</script>
+
+</body>
+</html>

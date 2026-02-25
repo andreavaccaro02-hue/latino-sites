@@ -1,0 +1,633 @@
+/* ═══════════════════════════════════════════════════════
+   LINGUA E CULTURA LATINA — CSS CONDIVISO
+   Prof. Andrea Vaccaro
+   Liceo Classico e Liceo Scientifico
+   ═══════════════════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Cardo:ital,wght@0,400;0,700;1,400&display=swap');
+
+/* ═══ VARIABILI ═══ */
+:root {
+  --bg: #f8f6f0;
+  --card: #ffffff;
+  --text: #2c2416;
+  --text-dim: #6b6456;
+  --border: #d4c9b8;
+  --gold: #b8915a;
+  --gold-light: #d4b088;
+
+  /* Colori per anno */
+  --latino1: #e85d5d;
+  --latino2: #78c878;
+  --latino3: #6db5d4;
+  --latino4: #f4d35e;
+  --latino5: #c084d4;
+
+  /* Colori per indirizzo */
+  --classico: #8B1E3F;
+  --scientifico: #1E5B8B;
+
+  /* Colori per funzioni grammaticali */
+  --soggetto: #e85d5d;
+  --verbo: #f4d35e;
+  --complemento-oggetto: #78c878;
+  --complemento-indiretto: #6db5d4;
+  --vocativo: #ff8c42;
+
+  /* Eulalia */
+  --eulalia: #2D6A4F;
+  --eulalia-light: #d4edda;
+}
+
+/* ═══ RESET ═══ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ═══ BASE ═══ */
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Cardo', serif;
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+a { color: var(--text); }
+
+/* ═══ HERO HEADER ═══ */
+.hero {
+  background: linear-gradient(135deg, #2c2416 0%, #5a4e3c 100%);
+  color: #f5f0e8;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.hero h1 {
+  font-family: 'Libre Baskerville', serif;
+  font-size: 44px;
+  margin-bottom: 12px;
+}
+
+.hero .subtitle {
+  font-size: 20px;
+  color: var(--gold-light);
+  font-style: italic;
+}
+
+.hero .school-info {
+  font-size: 15px;
+  color: rgba(245, 240, 232, 0.7);
+  margin-top: 16px;
+}
+
+.divider {
+  width: 120px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  margin: 16px auto;
+}
+
+/* ═══ NAVIGATION BAR ═══ */
+.navbar {
+  background: var(--card);
+  border-bottom: 2px solid var(--border);
+  padding: 12px 20px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.navbar .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.navbar .site-name {
+  font-family: 'Libre Baskerville', serif;
+  font-size: 16px;
+  font-weight: 700;
+  text-decoration: none;
+  color: var(--text);
+}
+
+.nav-links {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.nav-links a {
+  text-decoration: none;
+  font-size: 14px;
+  color: var(--text-dim);
+  font-weight: 600;
+  transition: color 0.2s;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  color: var(--text);
+}
+
+/* ═══ BACK LINK ═══ */
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+  color: var(--text-dim);
+  font-size: 15px;
+  margin: 20px 0;
+  transition: color 0.2s;
+}
+
+.back-link:hover { color: var(--text); }
+
+/* ═══ PAGE HEADER (for subpages) ═══ */
+.page-header {
+  text-align: center;
+  padding: 40px 20px;
+  margin-bottom: 30px;
+}
+
+.page-header h1 {
+  font-family: 'Libre Baskerville', serif;
+  font-size: 38px;
+  color: var(--text);
+  margin-bottom: 10px;
+}
+
+.page-header .subtitle {
+  font-size: 18px;
+  color: var(--text-dim);
+  font-style: italic;
+}
+
+.page-header .divider {
+  margin: 16px auto;
+}
+
+/* ═══ SECTION ═══ */
+.section {
+  margin-bottom: 40px;
+}
+
+.section-title {
+  font-family: 'Libre Baskerville', serif;
+  font-size: 26px;
+  margin-bottom: 8px;
+}
+
+.section-desc {
+  font-size: 16px;
+  color: var(--text-dim);
+  margin-bottom: 24px;
+  line-height: 1.6;
+}
+
+.section-header-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 3px solid var(--border);
+}
+
+.section-header-bar .icon { font-size: 28px; }
+
+/* ═══ CARDS GRID ═══ */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+  margin-bottom: 40px;
+}
+
+.card {
+  background: var(--card);
+  border: 2px solid var(--border);
+  border-radius: 16px;
+  padding: 30px;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  color: var(--text);
+  display: block;
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.12);
+  border-color: var(--text);
+}
+
+.card:hover::before {
+  height: 6px;
+}
+
+/* Card accent colors by year */
+.card[data-level="1"]::before { background: var(--latino1); }
+.card[data-level="2"]::before { background: var(--latino2); }
+.card[data-level="3"]::before { background: var(--latino3); }
+.card[data-level="4"]::before { background: var(--latino4); }
+.card[data-level="5"]::before { background: var(--latino5); }
+.card[data-level="strumenti"]::before { background: var(--gold); }
+.card[data-level="testi"]::before { background: var(--eulalia); }
+
+.card .card-icon {
+  font-size: 42px;
+  margin-bottom: 14px;
+  display: block;
+}
+
+.card h2,
+.card h3 {
+  font-family: 'Libre Baskerville', serif;
+  font-size: 22px;
+  margin-bottom: 10px;
+  color: var(--text);
+}
+
+.card p {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--text-dim);
+}
+
+.card .badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+  margin-top: 12px;
+  color: #fff;
+}
+
+.card[data-level="1"] .badge { background: var(--latino1); }
+.card[data-level="2"] .badge { background: var(--latino2); }
+.card[data-level="3"] .badge { background: var(--latino3); }
+.card[data-level="4"] .badge { background: var(--latino4); color: var(--text); }
+.card[data-level="5"] .badge { background: var(--latino5); }
+
+/* ═══ TOPIC TABLE ═══ */
+.topic-table {
+  width: 100%;
+  background: var(--card);
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  margin-bottom: 24px;
+}
+
+.topic-table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.topic-table th {
+  background: linear-gradient(135deg, #2c2416, #5a4e3c);
+  color: #f5f0e8;
+  padding: 14px 20px;
+  text-align: left;
+  font-family: 'Libre Baskerville', serif;
+  font-weight: 600;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.topic-table td {
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+
+.topic-table tr:last-child td {
+  border-bottom: none;
+}
+
+.topic-table tr:hover {
+  background: rgba(184, 145, 90, 0.04);
+}
+
+.topic-name {
+  font-family: 'Libre Baskerville', serif;
+  font-size: 17px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.topic-desc {
+  font-size: 14px;
+  color: var(--text-dim);
+  line-height: 1.5;
+}
+
+/* Status badges for topics */
+.status {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.status.placeholder {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.status.ready {
+  background: #d4edda;
+  color: #155724;
+}
+
+.status.wip {
+  background: #cce5ff;
+  color: #004085;
+}
+
+/* Resource links in tables */
+.resources {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.resource-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  text-decoration: none;
+  color: var(--text);
+  font-size: 13px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.resource-link:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.resource-link.text { border-color: var(--latino1); color: var(--latino1); }
+.resource-link.text:hover { background: var(--latino1); color: white; }
+
+.resource-link.pdf { border-color: var(--latino2); color: var(--latino2); }
+.resource-link.pdf:hover { background: var(--latino2); color: white; }
+
+.resource-link.tool { border-color: var(--latino3); color: var(--latino3); }
+.resource-link.tool:hover { background: var(--latino3); color: white; }
+
+.resource-link.grammar { border-color: var(--latino4); color: #9a7c1a; }
+.resource-link.grammar:hover { background: var(--latino4); color: var(--text); }
+
+/* ═══ EULALIA SECTION ═══ */
+.eulalia-section {
+  background: var(--card);
+  border: 2px solid var(--eulalia);
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 30px;
+}
+
+.eulalia-section .eulalia-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--eulalia-light);
+}
+
+.eulalia-section .eulalia-header h3 {
+  font-family: 'Libre Baskerville', serif;
+  font-size: 20px;
+  color: var(--eulalia);
+}
+
+.eulalia-level {
+  display: inline-block;
+  padding: 4px 14px;
+  border-radius: 20px;
+  background: var(--eulalia);
+  color: white;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+/* Checklist */
+.checklist {
+  list-style: none;
+  padding: 0;
+}
+
+.checklist li {
+  padding: 10px 12px;
+  border-left: 3px solid var(--eulalia);
+  margin-bottom: 6px;
+  margin-left: 4px;
+  font-size: 15px;
+  line-height: 1.5;
+  background: var(--eulalia-light);
+  border-radius: 0 8px 8px 0;
+}
+
+.checklist li::before {
+  content: '\2610';
+  margin-right: 10px;
+  font-size: 18px;
+}
+
+/* ═══ INDIRIZZO TABS ═══ */
+.track-tabs {
+  display: flex;
+  gap: 0;
+  margin-bottom: 24px;
+}
+
+.track-tab {
+  flex: 1;
+  padding: 14px 20px;
+  text-align: center;
+  font-family: 'Libre Baskerville', serif;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  border: 2px solid var(--border);
+  background: var(--bg);
+  color: var(--text-dim);
+  transition: all 0.2s;
+  text-decoration: none;
+}
+
+.track-tab:first-child {
+  border-radius: 12px 0 0 12px;
+}
+
+.track-tab:last-child {
+  border-radius: 0 12px 12px 0;
+}
+
+.track-tab.classico.active,
+.track-tab.classico:hover {
+  background: var(--classico);
+  color: white;
+  border-color: var(--classico);
+}
+
+.track-tab.scientifico.active,
+.track-tab.scientifico:hover {
+  background: var(--scientifico);
+  color: white;
+  border-color: var(--scientifico);
+}
+
+/* ═══ TOOLS SECTION ═══ */
+.tools-section {
+  background: var(--card);
+  border: 2px solid var(--border);
+  border-radius: 16px;
+  padding: 30px;
+  margin-bottom: 40px;
+}
+
+.tools-section h2 {
+  font-family: 'Libre Baskerville', serif;
+  font-size: 24px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.tools-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.tool-link {
+  padding: 16px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  text-decoration: none;
+  color: var(--text);
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.tool-link:hover {
+  background: var(--text);
+  color: var(--bg);
+  border-color: var(--text);
+  transform: translateX(4px);
+}
+
+.tool-link .tool-icon { font-size: 22px; }
+
+.tool-link .tool-name {
+  font-family: 'Libre Baskerville', serif;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+/* ═══ EMPTY STATE ═══ */
+.empty-state {
+  text-align: center;
+  padding: 50px 20px;
+  color: var(--text-dim);
+}
+
+.empty-state .icon {
+  font-size: 56px;
+  display: block;
+  margin-bottom: 16px;
+}
+
+.empty-state h2 {
+  font-family: 'Libre Baskerville', serif;
+  font-size: 22px;
+  margin-bottom: 10px;
+  color: var(--text);
+}
+
+.empty-state p {
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+/* ═══ FOOTER ═══ */
+footer {
+  background: #2c2416;
+  color: rgba(245, 240, 232, 0.8);
+  padding: 30px 20px;
+  text-align: center;
+  margin-top: 60px;
+}
+
+footer p { margin-bottom: 6px; }
+footer strong { color: var(--gold-light); }
+
+footer .footer-links {
+  margin-top: 12px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+footer .footer-links a {
+  color: var(--gold-light);
+  text-decoration: none;
+  font-size: 13px;
+  transition: color 0.2s;
+}
+
+footer .footer-links a:hover {
+  color: #fff;
+}
+
+/* ═══ RESPONSIVE ═══ */
+@media (max-width: 768px) {
+  .hero h1 { font-size: 30px; }
+  .page-header h1 { font-size: 28px; }
+  .cards-grid { grid-template-columns: 1fr; }
+  .tools-grid { grid-template-columns: 1fr; }
+  .navbar .container { flex-direction: column; text-align: center; }
+  .nav-links { justify-content: center; }
+  .track-tabs { flex-direction: column; }
+  .track-tab:first-child { border-radius: 12px 12px 0 0; }
+  .track-tab:last-child { border-radius: 0 0 12px 12px; }
+}

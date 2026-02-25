@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Le Cinque Declinazioni Latine — Lingua e Cultura Latina</title>
+<link rel="stylesheet" href="css/style.css">
+<style>
+  /* ═══ PAGINA DECLINAZIONI — STILI SPECIFICI ═══ */
+  :root {
+    --decl-1: #b8443a;
+    --decl-1-bg: rgba(184, 68, 58, 0.08);
+    --decl-1-border: rgba(184, 68, 58, 0.3);
+    --decl-2: #4a7f8a;
+    --decl-2-bg: rgba(74, 127, 138, 0.08);
+    --decl-2-border: rgba(74, 127, 138, 0.3);
+    --decl-3: #8a7340;
+    --decl-3-bg: rgba(138, 115, 64, 0.08);
+    --decl-3-border: rgba(138, 115, 64, 0.3);
+    --decl-4: #6b5a82;
+    --decl-4-bg: rgba(107, 90, 130, 0.08);
+    --decl-4-border: rgba(107, 90, 130, 0.3);
+    --decl-5: #5a8a55;
+    --decl-5-bg: rgba(90, 138, 85, 0.08);
+    --decl-5-border: rgba(90, 138, 85, 0.3);
+  }
+
+  /* ═══ LEGENDA ═══ */
+  .decl-legend {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+    padding: 20px;
+    background: var(--card);
+    border-radius: 12px;
+    border: 2px solid var(--border);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  .legend-color {
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    border: 2px solid currentColor;
+  }
+
+  .legend-item:nth-child(1) { color: var(--decl-1); }
+  .legend-item:nth-child(1) .legend-color { background: var(--decl-1-bg); border-color: var(--decl-1); }
+  .legend-item:nth-child(2) { color: var(--decl-2); }
+  .legend-item:nth-child(2) .legend-color { background: var(--decl-2-bg); border-color: var(--decl-2); }
+  .legend-item:nth-child(3) { color: var(--decl-3); }
+  .legend-item:nth-child(3) .legend-color { background: var(--decl-3-bg); border-color: var(--decl-3); }
+  .legend-item:nth-child(4) { color: var(--decl-4); }
+  .legend-item:nth-child(4) .legend-color { background: var(--decl-4-bg); border-color: var(--decl-4); }
+  .legend-item:nth-child(5) { color: var(--decl-5); }
+  .legend-item:nth-child(5) .legend-color { background: var(--decl-5-bg); border-color: var(--decl-5); }
+
+  /* ═══ TABLES GRID ═══ */
+  .tables-wrapper {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+    gap: 30px;
+    margin-bottom: 40px;
+  }
+
+  .decl-table-container {
+    background: var(--card);
+    border-radius: 16px;
+    overflow: hidden;
+    border: 2px solid;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    animation: fadeInUp 0.6s ease backwards;
+  }
+
+  .decl-table-container:nth-child(1) { border-color: var(--decl-1-border); animation-delay: 0.1s; }
+  .decl-table-container:nth-child(2) { border-color: var(--decl-2-border); animation-delay: 0.2s; }
+  .decl-table-container:nth-child(3) { border-color: var(--decl-3-border); animation-delay: 0.3s; }
+  .decl-table-container:nth-child(4) { border-color: var(--decl-4-border); animation-delay: 0.4s; }
+  .decl-table-container:nth-child(5) { border-color: var(--decl-5-border); animation-delay: 0.5s; }
+
+  .decl-table-container:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  }
+
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ═══ TABLE HEADER ═══ */
+  .table-header {
+    padding: 18px 24px;
+    text-align: center;
+  }
+
+  .decl-table-container:nth-child(1) .table-header { background: var(--decl-1-bg); }
+  .decl-table-container:nth-child(2) .table-header { background: var(--decl-2-bg); }
+  .decl-table-container:nth-child(3) .table-header { background: var(--decl-3-bg); }
+  .decl-table-container:nth-child(4) .table-header { background: var(--decl-4-bg); }
+  .decl-table-container:nth-child(5) .table-header { background: var(--decl-5-bg); }
+
+  .table-header h2 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+
+  .decl-table-container:nth-child(1) .table-header h2 { color: var(--decl-1); }
+  .decl-table-container:nth-child(2) .table-header h2 { color: var(--decl-2); }
+  .decl-table-container:nth-child(3) .table-header h2 { color: var(--decl-3); }
+  .decl-table-container:nth-child(4) .table-header h2 { color: var(--decl-4); }
+  .decl-table-container:nth-child(5) .table-header h2 { color: var(--decl-5); }
+
+  .gen-pl-indicator {
+    font-size: 13px;
+    font-style: italic;
+    color: var(--text-dim);
+    letter-spacing: 0.5px;
+  }
+
+  /* ═══ TABLE ═══ */
+  .decl-table-container table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .decl-table-container th {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    padding: 12px 16px;
+    text-align: left;
+    background: rgba(44, 36, 22, 0.05);
+    color: var(--gold);
+    border-bottom: 2px solid var(--border);
+  }
+
+  .decl-table-container td {
+    padding: 14px 16px;
+    font-size: 18px;
+    border-bottom: 1px solid rgba(212, 201, 184, 0.5);
+    transition: background 0.2s ease;
+  }
+
+  .decl-table-container tr:last-child td {
+    border-bottom: none;
+  }
+
+  .decl-table-container tr:hover td {
+    background: rgba(184, 145, 90, 0.04);
+  }
+
+  .caso-label {
+    font-weight: 600;
+    color: var(--text-dim);
+    font-size: 15px;
+  }
+
+  .desinenza {
+    font-family: 'Libre Baskerville', serif;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    color: var(--text);
+  }
+
+  /* Highlight genitivo plurale */
+  tr.gen-pl td {
+    background: rgba(184, 145, 90, 0.08);
+    border-left: 3px solid var(--gold);
+  }
+
+  tr.gen-pl .desinenza {
+    color: var(--gold);
+    font-size: 20px;
+  }
+
+  tr.gen-pl .caso-label {
+    color: var(--gold);
+  }
+
+  /* ═══ NOTE ═══ */
+  .decl-note {
+    background: var(--card);
+    border-left: 4px solid var(--gold);
+    border-radius: 8px;
+    padding: 20px 24px;
+    margin-top: 30px;
+    margin-bottom: 40px;
+    font-size: 16px;
+    line-height: 1.7;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  }
+
+  .decl-note strong {
+    color: var(--gold);
+    font-weight: 700;
+  }
+
+  /* ═══ RESPONSIVE ═══ */
+  @media (max-width: 768px) {
+    .tables-wrapper {
+      grid-template-columns: 1fr;
+    }
+    .decl-legend {
+      flex-direction: column;
+      gap: 12px;
+    }
+  }
+</style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="container">
+      <a href="index.html" class="site-name">Lingua e Cultura Latina</a>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="raccoglitore-testi.html">Testi</a>
+        <a href="strumenti/glossario-eulalia.html">Strumenti</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Header -->
+  <div class="page-header">
+    <h1>Le Cinque Declinazioni Latine</h1>
+    <div class="divider"></div>
+    <p class="subtitle">Specchietto delle Desinenze — Singolare e Plurale</p>
+  </div>
+
+  <div class="container">
+    <a href="index.html" class="back-link">&larr; Torna alla Home</a>
+
+    <div class="decl-legend">
+      <div class="legend-item">
+        <div class="legend-color"></div>
+        <span>I Declinazione</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-color"></div>
+        <span>II Declinazione</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-color"></div>
+        <span>III Declinazione</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-color"></div>
+        <span>IV Declinazione</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-color"></div>
+        <span>V Declinazione</span>
+      </div>
+    </div>
+
+    <div class="tables-wrapper">
+
+      <!-- I DECLINAZIONE -->
+      <div class="decl-table-container">
+        <div class="table-header">
+          <h2>I Declinazione</h2>
+          <p class="gen-pl-indicator">Gen. Pl. &rarr; -&#257;rum</p>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>Caso</th>
+              <th>Singolare</th>
+              <th>Plurale</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="caso-label">Nom.</td>
+              <td class="desinenza">-a</td>
+              <td class="desinenza">-ae</td>
+            </tr>
+            <tr class="gen-pl">
+              <td class="caso-label">Gen.</td>
+              <td class="desinenza">-ae</td>
+              <td class="desinenza">-&#257;rum</td>
+            </tr>
+            <tr>
+              <td class="caso-label">Dat.</td>
+              <td class="desinenza">-ae</td>
+              <td class="desinenza">-&#299;s</td>
+            </tr>
+            <tr>
+              <td class="caso-label">Acc.</td>
+              <td class="desinenza">-am</td>
+              <td class="desinenza">-&#257;s</td>
+            </tr>
+            <tr>
+              <td class="caso-label">Voc.</td>
+              <td class="desinenza">-a</td>
+              <td class="desinenza">-ae</td>
+            </tr>
+            <tr>
+              <td class="caso-label">Abl.</td>
+              <td class="desinenza">-&#257;</td>
+              <td class="desinenza">-&#299;s</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- II DECLINAZIONE -->
+      <div class="decl-table-container">
+        <div class="table-header">
+          <h2>II Declinazione</h2>
+          <p class="gen-pl-indicator">Gen. Pl. &rarr; -&#333;rum / -&#333;rum</p>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>Caso</th>
+              <th>Singolare</th>
+              <th>Plurale</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="caso-label">Nom.</td>
+              <td class="desinenza">-us / -er / -um</td>
+              <td class="desinenza">-&#299; / -a</td>
+            </tr>
+            <tr class="gen-pl">
+              <td class="caso-label">Gen.</td>
+              <td class="desinenza">-&#299;</td>
+              <td class="desinenza">-&#333;rum</td>
+            </tr>
+            <tr>
+              <td class="caso-label">Dat.</td>
+              <td class="desinenza">-&#333;</td>
+              <td class="desinenza">-&#299;s</td>
+            </tr>
+            <tr>
+              <td class="caso-label">Acc.</td>
+              <td class="desinenza">-um</td>
+              <td class="desinenza">-&#333;s / -a</td>
+            </tr>
+            <tr>
+              <td class="caso-label">Voc.</td>
+              <td class="desinenza">-e / -er / -um</td>
+              <td class="desinenza">-&#299; / -a</td>
+            </tr>
+            <tr>
+              <td class="caso-label">Abl.</td>
+              <td class="desinenza">-&#333;</td>
+              <td class="desinenza">-&#299;s</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- III DECLINAZIONE -->
+      <div class="decl-table-container">
+        <div class="table-header">
+          <h2>III Declinazione</h2>
+          <p class="gen-pl-indicator">Gen. Pl. &rarr; -um / -ium</p>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>Caso</th>
+              <th>Singolare</th>
+              <th>Plurale</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="caso-label">Nom.</td>
+              <td class="desinenza">variabile</td>
+              <td class="desinenza">-&#275;s / -a / -ia</td>
+            </tr>
+            <tr class="gen-pl">
+              <td class="caso-label">Gen.</td>
+              <td class="desinenza">-is</td>
+              <td class="desinenza">-um / -ium</td>
+            </tr>
+            <tr>
+              <td class="caso-label">Dat.</td>
+              <td class="desinenza">-&#299;</td>
+              <td class="desinenza">-ibus</td>
+            </tr>
+            <tr>
+              <td class="caso-label">Acc.</td>
+              <td class="desinenza">-em / -</td>
+              <td class="desinenza">-&#275;s / -a / -ia</td>
+            </tr>
+            <tr>
+              <td class="caso-label">Voc.</td>
+              <td class="desinenza">= Nom.</td>
+              <td class="desinenza">-&#275;s / -a / -ia</td>
+            </tr>
+            <tr>
+              <td class="caso-label">Abl.</td>
+              <td class="desinenza">-e / -&#299;</td>
+              <td class="desinenza">-ibus</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- IV DECLINAZIONE -->
+      <div class="decl-table-container">
+        <div class="table-header">
+          <h2>IV Declinazione</h2>
+          <p class="gen-pl-indicator">Gen. Pl. &rarr; -uum</p>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>Caso</th>
+              <th>Singolare</th>
+              <th>Plurale</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="caso-label">Nom.</td>
+              <td class="desinenza">-us / -&#363;</td>
+              <td class="desinenza">-&#363;s / -ua</td>
+            </tr>
+            <tr class="gen-pl">
+              <td class="caso-label">Gen.</td>
+              <td class="desinenza">-&#363;s</td>
+              <td class="desinenza">-uum</td>
+            </tr>
+            <tr>
+              <td class="caso-label">Dat.</td>
+              <td class="desinenza">-u&#299; / -&#363;</td>
+              <td class="desinenza">-ibus</td>
+            </tr>
+            <tr>
+              <td class="caso-label">Acc.</td>
+              <td class="desinenza">-um / -&#363;</td>
+              <td class="desinenza">-&#363;s / -ua</td>
+            </tr>
+            <tr>
+              <td class="caso-label">Voc.</td>
+              <td class="desinenza">-us / -&#363;</td>
+              <td class="desinenza">-&#363;s / -ua</td>
+            </tr>
+            <tr>
+              <td class="caso-label">Abl.</td>
+              <td class="desinenza">-&#363;</td>
+              <td class="desinenza">-ibus</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- V DECLINAZIONE -->
+      <div class="decl-table-container">
+        <div class="table-header">
+          <h2>V Declinazione</h2>
+          <p class="gen-pl-indicator">Gen. Pl. &rarr; -&#275;rum</p>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>Caso</th>
+              <th>Singolare</th>
+              <th>Plurale</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="caso-label">Nom.</td>
+              <td class="desinenza">-&#275;s</td>
+              <td class="desinenza">-&#275;s</td>
+            </tr>
+            <tr class="gen-pl">
+              <td class="caso-label">Gen.</td>
+              <td class="desinenza">-&#275;&#299; / -e&#299;</td>
+              <td class="desinenza">-&#275;rum</td>
+            </tr>
+            <tr>
+              <td class="caso-label">Dat.</td>
+              <td class="desinenza">-&#275;&#299; / -e&#299;</td>
+              <td class="desinenza">-&#275;bus</td>
+            </tr>
+            <tr>
+              <td class="caso-label">Acc.</td>
+              <td class="desinenza">-em</td>
+              <td class="desinenza">-&#275;s</td>
+            </tr>
+            <tr>
+              <td class="caso-label">Voc.</td>
+              <td class="desinenza">-&#275;s</td>
+              <td class="desinenza">-&#275;s</td>
+            </tr>
+            <tr>
+              <td class="caso-label">Abl.</td>
+              <td class="desinenza">-&#275;</td>
+              <td class="desinenza">-&#275;bus</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+
+    <div class="decl-note">
+      <strong>Nota Bene:</strong> Il genitivo plurale (evidenziato in oro) è la desinenza chiave per riconoscere a quale declinazione appartiene un sostantivo. Ogni declinazione ha una desinenza caratteristica del genitivo plurale che la distingue dalle altre.
+    </div>
+
+    <!-- Tools Section -->
+    <section class="tools-section">
+      <h2>Strumenti Correlati</h2>
+      <div class="tools-grid">
+        <a href="declinazioni_confronto.html" class="tool-link">
+          <span class="tool-icon">🔍</span>
+          <span class="tool-name">Confronto Declinazioni</span>
+        </a>
+        <a href="strumenti/glossario-eulalia.html" class="tool-link">
+          <span class="tool-icon">📚</span>
+          <span class="tool-name">Glossario Eulalia</span>
+        </a>
+        <a href="analisi_latino.html" class="tool-link">
+          <span class="tool-icon">✏️</span>
+          <span class="tool-name">Analisi Testi</span>
+        </a>
+      </div>
+    </section>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p><strong>Prof. Andrea Vaccaro</strong></p>
+    <p>Lingua e Cultura Latina — Liceo Classico e Liceo Scientifico</p>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="raccoglitore-testi.html">Raccoglitore Testi</a>
+      <a href="strumenti/glossario-eulalia.html">Strumenti</a>
+    </div>
+  </footer>
+</body>
+</html>

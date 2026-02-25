@@ -1,0 +1,1329 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dalla Repubblica all'Impero: Virgilio e il Potere Augusteo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600;700&family=Cormorant+Garamond:wght@400;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --color-primary: #8B1E3F;
+            --color-secondary: #3C153B;
+            --color-accent: #C8963E;
+            --color-bg: #F8F4E8;
+            --color-text: #2C1810;
+            --color-light: #FFF8E7;
+            --color-success: #2D6A4F;
+            --color-error: #9D2933;
+        }
+
+        body {
+            font-family: 'Crimson Pro', serif;
+            background: linear-gradient(135deg, var(--color-bg) 0%, #EDE4D3 100%);
+            color: var(--color-text);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        .page-header {
+            background: linear-gradient(135deg, var(--color-secondary) 0%, var(--color-primary) 100%);
+            color: var(--color-light);
+            padding: 3rem 2rem;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><text x="10" y="50" font-family="serif" font-size="60" fill="rgba(255,255,255,0.03)">SPQR</text></svg>') repeat;
+            opacity: 0.1;
+        }
+
+        .page-header h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 1;
+            letter-spacing: 1px;
+        }
+
+        .page-header .subtitle {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .nav-timeline {
+            display: flex;
+            justify-content: space-between;
+            margin: 2rem 0 3rem;
+            padding: 1.5rem;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .nav-btn {
+            flex: 1;
+            min-width: 150px;
+            padding: 1rem;
+            background: linear-gradient(135deg, var(--color-light) 0%, white 100%);
+            border: 2px solid var(--color-accent);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Crimson Pro', serif;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--color-text);
+            text-align: center;
+        }
+
+        .nav-btn:hover {
+            background: linear-gradient(135deg, var(--color-accent) 0%, #D4A855 100%);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(200, 150, 62, 0.4);
+        }
+
+        .nav-btn.active {
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+            color: white;
+            border-color: var(--color-primary);
+        }
+
+        .section {
+            display: none;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            border-left: 5px solid var(--color-accent);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateX(5px);
+            box-shadow: 0 6px 25px rgba(0,0,0,0.12);
+        }
+
+        .card h2 {
+            font-family: 'Cormorant Garamond', serif;
+            color: var(--color-primary);
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid var(--color-accent);
+            padding-bottom: 0.5rem;
+        }
+
+        .card h3 {
+            color: var(--color-secondary);
+            font-size: 1.5rem;
+            margin-top: 1.5rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .timeline {
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(180deg, var(--color-accent) 0%, var(--color-primary) 100%);
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            display: flex;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .timeline-item:nth-child(odd) {
+            flex-direction: row;
+        }
+
+        .timeline-item:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .timeline-content {
+            width: 45%;
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.1);
+            border: 2px solid var(--color-accent);
+        }
+
+        .timeline-date {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--color-primary);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            white-space: nowrap;
+            box-shadow: 0 2px 8px rgba(139, 30, 63, 0.3);
+        }
+
+        .quiz-container {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .quiz-question {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--color-primary);
+            margin-bottom: 1.5rem;
+        }
+
+        .quiz-options {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .quiz-option {
+            padding: 1.2rem;
+            background: var(--color-light);
+            border: 2px solid transparent;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+        }
+
+        .quiz-option:hover {
+            background: #FFF3D4;
+            border-color: var(--color-accent);
+            transform: translateX(5px);
+        }
+
+        .quiz-option.selected {
+            background: #E8F4F8;
+            border-color: #4A90A4;
+        }
+
+        .quiz-option.correct {
+            background: #D4EDDA;
+            border-color: var(--color-success);
+        }
+
+        .quiz-option.incorrect {
+            background: #F8D7DA;
+            border-color: var(--color-error);
+        }
+
+        .quiz-feedback {
+            margin-top: 1.5rem;
+            padding: 1.5rem;
+            border-radius: 8px;
+            display: none;
+            animation: slideDown 0.3s ease;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .quiz-feedback.show {
+            display: block;
+        }
+
+        .quiz-feedback.correct {
+            background: #D4EDDA;
+            border-left: 4px solid var(--color-success);
+        }
+
+        .quiz-feedback.incorrect {
+            background: #F8D7DA;
+            border-left: 4px solid var(--color-error);
+        }
+
+        .check-btn, .next-btn {
+            margin-top: 1rem;
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Crimson Pro', serif;
+        }
+
+        .check-btn:hover, .next-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(139, 30, 63, 0.4);
+        }
+
+        .check-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #FFF8E7 0%, #FFEFD5 100%);
+            border-left: 5px solid var(--color-accent);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+            font-style: italic;
+        }
+
+        .key-concept {
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            margin: 2rem 0;
+            box-shadow: 0 4px 20px rgba(139, 30, 63, 0.3);
+        }
+
+        .key-concept h3 {
+            color: var(--color-accent);
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .comparison-table th {
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+            color: white;
+            padding: 1rem;
+            text-align: left;
+            font-size: 1.1rem;
+        }
+
+        .comparison-table td {
+            padding: 1rem;
+            border-bottom: 1px solid #E0E0E0;
+        }
+
+        .comparison-table tr:hover {
+            background: var(--color-light);
+        }
+
+        .interactive-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid var(--color-accent);
+        }
+
+        .interactive-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+        }
+
+        .interactive-card h4 {
+            color: var(--color-primary);
+            margin-bottom: 0.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .interactive-card .content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .interactive-card.expanded .content {
+            max-height: 500px;
+            margin-top: 1rem;
+        }
+
+        .expand-icon {
+            transition: transform 0.3s ease;
+        }
+
+        .interactive-card.expanded .expand-icon {
+            transform: rotate(180deg);
+        }
+
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: rgba(255,255,255,0.3);
+            z-index: 1000;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--color-accent) 0%, var(--color-primary) 100%);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .score-display {
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            background: white;
+            padding: 1rem 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            font-weight: 600;
+            z-index: 100;
+        }
+
+        .reflection-box {
+            background: linear-gradient(135deg, #F0E6FF 0%, #E6D5FF 100%);
+            border: 2px solid var(--color-secondary);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .reflection-box h3 {
+            color: var(--color-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .reflection-box textarea {
+            width: 100%;
+            min-height: 120px;
+            padding: 1rem;
+            border: 2px solid var(--color-secondary);
+            border-radius: 8px;
+            font-family: 'Crimson Pro', serif;
+            font-size: 1rem;
+            resize: vertical;
+        }
+
+        @media (max-width: 768px) {
+            .timeline::before {
+                left: 20px;
+            }
+
+            .timeline-item {
+                flex-direction: column !important;
+            }
+
+            .timeline-content {
+                width: 100%;
+                margin-left: 40px;
+            }
+
+            .timeline-date {
+                left: 20px;
+                transform: translateX(0);
+            }
+
+            .nav-timeline {
+                flex-direction: column;
+            }
+
+            .page-header h1 {
+                font-size: 2rem;
+            }
+
+            .score-display {
+                position: static;
+                margin: 1rem 0;
+            }
+        }
+
+        .quote-box {
+            background: white;
+            border-left: 5px solid var(--color-primary);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            font-style: italic;
+            font-size: 1.1rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            border-radius: 0 8px 8px 0;
+        }
+
+        .quote-box cite {
+            display: block;
+            text-align: right;
+            margin-top: 1rem;
+            font-style: normal;
+            font-weight: 600;
+            color: var(--color-primary);
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-bar">
+        <div class="progress-fill" id="progressBar"></div>
+    </div>
+
+    <div class="score-display" id="scoreDisplay">
+        Punteggio: <span id="score">0</span>/12
+    </div>
+
+    <header class="page-header">
+        <h1>Dalla Repubblica all'Impero</h1>
+        <p class="subtitle">Il contesto storico di Virgilio e il potere augusteo</p>
+    </header>
+
+    <div class="container">
+        <nav class="nav-timeline">
+            <button class="nav-btn active" onclick="showSection('intro')">Introduzione</button>
+            <button class="nav-btn" onclick="showSection('guerre-civili')">Guerre Civili</button>
+            <button class="nav-btn" onclick="showSection('principato')">Il Principato</button>
+            <button class="nav-btn" onclick="showSection('letteratura')">Letteratura e Potere</button>
+            <button class="nav-btn" onclick="showSection('verifica')">Verifica Finale</button>
+        </nav>
+
+        <!-- SEZIONE INTRODUZIONE -->
+        <div id="intro" class="section active">
+            <div class="card">
+                <h2>🏛️ Contestualizzazione storica</h2>
+                <p>Benvenuti in questo percorso attraverso uno dei momenti più cruciali della storia romana: la trasformazione dalla Repubblica all'Impero. Questo periodo non è solo fondamentale per comprendere la storia politica di Roma, ma è anche il contesto in cui nasce e si sviluppa la grande letteratura augustea, con Virgilio come figura centrale.</p>
+                
+                <div class="highlight-box">
+                    <strong>Domanda iniziale (Cold Call):</strong> Che cosa significa per voi "potere"? Come si può esercitare il potere senza avere cariche ufficiali?
+                </div>
+
+                <h3>📅 L'arco temporale: 44 a.C. - 14 d.C.</h3>
+                <p>Il nostro viaggio copre circa 60 anni di storia romana:</p>
+                <ul style="margin-left: 2rem; margin-top: 1rem;">
+                    <li><strong>44 a.C.</strong> - Morte di Cesare (Idi di Marzo)</li>
+                    <li><strong>44-31 a.C.</strong> - Guerre civili e secondo triumvirato</li>
+                    <li><strong>31 a.C.</strong> - Battaglia di Azio (vittoria di Ottaviano)</li>
+                    <li><strong>27 a.C.</strong> - Ottaviano diventa Augusto: nasce il Principato</li>
+                    <li><strong>14 d.C.</strong> - Morte di Augusto</li>
+                </ul>
+            </div>
+
+            <div class="key-concept">
+                <h3>🎯 Concetto chiave: La CRISI della Repubblica</h3>
+                <p>La congiura contro Cesare (15 marzo 44 a.C.) non risolve i problemi strutturali di Roma. Perché?</p>
+                <p><strong>Think-Pair-Share:</strong> Discutete con il compagno accanto: secondo voi, è possibile "restaurare" la Repubblica semplicemente eliminando un dittatore? Quali potrebbero essere i problemi più profondi che affliggevano Roma in questo periodo?</p>
+            </div>
+
+            <div class="card">
+                <h2>Quiz di attivazione</h2>
+                <div class="quiz-container">
+                    <div class="quiz-question">1. Perché la congiura contro Cesare fallisce nel suo obiettivo politico?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="checkAnswer(this, false, 1)">
+                            A) Perché i congiurati vengono immediatamente catturati e giustiziati
+                        </div>
+                        <div class="quiz-option" onclick="checkAnswer(this, true, 1)">
+                            B) Perché eliminare il dittatore non risolve le forze sociali e i problemi strutturali che non si sentono rappresentate dall'oligarchia senatoria
+                        </div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false, 1)">
+                            C) Perché Cesare aveva già nominato Ottaviano come suo successore legittimo
+                        </div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false, 1)">
+                            D) Perché il Senato rifiuta di collaborare con Bruto e Cassio
+                        </div>
+                    </div>
+                    <div class="quiz-feedback" id="feedback-1"></div>
+                </div>
+            </div>
+
+            <button class="next-btn" onclick="showSection('guerre-civili')">Continua: Le Guerre Civili →</button>
+        </div>
+
+        <!-- SEZIONE GUERRE CIVILI -->
+        <div id="guerre-civili" class="section">
+            <div class="card">
+                <h2>⚔️ Le Guerre Civili (44-31 a.C.)</h2>
+                <p>Il periodo tra la morte di Cesare e la battaglia di Azio è caratterizzato da una violenza senza precedenti che investe non solo Roma, ma tutta l'Italia e le province.</p>
+
+                <div class="highlight-box">
+                    <strong>🎭 "La grande paura":</strong> Gli eserciti di Ottaviano e Antonio spargono sangue e desolazione in tutto il paese. La guerra civile raggiunge eccessi disumani, colpendo anche innocue popolazioni di agricoltori che avevano vissuto fino ad allora al riparo da qualsiasi mutamento politico.
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>📍 Timeline interattiva degli eventi principali</h2>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-date">44 a.C.</div>
+                        <div class="timeline-content">
+                            <h3>Il testamento di Cesare</h3>
+                            <p>Cesare nomina suo erede Gaio Ottavio, il giovane nipote. Ottaviano (il nuovo nome dopo l'adozione) torna dalla Macedonia e inizia un complesso gioco politico, guadagnandosi la fiducia sia del Senato che della plebe urbana.</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-date">43 a.C.</div>
+                        <div class="timeline-content">
+                            <h3>Il Secondo Triumvirato</h3>
+                            <p>Accordi di Bologna tra Ottaviano, Antonio e Lepido. Nasce una magistratura quinquennale per il governo dello Stato (diversamente dal primo triumvirato, che era un accordo privato). Seguono nuove proscrizioni: tra le vittime, Cicerone.</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-date">42 a.C.</div>
+                        <div class="timeline-content">
+                            <h3>Filippi: la fine dei cesaricidi</h3>
+                            <p>Bruto e Cassio sono sconfitti. Bruto cade nella prima battaglia, Cassio nella seconda. La resistenza "repubblicana" è definitivamente eliminata. I vincitori ridefiniscono le sfere di influenza: Oriente ad Antonio, Occidente a Ottaviano.</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-date">36 a.C.</div>
+                        <div class="timeline-content">
+                            <h3>Nàuloco: vittoria su Sesto Pompeo</h3>
+                            <p>Ottaviano sconfigge Sesto Pompeo (figlio di Pompeo Magno) in Sicilia, liberando Roma dal blocco mercantile. Si presenta come "salvatore della patria". Lepido è escluso dal triumvirato (ma conserva la carica di pontefice massimo).</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-date">31 a.C.</div>
+                        <div class="timeline-content">
+                            <h3>Azio: lo scontro decisivo</h3>
+                            <p>La flotta di Ottaviano sconfigge Antonio e Cleopatra al largo dell'Epiro. I due fuggono in Egitto dove si tolgono la vita (30 a.C.). Ottaviano è padrone dell'impero e deve affrontare il problema di dare veste giuridica al suo potere personale.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>🎯 Analisi: Antonio e Cleopatra nella propaganda</h2>
+                
+                <div class="interactive-card" onclick="toggleCard(this)">
+                    <h4>
+                        La propaganda di Ottaviano
+                        <span class="expand-icon">▼</span>
+                    </h4>
+                    <div class="content">
+                        <p>Dal 34 a.C., Ottaviano costruisce un apparato ideologico che giustifichi la guerra:</p>
+                        <ul style="margin-left: 2rem; margin-top: 1rem;">
+                            <li><strong>Il "primato" dell'Italia:</strong> terra fertile e laboriosa, destinata alla preminenza nell'impero</li>
+                            <li><strong>Il mos maiorum:</strong> ritorno alle tradizioni contro il lusso orientale</li>
+                            <li><strong>Roma vs. Oriente:</strong> libertà repubblicana contro assolutismo ellenistico</li>
+                            <li><strong>Guerra "giusta":</strong> non guerra civile, ma difesa da un nemico esterno (Cleopatra)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="interactive-card" onclick="toggleCard(this)">
+                    <h4>
+                        La realtà storica
+                        <span class="expand-icon">▼</span>
+                    </h4>
+                    <div class="content">
+                        <p>Cleopatra <strong>non</strong> fu l'amante ammaliatrice della propaganda. Fu una <strong>collaboratrice politica</strong> di Antonio nella costruzione della politica orientale di Roma. I territori d'Oriente, con forte tradizione ellenistica e monarchie divine, richiedevano un governo diverso dalle province occidentali.</p>
+                        <p><strong>Nota importante:</strong> La politica di Antonio fu poi adottata dagli stessi Augusto e dai suoi successori!</p>
+                    </div>
+                </div>
+
+                <div class="highlight-box">
+                    <strong>🤔 Riflessione critica:</strong> La propaganda trasforma una guerra civile in una "guerra di liberazione". Perché Ottaviano ha bisogno di questa narrazione? Come legittima il proprio potere?
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>Quiz: Le Guerre Civili</h2>
+                <div class="quiz-container">
+                    <div class="quiz-question">2. Qual è la differenza fondamentale tra il primo e il secondo triumvirato?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="checkAnswer(this, false, 2)">
+                            A) Il primo aveva tre membri, il secondo solo due
+                        </div>
+                        <div class="quiz-option" onclick="checkAnswer(this, true, 2)">
+                            B) Il primo era un accordo privato, il secondo una magistratura legale quinquennale sancita dalla legge Tizia
+                        </div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false, 2)">
+                            C) Il primo era supportato dal Senato, il secondo no
+                        </div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false, 2)">
+                            D) Non c'è nessuna differenza sostanziale
+                        </div>
+                    </div>
+                    <div class="quiz-feedback" id="feedback-2"></div>
+                </div>
+
+                <div class="quiz-container" style="margin-top: 2rem;">
+                    <div class="quiz-question">3. Come viene presentata la battaglia di Azio dalla propaganda augustea?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="checkAnswer(this, false, 3)">
+                            A) Come una battaglia contro i Parti per espandere l'impero
+                        </div>
+                        <div class="quiz-option" onclick="checkAnswer(this, true, 3)">
+                            B) Come una guerra giusta del capo dell'Italia unita contro la regina dell'Oriente (Cleopatra), non come guerra civile
+                        </div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false, 3)">
+                            C) Come vendetta per l'assassinio di Cesare
+                        </div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false, 3)">
+                            D) Come difesa dalle invasioni barbariche
+                        </div>
+                    </div>
+                    <div class="quiz-feedback" id="feedback-3"></div>
+                </div>
+            </div>
+
+            <button class="next-btn" onclick="showSection('principato')">Continua: Il Principato →</button>
+        </div>
+
+        <!-- SEZIONE PRINCIPATO -->
+        <div id="principato" class="section">
+            <div class="card">
+                <h2>👑 Dal potere assoluto alla legalità: la soluzione augustea</h2>
+                <p>Dopo Azio (31 a.C.), Ottaviano si trova davanti a un problema apparentemente irrisolvibile: come dare forma giuridica a un potere personale enorme, ottenuto paradossalmente in nome della difesa della tradizione repubblicana?</p>
+
+                <div class="quote-box">
+                    "Post id tempus auctoritate omnibus praestiti, potestatis autem nihilo amplius habui quam ceteri qui mihi quoque in magistratu conlegae fuerunt"
+                    <cite>— Augusto, Res gestae 34: "In seguito, fui superiore a tutti per auctoritas, ma non ebbi più potere di quello di chi esercitava con me le magistrature"</cite>
+                </div>
+            </div>
+
+            <div class="key-concept">
+                <h3>🔑 Il concetto centrale: AUCTORITAS vs POTESTAS</h3>
+                <p><strong>Auctoritas</strong> = prestigio, carisma, ascendente morale (NON giuridico)</p>
+                <p><strong>Potestas/Imperium</strong> = potere che deriva da una magistratura (giuridico, temporaneo)</p>
+                <p style="margin-top: 1rem;">Augusto governa formalmente come <em>princeps inter pares</em> (primo tra eguali), ma nella sostanza è un monarca. Il suo potere si fonda sull'<strong>auctoritas</strong>, non sulla costrizione.</p>
+            </div>
+
+            <div class="card">
+                <h2>📜 Le tappe della soluzione costituzionale</h2>
+                
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Anno</th>
+                            <th>Provvedimento</th>
+                            <th>Significato</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>28 a.C.</strong></td>
+                            <td>Princeps senatus</td>
+                            <td>Ottaviano è nominato "primo del Senato" ma rinuncia formalmente al potere, restituendolo al Senato e al popolo romano (propaganda della "restaurazione repubblicana")</td>
+                        </tr>
+                        <tr>
+                            <td><strong>27 a.C.</strong></td>
+                            <td>Il titolo di Augustus</td>
+                            <td>Il Senato gli conferisce il titolo di "Augustus" (collegato ad <em>auctoritas</em>) e gli assegna l'imperium sulle province non pacificate. Prima soluzione del problema costituzionale.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>23 a.C.</strong></td>
+                            <td>La legittimazione definitiva</td>
+                            <td>Abbandona il consolato ma ottiene: 1) <em>imperium proconsolare</em> su tutte le province; 2) <em>tribunicia potestas</em> (poteri dei tribuni). Controllo totale ma formalmente "repubblicano".</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="card">
+                <h2>🎭 Il paradosso augusteo</h2>
+                
+                <div class="interactive-card" onclick="toggleCard(this)">
+                    <h4>
+                        Rispetto formale delle istituzioni
+                        <span class="expand-icon">▼</span>
+                    </h4>
+                    <div class="content">
+                        <p>Augusto mantiene tutte le magistrature repubblicane (consolato, pretura, tribuni, ecc.) e mostra grande rispetto per il Senato. Formalmente, la Repubblica esiste ancora.</p>
+                    </div>
+                </div>
+
+                <div class="interactive-card" onclick="toggleCard(this)">
+                    <h4>
+                        Accentramento sostanziale del potere
+                        <span class="expand-icon">▼</span>
+                    </h4>
+                    <div class="content">
+                        <p>Augusto cumula poteri incompatibili nella forma repubblicana pura: <em>tribunicia potestas</em> + <em>imperium proconsolare</em> + controllo delle province + comando dell'esercito + prefettura dell'annona (approvvigionamenti).</p>
+                        <p>Senatori e cavalieri diventano funzionari personalmente legati all'imperatore, non più magistrati indipendenti.</p>
+                    </div>
+                </div>
+
+                <div class="highlight-box">
+                    <strong>💡 L'espediente geniale:</strong> Esercitare le funzioni di una magistratura SENZA rivestire la magistratura stessa permette ad Augusto di cumulare più poteri inconciliabili nella forma repubblicana.
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>Quiz: Il Principato</h2>
+                <div class="quiz-container">
+                    <div class="quiz-question">4. Che cosa significa che Augusto governa attraverso l'<em>auctoritas</em>?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="checkAnswer(this, false, 4)">
+                            A) Che usa la forza militare per imporre le sue decisioni
+                        </div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false, 4)">
+                            B) Che ha ottenuto legalmente tutte le magistrature repubblicane
+                        </div>
+                        <div class="quiz-option" onclick="checkAnswer(this, true, 4)">
+                            C) Che il suo potere si fonda sul prestigio e il carisma personale, non sulla costrizione, facendo apparire le sue decisioni come consigli che vengono seguiti spontaneamente
+                        </div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false, 4)">
+                            D) Che governa come un normale console romano
+                        </div>
+                    </div>
+                    <div class="quiz-feedback" id="feedback-4"></div>
+                </div>
+
+                <div class="quiz-container" style="margin-top: 2rem;">
+                    <div class="quiz-question">5. Qual è il "paradosso augusteo" dal punto di vista costituzionale?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="checkAnswer(this, false, 5)">
+                            A) Augusto è contemporaneamente console e tribuno della plebe
+                        </div>
+                        <div class="quiz-option" onclick="checkAnswer(this, true, 5)">
+                            B) Augusto è formalmente un princeps inter pares che rispetta le istituzioni repubblicane, ma sostanzialmente accentra tutti i poteri essenziali diventando un monarca
+                        </div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false, 5)">
+                            C) Augusto rifiuta tutte le cariche ma governa ugualmente
+                        </div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false, 5)">
+                            D) Augusto abolisce il Senato ma mantiene i consoli
+                        </div>
+                    </div>
+                    <div class="quiz-feedback" id="feedback-5"></div>
+                </div>
+
+                <div class="quiz-container" style="margin-top: 2rem;">
+                    <div class="quiz-question">6. Nel 23 a.C., quali sono i due poteri fondamentali che Augusto ottiene?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="checkAnswer(this, false, 6)">
+                            A) Consolato e dittatura
+                        </div>
+                        <div class="quiz-option" onclick="checkAnswer(this, true, 6)">
+                            B) Imperium proconsolare su tutte le province e tribunicia potestas
+                        </div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false, 6)">
+                            C) Censura e pontificato massimo
+                        </div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false, 6)">
+                            D) Pretura urbana e comando della flotta
+                        </div>
+                    </div>
+                    <div class="quiz-feedback" id="feedback-6"></div>
+                </div>
+            </div>
+
+            <button class="next-btn" onclick="showSection('letteratura')">Continua: Letteratura e Potere →</button>
+        </div>
+
+        <!-- SEZIONE LETTERATURA E POTERE -->
+        <div id="letteratura" class="section">
+            <div class="card">
+                <h2>📚 Letteratura e potere nell'età augustea</h2>
+                <p>Il rapporto tra i letterati e il potere augusteo è complesso e sfaccettato. Non si tratta di un semplice "controllo" dall'alto, ma di una <strong>cooperazione politico-culturale</strong> in cui i poeti hanno un ruolo attivo.</p>
+
+                <div class="highlight-box">
+                    <strong>🎯 Tesi centrale:</strong> Ciò che chiamiamo "ideologia augustea" non è il prodotto di un "Ministero della Propaganda", ma una convergenza spontanea tra gli interessi dei piccoli proprietari italici (come Virgilio e Orazio) e il programma politico di Ottaviano/Augusto.
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>👥 I poeti e le ferite della storia</h2>
+                
+                <div class="interactive-card" onclick="toggleCard(this)">
+                    <h4>
+                        Virgilio (70-19 a.C.)
+                        <span class="expand-icon">▼</span>
+                    </h4>
+                    <div class="content">
+                        <p><strong>Origine:</strong> Piccolo proprietario italico di Mantova</p>
+                        <p><strong>Trauma:</strong> Perde i suoi terreni nelle confische del 41 a.C. per distribuirli ai veterani (poi li riacquista grazie a interventi dall'alto)</p>
+                        <p><strong>Opere:</strong> Bucoliche (42-39 a.C.), Georgiche (37-29 a.C.), Eneide (29-19 a.C.)</p>
+                        <p><strong>Rapporto con Augusto:</strong> Strettissimo. Virgilio trova in Ottaviano/Augusto la promessa di pace e ricostruzione dopo gli orrori della guerra civile.</p>
+                    </div>
+                </div>
+
+                <div class="interactive-card" onclick="toggleCard(this)">
+                    <h4>
+                        Orazio (65-8 a.C.)
+                        <span class="expand-icon">▼</span>
+                    </h4>
+                    <div class="content">
+                        <p><strong>Origine:</strong> Figlio di un liberto (ex schiavo), piccolo proprietario</p>
+                        <p><strong>Trauma:</strong> Combatte dalla parte "sbagliata" a Filippi (42 a.C.) con Bruto. Dopo la sconfitta è un reduce senza posizione</p>
+                        <p><strong>Opere:</strong> Satire, Epodi, Odi, Epistole, Carmen saeculare</p>
+                        <p><strong>Rapporto con Augusto:</strong> Introdotto a Mecenate da Vario Rufo. Riceve una villa in Sabina. Canta la pax Augusta ma anche i valori del privato.</p>
+                    </div>
+                </div>
+
+                <div class="interactive-card" onclick="toggleCard(this)">
+                    <h4>
+                        Properzio e Tibullo (elegiaci)
+                        <span class="expand-icon">▼</span>
+                    </h4>
+                    <div class="content">
+                        <p><strong>Caratteristica:</strong> Sviluppano il genere elegiaco, poesia "privata" ripiegata sull'amore</p>
+                        <p><strong>Rapporto ambiguo:</strong> Rifiutano l'esaltazione epica dei valori nazionali ("Amore è dio di pace" - Properzio 3,5,1), ma fanno comunque omaggio al principe con le <em>recusationes</em> (scuse di non poter cantare temi epici)</p>
+                        <p><strong>Circoli:</strong> Properzio gravita intorno a Mecenate, Tibullo nel circolo di Messalla</p>
+                    </div>
+                </div>
+
+                <div class="interactive-card" onclick="toggleCard(this)">
+                    <h4>
+                        Ovidio (43 a.C. - 17/18 d.C.)
+                        <span class="expand-icon">▼</span>
+                    </h4>
+                    <div class="content">
+                        <p><strong>Caratteristica:</strong> Il più "disimpegnato" politicamente</p>
+                        <p><strong>Opere:</strong> Amores, Ars amatoria, Metamorfosi, Fasti</p>
+                        <p><strong>Il paradosso:</strong> Pur essendo apolitico, entra in collisione con il potere. Esiliato nel 8 d.C. a Tomi sul Mar Nero (le cause non sono del tutto chiare: "carmen et error")</p>
+                        <p><strong>Significato:</strong> Ovidio tocca la contraddizione tra i comportamenti reali della società (inclusa la casa di Augusto!) e i valori morali proclamati dal regime</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>🏛️ I circoli letterari</h2>
+                
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Circolo</th>
+                            <th>Figura centrale</th>
+                            <th>Poeti</th>
+                            <th>Caratteristiche</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Mecenate</strong></td>
+                            <td>Gaio Mecenate (cavaliere etrusco, consigliere di Augusto)</td>
+                            <td>Virgilio, Orazio, Properzio, Vario Rufo</td>
+                            <td>Il più allineato con Augusto. Promuove letteratura "nazionale" ad alto impegno ideale. Mecenate stesso scrive poesia intimistica.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Asinio Pollione</strong></td>
+                            <td>Soldato antoniano ritiratosi prima di Azio</td>
+                            <td>Il giovane Virgilio (Bucoliche)</td>
+                            <td>Più critico verso il regime. Fonda la prima biblioteca pubblica a Roma. Promuove le <em>recitationes</em> (letture pubbliche).</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Messalla</strong></td>
+                            <td>Marco Valerio Messalla (soldato con Bruto, poi con Ottaviano)</td>
+                            <td>Tibullo e il <em>Corpus Tibullianum</em></td>
+                            <td>Patronato autonomo. Poesia di ispirazione appartata, meno inserita nelle tendenze dominanti.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="key-concept">
+                <h3>💭 Dal poeta doctus al poeta vates</h3>
+                <p><strong>Neoterici (Catullo, ecc.):</strong> poeta <em>doctus</em>, artista raffinato, cultore della forma (modello alessandrino)</p>
+                <p><strong>Età augustea:</strong> poeta <em>vates</em>, cantore ispirato, maestro di verità, voce della comunità</p>
+                <p style="margin-top: 1rem;"><strong>Etimologie di <em>vates</em>:</strong></p>
+                <ul style="margin-left: 2rem;">
+                    <li><em>A versibus viendis</em> = "dall'intrecciare versi"</li>
+                    <li><em>A vi mentis</em> = "dal vigore della mente" (preferita da Lucrezio)</li>
+                </ul>
+                <p style="margin-top: 1rem;">Questa nuova immagine di poeta risponde alla necessità augustea di una letteratura con funzione sociale e morale.</p>
+            </div>
+
+            <div class="card">
+                <h2>⚖️ Ideologia augustea: elementi fondamentali</h2>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin: 1.5rem 0;">
+                    <div style="background: linear-gradient(135deg, #FFF8E7 0%, #FFEFD5 100%); padding: 1.5rem; border-radius: 8px; border-left: 4px solid var(--color-accent);">
+                        <h4 style="color: var(--color-primary); margin-bottom: 0.5rem;">🌾 Primato dell'Italia</h4>
+                        <p>Terra fertile, laboriosa, destinata alla preminenza nell'impero. Mito della "repubblica dei contadini".</p>
+                    </div>
+                    
+                    <div style="background: linear-gradient(135deg, #FFF8E7 0%, #FFEFD5 100%); padding: 1.5rem; border-radius: 8px; border-left: 4px solid var(--color-accent);">
+                        <h4 style="color: var(--color-primary); margin-bottom: 0.5rem;">🏛️ Mos maiorum</h4>
+                        <p>Ritorno alle tradizioni della società agraria arcaica: famiglia, proprietà terriera, virtù antiche.</p>
+                    </div>
+                    
+                    <div style="background: linear-gradient(135deg, #FFF8E7 0%, #FFEFD5 100%); padding: 1.5rem; border-radius: 8px; border-left: 4px solid var(--color-accent);">
+                        <h4 style="color: var(--color-primary); margin-bottom: 0.5rem;">⚔️ Contro l'Oriente</h4>
+                        <p>Lusso e mollezza orientale vs. sobrietà romana. Assolutismo ellenistico vs. libertà repubblicana.</p>
+                    </div>
+                    
+                    <div style="background: linear-gradient(135deg, #FFF8E7 0%, #FFEFD5 100%); padding: 1.5rem; border-radius: 8px; border-left: 4px solid var(--color-accent);">
+                        <h4 style="color: var(--color-primary); margin-bottom: 0.5rem;">🕊️ Pax Augusta</h4>
+                        <p>Fine delle guerre civili. Ordine, pace, prosperità. Augusto come salvatore e garante della stabilità.</p>
+                    </div>
+                </div>
+
+                <div class="highlight-box">
+                    <strong>⚠️ Contraddizioni:</strong> Molta parte di questa ideologia resta propaganda senza effetti pratici. Il "ritorno ai contadini" è impossibile in un regime che non si fonda più sulla partecipazione diretta. E la realtà dei costumi (inclusa la casa di Augusto) contraddice la proclamata purificazione morale.
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>Quiz: Letteratura e Potere</h2>
+                <div class="quiz-container">
+                    <div class="quiz-question">7. Perché Virgilio e Orazio si legano spontaneamente a Ottaviano/Augusto?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="checkAnswer(this, false, 7)">
+                            A) Perché vengono pagati profumatamente per scrivere propaganda
+                        </div>
+                        <div class="quiz-option" onclick="checkAnswer(this, true, 7)">
+                            B) Perché i loro interessi personali di piccoli proprietari italici, vittime delle guerre civili, coincidono con il programma di pace e ricostruzione di Augusto
+                        </div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false, 7)">
+                            C) Perché sono obbligati dal regime a scrivere a favore di Augusto
+                        </div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false, 7)">
+                            D) Perché avevano già combattuto con Ottaviano durante le guerre civili
+                        </div>
+                    </div>
+                    <div class="quiz-feedback" id="feedback-7"></div>
+                </div>
+
+                <div class="quiz-container" style="margin-top: 2rem;">
+                    <div class="quiz-question">8. Che cos'è una <em>recusatio</em> nella poesia augustea?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="checkAnswer(this, false, 8)">
+                            A) Un'accusa diretta contro il regime augusteo
+                        </div>
+                        <div class="quiz-option" onclick="checkAnswer(this, true, 8)">
+                            B) Una forma poetica in cui l'autore si scusa di non poter cantare i temi epici e celebrativi, dichiarando la propria vocazione per temi minori (es. l'amore)
+                        </div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false, 8)">
+                            C) Un rifiuto di pubblicare le proprie opere
+                        </div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false, 8)">
+                            D) Una dedica formale all'imperatore Augusto
+                        </div>
+                    </div>
+                    <div class="quiz-feedback" id="feedback-8"></div>
+                </div>
+
+                <div class="quiz-container" style="margin-top: 2rem;">
+                    <div class="quiz-question">9. Qual è la differenza tra il poeta <em>doctus</em> neoterico e il poeta <em>vates</em> augusteo?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="checkAnswer(this, false, 9)">
+                            A) Il poeta doctus scrive in greco, il vates in latino
+                        </div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false, 9)">
+                            B) Il poeta doctus è più colto del vates
+                        </div>
+                        <div class="quiz-option" onclick="checkAnswer(this, true, 9)">
+                            C) Il poeta doctus è un artista raffinato che cura soprattutto la forma; il vates è un cantore ispirato con funzione sociale, maestro di verità per la comunità
+                        </div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false, 9)">
+                            A) Il vates è pagato dallo Stato, il doctus no
+                        </div>
+                    </div>
+                    <div class="quiz-feedback" id="feedback-9"></div>
+                </div>
+
+                <div class="quiz-container" style="margin-top: 2rem;">
+                    <div class="quiz-question">10. Chi è Mecenate e qual è il suo ruolo?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="checkAnswer(this, false, 10)">
+                            A) Il console che affianca Augusto nel governo di Roma
+                        </div>
+                        <div class="quiz-option" onclick="checkAnswer(this, true, 10)">
+                            B) Un cavaliere etrusco, consigliere di Augusto che rifiuta le cariche ufficiali ma esercita grande potere; centro di attrazione della generazione poetica augustea
+                        </div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false, 10)">
+                            C) Il ministro della propaganda culturale di Augusto
+                        </div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false, 10)">
+                            D) Un generale che comanda le legioni in Oriente
+                        </div>
+                    </div>
+                    <div class="quiz-feedback" id="feedback-10"></div>
+                </div>
+            </div>
+
+            <div class="reflection-box">
+                <h3>💭 Riflessione finale: Letteratura autonoma o al servizio del potere?</h3>
+                <p>Rifletti su questa domanda e scrivi le tue considerazioni (almeno 5-6 righe):</p>
+                <p><em>"La letteratura augustea è genuina espressione artistica o propaganda mascherata? Si può parlare di 'libertà' intellettuale sotto Augusto? Il caso Ovidio cosa ci insegna sui limiti di questa libertà?"</em></p>
+                <textarea placeholder="Scrivi qui la tua riflessione..."></textarea>
+            </div>
+
+            <button class="next-btn" onclick="showSection('verifica')">Continua: Verifica Finale →</button>
+        </div>
+
+        <!-- SEZIONE VERIFICA FINALE -->
+        <div id="verifica" class="section">
+            <div class="card">
+                <h2>✍️ Verifica Finale: Sintesi e Connessioni</h2>
+                <p>Ora mettiamo insieme tutto ciò che abbiamo appreso in questa lezione. Queste domande richiedono una comprensione più profonda delle connessioni tra eventi storici e produzione letteraria.</p>
+            </div>
+
+            <div class="card">
+                <h2>Domande di sintesi</h2>
+                <div class="quiz-container">
+                    <div class="quiz-question">11. In che modo il contesto delle guerre civili influenza la poesia di Virgilio e Orazio?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="checkAnswer(this, false, 11)">
+                            A) Li rende nostalgici della repubblica aristocratica ciceroniana
+                        </div>
+                        <div class="quiz-option" onclick="checkAnswer(this, true, 11)">
+                            B) Li porta a vedere in Augusto il garante della pace dopo aver vissuto personalmente i traumi della guerra (confische, battaglie, instabilità), facendo coincidere i loro interessi con il suo programma politico
+                        </div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false, 11)">
+                            C) Li spinge a scrivere solo poesia d'evasione senza riferimenti politici
+                        </div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false, 11)">
+                            D) Non ha nessuna influenza, scrivono per puro diletto estetico
+                        </div>
+                    </div>
+                    <div class="quiz-feedback" id="feedback-11"></div>
+                </div>
+
+                <div class="quiz-container" style="margin-top: 2rem;">
+                    <div class="quiz-question">12. Qual è il legame profondo tra il concetto di <em>auctoritas</em> di Augusto e il ruolo del poeta <em>vates</em>?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="checkAnswer(this, false, 12)">
+                            A) Non c'è nessun legame, sono due ambiti separati
+                        </div>
+                        <div class="quiz-option" onclick="checkAnswer(this, true, 12)">
+                            B) Entrambi esercitano influenza attraverso il prestigio e la persuasione morale (non la costrizione): Augusto governa con l'auctoritas, il vates guida la comunità con l'ispirazione poetica
+                        </div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false, 12)">
+                            C) Il poeta vates è subordinato all'auctoritas imperiale e deve solo obbedire
+                        </div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false, 12)">
+                            D) Augusto usa i poeti per aumentare la sua auctoritas presso il popolo
+                        </div>
+                    </div>
+                    <div class="quiz-feedback" id="feedback-12"></div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>🎯 Sintesi: I concetti fondamentali</h2>
+                <div style="background: linear-gradient(135deg, var(--color-light) 0%, white 100%); padding: 2rem; border-radius: 12px; border: 3px solid var(--color-accent);">
+                    <h3 style="color: var(--color-primary); margin-bottom: 1rem;">STORICO-POLITICO:</h3>
+                    <ul style="margin-left: 2rem; line-height: 2;">
+                        <li>La congiura contro Cesare fallisce perché non affronta i problemi strutturali di Roma</li>
+                        <li>Le guerre civili (44-31 a.C.) devastano l'Italia e traumatizzano la società</li>
+                        <li>Ottaviano/Augusto risolve il problema costituzionale attraverso l'<strong>auctoritas</strong>: potere morale, non giuridico</li>
+                        <li>Il <strong>principato</strong> = rispetto formale delle istituzioni + accentramento sostanziale del potere</li>
+                    </ul>
+
+                    <h3 style="color: var(--color-primary); margin-bottom: 1rem; margin-top: 2rem;">LETTERATURA E POTERE:</h3>
+                    <ul style="margin-left: 2rem; line-height: 2;">
+                        <li>NON c'è un "controllo" diretto, ma <strong>cooperazione politico-culturale</strong></li>
+                        <li>Gli interessi dei piccoli proprietari (Virgilio, Orazio) coincidono con il programma augusteo</li>
+                        <li>Nasce il poeta <strong>vates</strong>: cantore ispirato con funzione sociale (vs. poeta doctus neoterico)</li>
+                        <li>L'<strong>ideologia augustea</strong> (primato Italia, mos maiorum, pace) è anche prodotto letterario</li>
+                        <li>Ma restano <strong>contraddizioni</strong>: tra propaganda e realtà, tra pubblico e privato (elegiaci, Ovidio)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="reflection-box">
+                <h3>📝 Compito di riflessione critica</h3>
+                <p><strong>Traccia:</strong> "Il potere di Augusto e il potere della letteratura augustea: analogie e differenze. In che modo entrambi costruiscono consenso senza apparente costrizione?"</p>
+                <p style="margin-top: 1rem;"><em>Sviluppa una risposta articolata (15-20 righe) che integri:</em></p>
+                <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                    <li>Il concetto di <em>auctoritas</em></li>
+                    <li>Il ruolo del poeta <em>vates</em></li>
+                    <li>Esempi concreti (Virgilio, Orazio, propaganda ad Azio)</li>
+                    <li>Tue riflessioni personali sul rapporto potere/cultura</li>
+                </ul>
+                <textarea style="min-height: 200px;" placeholder="Sviluppa qui la tua riflessione critica..."></textarea>
+            </div>
+
+            <div class="card" style="background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%); color: white; text-align: center;">
+                <h2 style="color: var(--color-accent);">🎓 Complimenti!</h2>
+                <p style="font-size: 1.2rem; margin-top: 1rem;">Hai completato il percorso sul contesto storico di Virgilio e l'età augustea.</p>
+                <p style="margin-top: 1rem;">Ora sei pronto/a per affrontare lo studio approfondito delle opere virgiliane, comprendendone il contesto storico-politico e il complesso rapporto con il potere augusteo.</p>
+                <p style="margin-top: 1.5rem; font-style: italic;">"Post id tempus auctoritate omnibus praestiti"</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentSection = 'intro';
+        let score = 0;
+        const totalQuestions = 12;
+        const correctAnswers = new Set();
+
+        function showSection(sectionId) {
+            // Nascondi tutte le sezioni
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Mostra la sezione richiesta
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Aggiorna i pulsanti di navigazione
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Scorri in alto
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            
+            // Aggiorna la progress bar
+            updateProgressBar(sectionId);
+            
+            currentSection = sectionId;
+        }
+
+        function updateProgressBar(sectionId) {
+            const sections = ['intro', 'guerre-civili', 'principato', 'letteratura', 'verifica'];
+            const index = sections.indexOf(sectionId);
+            const progress = ((index + 1) / sections.length) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+        }
+
+        function checkAnswer(element, isCorrect, questionNumber) {
+            // Rimuovi eventuali selezioni precedenti
+            const container = element.parentElement;
+            container.querySelectorAll('.quiz-option').forEach(opt => {
+                opt.classList.remove('selected', 'correct', 'incorrect');
+                opt.style.pointerEvents = 'none'; // Disabilita ulteriori click
+            });
+            
+            // Aggiungi la classe appropriata
+            if (isCorrect) {
+                element.classList.add('correct');
+                if (!correctAnswers.has(questionNumber)) {
+                    correctAnswers.add(questionNumber);
+                    score++;
+                    updateScore();
+                }
+                showFeedback(questionNumber, true);
+            } else {
+                element.classList.add('incorrect');
+                showFeedback(questionNumber, false);
+            }
+        }
+
+        function showFeedback(questionNumber, isCorrect) {
+            const feedback = document.getElementById(`feedback-${questionNumber}`);
+            feedback.classList.remove('correct', 'incorrect');
+            feedback.classList.add(isCorrect ? 'correct' : 'incorrect');
+            feedback.classList.add('show');
+            
+            const feedbacks = {
+                1: {
+                    correct: "✅ Esatto! La congiura fallisce perché elimina solo il sintomo (Cesare) ma non affronta le cause profonde della crisi: le forze sociali escluse, la concentrazione del potere, le aspirazioni dei veterani. Serve un nuovo assetto politico, non solo l'assassinio.",
+                    incorrect: "❌ Non proprio. La congiura fallisce per ragioni più profonde: eliminare Cesare non risolve i problemi strutturali di Roma (le forze sociali escluse, i veterani, la necessità di un nuovo equilibrio di potere). Il compromesso del 17 marzo dimostra che serve una soluzione politica, non solo l'eliminazione fisica del dittatore."
+                },
+                2: {
+                    correct: "✅ Perfetto! Il primo triumvirato (Cesare, Pompeo, Crasso) era un accordo privato informale. Il secondo triumvirato invece è sancito dalla legge Tizia del 27 novembre 43 a.C. come magistratura quinquennale per il governo dello Stato.",
+                    incorrect: "❌ La differenza è proprio nella forma giuridica: il primo triumvirato era un accordo privato tra tre potenti (Cesare, Pompeo, Crasso), mentre il secondo è una vera magistratura legale quinquennale istituita dalla legge Tizia del 43 a.C."
+                },
+                3: {
+                    correct: "✅ Corretto! La propaganda augustea trasforma abilmente una guerra civile (contro Antonio) in una 'guerra giusta' contro un nemico esterno (Cleopatra, la regina orientale). Nel 32 a.C. le città italiche giurano fedeltà a Ottaviano per 'difendere' Roma dall'Oriente.",
+                    incorrect: "❌ La propaganda presenta Azio come una guerra contro Cleopatra (nemico esterno), NON come guerra civile contro Antonio. Questo è fondamentale per legittimare il conflitto: il giuramento delle città italiche del 32 è 'contro Cleopatra', non contro un altro romano."
+                },
+                4: {
+                    correct: "✅ Esattamente! L'auctoritas è un potere morale, non giuridico: si fonda sul prestigio, il carisma, la capacità di influenzare attraverso il consiglio e l'esempio, facendo sì che gli altri seguano 'spontaneamente'. Diverso da potestas/imperium che derivano da magistrature.",
+                    incorrect: "❌ L'auctoritas è un concetto più sottile: non è potere giuridico (quello è potestas/imperium), ma prestigio personale, carisma, capacità di influenzare con il consiglio e l'esempio. Chi ha auctoritas non impone, ma persuade - gli altri lo seguono apparentemente per spontaneo convincimento."
+                },
+                5: {
+                    correct: "✅ Perfetto! Il paradosso è proprio questo: formalmente Augusto rispetta le istituzioni repubblicane e si presenta come 'primo tra eguali', ma sostanzialmente ha accentrato tutti i poteri essenziali (controllo dell'esercito, delle province, potere tribunizio, ecc.). Monarchia mascherata da repubblica.",
+                    incorrect: "❌ Il paradosso augusteo sta nella contraddizione tra forma e sostanza: formalmente Augusto rispetta le istituzioni repubblicane (Senato, magistrature) e si dice 'princeps inter pares', ma sostanzialmente ha accentrato tutti i poteri diventando di fatto un monarca. Apparenza repubblicana, realtà monarchica."
+                },
+                6: {
+                    correct: "✅ Esatto! Nel 23 a.C. Augusto abbandona il consolato (che aveva tenuto ininterrottamente dal 31) e ottiene: 1) imperium proconsolare su TUTTE le province (anche quelle 'senatorie'); 2) tribunicia potestas (poteri del tribunato). Questo gli dà controllo totale ma in forme 'repubblicane'.",
+                    incorrect: "❌ I due poteri chiave del 23 a.C. sono: 1) imperium proconsolare esteso a tutte le province (prima era limitato); 2) tribunicia potestas (poteri dei tribuni: convocare assemblee, proporre leggi, diritto di veto). Così controlla sia il territorio che la vita politica, senza 'monarchia' formale."
+                },
+                7: {
+                    correct: "✅ Esattamente! Virgilio e Orazio sono figli di piccoli proprietari italici, vittime dirette delle guerre civili (Virgilio perde i terreni, Orazio combatte dalla parte perdente a Filippi). In Augusto vedono spontaneamente il garante della pace e della ricostruzione. I loro interessi coincidono con il suo programma.",
+                    incorrect: "❌ Non si tratta di costrizione o mercenariato, ma di convergenza spontanea di interessi. Virgilio e Orazio sono piccoli proprietari italici traumatizzati dalle guerre civili (confische, battaglie, instabilità). In Augusto vedono realmente la promessa di pace e ordine dopo gli orrori vissuti. È cooperazione, non sottomissione."
+                },
+                8: {
+                    correct: "✅ Perfetto! La recusatio è una forma letteraria ambigua: il poeta 'si scusa' di non poter cantare i grandi temi epici augustei (guerre, conquiste, virtù nazionali) dichiarando la propria vocazione per temi 'minori' come l'amore. È un omaggio al principe ma anche una rivendicazione di autonomia.",
+                    incorrect: "❌ La recusatio è più sottile: è una forma poetica in cui l'autore si scusa di non poter cantare i temi epici e celebrativi (battaglie, conquiste), dichiarando la propria vocazione per temi 'minori' (l'amore in Properzio, Tibullo). È un modo ambiguo di fare omaggio al potere mantenendo autonomia."
+                },
+                9: {
+                    correct: "✅ Esattamente! Il poeta doctus neoterico (Catullo, ecc.) segue il modello alessandrino: artista raffinato che cura soprattutto la forma, la brevità, l'erudizione. Il vates augusteo invece è un cantore ispirato, maestro di verità, voce della comunità, con una funzione sociale e morale. Cambia l'idea stessa di poesia.",
+                    incorrect: "❌ La differenza è nel ruolo sociale del poeta. Il doctus neoterico è artista che cura la forma e l'erudizione (modello alessandrino). Il vates augusteo è cantore ispirato con funzione sociale: maestro di verità, voce della comunità, poeta 'utile' (etimologia: a vi mentis, 'dal vigore della mente'). Lucrezio anticipa questo modello."
+                },
+                10: {
+                    correct: "✅ Perfetto! Mecenate è una figura emblematica: etrusco nobilissimo che resta cavaliere (non senatore), esercita grande potere come consigliere di Augusto ma senza cariche ufficiali. Simbolo dei 'tempi nuovi'. Il suo circolo riunisce Virgilio, Orazio, Properzio e promuove letteratura 'nazionale'.",
+                    incorrect: "❌ Mecenate non ha cariche ufficiali (resta volutamente un cavaliere) ma è consigliere potentissimo di Augusto. È il centro del principale circolo letterario, che riunisce Virgilio, Orazio, Properzio, Vario Rufo. Simboleggia i tempi nuovi: potere senza forme tradizionali, otium e cultura. È lui il vero coordinatore culturale dell'età augustea."
+                },
+                11: {
+                    correct: "✅ Eccellente! Hai colto il punto fondamentale: la connessione tra esperienza personale (traumi delle guerre civili) e scelta politico-letteraria. Non è propaganda imposta, ma convergenza spontanea tra interessi dei piccoli proprietari italici e programma augusteo di pace e ricostruzione.",
+                    incorrect: "❌ Il legame è più personale e profondo. Virgilio e Orazio hanno vissuto sulla propria pelle i traumi delle guerre civili (confische, battaglie, instabilità). Figli di piccoli proprietari italici, non hanno nostalgia della repubblica aristocratica ma vedono in Augusto il garante della pace. I loro interessi coincidono spontaneamente con il suo programma."
+                },
+                12: {
+                    correct: "✅ Eccellente sintesi! Hai colto il parallelismo profondo: sia Augusto che il poeta vates esercitano influenza attraverso il prestigio e la persuasione morale, non la costrizione. Augusto governa con auctoritas (non con la forza), il vates guida la comunità con l'ispirazione poetica. Entrambi fanno apparire come 'spontaneo' ciò che in realtà orientano.",
+                    incorrect: "❌ C'è un parallelismo profondo: l'auctoritas augustea e il ruolo del vates si basano entrambi sulla persuasione morale, non sulla costrizione. Augusto governa facendo apparire le sue decisioni come consigli seguiti spontaneamente; il vates guida la comunità con l'ispirazione e l'esempio. Entrambi esercitano influenza attraverso il prestigio, non il comando diretto."
+                }
+            };
+            
+            const messages = feedbacks[questionNumber];
+            feedback.innerHTML = isCorrect ? messages.correct : messages.incorrect;
+        }
+
+        function updateScore() {
+            document.getElementById('score').textContent = score;
+        }
+
+        function toggleCard(card) {
+            card.classList.toggle('expanded');
+        }
+
+        // Inizializza la progress bar
+        updateProgressBar('intro');
+    </script>
+</body>
+</html>

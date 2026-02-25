@@ -1,0 +1,1551 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>L'Infinitiva Latina - Lezione Interattiva</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        
+        .progress-bar {
+            height: 8px;
+            background: #e0e0e0;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .section {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+        
+        .section.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        h2 {
+            color: #667eea;
+            font-size: 2em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+        }
+        
+        h3 {
+            color: #764ba2;
+            font-size: 1.5em;
+            margin: 30px 0 15px 0;
+        }
+        
+        .box {
+            background: #f8f9fa;
+            border-left: 5px solid #667eea;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+        
+        .box-warning {
+            background: #fff3cd;
+            border-left-color: #ffc107;
+        }
+        
+        .box-success {
+            background: #d4edda;
+            border-left-color: #28a745;
+        }
+        
+        .box-info {
+            background: #d1ecf1;
+            border-left-color: #17a2b8;
+        }
+        
+        .example {
+            background: #e3f2fd;
+            border: 2px solid #2196F3;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .latin {
+            color: #c2185b;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+        
+        .translation {
+            color: #1976d2;
+            font-style: italic;
+            margin-top: 8px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        th {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+        
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        tr:hover {
+            background: #f5f5f5;
+        }
+        
+        .quiz-option {
+            background: white;
+            border: 2px solid #ddd;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .quiz-option:hover {
+            border-color: #667eea;
+            transform: translateX(5px);
+            box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+        }
+        
+        .quiz-option.correct {
+            background: #d4edda;
+            border-color: #28a745;
+        }
+        
+        .quiz-option.wrong {
+            background: #f8d7da;
+            border-color: #dc3545;
+        }
+        
+        .drag-item {
+            background: #667eea;
+            color: white;
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 8px;
+            cursor: move;
+            display: inline-block;
+            user-select: none;
+            transition: all 0.3s;
+        }
+        
+        .drag-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        .drop-zone {
+            min-height: 60px;
+            border: 3px dashed #ddd;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            background: #fafafa;
+            transition: all 0.3s;
+        }
+        
+        .drop-zone.drag-over {
+            border-color: #667eea;
+            background: #e3f2fd;
+        }
+        
+        .drop-zone.filled {
+            border-color: #28a745;
+            border-style: solid;
+        }
+        
+        .input-exercise {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1em;
+            transition: border-color 0.3s;
+        }
+        
+        .input-exercise:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .input-exercise.correct {
+            border-color: #28a745;
+            background: #d4edda;
+        }
+        
+        .input-exercise.wrong {
+            border-color: #dc3545;
+            background: #f8d7da;
+        }
+        
+        .btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.1em;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin: 10px 5px;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+        }
+        
+        .btn:active {
+            transform: translateY(0);
+        }
+        
+        .btn-secondary {
+            background: linear-gradient(135deg, #6c757d, #495057);
+        }
+        
+        .feedback {
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            display: none;
+            animation: slideIn 0.5s;
+        }
+        
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        .feedback.show {
+            display: block;
+        }
+        
+        .feedback.success {
+            background: #d4edda;
+            border-left: 5px solid #28a745;
+            color: #155724;
+        }
+        
+        .feedback.error {
+            background: #f8d7da;
+            border-left: 5px solid #dc3545;
+            color: #721c24;
+        }
+        
+        .score-display {
+            text-align: center;
+            font-size: 3em;
+            color: #667eea;
+            margin: 30px 0;
+            animation: pulse 1s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px solid #eee;
+        }
+        
+        .highlight {
+            background: #fff3cd;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        
+        .formula {
+            background: #f8f9fa;
+            border: 2px solid #667eea;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+        
+        @media (max-width: 768px) {
+            header h1 { font-size: 1.8em; }
+            .content { padding: 20px; }
+            .btn { padding: 12px 20px; font-size: 1em; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🏛️ L'INFINITIVA LATINA</h1>
+            <p>Lezione Interattiva</p>
+        </header>
+        
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressBar"></div>
+        </div>
+        
+        <div class="content">
+            
+            <!-- SEZIONE 0: HOOK -->
+            <div class="section active" id="section0">
+                <h2>🎯 Iniziamo con un Quiz!</h2>
+                
+                <div class="box box-info">
+                    <p><strong>Prima di spiegare l'infinitiva, rispondi a questa domanda:</strong></p>
+                </div>
+                
+                <div class="example">
+                    <p class="latin">Dico te esse bonum.</p>
+                    <p style="margin-top: 15px; font-size: 1.1em;">Secondo te, qual è il SOGGETTO del verbo "esse"?</p>
+                </div>
+                
+                <div class="quiz-option" onclick="checkHook('a')">
+                    A) <strong>ego</strong> (io)
+                </div>
+                <div class="quiz-option" onclick="checkHook('b')">
+                    B) <strong>te</strong> (te / tu)
+                </div>
+                <div class="quiz-option" onclick="checkHook('c')">
+                    C) Non c'è nessun soggetto
+                </div>
+                
+                <div class="feedback" id="hookFeedback"></div>
+                
+                <div class="navigation">
+                    <div></div>
+                    <button class="btn" onclick="nextSection()" id="hookNextBtn" style="display:none;">Avanti →</button>
+                </div>
+            </div>
+            
+            <!-- SEZIONE 1: L'INFINITO LATINO -->
+            <div class="section" id="section1">
+                <h2>📚 Passo 1: L'Infinito Latino</h2>
+                
+                <div class="box">
+                    <p><strong>Prima di capire l'infinitiva, dobbiamo conoscere l'INFINITO latino.</strong></p>
+                    <p>In latino l'infinito è un modo verbale che ha TRE TEMPI (non uno solo come in italiano!):</p>
+                </div>
+                
+                <h3>I tre tempi dell'infinito</h3>
+                
+                <table>
+                    <tr>
+                        <th>Tempo</th>
+                        <th>Latino (amare)</th>
+                        <th>Traduzione</th>
+                        <th>Quando si usa</th>
+                    </tr>
+                    <tr>
+                        <td><strong>PRESENTE</strong></td>
+                        <td class="latin">amare</td>
+                        <td>amare</td>
+                        <td>Azione <span class="highlight">contemporanea</span> al verbo principale</td>
+                    </tr>
+                    <tr>
+                        <td><strong>PERFETTO</strong></td>
+                        <td class="latin">amavisse</td>
+                        <td>aver amato</td>
+                        <td>Azione <span class="highlight">anteriore</span> al verbo principale</td>
+                    </tr>
+                    <tr>
+                        <td><strong>FUTURO</strong></td>
+                        <td class="latin">amaturum esse</td>
+                        <td>essere per amare / amare (futuro)</td>
+                        <td>Azione <span class="highlight">posteriore</span> al verbo principale</td>
+                    </tr>
+                </table>
+                
+                <div class="box box-warning">
+                    <p><strong>⚠️ ATTENZIONE!</strong></p>
+                    <p>In italiano usiamo l'infinito presente anche per azioni passate ("Credo di aver visto Maria ieri"). In latino invece dobbiamo usare il tempo giusto dell'infinito!</p>
+                </div>
+                
+                <h3>Esercizio rapido</h3>
+                
+                <div class="example">
+                    <p>Quale infinito useresti per tradurre:</p>
+                    <p style="margin-top: 10px;"><em>"Penso che Mario sia venuto ieri"</em></p>
+                </div>
+                
+                <div class="quiz-option" onclick="checkInfinito('presente')">
+                    Infinito PRESENTE (venire)
+                </div>
+                <div class="quiz-option" onclick="checkInfinito('perfetto')">
+                    Infinito PERFETTO (essere venuto / aver venuto)
+                </div>
+                <div class="quiz-option" onclick="checkInfinito('futuro')">
+                    Infinito FUTURO (essere per venire)
+                </div>
+                
+                <div class="feedback" id="infinitoFeedback"></div>
+                
+                <div class="navigation">
+                    <button class="btn btn-secondary" onclick="prevSection()">← Indietro</button>
+                    <button class="btn" onclick="nextSection()" id="infinito1NextBtn" style="display:none;">Avanti →</button>
+                </div>
+            </div>
+            
+            <!-- SEZIONE 2: COS'È L'INFINITIVA -->
+            <div class="section" id="section2">
+                <h2>🎓 Passo 2: Cos'è l'Infinitiva?</h2>
+                
+                <div class="box box-info">
+                    <p><strong>Definizione:</strong></p>
+                    <p>L'infinitiva è una proposizione subordinata che ha come verbo un INFINITO e come soggetto un ACCUSATIVO.</p>
+                </div>
+                
+                <div class="formula">
+                    SOGGETTO IN ACCUSATIVO + INFINITO
+                </div>
+                
+                <h3>Il paradosso dell'infinitiva</h3>
+                
+                <div class="box box-warning">
+                    <p><strong>Perché il soggetto è in accusativo?</strong></p>
+                    <p>In italiano diciamo "Penso CHE tu sia bravo" → <em>tu</em> è soggetto e va in nominativo.</p>
+                    <p>In latino invece: <span class="latin">Puto te esse bonum</span> → <em>te</em> è in ACCUSATIVO!</p>
+                    <p style="margin-top: 15px; font-weight: bold; color: #c2185b;">Per i Romani, l'infinitiva NON è una vera subordinata completa, ma un "oggetto espanso" del verbo principale. Per questo il soggetto va in accusativo (caso dell'oggetto).</p>
+                </div>
+                
+                <h3>Esempio guidato</h3>
+                
+                <div class="example">
+                    <p class="latin">Dico te esse bonum.</p>
+                    <p class="translation">Dico che tu sei buono.</p>
+                    <br>
+                    <p><strong>Analisi:</strong></p>
+                    <ul style="margin-top: 10px; margin-left: 20px;">
+                        <li><strong>Dico</strong> = verbo principale (reggente)</li>
+                        <li><strong>te</strong> = soggetto dell'infinitiva (ACCUSATIVO!)</li>
+                        <li><strong>esse</strong> = infinito presente</li>
+                        <li><strong>bonum</strong> = predicato nominale (concorda con "te", quindi accusativo)</li>
+                    </ul>
+                </div>
+                
+                <div class="example">
+                    <p class="latin">Scio Marcum venisse.</p>
+                    <p class="translation">So che Marco è venuto.</p>
+                    <br>
+                    <p><strong>Analisi:</strong></p>
+                    <ul style="margin-top: 10px; margin-left: 20px;">
+                        <li><strong>Scio</strong> = verbo principale</li>
+                        <li><strong>Marcum</strong> = soggetto dell'infinitiva (ACCUSATIVO!)</li>
+                        <li><strong>venisse</strong> = infinito PERFETTO (azione anteriore: è già venuto)</li>
+                    </ul>
+                </div>
+                
+                <div class="box box-success">
+                    <p><strong>✓ Regola d'oro:</strong></p>
+                    <p>Quando vedi un ACCUSATIVO seguito da un INFINITO, pensa subito: "È un'infinitiva!"</p>
+                </div>
+                
+                <div class="navigation">
+                    <button class="btn btn-secondary" onclick="prevSection()">← Indietro</button>
+                    <button class="btn" onclick="nextSection()">Avanti →</button>
+                </div>
+            </div>
+            
+            <!-- SEZIONE 3: INFINITIVA OGGETTIVA -->
+            <div class="section" id="section3">
+                <h2>📝 Passo 3: Infinitiva OGGETTIVA</h2>
+                
+                <div class="box">
+                    <p><strong>Quando si usa?</strong></p>
+                    <p>L'infinitiva si dice OGGETTIVA quando dipende da verbi che esprimono:</p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li><strong>Dire/Affermare:</strong> dico, narro, affirmo, nego...</li>
+                        <li><strong>Pensare/Credere:</strong> puto, credo, arbitror, existimo...</li>
+                        <li><strong>Sapere/Ignorare:</strong> scio, cognosco, intellego, ignoro...</li>
+                        <li><strong>Sentire/Udire:</strong> audio, sentio, video...</li>
+                        <li><strong>Volere/Comandare:</strong> volo, nolo, malo, iubeo, veto...</li>
+                        <li><strong>Sperare/Promettere:</strong> spero, promitto, polliceor...</li>
+                    </ul>
+                </div>
+                
+                <h3>Esempi</h3>
+                
+                <div class="example">
+                    <p class="latin">1. Dico Caesarem vincere.</p>
+                    <p class="translation">Dico che Cesare vince.</p>
+                    <p style="margin-top: 10px; font-size: 0.9em; color: #666;">
+                        → infinito PRESENTE = azione contemporanea
+                    </p>
+                </div>
+                
+                <div class="example">
+                    <p class="latin">2. Scio Caesarem vicisse.</p>
+                    <p class="translation">So che Cesare ha vinto.</p>
+                    <p style="margin-top: 10px; font-size: 0.9em; color: #666;">
+                        → infinito PERFETTO = azione anteriore
+                    </p>
+                </div>
+                
+                <div class="example">
+                    <p class="latin">3. Spero Caesarem victurum esse.</p>
+                    <p class="translation">Spero che Cesare vincerà.</p>
+                    <p style="margin-top: 10px; font-size: 0.9em; color: #666;">
+                        → infinito FUTURO = azione posteriore
+                    </p>
+                </div>
+                
+                <div class="example">
+                    <p class="latin">4. Credo te esse sapientem.</p>
+                    <p class="translation">Credo che tu sia saggio.</p>
+                    <p style="margin-top: 10px; font-size: 0.9em; color: #666;">
+                        → con predicato nominale: <em>sapientem</em> concorda con <em>te</em> (accusativo)
+                    </p>
+                </div>
+                
+                <h3>Esercizio: Riconosci l'infinitiva oggettiva</h3>
+                
+                <div class="example">
+                    <p><strong>Frase:</strong> <span class="latin">Audio milites venire.</span></p>
+                    <p>Indica le parti dell'infinitiva:</p>
+                </div>
+                
+                <div style="margin: 20px 0;">
+                    <p><strong>Verbo principale:</strong></p>
+                    <input type="text" class="input-exercise" id="ex3_verb" placeholder="Scrivi qui...">
+                </div>
+                
+                <div style="margin: 20px 0;">
+                    <p><strong>Soggetto dell'infinitiva (in accusativo):</strong></p>
+                    <input type="text" class="input-exercise" id="ex3_subj" placeholder="Scrivi qui...">
+                </div>
+                
+                <div style="margin: 20px 0;">
+                    <p><strong>Infinito:</strong></p>
+                    <input type="text" class="input-exercise" id="ex3_inf" placeholder="Scrivi qui...">
+                </div>
+                
+                <div style="margin: 20px 0;">
+                    <p><strong>Traduzione:</strong></p>
+                    <input type="text" class="input-exercise" id="ex3_trad" placeholder="Scrivi qui...">
+                </div>
+                
+                <button class="btn" onclick="checkEx3()">Verifica</button>
+                
+                <div class="feedback" id="ex3Feedback"></div>
+                
+                <div class="navigation">
+                    <button class="btn btn-secondary" onclick="prevSection()">← Indietro</button>
+                    <button class="btn" onclick="nextSection()" id="ex3NextBtn" style="display:none;">Avanti →</button>
+                </div>
+            </div>
+            
+            <!-- SEZIONE 4: INFINITIVA SOGGETTIVA -->
+            <div class="section" id="section4">
+                <h2>🔍 Passo 4: Infinitiva SOGGETTIVA</h2>
+                
+                <div class="box">
+                    <p><strong>Quando si usa?</strong></p>
+                    <p>L'infinitiva si dice SOGGETTIVA quando dipende da:</p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li><strong>Verbi impersonali:</strong> oportet, licet, necesse est, constat...</li>
+                        <li><strong>Espressioni impersonali:</strong> manifestum est, certum est, verum est...</li>
+                        <li><strong>"Si dice che...":</strong> dicitur, narratur, fertur, traditur...</li>
+                    </ul>
+                </div>
+                
+                <div class="box box-info">
+                    <p><strong>Differenza con l'oggettiva:</strong></p>
+                    <p>Nell'infinitiva oggettiva, l'infinitiva fa da COMPLEMENTO OGGETTO.</p>
+                    <p>Nell'infinitiva soggettiva, l'infinitiva fa da SOGGETTO.</p>
+                    <p style="margin-top: 10px;"><em>Esempio: "È necessario che tu venga" → "che tu venga" è il soggetto di "è necessario"</em></p>
+                </div>
+                
+                <h3>Esempi</h3>
+                
+                <div class="example">
+                    <p class="latin">1. Oportet te venire.</p>
+                    <p class="translation">È necessario che tu venga. / Bisogna che tu venga.</p>
+                    <p style="margin-top: 10px; font-size: 0.9em; color: #666;">
+                        → <em>te venire</em> è il soggetto di <em>oportet</em>
+                    </p>
+                </div>
+                
+                <div class="example">
+                    <p class="latin">2. Constat Romanos vicisse.</p>
+                    <p class="translation">È certo che i Romani hanno vinto.</p>
+                    <p style="margin-top: 10px; font-size: 0.9em; color: #666;">
+                        → <em>Romanos vicisse</em> è il soggetto di <em>constat</em>
+                    </p>
+                </div>
+                
+                <div class="example">
+                    <p class="latin">3. Dicitur Caesarem esse fortem.</p>
+                    <p class="translation">Si dice che Cesare è coraggioso.</p>
+                    <p style="margin-top: 10px; font-size: 0.9em; color: #666;">
+                        → forma passiva: "è detto che..." = "si dice che..."
+                    </p>
+                </div>
+                
+                <div class="example">
+                    <p class="latin">4. Necesse est milites pugnare.</p>
+                    <p class="translation">È necessario che i soldati combattano.</p>
+                </div>
+                
+                <div class="box box-warning">
+                    <p><strong>⚠️ Trucco per riconoscerla:</strong></p>
+                    <p>Se il verbo principale è <strong>impersonale</strong> o alla <strong>forma passiva</strong> (dicitur, narratur, fertur...), probabilmente hai un'infinitiva SOGGETTIVA!</p>
+                </div>
+                
+                <h3>Esercizio: Oggettiva o Soggettiva?</h3>
+                
+                <p style="margin: 20px 0;"><strong>Indica se le seguenti frasi hanno un'infinitiva OGGETTIVA o SOGGETTIVA:</strong></p>
+                
+                <div class="example">
+                    <p class="latin">1. Scio te esse bonum.</p>
+                </div>
+                <div class="quiz-option" onclick="checkType(1, 'ogg')">OGGETTIVA</div>
+                <div class="quiz-option" onclick="checkType(1, 'sogg')">SOGGETTIVA</div>
+                <div class="feedback" id="type1Feedback"></div>
+                
+                <div class="example">
+                    <p class="latin">2. Oportet Marcum venire.</p>
+                </div>
+                <div class="quiz-option" onclick="checkType(2, 'ogg')">OGGETTIVA</div>
+                <div class="quiz-option" onclick="checkType(2, 'sogg')">SOGGETTIVA</div>
+                <div class="feedback" id="type2Feedback"></div>
+                
+                <div class="example">
+                    <p class="latin">3. Dicitur Romam esse pulchram.</p>
+                </div>
+                <div class="quiz-option" onclick="checkType(3, 'ogg')">OGGETTIVA</div>
+                <div class="quiz-option" onclick="checkType(3, 'sogg')">SOGGETTIVA</div>
+                <div class="feedback" id="type3Feedback"></div>
+                
+                <div class="navigation">
+                    <button class="btn btn-secondary" onclick="prevSection()">← Indietro</button>
+                    <button class="btn" onclick="nextSection()" id="type3NextBtn" style="display:none;">Avanti →</button>
+                </div>
+            </div>
+            
+            <!-- SEZIONE 5: ESERCIZIO DRAG & DROP -->
+            <div class="section" id="section5">
+                <h2>🎮 Esercizio Interattivo: Costruisci la frase!</h2>
+                
+                <div class="box">
+                    <p><strong>Trascina le parole negli spazi giusti per formare frasi corrette:</strong></p>
+                </div>
+                
+                <h3>Esercizio 1</h3>
+                <p><strong>Traduci:</strong> "Dico che Marco vince"</p>
+                
+                <div style="margin: 20px 0;">
+                    <div class="drag-item" draggable="true" id="drag1-1">Dico</div>
+                    <div class="drag-item" draggable="true" id="drag1-2">Marcum</div>
+                    <div class="drag-item" draggable="true" id="drag1-3">vincere</div>
+                    <div class="drag-item" draggable="true" id="drag1-4">Marcus</div>
+                    <div class="drag-item" draggable="true" id="drag1-5">vincit</div>
+                </div>
+                
+                <div class="drop-zone" id="drop1-1" data-correct="Dico">1. Verbo principale: </div>
+                <div class="drop-zone" id="drop1-2" data-correct="Marcum">2. Soggetto infinitiva: </div>
+                <div class="drop-zone" id="drop1-3" data-correct="vincere">3. Infinito: </div>
+                
+                <button class="btn" onclick="checkDrag1()">Verifica</button>
+                <button class="btn btn-secondary" onclick="resetDrag1()">Reset</button>
+                
+                <div class="feedback" id="drag1Feedback"></div>
+                
+                <h3 style="margin-top: 40px;">Esercizio 2</h3>
+                <p><strong>Traduci:</strong> "È necessario che i soldati combattano"</p>
+                
+                <div style="margin: 20px 0;">
+                    <div class="drag-item" draggable="true" id="drag2-1">Oportet</div>
+                    <div class="drag-item" draggable="true" id="drag2-2">milites</div>
+                    <div class="drag-item" draggable="true" id="drag2-3">pugnare</div>
+                    <div class="drag-item" draggable="true" id="drag2-4">militis</div>
+                    <div class="drag-item" draggable="true" id="drag2-5">pugnant</div>
+                </div>
+                
+                <div class="drop-zone" id="drop2-1" data-correct="Oportet">1. Verbo impersonale: </div>
+                <div class="drop-zone" id="drop2-2" data-correct="milites">2. Soggetto infinitiva: </div>
+                <div class="drop-zone" id="drop2-3" data-correct="pugnare">3. Infinito: </div>
+                
+                <button class="btn" onclick="checkDrag2()">Verifica</button>
+                <button class="btn btn-secondary" onclick="resetDrag2()">Reset</button>
+                
+                <div class="feedback" id="drag2Feedback"></div>
+                
+                <div class="navigation">
+                    <button class="btn btn-secondary" onclick="prevSection()">← Indietro</button>
+                    <button class="btn" onclick="nextSection()">Avanti →</button>
+                </div>
+            </div>
+            
+            <!-- SEZIONE 6: TRADUZIONE -->
+            <div class="section" id="section6">
+                <h2>📖 Esercizio di Traduzione</h2>
+                
+                <div class="box">
+                    <p><strong>Traduci le seguenti frasi in italiano:</strong></p>
+                </div>
+                
+                <div class="example">
+                    <p><strong>1.</strong> <span class="latin">Puto te esse sapientem.</span></p>
+                    <input type="text" class="input-exercise" id="trans1" placeholder="Scrivi la traduzione...">
+                    <button class="btn" onclick="checkTrans(1)">Verifica</button>
+                    <div class="feedback" id="trans1Feedback"></div>
+                </div>
+                
+                <div class="example">
+                    <p><strong>2.</strong> <span class="latin">Scio Marcum venisse.</span></p>
+                    <input type="text" class="input-exercise" id="trans2" placeholder="Scrivi la traduzione...">
+                    <button class="btn" onclick="checkTrans(2)">Verifica</button>
+                    <div class="feedback" id="trans2Feedback"></div>
+                </div>
+                
+                <div class="example">
+                    <p><strong>3.</strong> <span class="latin">Oportet milites pugnare.</span></p>
+                    <input type="text" class="input-exercise" id="trans3" placeholder="Scrivi la traduzione...">
+                    <button class="btn" onclick="checkTrans(3)">Verifica</button>
+                    <div class="feedback" id="trans3Feedback"></div>
+                </div>
+                
+                <div class="example">
+                    <p><strong>4.</strong> <span class="latin">Dicitur Romanos vicisse.</span></p>
+                    <input type="text" class="input-exercise" id="trans4" placeholder="Scrivi la traduzione...">
+                    <button class="btn" onclick="checkTrans(4)">Verifica</button>
+                    <div class="feedback" id="trans4Feedback"></div>
+                </div>
+                
+                <div class="example">
+                    <p><strong>5.</strong> <span class="latin">Spero te venturum esse.</span></p>
+                    <input type="text" class="input-exercise" id="trans5" placeholder="Scrivi la traduzione...">
+                    <button class="btn" onclick="checkTrans(5)">Verifica</button>
+                    <div class="feedback" id="trans5Feedback"></div>
+                </div>
+                
+                <div class="navigation">
+                    <button class="btn btn-secondary" onclick="prevSection()">← Indietro</button>
+                    <button class="btn" onclick="nextSection()">Avanti →</button>
+                </div>
+            </div>
+            
+            <!-- SEZIONE 7: SCHEMA RIEPILOGATIVO -->
+            <div class="section" id="section7">
+                <h2>📋 Schema Riepilogativo</h2>
+                
+                <div class="box box-success">
+                    <h3 style="color: #155724; margin-top: 0;">✓ L'INFINITIVA IN SINTESI</h3>
+                </div>
+                
+                <table>
+                    <tr>
+                        <th>Elemento</th>
+                        <th>Caratteristica</th>
+                    </tr>
+                    <tr>
+                        <td><strong>Struttura</strong></td>
+                        <td>SOGGETTO (accusativo) + INFINITO</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Soggetto</strong></td>
+                        <td>Sempre in <span class="highlight">ACCUSATIVO</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Verbo</strong></td>
+                        <td>All'infinito (presente/perfetto/futuro)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Predicato nominale</strong></td>
+                        <td>Concorda col soggetto → accusativo</td>
+                    </tr>
+                </table>
+                
+                <h3>Infinitiva OGGETTIVA</h3>
+                <div class="box">
+                    <p><strong>Dopo verbi di:</strong></p>
+                    <ul style="margin-left: 20px;">
+                        <li>Dire: dico, narro, affirmo, nego</li>
+                        <li>Pensare: puto, credo, arbitror, existimo</li>
+                        <li>Sapere: scio, intellego, cognosco</li>
+                        <li>Sentire: audio, video, sentio</li>
+                        <li>Volere: volo, nolo, iubeo, veto</li>
+                    </ul>
+                    <p style="margin-top: 15px;"><strong>Esempio:</strong> <span class="latin">Dico te esse bonum</span> = Dico che tu sei buono</p>
+                </div>
+                
+                <h3>Infinitiva SOGGETTIVA</h3>
+                <div class="box">
+                    <p><strong>Dopo:</strong></p>
+                    <ul style="margin-left: 20px;">
+                        <li>Verbi impersonali: oportet, licet, necesse est, constat</li>
+                        <li>Forme passive: dicitur, narratur, fertur, traditur</li>
+                        <li>Espressioni impersonali: manifestum est, certum est</li>
+                    </ul>
+                    <p style="margin-top: 15px;"><strong>Esempio:</strong> <span class="latin">Oportet te venire</span> = È necessario che tu venga</p>
+                </div>
+                
+                <h3>I tre tempi dell'infinito</h3>
+                <table>
+                    <tr>
+                        <th>Tempo</th>
+                        <th>Quando</th>
+                        <th>Esempio (amare)</th>
+                    </tr>
+                    <tr>
+                        <td>PRESENTE</td>
+                        <td>Contemporaneità</td>
+                        <td class="latin">amare</td>
+                    </tr>
+                    <tr>
+                        <td>PERFETTO</td>
+                        <td>Anteriorità</td>
+                        <td class="latin">amavisse</td>
+                    </tr>
+                    <tr>
+                        <td>FUTURO</td>
+                        <td>Posteriorità</td>
+                        <td class="latin">amaturum esse</td>
+                    </tr>
+                </table>
+                
+                <div class="box box-warning">
+                    <p><strong>⚠️ Errori comuni da evitare:</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li>❌ Mettere il soggetto in nominativo invece che in accusativo</li>
+                        <li>❌ Usare sempre l'infinito presente (ricorda i tempi relativi!)</li>
+                        <li>❌ Confondere oggettiva e soggettiva</li>
+                        <li>❌ Dimenticare che il predicato nominale va in accusativo</li>
+                    </ul>
+                </div>
+                
+                <div class="navigation">
+                    <button class="btn btn-secondary" onclick="prevSection()">← Indietro</button>
+                    <button class="btn" onclick="nextSection()">Test Finale →</button>
+                </div>
+            </div>
+            
+            <!-- SEZIONE 8: TEST FINALE -->
+            <div class="section" id="section8">
+                <h2>🎯 Test Finale</h2>
+                
+                <div class="box box-info">
+                    <p><strong>Verifica quello che hai imparato!</strong></p>
+                    <p>Rispondi a tutte le domande e poi clicca su "Risultati"</p>
+                </div>
+                
+                <div class="example">
+                    <p><strong>1. Qual è il caso del soggetto dell'infinitiva?</strong></p>
+                    <div class="quiz-option" id="q1a" onclick="selectAnswer(1, 'a')">A) Nominativo</div>
+                    <div class="quiz-option" id="q1b" onclick="selectAnswer(1, 'b')">B) Accusativo</div>
+                    <div class="quiz-option" id="q1c" onclick="selectAnswer(1, 'c')">C) Genitivo</div>
+                </div>
+                
+                <div class="example">
+                    <p><strong>2. Quale infinito usi per un'azione ANTERIORE al verbo principale?</strong></p>
+                    <div class="quiz-option" id="q2a" onclick="selectAnswer(2, 'a')">A) Infinito presente</div>
+                    <div class="quiz-option" id="q2b" onclick="selectAnswer(2, 'b')">B) Infinito perfetto</div>
+                    <div class="quiz-option" id="q2c" onclick="selectAnswer(2, 'c')">C) Infinito futuro</div>
+                </div>
+                
+                <div class="example">
+                    <p><strong>3. <span class="latin">Dico Marcum esse bonum</span> - Che tipo di infinitiva è?</strong></p>
+                    <div class="quiz-option" id="q3a" onclick="selectAnswer(3, 'a')">A) Oggettiva</div>
+                    <div class="quiz-option" id="q3b" onclick="selectAnswer(3, 'b')">B) Soggettiva</div>
+                </div>
+                
+                <div class="example">
+                    <p><strong>4. <span class="latin">Oportet te venire</span> - Che tipo di infinitiva è?</strong></p>
+                    <div class="quiz-option" id="q4a" onclick="selectAnswer(4, 'a')">A) Oggettiva</div>
+                    <div class="quiz-option" id="q4b" onclick="selectAnswer(4, 'b')">B) Soggettiva</div>
+                </div>
+                
+                <div class="example">
+                    <p><strong>5. Come si traduce: <span class="latin">Scio te venisse</span>?</strong></p>
+                    <div class="quiz-option" id="q5a" onclick="selectAnswer(5, 'a')">A) So che vieni</div>
+                    <div class="quiz-option" id="q5b" onclick="selectAnswer(5, 'b')">B) So che sei venuto</div>
+                    <div class="quiz-option" id="q5c" onclick="selectAnswer(5, 'c')">C) So che verrai</div>
+                </div>
+                
+                <div class="example">
+                    <p><strong>6. Quale verbo introduce un'infinitiva SOGGETTIVA?</strong></p>
+                    <div class="quiz-option" id="q6a" onclick="selectAnswer(6, 'a')">A) Dico (dico)</div>
+                    <div class="quiz-option" id="q6b" onclick="selectAnswer(6, 'b')">B) Oportet (è necessario)</div>
+                    <div class="quiz-option" id="q6c" onclick="selectAnswer(6, 'c')">C) Scio (so)</div>
+                </div>
+                
+                <div class="example">
+                    <p><strong>7. In <span class="latin">Puto te esse sapientem</span>, in che caso è "sapientem"?</strong></p>
+                    <div class="quiz-option" id="q7a" onclick="selectAnswer(7, 'a')">A) Nominativo</div>
+                    <div class="quiz-option" id="q7b" onclick="selectAnswer(7, 'b')">B) Accusativo</div>
+                    <div class="quiz-option" id="q7c" onclick="selectAnswer(7, 'c')">C) Ablativo</div>
+                </div>
+                
+                <div class="example">
+                    <p><strong>8. Come si traduce: <span class="latin">Dicitur Romanos vicisse</span>?</strong></p>
+                    <div class="quiz-option" id="q8a" onclick="selectAnswer(8, 'a')">A) Dico che i Romani hanno vinto</div>
+                    <div class="quiz-option" id="q8b" onclick="selectAnswer(8, 'b')">B) Si dice che i Romani hanno vinto</div>
+                    <div class="quiz-option" id="q8c" onclick="selectAnswer(8, 'c')">C) I Romani dicono di aver vinto</div>
+                </div>
+                
+                <button class="btn" onclick="showResults()" style="margin-top: 30px; font-size: 1.3em;">Mostra Risultati 🎓</button>
+                
+                <div class="feedback" id="finalResults"></div>
+                
+                <div class="navigation">
+                    <button class="btn btn-secondary" onclick="prevSection()">← Indietro</button>
+                    <button class="btn" onclick="resetTest()">🔄 Ricomincia la Lezione</button>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    <script>
+        // Variabili globali
+        let currentSection = 0;
+        const totalSections = 8;
+        let testAnswers = {};
+        
+        // Navigazione
+        function nextSection() {
+            document.getElementById(`section${currentSection}`).classList.remove('active');
+            currentSection++;
+            document.getElementById(`section${currentSection}`).classList.add('active');
+            updateProgress();
+            window.scrollTo(0, 0);
+        }
+        
+        function prevSection() {
+            document.getElementById(`section${currentSection}`).classList.remove('active');
+            currentSection--;
+            document.getElementById(`section${currentSection}`).classList.add('active');
+            updateProgress();
+            window.scrollTo(0, 0);
+        }
+        
+        function updateProgress() {
+            const progress = (currentSection / totalSections) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+        }
+        
+        // SEZIONE 0: Hook
+        function checkHook(answer) {
+            const feedback = document.getElementById('hookFeedback');
+            const options = document.querySelectorAll('#section0 .quiz-option');
+            
+            options.forEach(opt => {
+                opt.style.pointerEvents = 'none';
+            });
+            
+            if (answer === 'b') {
+                options[1].classList.add('correct');
+                feedback.className = 'feedback success show';
+                feedback.innerHTML = `
+                    <h3>✓ Esatto!</h3>
+                    <p><strong>"te"</strong> è il soggetto del verbo "esse" (essere).</p>
+                    <p>Ma c'è una cosa strana: <strong>"te" è in ACCUSATIVO!</strong></p>
+                    <p>In italiano diremmo "tu sei buono" (TU = nominativo). Ma in latino il soggetto dell'infinitiva va in accusativo. Questo è il cuore della lezione di oggi!</p>
+                `;
+                document.getElementById('hookNextBtn').style.display = 'inline-block';
+            } else {
+                if (answer === 'a') options[0].classList.add('wrong');
+                if (answer === 'c') options[2].classList.add('wrong');
+                feedback.className = 'feedback error show';
+                feedback.innerHTML = `
+                    <h3>✗ Non proprio...</h3>
+                    <p>La risposta corretta è <strong>B: "te"</strong></p>
+                    <p>"te" è il soggetto del verbo "esse". Ma attenzione: è in ACCUSATIVO! Scopriremo perché nelle prossime sezioni.</p>
+                `;
+                setTimeout(() => {
+                    options.forEach(opt => opt.style.pointerEvents = 'auto');
+                    options.forEach(opt => opt.classList.remove('wrong'));
+                    feedback.classList.remove('show');
+                }, 3000);
+            }
+        }
+        
+        // SEZIONE 1: Infinito
+        function checkInfinito(answer) {
+            const feedback = document.getElementById('infinitoFeedback');
+            const options = document.querySelectorAll('#section1 .quiz-option');
+            
+            options.forEach(opt => opt.style.pointerEvents = 'none');
+            
+            if (answer === 'perfetto') {
+                options[1].classList.add('correct');
+                feedback.className = 'feedback success show';
+                feedback.innerHTML = `
+                    <h3>✓ Perfetto!</h3>
+                    <p>Useresti l'infinito <strong>PERFETTO</strong> perché l'azione (venire) è <strong>ANTERIORE</strong> al momento in cui penso (adesso).</p>
+                    <p>In latino: <span class="latin">Puto Marium venisse</span></p>
+                    <p>Ora che conosci i tre tempi dell'infinito, possiamo capire cos'è l'infinitiva!</p>
+                `;
+                document.getElementById('infinito1NextBtn').style.display = 'inline-block';
+            } else {
+                if (answer === 'presente') options[0].classList.add('wrong');
+                if (answer === 'futuro') options[2].classList.add('wrong');
+                feedback.className = 'feedback error show';
+                feedback.innerHTML = `
+                    <h3>✗ Riprova!</h3>
+                    <p>L'azione di "venire" è avvenuta IERI, quindi è <strong>anteriore</strong> al momento in cui penso.</p>
+                    <p>Per le azioni anteriori si usa l'infinito <strong>PERFETTO</strong>.</p>
+                `;
+                setTimeout(() => {
+                    options.forEach(opt => opt.style.pointerEvents = 'auto');
+                    options.forEach(opt => opt.classList.remove('wrong'));
+                    feedback.classList.remove('show');
+                }, 3000);
+            }
+        }
+        
+        // SEZIONE 3: Esercizio analisi
+        function checkEx3() {
+            const verb = document.getElementById('ex3_verb').value.trim().toLowerCase();
+            const subj = document.getElementById('ex3_subj').value.trim().toLowerCase();
+            const inf = document.getElementById('ex3_inf').value.trim().toLowerCase();
+            const trad = document.getElementById('ex3_trad').value.trim().toLowerCase();
+            
+            const feedback = document.getElementById('ex3Feedback');
+            
+            let correct = true;
+            let message = '<h3>Verifica:</h3><ul style="margin-left: 20px;">';
+            
+            if (verb === 'audio') {
+                message += '<li>✓ Verbo principale: <strong>audio</strong></li>';
+                document.getElementById('ex3_verb').classList.add('correct');
+            } else {
+                message += '<li>✗ Verbo principale: <strong>audio</strong> (non "' + verb + '")</li>';
+                document.getElementById('ex3_verb').classList.add('wrong');
+                correct = false;
+            }
+            
+            if (subj === 'milites') {
+                message += '<li>✓ Soggetto: <strong>milites</strong></li>';
+                document.getElementById('ex3_subj').classList.add('correct');
+            } else {
+                message += '<li>✗ Soggetto: <strong>milites</strong> (non "' + subj + '")</li>';
+                document.getElementById('ex3_subj').classList.add('wrong');
+                correct = false;
+            }
+            
+            if (inf === 'venire') {
+                message += '<li>✓ Infinito: <strong>venire</strong></li>';
+                document.getElementById('ex3_inf').classList.add('correct');
+            } else {
+                message += '<li>✗ Infinito: <strong>venire</strong> (non "' + inf + '")</li>';
+                document.getElementById('ex3_inf').classList.add('wrong');
+                correct = false;
+            }
+            
+            const tradOk = trad.includes('sento') || trad.includes('odo') || trad.includes('ascolto');
+            const tradVenire = trad.includes('soldati') && (trad.includes('vengono') || trad.includes('venire') || trad.includes('arrivano'));
+            
+            if (tradOk && tradVenire) {
+                message += '<li>✓ Traduzione corretta!</li>';
+                document.getElementById('ex3_trad').classList.add('correct');
+            } else {
+                message += '<li>✗ Traduzione: <strong>Sento/Odo che i soldati vengono</strong></li>';
+                document.getElementById('ex3_trad').classList.add('wrong');
+                correct = false;
+            }
+            
+            message += '</ul>';
+            
+            if (correct) {
+                feedback.className = 'feedback success show';
+                feedback.innerHTML = '<h3>✓ Eccellente!</h3>' + message + '<p>Hai capito perfettamente la struttura dell\'infinitiva oggettiva!</p>';
+                document.getElementById('ex3NextBtn').style.display = 'inline-block';
+            } else {
+                feedback.className = 'feedback error show';
+                feedback.innerHTML = '<h3>Quasi!</h3>' + message;
+            }
+        }
+        
+        // SEZIONE 4: Oggettiva vs Soggettiva
+        let typeAnswered = [false, false, false];
+        
+        function checkType(num, answer) {
+            const feedback = document.getElementById(`type${num}Feedback`);
+            
+            // Trova le opzioni corrette per questo esercizio specifico
+            let correctAnswer = '';
+            let parentExample = null;
+            
+            // Trova il contenitore dell'esempio corretto
+            const allExamples = document.querySelectorAll('#section4 .example');
+            
+            if (num === 1) {
+                correctAnswer = 'ogg';
+                parentExample = allExamples[0]; // Primo esempio: Scio Marcum
+            } else if (num === 2) {
+                correctAnswer = 'sogg';
+                parentExample = allExamples[1]; // Secondo esempio: Oportet Marcum
+            } else if (num === 3) {
+                correctAnswer = 'sogg';
+                parentExample = allExamples[2]; // Terzo esempio: Dicitur Romam
+            }
+            
+            // Trova le due opzioni subito dopo l'esempio
+            let allOptions = [];
+            let nextElement = parentExample.nextElementSibling;
+            while (nextElement && allOptions.length < 2) {
+                if (nextElement.classList.contains('quiz-option')) {
+                    allOptions.push(nextElement);
+                }
+                nextElement = nextElement.nextElementSibling;
+            }
+            
+            if (allOptions.length < 2) {
+                console.error('Errore: non trovate le opzioni per la domanda ' + num);
+                return;
+            }
+            
+            // Blocca le opzioni
+            allOptions.forEach(opt => opt.style.pointerEvents = 'none');
+            
+            if (answer === correctAnswer) {
+                if (answer === 'ogg') {
+                    allOptions[0].classList.add('correct');
+                } else {
+                    allOptions[1].classList.add('correct');
+                }
+                
+                feedback.className = 'feedback success show';
+                let explanation = '';
+                
+                if (num === 1) {
+                    explanation = '<p><strong>Scio</strong> è un verbo di conoscenza → infinitiva OGGETTIVA</p>';
+                } else if (num === 2) {
+                    explanation = '<p><strong>Oportet</strong> è un verbo impersonale → infinitiva SOGGETTIVA</p>';
+                } else if (num === 3) {
+                    explanation = '<p><strong>Dicitur</strong> (forma passiva: "è detto") → infinitiva SOGGETTIVA</p>';
+                }
+                
+                feedback.innerHTML = '<h3>✓ Corretto!</h3>' + explanation;
+                typeAnswered[num-1] = true;
+                
+                if (typeAnswered[0] && typeAnswered[1] && typeAnswered[2]) {
+                    document.getElementById('type3NextBtn').style.display = 'inline-block';
+                }
+            } else {
+                if (answer === 'ogg') {
+                    allOptions[0].classList.add('wrong');
+                } else {
+                    allOptions[1].classList.add('wrong');
+                }
+                
+                feedback.className = 'feedback error show';
+                feedback.innerHTML = '<h3>✗ Riprova!</h3><p>Pensa: il verbo è impersonale o passivo? Allora è soggettiva. Altrimenti è oggettiva.</p>';
+                
+                setTimeout(() => {
+                    allOptions.forEach(opt => opt.style.pointerEvents = 'auto');
+                    allOptions.forEach(opt => opt.classList.remove('wrong'));
+                    feedback.classList.remove('show');
+                }, 3000);
+            }
+        }
+        
+        // SEZIONE 5: Drag & Drop
+        let draggedElement = null;
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            // Setup drag and drop
+            setupDragAndDrop();
+        });
+        
+        function setupDragAndDrop() {
+            const draggables = document.querySelectorAll('.drag-item');
+            const dropZones = document.querySelectorAll('.drop-zone');
+            
+            draggables.forEach(item => {
+                item.addEventListener('dragstart', function(e) {
+                    draggedElement = this;
+                    this.style.opacity = '0.5';
+                });
+                
+                item.addEventListener('dragend', function(e) {
+                    this.style.opacity = '1';
+                });
+            });
+            
+            dropZones.forEach(zone => {
+                zone.addEventListener('dragover', function(e) {
+                    e.preventDefault();
+                    this.classList.add('drag-over');
+                });
+                
+                zone.addEventListener('dragleave', function(e) {
+                    this.classList.remove('drag-over');
+                });
+                
+                zone.addEventListener('drop', function(e) {
+                    e.preventDefault();
+                    this.classList.remove('drag-over');
+                    
+                    if (draggedElement) {
+                        // Rimuovi eventuali elementi già presenti
+                        const existingItem = this.querySelector('.drag-item');
+                        if (existingItem) {
+                            existingItem.remove();
+                        }
+                        
+                        // Aggiungi il nuovo elemento
+                        const clone = draggedElement.cloneNode(true);
+                        this.appendChild(clone);
+                        this.classList.add('filled');
+                    }
+                });
+            });
+        }
+        
+        function checkDrag1() {
+            const drop1 = document.getElementById('drop1-1');
+            const drop2 = document.getElementById('drop1-2');
+            const drop3 = document.getElementById('drop1-3');
+            
+            const val1 = drop1.querySelector('.drag-item')?.textContent || '';
+            const val2 = drop2.querySelector('.drag-item')?.textContent || '';
+            const val3 = drop3.querySelector('.drag-item')?.textContent || '';
+            
+            const feedback = document.getElementById('drag1Feedback');
+            
+            if (val1 === 'Dico' && val2 === 'Marcum' && val3 === 'vincere') {
+                feedback.className = 'feedback success show';
+                feedback.innerHTML = `
+                    <h3>✓ Perfetto!</h3>
+                    <p>La frase corretta è: <span class="latin">Dico Marcum vincere</span></p>
+                    <p><strong>Marcum</strong> (accusativo) è il soggetto dell'infinitiva!</p>
+                `;
+            } else {
+                feedback.className = 'feedback error show';
+                let errors = '<ul style="margin-left: 20px;">';
+                if (val1 !== 'Dico') errors += '<li>Il verbo principale è <strong>Dico</strong></li>';
+                if (val2 !== 'Marcum') errors += '<li>Il soggetto deve essere <strong>Marcum</strong> (accusativo!)</li>';
+                if (val3 !== 'vincere') errors += '<li>Il verbo dell\'infinitiva è <strong>vincere</strong> (infinito)</li>';
+                errors += '</ul>';
+                feedback.innerHTML = '<h3>✗ Riprova!</h3>' + errors;
+            }
+        }
+        
+        function resetDrag1() {
+            const drops = document.querySelectorAll('[id^="drop1-"]');
+            drops.forEach(drop => {
+                const item = drop.querySelector('.drag-item');
+                if (item) item.remove();
+                drop.classList.remove('filled');
+            });
+            document.getElementById('drag1Feedback').classList.remove('show');
+        }
+        
+        function checkDrag2() {
+            const drop1 = document.getElementById('drop2-1');
+            const drop2 = document.getElementById('drop2-2');
+            const drop3 = document.getElementById('drop2-3');
+            
+            const val1 = drop1.querySelector('.drag-item')?.textContent || '';
+            const val2 = drop2.querySelector('.drag-item')?.textContent || '';
+            const val3 = drop3.querySelector('.drag-item')?.textContent || '';
+            
+            const feedback = document.getElementById('drag2Feedback');
+            
+            if (val1 === 'Oportet' && val2 === 'milites' && val3 === 'pugnare') {
+                feedback.className = 'feedback success show';
+                feedback.innerHTML = `
+                    <h3>✓ Eccellente!</h3>
+                    <p>La frase corretta è: <span class="latin">Oportet milites pugnare</span></p>
+                    <p>Infinitiva SOGGETTIVA perché <strong>oportet</strong> è impersonale!</p>
+                `;
+            } else {
+                feedback.className = 'feedback error show';
+                let errors = '<ul style="margin-left: 20px;">';
+                if (val1 !== 'Oportet') errors += '<li>Il verbo impersonale è <strong>Oportet</strong></li>';
+                if (val2 !== 'milites') errors += '<li>Il soggetto deve essere <strong>milites</strong> (accusativo!)</li>';
+                if (val3 !== 'pugnare') errors += '<li>Il verbo dell\'infinitiva è <strong>pugnare</strong> (infinito)</li>';
+                errors += '</ul>';
+                feedback.innerHTML = '<h3>✗ Riprova!</h3>' + errors;
+            }
+        }
+        
+        function resetDrag2() {
+            const drops = document.querySelectorAll('[id^="drop2-"]');
+            drops.forEach(drop => {
+                const item = drop.querySelector('.drag-item');
+                if (item) item.remove();
+                drop.classList.remove('filled');
+            });
+            document.getElementById('drag2Feedback').classList.remove('show');
+        }
+        
+        // SEZIONE 6: Traduzione
+        function checkTrans(num) {
+            const input = document.getElementById(`trans${num}`);
+            const feedback = document.getElementById(`trans${num}Feedback`);
+            const answer = input.value.trim().toLowerCase();
+            
+            let correct = false;
+            let correctAnswer = '';
+            
+            switch(num) {
+                case 1:
+                    correctAnswer = 'Penso/Credo che tu sia saggio';
+                    correct = (answer.includes('penso') || answer.includes('credo')) && 
+                             answer.includes('tu') && answer.includes('sia') && answer.includes('saggio');
+                    break;
+                case 2:
+                    correctAnswer = 'So che Marco è venuto / So che Marco ha venuto';
+                    correct = answer.includes('so') && answer.includes('marco') && 
+                             (answer.includes('venuto') || answer.includes('arrivato'));
+                    break;
+                case 3:
+                    correctAnswer = 'È necessario che i soldati combattano / Bisogna che i soldati combattano';
+                    correct = (answer.includes('necessario') || answer.includes('bisogna')) && 
+                             answer.includes('soldati') && answer.includes('combatt');
+                    break;
+                case 4:
+                    correctAnswer = 'Si dice che i Romani hanno vinto';
+                    correct = (answer.includes('si dice') || answer.includes('è detto')) && 
+                             answer.includes('romani') && answer.includes('vinto');
+                    break;
+                case 5:
+                    correctAnswer = 'Spero che tu verrai / Spero che tu sarai per venire';
+                    correct = answer.includes('spero') && answer.includes('tu') && 
+                             (answer.includes('verrai') || answer.includes('venir'));
+                    break;
+            }
+            
+            if (correct) {
+                input.classList.remove('wrong');
+                input.classList.add('correct');
+                feedback.className = 'feedback success show';
+                feedback.innerHTML = '<h3>✓ Corretto!</h3>';
+            } else {
+                input.classList.remove('correct');
+                input.classList.add('wrong');
+                feedback.className = 'feedback error show';
+                feedback.innerHTML = `<h3>✗ Riprova!</h3><p>Traduzione corretta: <em>${correctAnswer}</em></p>`;
+            }
+        }
+        
+        // SEZIONE 8: Test finale
+        function selectAnswer(question, answer) {
+            testAnswers[question] = answer;
+            
+            // Reset di tutte le opzioni per questa domanda
+            const allLetters = ['a', 'b', 'c'];
+            allLetters.forEach(letter => {
+                const elem = document.getElementById(`q${question}${letter}`);
+                if (elem) {
+                    elem.style.background = 'white';
+                }
+            });
+            
+            // Evidenzia la risposta selezionata
+            const selected = document.getElementById(`q${question}${answer}`);
+            if (selected) {
+                selected.style.background = '#e3f2fd';
+            }
+        }
+        
+        function showResults() {
+            const correctAnswers = {
+                1: 'b',  // Accusativo
+                2: 'b',  // Perfetto
+                3: 'a',  // Oggettiva
+                4: 'b',  // Soggettiva
+                5: 'b',  // Sei venuto
+                6: 'b',  // Oportet
+                7: 'b',  // Accusativo
+                8: 'b'   // Si dice
+            };
+            
+            let score = 0;
+            for (let i = 1; i <= 8; i++) {
+                if (testAnswers[i] === correctAnswers[i]) {
+                    score++;
+                }
+            }
+            
+            const percentage = Math.round((score / 8) * 100);
+            const feedback = document.getElementById('finalResults');
+            
+            // Colora le risposte
+            for (let i = 1; i <= 8; i++) {
+                const allLetters = ['a', 'b', 'c'];
+                
+                // Blocca tutte le opzioni
+                allLetters.forEach(letter => {
+                    const elem = document.getElementById(`q${i}${letter}`);
+                    if (elem) {
+                        elem.style.pointerEvents = 'none';
+                    }
+                });
+                
+                // Colora la risposta corretta in verde
+                const correctElem = document.getElementById(`q${i}${correctAnswers[i]}`);
+                if (correctElem) {
+                    correctElem.classList.add('correct');
+                    correctElem.style.background = '#d4edda';
+                }
+                
+                // Colora la risposta sbagliata in rosso (se l'utente ha risposto male)
+                if (testAnswers[i] && testAnswers[i] !== correctAnswers[i]) {
+                    const wrongElem = document.getElementById(`q${i}${testAnswers[i]}`);
+                    if (wrongElem) {
+                        wrongElem.classList.add('wrong');
+                        wrongElem.style.background = '#f8d7da';
+                    }
+                }
+            }
+            
+            // Mostra risultato
+            let message = '';
+            let className = '';
+            
+            if (percentage >= 80) {
+                className = 'success';
+                message = `
+                    <div class="score-display">${percentage}%</div>
+                    <h3>🎉 Eccellente!</h3>
+                    <p>Hai risposto correttamente a <strong>${score} su 8</strong> domande!</p>
+                    <p>Hai una padronanza molto buona dell'infinitiva latina. Complimenti!</p>
+                `;
+            } else if (percentage >= 60) {
+                className = 'success';
+                message = `
+                    <div class="score-display">${percentage}%</div>
+                    <h3>👍 Buon lavoro!</h3>
+                    <p>Hai risposto correttamente a <strong>${score} su 8</strong> domande.</p>
+                    <p>Hai capito i concetti principali. Rivedi le parti in cui hai sbagliato per migliorare!</p>
+                `;
+            } else {
+                className = 'error';
+                message = `
+                    <div class="score-display">${percentage}%</div>
+                    <h3>📚 Continua a esercitarti!</h3>
+                    <p>Hai risposto correttamente a <strong>${score} su 8</strong> domande.</p>
+                    <p>Ti consiglio di rivedere la lezione, soprattutto le sezioni 2, 3 e 4. Non ti scoraggiare, l'infinitiva richiede pratica!</p>
+                `;
+            }
+            
+            feedback.className = `feedback ${className} show`;
+            feedback.innerHTML = message;
+        }
+        
+        function resetTest() {
+            currentSection = 0;
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active');
+            });
+            document.getElementById('section0').classList.add('active');
+            updateProgress();
+            testAnswers = {};
+            window.scrollTo(0, 0);
+            
+            // Reset di tutti gli esercizi
+            document.querySelectorAll('.quiz-option').forEach(opt => {
+                opt.classList.remove('correct', 'wrong');
+                opt.style.pointerEvents = 'auto';
+                opt.style.background = 'white';
+            });
+            
+            // Reset specifico per il test finale
+            for (let i = 1; i <= 8; i++) {
+                const allLetters = ['a', 'b', 'c'];
+                allLetters.forEach(letter => {
+                    const elem = document.getElementById(`q${i}${letter}`);
+                    if (elem) {
+                        elem.classList.remove('correct', 'wrong');
+                        elem.style.pointerEvents = 'auto';
+                        elem.style.background = 'white';
+                    }
+                });
+            }
+            
+            document.querySelectorAll('.feedback').forEach(fb => {
+                fb.classList.remove('show');
+            });
+            
+            document.querySelectorAll('.input-exercise').forEach(input => {
+                input.value = '';
+                input.classList.remove('correct', 'wrong');
+            });
+            
+            resetDrag1();
+            resetDrag2();
+            
+            typeAnswered = [false, false, false];
+        }
+        
+        // Inizializzazione
+        updateProgress();
+    </script>
+</body>
+</html>

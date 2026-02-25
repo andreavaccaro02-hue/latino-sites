@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Glossario Interattivo Eulalia — Lingua e Cultura Latina</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .glossary-controls {
+      background: var(--card);
+      border: 2px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 24px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+    }
+    .glossary-controls input {
+      flex: 1;
+      min-width: 200px;
+      padding: 10px 16px;
+      border: 2px solid var(--border);
+      border-radius: 10px;
+      font-family: 'Cardo', serif;
+      font-size: 16px;
+      background: var(--bg);
+      color: var(--text);
+      outline: none;
+    }
+    .glossary-controls input:focus {
+      border-color: var(--eulalia);
+    }
+    .glossary-controls select {
+      padding: 10px 14px;
+      border: 2px solid var(--border);
+      border-radius: 10px;
+      font-family: 'Cardo', serif;
+      font-size: 15px;
+      background: var(--bg);
+      color: var(--text);
+      cursor: pointer;
+    }
+    .glossary-stats {
+      text-align: center;
+      font-size: 14px;
+      color: var(--text-dim);
+      margin-bottom: 16px;
+    }
+    .word-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 12px;
+      margin-bottom: 40px;
+    }
+    .word-card {
+      background: var(--card);
+      border: 2px solid var(--border);
+      border-radius: 10px;
+      padding: 16px;
+      transition: all 0.2s ease;
+      border-left: 4px solid var(--border);
+    }
+    .word-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+    .word-card.noun { border-left-color: var(--soggetto); }
+    .word-card.verb { border-left-color: var(--verbo); }
+    .word-card.adj { border-left-color: var(--complemento-oggetto); }
+    .word-card.adv { border-left-color: var(--complemento-indiretto); }
+    .word-card.prep { border-left-color: var(--latino5); }
+    .word-card.conj { border-left-color: var(--gold); }
+    .word-card.pron { border-left-color: var(--vocativo); }
+    .word-latin {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+    .word-function {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .word-function.noun { background: rgba(232, 93, 93, 0.15); color: var(--soggetto); }
+    .word-function.verb { background: rgba(244, 211, 94, 0.25); color: #9a7c1a; }
+    .word-function.adj { background: rgba(120, 200, 120, 0.15); color: #2d7a2d; }
+    .word-function.adv { background: rgba(109, 181, 212, 0.15); color: #1a6b8a; }
+    .word-function.prep { background: rgba(192, 132, 212, 0.15); color: #7a3d8f; }
+    .word-function.conj { background: rgba(184, 145, 90, 0.15); color: #8a6d35; }
+    .word-function.pron { background: rgba(255, 140, 66, 0.15); color: #b85a1a; }
+    .word-translation {
+      font-size: 15px;
+      color: var(--text-dim);
+      line-height: 1.4;
+    }
+    .word-freq {
+      font-size: 12px;
+      color: var(--text-dim);
+      margin-top: 6px;
+      opacity: 0.7;
+    }
+    .legend-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding: 12px 16px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+    }
+    .legend-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 3px;
+    }
+    .info-box {
+      background: var(--eulalia-light);
+      border: 2px solid var(--eulalia);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 24px;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+    .info-box strong { color: var(--eulalia); }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="container">
+      <a href="../index.html" class="site-name">Lingua e Cultura Latina</a>
+      <div class="nav-links">
+        <a href="../index.html">Home</a>
+        <a href="../raccoglitore-testi.html">Testi</a>
+        <a href="#" class="active">Glossario Eulalia</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="page-header">
+    <h1>📚 Glossario Interattivo Eulalia</h1>
+    <div class="divider"></div>
+    <p class="subtitle">Le 800 parole latine più frequenti — Progetto Eulalia, Università di Bologna</p>
+  </div>
+
+  <div class="container">
+    <a href="../index.html" class="back-link">← Torna alla Home</a>
+
+    <div class="info-box">
+      <strong>Progetto Eulalia</strong> — European Latin Linguistic Assessment (Università di Bologna). Il glossario raccoglie le parole latine più frequenti, organizzate per funzione grammaticale e ordinate per frequenza d'uso. Ogni parola è classificata secondo il sistema Eulalia: N = sostantivo (con indicazione della declinazione), V = verbo (con coniugazione), ADJ = aggettivo, ADV = avverbio, PREP = preposizione, CONJ = congiunzione, PRON = pronome.
+    </div>
+
+    <div class="glossary-controls">
+      <input type="text" id="searchInput" placeholder="Cerca parola latina o traduzione..." oninput="filterWords()">
+      <select id="functionFilter" onchange="filterWords()">
+        <option value="all">Tutte le funzioni</option>
+        <option value="noun">Sostantivi (N)</option>
+        <option value="verb">Verbi (V)</option>
+        <option value="adj">Aggettivi (ADJ)</option>
+        <option value="adv">Avverbi (ADV)</option>
+        <option value="prep">Preposizioni (PREP)</option>
+        <option value="conj">Congiunzioni (CONJ)</option>
+        <option value="pron">Pronomi (PRON)</option>
+      </select>
+      <select id="rangeFilter" onchange="filterWords()">
+        <option value="all">Tutte (1–800)</option>
+        <option value="1-100">1–100</option>
+        <option value="101-200">101–200</option>
+        <option value="201-400">201–400</option>
+        <option value="401-600">401–600</option>
+        <option value="601-800">601–800</option>
+      </select>
+    </div>
+
+    <div class="legend-bar">
+      <div class="legend-item"><div class="legend-dot" style="background: var(--soggetto);"></div> Sostantivi</div>
+      <div class="legend-item"><div class="legend-dot" style="background: var(--verbo);"></div> Verbi</div>
+      <div class="legend-item"><div class="legend-dot" style="background: var(--complemento-oggetto);"></div> Aggettivi</div>
+      <div class="legend-item"><div class="legend-dot" style="background: var(--complemento-indiretto);"></div> Avverbi</div>
+      <div class="legend-item"><div class="legend-dot" style="background: var(--latino5);"></div> Preposizioni</div>
+      <div class="legend-item"><div class="legend-dot" style="background: var(--gold);"></div> Congiunzioni</div>
+      <div class="legend-item"><div class="legend-dot" style="background: var(--vocativo);"></div> Pronomi</div>
+    </div>
+
+    <p class="glossary-stats" id="statsText">Mostrate 100 parole su 100 disponibili</p>
+
+    <div class="word-grid" id="wordGrid"></div>
+  </div>
+
+  <footer>
+    <p><strong>Prof. Andrea Vaccaro</strong></p>
+    <p>Lingua e Cultura Latina — Liceo Classico e Liceo Scientifico</p>
+    <div class="footer-links">
+      <a href="../index.html">Home</a>
+      <a href="../raccoglitore-testi.html">Raccoglitore Testi</a>
+      <a href="#">Glossario Eulalia</a>
+    </div>
+  </footer>
+
+  <script>
+    /*
+     * ═══════════════════════════════════════════════
+     *  GLOSSARIO EULALIA — DATABASE VOCABOLI
+     *  Per aggiungere nuove parole, aggiungi oggetti
+     *  all'array 'words' con la stessa struttura.
+     * ═══════════════════════════════════════════════
+     */
+    const words = [
+      // 1-20
+      {id:1, word:"sum", func:"V:irreg.", funcCat:"verb", trad:"essere, esistere", freq:1},
+      {id:2, word:"qui", func:"PRON:rel.", funcCat:"pron", trad:"che, il quale", freq:2},
+      {id:3, word:"et", func:"CONJ", funcCat:"conj", trad:"e, anche", freq:3},
+      {id:4, word:"in", func:"PREP:+abl./acc.", funcCat:"prep", trad:"in, dentro; verso", freq:4},
+      {id:5, word:"is", func:"PRON:dem.", funcCat:"pron", trad:"egli, quello", freq:5},
+      {id:6, word:"hic", func:"PRON:dem.", funcCat:"pron", trad:"questo, costui", freq:6},
+      {id:7, word:"non", func:"ADV", funcCat:"adv", trad:"non", freq:7},
+      {id:8, word:"ego", func:"PRON:pers.", funcCat:"pron", trad:"io", freq:8},
+      {id:9, word:"cum", func:"PREP:+abl./CONJ", funcCat:"prep", trad:"con; quando, poiché", freq:9},
+      {id:10, word:"ab", func:"PREP:+abl.", funcCat:"prep", trad:"da, lontano da", freq:10},
+      {id:11, word:"ad", func:"PREP:+acc.", funcCat:"prep", trad:"a, verso, presso", freq:11},
+      {id:12, word:"ut", func:"CONJ/ADV", funcCat:"conj", trad:"affinché, come, che", freq:12},
+      {id:13, word:"ille", func:"PRON:dem.", funcCat:"pron", trad:"quello, egli", freq:13},
+      {id:14, word:"sed", func:"CONJ", funcCat:"conj", trad:"ma, però", freq:14},
+      {id:15, word:"dico", func:"V:3°", funcCat:"verb", trad:"dire, parlare", freq:15},
+      {id:16, word:"omnis", func:"ADJ", funcCat:"adj", trad:"ogni, tutto", freq:16},
+      {id:17, word:"de", func:"PREP:+abl.", funcCat:"prep", trad:"di, da, riguardo a", freq:17},
+      {id:18, word:"res", func:"N:5", funcCat:"noun", trad:"cosa, fatto, circostanza", freq:18},
+      {id:19, word:"si", func:"CONJ", funcCat:"conj", trad:"se", freq:19},
+      {id:20, word:"facio", func:"V:3°", funcCat:"verb", trad:"fare, compiere", freq:20},
+      // 21-40
+      {id:21, word:"ipse", func:"PRON:det.", funcCat:"pron", trad:"egli stesso, proprio", freq:21},
+      {id:22, word:"tu", func:"PRON:pers.", funcCat:"pron", trad:"tu", freq:22},
+      {id:23, word:"atque", func:"CONJ", funcCat:"conj", trad:"e, e anche, e inoltre", freq:23},
+      {id:24, word:"habeo", func:"V:2°", funcCat:"verb", trad:"avere, possedere", freq:24},
+      {id:25, word:"possum", func:"V:irreg.", funcCat:"verb", trad:"potere, essere in grado", freq:25},
+      {id:26, word:"neque", func:"CONJ", funcCat:"conj", trad:"e non, né", freq:26},
+      {id:27, word:"magnus", func:"ADJ", funcCat:"adj", trad:"grande, importante", freq:27},
+      {id:28, word:"do", func:"V:1°", funcCat:"verb", trad:"dare, concedere", freq:28},
+      {id:29, word:"ex", func:"PREP:+abl.", funcCat:"prep", trad:"da, fuori da", freq:29},
+      {id:30, word:"alius", func:"ADJ/PRON", funcCat:"adj", trad:"altro, diverso", freq:30},
+      {id:31, word:"video", func:"V:2°", funcCat:"verb", trad:"vedere; sembrare (pass.)", freq:31},
+      {id:32, word:"suus", func:"ADJ:poss.", funcCat:"adj", trad:"suo, proprio", freq:32},
+      {id:33, word:"enim", func:"CONJ", funcCat:"conj", trad:"infatti, poiché", freq:33},
+      {id:34, word:"multus", func:"ADJ", funcCat:"adj", trad:"molto, numeroso", freq:34},
+      {id:35, word:"etiam", func:"ADV/CONJ", funcCat:"adv", trad:"anche, ancora, perfino", freq:35},
+      {id:36, word:"per", func:"PREP:+acc.", funcCat:"prep", trad:"per, attraverso", freq:36},
+      {id:37, word:"aut", func:"CONJ", funcCat:"conj", trad:"o, oppure", freq:37},
+      {id:38, word:"autem", func:"CONJ", funcCat:"conj", trad:"ma, d'altra parte, poi", freq:38},
+      {id:39, word:"quis", func:"PRON:inter.", funcCat:"pron", trad:"chi? che cosa?", freq:39},
+      {id:40, word:"venio", func:"V:4°", funcCat:"verb", trad:"venire, arrivare", freq:40},
+      // 41-60
+      {id:41, word:"pars", func:"N:3", funcCat:"noun", trad:"parte, porzione", freq:41},
+      {id:42, word:"meus", func:"ADJ:poss.", funcCat:"adj", trad:"mio", freq:42},
+      {id:43, word:"iam", func:"ADV", funcCat:"adv", trad:"già, ormai", freq:43},
+      {id:44, word:"homo", func:"N:3", funcCat:"noun", trad:"uomo, essere umano", freq:44},
+      {id:45, word:"nam", func:"CONJ", funcCat:"conj", trad:"infatti, poiché", freq:45},
+      {id:46, word:"idem", func:"PRON:dem.", funcCat:"pron", trad:"lo stesso, il medesimo", freq:46},
+      {id:47, word:"bonus", func:"ADJ", funcCat:"adj", trad:"buono, onesto", freq:47},
+      {id:48, word:"volo", func:"V:irreg.", funcCat:"verb", trad:"volere, desiderare", freq:48},
+      {id:49, word:"animus", func:"N:2", funcCat:"noun", trad:"animo, spirito, mente", freq:49},
+      {id:50, word:"tamen", func:"ADV/CONJ", funcCat:"adv", trad:"tuttavia, nondimeno", freq:50},
+      {id:51, word:"locus", func:"N:2", funcCat:"noun", trad:"luogo, posto, posizione", freq:51},
+      {id:52, word:"inter", func:"PREP:+acc.", funcCat:"prep", trad:"tra, fra", freq:52},
+      {id:53, word:"primus", func:"ADJ", funcCat:"adj", trad:"primo, principale", freq:53},
+      {id:54, word:"ago", func:"V:3°", funcCat:"verb", trad:"fare, agire, condurre", freq:54},
+      {id:55, word:"noster", func:"ADJ:poss.", funcCat:"adj", trad:"nostro", freq:55},
+      {id:56, word:"causa", func:"N:1", funcCat:"noun", trad:"causa, motivo, processo", freq:56},
+      {id:57, word:"nihil", func:"PRON:indef.", funcCat:"pron", trad:"nulla, niente", freq:57},
+      {id:58, word:"bellum", func:"N:2", funcCat:"noun", trad:"guerra", freq:58},
+      {id:59, word:"corpus", func:"N:3", funcCat:"noun", trad:"corpo", freq:59},
+      {id:60, word:"manus", func:"N:4", funcCat:"noun", trad:"mano, schiera", freq:60},
+      // 61-80
+      {id:61, word:"tempus", func:"N:3", funcCat:"noun", trad:"tempo, momento", freq:61},
+      {id:62, word:"nullus", func:"ADJ", funcCat:"adj", trad:"nessuno", freq:62},
+      {id:63, word:"ita", func:"ADV", funcCat:"adv", trad:"così, in questo modo", freq:63},
+      {id:64, word:"populus", func:"N:2", funcCat:"noun", trad:"popolo", freq:64},
+      {id:65, word:"quoque", func:"ADV", funcCat:"adv", trad:"anche, pure", freq:65},
+      {id:66, word:"vir", func:"N:2", funcCat:"noun", trad:"uomo (maschio), eroe", freq:66},
+      {id:67, word:"terra", func:"N:1", funcCat:"noun", trad:"terra, suolo, paese", freq:67},
+      {id:68, word:"iubeo", func:"V:2°", funcCat:"verb", trad:"ordinare, comandare", freq:68},
+      {id:69, word:"peto", func:"V:3°", funcCat:"verb", trad:"chiedere, cercare, dirigersi", freq:69},
+      {id:70, word:"rex", func:"N:3", funcCat:"noun", trad:"re, sovrano", freq:70},
+      {id:71, word:"dies", func:"N:5", funcCat:"noun", trad:"giorno, giornata", freq:71},
+      {id:72, word:"nomen", func:"N:3", funcCat:"noun", trad:"nome", freq:72},
+      {id:73, word:"mitto", func:"V:3°", funcCat:"verb", trad:"mandare, inviare", freq:73},
+      {id:74, word:"quam", func:"ADV/CONJ", funcCat:"adv", trad:"quanto, come; di (comp.)", freq:74},
+      {id:75, word:"teneo", func:"V:2°", funcCat:"verb", trad:"tenere, possedere", freq:75},
+      {id:76, word:"capio", func:"V:3°", funcCat:"verb", trad:"prendere, catturare", freq:76},
+      {id:77, word:"nunc", func:"ADV", funcCat:"adv", trad:"ora, adesso", freq:77},
+      {id:78, word:"gens", func:"N:3", funcCat:"noun", trad:"stirpe, popolo, gente", freq:78},
+      {id:79, word:"mors", func:"N:3", funcCat:"noun", trad:"morte", freq:79},
+      {id:80, word:"verus", func:"ADJ", funcCat:"adj", trad:"vero, reale", freq:80},
+      // 81-100
+      {id:81, word:"urbs", func:"N:3", funcCat:"noun", trad:"città", freq:81},
+      {id:82, word:"virtus", func:"N:3", funcCat:"noun", trad:"virtù, valore, coraggio", freq:82},
+      {id:83, word:"pater", func:"N:3", funcCat:"noun", trad:"padre", freq:83},
+      {id:84, word:"fero", func:"V:irreg.", funcCat:"verb", trad:"portare, sopportare", freq:84},
+      {id:85, word:"vita", func:"N:1", funcCat:"noun", trad:"vita", freq:85},
+      {id:86, word:"scribo", func:"V:3°", funcCat:"verb", trad:"scrivere", freq:86},
+      {id:87, word:"ubi", func:"ADV/CONJ", funcCat:"adv", trad:"dove, quando", freq:87},
+      {id:88, word:"ante", func:"PREP:+acc./ADV", funcCat:"prep", trad:"prima, davanti a", freq:88},
+      {id:89, word:"novus", func:"ADJ", funcCat:"adj", trad:"nuovo, recente", freq:89},
+      {id:90, word:"pono", func:"V:3°", funcCat:"verb", trad:"porre, mettere, collocare", freq:90},
+      {id:91, word:"eo", func:"V:irreg.", funcCat:"verb", trad:"andare", freq:91},
+      {id:92, word:"hostis", func:"N:3", funcCat:"noun", trad:"nemico (di guerra)", freq:92},
+      {id:93, word:"regnum", func:"N:2", funcCat:"noun", trad:"regno, potere reale", freq:93},
+      {id:94, word:"sic", func:"ADV", funcCat:"adv", trad:"così, in questo modo", freq:94},
+      {id:95, word:"tuus", func:"ADJ:poss.", funcCat:"adj", trad:"tuo", freq:95},
+      {id:96, word:"totus", func:"ADJ", funcCat:"adj", trad:"tutto, intero", freq:96},
+      {id:97, word:"quisque", func:"PRON:indef.", funcCat:"pron", trad:"ciascuno, ognuno", freq:97},
+      {id:98, word:"deus", func:"N:2", funcCat:"noun", trad:"dio, divinità", freq:98},
+      {id:99, word:"ager", func:"N:2", funcCat:"noun", trad:"campo, territorio", freq:99},
+      {id:100, word:"accipio", func:"V:3°", funcCat:"verb", trad:"ricevere, accogliere", freq:100}
+    ];
+
+    /* ═══ RENDERING ═══ */
+    function getTypeLabel(funcCat) {
+      const labels = {
+        noun: "Sostantivo",
+        verb: "Verbo",
+        adj: "Aggettivo",
+        adv: "Avverbio",
+        prep: "Preposizione",
+        conj: "Congiunzione",
+        pron: "Pronome"
+      };
+      return labels[funcCat] || funcCat;
+    }
+
+    function renderWords(filtered) {
+      const grid = document.getElementById('wordGrid');
+      if (filtered.length === 0) {
+        grid.innerHTML = '<div class="empty-state"><span class="icon">Search icon</span><h2>Nessun risultato</h2><p>Prova a modificare i filtri di ricerca.</p></div>';
+        document.getElementById('statsText').textContent = 'Nessuna parola trovata';
+        return;
+      }
+      grid.innerHTML = filtered.map(w => `
+        <div class="word-card ${w.funcCat}">
+          <div class="word-latin">${w.word}</div>
+          <span class="word-function ${w.funcCat}">${w.func} — ${getTypeLabel(w.funcCat)}</span>
+          <div class="word-translation">${w.trad}</div>
+          <div class="word-freq">#${w.freq} per frequenza</div>
+        </div>
+      `).join('');
+      document.getElementById('statsText').textContent =
+        `Mostrate ${filtered.length} parole su ${words.length} disponibili`;
+    }
+
+    function filterWords() {
+      const search = document.getElementById('searchInput').value.toLowerCase();
+      const funcFilter = document.getElementById('functionFilter').value;
+      const rangeFilter = document.getElementById('rangeFilter').value;
+
+      let filtered = words;
+
+      if (search) {
+        filtered = filtered.filter(w =>
+          w.word.toLowerCase().includes(search) ||
+          w.trad.toLowerCase().includes(search)
+        );
+      }
+
+      if (funcFilter !== 'all') {
+        filtered = filtered.filter(w => w.funcCat === funcFilter);
+      }
+
+      if (rangeFilter !== 'all') {
+        const [min, max] = rangeFilter.split('-').map(Number);
+        filtered = filtered.filter(w => w.freq >= min && w.freq <= max);
+      }
+
+      renderWords(filtered);
+    }
+
+    // Initial render
+    renderWords(words);
+  </script>
+</body>
+</html>

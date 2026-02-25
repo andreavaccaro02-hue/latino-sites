@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Congiuntivo Perfetto e Piuccheperfetto — Lingua e Cultura Latina</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* ═══ LEZIONE INTERATTIVA — Stili aggiuntivi ═══ */
+
+    /* Progress bar */
+    .lesson-progress {
+      background: var(--card);
+      border-bottom: 1px solid var(--border);
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      position: sticky;
+      top: 52px;
+      z-index: 90;
+    }
+    .progress-bar {
+      flex: 1; height: 8px;
+      background: var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%; width: 0%;
+      background: linear-gradient(90deg, var(--gold), var(--gold-light));
+      border-radius: 4px;
+      transition: width 0.5s ease;
+    }
+    .progress-text {
+      font-size: 13px; color: var(--text-dim);
+      font-weight: 700; white-space: nowrap;
+    }
+
+    /* Lesson tabs */
+    .lesson-tabs {
+      display: flex; gap: 4px;
+      padding-top: 16px;
+      overflow-x: auto;
+      flex-wrap: wrap;
+    }
+    .lesson-tab {
+      padding: 10px 16px;
+      border: 2px solid var(--border);
+      background: var(--card);
+      border-radius: 10px 10px 0 0;
+      cursor: pointer;
+      font-family: 'Cardo', serif;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-dim);
+      transition: all 0.2s;
+      white-space: nowrap;
+      border-bottom: none;
+    }
+    .lesson-tab:hover { color: var(--text); background: var(--bg); }
+    .lesson-tab.active {
+      color: var(--text);
+      background: var(--card);
+      border-color: var(--gold);
+      border-bottom: 2px solid var(--card);
+      position: relative; z-index: 2;
+    }
+
+    /* Lesson sections */
+    .lesson-section { display: none; animation: lsFadeIn 0.35s ease; }
+    .lesson-section.active { display: block; }
+    @keyframes lsFadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Lesson cards */
+    .lesson-card {
+      background: var(--card);
+      border: 2px solid var(--border);
+      border-radius: 14px;
+      padding: 28px;
+      margin: 20px 0;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+      overflow: hidden;
+    }
+    .lesson-card h2 {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 22px;
+      color: var(--text);
+      margin-bottom: 14px;
+    }
+    .lesson-card h3 {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 16px;
+      color: var(--text);
+      margin: 18px 0 8px;
+    }
+    .lesson-card p { line-height: 1.7; margin-bottom: 8px; }
+
+    /* Phase labels (TLAC) */
+    .phase-label {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 5px 14px; border-radius: 8px;
+      font-size: 12px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 1px;
+      margin-bottom: 14px;
+      font-family: 'Cardo', serif;
+    }
+    .phase-ido { background: #eae4d6; color: #5a4e3c; }
+    .phase-wedo { background: #fef3c7; color: #92400e; }
+    .phase-youdo { background: #d4edda; color: #155724; }
+
+    /* Formula box */
+    .formula-box {
+      background: linear-gradient(135deg, #f5f0e8 0%, #eae4d6 100%);
+      border: 2px solid var(--gold);
+      border-radius: 12px;
+      padding: 20px; text-align: center;
+      margin: 14px 0;
+    }
+    .formula {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 17px; font-weight: 700;
+      color: var(--text);
+    }
+    .formula .hl {
+      background: #fef3c7; padding: 2px 8px;
+      border-radius: 4px; color: #92400e;
+    }
+
+    /* Conjugation tables */
+    .conj-table { overflow-x: auto; margin: 14px 0; border-radius: 10px; border: 2px solid var(--border); }
+    .conj-table table { width: 100%; border-collapse: collapse; font-size: 14px; table-layout: fixed; }
+    .conj-table thead th {
+      background: linear-gradient(135deg, #2c2416, #5a4e3c);
+      color: #f5f0e8; padding: 10px 10px;
+      text-align: center; font-family: 'Libre Baskerville', serif;
+      font-size: 12px; font-weight: 600;
+      white-space: nowrap; overflow: hidden;
+    }
+    .conj-table tbody td {
+      padding: 9px 8px; text-align: center;
+      border-bottom: 1px solid var(--border);
+      font-family: 'Cardo', serif;
+      white-space: nowrap; font-size: 13px;
+    }
+    .conj-table tbody tr:nth-child(even) { background: #faf8f4; }
+    .conj-table tbody tr:hover { background: #f0ebe0; }
+    .conj-table td.lbl {
+      font-weight: 700; text-align: left;
+      color: var(--text); background: #f5f0e8;
+      font-family: 'Libre Baskerville', serif; font-size: 12px;
+      width: 60px; white-space: nowrap;
+    }
+    .conj-table .lat { font-style: italic; }
+    /* Allow wrapping in passive tables with long participio text */
+    .conj-table td.lat-wrap { white-space: normal; font-size: 13px; }
+
+    /* Callout boxes */
+    .ls-callout {
+      border-left: 4px solid; padding: 14px 18px;
+      border-radius: 0 10px 10px 0; margin: 14px 0;
+      font-size: 14px; line-height: 1.7;
+      box-sizing: border-box;
+      width: 100%;
+      overflow-wrap: break-word;
+      word-wrap: break-word;
+    }
+    .ls-callout-info { border-color: var(--gold); background: #faf5eb; }
+    .ls-callout-tip { border-color: #2D6A4F; background: #e8f5e9; }
+    .ls-callout-warn { border-color: #e85d5d; background: #fdf0ef; }
+    .ls-callout strong { display: block; margin-bottom: 4px; font-size: 15px; }
+    .ls-callout em, .ls-callout b { white-space: normal; }
+
+    /* Exercises */
+    .exercise-block {
+      background: var(--bg); border: 1px solid var(--border);
+      border-radius: 12px; padding: 20px; margin: 14px 0;
+    }
+    .exercise-block h4 {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 15px; color: var(--text); margin-bottom: 12px;
+    }
+    .ex-item {
+      margin: 10px 0; padding: 12px 14px;
+      background: var(--card); border-radius: 8px;
+      border: 1px solid var(--border);
+    }
+    .ex-item p {
+      margin-bottom: 6px; font-family: 'Cardo', serif; font-size: 15px;
+      line-height: 2; /* more space for inline inputs */
+    }
+    .ex-item .num {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 22px; height: 22px; background: #2c2416; color: #f5f0e8;
+      border-radius: 50%; font-size: 11px; font-weight: 700;
+      margin-right: 8px; font-family: 'Cardo', serif;
+      vertical-align: middle; flex-shrink: 0;
+    }
+    input[type="text"].ls-input {
+      border: 2px solid var(--border); border-radius: 8px;
+      padding: 6px 10px; font-family: 'Cardo', serif;
+      font-size: 14px; width: 170px; transition: border-color 0.2s; outline: none;
+      background: white; vertical-align: middle;
+    }
+    input[type="text"].ls-input:focus { border-color: var(--gold); }
+    input.ls-correct { border-color: #2D6A4F !important; background: #e8f5e9 !important; }
+    input.ls-incorrect { border-color: #e85d5d !important; background: #fdf0ef !important; }
+    select.ls-select {
+      border: 2px solid var(--border); border-radius: 8px;
+      padding: 7px 12px; font-family: 'Cardo', serif;
+      font-size: 15px; outline: none; cursor: pointer; background: white;
+    }
+    select.ls-select:focus { border-color: var(--gold); }
+
+    .ls-btn {
+      padding: 10px 22px; border: none; border-radius: 10px;
+      font-family: 'Libre Baskerville', serif;
+      font-weight: 700; font-size: 14px; cursor: pointer;
+      transition: all 0.2s;
+    }
+    .ls-btn-primary { background: #2c2416; color: #f5f0e8; }
+    .ls-btn-primary:hover { background: #5a4e3c; transform: translateY(-1px); }
+    .ls-btn-outline { background: transparent; color: var(--text); border: 2px solid var(--border); }
+    .ls-btn-outline:hover { background: var(--bg); }
+    .btn-row { display: flex; gap: 10px; margin-top: 14px; flex-wrap: wrap; }
+
+    .score-box {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 8px 16px; border-radius: 10px;
+      font-weight: 700; font-size: 14px; margin-top: 12px;
+      font-family: 'Cardo', serif;
+    }
+    .score-good { background: #d4edda; color: #155724; }
+    .score-medium { background: #fef3c7; color: #92400e; }
+    .score-bad { background: #fdf0ef; color: #991b1b; }
+
+    /* Flashcard */
+    .fc-container { perspective: 1000px; margin: 16px 0; }
+    .fc {
+      width: 100%; min-height: 130px; cursor: pointer;
+      position: relative; transform-style: preserve-3d;
+      transition: transform 0.6s;
+    }
+    .fc.flipped { transform: rotateY(180deg); }
+    .fc-face {
+      position: absolute; width: 100%; min-height: 130px;
+      backface-visibility: hidden; border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      padding: 24px; text-align: center;
+      font-family: 'Cardo', serif; font-size: 18px;
+    }
+    .fc-front {
+      background: linear-gradient(135deg, #f5f0e8, #eae4d6);
+      border: 2px solid var(--gold); color: var(--text);
+    }
+    .fc-back {
+      background: linear-gradient(135deg, #d4edda, #b8e6c8);
+      border: 2px solid #2D6A4F; color: #155724;
+      transform: rotateY(180deg);
+    }
+    .fc-hint {
+      font-size: 13px; color: var(--text-dim);
+      text-align: center; margin-top: 6px;
+    }
+
+    @media (max-width: 768px) {
+      .lesson-tabs { flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; padding-bottom: 4px; }
+      .lesson-tab { padding: 8px 12px; font-size: 12px; flex-shrink: 0; }
+      .lesson-card { padding: 18px; }
+      .conj-table table { font-size: 12px; table-layout: auto; }
+      .conj-table thead th { padding: 8px 6px; font-size: 11px; }
+      .conj-table tbody td { padding: 7px 6px; font-size: 12px; }
+      input[type="text"].ls-input { width: 130px; font-size: 13px; }
+      select.ls-select { font-size: 13px; padding: 6px 8px; }
+      .formula { font-size: 14px; }
+      .formula-box { padding: 14px; }
+    }
+    @media print {
+      .lesson-progress, .lesson-tabs, .ls-btn, .btn-row { display: none !important; }
+      .lesson-section { display: block !important; page-break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="container">
+      <a href="index.html" class="site-name">Lingua e Cultura Latina</a>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="latino2.html">Latino 2</a>
+        <a href="raccoglitore-testi.html">Testi</a>
+        <a href="strumenti/glossario-eulalia.html">Strumenti</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Header -->
+  <div class="page-header">
+    <h1>Congiuntivo Perfetto e Piuccheperfetto</h1>
+    <div class="divider"></div>
+    <p class="subtitle">Formazione, riconoscimento ed esercizi &mdash; Metodo TLAC</p>
+  </div>
+
+  <div class="container">
+    <a href="latino2.html" class="back-link">&larr; Torna a Latino 2</a>
+
+    <!-- Progress -->
+    <div class="lesson-progress" style="border-radius:10px; margin-bottom:4px;">
+      <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+      <span class="progress-text" id="progressText">0%</span>
+    </div>
+
+    <!-- Tabs -->
+    <div class="lesson-tabs">
+      <button class="lesson-tab active" onclick="showSection('intro')">Teoria</button>
+      <button class="lesson-tab" onclick="showSection('perfetto')">Perfetto</button>
+      <button class="lesson-tab" onclick="showSection('piuccheperfetto')">Piuccheperfetto</button>
+      <button class="lesson-tab" onclick="showSection('sum')">Sum</button>
+      <button class="lesson-tab" onclick="showSection('esercizi1')">Coniuga</button>
+      <button class="lesson-tab" onclick="showSection('esercizi2')">Riconosci</button>
+      <button class="lesson-tab" onclick="showSection('esercizi3')">Completa</button>
+      <button class="lesson-tab" onclick="showSection('flashcards')">Flashcards</button>
+    </div>
+
+    <!-- ═══════ SEZIONE 1: TEORIA ═══════ -->
+    <div class="lesson-section active" id="intro">
+      <div class="lesson-card">
+        <div class="phase-label phase-ido">I Do — Spiego io</div>
+        <h2>Che cos'è il congiuntivo?</h2>
+        <p>Il <strong>congiuntivo</strong> (in latino <em>coniunctīvus</em>) è il modo della <strong>possibilità, del dubbio, del desiderio</strong> e della <strong>subordinazione</strong>. A differenza dell'indicativo, che esprime fatti certi, il congiuntivo ci porta nel mondo di ciò che <em>potrebbe essere</em>.</p>
+
+        <div class="ls-callout ls-callout-info">
+          <strong>Ricorda</strong>
+          <span>Hai già studiato il congiuntivo <b>presente</b> e <b>imperfetto</b>. Ora completerai il quadro con i due tempi che mancano: il <b>perfetto</b> e il <b>piuccheperfetto</b>.</span>
+        </div>
+
+        <h3>I quattro tempi del congiuntivo latino</h3>
+        <div class="conj-table">
+          <table>
+            <thead><tr><th>Tempo</th><th>Caratteristica</th><th>Esempio (laudō)</th></tr></thead>
+            <tbody>
+              <tr><td class="lbl">Presente</td><td>Tema del presente + vocale tematica</td><td class="lat">laudem</td></tr>
+              <tr><td class="lbl">Imperfetto</td><td>Tema del presente + <strong>-re-</strong></td><td class="lat">laudārem</td></tr>
+              <tr style="background:#f5f0e8;"><td class="lbl">Perfetto</td><td>Tema del perfetto + <strong>-eri-</strong></td><td class="lat"><strong>laudāverim</strong></td></tr>
+              <tr style="background:#fef3c7;"><td class="lbl">Piuccheperfetto</td><td>Tema del perfetto + <strong>-isse-</strong></td><td class="lat"><strong>laudāvissem</strong></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="ls-callout ls-callout-tip">
+          <strong>Il segreto</strong>
+          <span>Entrambi i tempi partono dal <b>tema del perfetto</b> (la terza voce del paradigma, senza la desinenza <em>-ī</em>). Se conosci il perfetto indicativo, sai già formare questi tempi!</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════ SEZIONE 2: CONGIUNTIVO PERFETTO ═══════ -->
+    <div class="lesson-section" id="perfetto">
+      <div class="lesson-card">
+        <div class="phase-label phase-ido">I Do — Spiego io</div>
+        <h2>Congiuntivo Perfetto Attivo</h2>
+
+        <div class="formula-box">
+          <div class="formula">Tema del perfetto + <span class="hl">-ĕrĭ-</span> + desinenze personali</div>
+          <p style="margin-top:6px;font-size:13px;color:var(--text-dim);">Desinenze: <strong>-m, -s, -t, -mus, -tis, -nt</strong></p>
+        </div>
+
+        <div class="ls-callout ls-callout-warn">
+          <strong>Attenzione</strong>
+          <span>La 1ª pers. sing. del cong. perfetto (<em>laudāv<b>erim</b></em>) si distingue dal futuro anteriore (<em>laudāv<b>ero</b></em>) solo per la desinenza. Le altre persone sono identiche: distinguile dal contesto sintattico.</span>
+        </div>
+
+        <h3>Coniugazione completa — 4 coniugazioni</h3>
+        <div class="conj-table">
+          <table>
+            <thead><tr><th style="width:60px">Pers.</th><th>I (laudāv-)</th><th>II (monu-)</th><th>III (lex-)</th><th>IV (audīv-)</th></tr></thead>
+            <tbody>
+              <tr><td class="lbl">1ª sg.</td><td class="lat">laudāv<b>erim</b></td><td class="lat">monu<b>erim</b></td><td class="lat">lex<b>erim</b></td><td class="lat">audīv<b>erim</b></td></tr>
+              <tr><td class="lbl">2ª sg.</td><td class="lat">laudāv<b>eris</b></td><td class="lat">monu<b>eris</b></td><td class="lat">lex<b>eris</b></td><td class="lat">audīv<b>eris</b></td></tr>
+              <tr><td class="lbl">3ª sg.</td><td class="lat">laudāv<b>erit</b></td><td class="lat">monu<b>erit</b></td><td class="lat">lex<b>erit</b></td><td class="lat">audīv<b>erit</b></td></tr>
+              <tr><td class="lbl">1ª pl.</td><td class="lat">laudāv<b>erimus</b></td><td class="lat">monu<b>erimus</b></td><td class="lat">lex<b>erimus</b></td><td class="lat">audīv<b>erimus</b></td></tr>
+              <tr><td class="lbl">2ª pl.</td><td class="lat">laudāv<b>eritis</b></td><td class="lat">monu<b>eritis</b></td><td class="lat">lex<b>eritis</b></td><td class="lat">audīv<b>eritis</b></td></tr>
+              <tr><td class="lbl">3ª pl.</td><td class="lat">laudāv<b>erint</b></td><td class="lat">monu<b>erint</b></td><td class="lat">lex<b>erint</b></td><td class="lat">audīv<b>erint</b></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Congiuntivo Perfetto Passivo</h3>
+        <div class="formula-box">
+          <div class="formula">Participio perfetto + <span class="hl">sim, sīs, sit, sīmus, sītis, sint</span></div>
+          <p style="margin-top:6px;font-size:13px;color:var(--text-dim);">(= participio perfetto + congiuntivo presente di <em>sum</em>)</p>
+        </div>
+
+        <div class="conj-table">
+          <table>
+            <thead><tr><th style="width:60px">Pers.</th><th>I conj. (laudō)</th><th>III conj. (legō)</th></tr></thead>
+            <tbody>
+              <tr><td class="lbl">1ª sg.</td><td class="lat">laudātus, -a, -um <b>sim</b></td><td class="lat">lectus, -a, -um <b>sim</b></td></tr>
+              <tr><td class="lbl">2ª sg.</td><td class="lat">laudātus, -a, -um <b>sīs</b></td><td class="lat">lectus, -a, -um <b>sīs</b></td></tr>
+              <tr><td class="lbl">3ª sg.</td><td class="lat">laudātus, -a, -um <b>sit</b></td><td class="lat">lectus, -a, -um <b>sit</b></td></tr>
+              <tr><td class="lbl">1ª pl.</td><td class="lat">laudātī, -ae, -a <b>sīmus</b></td><td class="lat">lectī, -ae, -a <b>sīmus</b></td></tr>
+              <tr><td class="lbl">2ª pl.</td><td class="lat">laudātī, -ae, -a <b>sītis</b></td><td class="lat">lectī, -ae, -a <b>sītis</b></td></tr>
+              <tr><td class="lbl">3ª pl.</td><td class="lat">laudātī, -ae, -a <b>sint</b></td><td class="lat">lectī, -ae, -a <b>sint</b></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════ SEZIONE 3: PIUCCHEPERFETTO ═══════ -->
+    <div class="lesson-section" id="piuccheperfetto">
+      <div class="lesson-card">
+        <div class="phase-label phase-ido">I Do — Spiego io</div>
+        <h2>Congiuntivo Piuccheperfetto Attivo</h2>
+
+        <div class="formula-box">
+          <div class="formula">Tema del perfetto + <span class="hl">-issĕ-</span> + desinenze personali</div>
+          <p style="margin-top:6px;font-size:13px;color:var(--text-dim);">Desinenze: <strong>-m, -s, -t, -mus, -tis, -nt</strong></p>
+        </div>
+
+        <div class="ls-callout ls-callout-tip">
+          <strong>Trucco mnemonico</strong>
+          <span>Il piuccheperfetto congiuntivo attivo è semplicissimo: prendi l'<b>infinito perfetto</b> (es. <em>laudāvisse</em>) e aggiungi le desinenze! Es: <em>laudāvisse + m = laudāvissem</em>.</span>
+        </div>
+
+        <div class="conj-table">
+          <table>
+            <thead><tr><th style="width:60px">Pers.</th><th>I (laudāv-)</th><th>II (monu-)</th><th>III (lex-)</th><th>IV (audīv-)</th></tr></thead>
+            <tbody>
+              <tr><td class="lbl">1ª sg.</td><td class="lat">laudāv<b>issem</b></td><td class="lat">monu<b>issem</b></td><td class="lat">lex<b>issem</b></td><td class="lat">audīv<b>issem</b></td></tr>
+              <tr><td class="lbl">2ª sg.</td><td class="lat">laudāv<b>issēs</b></td><td class="lat">monu<b>issēs</b></td><td class="lat">lex<b>issēs</b></td><td class="lat">audīv<b>issēs</b></td></tr>
+              <tr><td class="lbl">3ª sg.</td><td class="lat">laudāv<b>isset</b></td><td class="lat">monu<b>isset</b></td><td class="lat">lex<b>isset</b></td><td class="lat">audīv<b>isset</b></td></tr>
+              <tr><td class="lbl">1ª pl.</td><td class="lat">laudāv<b>issēmus</b></td><td class="lat">monu<b>issēmus</b></td><td class="lat">lex<b>issēmus</b></td><td class="lat">audīv<b>issēmus</b></td></tr>
+              <tr><td class="lbl">2ª pl.</td><td class="lat">laudāv<b>issētis</b></td><td class="lat">monu<b>issētis</b></td><td class="lat">lex<b>issētis</b></td><td class="lat">audīv<b>issētis</b></td></tr>
+              <tr><td class="lbl">3ª pl.</td><td class="lat">laudāv<b>issent</b></td><td class="lat">monu<b>issent</b></td><td class="lat">lex<b>issent</b></td><td class="lat">audīv<b>issent</b></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Congiuntivo Piuccheperfetto Passivo</h3>
+        <div class="formula-box">
+          <div class="formula">Participio perfetto + <span class="hl">essem, essēs, esset, essēmus, essētis, essent</span></div>
+          <p style="margin-top:6px;font-size:13px;color:var(--text-dim);">(= participio perfetto + congiuntivo imperfetto di <em>sum</em>)</p>
+        </div>
+
+        <div class="conj-table">
+          <table>
+            <thead><tr><th style="width:60px">Pers.</th><th>I conj. (laudō)</th><th>III conj. (legō)</th></tr></thead>
+            <tbody>
+              <tr><td class="lbl">1ª sg.</td><td class="lat">laudātus, -a, -um <b>essem</b></td><td class="lat">lectus, -a, -um <b>essem</b></td></tr>
+              <tr><td class="lbl">2ª sg.</td><td class="lat">laudātus, -a, -um <b>essēs</b></td><td class="lat">lectus, -a, -um <b>essēs</b></td></tr>
+              <tr><td class="lbl">3ª sg.</td><td class="lat">laudātus, -a, -um <b>esset</b></td><td class="lat">lectus, -a, -um <b>esset</b></td></tr>
+              <tr><td class="lbl">1ª pl.</td><td class="lat">laudātī, -ae, -a <b>essēmus</b></td><td class="lat">lectī, -ae, -a <b>essēmus</b></td></tr>
+              <tr><td class="lbl">2ª pl.</td><td class="lat">laudātī, -ae, -a <b>essētis</b></td><td class="lat">lectī, -ae, -a <b>essētis</b></td></tr>
+              <tr><td class="lbl">3ª pl.</td><td class="lat">laudātī, -ae, -a <b>essent</b></td><td class="lat">lectī, -ae, -a <b>essent</b></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Schema riassuntivo</h3>
+        <div class="conj-table">
+          <table>
+            <thead><tr><th></th><th>Attivo</th><th>Passivo</th></tr></thead>
+            <tbody>
+              <tr><td class="lbl">Cong. Perfetto</td><td>Tema perf. + <b>-eri-</b> + des.</td><td>Part. perf. + cong. pres. di <em>sum</em></td></tr>
+              <tr><td class="lbl">Cong. Piucchep.</td><td>Tema perf. + <b>-isse-</b> + des.</td><td>Part. perf. + cong. imperf. di <em>sum</em></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════ SEZIONE 4: SUM ═══════ -->
+    <div class="lesson-section" id="sum">
+      <div class="lesson-card">
+        <div class="phase-label phase-ido">I Do — Spiego io</div>
+        <h2>Il congiuntivo di <em>sum</em></h2>
+        <p>Il verbo <em>sum</em> è fondamentale: lo usi per formare il passivo perifrastico del perfetto e del piuccheperfetto.</p>
+
+        <div class="conj-table">
+          <table>
+            <thead><tr><th style="width:60px">Pers.</th><th>Pres.</th><th>Imperf.</th><th>Perfetto</th><th>Piucchep.</th></tr></thead>
+            <tbody>
+              <tr><td class="lbl">1ª sg.</td><td class="lat">sim</td><td class="lat">essem</td><td class="lat"><b>fuerim</b></td><td class="lat"><b>fuissem</b></td></tr>
+              <tr><td class="lbl">2ª sg.</td><td class="lat">sīs</td><td class="lat">essēs</td><td class="lat"><b>fueris</b></td><td class="lat"><b>fuissēs</b></td></tr>
+              <tr><td class="lbl">3ª sg.</td><td class="lat">sit</td><td class="lat">esset</td><td class="lat"><b>fuerit</b></td><td class="lat"><b>fuisset</b></td></tr>
+              <tr><td class="lbl">1ª pl.</td><td class="lat">sīmus</td><td class="lat">essēmus</td><td class="lat"><b>fuerimus</b></td><td class="lat"><b>fuissēmus</b></td></tr>
+              <tr><td class="lbl">2ª pl.</td><td class="lat">sītis</td><td class="lat">essētis</td><td class="lat"><b>fueritis</b></td><td class="lat"><b>fuissētis</b></td></tr>
+              <tr><td class="lbl">3ª pl.</td><td class="lat">sint</td><td class="lat">essent</td><td class="lat"><b>fuerint</b></td><td class="lat"><b>fuissent</b></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="ls-callout ls-callout-tip">
+          <strong>Osserva</strong>
+          <span>Anche <em>sum</em> segue lo stesso schema! Il tema del perfetto di <em>sum</em> è <b>fu-</b>. Quindi: <em>fu- + erim = fuerim</em> (perfetto) e <em>fu- + issem = fuissem</em> (piuccheperfetto).</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════ SEZIONE 5: CONIUGAZIONE (WE DO) ═══════ -->
+    <div class="lesson-section" id="esercizi1">
+      <div class="lesson-card">
+        <div class="phase-label phase-wedo">We Do — Facciamo insieme</div>
+        <h2>Esercizi di coniugazione</h2>
+        <p>Coniuga la forma verbale richiesta. Scrivi la risposta e poi verifica!</p>
+
+        <div class="exercise-block">
+          <h4>Esercizio A &mdash; Coniuga al congiuntivo perfetto attivo</h4>
+          <div id="conjExA"></div>
+          <div class="btn-row">
+            <button class="ls-btn ls-btn-primary" onclick="checkConjA()">Verifica</button>
+            <button class="ls-btn ls-btn-outline" onclick="resetConjA()">Ricomincia</button>
+          </div>
+          <div id="scoreA"></div>
+        </div>
+
+        <div class="exercise-block">
+          <h4>Esercizio B &mdash; Coniuga al congiuntivo piuccheperfetto attivo</h4>
+          <div id="conjExB"></div>
+          <div class="btn-row">
+            <button class="ls-btn ls-btn-primary" onclick="checkConjB()">Verifica</button>
+            <button class="ls-btn ls-btn-outline" onclick="resetConjB()">Ricomincia</button>
+          </div>
+          <div id="scoreB"></div>
+        </div>
+
+        <div class="exercise-block">
+          <h4>Esercizio C &mdash; Misto (perfetto e piuccheperfetto)</h4>
+          <div id="conjExC"></div>
+          <div class="btn-row">
+            <button class="ls-btn ls-btn-primary" onclick="checkConjC()">Verifica</button>
+            <button class="ls-btn ls-btn-outline" onclick="resetConjC()">Ricomincia</button>
+          </div>
+          <div id="scoreC"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════ SEZIONE 6: RICONOSCIMENTO (YOU DO) ═══════ -->
+    <div class="lesson-section" id="esercizi2">
+      <div class="lesson-card">
+        <div class="phase-label phase-youdo">You Do — Fai tu</div>
+        <h2>Esercizi di riconoscimento</h2>
+        <p>Analizza la forma verbale: indica persona, numero, tempo e modo.</p>
+
+        <div class="exercise-block">
+          <h4>Esercizio D &mdash; Riconosci la forma verbale</h4>
+          <div id="riconExD"></div>
+          <div class="btn-row">
+            <button class="ls-btn ls-btn-primary" onclick="checkRiconD()">Verifica</button>
+            <button class="ls-btn ls-btn-outline" onclick="resetRiconD()">Ricomincia</button>
+          </div>
+          <div id="scoreD"></div>
+        </div>
+
+        <div class="exercise-block">
+          <h4>Esercizio E &mdash; Perfetto o piuccheperfetto? Attivo o passivo?</h4>
+          <p style="font-size:14px;color:var(--text-dim);margin-bottom:10px;">Per ogni forma, seleziona il tempo e la diatesi corretti.</p>
+          <div id="riconExE"></div>
+          <div class="btn-row">
+            <button class="ls-btn ls-btn-primary" onclick="checkRiconE()">Verifica</button>
+            <button class="ls-btn ls-btn-outline" onclick="resetRiconE()">Ricomincia</button>
+          </div>
+          <div id="scoreE"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════ SEZIONE 7: COMPLETAMENTO (YOU DO) ═══════ -->
+    <div class="lesson-section" id="esercizi3">
+      <div class="lesson-card">
+        <div class="phase-label phase-youdo">You Do — Fai tu</div>
+        <h2>Esercizi di completamento</h2>
+        <p>Completa le frasi inserendo la forma corretta del congiuntivo perfetto o piuccheperfetto.</p>
+
+        <div class="exercise-block">
+          <h4>Esercizio F &mdash; Completa le frasi latine</h4>
+          <div id="completaExF"></div>
+          <div class="btn-row">
+            <button class="ls-btn ls-btn-primary" onclick="checkCompletaF()">Verifica</button>
+            <button class="ls-btn ls-btn-outline" onclick="resetCompletaF()">Ricomincia</button>
+          </div>
+          <div id="scoreF"></div>
+        </div>
+
+        <div class="exercise-block">
+          <h4>Esercizio G &mdash; Traduci e completa</h4>
+          <p style="font-size:14px;color:var(--text-dim);margin-bottom:10px;">Inserisci la forma verbale latina corretta nella frase.</p>
+          <div id="completaExG"></div>
+          <div class="btn-row">
+            <button class="ls-btn ls-btn-primary" onclick="checkCompletaG()">Verifica</button>
+            <button class="ls-btn ls-btn-outline" onclick="resetCompletaG()">Ricomincia</button>
+          </div>
+          <div id="scoreG"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════ SEZIONE 8: FLASHCARDS ═══════ -->
+    <div class="lesson-section" id="flashcards">
+      <div class="lesson-card">
+        <div class="phase-label phase-youdo">You Do — Ripasso</div>
+        <h2>Flashcards di ripasso</h2>
+        <p>Clicca sulla carta per rivelare la risposta. Usa i pulsanti per navigare.</p>
+
+        <div class="fc-container">
+          <div class="fc" id="flashcard" onclick="flipCard()">
+            <div class="fc-face fc-front" id="fcFront"></div>
+            <div class="fc-face fc-back" id="fcBack"></div>
+          </div>
+        </div>
+        <p class="fc-hint">Clicca per girare la carta</p>
+        <div class="btn-row" style="justify-content:center;">
+          <button class="ls-btn ls-btn-outline" onclick="prevCard()">&larr; Precedente</button>
+          <span id="fcCounter" style="padding:10px;font-weight:700;color:var(--text-dim);font-family:'Cardo',serif;"></span>
+          <button class="ls-btn ls-btn-primary" onclick="nextCard()">Successiva &rarr;</button>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /.container -->
+
+  <!-- Footer -->
+  <footer>
+    <p><strong>Prof. Andrea Vaccaro</strong></p>
+    <p>Lingua e Cultura Latina — Liceo Classico e Liceo Scientifico</p>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="latino2.html">Latino 2</a>
+      <a href="raccoglitore-testi.html">Raccoglitore Testi</a>
+      <a href="strumenti/glossario-eulalia.html">Strumenti</a>
+    </div>
+  </footer>
+
+<script>
+// ═══ NAVIGATION ═══
+let currentSection='intro';
+const sections=['intro','perfetto','piuccheperfetto','sum','esercizi1','esercizi2','esercizi3','flashcards'];
+const completedSections=new Set(['intro']);
+
+function showSection(id){
+  document.querySelectorAll('.lesson-section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.lesson-tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  const idx=sections.indexOf(id);
+  document.querySelectorAll('.lesson-tab')[idx].classList.add('active');
+  currentSection=id;completedSections.add(id);updateProgress();
+  window.scrollTo({top:200,behavior:'smooth'});
+}
+function updateProgress(){
+  const pct=Math.round((completedSections.size/sections.length)*100);
+  document.getElementById('progressFill').style.width=pct+'%';
+  document.getElementById('progressText').textContent=pct+'%';
+}
+
+// ═══ DATA ═══
+const conjA=[
+  {verb:'amō, amāre, amāvī',person:'1ª sing.',answer:'amaverim'},
+  {verb:'dēleō, dēlēre, dēlēvī',person:'3ª sing.',answer:'deleverit'},
+  {verb:'scrībō, scrībere, scrīpsī',person:'2ª plur.',answer:'scripseritis'},
+  {verb:'audiō, audīre, audīvī',person:'1ª plur.',answer:'audiverimus'},
+  {verb:'mittō, mittere, mīsī',person:'3ª plur.',answer:'miserint'},
+  {verb:'habeō, habēre, habuī',person:'2ª sing.',answer:'habueris'},
+  {verb:'capiō, capere, cēpī',person:'1ª sing.',answer:'ceperim'},
+  {verb:'dīcō, dīcere, dīxī',person:'3ª sing.',answer:'dixerit'},
+];
+const conjB=[
+  {verb:'amō, amāre, amāvī',person:'1ª sing.',answer:'amavissem'},
+  {verb:'videō, vidēre, vīdī',person:'3ª plur.',answer:'vidissent'},
+  {verb:'legō, legere, lēgī',person:'2ª sing.',answer:'legisses'},
+  {verb:'veniō, venīre, vēnī',person:'1ª plur.',answer:'venissemus'},
+  {verb:'faciō, facere, fēcī',person:'3ª sing.',answer:'fecisset'},
+  {verb:'dūcō, dūcere, dūxī',person:'2ª plur.',answer:'duxissetis'},
+  {verb:'moneō, monēre, monuī',person:'1ª sing.',answer:'monuissem'},
+  {verb:'petō, petere, petīvī',person:'3ª plur.',answer:'petivissent'},
+];
+const conjC=[
+  {verb:'laudō (perf.: laudāvī)',tempo:'cong. perfetto',person:'3ª sing.',answer:'laudaverit'},
+  {verb:'laudō (perf.: laudāvī)',tempo:'cong. piucchep.',person:'3ª sing.',answer:'laudavisset'},
+  {verb:'moneō (perf.: monuī)',tempo:'cong. perfetto',person:'1ª plur.',answer:'monuerimus'},
+  {verb:'legō (perf.: lēgī)',tempo:'cong. piucchep.',person:'2ª sing.',answer:'legisses'},
+  {verb:'audiō (perf.: audīvī)',tempo:'cong. perfetto',person:'3ª plur.',answer:'audiverint'},
+  {verb:'sum (perf.: fuī)',tempo:'cong. perfetto',person:'1ª sing.',answer:'fuerim'},
+  {verb:'sum (perf.: fuī)',tempo:'cong. piucchep.',person:'3ª plur.',answer:'fuissent'},
+  {verb:'capiō (perf.: cēpī)',tempo:'cong. piucchep.',person:'1ª plur.',answer:'cepissemus'},
+];
+const riconD=[
+  {form:'scripserit',answer:'3ª sing., cong. perfetto attivo di scribō'},
+  {form:'audivisses',answer:'2ª sing., cong. piuccheperfetto attivo di audiō'},
+  {form:'monuerint',answer:'3ª plur., cong. perfetto attivo di moneō'},
+  {form:'fecissem',answer:'1ª sing., cong. piuccheperfetto attivo di faciō'},
+  {form:'dixeritis',answer:'2ª plur., cong. perfetto attivo di dīcō'},
+  {form:'fuisset',answer:'3ª sing., cong. piuccheperfetto di sum'},
+  {form:'miserint',answer:'3ª plur., cong. perfetto attivo di mittō'},
+  {form:'laudatus sit',answer:'3ª sing. masc., cong. perfetto passivo di laudō'},
+];
+const riconE=[
+  {form:'amaverim',tempo:'perfetto',diatesi:'attivo'},
+  {form:'amavissem',tempo:'piuccheperfetto',diatesi:'attivo'},
+  {form:'laudatus esset',tempo:'piuccheperfetto',diatesi:'passivo'},
+  {form:'lecti sint',tempo:'perfetto',diatesi:'passivo'},
+  {form:'fuerint',tempo:'perfetto',diatesi:'attivo'},
+  {form:'monuissemus',tempo:'piuccheperfetto',diatesi:'attivo'},
+  {form:'auditi essent',tempo:'piuccheperfetto',diatesi:'passivo'},
+  {form:'dixeris',tempo:'perfetto',diatesi:'attivo'},
+];
+const completaF=[
+  {pre:'Cum Caesar ',post:' (venio, cong. perf.), milites gavisi sunt.',answer:'venerit'},
+  {pre:'Nemo scit quid ',post:' (facio, cong. perf., 3ª plur.).',answer:'fecerint'},
+  {pre:'Si hoc ',post:' (dico, cong. piucchep., 2ª sing.), nemo tibi credidisset.',answer:'dixisses'},
+  {pre:'Quaero num epistulam ',post:' (scribo, cong. perf., 3ª sing.).',answer:'scripserit'},
+  {pre:'Utinam magistrum ',post:' (audio, cong. piucchep., 1ª plur.)!',answer:'audivissemus'},
+  {pre:'Cum hostes ',post:' (fugio, cong. piucchep., 3ª plur.), cives laeti erant.',answer:'fugissent'},
+];
+const completaG=[
+  {ita:'Non so chi <strong>abbia scritto</strong> questa lettera.',pre:'Nescio quis hanc epistulam ',post:'.',answer:'scripserit'},
+  {ita:'Se tu <strong>avessi ascoltato</strong> il maestro, avresti imparato.',pre:'Si magistrum ',post:', didicisses.',answer:'audivisses'},
+  {ita:'Poiché Cesare <strong>era partito</strong>, i soldati tornarono.',pre:'Cum Caesar ',post:', milites redierunt.',answer:'profectus esset'},
+  {ita:'Mi chiedo se <strong>siano venuti</strong> gli amici.',pre:'Quaero num amici ',post:'.',answer:'venerint'},
+  {ita:'Magari <strong>avessimo vinto</strong>!',pre:'Utinam ',post:'!',answer:'vicissemus'},
+];
+const flashcardData=[
+  {q:'Come si forma il congiuntivo perfetto attivo?',a:'Tema del perfetto + -ĕrĭ- + desinenze (-m, -s, -t, -mus, -tis, -nt)'},
+  {q:'Come si forma il congiuntivo piuccheperfetto attivo?',a:'Tema del perfetto + -issĕ- + desinenze\n= infinito perfetto + desinenze'},
+  {q:'Congiuntivo perfetto passivo: come si forma?',a:'Participio perfetto + sim, sīs, sit, sīmus, sītis, sint (= cong. presente di sum)'},
+  {q:'Congiuntivo piuccheperfetto passivo: come si forma?',a:'Participio perfetto + essem, essēs, esset, essēmus, essētis, essent (= cong. imperfetto di sum)'},
+  {q:'Coniuga "laudō" al cong. perfetto, 1ª sing.',a:'laudāverim'},
+  {q:'Coniuga "legō" al cong. piuccheperfetto, 3ª plur.',a:'legissent'},
+  {q:'Qual è il cong. perfetto di "sum", 1ª sing.?',a:'fuerim'},
+  {q:'Qual è il cong. piuccheperfetto di "sum", 3ª plur.?',a:'fuissent'},
+  {q:'Come distingui il cong. perfetto dal futuro anteriore?',a:'La 1ª pers. sing. ha -erim (cong.) vs -ero (fut. ant.). Le altre persone sono identiche: si distinguono dal contesto.'},
+  {q:'Trucco per il piuccheperfetto attivo?',a:'Infinito perfetto (es. laudāvisse) + desinenze = laudāvissem, laudāvissēs, ecc.'},
+  {q:'Coniuga "capiō" al cong. perfetto, 3ª plur.',a:'ceperint'},
+  {q:'Coniuga "dīcō" al cong. piuccheperfetto, 2ª sing.',a:'dixissēs'},
+];
+
+// ═══ UTILITIES ═══
+function normalize(s){
+  return s.toLowerCase().replace(/[āàăâ]/g,'a').replace(/[ēèĕê]/g,'e')
+    .replace(/[īìĭî]/g,'i').replace(/[ōòŏô]/g,'o').replace(/[ūùŭû]/g,'u')
+    .replace(/[ȳỳ]/g,'y').replace(/\s+/g,' ').trim();
+}
+function showScore(id,correct,total){
+  const pct=Math.round(correct/total*100);
+  let cls='score-bad';
+  if(pct>=80)cls='score-good'; else if(pct>=50)cls='score-medium';
+  document.getElementById(id).innerHTML=`
+    <div class="score-box ${cls}">
+      ${pct>=80?'Ottimo!':pct>=50?'Buon lavoro!':'Continua a esercitarti!'}
+      &mdash; ${correct}/${total} (${pct}%)
+    </div>`;
+}
+
+// ═══ CONJUGATION EXERCISES ═══
+function renderConj(data,cId,prefix){
+  const c=document.getElementById(cId);
+  c.innerHTML=data.map((it,i)=>`
+    <div class="ex-item"><p><span class="num">${i+1}</span>
+    <strong>${it.verb}</strong> &rarr; ${it.tempo?'<em>'+it.tempo+'</em>, ':''}${it.person}</p>
+    <input type="text" class="ls-input" id="${prefix}_${i}" placeholder="scrivi qui..."></div>`).join('');
+}
+function checkConj(data,prefix,sId){
+  let c=0;data.forEach((it,i)=>{
+    const inp=document.getElementById(`${prefix}_${i}`);
+    if(normalize(inp.value)===normalize(it.answer)){inp.className='ls-input ls-correct';c++;}
+    else{inp.className='ls-input ls-incorrect';inp.title='Risposta: '+it.answer;}
+  });showScore(sId,c,data.length);
+}
+function resetConj(data,prefix,sId){
+  data.forEach((_,i)=>{const inp=document.getElementById(`${prefix}_${i}`);inp.value='';inp.className='ls-input';inp.title='';});
+  document.getElementById(sId).innerHTML='';
+}
+
+renderConj(conjA,'conjExA','cA'); renderConj(conjB,'conjExB','cB'); renderConj(conjC,'conjExC','cC');
+function checkConjA(){checkConj(conjA,'cA','scoreA');}function resetConjA(){resetConj(conjA,'cA','scoreA');}
+function checkConjB(){checkConj(conjB,'cB','scoreB');}function resetConjB(){resetConj(conjB,'cB','scoreB');}
+function checkConjC(){checkConj(conjC,'cC','scoreC');}function resetConjC(){resetConj(conjC,'cC','scoreC');}
+
+// ═══ RECOGNITION D ═══
+(function(){
+  const c=document.getElementById('riconExD');
+  c.innerHTML=riconD.map((it,i)=>`
+    <div class="ex-item"><p><span class="num">${i+1}</span> <em style="font-size:17px;">${it.form}</em></p>
+    <input type="text" class="ls-input" id="rD_${i}" placeholder="persona, tempo, modo, verbo..." style="width:100%;max-width:400px;"></div>`).join('');
+})();
+function checkRiconD(){
+  let c=0;riconD.forEach((it,i)=>{
+    const inp=document.getElementById(`rD_${i}`);const val=normalize(inp.value);
+    const kw=it.answer.toLowerCase().split(/[,.\s]+/).filter(w=>w.length>2);
+    const m=kw.filter(k=>val.includes(normalize(k)));
+    if(m.length>=Math.ceil(kw.length*0.6)){inp.className='ls-input ls-correct';c++;}
+    else{inp.className='ls-input ls-incorrect';inp.title='Risposta: '+it.answer;}
+  });showScore('scoreD',c,riconD.length);
+}
+function resetRiconD(){
+  riconD.forEach((_,i)=>{const inp=document.getElementById(`rD_${i}`);inp.value='';inp.className='ls-input';inp.title='';});
+  document.getElementById('scoreD').innerHTML='';
+}
+
+// ═══ RECOGNITION E ═══
+(function(){
+  const c=document.getElementById('riconExE');
+  c.innerHTML=riconE.map((it,i)=>`
+    <div class="ex-item"><p><span class="num">${i+1}</span> <em style="font-size:16px;">${it.form}</em></p>
+    <select class="ls-select" id="rE_t_${i}"><option value="">— Tempo —</option><option value="perfetto">Perfetto</option><option value="piuccheperfetto">Piuccheperfetto</option></select>
+    <select class="ls-select" id="rE_d_${i}" style="margin-left:8px;"><option value="">— Diatesi —</option><option value="attivo">Attivo</option><option value="passivo">Passivo</option></select></div>`).join('');
+})();
+function checkRiconE(){
+  let c=0;riconE.forEach((it,i)=>{
+    const t=document.getElementById(`rE_t_${i}`).value,d=document.getElementById(`rE_d_${i}`).value;
+    if(t===it.tempo&&d===it.diatesi){c++;
+      document.getElementById(`rE_t_${i}`).style.borderColor='#2D6A4F';
+      document.getElementById(`rE_d_${i}`).style.borderColor='#2D6A4F';
+    }else{
+      document.getElementById(`rE_t_${i}`).style.borderColor='#e85d5d';
+      document.getElementById(`rE_d_${i}`).style.borderColor='#e85d5d';
+    }
+  });showScore('scoreE',c,riconE.length);
+}
+function resetRiconE(){
+  riconE.forEach((_,i)=>{
+    document.getElementById(`rE_t_${i}`).value='';document.getElementById(`rE_d_${i}`).value='';
+    document.getElementById(`rE_t_${i}`).style.borderColor='';document.getElementById(`rE_d_${i}`).style.borderColor='';
+  });document.getElementById('scoreE').innerHTML='';
+}
+
+// ═══ COMPLETION F ═══
+(function(){
+  const c=document.getElementById('completaExF');
+  c.innerHTML=completaF.map((it,i)=>`
+    <div class="ex-item"><p><span class="num">${i+1}</span>
+    ${it.pre}<input type="text" class="ls-input" id="cF_${i}" placeholder="...">${it.post}</p></div>`).join('');
+})();
+function checkCompletaF(){
+  let c=0;completaF.forEach((it,i)=>{
+    const inp=document.getElementById(`cF_${i}`);
+    if(normalize(inp.value)===normalize(it.answer)){inp.className='ls-input ls-correct';c++;}
+    else{inp.className='ls-input ls-incorrect';inp.title='Risposta: '+it.answer;}
+  });showScore('scoreF',c,completaF.length);
+}
+function resetCompletaF(){
+  completaF.forEach((_,i)=>{const inp=document.getElementById(`cF_${i}`);inp.value='';inp.className='ls-input';inp.title='';});
+  document.getElementById('scoreF').innerHTML='';
+}
+
+// ═══ COMPLETION G ═══
+(function(){
+  const c=document.getElementById('completaExG');
+  c.innerHTML=completaG.map((it,i)=>`
+    <div class="ex-item">
+    <p style="font-size:14px;color:var(--text-dim);margin-bottom:4px;">${it.ita}</p>
+    <p><span class="num">${i+1}</span>
+    ${it.pre}<input type="text" class="ls-input" id="cG_${i}" placeholder="...">${it.post}</p></div>`).join('');
+})();
+function checkCompletaG(){
+  let c=0;completaG.forEach((it,i)=>{
+    const inp=document.getElementById(`cG_${i}`);
+    if(normalize(inp.value)===normalize(it.answer)){inp.className='ls-input ls-correct';c++;}
+    else{inp.className='ls-input ls-incorrect';inp.title='Risposta: '+it.answer;}
+  });showScore('scoreG',c,completaG.length);
+}
+function resetCompletaG(){
+  completaG.forEach((_,i)=>{const inp=document.getElementById(`cG_${i}`);inp.value='';inp.className='ls-input';inp.title='';});
+  document.getElementById('scoreG').innerHTML='';
+}
+
+// ═══ FLASHCARDS ═══
+let fcIndex=0;
+function renderFlashcard(){
+  const fc=flashcardData[fcIndex];
+  document.getElementById('fcFront').textContent=fc.q;
+  document.getElementById('fcBack').textContent=fc.a;
+  document.getElementById('flashcard').classList.remove('flipped');
+  document.getElementById('fcCounter').textContent=`${fcIndex+1} / ${flashcardData.length}`;
+}
+function flipCard(){document.getElementById('flashcard').classList.toggle('flipped');}
+function nextCard(){fcIndex=(fcIndex+1)%flashcardData.length;renderFlashcard();}
+function prevCard(){fcIndex=(fcIndex-1+flashcardData.length)%flashcardData.length;renderFlashcard();}
+renderFlashcard();
+updateProgress();
+</script>
+</body>
+</html>

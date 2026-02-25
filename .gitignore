@@ -1,0 +1,10 @@
+# macOS
+.DS_Store
+
+# File temporanei di Word
+~$*
+
+# Documenti interni (non fanno parte del sito)
+GUIDA_GESTIONE_SITO.html
+PROPOSTA_STRUTTURA.html
+*.docx

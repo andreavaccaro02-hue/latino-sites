@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Raccoglitore Testi — Lingua e Cultura Latina</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .author-card {
+      background: var(--card);
+      border: 2px solid var(--border);
+      border-radius: 12px;
+      margin-bottom: 12px;
+      overflow: hidden;
+      transition: all 0.2s ease;
+    }
+    .author-card:hover {
+      border-color: var(--gold);
+    }
+    .author-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 20px;
+      cursor: pointer;
+      user-select: none;
+      transition: background 0.2s;
+    }
+    .author-header:hover {
+      background: rgba(184, 145, 90, 0.06);
+    }
+    .author-name {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 18px;
+      font-weight: 700;
+    }
+    .author-meta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .author-year {
+      font-size: 13px;
+      color: var(--text-dim);
+      padding: 3px 10px;
+      background: var(--bg);
+      border-radius: 12px;
+    }
+    .author-year.classico-only {
+      background: #f0d4dc;
+      color: #8B1E3F;
+    }
+    .author-toggle {
+      font-size: 20px;
+      color: var(--text-dim);
+      transition: transform 0.3s;
+    }
+    .author-card.open .author-toggle {
+      transform: rotate(180deg);
+    }
+    .author-body {
+      display: none;
+      padding: 0 20px 20px;
+      border-top: 1px solid var(--border);
+    }
+    .author-card.open .author-body {
+      display: block;
+    }
+    .text-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(212, 201, 184, 0.5);
+    }
+    .text-item:last-child {
+      border-bottom: none;
+    }
+    .text-title {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 16px;
+      font-weight: 600;
+    }
+    .text-desc {
+      font-size: 14px;
+      color: var(--text-dim);
+      margin-top: 3px;
+    }
+    .text-actions {
+      display: flex;
+      gap: 8px;
+    }
+    .empty-author {
+      padding: 16px 0;
+      text-align: center;
+      color: var(--text-dim);
+      font-style: italic;
+      font-size: 15px;
+    }
+    .filter-bar {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+    .filter-bar input {
+      flex: 1;
+      min-width: 200px;
+      padding: 10px 16px;
+      border: 2px solid var(--border);
+      border-radius: 10px;
+      font-family: 'Cardo', serif;
+      font-size: 16px;
+      background: var(--card);
+      color: var(--text);
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .filter-bar input:focus {
+      border-color: var(--gold);
+    }
+    .filter-bar input::placeholder {
+      color: var(--text-dim);
+    }
+    .stats {
+      font-size: 14px;
+      color: var(--text-dim);
+      text-align: center;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="container">
+      <a href="index.html" class="site-name">Lingua e Cultura Latina</a>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="#" class="active">Raccoglitore Testi</a>
+        <a href="strumenti/glossario-eulalia.html">Strumenti</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="page-header">
+    <h1>Raccoglitore Testi</h1>
+    <div class="divider"></div>
+    <p class="subtitle">Tutti i testi analizzati, organizzati per autore</p>
+  </div>
+
+  <div class="container">
+    <a href="index.html" class="back-link">← Torna alla Home</a>
+
+    <!-- Filter -->
+    <div class="filter-bar">
+      <input type="text" id="authorFilter" placeholder="Cerca autore..." oninput="filterAuthors()">
+    </div>
+
+    <p class="stats">27 autori nel raccoglitore — clicca su un autore per espandere</p>
+
+    <div id="authorList">
+
+      <!-- Agostino -->
+      <div class="author-card" data-author="agostino">
+        <div class="author-header" onclick="toggleAuthor(this)">
+          <span class="author-name">Agostino</span>
+          <div class="author-meta">
+            <span class="author-year classico-only">Anno 5 (Classico)</span>
+            <span class="author-toggle">▼</span>
+          </div>
+        </div>
+        <div class="author-body">
+          <div class="empty-author">Nessun testo ancora disponibile — da sviluppare</div>
+        </div>
+      </div>
+
+      <!-- Ambrogio -->
+      <div class="author-card" data-author="ambrogio">
+        <div class="author-header" onclick="toggleAuthor(this)">
+          <span class="author-name">Ambrogio</span>
+          <div class="author-meta">
+            <span class="author-year classico-only">Anno 5 (Classico)</span>
+            <span class="author-toggle">▼</span>
+          </div>
+        </div>
+        <div class="author-body">
+          <div class="empty-author">Nessun testo ancora disponibile — da sviluppare</div>
+        </div>
+      </div>
+
+      <!-- Apuleio -->
+      <div class="author-card" data-author="apuleio">
+        <div class="author-header" onclick="toggleAuthor(this)">
+          <span class="author-name">Apuleio</span>
+          <div class="author-meta">
+            <span class="author-year">Anno 5</span>
+            <span class="author-toggle">▼</span>
+          </div>
+        </div>
+        <div class="author-body">
+          <div class="empty-author">Nessun testo ancora disponibile — da sviluppare</div>
+        </div>
+      </div>
+
+      <!-- Catullo -->
+      <div class="author-card" data-author="catullo">
+        <div class="author-header" onclick="toggleAuthor(this)">
+          <span class="author-name">Catullo</span>
+          <div class="author-meta">
+            <span class="author-year">Anno 3</span>
+            <span class="author-toggle">▼</span>
+          </div>
+        </div>
+        <div class="author-body">
+          <div class="empty-author">Nessun testo ancora disponibile — da sviluppare</div>
+        </div>
+      </div>
+
+      <!-- Cesare -->
+      <div class="author-card" data-author="cesare">
+        <div class="author-header" onclick="toggleAuthor(this)">
+          <span class="author-name">Cesare</span>
+          <div class="author-meta">
+            <span class="author-year">Anno 3</span>
+            <span class="author-toggle">▼</span>
+          </div>
+        </div>
+        <div class="author-body">
+          <div class="empty-author">Nessun testo ancora disponibile — da sviluppare</div>
+        </div>
+      </div>
+
+      <!-- Cicerone -->
+      <div class="author-card" data-author="cicerone">
+        <div class="author-header" onclick="toggleAuthor(this)">
+          <span class="author-name">Cicerone</span>
+          <div class="author-meta">
+            <span class="author-year">Anni 3–4</span>
+            <span class="author-toggle">▼</span>
+          </div>
+        </div>
+        <div class="author-body">
+          <div class="empty-author">Nessun testo ancora disponibile — da sviluppare</div>
+        </div>
+      </div>
+
+      <!-- Ennio -->
+      <div class="author-card" data-author="ennio">
+        <div class="author-header" onclick="toggleAuthor(this)">
+          <span class="author-name">Ennio</span>
+          <div class="author-meta">
+            <span class="author-year classico-only">Anno 3 (Classico)</span>
+            <span class="author-toggle">▼</span>
+          </div>
+        </div>
+        <div class="author-body">
+          <div class="empty-author">Nessun testo ancora disponibile — da sviluppare</div>
+        </div>
+      </div>
+
+      <!-- Fedro -->
+      <div class="author-card" data-author="fedro">
+        <div class="author-header" onclick="toggleAuthor(this)">
+          <span class="author-name">Fedro</span>
+          <div class="author-meta">
+            <span class="author-year">Anno 2</span>
+            <span class="author-toggle">▼</span>
+          </div>
+        </div>
+        <div class="author-body">
+          <div class="empty-author">Nessun testo ancora disponibile — da sviluppare</div>
+        </div>
+      </div>
+
+      <!-- Giovenale -->
+      <div class="author-card" data-author="giovenale">
+        <div class="author-header" onclick="toggleAuthor(this)">
+          <span class="author-name">Giovenale</span>
+          <div class="author-meta">
+            <span class="author-year classico-only">Anno 5 (Classico)</span>
+            <span class="author-toggle">▼</span>
+          </div>
+        </div>
+        <div class="author-body">
+          <div class="empty-author">Nessun testo ancora disponibile — da sviluppare</div>
+        </div>
+      </div>
+
+      <!-- Livio -->
+      <div class="author-card" data-author="livio">
+        <div class="author-header" onclick="toggleAuthor(this)">
+          <span class="author-name">Livio</span>
+          <div class="author-meta">
+            <span class="author-year">Anno 4</span>
+            <span class="author-toggle">▼</span>
+          </div>
+        </div>
+        <div class="author-body">
+          <div class="empty-author">Nessun testo ancora disponibile — da sviluppare</div>
+        </div>
+      </div>
+
+      <!-- Lucano — HAS CONTENT -->
+      <div class="author-card" data-author="lucano">
+        <div class="author-header" onclick="toggleAuthor(this)">
+          <span class="author-name">Lucano</span>
+          <div class="author-meta">
+            <span class="author-year" style="background: #d4edda; color: #155724;">Anno 5 — testi pronti</span>
+            <span class="author-toggle">▼</span>
+          </div>
+        </div>
+        <div class="author-body">
+          <div class="text-item">
+            <div>
+              <div class="text-title">Bellum Civile I, 1–32</div>
+              <div class="text-desc">Proemio — Le cause della guerra civile</div>
+            </div>
+            <div class="text-actions">
+              <a href="analisi_latino.html" class="resource-link text">Analisi</a>
+            </div>
+          </div>
+          <div class="text-item">
+            <div>
+              <div class="text-title">Bellum Civile I, 126–157</div>
+              <div class="text-desc">I ritratti di Cesare e Pompeo</div>
+            </div>
+            <div class="text-actions">
+              <a href="analisi_latino.html" class="resource-link text">Analisi</a>
+            </div>
+          </div>
+          <div class="text-item">
+            <div>
+              <div class="text-title">Bellum Civile IX, 980–986</div>
+              <div class="text-desc">Cesare al sepolcro di Pompeo</div>
+            </div>
+            <div class="text-actions">
+              <a href="analisi_latino.html" class="resource-link text">Analisi</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Lucrezio -->
+      <div class="author-card" data-author="lucrezio">
+        <div class="author-header" onclick="toggleAuthor(this)">
+          <span class="author-name">Lucrezio</span>
+          <div class="author-meta">
+            <span class="author-year">Anno 3</span>
+            <span class="author-toggle">▼</span>
+          </div>
+        </div>
+        <div class="author-body">
+          <div class="empty-author">Nessun testo ancora disponibile — da sviluppare</div>
+        </div>
+      </div>
+
+      <!-- Marziale -->
+      <div class="author-card" data-author="marziale">
+        <div class="author-header" onclick="toggleAuthor(this)">
+          <span class="author-name">Marziale</span>
+          <div class="author-meta">
+            <span class="author-year">Anno 5</span>
+            <span class="author-toggle">▼</span>
+          </div>
+        </div>
+        <div class="author-body">
+          <div class="empty-author">Nessun testo ancora disponibile — da sviluppare</div>
+        </div>
+      </div>
+
+      <!-- Orazio -->
+      <div class="author-card" data-author="orazio">
+        <div class="author-header" onclick="toggleAuthor(this)">
+          <span class="author-name">Orazio</span>
+          <div class="author-meta">
+            <span class="author-year">Anno 4</span>
+            <span class="author-toggle">▼</span>
+          </div>
+        </div>
+        <div class="author-body">
+          <div class="empty-author">Nessun testo ancora disponibile — da sviluppare</div>
+        </div>
+      </div>
+
+      <!-- Ovidio -->
+      <div class="author-card" data-author="ovidio">
+        <div class="author-header" onclick="toggleAuthor(this)">
+          <span class="author-name">Ovidio</span>
+          <div class="author-meta">
+            <span class="author-year">Anno 4</span>
+            <span class="author-toggle">▼</span>
+          </div>
+        </div>
+        <div class="author-body">
+          <div class="empty-author">Nessun testo ancora disponibile — da sviluppare</div>
+        </div>
+      </div>
+
+      <!-- Persio -->
+      <div class="author-card" data-author="persio">
+        <div class="author-header" onclick="toggleAuthor(this)">
+          <span class="author-name">Persio</span>
+          <div class="author-meta">
+            <span class="author-year classico-only">Anno 5 (Classico)</span>
+            <span class="author-toggle">▼</span>
+          </div>
+        </div>
+        <div class="author-body">
+          <div class="empty-author">Nessun testo ancora disponibile — da sviluppare</div>
+        </div>
+      </div>
+
+      <!-- Petronio -->
+      <div class="author-card" data-author="petronio">
+        <div class="author-header" onclick="toggleAuthor(this)">
+          <span class="author-name">Petronio</span>
+          <div class="author-meta">
+            <span class="author-year">Anno 5</span>
+            <span class="author-toggle">▼</span>
+          </div>
+        </div>
+        <div class="author-body">
+          <div class="empty-author">Nessun testo ancora disponibile — da sviluppare</div>
+        </div>
+      </div>
+
+      <!-- Plauto -->
+      <div class="author-card" data-author="plauto">
+        <div class="author-header" onclick="toggleAuthor(this)">
+          <span class="author-name">Plauto</span>
+          <div class="author-meta">
+            <span class="author-year">Anno 3</span>
+            <span class="author-toggle">▼</span>
+          </div>
+        </div>
+        <div class="author-body">
+          <div class="empty-author">Nessun testo ancora disponibile — da sviluppare</div>
+        </div>
+      </div>
+
+      <!-- Plinio -->
+      <div class="author-card" data-author="plinio">
+        <div class="author-header" onclick="toggleAuthor(this)">
+          <span class="author-name">Plinio il Vecchio / Plinio il Giovane</span>
+          <div class="author-meta">
+            <span class="author-year classico-only">Anno 5 (Classico)</span>
+            <span class="author-toggle">▼</span>
+          </div>
+        </div>
+        <div class="author-body">
+          <div class="empty-author">Nessun testo ancora disponibile — da sviluppare</div>
+        </div>
+      </div>
+
+      <!-- Properzio -->
+      <div class="author-card" data-author="properzio">
+        <div class="author-header" onclick="toggleAuthor(this)">
+          <span class="author-name">Properzio</span>
+          <div class="author-meta">
+            <span class="author-year classico-only">Anno 4 (Classico)</span>
+            <span class="author-toggle">▼</span>
+          </div>
+        </div>
+        <div class="author-body">
+          <div class="empty-author">Nessun testo ancora disponibile — da sviluppare</div>
+        </div>
+      </div>
+
+      <!-- Quintiliano -->
+      <div class="author-card" data-author="quintiliano">
+        <div class="author-header" onclick="toggleAuthor(this)">
+          <span class="author-name">Quintiliano</span>
+          <div class="author-meta">
+            <span class="author-year">Anno 5</span>
+            <span class="author-toggle">▼</span>
+          </div>
+        </div>
+        <div class="author-body">
+          <div class="empty-author">Nessun testo ancora disponibile — da sviluppare</div>
+        </div>
+      </div>
+
+      <!-- Sallustio -->
+      <div class="author-card" data-author="sallustio">
+        <div class="author-header" onclick="toggleAuthor(this)">
+          <span class="author-name">Sallustio</span>
+          <div class="author-meta">
+            <span class="author-year">Anno 3</span>
+            <span class="author-toggle">▼</span>
+          </div>
+        </div>
+        <div class="author-body">
+          <div class="empty-author">Nessun testo ancora disponibile — da sviluppare</div>
+        </div>
+      </div>
+
+      <!-- Seneca -->
+      <div class="author-card" data-author="seneca">
+        <div class="author-header" onclick="toggleAuthor(this)">
+          <span class="author-name">Seneca</span>
+          <div class="author-meta">
+            <span class="author-year">Anno 5</span>
+            <span class="author-toggle">▼</span>
+          </div>
+        </div>
+        <div class="author-body">
+          <div class="empty-author">Nessun testo ancora disponibile — da sviluppare</div>
+        </div>
+      </div>
+
+      <!-- Svetonio -->
+      <div class="author-card" data-author="svetonio">
+        <div class="author-header" onclick="toggleAuthor(this)">
+          <span class="author-name">Svetonio</span>
+          <div class="author-meta">
+            <span class="author-year classico-only">Anno 5 (Classico)</span>
+            <span class="author-toggle">▼</span>
+          </div>
+        </div>
+        <div class="author-body">
+          <div class="empty-author">Nessun testo ancora disponibile — da sviluppare</div>
+        </div>
+      </div>
+
+      <!-- Tacito -->
+      <div class="author-card" data-author="tacito">
+        <div class="author-header" onclick="toggleAuthor(this)">
+          <span class="author-name">Tacito</span>
+          <div class="author-meta">
+            <span class="author-year">Anno 5</span>
+            <span class="author-toggle">▼</span>
+          </div>
+        </div>
+        <div class="author-body">
+          <div class="empty-author">Nessun testo ancora disponibile — da sviluppare</div>
+        </div>
+      </div>
+
+      <!-- Terenzio — HAS CONTENT -->
+      <div class="author-card" data-author="terenzio">
+        <div class="author-header" onclick="toggleAuthor(this)">
+          <span class="author-name">Terenzio</span>
+          <div class="author-meta">
+            <span class="author-year" style="background: #d4edda; color: #155724;">Anno 3 &mdash; lezione pronta</span>
+            <span class="author-toggle">&#9660;</span>
+          </div>
+        </div>
+        <div class="author-body">
+          <div class="text-item">
+            <div>
+              <div class="text-title">Le innovazioni drammaturgiche</div>
+              <div class="text-desc">Prologo polemico, contaminatio, illusione scenica, commedia stataria &mdash; lezione TLAC</div>
+            </div>
+            <div class="text-actions">
+              <a href="lezione_terenzio.html" class="resource-link text">Lezione interattiva</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tibullo -->
+      <div class="author-card" data-author="tibullo">
+        <div class="author-header" onclick="toggleAuthor(this)">
+          <span class="author-name">Tibullo</span>
+          <div class="author-meta">
+            <span class="author-year classico-only">Anno 4 (Classico)</span>
+            <span class="author-toggle">▼</span>
+          </div>
+        </div>
+        <div class="author-body">
+          <div class="empty-author">Nessun testo ancora disponibile — da sviluppare</div>
+        </div>
+      </div>
+
+      <!-- Virgilio — HAS CONTENT -->
+      <div class="author-card" data-author="virgilio">
+        <div class="author-header" onclick="toggleAuthor(this)">
+          <span class="author-name">Virgilio</span>
+          <div class="author-meta">
+            <span class="author-year" style="background: #d4edda; color: #155724;">Anno 4 — testi pronti</span>
+            <span class="author-toggle">▼</span>
+          </div>
+        </div>
+        <div class="author-body">
+          <div class="text-item">
+            <div>
+              <div class="text-title">Ecloga I</div>
+              <div class="text-desc">Dialogo tra Titiro e Melibeo — la pace augustea e l'esilio</div>
+            </div>
+            <div class="text-actions">
+              <a href="analisi_latino.html" class="resource-link text">Analisi</a>
+              <a href="lezione_virgilio.html" class="resource-link tool">Lezione</a>
+            </div>
+          </div>
+          <div class="text-item">
+            <div>
+              <div class="text-title">Ecloga IV, vv. 1–5 — L'aurea aetas</div>
+              <div class="text-desc">Proemio — le Muse siciliane e la profezia della Sibilla cumana</div>
+            </div>
+            <div class="text-actions">
+              <a href="lezione_bucoliche.html" class="resource-link text">Lezione interattiva</a>
+            </div>
+          </div>
+          <div class="text-item">
+            <div>
+              <div class="text-title">Ecloga X, vv. 69–77 — Omnia vincit Amor</div>
+              <div class="text-desc">Congedo dal mondo bucolico — Cornelio Gallo e la resa ad Amore</div>
+            </div>
+            <div class="text-actions">
+              <a href="lezione_bucoliche.html" class="resource-link text">Lezione interattiva</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Vulgata -->
+      <div class="author-card" data-author="vulgata">
+        <div class="author-header" onclick="toggleAuthor(this)">
+          <span class="author-name">Vulgata</span>
+          <div class="author-meta">
+            <span class="author-year">Anno 2</span>
+            <span class="author-toggle">▼</span>
+          </div>
+        </div>
+        <div class="author-body">
+          <div class="empty-author">Nessun testo ancora disponibile — da sviluppare</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <footer>
+    <p><strong>Prof. Andrea Vaccaro</strong></p>
+    <p>Lingua e Cultura Latina — Liceo Classico e Liceo Scientifico</p>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="raccoglitore-testi.html">Raccoglitore Testi</a>
+      <a href="strumenti/glossario-eulalia.html">Strumenti</a>
+    </div>
+  </footer>
+
+  <script>
+    function toggleAuthor(header) {
+      const card = header.closest('.author-card');
+      card.classList.toggle('open');
+    }
+
+    function filterAuthors() {
+      const query = document.getElementById('authorFilter').value.toLowerCase();
+      const cards = document.querySelectorAll('.author-card');
+      cards.forEach(card => {
+        const name = card.getAttribute('data-author');
+        card.style.display = name.includes(query) ? '' : 'none';
+      });
+    }
+  </script>
+</body>
+</html>

@@ -13,8 +13,6 @@
     --text-main: #2c2416;
     --text-dim: #6b6456;
     --border-color: #d4c9b8;
-    
-    /* Colori per funzioni grammaticali */
     --soggetto: #e85d5d;
     --verbo: #f4d35e;
     --complemento-oggetto: #78c878;
@@ -22,11 +20,7 @@
     --vocativo: #ff8c42;
   }
 
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
 
   body {
     background: var(--bg-main);
@@ -36,16 +30,9 @@
     min-height: 100vh;
   }
 
-  .container {
-    max-width: 1200px;
-    margin: 0 auto;
-  }
+  .container { max-width: 1200px; margin: 0 auto; }
 
-  /* ═══ HEADER ═══ */
-  header {
-    text-align: center;
-    margin-bottom: 40px;
-  }
+  header { text-align: center; margin-bottom: 40px; }
 
   h1 {
     font-family: 'Libre Baskerville', serif;
@@ -55,13 +42,8 @@
     margin-bottom: 10px;
   }
 
-  .subtitle {
-    font-size: 18px;
-    color: var(--text-dim);
-    font-style: italic;
-  }
+  .subtitle { font-size: 18px; color: var(--text-dim); font-style: italic; }
 
-  /* ═══ TOOLBAR ═══ */
   .toolbar {
     background: var(--bg-card);
     border: 2px solid var(--border-color);
@@ -76,12 +58,7 @@
     box-shadow: 0 2px 8px rgba(0,0,0,0.06);
   }
 
-  .legend {
-    display: flex;
-    gap: 16px;
-    flex-wrap: wrap;
-    flex: 1;
-  }
+  .legend { display: flex; gap: 16px; flex-wrap: wrap; flex: 1; }
 
   .legend-item {
     display: flex;
@@ -94,84 +71,52 @@
     cursor: help;
   }
 
-  .legend-item:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  }
+  .legend-item:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
 
   .legend-color {
-    width: 24px;
-    height: 24px;
+    width: 24px; height: 24px;
     border-radius: 6px;
     border: 2px solid rgba(0,0,0,0.2);
   }
 
-  .legend-item span {
-    font-size: 15px;
-    font-weight: 600;
-  }
+  .legend-item span { font-size: 15px; font-weight: 600; }
 
   .legend-item.soggetto { background: rgba(232, 93, 93, 0.15); }
   .legend-item.soggetto .legend-color { background: var(--soggetto); }
-  
   .legend-item.verbo { background: rgba(244, 211, 94, 0.15); }
   .legend-item.verbo .legend-color { background: var(--verbo); }
-  
   .legend-item.oggetto { background: rgba(120, 200, 120, 0.15); }
   .legend-item.oggetto .legend-color { background: var(--complemento-oggetto); }
-  
   .legend-item.indiretto { background: rgba(109, 181, 212, 0.15); }
   .legend-item.indiretto .legend-color { background: var(--complemento-indiretto); }
-
   .legend-item.vocativo { background: rgba(255, 140, 66, 0.15); }
   .legend-item.vocativo .legend-color { background: var(--vocativo); }
-
   .legend-item.subordinante { background: rgba(200, 50, 50, 0.1); }
   .legend-box {
-    width: 24px;
-    height: 24px;
+    width: 24px; height: 24px;
     border: 3px solid #c83232;
     border-radius: 4px;
     background: transparent;
   }
-
   .legend-item.invariabile { background: rgba(0, 0, 0, 0.05); }
   .legend-underline {
-    width: 24px;
-    height: 24px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    width: 24px; height: 24px;
+    display: flex; align-items: center; justify-content: center;
     position: relative;
   }
   .legend-underline::after {
-    content: '';
-    position: absolute;
-    bottom: 6px;
-    width: 20px;
-    height: 2px;
-    background: #000;
+    content: ''; position: absolute; bottom: 6px;
+    width: 20px; height: 2px; background: #000;
   }
 
-  .toolbar-actions {
-    display: flex;
-    gap: 10px;
-  }
+  .toolbar-actions { display: flex; gap: 10px; }
 
   .text-selector {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    justify-content: center;
+    display: flex; align-items: center;
+    width: 100%; justify-content: center;
   }
-
-  .text-selector select {
-    transition: all 0.2s ease;
-  }
-
-  .text-selector select:hover {
-    border-color: var(--text-main);
-  }
+  .text-selector select { transition: all 0.2s ease; }
+  .text-selector select:hover { border-color: var(--text-main); }
 
   .text-header {
     background: var(--bg-card);
@@ -182,466 +127,192 @@
     text-align: center;
     box-shadow: 0 2px 8px rgba(0,0,0,0.06);
   }
-
   .text-header h2 {
     font-family: 'Libre Baskerville', serif;
-    font-size: 22px;
-    color: var(--text-main);
-    font-weight: 600;
+    font-size: 22px; color: var(--text-main); font-weight: 600;
   }
 
   .btn {
-    padding: 10px 18px;
-    border-radius: 8px;
+    padding: 10px 18px; border-radius: 8px;
     border: 2px solid var(--border-color);
-    background: var(--bg-card);
-    color: var(--text-main);
+    background: var(--bg-card); color: var(--text-main);
     font-family: 'Libre Baskerville', serif;
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s ease;
+    font-size: 14px; font-weight: 600;
+    cursor: pointer; transition: all 0.2s ease;
   }
-
   .btn:hover {
-    background: var(--text-main);
-    color: var(--bg-card);
-    border-color: var(--text-main);
-    transform: translateY(-2px);
+    background: var(--text-main); color: var(--bg-card);
+    border-color: var(--text-main); transform: translateY(-2px);
   }
-
-  .btn-reset {
-    border-color: #e85d5d;
-    color: #e85d5d;
-  }
-
-  .btn-reset:hover {
-    background: #e85d5d;
-    color: white;
-  }
-
-  .btn-export {
-    border-color: #78c878;
-    color: #78c878;
-  }
-
-  .btn-export:hover {
-    background: #78c878;
-    color: white;
-  }
-
-  .btn-pdf {
-    border-color: #d4515e;
-    color: #d4515e;
-  }
-
-  .btn-pdf:hover {
-    background: #d4515e;
-    color: white;
-  }
-
+  .btn-reset { border-color: #e85d5d; color: #e85d5d; }
+  .btn-reset:hover { background: #e85d5d; color: white; }
+  .btn-export { border-color: #78c878; color: #78c878; }
+  .btn-export:hover { background: #78c878; color: white; }
+  .btn-pdf { border-color: #d4515e; color: #d4515e; }
+  .btn-pdf:hover { background: #d4515e; color: white; }
   .btn-home {
-    border-color: var(--text-main);
-    color: var(--text-main);
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
+    border-color: var(--text-main); color: var(--text-main);
+    display: inline-flex; align-items: center; gap: 6px;
   }
+  .btn-home:hover { background: var(--text-main); color: var(--bg-card); }
 
-  .btn-home:hover {
-    background: var(--text-main);
-    color: var(--bg-card);
-  }
-
-  /* ═══ TEXT EDITOR ═══ */
   .text-editor {
     background: var(--bg-card);
     border: 2px solid var(--border-color);
     border-radius: 12px;
-    padding: 40px;
-    margin-bottom: 30px;
+    padding: 40px; margin-bottom: 30px;
     box-shadow: 0 4px 16px rgba(0,0,0,0.08);
     min-height: 400px;
   }
 
   .text-layout {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 30px;
-    align-items: start;
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 30px; align-items: start;
   }
+  .text-layout.single-column { grid-template-columns: 1fr; }
 
-  .text-layout.single-column {
-    grid-template-columns: 1fr;
-  }
-
-  .latin-column {
-    border-right: 2px solid var(--border-color);
-    padding-right: 30px;
-  }
-
-  .text-layout.single-column .latin-column {
-    border-right: none;
-    padding-right: 0;
-  }
-
-  .translation-column {
-    padding-left: 30px;
-  }
+  .latin-column { border-right: 2px solid var(--border-color); padding-right: 30px; }
+  .text-layout.single-column .latin-column { border-right: none; padding-right: 0; }
+  .translation-column { padding-left: 30px; }
 
   .translation-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 16px;
-    padding-bottom: 12px;
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 16px; padding-bottom: 12px;
     border-bottom: 2px solid var(--border-color);
   }
-
-  .translation-header h3 {
-    font-family: 'Libre Baskerville', serif;
-    font-size: 18px;
-    color: var(--text-main);
-  }
+  .translation-header h3 { font-family: 'Libre Baskerville', serif; font-size: 18px; color: var(--text-main); }
 
   .toggle-translation {
-    padding: 6px 12px;
-    border-radius: 6px;
+    padding: 6px 12px; border-radius: 6px;
     border: 1px solid var(--border-color);
-    background: var(--bg-main);
-    color: var(--text-dim);
-    font-size: 13px;
-    cursor: pointer;
-    transition: all 0.2s ease;
+    background: var(--bg-main); color: var(--text-dim);
+    font-size: 13px; cursor: pointer; transition: all 0.2s ease;
   }
-
-  .toggle-translation:hover {
-    background: var(--text-main);
-    color: var(--bg-card);
-    border-color: var(--text-main);
-  }
+  .toggle-translation:hover { background: var(--text-main); color: var(--bg-card); border-color: var(--text-main); }
 
   .translation-textarea {
-    width: 100%;
-    min-height: 400px;
-    padding: 16px;
-    border: 2px solid var(--border-color);
-    border-radius: 8px;
-    font-family: 'Cardo', serif;
-    font-size: 16px;
-    line-height: 1.8;
-    color: var(--text-main);
-    background: var(--bg-main);
-    resize: vertical;
+    width: 100%; min-height: 400px; padding: 16px;
+    border: 2px solid var(--border-color); border-radius: 8px;
+    font-family: 'Cardo', serif; font-size: 16px; line-height: 1.8;
+    color: var(--text-main); background: var(--bg-main); resize: vertical;
   }
-
-  .translation-textarea:focus {
-    outline: none;
-    border-color: var(--text-main);
-    box-shadow: 0 0 0 3px rgba(44, 36, 22, 0.1);
-  }
+  .translation-textarea:focus { outline: none; border-color: var(--text-main); box-shadow: 0 0 0 3px rgba(44, 36, 22, 0.1); }
 
   .editable-text {
-    font-family: 'Cardo', serif;
-    font-size: 20px;
-    line-height: 2;
-    color: var(--text-main);
-    white-space: pre-wrap;
+    font-family: 'Cardo', serif; font-size: 20px;
+    line-height: 2; color: var(--text-main); white-space: pre-wrap;
   }
 
   .word {
-    cursor: pointer;
-    padding: 2px 4px;
-    border-radius: 4px;
-    transition: all 0.2s ease;
-    position: relative;
-    display: inline-block;
+    cursor: pointer; padding: 2px 4px; border-radius: 4px;
+    transition: all 0.2s ease; position: relative; display: inline-block;
   }
+  .word:hover { transform: translateY(-1px); box-shadow: 0 2px 8px rgba(0,0,0,0.15); }
+  .word.soggetto { background: var(--soggetto); color: white; }
+  .word.verbo { background: var(--verbo); color: var(--text-main); }
+  .word.complemento-oggetto { background: var(--complemento-oggetto); color: white; }
+  .word.complemento-indiretto { background: var(--complemento-indiretto); color: white; }
+  .word.vocativo { background: var(--vocativo); color: white; }
+  .word.congiunzione-subordinante { border: 3px solid #c83232; background: transparent; color: var(--text-main); font-weight: 600; }
+  .word.parte-invariabile { border-bottom: 2px solid #000; background: transparent; color: var(--text-main); }
 
-  .word:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-  }
-
-  .word.soggetto {
-    background: var(--soggetto);
-    color: white;
-  }
-
-  .word.verbo {
-    background: var(--verbo);
-    color: var(--text-main);
-  }
-
-  .word.complemento-oggetto {
-    background: var(--complemento-oggetto);
-    color: white;
-  }
-
-  .word.complemento-indiretto {
-    background: var(--complemento-indiretto);
-    color: white;
-  }
-
-  .word.vocativo {
-    background: var(--vocativo);
-    color: white;
-  }
-
-  .word.congiunzione-subordinante {
-    border: 3px solid #c83232;
-    background: transparent;
-    color: var(--text-main);
-    font-weight: 600;
-  }
-
-  .word.parte-invariabile {
-    border-bottom: 2px solid #000;
-    background: transparent;
-    color: var(--text-main);
-  }
-
-  /* ═══ CONCORDANCE BADGES ═══ */
-  .word.has-concordance {
-    position: relative;
-  }
-
+  .word.has-concordance { position: relative; }
   .concordance-badge {
-    position: absolute;
-    top: -10px;
-    right: -10px;
-    width: 20px;
-    height: 20px;
-    background: var(--text-main);
-    color: white;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 11px;
-    font-weight: 700;
-    border: 2px solid white;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
-    z-index: 10;
+    position: absolute; top: -10px; right: -10px;
+    width: 20px; height: 20px;
+    background: var(--text-main); color: white; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 700;
+    border: 2px solid white; box-shadow: 0 2px 4px rgba(0,0,0,0.3); z-index: 10;
   }
-
   .word.has-note::after {
-    content: '📝';
-    position: absolute;
-    top: -8px;
-    right: -8px;
-    font-size: 12px;
+    content: '\1F4DD'; position: absolute; top: -8px; right: -8px; font-size: 12px;
   }
 
-  /* ═══ CONTEXT MENU ═══ */
+  /* Context Menu */
   .context-menu {
-    position: fixed;
-    background: white;
-    border: 2px solid var(--text-main);
-    border-radius: 12px;
-    padding: 8px;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.2);
-    z-index: 1000;
-    min-width: 220px;
-    display: none;
+    position: fixed; background: white;
+    border: 2px solid var(--text-main); border-radius: 12px;
+    padding: 8px; box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+    z-index: 1000; min-width: 220px; display: none;
+    max-height: 80vh; overflow-y: auto;
   }
-
-  .context-menu.visible {
-    display: block;
-  }
+  .context-menu.visible { display: block; }
 
   .menu-item {
-    padding: 12px 16px;
-    border-radius: 8px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    transition: all 0.2s ease;
-    font-size: 15px;
-    font-weight: 600;
+    padding: 12px 16px; border-radius: 8px; cursor: pointer;
+    display: flex; align-items: center; gap: 12px;
+    transition: all 0.2s ease; font-size: 15px; font-weight: 600;
   }
+  .menu-item:hover { transform: translateX(4px); }
 
-  .menu-item:hover {
-    transform: translateX(4px);
-  }
-
-  .menu-color {
-    width: 20px;
-    height: 20px;
-    border-radius: 4px;
-    border: 2px solid rgba(0,0,0,0.2);
-  }
+  .menu-color { width: 20px; height: 20px; border-radius: 4px; border: 2px solid rgba(0,0,0,0.2); }
 
   .menu-item.soggetto:hover { background: rgba(232, 93, 93, 0.1); }
   .menu-item.verbo:hover { background: rgba(244, 211, 94, 0.1); }
   .menu-item.oggetto:hover { background: rgba(120, 200, 120, 0.1); }
   .menu-item.indiretto:hover { background: rgba(109, 181, 212, 0.1); }
+  .menu-item.vocativo:hover { background: rgba(255, 140, 66, 0.1); }
   .menu-item.subordinante:hover { background: rgba(200, 50, 50, 0.1); }
   .menu-item.invariabile:hover { background: rgba(0, 0, 0, 0.05); }
   .menu-item.note:hover { background: rgba(107, 100, 86, 0.1); }
   .menu-item.clear:hover { background: rgba(232, 93, 93, 0.1); color: #e85d5d; }
 
-  .menu-divider {
-    height: 1px;
-    background: var(--border-color);
-    margin: 8px 0;
-  }
+  .menu-divider { height: 1px; background: var(--border-color); margin: 8px 0; }
 
-  /* ═══ NOTE MODAL ═══ */
+  /* Note Modal */
   .note-modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.5);
-    display: none;
-    align-items: center;
-    justify-content: center;
-    z-index: 2000;
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.5); display: none;
+    align-items: center; justify-content: center; z-index: 2000;
   }
-
-  .note-modal.visible {
-    display: flex;
-  }
-
+  .note-modal.visible { display: flex; }
   .note-content {
-    background: white;
-    border-radius: 16px;
-    padding: 30px;
-    max-width: 500px;
-    width: 90%;
-    box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+    background: white; border-radius: 16px; padding: 30px;
+    max-width: 500px; width: 90%; box-shadow: 0 12px 40px rgba(0,0,0,0.3);
   }
-
-  .note-content h3 {
-    font-family: 'Libre Baskerville', serif;
-    font-size: 22px;
-    margin-bottom: 16px;
-    color: var(--text-main);
-  }
-
+  .note-content h3 { font-family: 'Libre Baskerville', serif; font-size: 22px; margin-bottom: 16px; color: var(--text-main); }
   .note-content textarea {
-    width: 100%;
-    min-height: 120px;
-    padding: 12px;
-    border: 2px solid var(--border-color);
-    border-radius: 8px;
-    font-family: 'Cardo', serif;
-    font-size: 16px;
-    resize: vertical;
-    margin-bottom: 16px;
+    width: 100%; min-height: 120px; padding: 12px;
+    border: 2px solid var(--border-color); border-radius: 8px;
+    font-family: 'Cardo', serif; font-size: 16px; resize: vertical; margin-bottom: 16px;
   }
+  .note-content textarea:focus { outline: none; border-color: var(--text-main); }
+  .note-actions { display: flex; gap: 10px; justify-content: flex-end; }
 
-  .note-content textarea:focus {
-    outline: none;
-    border-color: var(--text-main);
-  }
-
-  .note-actions {
-    display: flex;
-    gap: 10px;
-    justify-content: flex-end;
-  }
-
-  /* ═══ INSTRUCTIONS ═══ */
   .instructions {
     background: linear-gradient(135deg, rgba(120, 200, 120, 0.1), rgba(109, 181, 212, 0.1));
-    border: 2px dashed var(--border-color);
-    border-radius: 12px;
-    padding: 20px;
-    margin-bottom: 20px;
-    text-align: center;
+    border: 2px dashed var(--border-color); border-radius: 12px;
+    padding: 20px; margin-bottom: 20px; text-align: center;
   }
+  .instructions p { font-size: 16px; color: var(--text-dim); margin-bottom: 8px; }
+  .instructions strong { color: var(--text-main); font-weight: 700; }
 
-  .instructions p {
-    font-size: 16px;
-    color: var(--text-dim);
-    margin-bottom: 8px;
-  }
-
-  .instructions strong {
-    color: var(--text-main);
-    font-weight: 700;
-  }
-
-  /* ═══ TEXT SELECTOR ═══ */
   .text-selector {
-    background: var(--bg-card);
-    border: 2px solid var(--border-color);
-    border-radius: 12px;
-    padding: 20px;
-    margin-bottom: 20px;
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    flex-wrap: wrap;
+    background: var(--bg-card); border: 2px solid var(--border-color);
+    border-radius: 12px; padding: 20px; margin-bottom: 20px;
+    display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
     box-shadow: 0 2px 8px rgba(0,0,0,0.06);
   }
-
-  .text-selector label {
-    font-family: 'Libre Baskerville', serif;
-    font-size: 16px;
-    font-weight: 600;
-    color: var(--text-main);
-  }
-
+  .text-selector label { font-family: 'Libre Baskerville', serif; font-size: 16px; font-weight: 600; color: var(--text-main); }
   .text-selector select {
-    flex: 1;
-    min-width: 300px;
-    padding: 12px 16px;
-    border: 2px solid var(--border-color);
-    border-radius: 8px;
-    font-family: 'Cardo', serif;
-    font-size: 15px;
-    background: white;
-    color: var(--text-main);
-    cursor: pointer;
-    transition: all 0.2s ease;
+    flex: 1; min-width: 300px; padding: 12px 16px;
+    border: 2px solid var(--border-color); border-radius: 8px;
+    font-family: 'Cardo', serif; font-size: 15px;
+    background: white; color: var(--text-main); cursor: pointer; transition: all 0.2s ease;
   }
+  .text-selector select:hover { border-color: var(--text-main); }
+  .text-selector select:focus { outline: none; border-color: var(--text-main); box-shadow: 0 0 0 3px rgba(44, 36, 22, 0.1); }
+  .text-selector optgroup { font-weight: 700; font-style: italic; }
+  .text-selector option { padding: 8px; }
 
-  .text-selector select:hover {
-    border-color: var(--text-main);
-  }
-
-  .text-selector select:focus {
-    outline: none;
-    border-color: var(--text-main);
-    box-shadow: 0 0 0 3px rgba(44, 36, 22, 0.1);
-  }
-
-  .text-selector optgroup {
-    font-weight: 700;
-    font-style: italic;
-  }
-
-  .text-selector option {
-    padding: 8px;
-  }
-
-  /* ═══ RESPONSIVE ═══ */
   @media (max-width: 768px) {
-    .toolbar {
-      flex-direction: column;
-    }
-    .text-editor {
-      padding: 20px;
-    }
-    .editable-text {
-      font-size: 18px;
-    }
-    .text-layout {
-      grid-template-columns: 1fr;
-    }
-    .latin-column {
-      border-right: none;
-      padding-right: 0;
-      margin-bottom: 30px;
-    }
-    .translation-column {
-      padding-left: 0;
-    }
+    .toolbar { flex-direction: column; }
+    .text-editor { padding: 20px; }
+    .editable-text { font-size: 18px; }
+    .text-layout { grid-template-columns: 1fr; }
+    .latin-column { border-right: none; padding-right: 0; margin-bottom: 30px; }
+    .translation-column { padding-left: 0; }
   }
 </style>
 </head>
@@ -654,13 +325,13 @@
   </header>
 
   <div class="instructions">
-    <p><strong>👆 Clicca su qualsiasi parola</strong> per assegnare una funzione grammaticale</p>
+    <p><strong>&#x1F446; Clicca su qualsiasi parola</strong> per assegnare una funzione grammaticale</p>
     <p>Tasto destro su una parola evidenziata per aggiungere note o rimuovere il colore</p>
   </div>
 
   <div class="toolbar">
     <div style="width: 100%; margin-bottom: 16px;">
-      <label for="textSelect" style="font-weight: 600; margin-right: 8px; font-size: 15px;">📖 Scegli il brano da analizzare:</label>
+      <label for="textSelect" style="font-weight: 600; margin-right: 8px; font-size: 15px;">&#x1F4D6; Scegli il brano da analizzare:</label>
       <select id="textSelect" onchange="changeText()" style="padding: 8px 12px; border: 2px solid var(--border-color); border-radius: 8px; font-family: 'Cardo', serif; font-size: 14px; background: var(--bg-card); cursor: pointer;">
         <option value="text1">Bellum Civile I, 1-32 (Proemio della Pharsalia)</option>
         <option value="text2">Bellum Civile I, 126-157 (La quercus e il fulmen)</option>
@@ -669,40 +340,19 @@
       </select>
     </div>
     <div class="legend">
-      <div class="legend-item soggetto">
-        <div class="legend-color"></div>
-        <span>Soggetto</span>
-      </div>
-      <div class="legend-item verbo">
-        <div class="legend-color"></div>
-        <span>Verbo</span>
-      </div>
-      <div class="legend-item oggetto">
-        <div class="legend-color"></div>
-        <span>Complemento Oggetto</span>
-      </div>
-      <div class="legend-item indiretto">
-        <div class="legend-color"></div>
-        <span>Complemento Indiretto</span>
-      </div>
-      <div class="legend-item vocativo">
-        <div class="legend-color"></div>
-        <span>Vocativo</span>
-      </div>
-      <div class="legend-item subordinante">
-        <div class="legend-box"></div>
-        <span>Congiunzione Subordinante</span>
-      </div>
-      <div class="legend-item invariabile">
-        <div class="legend-underline"></div>
-        <span>Parti Invariabili</span>
-      </div>
+      <div class="legend-item soggetto"><div class="legend-color"></div><span>Soggetto</span></div>
+      <div class="legend-item verbo"><div class="legend-color"></div><span>Verbo</span></div>
+      <div class="legend-item oggetto"><div class="legend-color"></div><span>Complemento Oggetto</span></div>
+      <div class="legend-item indiretto"><div class="legend-color"></div><span>Complemento Indiretto</span></div>
+      <div class="legend-item vocativo"><div class="legend-color"></div><span>Vocativo</span></div>
+      <div class="legend-item subordinante"><div class="legend-box"></div><span>Congiunzione Subordinante</span></div>
+      <div class="legend-item invariabile"><div class="legend-underline"></div><span>Parti Invariabili</span></div>
     </div>
     <div class="toolbar-actions">
-      <button class="btn btn-home" onclick="window.location.href='index.html'">🏠 Home</button>
+      <button class="btn btn-home" onclick="window.location.href='index.html'">&#x1F3E0; Home</button>
       <button class="btn btn-reset" onclick="resetAnalysis()">Reset</button>
       <button class="btn btn-export" onclick="exportAnalysis()">Esporta HTML</button>
-      <button class="btn btn-pdf" onclick="exportPDF()">📄 Esporta PDF</button>
+      <button class="btn btn-pdf" onclick="exportPDF()">&#x1F4C4; Esporta PDF</button>
     </div>
   </div>
 
@@ -717,7 +367,7 @@
       </div>
       <div class="translation-column" id="translationColumn">
         <div class="translation-header">
-          <h3>📝 Traduzione</h3>
+          <h3>&#x1F4DD; Traduzione</h3>
           <button class="toggle-translation" onclick="toggleTranslation()">Nascondi</button>
         </div>
         <textarea class="translation-textarea" id="translationText" placeholder="Scrivi qui la tua traduzione italiana..."></textarea>
@@ -744,6 +394,10 @@
     <div class="menu-color" style="background: var(--complemento-indiretto);"></div>
     <span>Complemento Indiretto</span>
   </div>
+  <div class="menu-item vocativo" onclick="assignFunction('vocativo')">
+    <div class="menu-color" style="background: var(--vocativo);"></div>
+    <span>Vocativo</span>
+  </div>
   <div class="menu-item subordinante" onclick="assignFunction('congiunzione-subordinante')">
     <div style="width: 20px; height: 20px; border: 2px solid #c83232; border-radius: 4px;"></div>
     <span>Congiunzione Subordinante</span>
@@ -754,11 +408,11 @@
   </div>
   <div class="menu-divider"></div>
   <div class="menu-item note" onclick="openNoteModal()">
-    <span>📝</span>
+    <span>&#x1F4DD;</span>
     <span>Aggiungi Nota</span>
   </div>
   <div class="menu-item clear" onclick="clearWord()">
-    <span>✕</span>
+    <span>&#x2715;</span>
     <span>Rimuovi</span>
   </div>
 </div>
@@ -776,203 +430,35 @@
 </div>
 
 <script>
-// Lucano texts from dispensa
 const lucanoTexts = {
   text1: {
-    title: "Lucano Bellum Civile I, 1-32 — Proemio della Pharsalia",
-    content: `Bella per Emathios plus quam civilia campos
-Iusque datum sceleri canimus, populumque potentem
-In sua victrici conversum viscera dextra,
-Cognatasque acies, et rupto foedere regni,
-Certatum totis concussi viribus orbis
-In commune nefas, infestisque obvia signis
-Signa, pares aquilas, et pila minantia pilis.
-Quis furor, o cives, quae tanta licentia ferri,
-Gentibus invisis Latium praebere cruorem?
-Cumque superba foret Babylon spolianda tropaeis
-Ausoniis, umbraque erraret Crassus inulta,
-Bella geri placuit nullos habitura triumphos?
-Heu quantum terrae potuit pelagique parari
-Hoc, quem civiles hauserunt, sanguine, dextrae,
-Unde venit Titan, et nox ubi sidera condit,
-Quaque dies medius flagrantibus aestuat horis,
-Et qua bruma, rigens ac nescia vere remitti,
-Adstringit Scythico glacialem frigore pontum!
-Sub iuga iam Seres, iam barbarus isset Araxes,
-Et gens si qua iacet nascenti conscia Nilo.
-Tunc, si tantus amor belli tibi, Roma, nefandi,
-Totum sub Latias leges cum miseris orbem,
-In te verte manus: nondum tibi defuit hostis.
-At nunc semirutis pendent quod moenia tectis
-Urbibus Italiae, lapsisque ingentia muris
-Saxa iacent, nulloque domus custode tenentur
-Rarus et antiquis habitator in urbibus errat,
-Horrida quod dumis multosque inarata per annos
-Hesperia est, desuntque manus poscentibus arvis,
-Non tu, Pyrrhe ferox, nec tantis cladibus auctor
-Poenus erit: nulli penitus discindere ferro
-Contigit: alta sedent civilis vulnera dextrae.`
+    title: "Lucano Bellum Civile I, 1-32 \u2014 Proemio della Pharsalia",
+    content: "Bella per Emathios plus quam civilia campos\nIusque datum sceleri canimus, populumque potentem\nIn sua victrici conversum viscera dextra,\nCognatasque acies, et rupto foedere regni,\nCertatum totis concussi viribus orbis\nIn commune nefas, infestisque obvia signis\nSigna, pares aquilas, et pila minantia pilis.\nQuis furor, o cives, quae tanta licentia ferri,\nGentibus invisis Latium praebere cruorem?\nCumque superba foret Babylon spolianda tropaeis\nAusoniis, umbraque erraret Crassus inulta,\nBella geri placuit nullos habitura triumphos?\nHeu quantum terrae potuit pelagique parari\nHoc, quem civiles hauserunt, sanguine, dextrae,\nUnde venit Titan, et nox ubi sidera condit,\nQuaque dies medius flagrantibus aestuat horis,\nEt qua bruma, rigens ac nescia vere remitti,\nAdstringit Scythico glacialem frigore pontum!\nSub iuga iam Seres, iam barbarus isset Araxes,\nEt gens si qua iacet nascenti conscia Nilo.\nTunc, si tantus amor belli tibi, Roma, nefandi,\nTotum sub Latias leges cum miseris orbem,\nIn te verte manus: nondum tibi defuit hostis.\nAt nunc semirutis pendent quod moenia tectis\nUrbibus Italiae, lapsisque ingentia muris\nSaxa iacent, nulloque domus custode tenentur\nRarus et antiquis habitator in urbibus errat,\nHorrida quod dumis multosque inarata per annos\nHesperia est, desuntque manus poscentibus arvis,\nNon tu, Pyrrhe ferox, nec tantis cladibus auctor\nPoenus erit: nulli penitus discindere ferro\nContigit: alta sedent civilis vulnera dextrae."
   },
   text2: {
-    title: "Lucano Bellum Civile I, 126-157 — La quercus e il fulmen",
-    content: `Quis iustius induit arma,
-Scire nefas: magno se iudice quisque tuetur:
-Victrix caussa deis placuit, sed victa Catoni
-Nec coiere pares: alter, vergentibus annis
-In senium, longoque togae tranquillior usu,
-Dedidicit iam pace ducem; famaeque petitor,
-Multa dare in vulgus; totus popularibus auris
-Impelli, plausuque sui gaudere theatri:
-Nec reparare novas vires, multumque priori
-Credere fortunae. Stat magni nominis umbra:
-Qualis frugifero quercus sublimis in agro,
-Exuvias veteres populi sacrataque gestans
-Dona ducum, nec iam validis radicibus haerens,
-Pondere fixa suo est; nudosque per aera ramos
-Effundens, trunco, non frondibus, efficit umbram;
-Et quamvis primo nutet casura sub Euro,
-Tot circum silvae firmo se robore tollant,
-Sola tamen colitur. Sed non in Caesare tantum
-Nomen erat, nec fama ducis: sed nescia virtus
-Stare loco: solusque pudor, non vincere bello.
-Acer et indomitus; quo spes, quoque ira vocasset,
-Ferre manum, et numquam temerando parcere ferro:
-Successus urgere suos, instare favori
-Numinis: impellens, quidquid sibi, summa petenti,
-Obstaret, gaudensque viam fecisse ruina.
-Qualiter expressum ventis per nubila fulmen
-Aetheris impulsi sonitu mundique fragore
-Emicuit, rupitque diem, populosque paventes
-Terruit, obliqua praestringens lumina flamma.
-In sua templa furit: nullaque exire vetante
-Materia, magnamque cadens, magnamque revertens
-Dat stragem late, sparsosque recolligit ignes.`
+    title: "Lucano Bellum Civile I, 126-157 \u2014 La quercus e il fulmen",
+    content: "Quis iustius induit arma,\nScire nefas: magno se iudice quisque tuetur:\nVictrix caussa deis placuit, sed victa Catoni\nNec coiere pares: alter, vergentibus annis\nIn senium, longoque togae tranquillior usu,\nDedidicit iam pace ducem; famaeque petitor,\nMulta dare in vulgus; totus popularibus auris\nImpelli, plausuque sui gaudere theatri:\nNec reparare novas vires, multumque priori\nCredere fortunae. Stat magni nominis umbra:\nQualis frugifero quercus sublimis in agro,\nExuvias veteres populi sacrataque gestans\nDona ducum, nec iam validis radicibus haerens,\nPondere fixa suo est; nudosque per aera ramos\nEffundens, trunco, non frondibus, efficit umbram;\nEt quamvis primo nutet casura sub Euro,\nTot circum silvae firmo se robore tollant,\nSola tamen colitur. Sed non in Caesare tantum\nNomen erat, nec fama ducis: sed nescia virtus\nStare loco: solusque pudor, non vincere bello.\nAcer et indomitus; quo spes, quoque ira vocasset,\nFerre manum, et numquam temerando parcere ferro:\nSuccessus urgere suos, instare favori\nNuminis: impellens, quidquid sibi, summa petenti,\nObstaret, gaudensque viam fecisse ruina.\nQualiter expressum ventis per nubila fulmen\nAetheris impulsi sonitu mundique fragore\nEmicuit, rupitque diem, populosque paventes\nTerruit, obliqua praestringens lumina flamma.\nIn sua templa furit: nullaque exire vetante\nMateria, magnamque cadens, magnamque revertens\nDat stragem late, sparsosque recolligit ignes."
   },
   text3: {
-    title: "Lucano Bellum Civile IX, 980-986 — Il titolo del poema",
-    content: `O sacer et magnus vatum labor, omnia fato
-Eripis, et populis donas mortalibus aevum.
-Invidia sacrae, Caesar, ne tangere famae:
-Nam, si quid Latiis fas est promittere Musis,
-Quantum Smyrnaei durabunt vatis honore,
-Venturi me teque legent: Pharsalia nostra
-Vivet, et a nullo tenebris damnabimur aevo.`
+    title: "Lucano Bellum Civile IX, 980-986 \u2014 Il titolo del poema",
+    content: "O sacer et magnus vatum labor, omnia fato\nEripis, et populis donas mortalibus aevum.\nInvidia sacrae, Caesar, ne tangere famae:\nNam, si quid Latiis fas est promittere Musis,\nQuantum Smyrnaei durabunt vatis honore,\nVenturi me teque legent: Pharsalia nostra\nVivet, et a nullo tenebris damnabimur aevo."
   },
   text4: {
-    title: "Virgilio Bucolica, Ecloga I — Meliboeus et Tityrus",
-    content: `Meliboeus
-Tityre, tu patulae recubans sub tegmine fagi
-silvestrem tenui Musam meditaris avena;
-nos patriae fines et dulcia linquimus arva:
-nos patriam fugimus; tu, Tityre, lentus in umbra
-5 formosam resonare doces Amaryllida silvas.
-Tityrus
-O Meliboee, deus nobis haec otia fecit:
-namque erit ille mihi semper deus; illius aram
-saepe tener nostris ab ovilibus imbuet agnus.
-Ille meas errare boves, ut cernis, et ipsum
-10 ludere, quae vellem, calamo permisit agresti
-Meliboeus
-Non equidem invideo; miror magis: undique totis
-usque adeo turbatur agris. En, ipse capellas
-protinus aeger ago; hanc etiam vix, Tityre, duco:
-hic inter densas corylos modo namque gemellos,
-15 spem gregis, ah, silice in nuda conixa reliquit.
-Saepe malum hoc nobis, si mens non laeva fuisset,
-de caelo tactas memini praedicere quercus:—
-saepe sinistra cava praedixit ab ilice cornix.
-Sed tamen, iste deus qui sit, da, Tityre, nobis.
-Tityrus
-20 Urbem, quam dicunt Romam, Meliboee, putavi
-stultus ego huic nostrae similem, quo saepe solemus
-pastores ovium teneros depellere fetus:
-sic canibus catulos similis, sic matribus haedos
-noram, sic parvis componere magna solebam:
-25 verum haec tantum alias inter caput extulit urbes,
-quantum lenta solent inter viburna cupressi.
-Meliboeus
-Et quae tanta fuit Romam tibi causa videndi?
-Tityrus
-Libertas; quae sera, tamen respexit inertem,
-candidior postquam tondenti barba cadebat;
-30 respexit tamen, et longo post tempore venit,
-postquam nos Amaryllis habet, Galatea reliquit:
-namque, fatebor enim, dum me Galatea tenebat,
-nec spes libertatis erat, nec cura peculi:
-quamvis multa meis exiret victima saeptis,
-35 pinguis et ingratae premeretur caseus urbi,
-non umquam gravis aere domum mihi dextra redibat.
-Meliboeus
-Mirabar, quid maesta deos, Amarylli, vocares,
-cui pendere sua patereris in arbore poma:
-Tityrus hinc aberat. Ipsae te, Tityre, pinus,
-40 ipsi te fontes, ipsa haec arbusta vocabant.
-Tityrus
-Quid facerem? Neque servitio me exire licebat,
-nec tam praesentis alibi cognoscere divos.
-hic illum vidi iuvenem, Meliboee, quot annis
-bis senos cui nostra dies altaria fumant;
-45 hic mihi responsum primus dedit ille petenti:
-"pascite, ut ante, boves, pueri, submittite tauros."
-Meliboeus
-Fortunate senex, ergo tua rura manebunt,
-et tibi magna satis, quamvis lapis omnia nudus
-limosoque palus obducat pascua iunco!
-50 Non insueta gravis temptabunt pabula fetas,
-nec mala vicini pecoris contagia laedent.
-Fortunate senex, hic, inter flumina nota
-et fontis sacros, frigus captabis opacum!
-hinc tibi, quae semper, vicino ab limite, saepes
-55 Hyblaeis apibus florem depasta salicti
-saepe levi somnum suadebit inire susurro;
-hinc alta sub rupe canet frondator ad auras;
-nec tamen interea raucae, tua cura, palumbes,
-nec gemere aëria cessabit turtur ab ulmo.
-Tityrus
-60 Ante leves ergo pascentur in aequore cervi,
-et freta destituent nudos in litore pisces,
-ante pererratis amborum finibus exsul
-aut Ararim Parthus bibet, aut Germania Tigrim,
-quam nostro illius labatur pectore voltus.
-Meliboeus
-65 At nos hinc alii sitientis ibimus Afros,
-pars Scythiam et rapidum Cretae veniemus Oaxen,
-et penitus toto divisos orbe Britannos.
-En umquam patrios longo post tempore finis,
-pauperis et tuguri congestum caespite culmen,
-70 post aliquot mea regna videns mirabor aristas?
-Impius haec tam culta novalia miles habebit,
-barbarus has segetes? En, quo discordia civis
-produxit miseros! His nos consevimus agros!
-Insere nunc, Meliboee, piros, pone ordine vitis.
-75 Ite meae, felix quondam pecus, ite capellae.
-Non ego vos posthac, viridi proiectus in antro,
-dumosa pendere procul de rupe videbo;
-carmina nulla canam; non, me pascente, capellae,
-florentem cytisum et salices carpetis amaras.
-Tityrus
-80 Hic tamen hanc mecum poteras requiescere noctem
-fronde super viridi: sunt nobis mitia poma,
-castaneae molles, et pressi copia lactis;
-et iam summa procul villarum culmina fumant,
-maioresque cadunt altis de montibus umbrae.`
+    title: "Virgilio Bucolica, Ecloga I \u2014 Meliboeus et Tityrus",
+    content: "Meliboeus\nTityre, tu patulae recubans sub tegmine fagi\nsilvestrem tenui Musam meditaris avena;\nnos patriae fines et dulcia linquimus arva:\nnos patriam fugimus; tu, Tityre, lentus in umbra\n5 formosam resonare doces Amaryllida silvas.\nTityrus\nO Meliboee, deus nobis haec otia fecit:\nnamque erit ille mihi semper deus; illius aram\nsaepe tener nostris ab ovilibus imbuet agnus.\nIlle meas errare boves, ut cernis, et ipsum\n10 ludere, quae vellem, calamo permisit agresti\nMeliboeus\nNon equidem invideo; miror magis: undique totis\nusque adeo turbatur agris. En, ipse capellas\nprotinus aeger ago; hanc etiam vix, Tityre, duco:\nhic inter densas corylos modo namque gemellos,\n15 spem gregis, ah, silice in nuda conixa reliquit.\nSaepe malum hoc nobis, si mens non laeva fuisset,\nde caelo tactas memini praedicere quercus:\u2014\nsaepe sinistra cava praedixit ab ilice cornix.\nSed tamen, iste deus qui sit, da, Tityre, nobis.\nTityrus\n20 Urbem, quam dicunt Romam, Meliboee, putavi\nstultus ego huic nostrae similem, quo saepe solemus\npastores ovium teneros depellere fetus:\nsic canibus catulos similis, sic matribus haedos\nnoram, sic parvis componere magna solebam:\n25 verum haec tantum alias inter caput extulit urbes,\nquantum lenta solent inter viburna cupressi.\nMeliboeus\nEt quae tanta fuit Romam tibi causa videndi?\nTityrus\nLibertas; quae sera, tamen respexit inertem,\ncandidior postquam tondenti barba cadebat;\n30 respexit tamen, et longo post tempore venit,\npostquam nos Amaryllis habet, Galatea reliquit:\nnamque, fatebor enim, dum me Galatea tenebat,\nnec spes libertatis erat, nec cura peculi:\nquamvis multa meis exiret victima saeptis,\n35 pinguis et ingratae premeretur caseus urbi,\nnon umquam gravis aere domum mihi dextra redibat.\nMeliboeus\nMirabar, quid maesta deos, Amarylli, vocares,\ncui pendere sua patereris in arbore poma:\nTityrus hinc aberat. Ipsae te, Tityre, pinus,\n40 ipsi te fontes, ipsa haec arbusta vocabant.\nTityrus\nQuid facerem? Neque servitio me exire licebat,\nnec tam praesentis alibi cognoscere divos.\nhic illum vidi iuvenem, Meliboee, quot annis\nbis senos cui nostra dies altaria fumant;\n45 hic mihi responsum primus dedit ille petenti:\n\"pascite, ut ante, boves, pueri, submittite tauros.\"\nMeliboeus\nFortunate senex, ergo tua rura manebunt,\net tibi magna satis, quamvis lapis omnia nudus\nlimosoque palus obducat pascua iunco!\n50 Non insueta gravis temptabunt pabula fetas,\nnec mala vicini pecoris contagia laedent.\nFortunate senex, hic, inter flumina nota\net fontis sacros, frigus captabis opacum!\nhinc tibi, quae semper, vicino ab limite, saepes\n55 Hyblaeis apibus florem depasta salicti\nsaepe levi somnum suadebit inire susurro;\nhinc alta sub rupe canet frondator ad auras;\nnec tamen interea raucae, tua cura, palumbes,\nnec gemere a\u00EBria cessabit turtur ab ulmo.\nTityrus\n60 Ante leves ergo pascentur in aequore cervi,\net freta destituent nudos in litore pisces,\nante pererratis amborum finibus exsul\naut Ararim Parthus bibet, aut Germania Tigrim,\nquam nostro illius labatur pectore voltus.\nMeliboeus\n65 At nos hinc alii sitientis ibimus Afros,\npars Scythiam et rapidum Cretae veniemus Oaxen,\net penitus toto divisos orbe Britannos.\nEn umquam patrios longo post tempore finis,\npauperis et tuguri congestum caespite culmen,\n70 post aliquot mea regna videns mirabor aristas?\nImpius haec tam culta novalia miles habebit,\nbarbarus has segetes? En, quo discordia civis\nproduxit miseros! His nos consevimus agros!\nInsere nunc, Meliboee, piros, pone ordine vitis.\n75 Ite meae, felix quondam pecus, ite capellae.\nNon ego vos posthac, viridi proiectus in antro,\ndumosa pendere procul de rupe videbo;\ncarmina nulla canam; non, me pascente, capellae,\nflorentem cytisum et salices carpetis amaras.\nTityrus\n80 Hic tamen hanc mecum poteras requiescere noctem\nfronde super viridi: sunt nobis mitia poma,\ncastaneae molles, et pressi copia lactis;\net iam summa procul villarum culmina fumant,\nmaioresque cadunt altis de montibus umbrae."
   }
 };
 
 let currentText = 'text1';
 let currentWordElement = null;
-let wordData = {}; // Store function and notes for each word
+let wordData = {};
 let translationVisible = true;
 
-// Initialize the text editor
 function initializeText() {
   const container = document.getElementById('latinText');
   const textData = lucanoTexts[currentText];
   const words = textData.content.split(/(\s+|[,;:.!?])/);
-  
-  // Update title
   document.getElementById('textTitle').textContent = textData.title;
-  
   container.innerHTML = '';
   words.forEach((word, index) => {
     if (word.trim().length > 0 && /[a-zA-Z]/.test(word)) {
@@ -989,23 +475,19 @@ function initializeText() {
   });
 }
 
-// Change text function
 function changeText() {
   const select = document.getElementById('textSelect');
   currentText = select.value;
-  wordData = {}; // Reset word data when changing text
-  document.getElementById('translationText').value = ''; // Clear translation
+  wordData = {};
+  document.getElementById('translationText').value = '';
   initializeText();
 }
 
-// Toggle translation visibility
 function toggleTranslation() {
   const column = document.getElementById('translationColumn');
   const layout = document.getElementById('textLayout');
   const btn = document.querySelector('.toggle-translation');
-  
   translationVisible = !translationVisible;
-  
   if (translationVisible) {
     column.style.display = 'block';
     layout.classList.remove('single-column');
@@ -1017,63 +499,70 @@ function toggleTranslation() {
   }
 }
 
-// Handle word click
+/* FIX 2: posizionamento intelligente del menu - non esce piu fuori schermo */
 function handleWordClick(e) {
   e.stopPropagation();
   currentWordElement = e.target;
-  
+
   const menu = document.getElementById('contextMenu');
   const rect = e.target.getBoundingClientRect();
-  
-  menu.style.left = rect.left + 'px';
-  menu.style.top = (rect.bottom + 5) + 'px';
+
+  // Mostra il menu temporaneamente fuori schermo per misurarlo
+  menu.style.visibility = 'hidden';
   menu.classList.add('visible');
+  const menuHeight = menu.offsetHeight;
+  const menuWidth = menu.offsetWidth;
+  menu.style.visibility = '';
+
+  // Calcola posizione verticale
+  let top = rect.bottom + 5;
+  if (top + menuHeight > window.innerHeight) {
+    // Non c'e spazio sotto: apri sopra la parola
+    top = rect.top - menuHeight - 5;
+    if (top < 0) {
+      // Nemmeno sopra: allinea al bordo inferiore della finestra
+      top = window.innerHeight - menuHeight - 10;
+    }
+  }
+
+  // Calcola posizione orizzontale
+  let left = rect.left;
+  if (left + menuWidth > window.innerWidth) {
+    left = window.innerWidth - menuWidth - 10;
+  }
+  if (left < 0) left = 10;
+
+  menu.style.left = left + 'px';
+  menu.style.top = top + 'px';
 }
 
-// Handle right click
 function handleRightClick(e) {
   e.preventDefault();
   handleWordClick(e);
 }
 
-// Assign function to word
 function assignFunction(functionType) {
   if (!currentWordElement) return;
-  
   const index = currentWordElement.dataset.index;
-  
-  // Remove all function classes
-  currentWordElement.classList.remove('soggetto', 'verbo', 'complemento-oggetto', 'complemento-indiretto', 'congiunzione-subordinante', 'parte-invariabile');
-  
-  // Add new function class
+  currentWordElement.classList.remove('soggetto', 'verbo', 'complemento-oggetto', 'complemento-indiretto', 'vocativo', 'congiunzione-subordinante', 'parte-invariabile');
   currentWordElement.classList.add(functionType);
-  
-  // Store in data
   if (!wordData[index]) wordData[index] = {};
   wordData[index].function = functionType;
-  
   closeContextMenu();
 }
 
-// Clear word formatting
 function clearWord() {
   if (!currentWordElement) return;
-  
   const index = currentWordElement.dataset.index;
-  
-  currentWordElement.classList.remove('soggetto', 'verbo', 'complemento-oggetto', 'complemento-indiretto', 'congiunzione-subordinante', 'parte-invariabile', 'has-note');
+  currentWordElement.classList.remove('soggetto', 'verbo', 'complemento-oggetto', 'complemento-indiretto', 'vocativo', 'congiunzione-subordinante', 'parte-invariabile', 'has-note');
   delete wordData[index];
-  
   closeContextMenu();
 }
 
-// Note modal functions
 function openNoteModal() {
   if (!currentWordElement) return;
-  
   const index = currentWordElement.dataset.index;
   const existingNote = wordData[index]?.note || '';
-  
   document.getElementById('noteInput').value = existingNote;
   document.getElementById('noteModal').classList.add('visible');
   closeContextMenu();
@@ -1086,12 +575,9 @@ function closeNoteModal() {
 
 function saveNote() {
   if (!currentWordElement) return;
-  
   const index = currentWordElement.dataset.index;
   const noteText = document.getElementById('noteInput').value.trim();
-  
   if (!wordData[index]) wordData[index] = {};
-  
   if (noteText) {
     wordData[index].note = noteText;
     currentWordElement.classList.add('has-note');
@@ -1101,49 +587,40 @@ function saveNote() {
     currentWordElement.classList.remove('has-note');
     currentWordElement.removeAttribute('title');
   }
-  
   closeNoteModal();
 }
 
-// Close context menu
 function closeContextMenu() {
   document.getElementById('contextMenu').classList.remove('visible');
 }
 
-// Reset analysis
 function resetAnalysis() {
   if (!confirm('Sei sicuro di voler cancellare tutta l\'analisi?')) return;
-  
   wordData = {};
   const words = document.querySelectorAll('.word');
   words.forEach(word => {
-    word.classList.remove('soggetto', 'verbo', 'complemento-oggetto', 'complemento-indiretto', 'congiunzione-subordinante', 'parte-invariabile', 'has-note');
+    word.classList.remove('soggetto', 'verbo', 'complemento-oggetto', 'complemento-indiretto', 'vocativo', 'congiunzione-subordinante', 'parte-invariabile', 'has-note');
     word.removeAttribute('title');
   });
 }
 
-// Export as PDF
 function exportPDF() {
   const textData = lucanoTexts[currentText];
   const latinContainer = document.getElementById('latinText');
   const translationText = document.getElementById('translationText').value;
-  
-  // Create a temporary container for PDF
   const pdfContainer = document.createElement('div');
   pdfContainer.style.padding = '40px';
   pdfContainer.style.fontFamily = 'Georgia, serif';
   pdfContainer.style.fontSize = '12pt';
   pdfContainer.style.lineHeight = '1.6';
-  
-  // Add title
+
   const title = document.createElement('h1');
   title.textContent = 'Analisi del Testo Latino';
   title.style.fontSize = '20pt';
   title.style.marginBottom = '10px';
   title.style.textAlign = 'center';
   pdfContainer.appendChild(title);
-  
-  // Add subtitle
+
   const subtitle = document.createElement('h2');
   subtitle.textContent = textData.title;
   subtitle.style.fontSize = '14pt';
@@ -1153,49 +630,24 @@ function exportPDF() {
   subtitle.style.fontStyle = 'italic';
   subtitle.style.textAlign = 'center';
   pdfContainer.appendChild(subtitle);
-  
-  // Add legend
+
   const legend = document.createElement('div');
   legend.style.marginBottom = '20px';
   legend.style.padding = '15px';
   legend.style.border = '1px solid #ddd';
   legend.style.borderRadius = '8px';
   legend.style.backgroundColor = '#f9f9f9';
-  legend.innerHTML = `
-    <div style="display: flex; flex-wrap: wrap; gap: 15px; font-size: 10pt;">
-      <div style="display: flex; align-items: center; gap: 6px;">
-        <div style="width: 16px; height: 16px; background: #e85d5d; border-radius: 3px;"></div>
-        <span>Soggetto</span>
-      </div>
-      <div style="display: flex; align-items: center; gap: 6px;">
-        <div style="width: 16px; height: 16px; background: #f4d35e; border-radius: 3px;"></div>
-        <span>Verbo</span>
-      </div>
-      <div style="display: flex; align-items: center; gap: 6px;">
-        <div style="width: 16px; height: 16px; background: #78c878; border-radius: 3px;"></div>
-        <span>Compl. Oggetto</span>
-      </div>
-      <div style="display: flex; align-items: center; gap: 6px;">
-        <div style="width: 16px; height: 16px; background: #6db5d4; border-radius: 3px;"></div>
-        <span>Compl. Indiretto</span>
-      </div>
-      <div style="display: flex; align-items: center; gap: 6px;">
-        <div style="width: 16px; height: 16px; border: 2px solid #c83232; border-radius: 3px;"></div>
-        <span>Cong. Sub.</span>
-      </div>
-      <div style="display: flex; align-items: center; gap: 6px;">
-        <div style="width: 16px; height: 2px; background: #000;"></div>
-        <span>Parti Inv.</span>
-      </div>
-      <div style="display: flex; align-items: center; gap: 6px;">
-        <span style="font-size: 14px;">📝</span>
-        <span>Con nota</span>
-      </div>
-    </div>
-  `;
+  legend.innerHTML = '<div style="display: flex; flex-wrap: wrap; gap: 15px; font-size: 10pt;">' +
+    '<div style="display: flex; align-items: center; gap: 6px;"><div style="width: 16px; height: 16px; background: #e85d5d; border-radius: 3px;"></div><span>Soggetto</span></div>' +
+    '<div style="display: flex; align-items: center; gap: 6px;"><div style="width: 16px; height: 16px; background: #f4d35e; border-radius: 3px;"></div><span>Verbo</span></div>' +
+    '<div style="display: flex; align-items: center; gap: 6px;"><div style="width: 16px; height: 16px; background: #78c878; border-radius: 3px;"></div><span>Compl. Oggetto</span></div>' +
+    '<div style="display: flex; align-items: center; gap: 6px;"><div style="width: 16px; height: 16px; background: #6db5d4; border-radius: 3px;"></div><span>Compl. Indiretto</span></div>' +
+    '<div style="display: flex; align-items: center; gap: 6px;"><div style="width: 16px; height: 16px; background: #ff8c42; border-radius: 3px;"></div><span>Vocativo</span></div>' +
+    '<div style="display: flex; align-items: center; gap: 6px;"><div style="width: 16px; height: 16px; border: 2px solid #c83232; border-radius: 3px;"></div><span>Cong. Sub.</span></div>' +
+    '<div style="display: flex; align-items: center; gap: 6px;"><div style="width: 16px; height: 2px; background: #000;"></div><span>Parti Inv.</span></div>' +
+    '</div>';
   pdfContainer.appendChild(legend);
-  
-  // Add latin text
+
   const latinSection = document.createElement('div');
   latinSection.style.marginBottom = '30px';
   const latinTitle = document.createElement('h3');
@@ -1205,20 +657,17 @@ function exportPDF() {
   latinTitle.style.borderBottom = '2px solid #333';
   latinTitle.style.paddingBottom = '8px';
   latinSection.appendChild(latinTitle);
-  
   const latinClone = latinContainer.cloneNode(true);
   latinClone.style.fontSize = '12pt';
   latinClone.style.lineHeight = '2';
   latinSection.appendChild(latinClone);
   pdfContainer.appendChild(latinSection);
-  
-  // Add notes section if there are any
-  const hasNotes = Object.values(wordData).some(data => data.note);
+
+  const hasNotes = Object.values(wordData).some(function(data) { return data.note; });
   if (hasNotes) {
     const notesSection = document.createElement('div');
     notesSection.style.marginTop = '30px';
     notesSection.style.pageBreakBefore = 'auto';
-    
     const notesTitle = document.createElement('h3');
     notesTitle.textContent = 'Note';
     notesTitle.style.fontSize = '14pt';
@@ -1226,170 +675,95 @@ function exportPDF() {
     notesTitle.style.borderBottom = '2px solid #333';
     notesTitle.style.paddingBottom = '8px';
     notesSection.appendChild(notesTitle);
-    
     const notesList = document.createElement('div');
     notesList.style.fontSize = '11pt';
     notesList.style.lineHeight = '1.8';
-    
-    // Get all words with notes
-    const words = document.querySelectorAll('.word');
-    words.forEach(word => {
-      const index = word.dataset.index;
-      if (wordData[index] && wordData[index].note) {
+    const allWords = document.querySelectorAll('.word');
+    allWords.forEach(function(word) {
+      const idx = word.dataset.index;
+      if (wordData[idx] && wordData[idx].note) {
         const noteItem = document.createElement('div');
         noteItem.style.marginBottom = '12px';
         noteItem.style.paddingLeft = '15px';
         noteItem.style.borderLeft = '3px solid #d4af37';
-        noteItem.innerHTML = `
-          <strong style="color: #2c2416;">${word.textContent}</strong>: 
-          <span style="color: #6b6456;">${wordData[index].note}</span>
-        `;
+        noteItem.innerHTML = '<strong style="color: #2c2416;">' + word.textContent + '</strong>: <span style="color: #6b6456;">' + wordData[idx].note + '</span>';
         notesList.appendChild(noteItem);
       }
     });
-    
     notesSection.appendChild(notesList);
     pdfContainer.appendChild(notesSection);
   }
-  
-  // Add translation if present
+
   if (translationText.trim()) {
     const translationSection = document.createElement('div');
     translationSection.style.marginTop = '30px';
     translationSection.style.pageBreakBefore = 'auto';
-    
-    const translationTitle = document.createElement('h3');
-    translationTitle.textContent = 'Traduzione';
-    translationTitle.style.fontSize = '14pt';
-    translationTitle.style.marginBottom = '15px';
-    translationTitle.style.borderBottom = '2px solid #333';
-    translationTitle.style.paddingBottom = '8px';
-    translationSection.appendChild(translationTitle);
-    
-    const translationContent = document.createElement('div');
-    translationContent.textContent = translationText;
-    translationContent.style.fontSize = '11pt';
-    translationContent.style.lineHeight = '1.8';
-    translationContent.style.whiteSpace = 'pre-wrap';
-    translationSection.appendChild(translationContent);
-    
+    const trTitle = document.createElement('h3');
+    trTitle.textContent = 'Traduzione';
+    trTitle.style.fontSize = '14pt';
+    trTitle.style.marginBottom = '15px';
+    trTitle.style.borderBottom = '2px solid #333';
+    trTitle.style.paddingBottom = '8px';
+    translationSection.appendChild(trTitle);
+    const trContent = document.createElement('div');
+    trContent.textContent = translationText;
+    trContent.style.fontSize = '11pt';
+    trContent.style.lineHeight = '1.8';
+    trContent.style.whiteSpace = 'pre-wrap';
+    translationSection.appendChild(trContent);
     pdfContainer.appendChild(translationSection);
   }
-  
-  // Temporarily add to body
+
   document.body.appendChild(pdfContainer);
-  
-  // Use html2pdf library
-  const opt = {
+  var opt = {
     margin: 15,
     filename: 'analisi_lucano.pdf',
     image: { type: 'jpeg', quality: 0.98 },
     html2canvas: { scale: 2, useCORS: true },
     jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
   };
-  
-  // Check if html2pdf is loaded
   if (typeof html2pdf === 'undefined') {
     alert('Caricamento libreria PDF in corso... Riprova tra un secondo.');
-    // Load the library
-    const script = document.createElement('script');
+    var script = document.createElement('script');
     script.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js';
     script.onload = function() {
-      html2pdf().set(opt).from(pdfContainer).save().then(() => {
-        document.body.removeChild(pdfContainer);
-      });
+      html2pdf().set(opt).from(pdfContainer).save().then(function() { document.body.removeChild(pdfContainer); });
     };
     document.head.appendChild(script);
   } else {
-    html2pdf().set(opt).from(pdfContainer).save().then(() => {
-      document.body.removeChild(pdfContainer);
-    });
+    html2pdf().set(opt).from(pdfContainer).save().then(function() { document.body.removeChild(pdfContainer); });
   }
 }
+
 function exportAnalysis() {
   const container = document.getElementById('latinText');
   const clone = container.cloneNode(true);
   const textData = lucanoTexts[currentText];
   const translationText = document.getElementById('translationText').value;
-  
-  // Create translation HTML if present
-  let translationHTML = '';
+  var translationHTML = '';
   if (translationText.trim()) {
-    translationHTML = `
-<div style="margin-top: 40px; padding-top: 30px; border-top: 2px solid #d4c9b8;">
-  <h2 style="font-size: 22px; margin-bottom: 16px; color: #2c2416;">Traduzione</h2>
-  <div style="font-size: 16px; line-height: 1.8; color: #2c2416; white-space: pre-wrap;">${translationText}</div>
-</div>`;
+    translationHTML = '<div style="margin-top: 40px; padding-top: 30px; border-top: 2px solid #d4c9b8;"><h2 style="font-size: 22px; margin-bottom: 16px; color: #2c2416;">Traduzione</h2><div style="font-size: 16px; line-height: 1.8; color: #2c2416; white-space: pre-wrap;">' + translationText + '</div></div>';
   }
-  
-  // Create a styled HTML export
-  const html = `
-<!DOCTYPE html>
-<html lang="it">
-<head>
-<meta charset="UTF-8">
-<title>Analisi Latino — ${textData.title}</title>
-<style>
-body { font-family: Georgia, serif; padding: 40px; background: #f8f6f0; }
-.text { background: white; padding: 40px; border-radius: 12px; box-shadow: 0 4px 16px rgba(0,0,0,0.1); }
-.word { padding: 2px 4px; border-radius: 4px; }
-.soggetto { background: #e85d5d; color: white; }
-.verbo { background: #f4d35e; color: #2c2416; }
-.complemento-oggetto { background: #78c878; color: white; }
-.complemento-indiretto { background: #6db5d4; color: white; }
-.congiunzione-subordinante { border: 3px solid #c83232; font-weight: 600; }
-.parte-invariabile { border-bottom: 2px solid #000; }
-.has-note::after { content: '📝'; font-size: 12px; vertical-align: super; }
-h1 { font-size: 28px; margin-bottom: 10px; }
-h2 { font-size: 20px; margin-bottom: 20px; color: #6b6456; font-weight: normal; font-style: italic; }
-.legend { margin-bottom: 30px; display: flex; gap: 20px; flex-wrap: wrap; }
-.legend-item { display: flex; align-items: center; gap: 8px; }
-.legend-color { width: 20px; height: 20px; border-radius: 4px; }
-</style>
-</head>
-<body>
-<div class="text">
-<h1>Analisi del Testo Latino</h1>
-<h2>${textData.title}</h2>
-<div class="legend">
-<div class="legend-item"><div class="legend-color" style="background:#e85d5d;"></div><span>Soggetto</span></div>
-<div class="legend-item"><div class="legend-color" style="background:#f4d35e;"></div><span>Verbo</span></div>
-<div class="legend-item"><div class="legend-color" style="background:#78c878;"></div><span>Complemento Oggetto</span></div>
-<div class="legend-item"><div class="legend-color" style="background:#6db5d4;"></div><span>Complemento Indiretto</span></div>
-<div class="legend-item"><div style="width:20px;height:20px;border:2px solid #c83232;border-radius:4px;"></div><span>Cong. Subordinante</span></div>
-<div class="legend-item"><div style="width:20px;height:2px;background:#000;"></div><span>Parti Invariabili</span></div>
-</div>
-${clone.innerHTML}
-${translationHTML}
-</div>
-</body>
-</html>`;
-  
-  // Create download link
-  const blob = new Blob([html], { type: 'text/html' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
+  var html = '<!DOCTYPE html><html lang="it"><head><meta charset="UTF-8"><title>Analisi Latino</title><style>body{font-family:Georgia,serif;padding:40px;background:#f8f6f0}.text{background:#fff;padding:40px;border-radius:12px;box-shadow:0 4px 16px rgba(0,0,0,.1)}.word{padding:2px 4px;border-radius:4px}.soggetto{background:#e85d5d;color:#fff}.verbo{background:#f4d35e;color:#2c2416}.complemento-oggetto{background:#78c878;color:#fff}.complemento-indiretto{background:#6db5d4;color:#fff}.vocativo{background:#ff8c42;color:#fff}.congiunzione-subordinante{border:3px solid #c83232;font-weight:600}.parte-invariabile{border-bottom:2px solid #000}h1{font-size:28px;margin-bottom:10px}h2{font-size:20px;margin-bottom:20px;color:#6b6456;font-weight:400;font-style:italic}.legend{margin-bottom:30px;display:flex;gap:20px;flex-wrap:wrap}.legend-item{display:flex;align-items:center;gap:8px}.legend-color{width:20px;height:20px;border-radius:4px}</style></head><body><div class="text"><h1>Analisi del Testo Latino</h1><h2>' + textData.title + '</h2><div class="legend"><div class="legend-item"><div class="legend-color" style="background:#e85d5d"></div><span>Soggetto</span></div><div class="legend-item"><div class="legend-color" style="background:#f4d35e"></div><span>Verbo</span></div><div class="legend-item"><div class="legend-color" style="background:#78c878"></div><span>Compl. Oggetto</span></div><div class="legend-item"><div class="legend-color" style="background:#6db5d4"></div><span>Compl. Indiretto</span></div><div class="legend-item"><div class="legend-color" style="background:#ff8c42"></div><span>Vocativo</span></div><div class="legend-item"><div style="width:20px;height:20px;border:2px solid #c83232;border-radius:4px"></div><span>Cong. Sub.</span></div><div class="legend-item"><div style="width:20px;height:2px;background:#000"></div><span>Parti Inv.</span></div></div>' + clone.innerHTML + translationHTML + '</div></body></html>';
+  var blob = new Blob([html], { type: 'text/html' });
+  var url = URL.createObjectURL(blob);
+  var a = document.createElement('a');
   a.href = url;
   a.download = 'analisi_lucano.html';
   a.click();
   URL.revokeObjectURL(url);
 }
 
-// Close menu when clicking outside
 document.addEventListener('click', function(e) {
   if (!e.target.closest('.context-menu') && !e.target.classList.contains('word')) {
     closeContextMenu();
   }
 });
 
-// Close note modal when clicking outside
 document.getElementById('noteModal').addEventListener('click', function(e) {
-  if (e.target === this) {
-    closeNoteModal();
-  }
+  if (e.target === this) closeNoteModal();
 });
 
-// Initialize on load
 initializeText();
 </script>
 

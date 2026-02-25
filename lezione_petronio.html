@@ -1,0 +1,1101 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Petronio e il Satyricon — L'antiromanzo latino | Lezione Interattiva</title>
+<link rel="stylesheet" href="css/style.css">
+<style>
+  /* ═══ STILI SPECIFICI LEZIONE PETRONIO ═══ */
+
+  .lesson-intro {
+    background: var(--card);
+    border: 2px solid var(--border);
+    border-radius: 16px;
+    padding: 30px;
+    margin-bottom: 30px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  }
+
+  .lesson-intro h2 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 22px;
+    color: var(--gold);
+    margin-bottom: 14px;
+  }
+
+  .lesson-intro p {
+    font-size: 16px;
+    line-height: 1.8;
+    margin-bottom: 10px;
+  }
+
+  .context-badge {
+    display: inline-block;
+    padding: 4px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 700;
+    margin-right: 8px;
+    margin-bottom: 6px;
+  }
+
+  .context-badge.autore { background: rgba(184,145,90,0.15); color: var(--gold); }
+  .context-badge.opera { background: rgba(45,106,79,0.12); color: var(--eulalia); }
+  .context-badge.data { background: rgba(107,100,86,0.12); color: var(--text-dim); }
+  .context-badge.genere { background: rgba(192,132,212,0.12); color: #7a3a9a; }
+
+  /* ═══ TLAC BOXES ═══ */
+  .tlac-box {
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin: 24px 0;
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  .tlac-box .tlac-label {
+    font-family: 'Libre Baskerville', serif;
+    font-weight: 700;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .tlac-donow {
+    background: rgba(232, 93, 93, 0.08);
+    border-left: 4px solid var(--latino1);
+  }
+
+  .tlac-donow .tlac-label { color: var(--latino1); }
+
+  .tlac-coldcall {
+    background: rgba(109, 181, 212, 0.1);
+    border-left: 4px solid var(--latino3);
+  }
+
+  .tlac-coldcall .tlac-label { color: #1a6b8a; }
+
+  .tlac-turntalk {
+    background: rgba(120, 200, 120, 0.08);
+    border-left: 4px solid var(--latino2);
+  }
+
+  .tlac-turntalk .tlac-label { color: #2a7a2a; }
+
+  .tlac-stretch {
+    background: rgba(192, 132, 212, 0.08);
+    border-left: 4px solid var(--latino5);
+  }
+
+  .tlac-stretch .tlac-label { color: #7a3a9a; }
+
+  .tlac-exit {
+    background: rgba(244, 211, 94, 0.12);
+    border-left: 4px solid var(--latino4);
+  }
+
+  .tlac-exit .tlac-label { color: #8a6a0a; }
+
+  .tlac-reveal-btn {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 7px 16px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--card);
+    font-family: 'Cardo', serif;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s;
+    color: var(--text-dim);
+  }
+
+  .tlac-reveal-btn:hover {
+    border-color: var(--gold);
+    color: var(--gold);
+  }
+
+  .tlac-hint {
+    display: none;
+    margin-top: 10px;
+    padding: 12px 16px;
+    background: rgba(184,145,90,0.06);
+    border-radius: 8px;
+    font-style: italic;
+    color: var(--text-dim);
+    line-height: 1.6;
+  }
+
+  .tlac-hint.visible { display: block; }
+
+  /* ═══ SEZIONE CONTENUTO ═══ */
+  .content-section {
+    background: var(--card);
+    border: 2px solid var(--border);
+    border-radius: 16px;
+    margin-bottom: 30px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  }
+
+  .content-header {
+    background: linear-gradient(135deg, #2c2416 0%, #5a4e3c 100%);
+    color: #f5f0e8;
+    padding: 24px 30px;
+  }
+
+  .content-header h2 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 24px;
+    margin-bottom: 4px;
+  }
+
+  .content-header .section-ref {
+    font-size: 15px;
+    color: var(--gold-light);
+    font-style: italic;
+  }
+
+  .content-body {
+    padding: 30px;
+  }
+
+  .content-body h3 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 19px;
+    color: var(--text);
+    margin: 24px 0 12px;
+  }
+
+  .content-body h3:first-child { margin-top: 0; }
+
+  .content-body p {
+    font-size: 16px;
+    line-height: 1.8;
+    margin-bottom: 12px;
+  }
+
+  .lat-cite {
+    font-family: 'Libre Baskerville', serif;
+    font-style: italic;
+    color: var(--gold);
+    font-weight: 600;
+  }
+
+  .nota-fonte {
+    display: block;
+    font-size: 13px;
+    color: var(--text-dim);
+    font-style: italic;
+    margin-top: 4px;
+  }
+
+  /* ═══ BRANO ANTOLOGICO ═══ */
+  .brano-box {
+    background: rgba(184,145,90,0.04);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--gold);
+    border-radius: 10px;
+    padding: 20px 24px;
+    margin: 20px 0;
+    font-size: 15px;
+    line-height: 1.8;
+  }
+
+  .brano-box .brano-titolo {
+    font-family: 'Libre Baskerville', serif;
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--gold);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .brano-box .brano-testo {
+    font-family: 'Cardo', serif;
+    font-size: 15px;
+    line-height: 1.9;
+    color: var(--text);
+  }
+
+  .brano-box .brano-commento {
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px solid var(--border);
+    font-size: 14px;
+    color: var(--text-dim);
+    line-height: 1.6;
+  }
+
+  /* ═══ CONFRONTO TABLE ═══ */
+  .confronto-grid {
+    display: grid;
+    grid-template-columns: auto 1fr 1fr;
+    gap: 0;
+    border: 2px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    margin: 24px 0;
+  }
+
+  .confronto-grid .cg-header {
+    background: linear-gradient(135deg, #2c2416, #5a4e3c);
+    color: #f5f0e8;
+    padding: 14px 18px;
+    font-family: 'Libre Baskerville', serif;
+    font-size: 15px;
+    font-weight: 700;
+    text-align: center;
+  }
+
+  .confronto-grid .cg-label {
+    padding: 14px 18px;
+    font-family: 'Libre Baskerville', serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--gold);
+    background: rgba(184,145,90,0.06);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+  }
+
+  .confronto-grid .cg-cell {
+    padding: 14px 18px;
+    font-size: 15px;
+    line-height: 1.6;
+    border-bottom: 1px solid var(--border);
+    background: var(--card);
+  }
+
+  .confronto-grid .cg-cell.greco {
+    border-right: 1px solid var(--border);
+  }
+
+  .cg-highlight {
+    font-weight: 700;
+    color: var(--gold);
+  }
+
+  /* ═══ PERSONAGGI CARDS ═══ */
+  .personaggi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 16px;
+    margin: 20px 0;
+  }
+
+  .personaggio-card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px;
+    transition: all 0.3s;
+    cursor: pointer;
+  }
+
+  .personaggio-card:hover {
+    border-color: var(--gold);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  }
+
+  .personaggio-card .pc-nome {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--gold);
+    margin-bottom: 6px;
+  }
+
+  .personaggio-card .pc-ruolo {
+    font-size: 13px;
+    color: var(--text-dim);
+    font-style: italic;
+    margin-bottom: 8px;
+  }
+
+  .personaggio-card .pc-desc {
+    font-size: 14px;
+    line-height: 1.6;
+    display: none;
+  }
+
+  .personaggio-card.open .pc-desc {
+    display: block;
+  }
+
+  /* ═══ MAPPA CONCETTUALE ═══ */
+  .mappa-container {
+    margin: 24px 0;
+    padding: 30px;
+    background: var(--bg);
+    border: 2px solid var(--border);
+    border-radius: 16px;
+    overflow-x: auto;
+  }
+
+  .mappa-svg {
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+    height: auto;
+  }
+
+  .mappa-node {
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+
+  .mappa-node:hover rect,
+  .mappa-node:hover ellipse {
+    filter: brightness(0.92);
+    stroke-width: 3;
+  }
+
+  .mappa-tooltip {
+    display: none;
+    position: fixed;
+    background: #2c2416;
+    color: #f5f0e8;
+    padding: 12px 16px;
+    border-radius: 10px;
+    font-size: 14px;
+    line-height: 1.5;
+    max-width: 300px;
+    z-index: 200;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+    font-family: 'Cardo', serif;
+    pointer-events: none;
+  }
+
+  /* ═══ QUIZ ═══ */
+  .esercizio-section {
+    background: var(--card);
+    border: 2px solid var(--eulalia);
+    border-radius: 16px;
+    padding: 30px;
+    margin-bottom: 30px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  }
+
+  .esercizio-section h2 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 22px;
+    color: var(--eulalia);
+    margin-bottom: 20px;
+  }
+
+  .esercizio-section h3 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 17px;
+    color: var(--text);
+    margin: 20px 0 12px;
+  }
+
+  .quiz-item {
+    background: rgba(45,106,79,0.05);
+    border-radius: 10px;
+    padding: 18px;
+    margin-bottom: 14px;
+  }
+
+  .quiz-item .quiz-q {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    line-height: 1.5;
+  }
+
+  .quiz-options {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .quiz-option {
+    padding: 12px 16px;
+    border: 2px solid var(--border);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 15px;
+    background: var(--card);
+  }
+
+  .quiz-option:hover { border-color: var(--eulalia); background: rgba(45,106,79,0.04); }
+  .quiz-option.correct { border-color: #28a745; background: rgba(40,167,69,0.1); color: #155724; }
+  .quiz-option.wrong { border-color: #dc3545; background: rgba(220,53,69,0.08); color: #721c24; }
+  .quiz-option.disabled { pointer-events: none; opacity: 0.6; }
+
+  .quiz-feedback {
+    margin-top: 10px;
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-size: 14px;
+    line-height: 1.5;
+    display: none;
+  }
+
+  .quiz-feedback.show { display: block; }
+  .quiz-feedback.correct-fb { background: rgba(40,167,69,0.1); border-left: 3px solid #28a745; color: #155724; }
+  .quiz-feedback.wrong-fb { background: rgba(220,53,69,0.08); border-left: 3px solid #dc3545; color: #721c24; }
+
+  /* ═══ SCORE BAR ═══ */
+  .score-bar {
+    background: var(--card);
+    border: 2px solid var(--border);
+    border-radius: 12px;
+    padding: 16px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    position: sticky;
+    top: 60px;
+    z-index: 50;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  }
+
+  .score-label {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 15px;
+    font-weight: 700;
+  }
+
+  .score-value {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--eulalia);
+  }
+
+  /* ═══ RESPONSIVE ═══ */
+  @media (max-width: 768px) {
+    .content-body { padding: 20px; }
+    .content-header { padding: 18px 20px; }
+    .confronto-grid { grid-template-columns: 1fr; }
+    .confronto-grid .cg-header { display: block; }
+    .personaggi-grid { grid-template-columns: 1fr; }
+    .score-bar { flex-direction: column; gap: 6px; top: 50px; }
+    .mappa-container { padding: 16px; }
+  }
+</style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="container">
+      <a href="index.html" class="site-name">Lingua e Cultura Latina</a>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="latino5-classico.html">Latino 5</a>
+        <a href="raccoglitore-testi.html">Testi</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Header -->
+  <div class="page-header">
+    <h1>Petronio e il Satyricon &mdash; L&rsquo;antiromanzo latino</h1>
+    <div class="divider"></div>
+    <p class="subtitle">Lezione interattiva &mdash; Latino 5 Classico</p>
+  </div>
+
+  <div class="container">
+    <a href="latino5-classico.html" class="back-link">&larr; Torna a Latino 5 Classico</a>
+
+    <!-- Punteggio -->
+    <div class="score-bar">
+      <span class="score-label">Punteggio</span>
+      <span class="score-value" id="scoreDisplay">0 / 12</span>
+    </div>
+
+    <!-- ═══════════════════ DO NOW ═══════════════════ -->
+    <div class="tlac-box tlac-donow">
+      <div class="tlac-label">Do Now &mdash; Attivit&agrave; di avvio (3 min)</div>
+      <p>Scrivi sul quaderno una risposta in 3&ndash;4 righe: <strong>&laquo;Pensa a un film o una serie TV che prende in giro un genere cinematografico (es. <em>Scary Movie</em> per l&rsquo;horror, <em>Non ci resta che piangere</em> per il film storico). Come funziona la parodia? Cosa la rende divertente?&raquo;</strong></p>
+      <p>Questa lezione esplorer&agrave; un autore romano che, quasi duemila anni fa, ha fatto esattamente la stessa cosa con il romanzo d&rsquo;amore e d&rsquo;avventura del suo tempo.</p>
+    </div>
+
+    <!-- ═══════════════════ INTRODUZIONE ═══════════════════ -->
+    <div class="lesson-intro">
+      <h2>Chi era Petronio?</h2>
+      <div style="margin-bottom: 14px;">
+        <span class="context-badge autore">C. Petronius Arbiter</span>
+        <span class="context-badge opera">Satyricon (prosimetro)</span>
+        <span class="context-badge data">Et&agrave; neroniana (54&ndash;68 d.C.)</span>
+        <span class="context-badge genere">Romanzo &bull; Satira &bull; Parodia</span>
+      </div>
+      <p>Tacito ci offre un ritratto paradossale: Petronio &egrave; un uomo che dedica le giornate al sonno e le notti ai piaceri, eppure come proconsole e console si rivela energico e capace. Nerone lo accoglie tra i suoi intimi come <span class="lat-cite">elegantiae arbiter</span> &mdash; giudice della raffinatezza: nulla &egrave; elegante se Petronio non l&rsquo;ha approvato.</p>
+      <p>Il suo suicidio nel 66 d.C. &egrave; l&rsquo;ultima parodia: dove Seneca muore da filosofo stoico, Petronio si taglia le vene e poi le richiude a piacimento, chiacchiera con gli amici, ascolta canti leggeri, distribuisce doni e frustate ai servi. Nel testamento descrive le perversioni di Nerone e spezza il sigillo perch&eacute; nessun altro possa essere ricattato.</p>
+      <span class="nota-fonte">Fonte: Tacito, Annales XVI, 18&ndash;19</span>
+    </div>
+
+    <!-- ═══════════════════ COLD CALL 1 ═══════════════════ -->
+    <div class="tlac-box tlac-coldcall">
+      <div class="tlac-label">Fermati e rispondi</div>
+      <p><strong>In cosa il suicidio di Petronio si distingue da quello &laquo;classico&raquo; di un filosofo stoico come Seneca? Che rapporto vedi tra il modo in cui muore e il tipo di letteratura che scrive?</strong></p>
+      <button class="tlac-reveal-btn" onclick="toggleHint(this)">Mostra spunto</button>
+      <div class="tlac-hint">Seneca muore citando la filosofia, in un&rsquo;imitazione consapevole di Socrate: &egrave; una morte &laquo;seria&raquo;, coerente con il suo insegnamento. Petronio muore dissacrando il modello: niente filosofia, niente parole sublimi, solo canti leggeri e gesti ironici. La sua morte &egrave; una parodia della &laquo;bella morte&raquo; stoica &mdash; esattamente come il <em>Satyricon</em> &egrave; una parodia del romanzo idealizzato.</div>
+    </div>
+
+    <!-- ═══════════════════ IL SATYRICON ═══════════════════ -->
+    <div class="content-section">
+      <div class="content-header">
+        <h2>Il Satyricon: un&rsquo;opera misteriosa</h2>
+        <span class="section-ref">Forma, struttura, genere</span>
+      </div>
+      <div class="content-body">
+        <h3>Un&rsquo;opera inclassificabile</h3>
+        <p>Il titolo <span class="lat-cite">Satyricon</span> (genitivo plurale neutro, &laquo;delle cose satiriche&raquo;, dal mondo dei satiri) introduce un&rsquo;opera che sfugge a ogni categoria. La forma &egrave; il <strong>prosimetro</strong>: alternanza di prosa e poesia, gi&agrave; tipica della satira menippea. Il testo ci &egrave; giunto <strong>frammentario</strong> &mdash; conserviamo parti dei libri XIV, XV e XVI di un&rsquo;opera forse molto pi&ugrave; lunga (16&ndash;20 libri).</p>
+        <p>Il protagonista <strong>Encolpio</strong> racconta in prima persona le sue avventure picarescheluogo attraverso le citt&agrave; della Campania, accompagnato dal giovane <strong>Gitone</strong> (suo amante) e da una galleria di personaggi grotteschi.</p>
+
+        <h3>I personaggi principali</h3>
+        <p style="font-size:14px; color: var(--text-dim); margin-bottom: 14px;">Clicca su ciascun personaggio per i dettagli.</p>
+        <div class="personaggi-grid">
+          <div class="personaggio-card" onclick="this.classList.toggle('open')">
+            <div class="pc-nome">Encolpio</div>
+            <div class="pc-ruolo">Protagonista e narratore</div>
+            <div class="pc-desc">Giovane colto ma sfortunato, racconta le sue avventure in prima persona. Ingenuo, si prende troppo sul serio e interpreta la sua vita miserabile attraverso i modelli dell&rsquo;epica omerica. &Egrave; il narratore <em>inaffidabile</em> attraverso cui Petronio costruisce l&rsquo;ironia.</div>
+          </div>
+          <div class="personaggio-card" onclick="this.classList.toggle('open')">
+            <div class="pc-nome">Gitone</div>
+            <div class="pc-ruolo">Giovane amante di Encolpio</div>
+            <div class="pc-desc">Bellissimo e volubile, passa da un protettore all&rsquo;altro. La sua infedelt&agrave; scatena le crisi eroiche (e ridicole) di Encolpio.</div>
+          </div>
+          <div class="personaggio-card" onclick="this.classList.toggle('open')">
+            <div class="pc-nome">Ascilto</div>
+            <div class="pc-ruolo">Avventuriero, rivale di Encolpio</div>
+            <div class="pc-desc">Compagno di viaggio e rivale nella contesa per Gitone. Dopo il litigio, scompare dal racconto.</div>
+          </div>
+          <div class="personaggio-card" onclick="this.classList.toggle('open')">
+            <div class="pc-nome">Trimalchione</div>
+            <div class="pc-ruolo">Liberto arricchito</div>
+            <div class="pc-desc">Protagonista della celebre <em>Cena</em>. Ex schiavo divenuto ricchissimo, ostenta la sua fortuna con cattivo gusto sconvolgente. Privo di cultura autentica, storpia citazioni e si inventa genealogie. Ossessionato dalla morte, fa preparare il suo sepolcro e recita il proprio epitaffio.</div>
+          </div>
+          <div class="personaggio-card" onclick="this.classList.toggle('open')">
+            <div class="pc-nome">Eumolpo</div>
+            <div class="pc-ruolo">Poeta vagabondo</div>
+            <div class="pc-desc">Anziano e insaziabile, declama continuamente i suoi versi in momenti inopportuni. Orchestratore della truffa ai cacciatori di eredit&agrave; a Crotone. Il suo testamento &laquo;cannibalistico&raquo; chiude i frammenti conservati.</div>
+          </div>
+        </div>
+
+        <h3>La trama (punti salienti)</h3>
+        <p>Il racconto segue Encolpio attraverso una serie di avventure picarescheluogo: un dibattito sulla decadenza dell&rsquo;oratoria con il retore Agamennone; riti orgiastici in onore di Priapo; il celebre banchetto nella casa di Trimalchione (<em>Cena Trimalchionis</em>); il triangolo amoroso con Gitone e Ascilto; l&rsquo;incontro con Eumolpo e il viaggio in nave con tempesta; la truffa ai cacciatori di eredit&agrave; a Crotone; e infine l&rsquo;impotenza sessuale di Encolpio, che si crede perseguitato dal dio Priapo.</p>
+      </div>
+    </div>
+
+    <!-- ═══════════════════ ROMANZO GRECO vs SATYRICON ═══════════════════ -->
+    <div class="content-section">
+      <div class="content-header">
+        <h2>L&rsquo;anti-romanzo: Satyricon vs Romanzo greco</h2>
+        <span class="section-ref">Il ribaltamento sistematico</span>
+      </div>
+      <div class="content-body">
+        <p>Nel I secolo d.C. era molto diffuso il <strong>romanzo greco d&rsquo;amore e d&rsquo;avventura</strong>: due protagonisti bellissimi si innamorano, vengono separati da mille peripezie, preservano la castit&agrave;, si riuniscono nel lieto fine. Petronio conosceva benissimo questo schema &mdash; e lo ribalta sistematicamente.</p>
+
+        <div class="confronto-grid">
+          <div class="cg-header">Elemento</div>
+          <div class="cg-header">Romanzo greco</div>
+          <div class="cg-header">Satyricon</div>
+
+          <div class="cg-label">Coppia</div>
+          <div class="cg-cell greco"><span class="cg-highlight">Eterosessuale:</span> lui + lei, entrambi bellissimi e nobili</div>
+          <div class="cg-cell"><span class="cg-highlight">Omosessuale:</span> Encolpio + Gitone, anti-eroi senza scrupoli</div>
+
+          <div class="cg-label">Amore</div>
+          <div class="cg-cell greco"><span class="cg-highlight">Casto e idealizzato:</span> fedelt&agrave; assoluta nonostante le prove</div>
+          <div class="cg-cell"><span class="cg-highlight">Sesso esplicito:</span> tradimenti continui, volubilt&agrave;</div>
+
+          <div class="cg-label">Eroi</div>
+          <div class="cg-cell greco">Nobili e virtuosi, modelli morali</div>
+          <div class="cg-cell">Pitocchi e senza scrupoli, vagabondi</div>
+
+          <div class="cg-label">Tono</div>
+          <div class="cg-cell greco"><span class="cg-highlight">Serio e patetico:</span> sofferenza autentica</div>
+          <div class="cg-cell"><span class="cg-highlight">Comico e satirico:</span> sofferenza grottesca</div>
+
+          <div class="cg-label">Divinit&agrave;</div>
+          <div class="cg-cell greco">Afrodite, Eros &mdash; dei dell&rsquo;amore sublime</div>
+          <div class="cg-cell"><span class="cg-highlight">Priapo</span> &mdash; dio della sessualit&agrave; grottesca</div>
+
+          <div class="cg-label">Finale</div>
+          <div class="cg-cell greco"><span class="cg-highlight">Lieto fine:</span> matrimonio e felicit&agrave;</div>
+          <div class="cg-cell"><span class="cg-highlight">Ignoto:</span> il testo &egrave; frammentario</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════ TURN AND TALK 1 ═══════════════════ -->
+    <div class="tlac-box tlac-turntalk">
+      <div class="tlac-label">Turn and Talk &mdash; Discuti con il compagno (3 min)</div>
+      <p><strong>Se il Satyricon ribalta sistematicamente il romanzo greco, possiamo dire che ne dipende? In che senso la parodia &egrave; anche un omaggio al modello che distrugge?</strong> Pensate insieme a un esempio tratto dal cinema o dalla musica.</p>
+    </div>
+
+    <!-- ═══════════════════ LA STRATEGIA DELLA PARODIA ═══════════════════ -->
+    <div class="content-section">
+      <div class="content-header">
+        <h2>Il meccanismo della parodia</h2>
+        <span class="section-ref">Autore nascosto vs Narratore mitomane</span>
+      </div>
+      <div class="content-body">
+        <h3>Chi racconta il Satyricon?</h3>
+        <p>Questa &egrave; la domanda chiave per capire Petronio. Formalmente il narratore &egrave; <strong>Encolpio</strong>, che racconta in prima persona. Ma Encolpio &egrave; un <strong>narratore inaffidabile</strong>: ingenuo, esaltato, interpreta tutto come epica. Dietro di lui, nascosto, c&rsquo;&egrave; il vero autore &mdash; <strong>Petronio</strong> &mdash; che controlla il significato profondo e guida il lettore verso l&rsquo;ironia.</p>
+
+        <div class="confronto-grid" style="grid-template-columns: auto 1fr 1fr;">
+          <div class="cg-header">Aspetto</div>
+          <div class="cg-header">Petronio (autore nascosto)</div>
+          <div class="cg-header">Encolpio (narratore mitomane)</div>
+
+          <div class="cg-label">Intelligenza</div>
+          <div class="cg-cell greco">Intelligente e colto</div>
+          <div class="cg-cell">Colto ma ingenuo</div>
+
+          <div class="cg-label">Tono</div>
+          <div class="cg-cell greco">Ironico e distaccato</div>
+          <div class="cg-cell">Esaltato ed emotivo</div>
+
+          <div class="cg-label">Visione</div>
+          <div class="cg-cell greco">Vede la realt&agrave; com&rsquo;&egrave;</div>
+          <div class="cg-cell">Interpreta tutto come epica</div>
+
+          <div class="cg-label">Funzione</div>
+          <div class="cg-cell greco">Guida il lettore all&rsquo;ironia</div>
+          <div class="cg-cell">Non capisce di essere ridicolo</div>
+        </div>
+
+        <h3>Esempio: Encolpio come Achille (Sat. 81)</h3>
+        <p>Quando Ascilto gli porta via Gitone, Encolpio piange sulla spiaggia e si paragona ad Achille privato di Briseide. Si percuote il petto, geme, invoca la terra e il mare. Ma la situazione &egrave; tutt&rsquo;altro che epica: un ragazzino volubile se n&rsquo;&egrave; andato con un altro.</p>
+
+        <div class="brano-box">
+          <div class="brano-titolo">Sat. 81 &mdash; Il lamento di Encolpio</div>
+          <div class="brano-testo">
+            Encolpio si rifugia in una pensioncina in riva al mare, si percuote il petto e geme: &laquo;Ma perch&eacute; la terra non mi ha voluto inghiottire? Perch&eacute; non mi ha risucchiato il mare che infierisce anche contro gli innocenti?&raquo;. Si paragona a un eroe che ha scampato la sabbia del circo e assassinato un ospite, per finire abbandonato e senza il becco di un quattrino. Poi scaglia invettive contro Gitone e Ascilto e giura vendetta nel sangue.
+          </div>
+          <div class="brano-commento">
+            <strong>Il meccanismo parodico:</strong> cosa vede Encolpio? Una tragedia epica degna dell&rsquo;Iliade. Cosa vediamo noi lettori, guidati da Petronio? Una farsa comica &mdash; un ragazzino infedele se ne va con un altro. Il paragone con Achille &egrave; grottesco e inappropriato. La parodia colpisce simultaneamente tre bersagli: il personaggio (ridicolo e presuntuoso), la cultura retorica scolastica (che insegna a vedere tutto attraverso i classici), e il romanzo greco idealizzato.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════ COLD CALL 2 ═══════════════════ -->
+    <div class="tlac-box tlac-coldcall">
+      <div class="tlac-label">Fermati e rispondi</div>
+      <p><strong>Perch&eacute; Petronio sceglie un narratore inaffidabile invece di raccontare direttamente? Che effetto produce sul lettore questa doppia prospettiva?</strong></p>
+      <button class="tlac-reveal-btn" onclick="toggleHint(this)">Mostra spunto</button>
+      <div class="tlac-hint">Con il narratore inaffidabile, il lettore deve fare un lavoro attivo: capire che la verit&agrave; non &egrave; quella che dice Encolpio. L&rsquo;ironia nasce dallo scarto tra la percezione esaltata del narratore e la realt&agrave; banale dei fatti. &Egrave; una tecnica narrativa modernissima, che ritroveremo nel romanzo del Novecento.</div>
+    </div>
+
+    <!-- ═══════════════════ LA CENA TRIMALCHIONIS ═══════════════════ -->
+    <div class="content-section">
+      <div class="content-header">
+        <h2>La Cena Trimalchionis</h2>
+        <span class="section-ref">L&rsquo;episodio pi&ugrave; celebre del Satyricon</span>
+      </div>
+      <div class="content-body">
+        <h3>Chi &egrave; Trimalchione?</h3>
+        <p>Un liberto (ex schiavo) che ha fatto fortuna nel commercio. Ricchissimo ma privo di cultura e di gusto, ostenta la sua ricchezza in modo grottesco e volgare. Storpia citazioni, confonde gli episodi mitologici, si inventa genealogie culturali. &Egrave; ossessionato dalla morte: fa preparare il suo sepolcro e recita il proprio epitaffio davanti ai commensali.</p>
+
+        <h3>L&rsquo;ingresso di Trimalchione (Sat. 32&ndash;33)</h3>
+        <div class="brano-box">
+          <div class="brano-titolo">Sat. 32&ndash;33 &mdash; L&rsquo;entrata del padrone di casa</div>
+          <div class="brano-testo">
+            Trimalchione fa il suo ingresso trasportato a suon di musica, sdraiato su cuscini, con la testa pelata che spunta da un mantello rosso fuoco. Ha un foulard orlato di porpora, un enorme anello dorato al mignolo, un bracciale d&rsquo;oro al bicipite. Si scusa per il ritardo, chiede il permesso di finire la partita &mdash; al posto delle pedine bianche e nere ha monete d&rsquo;oro e d&rsquo;argento. Poi arriva un vassoio con una gallina di legno che cova uova di pavone: dentro ogni uovo, un beccaccino immerso in salsa piccante.
+          </div>
+          <div class="brano-commento">
+            <strong>Il realismo petroniano:</strong> ogni dettaglio &mdash; gli anelli, il mantello, la partita con monete &mdash; costruisce il ritratto di un uomo che confonde ricchezza e raffinatezza. Il cattivo gusto non &egrave; solo comico: rivela una mentalit&agrave;, una classe sociale, un mondo.
+          </div>
+        </div>
+
+        <h3>Il latino volgare nella Cena</h3>
+        <p>Petronio fa parlare i liberti con la <strong>lingua popolare autentica</strong> &mdash; una rarit&agrave; assoluta nella letteratura latina. I commensali usano errori grammaticali tipici del parlato, parole gergali mai attestate nella letteratura alta, proverbi e modi di dire quotidiani, citazioni sbagliate e storpiature della cultura. &Egrave; un documento linguistico straordinario: il <em>Satyricon</em> &egrave; la nostra migliore finestra sul latino parlato.</p>
+      </div>
+    </div>
+
+    <!-- ═══════════════════ STRETCH IT ═══════════════════ -->
+    <div class="tlac-box tlac-stretch">
+      <div class="tlac-label">Stretch It &mdash; Approfondisci</div>
+      <p><strong>Il realismo linguistico di Petronio &egrave; un&rsquo;operazione complessa: far parlare i personaggi &laquo;male&raquo; richiede una padronanza perfetta della lingua &laquo;corretta&raquo;. In che senso si pu&ograve; dire che Petronio &egrave; un virtuoso dello stile?</strong></p>
+      <button class="tlac-reveal-btn" onclick="toggleHint(this)">Mostra spunto</button>
+      <div class="tlac-hint">Per riprodurre in modo credibile gli errori del parlato popolare, Petronio deve conoscere perfettamente sia la norma grammaticale sia le sue deviazioni. &Egrave; come un attore che interpreta un personaggio ignorante: per farlo bene, deve essere colto. La variazione stilistica del <em>Satyricon</em> &mdash; dal latino letterario di Encolpio al volgare dei liberti alla poesia elevata di Eumolpo &mdash; &egrave; un&rsquo;esibizione di virtuosismo senza pari nella letteratura antica.</div>
+    </div>
+
+    <!-- ═══════════════════ TURN AND TALK 2 ═══════════════════ -->
+    <div class="tlac-box tlac-turntalk">
+      <div class="tlac-label">Turn and Talk &mdash; Discuti con il compagno (2 min)</div>
+      <p><strong>Trimalchione &egrave; un personaggio solo comico, o c&rsquo;&egrave; qualcosa di tragico nella sua ossessione per la morte e nel suo bisogno di riconoscimento? Petronio lo giudica moralmente oppure si limita a osservarlo?</strong></p>
+    </div>
+
+    <!-- ═══════════════════ MAPPA CONCETTUALE ═══════════════════ -->
+    <div class="content-section">
+      <div class="content-header">
+        <h2>Mappa concettuale interattiva</h2>
+        <span class="section-ref">Passa il mouse sui nodi per approfondire</span>
+      </div>
+      <div class="content-body">
+        <div class="mappa-container">
+          <svg class="mappa-svg" viewBox="0 0 920 560" xmlns="http://www.w3.org/2000/svg">
+            <!-- Linee di connessione livello 1 -->
+            <line x1="460" y1="60" x2="160" y2="160" stroke="#d4c9b8" stroke-width="2"/>
+            <line x1="460" y1="60" x2="460" y2="160" stroke="#d4c9b8" stroke-width="2"/>
+            <line x1="460" y1="60" x2="760" y2="160" stroke="#d4c9b8" stroke-width="2"/>
+            <!-- Sotto-nodi livello 2 -->
+            <line x1="160" y1="210" x2="80" y2="310" stroke="#d4c9b8" stroke-width="2"/>
+            <line x1="160" y1="210" x2="240" y2="310" stroke="#d4c9b8" stroke-width="2"/>
+            <line x1="460" y1="210" x2="380" y2="310" stroke="#d4c9b8" stroke-width="2"/>
+            <line x1="460" y1="210" x2="540" y2="310" stroke="#d4c9b8" stroke-width="2"/>
+            <line x1="760" y1="210" x2="680" y2="310" stroke="#d4c9b8" stroke-width="2"/>
+            <line x1="760" y1="210" x2="840" y2="310" stroke="#d4c9b8" stroke-width="2"/>
+            <!-- Freccia meccanismo parodico -->
+            <line x1="460" y1="360" x2="460" y2="440" stroke="#b8915a" stroke-width="2.5" stroke-dasharray="6,4"/>
+            <!-- Freccia importanza -->
+            <line x1="460" y1="490" x2="460" y2="520" stroke="#b8915a" stroke-width="2" stroke-dasharray="4,3"/>
+
+            <!-- Nodo centrale: PETRONIO -->
+            <g class="mappa-node" data-info="C. Petronius Arbiter. Console nel 62 d.C., elegantiae arbiter di Nerone. Suicidio nel 66 d.C.: una parodia della bella morte stoica.">
+              <ellipse cx="460" cy="42" rx="140" ry="28" fill="#2c2416" stroke="#b8915a" stroke-width="2.5"/>
+              <text x="460" y="48" text-anchor="middle" fill="#f5f0e8" font-family="Libre Baskerville, serif" font-size="16" font-weight="700">PETRONIO</text>
+            </g>
+
+            <!-- 3 rami principali -->
+            <g class="mappa-node" data-info="Il Satyricon ribalta il romanzo greco: coppia omosessuale, anti-eroi, tono comico, Priapo al posto di Afrodite. L'anti-romanzo.">
+              <rect x="50" y="160" width="220" height="50" rx="12" fill="#e8f4f8" stroke="#6db5d4" stroke-width="2"/>
+              <text x="160" y="190" text-anchor="middle" fill="#1a6b8a" font-family="Libre Baskerville, serif" font-size="14" font-weight="700">Parodia</text>
+            </g>
+
+            <g class="mappa-node" data-info="La Cena Trimalchionis: realismo linguistico senza precedenti. Latino volgare, osservazione sociale senza moralismo.">
+              <rect x="340" y="160" width="240" height="50" rx="12" fill="#fef3cd" stroke="#f4d35e" stroke-width="2"/>
+              <text x="460" y="190" text-anchor="middle" fill="#8a6a0a" font-family="Libre Baskerville, serif" font-size="14" font-weight="700">Realismo</text>
+            </g>
+
+            <g class="mappa-node" data-info="Petronio (autore nascosto) controlla il significato; Encolpio (narratore mitomane) non capisce di essere ridicolo. Doppio livello di lettura.">
+              <rect x="640" y="160" width="240" height="50" rx="12" fill="#e8f0e8" stroke="#78c878" stroke-width="2"/>
+              <text x="760" y="190" text-anchor="middle" fill="#2a7a2a" font-family="Libre Baskerville, serif" font-size="14" font-weight="700">Ironia</text>
+            </g>
+
+            <!-- Sotto-nodi -->
+            <g class="mappa-node" data-info="Ribaltamento del romanzo greco: coppia omosessuale vs eterosessuale, anti-eroi vs eroi, tono comico vs serio.">
+              <rect x="10" y="310" width="150" height="46" rx="10" fill="#fff" stroke="#6db5d4" stroke-width="1.5"/>
+              <text x="85" y="338" text-anchor="middle" fill="#2c2416" font-family="Cardo, serif" font-size="13">Anti-romanzo</text>
+            </g>
+
+            <g class="mappa-node" data-info="Prosimetro (prosa + poesia). Mescola romanzo, satira menippea, racconto milesio. Genere inclassificabile.">
+              <rect x="170" y="310" width="150" height="46" rx="10" fill="#fff" stroke="#6db5d4" stroke-width="1.5"/>
+              <text x="245" y="338" text-anchor="middle" fill="#2c2416" font-family="Cardo, serif" font-size="13">Prosimetro</text>
+            </g>
+
+            <g class="mappa-node" data-info="La Cena Trimalchionis: banchetto del liberto arricchito. Osservazione di una classe sociale emergente, senza giudizio morale.">
+              <rect x="310" y="310" width="150" height="46" rx="10" fill="#fff" stroke="#f4d35e" stroke-width="1.5"/>
+              <text x="385" y="338" text-anchor="middle" fill="#2c2416" font-family="Cardo, serif" font-size="13">Cena</text>
+            </g>
+
+            <g class="mappa-node" data-info="Lingua dei liberti: errori grammaticali, parole gergali, proverbi popolari. Documento unico del latino parlato.">
+              <rect x="470" y="310" width="150" height="46" rx="10" fill="#fff" stroke="#f4d35e" stroke-width="1.5"/>
+              <text x="545" y="338" text-anchor="middle" fill="#2c2416" font-family="Cardo, serif" font-size="13">Latino volgare</text>
+            </g>
+
+            <g class="mappa-node" data-info="Petronio: autore nascosto, intelligente, ironico, distaccato. Controlla il significato profondo e guida il lettore.">
+              <rect x="610" y="310" width="150" height="46" rx="10" fill="#fff" stroke="#78c878" stroke-width="1.5"/>
+              <text x="685" y="338" text-anchor="middle" fill="#2c2416" font-family="Cardo, serif" font-size="13">Autore nascosto</text>
+            </g>
+
+            <g class="mappa-node" data-info="Encolpio: narratore mitomane. Colto ma ingenuo, vive tutto come epica. Lo scarto tra la sua percezione e la realt&agrave; genera l'ironia.">
+              <rect x="770" y="310" width="150" height="46" rx="10" fill="#fff" stroke="#78c878" stroke-width="1.5"/>
+              <text x="845" y="338" text-anchor="middle" fill="#2c2416" font-family="Cardo, serif" font-size="12">Narratore mitomane</text>
+            </g>
+
+            <!-- Nodo meccanismo parodico -->
+            <g class="mappa-node" data-info="Encolpio vede: tragedia epica. Noi lettori vediamo: farsa comica. Lo scarto genera la parodia, che colpisce il personaggio, la retorica scolastica e il romanzo idealizzato.">
+              <rect x="310" y="440" width="300" height="46" rx="12" fill="#b8915a" stroke="#2c2416" stroke-width="2"/>
+              <text x="460" y="468" text-anchor="middle" fill="#fff" font-family="Libre Baskerville, serif" font-size="14" font-weight="700">MECCANISMO PARODICO</text>
+            </g>
+
+            <!-- Nodo importanza -->
+            <g class="mappa-node" data-info="Unico romanzo latino esteso. Sperimentazione formale e linguistica unica. Ironia senza giudizio morale (modernissimo!). Ha influenzato Flaubert, Joyce, Fellini.">
+              <ellipse cx="460" cy="540" rx="170" ry="22" fill="#2c2416" stroke="#b8915a" stroke-width="2"/>
+              <text x="460" y="546" text-anchor="middle" fill="#f5f0e8" font-family="Cardo, serif" font-size="13" font-weight="700">Unico romanzo latino &bull; Modernissimo</text>
+            </g>
+          </svg>
+          <div class="mappa-tooltip" id="mappaTooltip"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════ QUIZ ═══════════════════ -->
+    <div class="esercizio-section" id="esercizi">
+      <h2>Check for Understanding &mdash; Quiz</h2>
+
+      <h3>A. Petronio e il Satyricon</h3>
+
+      <!-- Quiz 1 -->
+      <div class="quiz-item" data-quiz="q1">
+        <div class="quiz-q">1. Come definisce Tacito il ruolo di Petronio alla corte di Nerone?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">Magister eloquentiae &mdash; maestro di eloquenza</div>
+          <div class="quiz-option" data-correct="true" onclick="checkQuiz(this)">Elegantiae arbiter &mdash; giudice della raffinatezza</div>
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">Princeps senatus &mdash; primo del senato</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <!-- Quiz 2 -->
+      <div class="quiz-item" data-quiz="q2">
+        <div class="quiz-q">2. Che cos&rsquo;&egrave; un prosimetro?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">Un&rsquo;opera scritta interamente in versi</div>
+          <div class="quiz-option" data-correct="true" onclick="checkQuiz(this)">Un&rsquo;opera che alterna prosa e poesia</div>
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">Un&rsquo;opera teatrale con coro e dialoghi</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <!-- Quiz 3 -->
+      <div class="quiz-item" data-quiz="q3">
+        <div class="quiz-q">3. In che modo il Satyricon ribalta il romanzo greco?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">Sostituisce il lieto fine con un finale tragico</div>
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">Mantiene lo stesso schema ma in ambientazione romana</div>
+          <div class="quiz-option" data-correct="true" onclick="checkQuiz(this)">Inverte sistematicamente gli elementi: coppia omosessuale, anti-eroi, tono comico, sessualit&agrave; esplicita</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <!-- Quiz 4 -->
+      <div class="quiz-item" data-quiz="q4">
+        <div class="quiz-q">4. Perch&eacute; Encolpio &egrave; definito un &laquo;narratore inaffidabile&raquo;?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">Perch&eacute; mente deliberatamente al lettore</div>
+          <div class="quiz-option" data-correct="true" onclick="checkQuiz(this)">Perch&eacute; interpreta le sue avventure banali come epica omerica, senza rendersi conto di essere ridicolo</div>
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">Perch&eacute; racconta fatti avvenuti molti anni prima e la memoria lo tradisce</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <h3>B. La Cena Trimalchionis</h3>
+
+      <!-- Quiz 5 -->
+      <div class="quiz-item" data-quiz="q5">
+        <div class="quiz-q">5. Chi &egrave; Trimalchione?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">Un senatore romano colto e raffinato</div>
+          <div class="quiz-option" data-correct="true" onclick="checkQuiz(this)">Un liberto arricchito che ostenta la sua fortuna con cattivo gusto</div>
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">Un poeta vagabondo che declama i suoi versi durante i banchetti</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <!-- Quiz 6 -->
+      <div class="quiz-item" data-quiz="q6">
+        <div class="quiz-q">6. Qual &egrave; l&rsquo;importanza linguistica della Cena Trimalchionis?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="true" onclick="checkQuiz(this)">Documenta il latino volgare parlato: errori grammaticali, parole gergali, proverbi popolari</div>
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">Contiene il latino pi&ugrave; elegante e classico della letteratura romana</div>
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">Rappresenta il primo testo scritto interamente in greco</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <h3>C. Analisi critica</h3>
+
+      <!-- Quiz 7 -->
+      <div class="quiz-item" data-quiz="q7">
+        <div class="quiz-q">7. In Sat. 81, Encolpio piange sulla spiaggia perch&eacute; Ascilto gli ha portato via Gitone. A chi si paragona?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">A Ulisse che piange per Penelope</div>
+          <div class="quiz-option" data-correct="true" onclick="checkQuiz(this)">A Achille privato di Briseide</div>
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">A Enea che abbandona Didone</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <!-- Quiz 8 -->
+      <div class="quiz-item" data-quiz="q8">
+        <div class="quiz-q">8. Quale divinit&agrave; perseguita il protagonista del Satyricon?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">Poseidone (come nell&rsquo;Odissea)</div>
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">Afrodite (come nel romanzo greco)</div>
+          <div class="quiz-option" data-correct="true" onclick="checkQuiz(this)">Priapo (dio della sessualit&agrave; grottesca)</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <!-- Quiz 9 -->
+      <div class="quiz-item" data-quiz="q9">
+        <div class="quiz-q">9. La parodia petroniana colpisce simultaneamente tre bersagli. Quali?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">L&rsquo;imperatore Nerone, il Senato e la plebe</div>
+          <div class="quiz-option" data-correct="true" onclick="checkQuiz(this)">Il personaggio Encolpio, la cultura retorica scolastica e il romanzo greco idealizzato</div>
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">La filosofia stoica, la religione tradizionale e la poesia epica</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <!-- Quiz 10 -->
+      <div class="quiz-item" data-quiz="q10">
+        <div class="quiz-q">10. In cosa il suicidio di Petronio si differenzia da quello di Seneca?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">Petronio muore combattendo, Seneca si avvelena</div>
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">Entrambi muoiono allo stesso modo, citando la filosofia</div>
+          <div class="quiz-option" data-correct="true" onclick="checkQuiz(this)">Seneca muore da filosofo stoico; Petronio dissacra il modello con canti leggeri, doni e ironia</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <!-- Quiz 11 -->
+      <div class="quiz-item" data-quiz="q11">
+        <div class="quiz-q">11. Chi &egrave; Eumolpo nel Satyricon?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="true" onclick="checkQuiz(this)">Un poeta vagabondo che declama versi e organizza la truffa ai cacciatori di eredit&agrave;</div>
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">Un retore che insegna nella scuola di Agamennone</div>
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">Il padrone di casa del banchetto</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <!-- Quiz 12 -->
+      <div class="quiz-item" data-quiz="q12">
+        <div class="quiz-q">12. Perch&eacute; il Satyricon &egrave; considerato un&rsquo;opera &laquo;modernissima&raquo;?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">Perch&eacute; usa una lingua semplice e accessibile a tutti</div>
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">Perch&eacute; &egrave; stato riscoperto solo nel XX secolo</div>
+          <div class="quiz-option" data-correct="true" onclick="checkQuiz(this)">Per il narratore inaffidabile, l&rsquo;ironia senza giudizio morale, la sperimentazione linguistica: tecniche riprese dal romanzo moderno (Flaubert, Joyce, Fellini)</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════ EXIT TICKET ═══════════════════ -->
+    <div class="tlac-box tlac-exit">
+      <div class="tlac-label">Exit Ticket &mdash; Verifica finale (5 min)</div>
+      <p>Rispondi per iscritto su un foglio e consegna al professore:</p>
+      <p><strong>1.</strong> Spiega in 4&ndash;5 righe il meccanismo dell&rsquo;<em>autore nascosto vs narratore mitomane</em> e fai un esempio concreto tratto dalla lezione.</p>
+      <p><strong>2.</strong> Indica tre elementi che il Satyricon inverte rispetto al romanzo greco d&rsquo;amore e d&rsquo;avventura.</p>
+      <p><strong>3.</strong> Perch&eacute; la Cena Trimalchionis &egrave; un documento linguistico straordinario? In che modo il latino dei liberti si differenzia dal latino letterario?</p>
+    </div>
+
+    <!-- Strumenti Correlati -->
+    <section class="tools-section">
+      <h2>Strumenti Correlati</h2>
+      <div class="tools-grid">
+        <a href="latino5-classico.html" class="tool-link">
+          <span class="tool-icon">&#x1F4D8;</span>
+          <span class="tool-name">Latino 5 Classico</span>
+        </a>
+        <a href="raccoglitore-testi.html" class="tool-link">
+          <span class="tool-icon">&#x1F4DA;</span>
+          <span class="tool-name">Raccoglitore Testi</span>
+        </a>
+        <a href="analisi_latino.html" class="tool-link">
+          <span class="tool-icon">&#x1F4DD;</span>
+          <span class="tool-name">Analisi Testi</span>
+        </a>
+        <a href="pdf/5AC_Dispensa25-26.pdf" class="tool-link" target="_blank">
+          <span class="tool-icon">&#x1F4C4;</span>
+          <span class="tool-name">PDF Dispensa</span>
+        </a>
+      </div>
+    </section>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p><strong>Prof. Andrea Vaccaro</strong></p>
+    <p>Lingua e Cultura Latina &mdash; Liceo Classico e Liceo Scientifico</p>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="raccoglitore-testi.html">Raccoglitore Testi</a>
+      <a href="strumenti/glossario-eulalia.html">Strumenti</a>
+    </div>
+  </footer>
+
+<script>
+// ═══ TLAC HINT TOGGLE ═══
+function toggleHint(btn) {
+  var hint = btn.nextElementSibling;
+  hint.classList.toggle('visible');
+  btn.textContent = hint.classList.contains('visible') ? 'Nascondi spunto' : 'Mostra spunto';
+}
+
+// ═══ MAPPA CONCETTUALE ═══
+(function() {
+  var tooltip = document.getElementById('mappaTooltip');
+  var nodes = document.querySelectorAll('.mappa-node');
+
+  nodes.forEach(function(node) {
+    node.addEventListener('mouseenter', function(e) {
+      var info = node.getAttribute('data-info');
+      if (!info) return;
+      tooltip.textContent = info;
+      tooltip.style.display = 'block';
+      positionTooltip(e);
+    });
+
+    node.addEventListener('mousemove', function(e) {
+      positionTooltip(e);
+    });
+
+    node.addEventListener('mouseleave', function() {
+      tooltip.style.display = 'none';
+    });
+  });
+
+  function positionTooltip(e) {
+    var x = e.clientX + 16;
+    var y = e.clientY - 10;
+    if (x + 320 > window.innerWidth) {
+      x = e.clientX - 320;
+    }
+    if (y + 100 > window.innerHeight) {
+      y = e.clientY - 100;
+    }
+    tooltip.style.left = x + 'px';
+    tooltip.style.top = y + 'px';
+  }
+})();
+
+// ═══ QUIZ ═══
+var score = 0;
+var totalQuiz = 12;
+
+function checkQuiz(option) {
+  var item = option.closest('.quiz-item');
+  if (item.classList.contains('answered')) return;
+
+  item.classList.add('answered');
+  var isCorrect = option.getAttribute('data-correct') === 'true';
+  var feedback = item.querySelector('.quiz-feedback');
+  var allOptions = item.querySelectorAll('.quiz-option');
+
+  allOptions.forEach(function(opt) {
+    opt.classList.add('disabled');
+    if (opt.getAttribute('data-correct') === 'true') {
+      opt.classList.add('correct');
+    }
+  });
+
+  if (isCorrect) {
+    option.classList.add('correct');
+    feedback.className = 'quiz-feedback show correct-fb';
+    feedback.textContent = 'Corretto!';
+    score++;
+  } else {
+    option.classList.add('wrong');
+    feedback.className = 'quiz-feedback show wrong-fb';
+    var correctText = item.querySelector('.quiz-option[data-correct="true"]').textContent;
+    feedback.innerHTML = 'Non esatto. La risposta corretta \u00e8: <strong>' + correctText + '</strong>. Rileggila e assicurati di aver capito perch\u00e9.';
+  }
+
+  document.getElementById('scoreDisplay').textContent = score + ' / ' + totalQuiz;
+}
+</script>
+
+</body>
+</html>

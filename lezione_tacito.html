@@ -1,0 +1,1240 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tacito &mdash; Lo storico dell&rsquo;impero | Lezione Interattiva</title>
+<link rel="stylesheet" href="css/style.css">
+<style>
+  /* ═══ STILI SPECIFICI LEZIONE TACITO ═══ */
+
+  .lesson-intro {
+    background: var(--card);
+    border: 2px solid var(--border);
+    border-radius: 16px;
+    padding: 30px;
+    margin-bottom: 30px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  }
+  .lesson-intro h2 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 22px;
+    color: var(--gold);
+    margin-bottom: 14px;
+  }
+  .lesson-intro p {
+    font-size: 16px;
+    line-height: 1.8;
+    margin-bottom: 10px;
+  }
+
+  .context-badge {
+    display: inline-block;
+    padding: 4px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 700;
+    margin-right: 8px;
+    margin-bottom: 6px;
+  }
+  .context-badge.autore { background: rgba(184,145,90,0.15); color: var(--gold); }
+  .context-badge.data   { background: rgba(107,100,86,0.12); color: var(--text-dim); }
+  .context-badge.genere { background: rgba(192,132,212,0.12); color: #7a3a9a; }
+  .context-badge.opera  { background: rgba(45,106,79,0.12);  color: var(--eulalia); }
+
+  /* ═══ TLAC BOXES ═══ */
+  .tlac-box {
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin: 24px 0;
+    font-size: 15px;
+    line-height: 1.7;
+  }
+  .tlac-box .tlac-label {
+    font-family: 'Libre Baskerville', serif;
+    font-weight: 700;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .tlac-donow   { background: rgba(232,93,93,0.08);   border-left: 4px solid var(--latino1); }
+  .tlac-donow   .tlac-label { color: var(--latino1); }
+  .tlac-coldcall{ background: rgba(109,181,212,0.10); border-left: 4px solid var(--latino3); }
+  .tlac-coldcall .tlac-label { color: #1a6b8a; }
+  .tlac-turntalk{ background: rgba(120,200,120,0.08); border-left: 4px solid var(--latino2); }
+  .tlac-turntalk .tlac-label { color: #2a7a2a; }
+  .tlac-stretch { background: rgba(192,132,212,0.08); border-left: 4px solid var(--latino5); }
+  .tlac-stretch  .tlac-label { color: #7a3a9a; }
+  .tlac-exit    { background: rgba(244,211,94,0.12);  border-left: 4px solid var(--latino4); }
+  .tlac-exit    .tlac-label { color: #8a6a0a; }
+
+  .tlac-reveal-btn {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 7px 16px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--card);
+    font-family: 'Cardo', serif;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s;
+    color: var(--text-dim);
+  }
+  .tlac-reveal-btn:hover { border-color: var(--gold); color: var(--gold); }
+  .tlac-hint {
+    display: none;
+    margin-top: 10px;
+    padding: 12px 16px;
+    background: rgba(184,145,90,0.08);
+    border-radius: 8px;
+    font-size: 14px;
+    line-height: 1.75;
+  }
+  .tlac-hint.visible { display: block; }
+
+  /* ═══ TIMELINE VITA ═══ */
+  .vita-timeline {
+    position: relative;
+    padding-left: 30px;
+    margin: 16px 0;
+  }
+  .vita-timeline::before {
+    content: '';
+    position: absolute;
+    left: 8px; top: 0; bottom: 0;
+    width: 2px;
+    background: var(--border);
+  }
+  .vt-item { position: relative; margin-bottom: 18px; }
+  .vt-item::before {
+    content: '';
+    position: absolute;
+    left: -26px; top: 5px;
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: var(--gold);
+    border: 2px solid var(--card);
+  }
+  .vt-date { font-size: 12px; font-weight: 700; color: var(--gold); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 2px; }
+  .vt-text { font-size: 14px; line-height: 1.6; }
+
+  /* ═══ OPERE CARD ═══ */
+  .opere-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 20px;
+  }
+  .opera-card {
+    border: 2px solid var(--border);
+    border-radius: 14px;
+    padding: 20px;
+    cursor: pointer;
+    transition: all 0.25s;
+    background: var(--card);
+  }
+  .opera-card:hover { border-color: var(--gold); transform: translateY(-2px); }
+  .opera-card.open  { border-color: var(--gold); }
+  .op-titolo { font-family: 'Libre Baskerville', serif; font-size: 17px; font-weight: 700; color: var(--gold); font-style: italic; margin-bottom: 4px; }
+  .op-data   { font-size: 12px; color: var(--text-dim); margin-bottom: 8px; font-style: italic; }
+  .op-tema   { font-size: 13px; font-weight: 700; color: var(--text-dim); margin-bottom: 8px; }
+  .op-detail { display: none; font-size: 14px; line-height: 1.75; margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border); }
+  .opera-card.open .op-detail { display: block; }
+
+  /* ═══ TESTO LATINO — STILE ORBERG ═══ */
+  .testo-section {
+    background: var(--card);
+    border: 2px solid var(--border);
+    border-radius: 16px;
+    margin: 28px 0;
+    overflow: hidden;
+  }
+  .testo-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 24px;
+    background: rgba(184,145,90,0.08);
+    border-bottom: 1px solid var(--border);
+  }
+  .testo-titolo-box h3 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 18px;
+    color: var(--gold);
+    margin-bottom: 2px;
+  }
+  .testo-ref { font-size: 13px; color: var(--text-dim); font-style: italic; }
+  .testo-body { padding: 24px; }
+
+  .latino-text {
+    font-family: 'Cardo', serif;
+    font-size: 19px;
+    line-height: 2.1;
+    color: #1a1008;
+    margin-bottom: 20px;
+  }
+
+  /* Glosse stile Orberg */
+  .gloss {
+    position: relative;
+    cursor: help;
+    border-bottom: 1px dotted var(--gold);
+  }
+  .gloss::after {
+    content: attr(data-gloss);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #2c2416;
+    color: #f5f0e8;
+    font-family: 'Cardo', serif;
+    font-size: 13px;
+    font-style: italic;
+    padding: 5px 10px;
+    border-radius: 6px;
+    white-space: nowrap;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.2s;
+    z-index: 100;
+  }
+  .gloss:hover::after { opacity: 1; }
+
+  /* Domande comprensione */
+  .comprensione-box {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin: 16px 0;
+    background: rgba(109,181,212,0.06);
+  }
+  .comprensione-box h4 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 13px;
+    color: #1a6b8a;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+  }
+  .comprensione-box ol { padding-left: 18px; }
+  .comprensione-box li { font-size: 14px; line-height: 1.8; margin-bottom: 6px; }
+
+  /* Key quote */
+  .key-quote {
+    border-left: 4px solid var(--gold);
+    padding: 14px 20px;
+    margin: 20px 0;
+    background: rgba(184,145,90,0.05);
+    border-radius: 0 10px 10px 0;
+  }
+  .key-quote .lat-main {
+    font-family: 'Cardo', serif;
+    font-size: 19px;
+    font-style: italic;
+    display: block;
+    margin-bottom: 8px;
+    color: #1a1008;
+  }
+  .key-quote .kq-trad { font-size: 14px; color: var(--text-dim); font-style: italic; display: block; margin-bottom: 8px; }
+  .key-quote .kq-nota {
+    font-size: 13px;
+    color: var(--text-dim);
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px solid var(--border);
+    line-height: 1.65;
+  }
+
+  /* Commento */
+  .testo-commento {
+    font-size: 15px;
+    line-height: 1.75;
+    padding: 16px 20px;
+    background: rgba(184,145,90,0.05);
+    border-radius: 10px;
+    margin: 16px 0;
+  }
+  .testo-commento strong { color: var(--gold); }
+
+  /* Toggle traduzione */
+  .traduzione-toggle {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px dashed var(--border);
+  }
+  .traduzione-btn {
+    padding: 7px 18px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: transparent;
+    font-family: 'Cardo', serif;
+    font-size: 14px;
+    cursor: pointer;
+    color: var(--text-dim);
+    transition: all 0.2s;
+  }
+  .traduzione-btn:hover { border-color: var(--gold); color: var(--gold); }
+  .traduzione-text {
+    display: none;
+    margin-top: 12px;
+    padding: 14px 18px;
+    border-left: 3px solid var(--gold);
+    font-family: 'Cardo', serif;
+    font-size: 16px;
+    font-style: italic;
+    line-height: 1.85;
+    color: var(--text-dim);
+  }
+  .traduzione-text.visible { display: block; }
+
+  /* ═══ STILE SECTION ═══ */
+  .stile-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 14px;
+    margin-top: 16px;
+  }
+  .stile-card {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px;
+    background: var(--card);
+    text-align: center;
+  }
+  .stile-card .sc-term { font-family: 'Libre Baskerville', serif; font-size: 15px; font-weight: 700; color: var(--gold); font-style: italic; margin-bottom: 8px; display: block; }
+  .stile-card .sc-def  { font-size: 13px; line-height: 1.65; color: var(--text-dim); }
+  .stile-card .sc-ex   { font-family: 'Cardo', serif; font-size: 13px; font-style: italic; color: #1a1008; margin-top: 10px; padding-top: 10px; border-top: 1px dashed var(--border); display: block; }
+
+  /* ═══ NOTA FONTE ═══ */
+  .nota-fonte { font-size: 12px; color: var(--text-dim); font-style: italic; margin-top: 12px; display: block; }
+
+  /* ═══ SCORE BAR ═══ */
+  .score-bar {
+    position: sticky;
+    top: 70px;
+    float: right;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 10px 18px;
+    margin-left: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+    z-index: 10;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  }
+  .score-label { font-size: 11px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px; display: block; }
+  .score-value { font-family: 'Libre Baskerville', serif; font-size: 20px; color: var(--gold); font-weight: 700; }
+
+  /* ═══ MAPPA ═══ */
+  .mappa-container {
+    background: rgba(184,145,90,0.04);
+    border-radius: 12px;
+    padding: 20px;
+    overflow-x: auto;
+    position: relative;
+  }
+  .mappa-svg { width: 100%; max-width: 940px; height: auto; cursor: pointer; }
+  .mappa-node { cursor: pointer; }
+  .mappa-node rect, .mappa-node ellipse { transition: opacity 0.2s; }
+  .mappa-node:hover rect, .mappa-node:hover ellipse { opacity: 0.82; }
+  .mappa-tooltip {
+    display: none;
+    position: fixed;
+    background: #2c2416;
+    color: #f5f0e8;
+    font-family: 'Cardo', serif;
+    font-size: 14px;
+    padding: 8px 14px;
+    border-radius: 8px;
+    max-width: 340px;
+    line-height: 1.5;
+    pointer-events: none;
+    z-index: 1000;
+  }
+
+  /* ═══ QUIZ ═══ */
+  .esercizio-section {
+    background: var(--card);
+    border: 2px solid var(--border);
+    border-radius: 16px;
+    padding: 28px;
+    margin: 30px 0;
+  }
+  .esercizio-section h2 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 20px;
+    color: var(--gold);
+    margin-bottom: 20px;
+  }
+  .esercizio-section h3 {
+    font-size: 14px;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin: 22px 0 12px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--border);
+  }
+  .quiz-item { margin-bottom: 22px; }
+  .quiz-q { font-size: 15px; font-weight: 700; margin-bottom: 10px; line-height: 1.5; }
+  .quiz-options { display: flex; flex-direction: column; gap: 7px; }
+  .quiz-option {
+    padding: 9px 15px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    line-height: 1.5;
+    transition: all 0.15s;
+    background: var(--card);
+  }
+  .quiz-option:hover:not(.disabled) { border-color: var(--gold); background: rgba(184,145,90,0.06); }
+  .quiz-option.correct  { background: rgba(45,106,79,0.12); border-color: var(--eulalia); color: var(--eulalia); }
+  .quiz-option.wrong    { background: rgba(232,93,93,0.10); border-color: var(--latino1); }
+  .quiz-option.disabled { cursor: default; }
+  .quiz-feedback { display: none; font-size: 13px; margin-top: 8px; padding: 8px 12px; border-radius: 6px; }
+  .quiz-feedback.show        { display: block; }
+  .quiz-feedback.correct-fb  { background: rgba(45,106,79,0.10); color: var(--eulalia); }
+  .quiz-feedback.wrong-fb    { background: rgba(232,93,93,0.08); color: #8a2020; }
+
+  /* ═══ RESPONSIVE ═══ */
+  @media (max-width: 768px) {
+    .opere-grid  { grid-template-columns: 1fr; }
+    .stile-grid  { grid-template-columns: 1fr; }
+    .score-bar   { position: static; float: none; margin: 0 0 20px; }
+    .latino-text { font-size: 17px; }
+  }
+</style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="container">
+      <a href="index.html" class="site-name">Lingua e Cultura Latina</a>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="latino5-classico.html">Latino 5</a>
+        <a href="raccoglitore-testi.html">Testi</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Header -->
+  <div class="page-header">
+    <h1>Tacito &mdash; Lo storico dell&rsquo;impero</h1>
+    <div class="divider"></div>
+    <p class="subtitle">Lezione interattiva &mdash; Latino 5 Classico</p>
+  </div>
+
+  <div class="container">
+    <a href="latino5-classico.html" class="back-link">&larr; Torna a Latino 5 Classico</a>
+
+    <!-- Punteggio -->
+    <div class="score-bar">
+      <span class="score-label">Punteggio</span>
+      <span class="score-value" id="scoreDisplay">0 / 12</span>
+    </div>
+
+    <!-- ═══ DO NOW ═══ -->
+    <div class="tlac-box tlac-donow">
+      <div class="tlac-label">Do Now &mdash; Attivit&agrave; di avvio (3 min)</div>
+      <p>Scrivi sul quaderno una risposta in 3&ndash;4 righe: <strong>&laquo;Uno storico pu&ograve; essere davvero imparziale? &Egrave; possibile raccontare gli eventi di un regime senza prendere posizione? Oppure ogni storia &egrave; gi&agrave; una interpretazione?&raquo;</strong></p>
+      <p>Tacito promette di scrivere <em>sine ira et studio</em> &mdash; &laquo;senza rabbia e senza faziosit&agrave;&raquo;. Ma &egrave; davvero imparziale? Oggi scopriremo perch&eacute; questa formula &egrave; pi&ugrave; complessa di quanto sembra.</p>
+    </div>
+
+    <!-- ═══ INTRODUZIONE ═══ -->
+    <div class="lesson-intro">
+      <h2>Il <em>pathos</em> della storia</h2>
+      <div style="margin-bottom: 14px;">
+        <span class="context-badge autore">P. Cornelius Tacitus</span>
+        <span class="context-badge data">55 ca. &ndash; 117 ca. d.C.</span>
+        <span class="context-badge genere">Storiografia &bull; Monografia &bull; Etnografia</span>
+        <span class="context-badge opera">4 opere principali</span>
+      </div>
+      <p>Tacito &egrave; considerato il pi&ugrave; grande storico dell&rsquo;antichit&agrave; latina. Nelle sue opere si fa interprete dello stato d&rsquo;animo dei suoi contemporanei nei confronti dell&rsquo;impero, raccontando con toni tragici e insieme solenni le pagine pi&ugrave; cupe della dittatura imperiale, sotto Nerone e Domiziano.</p>
+      <p>Nostalgico della <em>libertas</em> repubblicana, Tacito &egrave; tuttavia convinto della necessit&agrave; del principato e plaude ai sovrani come Nerva e Traiano, capaci di conciliare principato e libert&agrave;. La sua storia non &egrave; per&ograve; solo cronaca o analisi oggettiva: &egrave; una storia <strong>animata da personaggi tragici</strong> che si muovono su un palcoscenico fatto di intrighi, tradimenti, paure ed emozioni violente.</p>
+      <span class="nota-fonte">Rif.: G.B. Conte, <em>Profilo storico della letteratura latina</em>, cap. 15</span>
+    </div>
+
+    <!-- ═══ VITA ═══ -->
+    <div class="content-section">
+      <div class="content-header">
+        <h2>La vita e la carriera</h2>
+        <span class="section-ref">Il <em>cursus honorum</em> di Tacito</span>
+      </div>
+      <div class="content-body">
+        <p>La vita di Tacito attraversa il periodo pi&ugrave; drammatico del principato: dalla tirannide di Domiziano alla libert&agrave; ritrovata sotto Nerva e Traiano. Questa esperienza diretta &egrave; alla base del suo sguardo sulla storia.</p>
+        <div class="vita-timeline">
+          <div class="vt-item">
+            <div class="vt-date">55 ca. d.C.</div>
+            <div class="vt-text">Nasce, probabilmente nella Gallia Narbonese, da una famiglia di condizione equestre. Il nome completo &egrave; Publio (o Gaio?) Cornelio Tacito.</div>
+          </div>
+          <div class="vt-item">
+            <div class="vt-date">78 d.C.</div>
+            <div class="vt-text">Sposa la figlia di Gneo Giulio Agricola, generale e governatore della Britannia. Il suocero diventer&agrave; il protagonista della sua prima opera.</div>
+          </div>
+          <div class="vt-item">
+            <div class="vt-date">88 d.C.</div>
+            <div class="vt-text">Pretore e membro del collegio dei <em>quindecemviri sacris faciundis</em>. Inizia la carriera senatoria sotto Domiziano &mdash; un periodo che lo segner&agrave; a vita.</div>
+          </div>
+          <div class="vt-item">
+            <div class="vt-date">97&ndash;98 d.C.</div>
+            <div class="vt-text">Console suffetto sotto Nerva. Pubblica l&rsquo;<em>Agricola</em> e la <em>Germania</em>: il ripristino della libert&agrave; dopo Domiziano rende possibile la scrittura storica.</div>
+          </div>
+          <div class="vt-item">
+            <div class="vt-date">100&ndash;110 ca. d.C.</div>
+            <div class="vt-text">Pubblica le <em>Historiae</em>. &Egrave; avvocato di fama: insieme a Plinio il Giovane, suo grande amico, accusa i responsabili degli abusi della provincia d&rsquo;Africa.</div>
+          </div>
+          <div class="vt-item">
+            <div class="vt-date">117 ca. d.C.</div>
+            <div class="vt-text">Pubblica gli <em>Annales</em>, la sua opera pi&ugrave; ambiziosa. Muore poco dopo.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ LE OPERE ═══ -->
+    <div class="content-section">
+      <div class="content-header">
+        <h2>Le quattro opere</h2>
+        <span class="section-ref">Clicca su ciascuna per i dettagli</span>
+      </div>
+      <div class="content-body">
+        <p>La produzione di Tacito segue una progressione dalle monografie minori alla grande storiografia imperiale. Le due monografie (<em>Agricola</em> e <em>Germania</em>) aprono una strada che culmina negli <em>Annales</em>: dall&rsquo;individuo all&rsquo;impero, dal particolare all&rsquo;universale.</p>
+        <div class="opere-grid">
+
+          <div class="opera-card" onclick="this.classList.toggle('open')">
+            <div class="op-titolo">Agricola</div>
+            <div class="op-data">97&ndash;98 d.C.</div>
+            <div class="op-tema">Biografia &bull; <em>Laudatio funebris</em> &bull; Etnografia</div>
+            <div class="op-detail">
+              <p>Biografia del suocero Gneo Giulio Agricola, governatore militare della Britannia sotto Domiziano. &Egrave; insieme elogio funebre, resoconto militare e riflessione sulla possibilit&agrave; di servire lo Stato con integrit&agrave; anche sotto un principe tirannico.</p>
+              <p>Il tema centrale &egrave; la <strong><em>virtus</em> di Agricola</strong>: obbedire senza servilismo, agire bene senza ostentazione. Contiene la celebre invettiva di Calgàco contro l&rsquo;imperialismo romano (<em>Agricola</em> 30).</p>
+            </div>
+          </div>
+
+          <div class="opera-card" onclick="this.classList.toggle('open')">
+            <div class="op-titolo">Germania</div>
+            <div class="op-data">98 d.C.</div>
+            <div class="op-tema">Etnografia &bull; Monografia geografica</div>
+            <div class="op-detail">
+              <p>L&rsquo;unica opera etnografica latina conservata integralmente. Descrive il territorio e i costumi dei popoli germanici, probabilmente traendo le notizie da fonti scritte (soprattutto i <em>Bella Germaniae</em> di Plinio il Vecchio), non da osservazione diretta.</p>
+              <p>I Germani &mdash; con le loro virt&ugrave; militari, la fedelt&agrave; coniugale, la semplicit&agrave; di vita &mdash; sono uno <strong>specchio critico</strong> dei vizi romani. L&rsquo;idealizzazione del &laquo;buon barbaro&raquo; &egrave; una critica implicita alla corruzione di Roma imperiale.</p>
+            </div>
+          </div>
+
+          <div class="opera-card" onclick="this.classList.toggle('open')">
+            <div class="op-titolo">Historiae</div>
+            <div class="op-data">100&ndash;110 ca. d.C.</div>
+            <div class="op-tema">Storiografia &bull; 69&ndash;96 d.C.</div>
+            <div class="op-detail">
+              <p>Opera in 12 libri di cui sono pervenuti i primi quattro e parte del quinto. Narra la storia di Roma dall&rsquo;anno dei quattro imperatori (69 d.C.) fino alla morte di Domiziano (96 d.C.).</p>
+              <p>Il proemio &egrave; un documento fondamentale: Tacito riconosce di aver ricevuto cariche dai Flavi (Vespasiano, Tito, Domiziano), ma dichiara l&rsquo;<em>incorrupta fides</em> come proprio metodo. Riserva la trattazione di Nerva e Traiano alla vecchiaia &mdash; <em>senectuti seposui</em>.</p>
+            </div>
+          </div>
+
+          <div class="opera-card" onclick="this.classList.toggle('open')">
+            <div class="op-titolo">Annales</div>
+            <div class="op-data">117 ca. d.C.</div>
+            <div class="op-tema">Storiografia &bull; 14&ndash;68 d.C.</div>
+            <div class="op-detail">
+              <p>L&rsquo;opera pi&ugrave; ambiziosa: la storia del principato dalla morte di Augusto alla morte di Nerone, in sedici libri. Ci sono pervenuti i libri I&ndash;IV, un frammento del V e parte del VI, e poi i libri XI&ndash;XVI.</p>
+              <p>Il titolo nei manoscritti &egrave; <em>Ab excessu divi Augusti</em>: richiama esplicitamente l&rsquo;<em>Ab urbe condita</em> di Livio. Tacito si pone come continuatore della grande storiografia latina, portandola nell&rsquo;et&agrave; del principato. Lo stile &egrave; pi&ugrave; arcaico e austero rispetto alle <em>Historiae</em>.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ COLD CALL 1 ═══ -->
+    <div class="tlac-box tlac-coldcall">
+      <div class="tlac-label">Fermati e rispondi</div>
+      <p><strong>Tacito dichiara di scrivere <em>sine ira et studio</em> (Annales 1,1). Ma ha ricevuto incarichi e onori dagli imperatori che racconta (Vespasiano, Tito, Domiziano). Quanto pu&ograve; essere davvero imparziale? La sua &egrave; vera obiettivit&agrave; o &egrave; una dichiarazione di metodo?</strong></p>
+      <button class="tlac-reveal-btn" onclick="toggleHint(this)">Mostra spunto</button>
+      <div class="tlac-hint">La formula <em>sine ira et studio</em> non &egrave; una promessa di neutralit&agrave; assoluta, ma di <em>rigore metodologico</em>: Tacito vuole evitare l&rsquo;adulazione (il vizio degli storici di corte) e l&rsquo;odio fazioso (il vizio degli oppositori). Ma il suo sguardo &egrave; orientato: &egrave; un senatore nostalgico della <em>libertas</em> repubblicana, e questa postura permea tutta la sua scrittura. La dichiarazione &egrave; una scelta retorica cosciente, non una garanzia di trasparenza assoluta.</div>
+    </div>
+
+    <!-- ═══ TESTO 1: AGRICOLA 30 ═══ -->
+    <div class="testo-section">
+      <div class="testo-header">
+        <div class="testo-titolo-box">
+          <h3>Agricola 30 &mdash; Il discorso di Calg&agrave;co</h3>
+          <span class="testo-ref">Il capo britone ai suoi soldati prima della battaglia del Mons Graupius</span>
+        </div>
+      </div>
+      <div class="testo-body">
+
+        <div class="tlac-box tlac-coldcall" style="margin-top: 0; margin-bottom: 20px;">
+          <div class="tlac-label">Prima lettura &mdash; Metodo Orberg</div>
+          <p>Leggi il testo ad alta voce senza fermarti. Le parole sottolineate hanno una glossa: passa il mouse per il significato. Poi rispondi: <strong>chi parla? a chi? in quale situazione geografica?</strong></p>
+        </div>
+
+        <div class="latino-text">
+          &lsquo;<span class="gloss" data-gloss="quotiens: ogni volta che">Quotiens</span>
+          <span class="gloss" data-gloss="causas belli: le cause della guerra (acc. pl.)">causas belli</span> et
+          <span class="gloss" data-gloss="necessitatem: la necessit&agrave;, l'urgenza (acc. sg.)">necessitatem</span> nostram intueor, magnus mihi animus est hodiernum diem consensumque vestrum
+          <span class="gloss" data-gloss="initium libertatis: l'inizio della libert&agrave; (pred. di 'fore')">initium libertatis</span> toti Britanniae fore: nam et universi coistis et servitutis
+          <span class="gloss" data-gloss="expertes: privi, estranei a (+ gen.)">expertes</span>, et nullae ultra terrae ac ne mare quidem securum
+          <span class="gloss" data-gloss="inminente...classe Romana: con la flotta romana che incombe su di noi (abl. ass.)">inminente nobis classe Romana</span>.
+          [2] ita proelium atque arma, quae fortibus
+          <span class="gloss" data-gloss="honesta: onorevoli (n. pl.)">honesta</span>, eadem etiam ignavis
+          <span class="gloss" data-gloss="tutissima: sicurissima, l'unica salvezza">tutissima</span> sunt.
+          nos terrarum ac libertatis
+          <span class="gloss" data-gloss="extremos recessus: i recessi pi&ugrave; lontani, l'angolo estremo del mondo">extremos recessus</span> ipse ac
+          <span class="gloss" data-gloss="sinus famae: il seno della fama, ci&ograve; che persino la rinomanza nasconde">sinus famae</span> in hunc diem defendit: nunc
+          <span class="gloss" data-gloss="terminus Britanniae patet: il confine della Britannia &egrave; aperto &mdash; non c'&egrave; pi&ugrave; dove fuggire">terminus Britanniae patet</span>, atque omne ignotum pro magnifico est; sed nulla iam ultra gens, nihil nisi fluctus ac saxa, et
+          <span class="gloss" data-gloss="infestiores: ancora pi&ugrave; ostili (comp. di infestus)">infestiores</span> Romani, quorum
+          <span class="gloss" data-gloss="superbiam frustra...effugias: la cui superbia invano cerchi di sfuggire attraverso obbedienza e moderazione">superbiam frustra per obsequium ac modestiam effugias</span>.
+          [5]
+          <span class="gloss" data-gloss="Raptores orbis: predatori del mondo (nom. pl. — sogg. di 'scrutantur')">Raptores orbis</span>, postquam cuncta
+          <span class="gloss" data-gloss="vastantibus defuere terrae: le terre sono venute a mancare a chi devasta (dat. + perf.)">vastantibus defuere terrae</span>, mare
+          <span class="gloss" data-gloss="scrutantur: frugano, perludstrano">scrutantur</span>: si locuples hostis est,
+          <span class="gloss" data-gloss="avari: avidi di ricchezze">avari</span>, si pauper,
+          <span class="gloss" data-gloss="ambitiosi: bramosi di gloria">ambitiosi</span>, quos non Oriens, non Occidens
+          <span class="gloss" data-gloss="satiaverit: ha saziato (perf. cong. nella relativa)">satiaverit</span>: soli omnium opes atque inopiam pari
+          <span class="gloss" data-gloss="adfectu: slancio, impulso (abl.)">adfectu</span>
+          <span class="gloss" data-gloss="concupiscunt: bramano avidamente">concupiscunt</span>.
+          <span class="gloss" data-gloss="auferre trucidare rapere: razziare, massacrare, saccheggiare (inf. storici asindetici)">auferre trucidare rapere</span>
+          <span class="gloss" data-gloss="falsis nominibus: con nomi falsi, mascherando la realt&agrave;">falsis nominibus</span> imperium, atque
+          <span class="gloss" data-gloss="ubi solitudinem faciunt, pacem appellant: dove creano il deserto, lo chiamano pace (paradosso finale)">ubi solitudinem faciunt, pacem appellant</span>.&rsquo;
+        </div>
+
+        <div class="comprensione-box">
+          <h4>Domande di comprensione (stile Orberg)</h4>
+          <ol>
+            <li><em>Quis loquitur?</em> Chi parla e a chi si rivolge? In quale momento della narrazione?</li>
+            <li>Qual &egrave; la situazione geografica dei Britoni secondo Calgàco? (§§ 1&ndash;2)</li>
+            <li>Con quali tre infiniti Calgàco riassume la politica romana? (§ 5)</li>
+            <li>Spiega il paradosso della chiusa: come funziona e qual &egrave; il suo effetto sul lettore.</li>
+          </ol>
+        </div>
+
+        <div class="key-quote">
+          <span class="lat-main">auferre trucidare rapere falsis nominibus imperium, atque ubi solitudinem faciunt, pacem appellant.</span>
+          <span class="kq-trad">&laquo;Razziare, massacrare, saccheggiare: questi danno il falso nome di impero; e dove fanno il deserto, lo chiamano pace.&raquo;</span>
+          <div class="kq-nota"><strong>La pi&ugrave; celebre sentenza di Tacito.</strong> La struttura &egrave; volutamente brutale: tre infiniti storici nudi in asindeto, poi la sententia finale. La chiusa &egrave; un ossimoro: la &laquo;pace&raquo; romana &egrave; il nome dato alla distruzione assoluta. Tacito fa parlare un nemico di Roma &mdash; ma le parole sono una critica dell&rsquo;imperialismo che il lettore romano riconosce come reale. &Egrave; la tecnica della <em>voce del vinto</em>: la verit&agrave; &egrave; detta da chi non ha il potere di dirla.</div>
+        </div>
+
+        <div class="testo-commento">
+          <strong>Nota stilistica:</strong> Il discorso di Calgàco &egrave; un&rsquo;<em>oratio obliqua</em> nella forma, ma ha la forza di un&rsquo;arringa diretta. Tacito costruisce la voce del nemico come autocritica implicita dell&rsquo;impero. Questo procedimento &mdash; affidare la verit&agrave; scomoda alle voci dei vinti &mdash; &egrave; uno dei marchi pi&ugrave; originali dello stile tacitiano.
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ═══ TURN AND TALK 1 ═══ -->
+    <div class="tlac-box tlac-turntalk">
+      <div class="tlac-label">Turn and Talk &mdash; Discuti con il compagno (3 min)</div>
+      <p><strong>Calgàco &egrave; un capo barbaro nemico di Roma. Tacito &egrave; un senatore romano. Eppure Tacito gli mette in bocca le parole pi&ugrave; amare sulla conquista romana. Perch&eacute; uno storico romano scriverebbe questo? Che effetto ha sul lettore antico? E su quello moderno?</strong></p>
+    </div>
+
+    <!-- ═══ TESTO 2: ANNALES 1,1 ═══ -->
+    <div class="testo-section">
+      <div class="testo-header">
+        <div class="testo-titolo-box">
+          <h3>Annales 1,1 &mdash; Il proemio</h3>
+          <span class="testo-ref">L&rsquo;incipit degli Annali: storia di Roma e dichiarazione di metodo</span>
+        </div>
+      </div>
+      <div class="testo-body">
+
+        <div class="tlac-box tlac-coldcall" style="margin-top: 0; margin-bottom: 20px;">
+          <div class="tlac-label">Prima lettura &mdash; Metodo Orberg</div>
+          <p>Leggi il testo cercando di rispondere: <strong>quale storia sta per raccontare Tacito? Chi ha scritto prima di lui? Perch&eacute; quella tradizione si &egrave; interrotta?</strong></p>
+        </div>
+
+        <div class="latino-text">
+          <span class="gloss" data-gloss="Vrbem Romam: Roma (acc. — oggetto di 'habuere')">Vrbem Romam</span> a principio
+          <span class="gloss" data-gloss="reges habuere: ebbero re, furono governati da re (= habuerunt)">reges habuere</span>;
+          <span class="gloss" data-gloss="libertatem et consulatum: la libert&agrave; e il consolato — instaurati da Lucio Bruto nel 509 a.C.">libertatem et consulatum</span> L. Brutus instituit. dictaturae ad tempus sumebantur; neque decemviralis potestas ultra biennium, neque tribunorum militum consulare ius diu valuit. non Cinnae, non Sullae
+          <span class="gloss" data-gloss="longa dominatio: il dominio prolungato (= 'quello di Cinna / di Silla')">longa dominatio</span>; et Pompei Crassique potentia cito in Caesarem, Lepidi atque Antonii arma in Augustum
+          <span class="gloss" data-gloss="cessere: cedettero, confluirono (= cesserunt)">cessere</span>, qui cuncta
+          <span class="gloss" data-gloss="discordiis civilibus fessa: stanche delle discordie civili (part. predicativo)">discordiis civilibus fessa</span>
+          <span class="gloss" data-gloss="nomine principis: col titolo di principe">nomine principis</span> sub imperium accepit.
+
+          sed veteris populi Romani prospera vel adversa
+          <span class="gloss" data-gloss="claris scriptoribus memorata sunt: furono narrate da scrittori illustri">claris scriptoribus memorata sunt</span>; temporibusque Augusti dicendis non defuere
+          <span class="gloss" data-gloss="decora ingenia: ingegni illustri (sogg.)">decora ingenia</span>, donec
+          <span class="gloss" data-gloss="gliscente adulatione: con l'adulazione che cresceva (abl. ass.)">gliscente adulatione</span>
+          <span class="gloss" data-gloss="deterrerentur: venissero scoraggiati, dissuasi (cong. imp. — causale)">deterrerentur</span>. Tiberii Gaique et Claudii ac Neronis res florentibus ipsis ob
+          <span class="gloss" data-gloss="metum: paura (causa del falsare la storia quando erano in vita)">metum</span> falsae, postquam
+          <span class="gloss" data-gloss="occiderant: erano morti (piucchep. ind.)">occiderant</span> recentibus
+          <span class="gloss" data-gloss="odiis: odi ancora freschi (abl. di causa)">odiis</span>
+          <span class="gloss" data-gloss="compositae sunt: furono scritte, composte">compositae sunt</span>. inde
+          <span class="gloss" data-gloss="consilium mihi: il mio proposito">consilium mihi</span> pauca de Augusto et extrema tradere, mox Tiberii principatum et cetera,
+          <span class="gloss" data-gloss="sine ira et studio: senza rancore e senza favoritismo — la formula metodologica di Tacito">sine ira et studio</span>, quorum causas procul habeo.
+        </div>
+
+        <div class="comprensione-box">
+          <h4>Domande di comprensione (stile Orberg)</h4>
+          <ol>
+            <li>Come riassume Tacito la storia di Roma prima del principato? Quali regimi elenca?</li>
+            <li>Perch&eacute; gli storici dell&rsquo;et&agrave; di Augusto vennero &laquo;scoraggiati&raquo; (<em>deterrerentur</em>)?</li>
+            <li>Perch&eacute; la storia di Tiberio, Caligola, Claudio e Nerone fu falsata: prima per <em>metum</em>, poi per <em>odia</em>? Quale &egrave; il paradosso?</li>
+            <li>Qual &egrave; il programma di Tacito e come definisce il suo metodo?</li>
+          </ol>
+        </div>
+
+        <div class="key-quote">
+          <span class="lat-main">sine ira et studio, quorum causas procul habeo.</span>
+          <span class="kq-trad">&laquo;Senza rancore e senza favoritismo, cause di cui mi tengo lontano.&raquo;</span>
+          <div class="kq-nota"><strong>La formula metodologica.</strong> <em>Ira</em> = odio personale verso i soggetti della narrazione; <em>studium</em> = favoritismo fazioso. Tacito rivendica equidistanza non perch&eacute; sia neutrale, ma perch&eacute; non ha motivi personali di rancore n&eacute; favori da elargire: gli imperatori che racconta sono morti da tempo. &Egrave; una dichiarazione di seri&egrave;t&agrave; metodologica, non di assenza di giudizio morale.</div>
+        </div>
+
+        <div class="testo-commento">
+          <strong>La struttura a clessidra del proemio:</strong> Tacito comprime tutta la storia di Roma in poche righe (dalle origini al principato), poi espande il focus sul problema storiografico: come si scrive storia sotto un regime? La risposta &egrave; implicita &mdash; solo quando il regime &egrave; finito. E anche allora bisogna stare attenti all&rsquo;<em>ira</em> reattiva. Il proemio &egrave; esso stesso un saggio sulla difficolt&agrave; di fare storia vera.
+        </div>
+
+        <div class="traduzione-toggle">
+          <button class="traduzione-btn" onclick="toggleTrad(this)">Mostra traduzione completa</button>
+          <span style="font-size:13px; color: var(--text-dim);">— prova prima da solo</span>
+        </div>
+        <div class="traduzione-text">
+          &laquo;Roma fu governata all&rsquo;inizio dai re; Lucio Bruto istitu&igrave; la libert&agrave; e il consolato. Le dittature venivano assunte per un tempo limitato; n&eacute; il potere decemvirale dur&ograve; pi&ugrave; di due anni, n&eacute; il consolato militare dei tribuni a lungo. Non lunga fu la tirannia di Cinna n&eacute; quella di Silla; e il potere di Pompeo e Crasso pass&ograve; rapidamente a Cesare, le armi di Lepido e Antonio ad Augusto, il quale assunse sotto il suo dominio, col titolo di principe, tutto uno Stato stremato dalle discordie civili. Ma le fortune e le sventure della Repubblica romana furono narrate da storici illustri; e neppure per i tempi di Augusto mancarono ingegni di valore, finch&eacute; l&rsquo;adulazione crescendo li scosse. Le vicende di Tiberio, Caligola, Claudio e Nerone furono falsate, quando erano in vita, per paura; dopo la loro morte, scritte con odio ancora fresco. Di qui il mio proposito di trasmettere poche notizie su Augusto e le sue ultime vicende, poi il principato di Tiberio e il resto, senza rancore e senza faziosit&agrave;, cause di cui mi tengo lontano.&raquo;
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ═══ TESTO 3: HISTORIAE 1,1 ═══ -->
+    <div class="testo-section">
+      <div class="testo-header">
+        <div class="testo-titolo-box">
+          <h3>Historiae 1,1 &mdash; Il proemio</h3>
+          <span class="testo-ref">Posizione personale, debito verso i Flavi, <em>incorrupta fides</em></span>
+        </div>
+      </div>
+      <div class="testo-body">
+
+        <div class="tlac-box tlac-coldcall" style="margin-top: 0; margin-bottom: 20px;">
+          <div class="tlac-label">Prima lettura &mdash; Metodo Orberg</div>
+          <p>Confronta questo proemio con quello degli <em>Annales</em>. <strong>Cosa cambia? Cosa rimane uguale? Come si posiziona Tacito rispetto agli imperatori che ha conosciuto di persona?</strong></p>
+        </div>
+
+        <div class="latino-text">
+          <span class="gloss" data-gloss="Initium mihi operis: l'inizio della mia opera (sogg. del pred.)">Initium mihi operis</span> Servius Galba iterum Titus Vinius consules erunt. nam post conditam urbem octingentos et viginti prioris aevi annos multi auctores
+          <span class="gloss" data-gloss="rettulerunt: narrarono (= retulerunt)">rettulerunt</span>, dum res populi Romani memorabantur pari eloquentia ac libertate: postquam bellatum apud Actium atque omnem potentiam ad unum conferri
+          <span class="gloss" data-gloss="pacis interfuit: fu nell'interesse della pace (che il potere si concentrasse in uno)">pacis interfuit</span>, magna illa ingenia
+          <span class="gloss" data-gloss="cessere: si ritirarono, scomparvero (= cesserunt)">cessere</span>; simul veritas pluribus modis
+          <span class="gloss" data-gloss="infracta: spezzata, compromessa (part. pred.)">infracta</span>, primum inscitia rei publicae ut alienae, mox
+          <span class="gloss" data-gloss="libidine adsentandi: per il desiderio di adulare (gerundivo)">libidine adsentandi</span> aut rursus odio adversus dominantis.
+
+          mihi Galba Otho Vitellius nec beneficio nec iniuria
+          <span class="gloss" data-gloss="cogniti: noti per esperienza personale (pred. nom.)">cogniti</span>. dignitatem nostram a Vespasiano
+          <span class="gloss" data-gloss="inchoatam: avviata, inaugurata (part. acc.)">inchoatam</span>, a Tito auctam, a Domitiano
+          <span class="gloss" data-gloss="longius provectam non abnuerim: ulteriormente promossa non negherei (pot. del cong. perf.)">longius provectam non abnuerim</span>: sed
+          <span class="gloss" data-gloss="incorruptam fidem professis: per chi ha professato una fede incorrotta (dat. part. perf.)">incorruptam fidem professis</span> neque amore quisquam et sine odio dicendus est. quod si vita suppeditet, principatum divi Nervae et imperium Traiani,
+          <span class="gloss" data-gloss="uberiorem securioremque materiam: materia pi&ugrave; ricca e pi&ugrave; sicura (da trattare)">uberiorem securioremque materiam</span>, senectuti seposui,
+          <span class="gloss" data-gloss="rara temporum felicitate: nella rara felicit&agrave; dei tempi (abl. di qualit&agrave;)">rara temporum felicitate</span> ubi sentire quae velis et quae sentias dicere licet.
+        </div>
+
+        <div class="comprensione-box">
+          <h4>Domande di comprensione (stile Orberg)</h4>
+          <ol>
+            <li>Da quale anno inizia la narrazione delle <em>Historiae</em>? Come lo indica Tacito secondo la prassi romana?</li>
+            <li>Perch&eacute; dopo Azio la storiografia declinò? Quali sono i due vizi che la compromisero?</li>
+            <li>Qual &egrave; il rapporto personale di Tacito con i tre imperatori protagonisti (Galba, Otone, Vitellio)?</li>
+            <li>Come descrive il suo debito verso i Flavi? Perch&eacute; dichiararlo &egrave; un atto di correttezza metodologica?</li>
+            <li>Cosa significa la chiusa: <em>ubi sentire quae velis et quae sentias dicere licet</em>?</li>
+          </ol>
+        </div>
+
+        <div class="key-quote">
+          <span class="lat-main">rara temporum felicitate ubi sentire quae velis et quae sentias dicere licet.</span>
+          <span class="kq-trad">&laquo;Nella rara felicit&agrave; dei tempi in cui &egrave; lecito sentire ci&ograve; che si vuole e dire ci&ograve; che si sente.&raquo;</span>
+          <div class="kq-nota"><strong>Il ritratto del principato ideale.</strong> Questa frase chiude il proemio. Tacito scrive sotto Traiano, che garantisce la libert&agrave; di pensiero e di parola. Il semplice fatto che questa coincidenza sia <em>rara</em> &egrave; una condanna implicita di tutti i principati precedenti. La chiusa &egrave; anche una risposta alla domanda del proemio: la storia vera si pu&ograve; scrivere solo qui, solo ora.</div>
+        </div>
+
+        <div class="testo-commento">
+          <strong>Confronto tra i due proemi:</strong> Negli <em>Annales</em> Tacito &egrave; astratto e metodologico; nelle <em>Historiae</em> &egrave; autobiografico e personale. Ammette il debito coi Flavi &mdash; un debito che potrebbe compromettere la sua <em>fides</em>. La scelta di dichiararlo &egrave; essa stessa un atto di onest&agrave; metodologica: Tacito non nasconde i propri condizionamenti, li espone al giudizio del lettore. &Egrave; il contrario dell&rsquo;adulazione.
+        </div>
+
+        <div class="traduzione-toggle">
+          <button class="traduzione-btn" onclick="toggleTrad(this)">Mostra traduzione completa</button>
+          <span style="font-size:13px; color: var(--text-dim);">— prova prima da solo</span>
+        </div>
+        <div class="traduzione-text">
+          &laquo;L&rsquo;inizio della mia opera saranno i consoli Servio Galba (per la seconda volta) e Tito Vinio [69 d.C.]. Dei 820 anni dalla fondazione di Roma molti autori narrarono le vicende del popolo romano, finch&eacute; esse venivano ricordate con pari eloquenza e libert&agrave;: dopo che si combatt&eacute; ad Azio e fu interesse della pace che tutto il potere si concentrasse in uno, quegli ingegni scomparvero; e insieme la verit&agrave; fu compromessa in pi&ugrave; modi, prima per ignoranza della cosa pubblica come di cosa aliena, poi per la voglia di adulare o viceversa per l&rsquo;odio contro chi dominava. Galba, Otone, Vitellio non mi sono noti n&eacute; per benefici n&eacute; per offese. Non negher&ograve; che la mia dignit&agrave; fu avviata da Vespasiano, accresciuta da Tito, ulteriormente promossa da Domiziano: ma chi ha professato una fede incorrotta deve parlare di ciascuno senza amore e senza odio. Se la vita lo concede, ho riservato alla vecchiaia i principati di Nerva e Traiano, materia pi&ugrave; ricca e pi&ugrave; sicura, nella rara felicit&agrave; dei tempi in cui &egrave; lecito sentire ci&ograve; che si vuole e dire ci&ograve; che si sente.&raquo;
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ═══ COLD CALL 2 ═══ -->
+    <div class="tlac-box tlac-coldcall">
+      <div class="tlac-label">Fermati e rispondi</div>
+      <p><strong>I due proemi (Annales 1,1 e Historiae 1,1) affrontano lo stesso problema &mdash; la difficolt&agrave; di fare storia vera &mdash; ma da angolature diverse. Individua una somiglianza e una differenza tra i due testi.</strong></p>
+      <button class="tlac-reveal-btn" onclick="toggleHint(this)">Mostra spunto</button>
+      <div class="tlac-hint">Somiglianza: entrambi diagnosticano le cause della storiografia corrotta (adulazione e odio) e rivendicano un metodo rigoroso. Differenza: gli <em>Annales</em> guardano alla storia da fuori, con sguardo universale (la storia di Roma dall&rsquo;inizio); le <em>Historiae</em> espongono la posizione personale di Tacito, il suo debito con i Flavi, la sua traiettoria biografica. Uno &egrave; metodologico, l&rsquo;altro &egrave; confessionale.</div>
+    </div>
+
+    <!-- ═══ TESTO 4: GERMANIA 18–20 ═══ -->
+    <div class="testo-section">
+      <div class="testo-header">
+        <div class="testo-titolo-box">
+          <h3>Germania 18,1 &ndash; 20,2 &mdash; Il matrimonio dei Germani</h3>
+          <span class="testo-ref">Le virt&ugrave; dei barbari come specchio critico dei vizi romani</span>
+        </div>
+      </div>
+      <div class="testo-body">
+
+        <div class="tlac-box tlac-coldcall" style="margin-top: 0; margin-bottom: 20px;">
+          <div class="tlac-label">Prima lettura &mdash; Metodo Orberg</div>
+          <p>Leggi il testo cercando di rispondere: <strong>come si differenzia il matrimonio germanico da quello romano? Quali virt&ugrave; emergono? Qual &egrave; la critica implicita a Roma?</strong></p>
+        </div>
+
+        <div class="latino-text">
+          [18]
+          <span class="gloss" data-gloss="Quamquam severa illic matrimonia: sebbene severi siano l&agrave; i matrimoni (conc.)">Quamquam severa illic matrimonia</span>, nec ullam morum partem magis
+          <span class="gloss" data-gloss="laudaveris: potresti lodare (pot. del cong. perf.)">laudaveris</span>. nam prope soli barbarorum
+          <span class="gloss" data-gloss="singulis uxoribus contenti: contenti di una sola moglie (abl. di limitazione)">singulis uxoribus contenti</span> sunt, exceptis admodum paucis, qui non libidine sed ob nobilitatem plurimis nuptiis
+          <span class="gloss" data-gloss="ambiuntur: sono richiesti, cercati (pass.)">ambiuntur</span>. [2] dotem non uxor marito, sed
+          <span class="gloss" data-gloss="uxori maritus offert: &egrave; il marito a portare la dote alla moglie — inverso rispetto a Roma">uxori maritus offert</span>. intersunt parentes et propinqui ac munera probant, munera non ad
+          <span class="gloss" data-gloss="delicias muliebres: i piaceri femminili, gli ornamenti di lusso">delicias muliebres</span> quaesita nec quibus nova nupta
+          <span class="gloss" data-gloss="comatur: si adorni">comatur</span>, sed boves et frenatum equum et scutum cum
+          <span class="gloss" data-gloss="framea gladioque: la lancia germanica e la spada">framea gladioque</span>. [4] ne se mulier extra virtutum cogitationes extraque bellorum casus putet, ipsis incipientis matrimonii
+          <span class="gloss" data-gloss="auspiciis: auspici, inizi (abl. di circostanza)">auspiciis</span> admonetur venire se
+          <span class="gloss" data-gloss="laborum periculorumque sociam: compagna delle fatiche e dei pericoli (pred. acc. di 'se')">laborum periculorumque sociam</span>, idem in pace, idem in proelio passuram ausuramque.
+
+          [19] Ergo saepta pudicitia agunt, nullis spectaculorum
+          <span class="gloss" data-gloss="illecebris: seduzioni, allettamenti (abl. di mezzo)">illecebris</span>, nullis conviviorum
+          <span class="gloss" data-gloss="irritationibus corruptae: corrotte dagli stimoli (abl. di causa)">irritationibus corruptae</span>. paucissima in tam numerosa gente adulteria, quorum poena
+          <span class="gloss" data-gloss="praesens: immediata, pronta">praesens</span> et maritis permissa. nemo enim illic
+          <span class="gloss" data-gloss="vitia ridet: ride dei vizi, li tollera con indulgenza">vitia ridet</span>, nec corrumpere et corrumpi
+          <span class="gloss" data-gloss="saeculum vocatur: si chiama 'vivere alla moda' — critica implicita a Roma">saeculum vocatur</span>.
+
+          [20] In omni domo nudi ac
+          <span class="gloss" data-gloss="sordidi: sporchi (in senso rustico, non degradato) — bambini crescono a contatto con la natura">sordidi</span> in hos artus, in haec corpora, quae miramur,
+          <span class="gloss" data-gloss="excrescunt: crescono, si sviluppano">excrescunt</span>. sua quemque mater [2]
+          <span class="gloss" data-gloss="uberibus alit: nutre al proprio seno (abl.)">uberibus alit</span>, nec ancillis ac nutricibus
+          <span class="gloss" data-gloss="delegantur: vengono affidati (i figli) — al contrario delle famiglie romane ricche">delegantur</span>.
+        </div>
+
+        <div class="comprensione-box">
+          <h4>Domande di comprensione (stile Orberg)</h4>
+          <ol>
+            <li>In cosa il matrimonio germanico differisce da quello romano? (dote, fedelt&agrave; coniugale, ruolo della sposa)</li>
+            <li>Quali doni riceve la sposa germanica? Cosa simboleggiano rispetto ai doni tipici delle spose romane?</li>
+            <li>Come vengono cresciuti i figli germanici? Qual &egrave; la differenza con la prassi romana?</li>
+            <li>La frase <em>nec corrumpere et corrumpi saeculum vocatur</em> &egrave; una critica implicita a chi?</li>
+          </ol>
+        </div>
+
+        <div class="testo-commento">
+          <strong>Il &laquo;buon barbaro&raquo; come specchio critico:</strong> Tacito non descrive i Germani per curiosit&agrave; etnografica: li usa come termine di paragone per colpire implicitamente la corruzione morale di Roma. I Germani sono monogami, guerrieri, le loro donne sono fedeli e allevano i figli di persona. Il lettore romano, abituato agli scandali imperiali (adulteri, divorzi, bambini affidati a nutrici schiave, il lusso dei banchetti), legge questa descrizione come un&rsquo;accusa non pronunciata. Le virt&ugrave; dei barbari <em>sono</em> le antiche virt&ugrave; romane del <em>mos maiorum</em>.
+        </div>
+
+        <div class="traduzione-toggle">
+          <button class="traduzione-btn" onclick="toggleTrad(this)">Mostra traduzione completa</button>
+          <span style="font-size:13px; color: var(--text-dim);">— prova prima da solo</span>
+        </div>
+        <div class="traduzione-text">
+          &laquo;[18] Sebbene severi, i matrimoni l&agrave; sono tali che nessun&rsquo;altra parte dei loro costumi potresti lodare di pi&ugrave;. Quasi soli tra i barbari si accontentano di una sola moglie, eccetto pochissimi che non per libidine ma per nobilt&agrave; sono cercati in molti matrimoni. [2] La dote non &egrave; la moglie a portarla al marito, ma il marito alla moglie. Vi assistono i genitori e i parenti e approvano i doni &mdash; doni non ricercati per il piacere femminile n&eacute; per adornare la nuova sposa, ma buoi e un cavallo bardato e uno scudo con lancia e spada. [4] Affinch&eacute; la donna non si creda estranea ai pensieri della virt&ugrave; e alle vicende della guerra, viene ammonita sin dagli inizi del matrimonio che viene come compagna delle fatiche e dei pericoli, che dovr&agrave; soffrire e osare le stesse cose in pace come in guerra.<br>[19] Perci&ograve; vivono protette dalla pudicizia, senza essere corrotte dalla seduzione degli spettacoli, dai sollecitamenti dei banchetti. Pochissimi gli adulteri in una gente cos&igrave; numerosa, e la loro pena &egrave; immediata e affidata ai mariti. Nessuno l&agrave; ride dei vizi, n&eacute; corrompere e lasciarsi corrompere si chiama &laquo;vivere alla moda&raquo;.<br>[20] In ogni casa crescono nudi e sporchi fino a queste membra, a questi corpi che ammiriamo. [2] Ogni madre nutre al proprio seno i figli, e non vengono affidati ad ancelle e nutrici.&raquo;
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ═══ STRETCH IT ═══ -->
+    <div class="tlac-box tlac-stretch">
+      <div class="tlac-label">Stretch It &mdash; Approfondisci</div>
+      <p><strong>Tacito descrive i Germani come custodi di virt&ugrave; che Roma ha perduto. Ma queste sono le stesse virt&ugrave; del <em>mos maiorum</em> romano. Sta quindi dicendo che i Romani erano migliori in passato? Oppure il messaggio &egrave; pi&ugrave; radicale: che l&rsquo;impero stesso ha distrutto ci&ograve; che aveva fatto grande Roma?</strong></p>
+      <button class="tlac-reveal-btn" onclick="toggleHint(this)">Mostra spunto</button>
+      <div class="tlac-hint">Il messaggio &egrave; pi&ugrave; radicale. Tacito non fa nostalgia ingenua: denuncia una contraddizione strutturale. La conquista del mondo &mdash; <em>raptores orbis</em> &mdash; ha portato ricchezza, ma ha corroso le virt&ugrave; civiche che avevano reso Roma capace di conquistare. I barbari, ancora &laquo;poveri&raquo; e &laquo;rudi&raquo;, conservano quelle virt&ugrave; perch&eacute; non hanno ancora subito il lusso. &Egrave; il paradosso della grandezza imperiale: pi&ugrave; Roma vince, pi&ugrave; si degrada. Lo stesso paradosso dell&rsquo;<em>ubi solitudinem faciunt, pacem appellant</em>: la vittoria produce la propria nemesi.</div>
+    </div>
+
+    <!-- ═══ LO STILE ═══ -->
+    <div class="content-section">
+      <div class="content-header">
+        <h2>Lo stile di Tacito</h2>
+        <span class="section-ref"><em>Brevitas</em>, <em>variatio</em>, <em>inconcinnitas</em></span>
+      </div>
+      <div class="content-body">
+        <p>Lo stile di Tacito &egrave; tra i pi&ugrave; originali della letteratura latina: denso, arcaico, asimmetrico. Si allontana deliberatamente dalla <em>latinitas</em> ciceroniana per costruire un idioma che rifletta la tensione morale e politica del contenuto. Conte lo descrive come uno stile della <strong>&laquo;disarmonia&raquo;</strong>: la forma spezzata riflette la storia spezzata.</p>
+
+        <div class="stile-grid">
+          <div class="stile-card">
+            <span class="sc-term">Brevitas</span>
+            <span class="sc-def">Densit&agrave; espressiva: Tacito dice in una parola ci&ograve; che altri diluirebbero in una frase. I participi sostituiscono subordinate, le subordinate si comprimono in ablativi assoluti.</span>
+            <span class="sc-ex">non Cinnae, non Sullae longa dominatio</span>
+          </div>
+          <div class="stile-card">
+            <span class="sc-term">Variatio</span>
+            <span class="sc-def">Asimmetria sintattica deliberata: dove ci si aspetta una struttura parallela, Tacito cambia costruzione. Non per trascuratezza, ma come scelta: la disarmonia formale riflette quella del mondo narrato.</span>
+            <span class="sc-ex">florentibus ipsis ob metum falsae, postquam occiderant recentibus odiis compositae</span>
+          </div>
+          <div class="stile-card">
+            <span class="sc-term">Arcaismo</span>
+            <span class="sc-def">Forme verbali arcaiche e costruzioni desuete avvicinano Tacito a Sallustio (il suo modello principale), lontano da Cicerone. Lo stile assume una solennt&agrave; quasi lapidaria.</span>
+            <span class="sc-ex">habuere, cessere, rettulerunt (al posto di -erunt)</span>
+          </div>
+          <div class="stile-card">
+            <span class="sc-term">Inconcinnitas</span>
+            <span class="sc-def">Irregolarit&agrave; intenzionale: Tacito evita le strutture equilibrate della <em>concinnitas</em> ciceroniana e le sostituisce con costruzioni volutamente scomposte. La tensione formale riflette la tensione morale.</span>
+            <span class="sc-ex">pars mora, pars festinans, cuncta inpediebant (Ann. 15,38)</span>
+          </div>
+          <div class="stile-card">
+            <span class="sc-term">Sententia</span>
+            <span class="sc-def">Frasi brevi e taglienti che sintetizzano paradossi storici o giudizi morali in forma aforistica. Sono il punto di massima concentrazione dello stile e sono diventate citazioni immortali.</span>
+            <span class="sc-ex">ubi solitudinem faciunt, pacem appellant</span>
+          </div>
+          <div class="stile-card">
+            <span class="sc-term">Poetismi e metafore</span>
+            <span class="sc-def">Coloritura poetica virgiliana e lucanea nella prosa. Metafore della luce e delle tenebre, dell&rsquo;incendio e della rovina. Il tono tragico della narrazione si riflette nel lessico.</span>
+            <span class="sc-ex">gliscente adulatione; cuncta discordiis civilibus fessa</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ MAPPA CONCETTUALE SVG ═══ -->
+    <div class="content-section">
+      <div class="content-header">
+        <h2>Mappa concettuale interattiva</h2>
+        <span class="section-ref">Passa il mouse sui nodi per approfondire</span>
+      </div>
+      <div class="content-body">
+        <div class="mappa-container">
+          <svg class="mappa-svg" viewBox="0 0 940 520" xmlns="http://www.w3.org/2000/svg">
+            <!-- Connessioni livello 1 -->
+            <line x1="470" y1="60" x2="155" y2="162" stroke="#d4c9b8" stroke-width="2"/>
+            <line x1="470" y1="60" x2="470" y2="162" stroke="#d4c9b8" stroke-width="2"/>
+            <line x1="470" y1="60" x2="785" y2="162" stroke="#d4c9b8" stroke-width="2"/>
+            <!-- Sotto-nodi ramo 1 -->
+            <line x1="155" y1="212" x2="65"  y2="312" stroke="#d4c9b8" stroke-width="1.5"/>
+            <line x1="155" y1="212" x2="250" y2="312" stroke="#d4c9b8" stroke-width="1.5"/>
+            <!-- Sotto-nodi ramo 2 -->
+            <line x1="470" y1="212" x2="370" y2="312" stroke="#d4c9b8" stroke-width="1.5"/>
+            <line x1="470" y1="212" x2="570" y2="312" stroke="#d4c9b8" stroke-width="1.5"/>
+            <!-- Sotto-nodi ramo 3 -->
+            <line x1="785" y1="212" x2="690" y2="312" stroke="#d4c9b8" stroke-width="1.5"/>
+            <line x1="785" y1="212" x2="870" y2="312" stroke="#d4c9b8" stroke-width="1.5"/>
+            <!-- Freccia nodo finale -->
+            <line x1="470" y1="358" x2="470" y2="428" stroke="#b8915a" stroke-width="2.5" stroke-dasharray="6,4"/>
+
+            <!-- Nodo centrale -->
+            <g class="mappa-node" data-info="Publio (o Gaio?) Cornelio Tacito, 55–117 ca. d.C. Il più grande storico latino dell'età imperiale. Nostalgico della libertas repubblicana, interprete del pathos del principato.">
+              <ellipse cx="470" cy="42" rx="120" ry="28" fill="#2c2416" stroke="#b8915a" stroke-width="2.5"/>
+              <text x="470" y="48" text-anchor="middle" fill="#f5f0e8" font-family="Libre Baskerville, serif" font-size="15" font-weight="700">TACITO</text>
+            </g>
+
+            <!-- Ramo 1: Le opere -->
+            <g class="mappa-node" data-info="4 opere: Agricola (97-98), Germania (98), Historiae (100-110 ca.), Annales (117 ca.). Dalla monografia alla grande storiografia imperiale.">
+              <rect x="40" y="164" width="230" height="48" rx="12" fill="#e8f4f8" stroke="#6db5d4" stroke-width="2"/>
+              <text x="155" y="193" text-anchor="middle" fill="#1a6b8a" font-family="Libre Baskerville, serif" font-size="13" font-weight="700">Le quattro opere</text>
+            </g>
+
+            <!-- Ramo 2: Il pensiero -->
+            <g class="mappa-node" data-info="Temi centrali: la libertas vs il principato; sine ira et studio come metodo; il tramonto della libertà senatoria (libido adsentandi); il paradosso dell'imperialismo (ubi solitudinem faciunt, pacem appellant).">
+              <rect x="335" y="164" width="270" height="48" rx="12" fill="#fef3cd" stroke="#f4d35e" stroke-width="2"/>
+              <text x="470" y="193" text-anchor="middle" fill="#8a6a0a" font-family="Libre Baskerville, serif" font-size="13" font-weight="700">Il pensiero storico</text>
+            </g>
+
+            <!-- Ramo 3: Lo stile -->
+            <g class="mappa-node" data-info="Stile: brevitas, variatio, inconcinnitas, arcaismo sallustiano, sententia. Modello: Sallustio più che Cicerone. Effetto: la disarmonia formale riflette la disarmonia storica (Conte).">
+              <rect x="660" y="164" width="250" height="48" rx="12" fill="#f0e8f0" stroke="#c084dc" stroke-width="2"/>
+              <text x="785" y="193" text-anchor="middle" fill="#7a3a9a" font-family="Libre Baskerville, serif" font-size="13" font-weight="700">Lo stile</text>
+            </g>
+
+            <!-- Sotto-nodi ramo 1 -->
+            <g class="mappa-node" data-info="Agricola: biografia del suocero, unicum tra laudatio, storiografia ed etnografia. La virtus di Agricola: servire lo Stato con onestà anche sotto un principe tirannico. Germania: il 'buon barbaro' come specchio dei vizi romani.">
+              <rect x="0"  y="312" width="155" height="44" rx="10" fill="#fff" stroke="#6db5d4" stroke-width="1.5"/>
+              <text x="77"  y="338" text-anchor="middle" fill="#2c2416" font-family="Cardo, serif" font-size="12">Agricola, Germania</text>
+            </g>
+            <g class="mappa-node" data-info="Historiae: 69-96 d.C. — dall'anno dei 4 imperatori a Domiziano. Annales: 14-68 d.C. — da Tiberio a Nerone. Titolo originale Ab excessu divi Augusti: si ricollega all'Ab urbe condita di Livio.">
+              <rect x="162" y="312" width="170" height="44" rx="10" fill="#fff" stroke="#6db5d4" stroke-width="1.5"/>
+              <text x="247" y="338" text-anchor="middle" fill="#2c2416" font-family="Cardo, serif" font-size="12">Historiae, Annales</text>
+            </g>
+
+            <!-- Sotto-nodi ramo 2 -->
+            <g class="mappa-node" data-info="Libertas: tema centrale. Tacito è nostalgico della libertas repubblicana ma accetta la necessità del principato. La storia del principato è la storia del tramonto della libertà politica dell'aristocrazia senatoria: la libido adsentandi.">
+              <rect x="305" y="312" width="148" height="44" rx="10" fill="#fff" stroke="#f4d35e" stroke-width="1.5"/>
+              <text x="379" y="338" text-anchor="middle" fill="#2c2416" font-family="Cardo, serif" font-size="12">Libertas</text>
+            </g>
+            <g class="mappa-node" data-info="Sine ira et studio (Ann. 1,1): non neutralità assoluta ma rigore metodologico. Assenza di motivi personali di odio o favore. Historiae 1,1: incorrupta fides — dichiarare i propri condizionamenti è già parte del metodo.">
+              <rect x="460" y="312" width="165" height="44" rx="10" fill="#fff" stroke="#f4d35e" stroke-width="1.5"/>
+              <text x="542" y="330" text-anchor="middle" fill="#2c2416" font-family="Cardo, serif" font-size="12">Sine ira et studio</text>
+              <text x="542" y="348" text-anchor="middle" fill="#2c2416" font-family="Cardo, serif" font-size="11" font-style="italic">(Ann. 1,1)</text>
+            </g>
+
+            <!-- Sotto-nodi ramo 3 -->
+            <g class="mappa-node" data-info="Brevitas e variatio: densità espressiva e asimmetria sintattica (inconcinnitas). Sallustio è il modello, non Cicerone. Arcaismi: habuere, cessere, rettulerunt. Lo stile arcaico crea solennità quasi lapidaria.">
+              <rect x="628" y="312" width="148" height="44" rx="10" fill="#fff" stroke="#c084dc" stroke-width="1.5"/>
+              <text x="702" y="338" text-anchor="middle" fill="#2c2416" font-family="Cardo, serif" font-size="12">Brevitas, variatio</text>
+            </g>
+            <g class="mappa-node" data-info="La sententia: brevi frasi aforistiche che sintetizzano paradossi storici o giudizi morali. Es.: 'ubi solitudinem faciunt, pacem appellant' (Agr. 30); 'rara temporum felicitate ubi sentire quae velis et quae sentias dicere licet' (Hist. 1,1).">
+              <rect x="784" y="312" width="148" height="44" rx="10" fill="#fff" stroke="#c084dc" stroke-width="1.5"/>
+              <text x="858" y="338" text-anchor="middle" fill="#2c2416" font-family="Cardo, serif" font-size="12">Sententia</text>
+            </g>
+
+            <!-- Nodo finale -->
+            <g class="mappa-node" data-info="'Il più grande storico dell'antichità' (Conte). La storia di Tacito non è cronaca: è storia animata da personaggi tragici, in cui la forma spezzata riflette un mondo spezzato. Lo storico del pathos.">
+              <ellipse cx="470" cy="455" rx="240" ry="26" fill="#b8915a" stroke="#2c2416" stroke-width="2.5"/>
+              <text x="470" y="461" text-anchor="middle" fill="#fff" font-family="Libre Baskerville, serif" font-size="12" font-weight="700">Lo storico del pathos: forma e contenuto si corrispondono</text>
+            </g>
+          </svg>
+          <div class="mappa-tooltip" id="mappaTooltip"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ QUIZ ═══ -->
+    <div class="esercizio-section" id="esercizi">
+      <h2>Check for Understanding &mdash; Quiz</h2>
+
+      <h3>A. La vita e le opere</h3>
+
+      <div class="quiz-item" data-quiz="q1">
+        <div class="quiz-q">1. Che cos&rsquo;&egrave; l&rsquo;<em>Agricola</em>?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">Un trattato di agronomia in stile varroniano</div>
+          <div class="quiz-option" data-correct="true"  onclick="checkQuiz(this)">La biografia del suocero di Tacito, governatore militare della Britannia sotto Domiziano</div>
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">Un poema epico sulla conquista della Britannia</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <div class="quiz-item" data-quiz="q2">
+        <div class="quiz-q">2. Quale periodo storico coprono gli <em>Annales</em>?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">Dall&rsquo;anno dei Quattro Imperatori (69 d.C.) alla morte di Domiziano (96 d.C.)</div>
+          <div class="quiz-option" data-correct="true"  onclick="checkQuiz(this)">Dalla morte di Augusto (14 d.C.) alla morte di Nerone (68 d.C.)</div>
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">Dalla fondazione di Roma alla caduta della Repubblica</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <div class="quiz-item" data-quiz="q3">
+        <div class="quiz-q">3. Il titolo <em>Ab excessu divi Augusti</em> richiama esplicitamente quale modello letterario?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">Le <em>Historiae</em> di Sallustio, per la struttura annalistica</div>
+          <div class="quiz-option" data-correct="true"  onclick="checkQuiz(this)">L&rsquo;<em>Ab urbe condita</em> di Livio: Tacito si propone come continuatore della grande storiografia latina</div>
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">Il <em>De bello Gallico</em> di Cesare, per il tema militare</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <h3>B. I testi latini</h3>
+
+      <div class="quiz-item" data-quiz="q4">
+        <div class="quiz-q">4. Chi pronuncia il discorso &laquo;<em>raptores orbis</em>&raquo; nell&rsquo;<em>Agricola</em>?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">Agricola, prima della battaglia di fronte alle truppe romane</div>
+          <div class="quiz-option" data-correct="true"  onclick="checkQuiz(this)">Calgàco, capo britannico, ai suoi uomini prima della battaglia del Mons Graupius</div>
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">Un senatore romano durante un&rsquo;arringa al Foro</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <div class="quiz-item" data-quiz="q5">
+        <div class="quiz-q">5. Cosa significa esattamente la formula <em>sine ira et studio</em>?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">Senza impegno personale e senza entusiasmo per la ricerca storica</div>
+          <div class="quiz-option" data-correct="true"  onclick="checkQuiz(this)">Senza rancore personale e senza faziosit&agrave; di parte: &egrave; una dichiarazione di rigore metodologico, non di neutralit&agrave; assoluta</div>
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">Senza consultare fonti dirette e senza studi preliminari approfonditi</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <div class="quiz-item" data-quiz="q6">
+        <div class="quiz-q">6. Nel proemio delle <em>Historiae</em>, Tacito dichiara il proprio debito con Vespasiano, Tito e Domiziano. Perch&eacute; questa dichiarazione &egrave; metodologicamente importante?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">Per vantare la propria carriera e guadagnare autorevolezza presso il lettore</div>
+          <div class="quiz-option" data-correct="true"  onclick="checkQuiz(this)">Perch&eacute; la trasparenza sui propri condizionamenti &egrave; parte dell&rsquo;<em>incorrupta fides</em>: Tacito non nasconde ci&ograve; che potrebbe compromettere la sua obiettivit&agrave;</div>
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">Per giustificare il fatto di non criticare apertamente i Flavi nelle <em>Historiae</em></div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <div class="quiz-item" data-quiz="q7">
+        <div class="quiz-q">7. Nella <em>Germania</em>, la dote nuziale germanica &egrave; composta da:</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">Gioielli, vesti e ornamenti femminili di lusso</div>
+          <div class="quiz-option" data-correct="true"  onclick="checkQuiz(this)">Buoi, un cavallo bardato, uno scudo con lancia e spada &mdash; simboli di guerra e fatica condivisa</div>
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">Terre, schiavi e denaro in argento, come a Roma</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <div class="quiz-item" data-quiz="q8">
+        <div class="quiz-q">8. Qual &egrave; la funzione retorica del &laquo;buon barbaro&raquo; nella <em>Germania</em>?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">Descrivere i Germani come popolo primitivo da civilizzare militarmente</div>
+          <div class="quiz-option" data-correct="true"  onclick="checkQuiz(this)">Usare le virt&ugrave; dei barbari come specchio critico della corruzione morale di Roma imperiale</div>
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">Dimostrare la superiorit&agrave; del clima nordico su quello mediterraneo per la formazione del carattere</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <h3>C. Lo stile e il pensiero</h3>
+
+      <div class="quiz-item" data-quiz="q9">
+        <div class="quiz-q">9. Che cos&rsquo;&egrave; l&rsquo;<em>inconcinnitas</em> dello stile tacitiano?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">L&rsquo;uso massiccio di parole greche nella prosa latina</div>
+          <div class="quiz-option" data-correct="true"  onclick="checkQuiz(this)">L&rsquo;asimmetria sintattica intenzionale: strutture volutamente scomposte, opposte alla <em>concinnitas</em> ciceroniana</div>
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">La totale assenza di figure retoriche nel testo storico</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <div class="quiz-item" data-quiz="q10">
+        <div class="quiz-q">10. Qual &egrave; il principale modello stilistico di Tacito?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">Cicerone, per l&rsquo;equilibrio e l&rsquo;eleganza del periodo lungo</div>
+          <div class="quiz-option" data-correct="true"  onclick="checkQuiz(this)">Sallustio, per la <em>brevitas</em>, l&rsquo;arcaismo e la densit&agrave; espressiva</div>
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">Livio, per la narrazione annalistica distesa e il pathos epidittico</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <div class="quiz-item" data-quiz="q11">
+        <div class="quiz-q">11. La chiusa del proemio delle <em>Historiae</em> &mdash; <em>ubi sentire quae velis et quae sentias dicere licet</em> &mdash; si riferisce a:</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">All&rsquo;et&agrave; di Tiberio, caratterizzata da una certa apertura politica iniziale</div>
+          <div class="quiz-option" data-correct="true"  onclick="checkQuiz(this)">Al principato di Traiano, sotto cui Tacito scrive: la <em>rara felicitas temporum</em> che contrasta con tutti i regimi precedenti</div>
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">Alla Repubblica romana nel periodo aureo degli Scipioni</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <div class="quiz-item" data-quiz="q12">
+        <div class="quiz-q">12. Il paradosso di <em>ubi solitudinem faciunt, pacem appellant</em> consiste in:</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">I Romani costruiscono strade nel deserto e le chiamano impropriamente pace</div>
+          <div class="quiz-option" data-correct="true"  onclick="checkQuiz(this)">La distruzione totale (&laquo;deserto&raquo;) viene ribattezzata con il nome di &laquo;pace&raquo;: l&rsquo;imperialismo romano &egrave; smascherato come violenza camuffata da ordine civile</div>
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">I Britoni preferiscono la solitudine e la morte alla pace imposta dai Romani</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+    </div>
+
+    <!-- ═══ EXIT TICKET ═══ -->
+    <div class="tlac-box tlac-exit">
+      <div class="tlac-label">Exit Ticket &mdash; Verifica finale (5 min)</div>
+      <p>Rispondi per iscritto su un foglio e consegna al professore:</p>
+      <p><strong>1.</strong> Spiega la formula <em>sine ira et studio</em>: cos&rsquo;&egrave;? Cosa non &egrave;? Perch&eacute; la questione dell&rsquo;imparzialit&agrave; storica &egrave; pi&ugrave; complessa di una semplice promessa di neutralit&agrave;?</p>
+      <p><strong>2.</strong> Analizza la sentenza <em>ubi solitudinem faciunt, pacem appellant</em>: struttura sintattica, figure retoriche, significato critico verso Roma.</p>
+      <p><strong>3.</strong> In che senso la <em>Germania</em> &egrave; un testo di critica sociale implicita? Motiva la risposta attraverso il passo sul matrimonio germanico (capp. 18&ndash;20).</p>
+    </div>
+
+    <!-- Strumenti Correlati -->
+    <section class="tools-section">
+      <h2>Strumenti Correlati</h2>
+      <div class="tools-grid">
+        <a href="latino5-classico.html" class="tool-link">
+          <span class="tool-icon">&#x1F4D2;</span>
+          <span class="tool-name">Latino 5 Classico</span>
+        </a>
+        <a href="lezione_petronio.html" class="tool-link">
+          <span class="tool-icon">&#x1F4D6;</span>
+          <span class="tool-name">Lezione Petronio</span>
+        </a>
+        <a href="raccoglitore-testi.html" class="tool-link">
+          <span class="tool-icon">&#x1F4DA;</span>
+          <span class="tool-name">Raccoglitore Testi</span>
+        </a>
+        <a href="analisi_latino.html" class="tool-link">
+          <span class="tool-icon">&#x1F50D;</span>
+          <span class="tool-name">Analisi Testi</span>
+        </a>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p><strong>Prof. Andrea Vaccaro</strong></p>
+    <p>Lingua e Cultura Latina &mdash; Liceo Classico e Liceo Scientifico</p>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="raccoglitore-testi.html">Raccoglitore Testi</a>
+      <a href="strumenti/glossario-eulalia.html">Strumenti</a>
+    </div>
+  </footer>
+
+<script>
+// ═══ TLAC HINT TOGGLE ═══
+function toggleHint(btn) {
+  var hint = btn.nextElementSibling;
+  hint.classList.toggle('visible');
+  btn.textContent = hint.classList.contains('visible') ? 'Nascondi spunto' : 'Mostra spunto';
+}
+
+// ═══ TRADUZIONE TOGGLE ═══
+function toggleTrad(btn) {
+  var wrap = btn.closest('.traduzione-toggle');
+  var trad = wrap.nextElementSibling;
+  trad.classList.toggle('visible');
+  btn.textContent = trad.classList.contains('visible') ? 'Nascondi traduzione' : 'Mostra traduzione completa';
+}
+
+// ═══ MAPPA CONCETTUALE ═══
+(function() {
+  var tooltip = document.getElementById('mappaTooltip');
+  var nodes   = document.querySelectorAll('.mappa-node');
+  nodes.forEach(function(node) {
+    node.addEventListener('mouseenter', function(e) {
+      var info = node.getAttribute('data-info');
+      if (!info) return;
+      tooltip.textContent = info;
+      tooltip.style.display = 'block';
+      positionTooltip(e);
+    });
+    node.addEventListener('mousemove', positionTooltip);
+    node.addEventListener('mouseleave', function() { tooltip.style.display = 'none'; });
+  });
+  function positionTooltip(e) {
+    var x = e.clientX + 16, y = e.clientY - 10;
+    if (x + 360 > window.innerWidth)  x = e.clientX - 360;
+    if (y + 110 > window.innerHeight) y = e.clientY - 110;
+    tooltip.style.left = x + 'px';
+    tooltip.style.top  = y + 'px';
+  }
+})();
+
+// ═══ QUIZ ═══
+var score = 0;
+var totalQuiz = 12;
+function checkQuiz(option) {
+  var item = option.closest('.quiz-item');
+  if (item.classList.contains('answered')) return;
+  item.classList.add('answered');
+  var isCorrect  = option.getAttribute('data-correct') === 'true';
+  var feedback   = item.querySelector('.quiz-feedback');
+  var allOptions = item.querySelectorAll('.quiz-option');
+  allOptions.forEach(function(opt) {
+    opt.classList.add('disabled');
+    if (opt.getAttribute('data-correct') === 'true') opt.classList.add('correct');
+  });
+  if (isCorrect) {
+    option.classList.add('correct');
+    feedback.className = 'quiz-feedback show correct-fb';
+    feedback.textContent = 'Corretto!';
+    score++;
+  } else {
+    option.classList.add('wrong');
+    feedback.className = 'quiz-feedback show wrong-fb';
+    var correctText = item.querySelector('.quiz-option[data-correct="true"]').textContent;
+    feedback.innerHTML = 'Non esatto. La risposta corretta \u00e8: <strong>' + correctText + '</strong>. Rileggila e rifletti sul perch\u00e9.';
+  }
+  document.getElementById('scoreDisplay').textContent = score + ' / ' + totalQuiz;
+}
+</script>
+
+</body>
+</html>

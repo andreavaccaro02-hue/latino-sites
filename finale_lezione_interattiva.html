@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Proposizione Finale Latina - Lezione Interattiva</title>
+    <meta name="description" content="Lezione interattiva sulla proposizione finale latina: ut/ne + congiuntivo, qui finale, ad + gerundio, esempi e quiz.">
+    <meta property="og:title" content="La Proposizione Finale Latina - Lezione Interattiva">
+    <meta property="og:description" content="Lezione interattiva sulla proposizione finale latina: ut/ne + congiuntivo, qui finale, ad + gerundio, esempi e quiz.">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="it_IT">
+    <meta property="og:url" content="https://andreavaccaro02-hue.github.io/latino-sites/finale_lezione_interattiva.html">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: #e0e0e0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #11998e, #38ef7d);
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .section {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h2 {
+            color: #11998e;
+            font-size: 2em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #11998e;
+        }
+
+        h3 {
+            color: #0a6e63;
+            font-size: 1.5em;
+            margin: 30px 0 15px 0;
+        }
+
+        .box {
+            background: #f0fdf9;
+            border-left: 5px solid #11998e;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .box-warning {
+            background: #fff3cd;
+            border-left-color: #ffc107;
+        }
+
+        .box-success {
+            background: #d4edda;
+            border-left-color: #28a745;
+        }
+
+        .box-info {
+            background: #d1ecf1;
+            border-left-color: #17a2b8;
+        }
+
+        .example {
+            background: #e8f8f5;
+            border: 2px solid #11998e;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .latin {
+            color: #c2185b;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        .translation {
+            color: #1976d2;
+            font-style: italic;
+            margin-top: 8px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        th {
+            background: linear-gradient(135deg, #11998e, #0a6e63);
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        tr:hover {
+            background: #f0fdf9;
+        }
+
+        .quiz-option {
+            background: white;
+            border: 2px solid #ddd;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .quiz-option:hover {
+            border-color: #11998e;
+            transform: translateX(5px);
+            box-shadow: 0 2px 8px rgba(17, 153, 142, 0.3);
+        }
+
+        .quiz-option.correct {
+            background: #d4edda;
+            border-color: #28a745;
+        }
+
+        .quiz-option.wrong {
+            background: #f8d7da;
+            border-color: #dc3545;
+        }
+
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #11998e, #38ef7d);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: #e0e0e0;
+            color: #555;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .section-counter {
+            text-align: center;
+            color: #999;
+            margin-bottom: 10px;
+            font-size: 0.9em;
+        }
+
+        .highlight {
+            background: #fef9e7;
+            border: 1px solid #f39c12;
+            padding: 3px 6px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+
+        .schema-box {
+            background: linear-gradient(135deg, #e8f8f5, #d0f0ea);
+            border: 2px solid #11998e;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .schema-box .formula {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #0a6e63;
+            margin: 10px 0;
+        }
+
+        .result-box {
+            background: linear-gradient(135deg, #e8f8f5, #d0f0ea);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .result-box h3 {
+            font-size: 2em;
+            color: #11998e;
+        }
+
+        .result-box p {
+            font-size: 1.2em;
+            color: #555;
+            margin-top: 10px;
+        }
+
+        .score-circle {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #11998e, #38ef7d);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 20px auto;
+            font-size: 2.5em;
+            font-weight: bold;
+            color: white;
+            box-shadow: 0 5px 20px rgba(17,153,142,0.4);
+        }
+
+        .nav-home {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 25px;
+            background: #11998e;
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .nav-home:hover {
+            background: #0a6e63;
+            transform: translateY(-2px);
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 0.85em;
+            font-weight: 700;
+            margin: 2px;
+        }
+
+        .tag-green { background: #d4edda; color: #155724; }
+        .tag-red { background: #f8d7da; color: #721c24; }
+        .tag-blue { background: #d1ecf1; color: #0c5460; }
+        .tag-yellow { background: #fff3cd; color: #856404; }
+
+        .quiz-feedback {
+            margin-top: 10px;
+            padding: 10px 15px;
+            border-radius: 8px;
+            display: none;
+            font-weight: 600;
+        }
+
+        .quiz-feedback.show { display: block; }
+        .quiz-feedback.correct-fb { background: #d4edda; color: #155724; }
+        .quiz-feedback.wrong-fb { background: #f8d7da; color: #721c24; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1>🎯 La Proposizione Finale</h1>
+        <p>Lezione interattiva — Latino 2 · Sintassi del Periodo</p>
+    </header>
+
+    <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+    </div>
+
+    <div class="content">
+        <div class="section-counter" id="sectionCounter">Sezione 1 di 6</div>
+
+        <!-- SEZIONE 1: Introduzione -->
+        <div class="section active" id="section1">
+            <h2>1. Che cos'è la proposizione finale?</h2>
+
+            <p>La <strong>proposizione finale</strong> è una proposizione subordinata che esprime lo <strong>scopo</strong> o il <strong>fine</strong> dell'azione della reggente. Risponde alla domanda: <em>«perché? con quale scopo?»</em></p>
+
+            <div class="box">
+                <strong>Definizione:</strong> La proposizione finale indica il fine o lo scopo a cui tende l'azione espressa nella proposizione principale.
+            </div>
+
+            <div class="example">
+                <span class="latin">Venit ut te videat.</span>
+                <div class="translation">→ Viene <u>per vederti / affinché ti veda</u>.</div>
+            </div>
+
+            <div class="example">
+                <span class="latin">Tacent ne puniantur.</span>
+                <div class="translation">→ Tacciono <u>per non essere puniti / affinché non vengano puniti</u>.</div>
+            </div>
+
+            <h3>Come si riconosce?</h3>
+            <p>La finale risponde sempre a una delle seguenti domande:</p>
+            <ul style="margin: 15px 0 15px 25px;">
+                <li><em>Con quale scopo? / Per quale fine?</em></li>
+                <li><em>Perché? (= per fare cosa)</em></li>
+                <li><em>Affinché / Per</em></li>
+            </ul>
+
+            <div class="box box-info">
+                <strong>Attenzione:</strong> La finale indica lo <em>scopo soggettivo</em> di chi compie l'azione, non la causa. <br>
+                <span class="latin">Venit <u>quia</u> te amat</span> → Causale (viene <em>perché</em> ti ama) <br>
+                <span class="latin">Venit <u>ut</u> te videat</span> → Finale (viene <em>per / affinché</em> ti veda)
+            </div>
+        </div>
+
+        <!-- SEZIONE 2: Costruzioni della finale -->
+        <div class="section" id="section2">
+            <h2>2. Come si costruisce la finale</h2>
+
+            <p>La proposizione finale ha <strong>quattro costruzioni principali</strong> in latino:</p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Costruzione</th>
+                        <th>Uso</th>
+                        <th>Esempio</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="tag tag-green">ut + congiuntivo</span></td>
+                        <td>Forma più comune (affermativa)</td>
+                        <td><span class="latin">Venit ut disceret.</span> Viene per imparare.</td>
+                    </tr>
+                    <tr>
+                        <td><span class="tag tag-red">ne + congiuntivo</span></td>
+                        <td>Forma negativa</td>
+                        <td><span class="latin">Tacet ne audiatur.</span> Tace per non essere ascoltato.</td>
+                    </tr>
+                    <tr>
+                        <td><span class="tag tag-blue">qui / quae / quod + congiuntivo</span></td>
+                        <td>Pronome relativo con valore finale</td>
+                        <td><span class="latin">Misit legatos qui pacem peterent.</span> Inviò ambasciatori a chiedere la pace.</td>
+                    </tr>
+                    <tr>
+                        <td><span class="tag tag-yellow">ad + gerundio/gerundivo</span></td>
+                        <td>Con nomi / pronomi; soprattutto in prosa</td>
+                        <td><span class="latin">Venit ad discendum.</span> Viene per imparare.</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Il modo: il Congiuntivo</h3>
+            <div class="box">
+                <strong>Regola fondamentale:</strong> La proposizione finale vuole sempre il <strong>congiuntivo</strong> (presente o imperfetto), secondo la <em>consecutio temporum</em>.
+                <ul style="margin: 10px 0 0 20px;">
+                    <li>Reggente con verbo di tempo <strong>principale</strong> → congiuntivo <strong>presente</strong></li>
+                    <li>Reggente con verbo di tempo <strong>storico</strong> → congiuntivo <strong>imperfetto</strong></li>
+                </ul>
+            </div>
+
+            <div class="example">
+                <span class="latin">Venit ut discāt.</span> (presente) → Viene per imparare.
+                <div class="translation">Reggente al presente → congiuntivo presente</div>
+            </div>
+            <div class="example">
+                <span class="latin">Venit ut disceret.</span> (imperfetto) → Venne per imparare.
+                <div class="translation">Reggente al perfetto → congiuntivo imperfetto</div>
+            </div>
+        </div>
+
+        <!-- SEZIONE 3: La consecutio temporum -->
+        <div class="section" id="section3">
+            <h2>3. Consecutio Temporum nella Finale</h2>
+
+            <p>La finale <strong>non distingue anteriorità o contemporaneità</strong> rispetto alla reggente: esprime sempre uno scopo futuro rispetto al verbo principale. Il tempo del congiuntivo segue solo la regola dei tempi:</p>
+
+            <div class="schema-box">
+                <div class="formula">Tempo principale → congiuntivo PRESENTE</div>
+                <div class="formula">Tempo storico → congiuntivo IMPERFETTO</div>
+            </div>
+
+            <h3>Tempi principali (presente, futuro, futuro anteriore, perfetto logico)</h3>
+            <div class="example">
+                <span class="latin">Milites mittit ut hostes vincant.</span>
+                <div class="translation">→ Manda i soldati affinché vincano i nemici.</div>
+            </div>
+            <div class="example">
+                <span class="latin">Scribam ut intellegas.</span>
+                <div class="translation">→ Scriverò affinché tu capisca.</div>
+            </div>
+
+            <h3>Tempi storici (imperfetto, perfetto narrativo, piuccheperfetto)</h3>
+            <div class="example">
+                <span class="latin">Milites misit ut hostes vincerent.</span>
+                <div class="translation">→ Mandò i soldati affinché vincessero i nemici.</div>
+            </div>
+            <div class="example">
+                <span class="latin">Tacebant ne audirentur.</span>
+                <div class="translation">→ Tacevano per non essere ascoltati.</div>
+            </div>
+
+            <div class="box box-warning">
+                <strong>Nota:</strong> La finale usa solo presente e imperfetto del congiuntivo, mai il perfetto o il piuccheperfetto, perché lo scopo è sempre <em>proiettato nel futuro</em> rispetto all'azione principale.
+            </div>
+        </div>
+
+        <!-- SEZIONE 4: Finale relativa e implicita -->
+        <div class="section" id="section4">
+            <h2>4. Finale relativa e costruzioni implicite</h2>
+
+            <h3>La finale relativa (qui/quae/quod + congiuntivo)</h3>
+            <p>Quando la principale contiene una persona o una cosa a cui si assegna un compito, si usa il <strong>pronome relativo + congiuntivo</strong> con valore finale:</p>
+
+            <div class="example">
+                <span class="latin">Caesar legatos misit qui pacem peterent.</span>
+                <div class="translation">→ Cesare mandò ambasciatori <u>per chiedere / che chiedessero</u> la pace.</div>
+            </div>
+            <div class="example">
+                <span class="latin">Deliguntur duces qui exercitum ducant.</span>
+                <div class="translation">→ Vengono scelti capi che guidino l'esercito.</div>
+            </div>
+
+            <div class="box box-info">
+                <strong>Come riconoscere la relativa finale:</strong> Il pronome relativo ha valore finale quando il sostantivo antecedente indica una persona <em>designata per uno scopo</em> (ambasciatori inviati, soldati scelti, uomini mandati…).
+            </div>
+
+            <h3>Finale implicita con ad + gerundio/gerundivo</h3>
+            <p>Quando soggetto della finale e della reggente coincidono, si può usare la costruzione <strong>ad + gerundio</strong> (o gerundivo se c'è un complemento oggetto):</p>
+
+            <div class="example">
+                <span class="latin">Venit ad discendum.</span>
+                <div class="translation">→ Viene per imparare. (gerundio)</div>
+            </div>
+            <div class="example">
+                <span class="latin">Venit ad libros legendos.</span>
+                <div class="translation">→ Viene per leggere i libri. (gerundivo)</div>
+            </div>
+
+            <h3>Finale implicita con il supino attivo</h3>
+            <p>Con verbi di moto, lo <strong>scopo</strong> può essere espresso dal <strong>supino in -um</strong> (IV supino attivo):</p>
+            <div class="example">
+                <span class="latin">Lusum it.</span>
+                <div class="translation">→ Va a giocare.</div>
+            </div>
+            <div class="example">
+                <span class="latin">Romam spectatum venerunt.</span>
+                <div class="translation">→ Vennero a Roma a vedere (gli spettacoli).</div>
+            </div>
+        </div>
+
+        <!-- SEZIONE 5: Riepilogo -->
+        <div class="section" id="section5">
+            <h2>5. Riepilogo: schema completo</h2>
+
+            <div class="schema-box">
+                <p style="font-size:1.1em; margin-bottom:15px;"><strong>PROPOSIZIONE FINALE — Schema Riassuntivo</strong></p>
+                <table>
+                    <thead>
+                        <tr><th>Tipo</th><th>Formula</th><th>Quando si usa</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Esplicita affermativa</td>
+                            <td><span class="latin">ut + cong. pres./imperf.</span></td>
+                            <td>Sempre (forma base)</td>
+                        </tr>
+                        <tr>
+                            <td>Esplicita negativa</td>
+                            <td><span class="latin">ne + cong. pres./imperf.</span></td>
+                            <td>Scopo negativo</td>
+                        </tr>
+                        <tr>
+                            <td>Relativa finale</td>
+                            <td><span class="latin">qui/quae/quod + cong.</span></td>
+                            <td>Antecedente = persona designata</td>
+                        </tr>
+                        <tr>
+                            <td>Implicita (gerundio)</td>
+                            <td><span class="latin">ad + gerundio</span></td>
+                            <td>Stesso soggetto; senza oggetto</td>
+                        </tr>
+                        <tr>
+                            <td>Implicita (gerundivo)</td>
+                            <td><span class="latin">ad + gerundivo</span></td>
+                            <td>Stesso soggetto; con oggetto</td>
+                        </tr>
+                        <tr>
+                            <td>Implicita (supino)</td>
+                            <td><span class="latin">supino in -um</span></td>
+                            <td>Con verbi di moto</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>Parole chiave da ricordare</h3>
+            <div style="margin: 15px 0;">
+                <span class="tag tag-green">ut (affinché)</span>
+                <span class="tag tag-red">ne (affinché non)</span>
+                <span class="tag tag-blue">qui/quae/quod (che, per)</span>
+                <span class="tag tag-yellow">ad + gerundio/gerundivo</span>
+                <span class="tag tag-green">supino in -um (con verbi di moto)</span>
+            </div>
+
+            <div class="box box-success">
+                <strong>Differenza finale / consecutiva:</strong> La <em>finale</em> esprime lo <em>scopo voluto</em> (intenzionale), la <em>consecutiva</em> esprime il <em>risultato reale</em> (conseguenza). <br>
+                <span class="latin">Ita dixit <u>ut omnes riderent</u></span> → Consecutiva (conseguenza) <br>
+                <span class="latin">Dixit <u>ut omnes riderent</u></span> → Finale (scopo: vuole che ridano) <br>
+                <em>Il contesto e la presenza di correlativi (ita, tam, talis…) distinguono le due.</em>
+            </div>
+        </div>
+
+        <!-- SEZIONE 6: Quiz -->
+        <div class="section" id="section6">
+            <h2>6. Quiz — Metti alla prova la tua preparazione</h2>
+            <p>Rispondi alle domande. Per ogni domanda corretta guadagni un punto.</p>
+
+            <div id="quizContainer">
+                <!-- Domanda 1 -->
+                <div class="quiz-question" id="q1" style="margin-bottom: 30px;">
+                    <h3>Domanda 1 / 6</h3>
+                    <p><strong>Quale modo verbale vuole la proposizione finale?</strong></p>
+                    <div class="quiz-option" onclick="checkAnswer(1, this, false)">Indicativo</div>
+                    <div class="quiz-option" onclick="checkAnswer(1, this, true)">Congiuntivo</div>
+                    <div class="quiz-option" onclick="checkAnswer(1, this, false)">Infinito</div>
+                    <div class="quiz-option" onclick="checkAnswer(1, this, false)">Imperativo</div>
+                    <div class="quiz-feedback" id="fb1"></div>
+                </div>
+
+                <!-- Domanda 2 -->
+                <div class="quiz-question" id="q2" style="margin-bottom: 30px;">
+                    <h3>Domanda 2 / 6</h3>
+                    <p><strong>La reggente è al perfetto narrativo (tempo storico). Quale tempo del congiuntivo usi nella finale?</strong></p>
+                    <div class="quiz-option" onclick="checkAnswer(2, this, false)">Presente</div>
+                    <div class="quiz-option" onclick="checkAnswer(2, this, false)">Perfetto</div>
+                    <div class="quiz-option" onclick="checkAnswer(2, this, true)">Imperfetto</div>
+                    <div class="quiz-option" onclick="checkAnswer(2, this, false)">Piuccheperfetto</div>
+                    <div class="quiz-feedback" id="fb2"></div>
+                </div>
+
+                <!-- Domanda 3 -->
+                <div class="quiz-question" id="q3" style="margin-bottom: 30px;">
+                    <h3>Domanda 3 / 6</h3>
+                    <p><strong>Individua la costruzione usata in: <span class="latin">Caesar milites misit ad pontem aedificandum.</span></strong></p>
+                    <div class="quiz-option" onclick="checkAnswer(3, this, false)">ut + congiuntivo</div>
+                    <div class="quiz-option" onclick="checkAnswer(3, this, false)">ne + congiuntivo</div>
+                    <div class="quiz-option" onclick="checkAnswer(3, this, false)">supino in -um</div>
+                    <div class="quiz-option" onclick="checkAnswer(3, this, true)">ad + gerundivo</div>
+                    <div class="quiz-feedback" id="fb3"></div>
+                </div>
+
+                <!-- Domanda 4 -->
+                <div class="quiz-question" id="q4" style="margin-bottom: 30px;">
+                    <h3>Domanda 4 / 6</h3>
+                    <p><strong>Qual è la forma negativa della proposizione finale in latino?</strong></p>
+                    <div class="quiz-option" onclick="checkAnswer(4, this, false)">ut non + congiuntivo</div>
+                    <div class="quiz-option" onclick="checkAnswer(4, this, true)">ne + congiuntivo</div>
+                    <div class="quiz-option" onclick="checkAnswer(4, this, false)">nisi + congiuntivo</div>
+                    <div class="quiz-option" onclick="checkAnswer(4, this, false)">non ut + congiuntivo</div>
+                    <div class="quiz-feedback" id="fb4"></div>
+                </div>
+
+                <!-- Domanda 5 -->
+                <div class="quiz-question" id="q5" style="margin-bottom: 30px;">
+                    <h3>Domanda 5 / 6</h3>
+                    <p><strong>Nella frase <span class="latin">Misit legatos qui pacem peterent</span>, la proposizione relativa ha valore:</strong></p>
+                    <div class="quiz-option" onclick="checkAnswer(5, this, false)">Causale</div>
+                    <div class="quiz-option" onclick="checkAnswer(5, this, false)">Consecutivo</div>
+                    <div class="quiz-option" onclick="checkAnswer(5, this, true)">Finale</div>
+                    <div class="quiz-option" onclick="checkAnswer(5, this, false)">Concessivo</div>
+                    <div class="quiz-feedback" id="fb5"></div>
+                </div>
+
+                <!-- Domanda 6 -->
+                <div class="quiz-question" id="q6" style="margin-bottom: 30px;">
+                    <h3>Domanda 6 / 6</h3>
+                    <p><strong>Con quale tipo di verbo si usa il supino attivo in funzione finale?</strong></p>
+                    <div class="quiz-option" onclick="checkAnswer(6, this, false)">Verbi di dire</div>
+                    <div class="quiz-option" onclick="checkAnswer(6, this, false)">Verbi di pensare</div>
+                    <div class="quiz-option" onclick="checkAnswer(6, this, true)">Verbi di moto</div>
+                    <div class="quiz-option" onclick="checkAnswer(6, this, false)">Verbi di sentire</div>
+                    <div class="quiz-feedback" id="fb6"></div>
+                </div>
+            </div>
+
+            <div id="resultBox" style="display:none;" class="result-box">
+                <h3>Risultato finale</h3>
+                <div class="score-circle" id="scoreCircle"></div>
+                <p id="scoreMessage"></p>
+                <br>
+                <a href="latino2.html" class="nav-home">← Torna a Latino 2</a>
+            </div>
+        </div>
+
+        <div class="nav-buttons">
+            <button class="btn btn-secondary" id="prevBtn" onclick="changeSection(-1)" disabled>← Indietro</button>
+            <button class="btn btn-primary" id="nextBtn" onclick="changeSection(1)">Avanti →</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    let currentSection = 1;
+    const totalSections = 6;
+    let quizAnswers = {};
+    let quizScore = 0;
+
+    function updateProgress() {
+        const pct = ((currentSection - 1) / (totalSections - 1)) * 100;
+        document.getElementById('progressFill').style.width = pct + '%';
+        document.getElementById('sectionCounter').textContent = `Sezione ${currentSection} di ${totalSections}`;
+    }
+
+    function changeSection(dir) {
+        document.getElementById('section' + currentSection).classList.remove('active');
+        currentSection += dir;
+        document.getElementById('section' + currentSection).classList.add('active');
+        document.getElementById('prevBtn').disabled = currentSection === 1;
+        document.getElementById('nextBtn').disabled = currentSection === totalSections;
+        updateProgress();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+
+        if (currentSection === totalSections) {
+            document.getElementById('nextBtn').textContent = 'Fine';
+        } else {
+            document.getElementById('nextBtn').textContent = 'Avanti →';
+        }
+    }
+
+    function checkAnswer(qNum, el, isCorrect) {
+        if (quizAnswers[qNum] !== undefined) return;
+        quizAnswers[qNum] = isCorrect;
+
+        const options = el.parentElement.querySelectorAll('.quiz-option');
+        options.forEach(o => o.style.pointerEvents = 'none');
+
+        const fb = document.getElementById('fb' + qNum);
+        if (isCorrect) {
+            el.classList.add('correct');
+            quizScore++;
+            fb.textContent = '✓ Corretto!';
+            fb.className = 'quiz-feedback show correct-fb';
+        } else {
+            el.classList.add('wrong');
+            fb.textContent = '✗ Non corretto. Rileggi la sezione corrispondente.';
+            fb.className = 'quiz-feedback show wrong-fb';
+            // Evidenzia la risposta corretta
+            options.forEach(o => {
+                if (o.onclick.toString().includes('true')) o.classList.add('correct');
+            });
+        }
+
+        // Mostra risultato finale se tutte le domande sono state risposta
+        if (Object.keys(quizAnswers).length === 6) {
+            setTimeout(showResult, 600);
+        }
+    }
+
+    function showResult() {
+        document.getElementById('resultBox').style.display = 'block';
+        document.getElementById('scoreCircle').textContent = quizScore + '/6';
+        let msg = '';
+        if (quizScore === 6) msg = 'Perfetto! Hai dimostrato una piena padronanza della proposizione finale.';
+        else if (quizScore >= 4) msg = 'Ottimo! Conosci bene la struttura della finale. Rileggi le parti che hai sbagliato.';
+        else if (quizScore >= 2) msg = 'Abbastanza bene. Ripasssa le sezioni sulla consecutio e le costruzioni implicite.';
+        else msg = 'Rileggi la lezione con attenzione, soprattutto le sezioni 2, 3 e 4.';
+        document.getElementById('scoreMessage').textContent = msg;
+        document.getElementById('resultBox').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    updateProgress();
+</script>
+</body>
+</html>

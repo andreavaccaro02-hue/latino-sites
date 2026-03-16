@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://andreavaccaro02-hue.github.io/latino-sites/sitemap.xml

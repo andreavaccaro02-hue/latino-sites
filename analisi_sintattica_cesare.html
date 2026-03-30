@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Analisi Sintattica (Tesnière) — Cesare | Lingua e Cultura Latina</title>
+<meta name="description" content="Stemmi di dipendenza secondo il metodo Tesnière per De Bello Gallico II e De Bello Civili III di Cesare.">
+<link rel="canonical" href="https://andreavaccaro02-hue.github.io/latino-sites/analisi_sintattica_cesare.html">
+<link rel="stylesheet" href="css/style.css">
+<style>
+  /* ── CSS Tree (display:table method) ── */
+  .tree-wrap {
+    overflow-x: auto;
+    padding: 8px 0 20px;
+  }
+
+  .tree,
+  .tree ul,
+  .tree li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    position: relative;
+  }
+
+  .tree {
+    display: table;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .tree ul {
+    display: table;
+    width: 100%;
+  }
+
+  .tree li {
+    display: table-cell;
+    padding: 6px 0;
+    vertical-align: top;
+  }
+
+  /* horizontal bar above siblings */
+  .tree li::before {
+    outline: solid 1.5px #3a5a80;
+    content: "";
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+
+  .tree li:first-child::before { left: 50%; }
+  .tree li:last-child::before  { right: 50%; }
+
+  /* vertical stub from bar down to node */
+  .tree .node::before {
+    outline: solid 1.5px #3a5a80;
+    content: "";
+    height: 8px;
+    left: 50%;
+    position: absolute;
+    top: -8px;
+  }
+
+  /* vertical line from ul up to parent bar */
+  .tree ul::before {
+    outline: solid 1.5px #3a5a80;
+    content: "";
+    height: 8px;
+    left: 50%;
+    position: absolute;
+    top: -8px;
+  }
+
+  /* ── Node styles ── */
+  .node {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 6px 11px 5px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: bold;
+    white-space: nowrap;
+    border: 2px solid;
+    cursor: default;
+    position: relative;
+    min-width: 64px;
+    margin: 0 5px 6px;
+    line-height: 1.3;
+  }
+
+  .lbl {
+    font-size: 9px;
+    font-weight: normal;
+    font-style: italic;
+    opacity: 0.8;
+    margin-top: 3px;
+    white-space: nowrap;
+  }
+
+  /* ── Sistema cromatico basato sul caso (stesso modello di albero_agricola.html) ── */
+
+  /* Verbo e proposizioni a testa verbale (inf., rel., abl. ass.) → giallo */
+  .node.v, .node.inf, .node.rel, .node.pt {
+    background: rgba(244,211,94,.30);
+    border-color: #f4d35e;
+    color: #5c4400;
+  }
+
+  /* Soggetto nominativo → rosso */
+  .node.s {
+    background: rgba(232,93,93,.20);
+    border-color: #e85d5d;
+    color: #7a1212;
+  }
+
+  /* Soggetto in AcI (accusativo + infinitivo) → rosso-verde (doppia natura) */
+  li:has(> span.node.inf) .node.s {
+    background: linear-gradient(to right, rgba(232,93,93,.22) 50%, rgba(120,200,120,.28) 50%);
+    border-color: #9b3a3a;
+    color: #5a1010;
+  }
+
+  /* Oggetto diretto (accusativo) → verde */
+  .node.o {
+    background: rgba(120,200,120,.22);
+    border-color: #78c878;
+    color: #155a15;
+  }
+
+  /* Compl. indiretto (dat./abl.), attributo (gen.), circostante (abl.) → blu */
+  .node.ind, .node.at, .node.ci {
+    background: rgba(109,181,212,.22);
+    border-color: #6db5d4;
+    color: #0e3d70;
+  }
+
+  /* Congiunzione / coordinatore → grigio */
+  .node.cn {
+    background: rgba(173,181,189,.25);
+    border-color: #adb5bd;
+    color: #444d55;
+  }
+
+  hr.sep { border: none; border-top: 1px solid var(--border); margin: 28px 0 8px; }
+
+  /* ── Legend ── */
+  .tesniere-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 20px;
+    margin: 0 0 12px;
+    font-size: 13px;
+  }
+
+  .tesniere-legend-item {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    color: var(--text);
+  }
+
+  .ld {
+    width: 16px;
+    height: 16px;
+    border-radius: 4px;
+    flex-shrink: 0;
+    border: 2px solid rgba(0,0,0,0.15);
+  }
+
+  .tesniere-note {
+    font-size: 13px;
+    color: var(--text-dim);
+    font-style: italic;
+    line-height: 1.7;
+    margin-top: 12px;
+  }
+
+  .prop-title {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 16px;
+    color: var(--text);
+    margin: 28px 0 12px;
+    font-style: italic;
+  }
+
+  .prop-title:first-child { margin-top: 0; }
+</style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="container">
+      <a href="index.html" class="site-name">Lingua e Cultura Latina</a>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="latino3-classico.html">Latino 3</a>
+        <a href="raccoglitore-testi.html">Testi</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Header -->
+  <div class="page-header">
+    <h1>Analisi Sintattica &mdash; Cesare</h1>
+    <div class="divider"></div>
+    <p class="subtitle">Stemmi di dipendenza (diagrammi ad albero) &mdash; Metodo Tesnière</p>
+  </div>
+
+  <div class="container">
+    <a href="lezione_cesare.html" class="back-link">&larr; Torna alla lezione su Cesare</a>
+
+    <!-- ══════════════ LEGENDA ══════════════ -->
+    <div class="content-section">
+      <div class="content-header">
+        <h2>Legenda dei nodi</h2>
+        <div class="section-ref">Metodo Tesnière &mdash; <em>Éléments de syntaxe structurale</em> (1959)</div>
+      </div>
+      <div class="content-body">
+        <div class="tesniere-legend">
+          <div class="tesniere-legend-item"><div class="ld" style="background:rgba(244,211,94,.30);border-color:#f4d35e"></div>Verbo / nucleo &mdash; e proposizioni verbali (inf., rel., abl. ass.) &nbsp;<em style="color:var(--text-dim)">[giallo]</em></div>
+          <div class="tesniere-legend-item"><div class="ld" style="background:rgba(232,93,93,.20);border-color:#e85d5d"></div>Soggetto <strong>nominativo</strong> &nbsp;<em style="color:var(--text-dim)">[rosso]</em></div>
+          <div class="tesniere-legend-item"><div class="ld" style="background:linear-gradient(to right,rgba(232,93,93,.22) 50%,rgba(120,200,120,.28) 50%);border-color:#9b3a3a"></div>Soggetto in <em>accusativus cum infinitivo</em> (doppia natura) &nbsp;<em style="color:var(--text-dim)">[rosso-verde]</em></div>
+          <div class="tesniere-legend-item"><div class="ld" style="background:rgba(120,200,120,.22);border-color:#78c878"></div>Oggetto diretto &mdash; II Attante (<strong>accusativo</strong>) &nbsp;<em style="color:var(--text-dim)">[verde]</em></div>
+          <div class="tesniere-legend-item"><div class="ld" style="background:rgba(109,181,212,.22);border-color:#6db5d4"></div>Compl. indiretto, attributo, circostante (<strong>genitivo / dativo / ablativo</strong>) &nbsp;<em style="color:var(--text-dim)">[blu]</em></div>
+          <div class="tesniere-legend-item"><div class="ld" style="background:rgba(173,181,189,.25);border-color:#adb5bd"></div>Coordinazione / connettivo (invariabile) &nbsp;<em style="color:var(--text-dim)">[grigio]</em></div>
+        </div>
+        <p class="tesniere-note">
+          Nel metodo Tesnière il <strong>verbo</strong> è il nucleo (radice dell'albero); gli <strong>attanti</strong> sono i
+          dipendenti obbligatori (soggetto, oggetto, complemento indiretto); i <strong>circostanti</strong> sono i
+          complementi facoltativi (tempo, luogo, modo, causa &hellip;). Le proposizioni subordinate dipendono dalla parola
+          reggente tramite la loro forma verbale.
+        </p>
+      </div>
+    </div>
+
+    <!-- ══════════════ TESTO 1 ══════════════ -->
+    <div class="content-section">
+      <div class="content-header">
+        <h2>Testo 1 &mdash; <em>De Bello Gallico</em>, II (I Nervi)</h2>
+        <div class="section-ref">Struttura sintattica delle proposizioni principali e subordinate</div>
+      </div>
+      <div class="content-body">
+
+        <div class="brano-box">
+          <div class="brano-titolo">Testo latino</div>
+          <div class="brano-testo">
+            Eorum fines Nervii attingebant. Quorum de natura moribusque Caesar cum quaereret, sic reperiebat:
+            nullum esse aditum ad eos mercatoribus; nihil pati vini reliquarumque rerum ad luxuriam pertinentium
+            inferri, quod his rebus relanguescere animos eorum et remitti virtutem existimarent; esse homines feros
+            magnaeque virtutis; increpitare atque incusare reliquos Belgas, qui se populo Romano dedidissent
+            patriamque virtutem proiecissent; confirmare sese neque legatos missuros neque ullam condicionem
+            pacis accepturos. Cum per eorum fines triduum iter fecisset, inveniebat ex captivis Sabim flumen a
+            castris suis non amplius milibus passuum decem abesse; trans id flumen omnes Nervios consedisse
+            adventumque ibi Romanorum expectare una cum Atrebatibus et Viromanduis, finitimis suis.
+          </div>
+        </div>
+
+        <!-- 1.1 -->
+        <h3 class="prop-title">Prop. 1.1 &mdash; <em>Eorum fines Nervii attingebant</em></h3>
+        <div class="tree-wrap">
+          <ul class="tree">
+            <li>
+              <span class="node v">attingebant<span class="lbl">VERBO principale</span></span>
+              <ul>
+                <li>
+                  <span class="node s">Nervii<span class="lbl">I Att. &mdash; soggetto</span></span>
+                </li>
+                <li>
+                  <span class="node o">fines<span class="lbl">II Att. &mdash; oggetto dir.</span></span>
+                  <ul>
+                    <li><span class="node at">Eorum<span class="lbl">gen. poss. (= Nerviorum)</span></span></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+
+        <hr class="sep">
+
+        <!-- 1.2 -->
+        <h3 class="prop-title">Prop. 1.2 &mdash; <em>Caesar&hellip;reperiebat</em> + oratio obliqua (5 infinitive)</h3>
+        <div class="tree-wrap">
+          <ul class="tree">
+            <li>
+              <span class="node v">reperiebat<span class="lbl">VERBO principale</span></span>
+              <ul>
+                <li>
+                  <span class="node s">Caesar<span class="lbl">I Att. &mdash; soggetto</span></span>
+                </li>
+                <li>
+                  <span class="node v">quaereret<span class="lbl">prop. temp. cum + cong.</span></span>
+                  <ul>
+                    <li>
+                      <span class="node ci">de natura<br>moribusque<span class="lbl">Circ. (argomento)</span></span>
+                      <ul>
+                        <li><span class="node at">Quorum<span class="lbl">gen. (= Nerviorum)</span></span></li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+                <li><span class="node ci">sic<span class="lbl">Circ. (modo)</span></span></li>
+
+                <!-- Inf 1 -->
+                <li>
+                  <span class="node inf">esse ①<span class="lbl">inf. (acc.+inf.) &mdash; oratio obl.</span></span>
+                  <ul>
+                    <li>
+                      <span class="node s">aditum<span class="lbl">sogg. acc.</span></span>
+                      <ul>
+                        <li><span class="node at">nullum<span class="lbl">attr.</span></span></li>
+                      </ul>
+                    </li>
+                    <li><span class="node ci">ad eos<span class="lbl">Circ. (destinazione)</span></span></li>
+                    <li><span class="node ind">mercatoribus<span class="lbl">III Att. &mdash; dat. di svant.</span></span></li>
+                  </ul>
+                </li>
+
+                <!-- Inf 2 -->
+                <li>
+                  <span class="node inf">pati ②<span class="lbl">inf. (acc.+inf.) &mdash; oratio obl.</span></span>
+                  <ul>
+                    <li><span class="node s">[Nervios]<span class="lbl">sogg. acc. (sottinteso)</span></span></li>
+                    <li>
+                      <span class="node inf">inferri<span class="lbl">inf. passivo &mdash; compl. di pati</span></span>
+                      <ul>
+                        <li>
+                          <span class="node s">nihil<span class="lbl">sogg. acc.</span></span>
+                          <ul>
+                            <li>
+                              <span class="node at">vini / rerum<span class="lbl">gen. partitivo</span></span>
+                              <ul>
+                                <li><span class="node at">reliquarumque<span class="lbl">coord. attr.</span></span></li>
+                                <li><span class="node at">ad luxuriam<br>pertinentium<span class="lbl">part. attr. (gen.)</span></span></li>
+                              </ul>
+                            </li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </li>
+                    <li>
+                      <span class="node v">existimarent<span class="lbl">prop. caus. rel. (quod)</span></span>
+                      <ul>
+                        <li>
+                          <span class="node inf">relanguescere<span class="lbl">inf. &mdash; I acc.+inf. interno</span></span>
+                          <ul>
+                            <li><span class="node s">animos eorum<span class="lbl">sogg. acc.</span></span></li>
+                            <li><span class="node ci">his rebus<span class="lbl">Circ. (causa)</span></span></li>
+                          </ul>
+                        </li>
+                        <li>
+                          <span class="node inf">remitti<span class="lbl">inf. pass. &mdash; II acc.+inf. interno</span></span>
+                          <ul>
+                            <li><span class="node s">virtutem<span class="lbl">sogg. acc.</span></span></li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+
+                <!-- Inf 3 -->
+                <li>
+                  <span class="node inf">esse ③<span class="lbl">inf. (acc.+inf.) &mdash; oratio obl.</span></span>
+                  <ul>
+                    <li><span class="node s">homines<span class="lbl">sogg. acc.</span></span></li>
+                    <li><span class="node at">feros<span class="lbl">pred. acc.</span></span></li>
+                    <li><span class="node at">magnaeque<br>virtutis<span class="lbl">gen. qualità</span></span></li>
+                  </ul>
+                </li>
+
+                <!-- Inf 4 -->
+                <li>
+                  <span class="node inf">increpitare ④<br>atque incusare<span class="lbl">inf. coord. (acc.+inf.)</span></span>
+                  <ul>
+                    <li><span class="node s">[Nervios]<span class="lbl">sogg. acc. (sottinteso)</span></span></li>
+                    <li>
+                      <span class="node o">reliquos Belgas<span class="lbl">II Att. &mdash; oggetto dir.</span></span>
+                      <ul>
+                        <li>
+                          <span class="node rel">dedidissent /<br>proiecissent<span class="lbl">prop. relativa (qui)</span></span>
+                          <ul>
+                            <li><span class="node s">qui<span class="lbl">sogg. rel.</span></span></li>
+                            <li><span class="node o">se<span class="lbl">ogg. dir. (dederunt)</span></span></li>
+                            <li><span class="node ind">populo Romano<span class="lbl">III Att. &mdash; dat.</span></span></li>
+                            <li><span class="node o">virtutem<br>patriam<span class="lbl">ogg. dir. (proiec.)</span></span></li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+
+                <!-- Inf 5 -->
+                <li>
+                  <span class="node inf">confirmare ⑤<span class="lbl">inf. (acc.+inf.) &mdash; oratio obl.</span></span>
+                  <ul>
+                    <li><span class="node s">sese<span class="lbl">sogg. acc. (= Nervios)</span></span></li>
+                    <li>
+                      <span class="node inf">missuros [esse]<span class="lbl">inf. fut. (neque &hellip; neque)</span></span>
+                      <ul>
+                        <li><span class="node s">legatos<span class="lbl">sogg. acc.</span></span></li>
+                        <li><span class="node cn">neque<span class="lbl">negaz. I</span></span></li>
+                      </ul>
+                    </li>
+                    <li>
+                      <span class="node inf">accepturos [esse]<span class="lbl">inf. fut. (neque &hellip; neque)</span></span>
+                      <ul>
+                        <li>
+                          <span class="node o">ullam<br>condicionem pacis<span class="lbl">II Att. &mdash; oggetto dir.</span></span>
+                        </li>
+                        <li><span class="node cn">neque<span class="lbl">negaz. II</span></span></li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+
+              </ul>
+            </li>
+          </ul>
+        </div>
+
+        <hr class="sep">
+
+        <!-- 1.3 -->
+        <h3 class="prop-title">Prop. 1.3 &mdash; <em>Cum&hellip;iter fecisset, inveniebat</em> + oratio obliqua</h3>
+        <div class="tree-wrap">
+          <ul class="tree">
+            <li>
+              <span class="node v">inveniebat<span class="lbl">VERBO principale</span></span>
+              <ul>
+                <li>
+                  <span class="node v">fecisset<span class="lbl">prop. temp. cum + cong.</span></span>
+                  <ul>
+                    <li><span class="node o">iter<span class="lbl">II Att. &mdash; oggetto dir.</span></span></li>
+                    <li><span class="node ci">per eorum fines<span class="lbl">Circ. (percorso)</span></span></li>
+                    <li><span class="node ci">triduum<span class="lbl">Circ. (durata)</span></span></li>
+                  </ul>
+                </li>
+                <li><span class="node ci">ex captivis<span class="lbl">Circ. (fonte)</span></span></li>
+
+                <!-- Inf a -->
+                <li>
+                  <span class="node inf">abesse ①<span class="lbl">inf. (acc.+inf.) &mdash; oratio obl.</span></span>
+                  <ul>
+                    <li><span class="node s">Sabim flumen<span class="lbl">sogg. acc.</span></span></li>
+                    <li><span class="node ci">a castris suis<span class="lbl">Circ. (allontanamento)</span></span></li>
+                    <li><span class="node ci">non amplius<br>milibus passuum X<span class="lbl">Circ. (distanza)</span></span></li>
+                  </ul>
+                </li>
+
+                <!-- Inf b -->
+                <li>
+                  <span class="node inf">consedisse ②<span class="lbl">inf. (acc.+inf.) &mdash; oratio obl.</span></span>
+                  <ul>
+                    <li><span class="node s">omnes Nervios<span class="lbl">sogg. acc.</span></span></li>
+                    <li><span class="node ci">trans id flumen<span class="lbl">Circ. (luogo)</span></span></li>
+                  </ul>
+                </li>
+
+                <!-- Inf c -->
+                <li>
+                  <span class="node inf">expectare ③<span class="lbl">inf. coord. &mdash; oratio obl.</span></span>
+                  <ul>
+                    <li><span class="node s">[omnes Nervios]<span class="lbl">sogg. acc. (coord.)</span></span></li>
+                    <li>
+                      <span class="node o">adventum<br>Romanorum<span class="lbl">II Att. &mdash; oggetto dir.</span></span>
+                    </li>
+                    <li><span class="node ci">ibi<span class="lbl">Circ. (luogo)</span></span></li>
+                    <li>
+                      <span class="node ci">una cum<br>Atrebatibus et<br>Viromanduis<span class="lbl">Circ. (compagnia)</span></span>
+                      <ul>
+                        <li><span class="node at">finitimis suis<span class="lbl">apposizione</span></span></li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+
+              </ul>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+    </div><!-- /Testo 1 -->
+
+
+    <!-- ══════════════ TESTO 2 ══════════════ -->
+    <div class="content-section">
+      <div class="content-header">
+        <h2>Testo 2 &mdash; <em>De Bello Civili</em>, III (Prodigi dopo la vittoria)</h2>
+        <div class="section-ref">Struttura sintattica delle proposizioni principali e subordinate</div>
+      </div>
+      <div class="content-body">
+
+        <div class="brano-box">
+          <div class="brano-titolo">Testo latino</div>
+          <div class="brano-testo">
+            Constabat Elide in templo Minervae repetitis atque enumeratis diebus, quo die proelium secundum
+            Caesar fecisset, simulacrum Victoriae, quod ante ipsam Minervam collocatum esset et ante ad simulacrum
+            Minervae spectavisset, ad valvas se templi limenque convertisse. Eodemque die Antiochiae in Syria bis
+            tantus exercitus clamor et signorum sonus exauditus est, ut in muris armata civitas discurreret. Hoc idem
+            Ptolemaide accidit. Pergamique in occultis ac reconditis templis, quo praeter sacerdotes adire fas non est,
+            quae Graeci adyta appellant, tympana sonuerunt. Item Trallibus in templo Victoriae, ubi Caesaris statuam
+            consecraverant, palma per eos dies inter coagmenta lapidum ex pavimento exstitisse ostendebatur.
+          </div>
+        </div>
+
+        <!-- 2.1 -->
+        <h3 class="prop-title">Prop. 2.1 &mdash; <em>Constabat&hellip;simulacrum&hellip;convertisse</em></h3>
+        <div class="tree-wrap">
+          <ul class="tree">
+            <li>
+              <span class="node v">constabat<span class="lbl">VERBO impers. (asse del periodo)</span></span>
+              <ul>
+                <li><span class="node ci">Elide in templo<br>Minervae<span class="lbl">Circ. (luogo)</span></span></li>
+                <li>
+                  <span class="node pt">repetitis atque<br>enumeratis diebus<span class="lbl">Abl. Assoluto (tempo)</span></span>
+                </li>
+                <li>
+                  <span class="node inf">convertisse<span class="lbl">inf. (acc.+inf.) &mdash; sogg. logico</span></span>
+                  <ul>
+                    <li>
+                      <span class="node s">simulacrum<br>Victoriae<span class="lbl">sogg. acc.</span></span>
+                      <ul>
+                        <li>
+                          <span class="node rel">collocatum esset<span class="lbl">prop. rel. (quod)</span></span>
+                          <ul>
+                            <li><span class="node ci">ante ipsam<br>Minervam<span class="lbl">Circ. (luogo prev.)</span></span></li>
+                          </ul>
+                        </li>
+                        <li>
+                          <span class="node rel">spectavisset<span class="lbl">prop. rel. (et [quod]) coord.</span></span>
+                          <ul>
+                            <li><span class="node ci">ante ad simulacrum<br>Minervae<span class="lbl">Circ. (direzione prev.)</span></span></li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </li>
+                    <li><span class="node s">se<span class="lbl">sogg. acc. riflessivo</span></span></li>
+                    <li><span class="node ci">ad valvas templi<br>limenque<span class="lbl">Circ. (direzione)</span></span></li>
+                    <li>
+                      <span class="node rel">fecisset<span class="lbl">prop. rel. temp. (quo die)</span></span>
+                      <ul>
+                        <li><span class="node s">Caesar<span class="lbl">sogg.</span></span></li>
+                        <li><span class="node o">proelium<br>secundum<span class="lbl">II Att. &mdash; oggetto dir.</span></span></li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+
+        <hr class="sep">
+
+        <!-- 2.2 -->
+        <h3 class="prop-title">Prop. 2.2 &mdash; <em>&hellip;clamor et sonus exauditus est, ut&hellip;discurreret</em></h3>
+        <div class="tree-wrap">
+          <ul class="tree">
+            <li>
+              <span class="node v">exauditus est<span class="lbl">VERBO princ. (passivo)</span></span>
+              <ul>
+                <li><span class="node ci">Eodemque die<span class="lbl">Circ. (tempo)</span></span></li>
+                <li><span class="node ci">Antiochiae in Syria<span class="lbl">Circ. (luogo)</span></span></li>
+                <li><span class="node ci">bis<span class="lbl">Circ. (freq./modo)</span></span></li>
+                <li>
+                  <span class="node s">clamor<span class="lbl">I Att. &mdash; sogg. I</span></span>
+                  <ul>
+                    <li><span class="node at">tantus<span class="lbl">attr. pred.</span></span></li>
+                    <li><span class="node at">exercitus<span class="lbl">gen. sogg. (dell&rsquo;esercito)</span></span></li>
+                  </ul>
+                </li>
+                <li>
+                  <span class="node s">sonus<span class="lbl">I Att. &mdash; sogg. II (coord.)</span></span>
+                  <ul>
+                    <li><span class="node at">signorum<span class="lbl">gen. sogg.</span></span></li>
+                  </ul>
+                </li>
+                <li>
+                  <span class="node v">discurreret<span class="lbl">prop. consec. (ut + cong.)</span></span>
+                  <ul>
+                    <li>
+                      <span class="node s">civitas<span class="lbl">I Att. &mdash; sogg.</span></span>
+                      <ul>
+                        <li><span class="node at">armata<span class="lbl">attr.</span></span></li>
+                      </ul>
+                    </li>
+                    <li><span class="node ci">in muris<span class="lbl">Circ. (luogo)</span></span></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+
+        <hr class="sep">
+
+        <!-- 2.3 -->
+        <h3 class="prop-title">Prop. 2.3 &mdash; <em>Hoc idem Ptolemaide accidit</em></h3>
+        <div class="tree-wrap">
+          <ul class="tree">
+            <li>
+              <span class="node v">accidit<span class="lbl">VERBO principale</span></span>
+              <ul>
+                <li>
+                  <span class="node s">Hoc idem<span class="lbl">I Att. &mdash; sogg.</span></span>
+                </li>
+                <li>
+                  <span class="node ci">Ptolemaide<span class="lbl">Circ. (luogo)</span></span>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+
+        <hr class="sep">
+
+        <!-- 2.4 -->
+        <h3 class="prop-title">Prop. 2.4 &mdash; <em>Pergamique&hellip;tympana sonuerunt</em></h3>
+        <div class="tree-wrap">
+          <ul class="tree">
+            <li>
+              <span class="node v">sonuerunt<span class="lbl">VERBO principale</span></span>
+              <ul>
+                <li>
+                  <span class="node s">tympana<span class="lbl">I Att. &mdash; sogg.</span></span>
+                </li>
+                <li>
+                  <span class="node ci">Pergami in templis<span class="lbl">Circ. (luogo)</span></span>
+                  <ul>
+                    <li><span class="node at">occultis ac<br>reconditis<span class="lbl">attr.</span></span></li>
+                    <li>
+                      <span class="node rel">fas non est<span class="lbl">prop. rel. (quo = in quibus)</span></span>
+                      <ul>
+                        <li>
+                          <span class="node s">adire<span class="lbl">sogg. inf. di fas est</span></span>
+                          <ul>
+                            <li><span class="node ci">praeter sacerdotes<span class="lbl">Circ. (eccettuativo)</span></span></li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </li>
+                    <li>
+                      <span class="node rel">appellant<span class="lbl">prop. rel. (quae)</span></span>
+                      <ul>
+                        <li><span class="node s">Graeci<span class="lbl">I Att. &mdash; sogg.</span></span></li>
+                        <li><span class="node o">quae (= templa)<span class="lbl">II Att. &mdash; ogg. dir.</span></span></li>
+                        <li><span class="node at">adyta<span class="lbl">pred. ogg. (greco)</span></span></li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+
+        <hr class="sep">
+
+        <!-- 2.5 -->
+        <h3 class="prop-title">Prop. 2.5 &mdash; <em>&hellip;palma&hellip;exstitisse ostendebatur</em></h3>
+        <div class="tree-wrap">
+          <ul class="tree">
+            <li>
+              <span class="node v">ostendebatur<span class="lbl">VERBO princ. (pass. impers.)</span></span>
+              <ul>
+                <li>
+                  <span class="node ci">Item Trallibus<br>in templo Victoriae<span class="lbl">Circ. (luogo)</span></span>
+                  <ul>
+                    <li>
+                      <span class="node rel">consecraverant<span class="lbl">prop. rel. (ubi)</span></span>
+                      <ul>
+                        <li><span class="node o">statuam Caesaris<span class="lbl">II Att. &mdash; ogg. dir.</span></span></li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                  <span class="node inf">exstitisse<span class="lbl">inf. (acc.+inf.) &mdash; sogg. logico</span></span>
+                  <ul>
+                    <li><span class="node s">palma<span class="lbl">sogg. acc.</span></span></li>
+                    <li><span class="node ci">per eos dies<span class="lbl">Circ. (tempo)</span></span></li>
+                    <li>
+                      <span class="node ci">inter coagmenta<br>lapidum ex pavimento<span class="lbl">Circ. (luogo)</span></span>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+    </div><!-- /Testo 2 -->
+
+    <a href="lezione_cesare.html" class="back-link">&larr; Torna alla lezione su Cesare</a>
+
+  </div><!-- /container -->
+
+  <!-- Footer -->
+  <footer>
+    <p><strong>Prof. Andrea Vaccaro</strong></p>
+    <p>Lingua e Cultura Latina &mdash; Liceo Classico e Liceo Scientifico</p>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="raccoglitore-testi.html">Raccoglitore Testi</a>
+      <a href="strumenti/glossario-eulalia.html">Strumenti</a>
+    </div>
+  </footer>
+
+</body>
+</html>

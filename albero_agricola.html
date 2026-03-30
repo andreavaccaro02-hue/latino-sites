@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stemma sintattico — Tacito, Agricola 30</title>
+<link rel="stylesheet" href="css/style.css">
+<style>
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 14px;
+    color: var(--text-dim);
+    text-decoration: none;
+    margin: 28px 0 0 0;
+    transition: all 0.2s;
+  }
+  .back-link:hover { border-color: var(--gold); color: var(--gold); }
+
+  .page-header {
+    background: linear-gradient(135deg, #2c2416 0%, #5a4e3c 100%);
+    color: #f5f0e8;
+    padding: 48px 20px 36px;
+    text-align: center;
+  }
+  .page-header h1 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 32px;
+    margin-bottom: 10px;
+  }
+  .page-header .sub {
+    font-size: 16px;
+    color: #c8b898;
+    font-style: italic;
+  }
+
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin: 32px 0 24px;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 700;
+  }
+  .legend-dot {
+    width: 18px;
+    height: 18px;
+    border-radius: 4px;
+    border: 2px solid;
+    flex-shrink: 0;
+  }
+  .ld-verb    { background: #fff8e0; border-color: #f4d35e; }
+  .ld-sogg    { background: #fdeaea; border-color: #e85d5d; }
+  .ld-obj     { background: #eafaec; border-color: #78c878; }
+  .ld-ind     { background: #e8f6fb; border-color: #6db5d4; }
+
+  .stemma-block {
+    background: var(--card);
+    border: 2px solid var(--border);
+    border-radius: 16px;
+    padding: 28px 24px 20px;
+    margin-bottom: 32px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    overflow-x: auto;
+  }
+  .stemma-block h2 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 17px;
+    color: var(--gold);
+    margin-bottom: 6px;
+  }
+  .stemma-block .lat-quote {
+    font-size: 14px;
+    font-style: italic;
+    color: var(--text-dim);
+    margin-bottom: 20px;
+    border-left: 3px solid var(--border);
+    padding-left: 12px;
+    line-height: 1.6;
+  }
+  .stemma-block svg {
+    display: block;
+    min-width: 600px;
+  }
+
+  /* SVG node styles */
+  .nd-verb rect  { fill: #fff8e0; stroke: #f4d35e; stroke-width: 2; }
+  .nd-verb .nw   { fill: #7a5c00; font-weight: 700; }
+  .nd-verb .nr   { fill: #a07a20; }
+
+  .nd-sogg rect  { fill: #fdeaea; stroke: #e85d5d; stroke-width: 2; }
+  .nd-sogg .nw   { fill: #8a1a1a; font-weight: 700; }
+  .nd-sogg .nr   { fill: #b03030; }
+
+  .nd-obj rect   { fill: #eafaec; stroke: #78c878; stroke-width: 2; }
+  .nd-obj .nw    { fill: #1a6a1a; font-weight: 700; }
+  .nd-obj .nr    { fill: #3a8a3a; }
+
+  .nd-ind rect   { fill: #e8f6fb; stroke: #6db5d4; stroke-width: 2; }
+  .nd-ind .nw    { fill: #1a4a7a; font-weight: 700; }
+  .nd-ind .nr    { fill: #2a6a9a; }
+
+  .edge { stroke: #b0a090; stroke-width: 1.5; fill: none; }
+  .edge-label { font-size: 11px; fill: #8a7060; font-style: italic; font-family: 'Cardo', serif; }
+  .nw { font-family: 'Cardo', serif; font-size: 15px; }
+  .nr { font-family: 'Cardo', serif; font-size: 10px; font-style: italic; text-transform: uppercase; letter-spacing: 0.5px; }
+
+  .nota-box {
+    background: rgba(184,145,90,0.07);
+    border-left: 3px solid var(--gold);
+    border-radius: 0 8px 8px 0;
+    padding: 12px 16px;
+    font-size: 13px;
+    line-height: 1.7;
+    margin-top: 16px;
+    color: var(--text-dim);
+  }
+  .nota-box strong { color: var(--text); }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <div class="container">
+    <h1>Stemma sintattico</h1>
+    <p class="sub">Tacito, <em>Agricola</em> 30 — Discorso di Calgàco</p>
+  </div>
+</div>
+
+<main class="container" style="padding-top: 8px; padding-bottom: 60px;">
+
+  <a href="lezione_tacito.html" class="back-link">← Torna alla lezione su Tacito</a>
+
+  <!-- LEGENDA -->
+  <div class="legend" style="margin-top: 32px;">
+    <div class="legend-item"><div class="legend-dot ld-verb"></div> Verbo (nodo reggente)</div>
+    <div class="legend-item"><div class="legend-dot ld-sogg"></div> Soggetto</div>
+    <div class="legend-item"><div class="legend-dot ld-obj"></div> Complemento oggetto</div>
+    <div class="legend-item"><div class="legend-dot ld-ind"></div> Complemento indiretto</div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════
+       ALBERO 1 — ubi solitudinem faciunt, pacem appellant
+       ══════════════════════════════════════════════════ -->
+  <div class="stemma-block">
+    <h2>I. La sentenza finale</h2>
+    <div class="lat-quote">
+      «… <em>atque ubi solitudinem faciunt, pacem appellant.</em>»
+      <br>«… e dove creano un deserto, lo chiamano pace.»
+    </div>
+
+    <svg viewBox="0 0 700 370" xmlns="http://www.w3.org/2000/svg" style="max-width:700px; width:100%;">
+
+      <!-- EDGES -->
+      <!-- appellant → pacem -->
+      <line class="edge" x1="350" y1="82" x2="100" y2="155"/>
+      <!-- appellant → [Rōmānī] -->
+      <line class="edge" x1="350" y1="82" x2="280" y2="155"/>
+      <!-- appellant → faciunt -->
+      <line class="edge" x1="350" y1="82" x2="520" y2="155"/>
+      <!-- edge label: ubi (congiunzione subordinante) -->
+      <text class="edge-label" x="452" y="112" transform="rotate(-25, 452, 112)">ubi (prop. temp.)</text>
+      <!-- faciunt → solitudinem -->
+      <line class="edge" x1="520" y1="207" x2="420" y2="285"/>
+      <!-- faciunt → [Rōmānī]₂ -->
+      <line class="edge" x1="520" y1="207" x2="610" y2="285"/>
+
+      <!-- NODE: appellant (VERB PRINC) -->
+      <g class="nd-verb">
+        <rect x="282" y="30" width="136" height="52" rx="10"/>
+        <text class="nw" x="350" y="54" text-anchor="middle">appellant</text>
+        <text class="nr" x="350" y="71" text-anchor="middle">verb. princ.</text>
+      </g>
+
+      <!-- NODE: pacem (OBJ) -->
+      <g class="nd-obj">
+        <rect x="53" y="155" width="94" height="52" rx="10"/>
+        <text class="nw" x="100" y="179" text-anchor="middle">pacem</text>
+        <text class="nr" x="100" y="196" text-anchor="middle">compl. ogg.</text>
+      </g>
+
+      <!-- NODE: [Rōmānī] subj 1 -->
+      <g class="nd-sogg">
+        <rect x="227" y="155" width="106" height="52" rx="10"/>
+        <text class="nw" x="280" y="179" text-anchor="middle" font-style="italic">[Rōmānī]</text>
+        <text class="nr" x="280" y="196" text-anchor="middle">soggetto (imp.)</text>
+      </g>
+
+      <!-- NODE: faciunt (VERB SUB) -->
+      <g class="nd-verb">
+        <rect x="467" y="155" width="106" height="52" rx="10"/>
+        <text class="nw" x="520" y="179" text-anchor="middle">faciunt</text>
+        <text class="nr" x="520" y="196" text-anchor="middle">verb. sub. temp.</text>
+      </g>
+
+      <!-- NODE: solitudinem (OBJ) -->
+      <g class="nd-obj">
+        <rect x="352" y="285" width="136" height="52" rx="10"/>
+        <text class="nw" x="420" y="309" text-anchor="middle">solitudinem</text>
+        <text class="nr" x="420" y="326" text-anchor="middle">compl. ogg.</text>
+      </g>
+
+      <!-- NODE: [Rōmānī] subj 2 -->
+      <g class="nd-sogg">
+        <rect x="557" y="285" width="106" height="52" rx="10"/>
+        <text class="nw" x="610" y="309" text-anchor="middle" font-style="italic">[Rōmānī]</text>
+        <text class="nr" x="610" y="326" text-anchor="middle">soggetto (imp.)</text>
+      </g>
+
+    </svg>
+
+    <div class="nota-box">
+      <strong>Nota stilistica.</strong> Il chiasmo retorico è visibile nell'albero: <em>solitudinem</em> (oggetto del verbo subordinato) rispecchia <em>pacem</em> (oggetto del verbo principale). Il paradosso tacitiano consiste nell'identità grammaticale dei due complementi oggetto — stesso ruolo, realtà opposta.
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════
+       ALBERO 2 — Raptores orbis... mare scrutantur
+       ══════════════════════════════════════════════════ -->
+  <div class="stemma-block">
+    <h2>II. La metafora dei «predatori del mondo»</h2>
+    <div class="lat-quote">
+      «<em>Raptores orbis, postquam cuncta vastantibus defuere terrae, mare scrutantur.</em>»
+      <br>«Predatori del mondo, dopo che alle loro devastazioni mancò la terra, scrutano il mare.»
+    </div>
+
+    <svg viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg" style="max-width:800px; width:100%;">
+
+      <!-- EDGES -->
+      <!-- scrutantur → Raptores -->
+      <line class="edge" x1="380" y1="82" x2="115" y2="155"/>
+      <!-- scrutantur → mare -->
+      <line class="edge" x1="380" y1="82" x2="330" y2="155"/>
+      <!-- scrutantur → defuere (postquam) -->
+      <line class="edge" x1="380" y1="82" x2="590" y2="155"/>
+      <text class="edge-label" x="500" y="106" transform="rotate(-22, 500, 106)">postquam (prop. temp.)</text>
+      <!-- Raptores → orbis -->
+      <line class="edge" x1="115" y1="207" x2="85" y2="290"/>
+      <!-- defuere → terrae -->
+      <line class="edge" x1="590" y1="207" x2="440" y2="290"/>
+      <!-- defuere → cuncta -->
+      <line class="edge" x1="590" y1="207" x2="580" y2="290"/>
+      <!-- defuere → vastantibus -->
+      <line class="edge" x1="590" y1="207" x2="715" y2="290"/>
+
+      <!-- NODE: scrutantur (VERB PRINC) -->
+      <g class="nd-verb">
+        <rect x="298" y="30" width="164" height="52" rx="10"/>
+        <text class="nw" x="380" y="54" text-anchor="middle">scrutantur</text>
+        <text class="nr" x="380" y="71" text-anchor="middle">verb. princ.</text>
+      </g>
+
+      <!-- NODE: Raptores (SOGG) -->
+      <g class="nd-sogg">
+        <rect x="55" y="155" width="120" height="52" rx="10"/>
+        <text class="nw" x="115" y="179" text-anchor="middle">Raptores</text>
+        <text class="nr" x="115" y="196" text-anchor="middle">soggetto</text>
+      </g>
+
+      <!-- NODE: mare (OBJ) -->
+      <g class="nd-obj">
+        <rect x="285" y="155" width="90" height="52" rx="10"/>
+        <text class="nw" x="330" y="179" text-anchor="middle">mare</text>
+        <text class="nr" x="330" y="196" text-anchor="middle">compl. ogg.</text>
+      </g>
+
+      <!-- NODE: defuere (VERB SUB) -->
+      <g class="nd-verb">
+        <rect x="530" y="155" width="120" height="52" rx="10"/>
+        <text class="nw" x="590" y="179" text-anchor="middle">defuere</text>
+        <text class="nr" x="590" y="196" text-anchor="middle">verb. sub. temp.</text>
+      </g>
+
+      <!-- NODE: orbis (IND, gen.) -->
+      <g class="nd-ind">
+        <rect x="45" y="290" width="80" height="52" rx="10"/>
+        <text class="nw" x="85" y="314" text-anchor="middle">orbis</text>
+        <text class="nr" x="85" y="331" text-anchor="middle">gen. (specif.)</text>
+      </g>
+
+      <!-- NODE: terrae (SOGG sub) -->
+      <g class="nd-sogg">
+        <rect x="393" y="290" width="94" height="52" rx="10"/>
+        <text class="nw" x="440" y="314" text-anchor="middle">terrae</text>
+        <text class="nr" x="440" y="331" text-anchor="middle">soggetto</text>
+      </g>
+
+      <!-- NODE: cuncta (OBJ sub) -->
+      <g class="nd-obj">
+        <rect x="533" y="290" width="94" height="52" rx="10"/>
+        <text class="nw" x="580" y="314" text-anchor="middle">cuncta</text>
+        <text class="nr" x="580" y="331" text-anchor="middle">compl. ogg.</text>
+      </g>
+
+      <!-- NODE: vastantibus (IND, dat.) -->
+      <g class="nd-ind">
+        <rect x="645" y="290" width="140" height="52" rx="10"/>
+        <text class="nw" x="715" y="314" text-anchor="middle">vastantibus</text>
+        <text class="nr" x="715" y="331" text-anchor="middle">dat. (agli stragisti)</text>
+      </g>
+
+    </svg>
+
+    <div class="nota-box">
+      <strong>Nota.</strong> <em>Raptores orbis</em> è in apposizione al soggetto sottinteso: il genitivo <em>orbis</em> dipende da <em>Raptores</em>, non da <em>scrutantur</em>. La struttura ad albero rende visibile come Tacito costruisca il ritratto di Roma già nel soggetto, prima ancora del verbo.
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════
+       ALBERO 3 — Auferre trucidare rapere falsis nominibus imperium
+       ══════════════════════════════════════════════════ -->
+  <div class="stemma-block">
+    <h2>III. I tre infiniti soggetto</h2>
+    <div class="lat-quote">
+      «<em>Auferre trucidare rapere falsis nominibus imperium [vocant]…</em>»
+      <br>«Rubare, massacrare, depredare: chiamano [tutto questo] "impero" con falsi nomi.»
+    </div>
+
+    <svg viewBox="0 0 770 240" xmlns="http://www.w3.org/2000/svg" style="max-width:770px; width:100%;">
+
+      <!-- EDGES -->
+      <!-- [vocant] → auferre -->
+      <line class="edge" x1="375" y1="82" x2="75" y2="158"/>
+      <!-- [vocant] → trucidare -->
+      <line class="edge" x1="375" y1="82" x2="215" y2="158"/>
+      <!-- [vocant] → rapere -->
+      <line class="edge" x1="375" y1="82" x2="355" y2="158"/>
+      <!-- [vocant] → imperium -->
+      <line class="edge" x1="375" y1="82" x2="510" y2="158"/>
+      <!-- [vocant] → falsis nominibus -->
+      <line class="edge" x1="375" y1="82" x2="665" y2="158"/>
+
+      <!-- NODE: [vocant] (VERB PRINC implied) -->
+      <g class="nd-verb">
+        <rect x="308" y="30" width="134" height="52" rx="10"/>
+        <text class="nw" x="375" y="52" text-anchor="middle" font-style="italic">[vocant]</text>
+        <text class="nr" x="375" y="69" text-anchor="middle">verb. princ. (imp.)</text>
+      </g>
+
+      <!-- NODE: auferre (SOGG inf.) -->
+      <g class="nd-sogg">
+        <rect x="22" y="158" width="106" height="52" rx="10"/>
+        <text class="nw" x="75" y="182" text-anchor="middle">auferre</text>
+        <text class="nr" x="75" y="199" text-anchor="middle">sogg. inf.</text>
+      </g>
+
+      <!-- NODE: trucidare (SOGG inf.) -->
+      <g class="nd-sogg">
+        <rect x="158" y="158" width="114" height="52" rx="10"/>
+        <text class="nw" x="215" y="182" text-anchor="middle">trucidare</text>
+        <text class="nr" x="215" y="199" text-anchor="middle">sogg. inf.</text>
+      </g>
+
+      <!-- NODE: rapere (SOGG inf.) -->
+      <g class="nd-sogg">
+        <rect x="302" y="158" width="106" height="52" rx="10"/>
+        <text class="nw" x="355" y="182" text-anchor="middle">rapere</text>
+        <text class="nr" x="355" y="199" text-anchor="middle">sogg. inf.</text>
+      </g>
+
+      <!-- NODE: imperium (OBJ) -->
+      <g class="nd-obj">
+        <rect x="448" y="158" width="124" height="52" rx="10"/>
+        <text class="nw" x="510" y="182" text-anchor="middle">imperium</text>
+        <text class="nr" x="510" y="199" text-anchor="middle">compl. ogg.</text>
+      </g>
+
+      <!-- NODE: falsis nominibus (IND, abl.) -->
+      <g class="nd-ind">
+        <rect x="580" y="158" width="170" height="52" rx="10"/>
+        <text class="nw" x="665" y="182" text-anchor="middle">falsis nominibus</text>
+        <text class="nr" x="665" y="199" text-anchor="middle">abl. di modo/mezzo</text>
+      </g>
+
+    </svg>
+
+    <div class="nota-box">
+      <strong>Nota retorica.</strong> La triade asindetica <em>auferre — trucidare — rapere</em> (tre infiniti coordinati per giustapposizione, senza congiunzione) è un esempio perfetto di <em>tricolon crescens</em> tacitiano: la violenza si accumula senza pausa, e solo alla fine, con <em>falsis nominibus</em>, arriva la denuncia del meccanismo semantico del potere.
+    </div>
+  </div>
+
+</main>
+
+</body>
+</html>

@@ -404,6 +404,9 @@
     line-height: 1.5;
     transition: all 0.15s;
     background: var(--card);
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
   }
   .quiz-option:hover:not(.disabled) { border-color: var(--gold); background: rgba(184,145,90,0.06); }
   .quiz-option.correct  { background: rgba(45,106,79,0.12); border-color: var(--eulalia); color: var(--eulalia); }
@@ -662,6 +665,12 @@
           <span class="lat-main">auferre trucidare rapere falsis nominibus imperium, atque ubi solitudinem faciunt, pacem appellant.</span>
           <span class="kq-trad">&laquo;Razziare, massacrare, saccheggiare: questi danno il falso nome di impero; e dove fanno il deserto, lo chiamano pace.&raquo;</span>
           <div class="kq-nota"><strong>La pi&ugrave; celebre sentenza di Tacito.</strong> La struttura &egrave; volutamente brutale: tre infiniti storici nudi in asindeto, poi la sententia finale. La chiusa &egrave; un ossimoro: la &laquo;pace&raquo; romana &egrave; il nome dato alla distruzione assoluta. Tacito fa parlare un nemico di Roma &mdash; ma le parole sono una critica dell&rsquo;imperialismo che il lettore romano riconosce come reale. &Egrave; la tecnica della <em>voce del vinto</em>: la verit&agrave; &egrave; detta da chi non ha il potere di dirla.</div>
+        </div>
+
+        <div style="margin: 14px 0;">
+          <a href="albero_agricola.html" target="_blank" style="display:inline-flex; align-items:center; gap:8px; padding:9px 18px; border:1.5px solid var(--border); border-radius:10px; font-family:'Cardo',serif; font-size:14px; color:var(--text-dim); text-decoration:none; transition:all 0.2s;" onmouseover="this.style.borderColor='var(--gold)';this.style.color='var(--gold)';" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text-dim)';">
+            🌳 Apri lo stemma sintattico (Tesnière) — <em>Agricola</em> 30
+          </a>
         </div>
 
         <div class="testo-commento">
@@ -1304,6 +1313,16 @@ function toggleTrad(btn) {
     tooltip.style.top  = y + 'px';
   }
 })();
+
+// ═══ EQUALIZZA ALTEZZA OPZIONI QUIZ ═══
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('.quiz-item').forEach(function(item) {
+    var opts = item.querySelectorAll('.quiz-option');
+    var maxH = 0;
+    opts.forEach(function(o) { o.style.height = 'auto'; maxH = Math.max(maxH, o.offsetHeight); });
+    opts.forEach(function(o) { o.style.height = maxH + 'px'; });
+  });
+});
 
 // ═══ QUIZ ═══
 var score = 0;

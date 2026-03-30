@@ -7,388 +7,503 @@
 <link rel="stylesheet" href="css/style.css">
 <style>
   .back-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 8px 16px;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    font-size: 14px;
-    color: var(--text-dim);
-    text-decoration: none;
-    margin: 28px 0 0 0;
-    transition: all 0.2s;
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 8px 16px; border: 1px solid var(--border); border-radius: 8px;
+    font-size: 14px; color: var(--text-dim); text-decoration: none;
+    margin: 28px 0 0; transition: all 0.2s;
   }
   .back-link:hover { border-color: var(--gold); color: var(--gold); }
 
   .page-header {
     background: linear-gradient(135deg, #2c2416 0%, #5a4e3c 100%);
-    color: #f5f0e8;
-    padding: 48px 20px 36px;
-    text-align: center;
+    color: #f5f0e8; padding: 48px 20px 36px; text-align: center;
   }
-  .page-header h1 {
-    font-family: 'Libre Baskerville', serif;
-    font-size: 32px;
-    margin-bottom: 10px;
-  }
-  .page-header .sub {
-    font-size: 16px;
-    color: #c8b898;
-    font-style: italic;
-  }
+  .page-header h1 { font-family:'Libre Baskerville',serif; font-size:30px; margin-bottom:8px; }
+  .page-header .sub { font-size:15px; color:#c8b898; font-style:italic; }
 
   .legend {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-    margin: 32px 0 24px;
+    display: flex; flex-wrap: wrap; gap: 14px;
+    margin: 28px 0 20px;
   }
-  .legend-item {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 13px;
-    font-weight: 700;
-  }
-  .legend-dot {
-    width: 18px;
-    height: 18px;
-    border-radius: 4px;
-    border: 2px solid;
-    flex-shrink: 0;
-  }
-  .ld-verb    { background: #fff8e0; border-color: #f4d35e; }
-  .ld-sogg    { background: #fdeaea; border-color: #e85d5d; }
-  .ld-obj     { background: #eafaec; border-color: #78c878; }
-  .ld-ind     { background: #e8f6fb; border-color: #6db5d4; }
+  .legend-item { display:flex; align-items:center; gap:8px; font-size:13px; font-weight:700; }
+  .ld { width:18px; height:18px; border-radius:4px; border:2px solid; flex-shrink:0; }
+  .ld-v { background:#fff8e0; border-color:#f4d35e; }
+  .ld-s { background:#fdeaea; border-color:#e85d5d; }
+  .ld-o { background:#eafaec; border-color:#78c878; }
+  .ld-i { background:#e8f6fb; border-color:#6db5d4; }
 
   .stemma-block {
-    background: var(--card);
-    border: 2px solid var(--border);
-    border-radius: 16px;
-    padding: 28px 24px 20px;
-    margin-bottom: 32px;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-    overflow-x: auto;
+    background: var(--card); border: 2px solid var(--border); border-radius: 16px;
+    padding: 24px 22px 18px; margin-bottom: 28px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06); overflow-x: auto;
   }
   .stemma-block h2 {
-    font-family: 'Libre Baskerville', serif;
-    font-size: 17px;
-    color: var(--gold);
-    margin-bottom: 6px;
+    font-family:'Libre Baskerville',serif; font-size:16px; color:var(--gold); margin-bottom:6px;
   }
-  .stemma-block .lat-quote {
-    font-size: 14px;
-    font-style: italic;
-    color: var(--text-dim);
-    margin-bottom: 20px;
-    border-left: 3px solid var(--border);
-    padding-left: 12px;
-    line-height: 1.6;
+  .stemma-block .lat-q {
+    font-size:13.5px; font-style:italic; color:var(--text-dim); margin-bottom:18px;
+    border-left:3px solid var(--border); padding-left:12px; line-height:1.65;
   }
-  .stemma-block svg {
-    display: block;
-    min-width: 600px;
-  }
-
-  /* SVG node styles */
-  .nd-verb rect  { fill: #fff8e0; stroke: #f4d35e; stroke-width: 2; }
-  .nd-verb .nw   { fill: #7a5c00; font-weight: 700; }
-  .nd-verb .nr   { fill: #a07a20; }
-
-  .nd-sogg rect  { fill: #fdeaea; stroke: #e85d5d; stroke-width: 2; }
-  .nd-sogg .nw   { fill: #8a1a1a; font-weight: 700; }
-  .nd-sogg .nr   { fill: #b03030; }
-
-  .nd-obj rect   { fill: #eafaec; stroke: #78c878; stroke-width: 2; }
-  .nd-obj .nw    { fill: #1a6a1a; font-weight: 700; }
-  .nd-obj .nr    { fill: #3a8a3a; }
-
-  .nd-ind rect   { fill: #e8f6fb; stroke: #6db5d4; stroke-width: 2; }
-  .nd-ind .nw    { fill: #1a4a7a; font-weight: 700; }
-  .nd-ind .nr    { fill: #2a6a9a; }
-
-  .edge { stroke: #b0a090; stroke-width: 1.5; fill: none; }
-  .edge-label { font-size: 11px; fill: #8a7060; font-style: italic; font-family: 'Cardo', serif; }
-  .nw { font-family: 'Cardo', serif; font-size: 15px; }
-  .nr { font-family: 'Cardo', serif; font-size: 10px; font-style: italic; text-transform: uppercase; letter-spacing: 0.5px; }
-
   .nota-box {
-    background: rgba(184,145,90,0.07);
-    border-left: 3px solid var(--gold);
-    border-radius: 0 8px 8px 0;
-    padding: 12px 16px;
-    font-size: 13px;
-    line-height: 1.7;
-    margin-top: 16px;
-    color: var(--text-dim);
+    background:rgba(184,145,90,0.07); border-left:3px solid var(--gold);
+    border-radius:0 8px 8px 0; padding:11px 14px; font-size:12.5px;
+    line-height:1.7; margin-top:14px; color:var(--text-dim);
   }
-  .nota-box strong { color: var(--text); }
+  .nota-box strong { color:var(--text); }
 </style>
 </head>
 <body>
 
 <div class="page-header">
   <div class="container">
-    <h1>Stemma sintattico</h1>
+    <h1>Stemma sintattico (Tesnière)</h1>
     <p class="sub">Tacito, <em>Agricola</em> 30 — Discorso di Calgàco</p>
   </div>
 </div>
 
-<main class="container" style="padding-top: 8px; padding-bottom: 60px;">
-
+<main class="container" style="padding-top:6px; padding-bottom:60px;">
   <a href="lezione_tacito.html" class="back-link">← Torna alla lezione su Tacito</a>
 
-  <!-- LEGENDA -->
-  <div class="legend" style="margin-top: 32px;">
-    <div class="legend-item"><div class="legend-dot ld-verb"></div> Verbo (nodo reggente)</div>
-    <div class="legend-item"><div class="legend-dot ld-sogg"></div> Soggetto</div>
-    <div class="legend-item"><div class="legend-dot ld-obj"></div> Complemento oggetto</div>
-    <div class="legend-item"><div class="legend-dot ld-ind"></div> Complemento indiretto</div>
+  <div class="legend" style="margin-top:28px;">
+    <div class="legend-item"><div class="ld ld-v"></div>Verbo</div>
+    <div class="legend-item"><div class="ld ld-s"></div>Soggetto</div>
+    <div class="legend-item"><div class="ld ld-o"></div>Compl. oggetto</div>
+    <div class="legend-item"><div class="ld ld-i"></div>Compl. indiretto</div>
   </div>
 
-  <!-- ══════════════════════════════════════════════════
-       ALBERO 1 — ubi solitudinem faciunt, pacem appellant
-       ══════════════════════════════════════════════════ -->
-  <div class="stemma-block">
-    <h2>I. La sentenza finale</h2>
-    <div class="lat-quote">
-      «… <em>atque ubi solitudinem faciunt, pacem appellant.</em>»
-      <br>«… e dove creano un deserto, lo chiamano pace.»
-    </div>
-
-    <svg viewBox="0 0 700 370" xmlns="http://www.w3.org/2000/svg" style="max-width:700px; width:100%;">
-
-      <!-- EDGES -->
-      <!-- appellant → pacem -->
-      <line class="edge" x1="350" y1="82" x2="100" y2="155"/>
-      <!-- appellant → [Rōmānī] -->
-      <line class="edge" x1="350" y1="82" x2="280" y2="155"/>
-      <!-- appellant → faciunt -->
-      <line class="edge" x1="350" y1="82" x2="520" y2="155"/>
-      <!-- edge label: ubi (congiunzione subordinante) -->
-      <text class="edge-label" x="452" y="112" transform="rotate(-25, 452, 112)">ubi (prop. temp.)</text>
-      <!-- faciunt → solitudinem -->
-      <line class="edge" x1="520" y1="207" x2="420" y2="285"/>
-      <!-- faciunt → [Rōmānī]₂ -->
-      <line class="edge" x1="520" y1="207" x2="610" y2="285"/>
-
-      <!-- NODE: appellant (VERB PRINC) -->
-      <g class="nd-verb">
-        <rect x="282" y="30" width="136" height="52" rx="10"/>
-        <text class="nw" x="350" y="54" text-anchor="middle">appellant</text>
-        <text class="nr" x="350" y="71" text-anchor="middle">verb. princ.</text>
-      </g>
-
-      <!-- NODE: pacem (OBJ) -->
-      <g class="nd-obj">
-        <rect x="53" y="155" width="94" height="52" rx="10"/>
-        <text class="nw" x="100" y="179" text-anchor="middle">pacem</text>
-        <text class="nr" x="100" y="196" text-anchor="middle">compl. ogg.</text>
-      </g>
-
-      <!-- NODE: [Rōmānī] subj 1 -->
-      <g class="nd-sogg">
-        <rect x="227" y="155" width="106" height="52" rx="10"/>
-        <text class="nw" x="280" y="179" text-anchor="middle" font-style="italic">[Rōmānī]</text>
-        <text class="nr" x="280" y="196" text-anchor="middle">soggetto (imp.)</text>
-      </g>
-
-      <!-- NODE: faciunt (VERB SUB) -->
-      <g class="nd-verb">
-        <rect x="467" y="155" width="106" height="52" rx="10"/>
-        <text class="nw" x="520" y="179" text-anchor="middle">faciunt</text>
-        <text class="nr" x="520" y="196" text-anchor="middle">verb. sub. temp.</text>
-      </g>
-
-      <!-- NODE: solitudinem (OBJ) -->
-      <g class="nd-obj">
-        <rect x="352" y="285" width="136" height="52" rx="10"/>
-        <text class="nw" x="420" y="309" text-anchor="middle">solitudinem</text>
-        <text class="nr" x="420" y="326" text-anchor="middle">compl. ogg.</text>
-      </g>
-
-      <!-- NODE: [Rōmānī] subj 2 -->
-      <g class="nd-sogg">
-        <rect x="557" y="285" width="106" height="52" rx="10"/>
-        <text class="nw" x="610" y="309" text-anchor="middle" font-style="italic">[Rōmānī]</text>
-        <text class="nr" x="610" y="326" text-anchor="middle">soggetto (imp.)</text>
-      </g>
-
-    </svg>
-
-    <div class="nota-box">
-      <strong>Nota stilistica.</strong> Il chiasmo retorico è visibile nell'albero: <em>solitudinem</em> (oggetto del verbo subordinato) rispecchia <em>pacem</em> (oggetto del verbo principale). Il paradosso tacitiano consiste nell'identità grammaticale dei due complementi oggetto — stesso ruolo, realtà opposta.
-    </div>
-  </div>
-
-  <!-- ══════════════════════════════════════════════════
-       ALBERO 2 — Raptores orbis... mare scrutantur
-       ══════════════════════════════════════════════════ -->
-  <div class="stemma-block">
-    <h2>II. La metafora dei «predatori del mondo»</h2>
-    <div class="lat-quote">
-      «<em>Raptores orbis, postquam cuncta vastantibus defuere terrae, mare scrutantur.</em>»
-      <br>«Predatori del mondo, dopo che alle loro devastazioni mancò la terra, scrutano il mare.»
-    </div>
-
-    <svg viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg" style="max-width:800px; width:100%;">
-
-      <!-- EDGES -->
-      <!-- scrutantur → Raptores -->
-      <line class="edge" x1="380" y1="82" x2="115" y2="155"/>
-      <!-- scrutantur → mare -->
-      <line class="edge" x1="380" y1="82" x2="330" y2="155"/>
-      <!-- scrutantur → defuere (postquam) -->
-      <line class="edge" x1="380" y1="82" x2="590" y2="155"/>
-      <text class="edge-label" x="500" y="106" transform="rotate(-22, 500, 106)">postquam (prop. temp.)</text>
-      <!-- Raptores → orbis -->
-      <line class="edge" x1="115" y1="207" x2="85" y2="290"/>
-      <!-- defuere → terrae -->
-      <line class="edge" x1="590" y1="207" x2="440" y2="290"/>
-      <!-- defuere → cuncta -->
-      <line class="edge" x1="590" y1="207" x2="580" y2="290"/>
-      <!-- defuere → vastantibus -->
-      <line class="edge" x1="590" y1="207" x2="715" y2="290"/>
-
-      <!-- NODE: scrutantur (VERB PRINC) -->
-      <g class="nd-verb">
-        <rect x="298" y="30" width="164" height="52" rx="10"/>
-        <text class="nw" x="380" y="54" text-anchor="middle">scrutantur</text>
-        <text class="nr" x="380" y="71" text-anchor="middle">verb. princ.</text>
-      </g>
-
-      <!-- NODE: Raptores (SOGG) -->
-      <g class="nd-sogg">
-        <rect x="55" y="155" width="120" height="52" rx="10"/>
-        <text class="nw" x="115" y="179" text-anchor="middle">Raptores</text>
-        <text class="nr" x="115" y="196" text-anchor="middle">soggetto</text>
-      </g>
-
-      <!-- NODE: mare (OBJ) -->
-      <g class="nd-obj">
-        <rect x="285" y="155" width="90" height="52" rx="10"/>
-        <text class="nw" x="330" y="179" text-anchor="middle">mare</text>
-        <text class="nr" x="330" y="196" text-anchor="middle">compl. ogg.</text>
-      </g>
-
-      <!-- NODE: defuere (VERB SUB) -->
-      <g class="nd-verb">
-        <rect x="530" y="155" width="120" height="52" rx="10"/>
-        <text class="nw" x="590" y="179" text-anchor="middle">defuere</text>
-        <text class="nr" x="590" y="196" text-anchor="middle">verb. sub. temp.</text>
-      </g>
-
-      <!-- NODE: orbis (IND, gen.) -->
-      <g class="nd-ind">
-        <rect x="45" y="290" width="80" height="52" rx="10"/>
-        <text class="nw" x="85" y="314" text-anchor="middle">orbis</text>
-        <text class="nr" x="85" y="331" text-anchor="middle">gen. (specif.)</text>
-      </g>
-
-      <!-- NODE: terrae (SOGG sub) -->
-      <g class="nd-sogg">
-        <rect x="393" y="290" width="94" height="52" rx="10"/>
-        <text class="nw" x="440" y="314" text-anchor="middle">terrae</text>
-        <text class="nr" x="440" y="331" text-anchor="middle">soggetto</text>
-      </g>
-
-      <!-- NODE: cuncta (OBJ sub) -->
-      <g class="nd-obj">
-        <rect x="533" y="290" width="94" height="52" rx="10"/>
-        <text class="nw" x="580" y="314" text-anchor="middle">cuncta</text>
-        <text class="nr" x="580" y="331" text-anchor="middle">compl. ogg.</text>
-      </g>
-
-      <!-- NODE: vastantibus (IND, dat.) -->
-      <g class="nd-ind">
-        <rect x="645" y="290" width="140" height="52" rx="10"/>
-        <text class="nw" x="715" y="314" text-anchor="middle">vastantibus</text>
-        <text class="nr" x="715" y="331" text-anchor="middle">dat. (agli stragisti)</text>
-      </g>
-
-    </svg>
-
-    <div class="nota-box">
-      <strong>Nota.</strong> <em>Raptores orbis</em> è in apposizione al soggetto sottinteso: il genitivo <em>orbis</em> dipende da <em>Raptores</em>, non da <em>scrutantur</em>. La struttura ad albero rende visibile come Tacito costruisca il ritratto di Roma già nel soggetto, prima ancora del verbo.
-    </div>
-  </div>
-
-  <!-- ══════════════════════════════════════════════════
-       ALBERO 3 — Auferre trucidare rapere falsis nominibus imperium
-       ══════════════════════════════════════════════════ -->
-  <div class="stemma-block">
-    <h2>III. I tre infiniti soggetto</h2>
-    <div class="lat-quote">
-      «<em>Auferre trucidare rapere falsis nominibus imperium [vocant]…</em>»
-      <br>«Rubare, massacrare, depredare: chiamano [tutto questo] "impero" con falsi nomi.»
-    </div>
-
-    <svg viewBox="0 0 770 240" xmlns="http://www.w3.org/2000/svg" style="max-width:770px; width:100%;">
-
-      <!-- EDGES -->
-      <!-- [vocant] → auferre -->
-      <line class="edge" x1="375" y1="82" x2="75" y2="158"/>
-      <!-- [vocant] → trucidare -->
-      <line class="edge" x1="375" y1="82" x2="215" y2="158"/>
-      <!-- [vocant] → rapere -->
-      <line class="edge" x1="375" y1="82" x2="355" y2="158"/>
-      <!-- [vocant] → imperium -->
-      <line class="edge" x1="375" y1="82" x2="510" y2="158"/>
-      <!-- [vocant] → falsis nominibus -->
-      <line class="edge" x1="375" y1="82" x2="665" y2="158"/>
-
-      <!-- NODE: [vocant] (VERB PRINC implied) -->
-      <g class="nd-verb">
-        <rect x="308" y="30" width="134" height="52" rx="10"/>
-        <text class="nw" x="375" y="52" text-anchor="middle" font-style="italic">[vocant]</text>
-        <text class="nr" x="375" y="69" text-anchor="middle">verb. princ. (imp.)</text>
-      </g>
-
-      <!-- NODE: auferre (SOGG inf.) -->
-      <g class="nd-sogg">
-        <rect x="22" y="158" width="106" height="52" rx="10"/>
-        <text class="nw" x="75" y="182" text-anchor="middle">auferre</text>
-        <text class="nr" x="75" y="199" text-anchor="middle">sogg. inf.</text>
-      </g>
-
-      <!-- NODE: trucidare (SOGG inf.) -->
-      <g class="nd-sogg">
-        <rect x="158" y="158" width="114" height="52" rx="10"/>
-        <text class="nw" x="215" y="182" text-anchor="middle">trucidare</text>
-        <text class="nr" x="215" y="199" text-anchor="middle">sogg. inf.</text>
-      </g>
-
-      <!-- NODE: rapere (SOGG inf.) -->
-      <g class="nd-sogg">
-        <rect x="302" y="158" width="106" height="52" rx="10"/>
-        <text class="nw" x="355" y="182" text-anchor="middle">rapere</text>
-        <text class="nr" x="355" y="199" text-anchor="middle">sogg. inf.</text>
-      </g>
-
-      <!-- NODE: imperium (OBJ) -->
-      <g class="nd-obj">
-        <rect x="448" y="158" width="124" height="52" rx="10"/>
-        <text class="nw" x="510" y="182" text-anchor="middle">imperium</text>
-        <text class="nr" x="510" y="199" text-anchor="middle">compl. ogg.</text>
-      </g>
-
-      <!-- NODE: falsis nominibus (IND, abl.) -->
-      <g class="nd-ind">
-        <rect x="580" y="158" width="170" height="52" rx="10"/>
-        <text class="nw" x="665" y="182" text-anchor="middle">falsis nominibus</text>
-        <text class="nr" x="665" y="199" text-anchor="middle">abl. di modo/mezzo</text>
-      </g>
-
-    </svg>
-
-    <div class="nota-box">
-      <strong>Nota retorica.</strong> La triade asindetica <em>auferre — trucidare — rapere</em> (tre infiniti coordinati per giustapposizione, senza congiunzione) è un esempio perfetto di <em>tricolon crescens</em> tacitiano: la violenza si accumula senza pausa, e solo alla fine, con <em>falsis nominibus</em>, arriva la denuncia del meccanismo semantico del potere.
-    </div>
-  </div>
-
+  <div id="trees"></div>
 </main>
 
+<script>
+/* ═══════════════════════════════════════════
+   DATI DEGLI ALBERI — Agricola 30
+   ═══════════════════════════════════════════ */
+var TREES = [
+
+  /* ── § 1a ── */
+  { sec:'§ 1a', note:'Struttura <em>magnus mihi animus est</em> + AcI. La temporale <em>quotiens intueor</em> è circostante del verbo principale. Il nodo <em>fore</em> apre l\'AcI (sogg. accusativo + pred. accusativo).',
+    q:'Quotiens causas belli et necessitatem nostram intueor, magnus mihi animus est hodiernum diem consensumque vestrum initium libertatis toti Britanniae fore',
+    t:{ w:'est', t:'v', r:'verb. princ.', ch:[
+      { w:'animus', t:'s', r:'soggetto', ch:[
+        { w:'magnus', t:'i', r:'pred. nom.' },
+        { w:'mihi', t:'i', r:'dat. poss.' }
+      ]},
+      { w:'fore', t:'o', r:'inf. AcI', ch:[
+        { w:'hodiernum diem', t:'s', r:'sogg. acc.' },
+        { w:'consensumque vestrum', t:'s', r:'sogg. acc. (coord.)' },
+        { w:'initium', t:'i', r:'pred. acc.', ch:[
+          { w:'libertatis', t:'i', r:'gen. ogg.', ch:[
+            { w:'toti Britanniae', t:'i', r:'gen. poss.' }
+          ]}
+        ]}
+      ]},
+      { w:'intueor', t:'v', r:'prop. temp. (quotiens)', ch:[
+        { w:'[ego]', t:'s', r:'sogg. imp.' },
+        { w:'causas', t:'o', r:'compl. ogg.', ch:[
+          { w:'belli', t:'i', r:'gen. sogg.' }
+        ]},
+        { w:'necessitatem', t:'o', r:'compl. ogg.', ch:[
+          { w:'nostram', t:'i', r:'agg. poss.' }
+        ]}
+      ]}
+    ]}
+  },
+
+  /* ── § 1b ── */
+  { sec:'§ 1b', note:'Tre proposizioni coordinate da <em>nam et…et…et</em>. Il soggetto cambia: <em>universi</em> (2ª pers. pl.) → <em>[vos]</em> → <em>terrae / mare</em>. L\'ablativo assoluto <em>inminente classe Romana</em> è circostante della terza.',
+    q:'nam et universi coistis et servitutis expertes [estis], et nullae ultra terrae ac ne mare quidem securum inminente nobis classe Romana',
+    t:{ w:'coistis', t:'v', r:'verb. 1ª prop.', ch:[
+      { w:'universi', t:'s', r:'soggetto' },
+      { w:'[estis]', t:'v', r:'verb. 2ª prop.', ch:[
+        { w:'[vos]', t:'s', r:'sogg. imp.' },
+        { w:'expertes', t:'i', r:'pred. nom.', ch:[
+          { w:'servitutis', t:'i', r:'gen. sett.' }
+        ]}
+      ]},
+      { w:'[sunt]', t:'v', r:'verb. 3ª prop.', ch:[
+        { w:'terrae', t:'s', r:'soggetto', ch:[
+          { w:'nullae ultra', t:'i', r:'agg.+avv.' }
+        ]},
+        { w:'mare…securum', t:'s', r:'sogg. coord.', ch:[
+          { w:'ne…quidem', t:'i', r:'neg. raff.' }
+        ]},
+        { w:'inminente', t:'v', r:'abl. ass. (part.)', ch:[
+          { w:'classe Romana', t:'s', r:'sogg. abl.' },
+          { w:'nobis', t:'i', r:'dat. svant.' }
+        ]}
+      ]}
+    ]}
+  },
+
+  /* ── § 2 ── */
+  { sec:'§ 2', note:'La relativa <em>quae fortibus honesta</em> anticipa l\'attributo <em>tutissima</em>: stesso sogg. grammaticale (<em>proelium atque arma</em>), predicato nominale diverso. Chiasmo implicito: honesta (forti) / tutissima (vili).',
+    q:'ita proelium atque arma, quae fortibus honesta, eadem etiam ignavis tutissima sunt',
+    t:{ w:'sunt', t:'v', r:'verb. princ.', ch:[
+      { w:'proelium', t:'s', r:'soggetto', ch:[
+        { w:'arma', t:'s', r:'coord. (atque)' },
+        { w:'honesta', t:'v', r:'prop. rel. (quae)', ch:[
+          { w:'quae', t:'s', r:'sogg. rel.' },
+          { w:'fortibus', t:'i', r:'dat. (per i forti)' }
+        ]}
+      ]},
+      { w:'tutissima', t:'i', r:'pred. nom.' },
+      { w:'ignavis', t:'i', r:'dat. (per i vili)' },
+      { w:'eadem', t:'i', r:'pron. pred.' }
+    ]}
+  },
+
+  /* ── § 3a ── */
+  { sec:'§ 3a', note:'Il relativo <em>quibus</em> è ablativo strumentale ("con cui, in cui"). <em>Varia fortuna</em> è ablativo di modo. Il verbo impersonale <em>certatum est</em> regge la relativa.',
+    q:'priores pugnae, quibus adversus Romanos varia fortuna certatum est, spem ac subsidium in nostris manibus habebant',
+    t:{ w:'habebant', t:'v', r:'verb. princ.', ch:[
+      { w:'pugnae', t:'s', r:'soggetto', ch:[
+        { w:'priores', t:'i', r:'agg.' },
+        { w:'certatum est', t:'v', r:'prop. rel. (quibus)', ch:[
+          { w:'quibus', t:'i', r:'abl. strum.' },
+          { w:'adversus Romanos', t:'i', r:'compl. avvers.' },
+          { w:'varia fortuna', t:'i', r:'abl. modo' }
+        ]}
+      ]},
+      { w:'spem', t:'o', r:'compl. ogg.', ch:[
+        { w:'subsidium', t:'o', r:'coord. (ac)' }
+      ]},
+      { w:'in manibus', t:'i', r:'st. in luogo', ch:[
+        { w:'nostris', t:'i', r:'agg. poss.' }
+      ]}
+    ]}
+  },
+
+  /* ── § 3b ── */
+  { sec:'§ 3b', note:'Proposizione causale (<em>quia</em>) con soggetto implicito [nos] qualificato da tre participi in serie (<em>nobilissimi</em> + <em>siti</em> + <em>aspicientes</em>). Oggetto di <em>habebamus</em>: <em>oculos inviolatos</em> (accusativo + participio predicativo).',
+    q:'quia nobilissimi totius Britanniae eoque in ipsis penetralibus siti nec ulla servientium litora aspicientes, oculos quoque a contactu dominationis inviolatos habebamus',
+    t:{ w:'habebamus', t:'v', r:'prop. caus. (quia)', ch:[
+      { w:'[nos]', t:'s', r:'soggetto imp.', ch:[
+        { w:'nobilissimi', t:'i', r:'pred. nom.', ch:[
+          { w:'totius Britanniae', t:'i', r:'gen. poss.' }
+        ]},
+        { w:'siti', t:'v', r:'part. pred.', ch:[
+          { w:'in penetralibus', t:'i', r:'st. in luogo', ch:[
+            { w:'ipsis', t:'i', r:'agg. enf.' }
+          ]}
+        ]},
+        { w:'aspicientes', t:'v', r:'part. pred.', ch:[
+          { w:'litora', t:'o', r:'compl. ogg.', ch:[
+            { w:'nec ulla', t:'i', r:'neg.+agg.' },
+            { w:'servientium', t:'i', r:'gen. sogg.' }
+          ]}
+        ]}
+      ]},
+      { w:'oculos', t:'o', r:'compl. ogg.', ch:[
+        { w:'inviolatos', t:'i', r:'pred. agg.' },
+        { w:'a contactu', t:'i', r:'allontanam.', ch:[
+          { w:'dominationis', t:'i', r:'gen. sogg.' }
+        ]}
+      ]}
+    ]}
+  },
+
+  /* ── § 4a ── */
+  { sec:'§ 4a', note:'Iperbato: <em>nos</em> (oggetto) apre la frase, il soggetto (<em>recessus … ac sinus famae</em>) arriva solo dopo. <em>Ipse</em> enfatizza che sono stati i luoghi stessi, non gli uomini, a proteggere i Britoni.',
+    q:'nos terrarum ac libertatis extremos recessus ipse ac sinus famae in hunc diem defendit',
+    t:{ w:'defendit', t:'v', r:'verb. princ.', ch:[
+      { w:'recessus', t:'s', r:'soggetto', ch:[
+        { w:'extremos', t:'i', r:'agg.' },
+        { w:'terrarum', t:'i', r:'gen. poss.' },
+        { w:'ac libertatis', t:'i', r:'gen. poss. (coord.)' },
+        { w:'ipse', t:'i', r:'pron. enf.' },
+        { w:'sinus famae', t:'s', r:'coord. (ac)' }
+      ]},
+      { w:'nos', t:'o', r:'compl. ogg.' },
+      { w:'in hunc diem', t:'i', r:'compl. tempo' }
+    ]}
+  },
+
+  /* ── § 4b ── */
+  { sec:'§ 4b', note:'Due proposizioni brevi coordinate (<em>atque</em>). La brevitas tacitiana: dopo il lungo § 3, due frasi secche aprono la seconda parte del discorso.',
+    q:'nunc terminus Britanniae patet, atque omne ignotum pro magnifico est',
+    t:{ w:'patet', t:'v', r:'verb. 1ª prop.', ch:[
+      { w:'terminus', t:'s', r:'soggetto', ch:[
+        { w:'Britanniae', t:'i', r:'gen. poss.' }
+      ]},
+      { w:'nunc', t:'i', r:'avv. tempo' },
+      { w:'est', t:'v', r:'verb. 2ª prop. (atque)', ch:[
+        { w:'ignotum', t:'s', r:'soggetto', ch:[
+          { w:'omne', t:'i', r:'pron. indef.' }
+        ]},
+        { w:'pro magnifico', t:'i', r:'pred. (pro + abl.)' }
+      ]}
+    ]}
+  },
+
+  /* ── § 4c ── */
+  { sec:'§ 4c', note:'Triplice soggetto asindetico: <em>nulla gens</em>, <em>nihil</em>, <em>Romani infestiores</em>. Verbo sottinteso. La relativa con congiuntivo (<em>effugias</em>) ha valore potenziale: "che non potresti evitare".',
+    q:'sed nulla iam ultra gens, nihil nisi fluctus ac saxa, et infestiores Romani, quorum superbiam frustra per obsequium ac modestiam effugias',
+    t:{ w:'[relinquuntur]', t:'v', r:'verb. imp. (sottinteso)', ch:[
+      { w:'gens', t:'s', r:'soggetto', ch:[
+        { w:'nulla iam ultra', t:'i', r:'agg.+avv.' }
+      ]},
+      { w:'nihil', t:'s', r:'soggetto', ch:[
+        { w:'fluctus ac saxa', t:'i', r:'nisi (eccett.)' }
+      ]},
+      { w:'Romani', t:'s', r:'soggetto', ch:[
+        { w:'infestiores', t:'i', r:'pred. agg. comp.' },
+        { w:'effugias', t:'v', r:'prop. rel. pot. (quorum)', ch:[
+          { w:'[tu]', t:'s', r:'sogg. imp.' },
+          { w:'superbiam', t:'o', r:'compl. ogg.', ch:[
+            { w:'quorum', t:'i', r:'gen. sogg.' }
+          ]},
+          { w:'per obsequium', t:'i', r:'compl. mezzo', ch:[
+            { w:'ac modestiam', t:'i', r:'coord.' }
+          ]},
+          { w:'frustra', t:'i', r:'avv. modo' }
+        ]}
+      ]}
+    ]}
+  },
+
+  /* ── § 5a ── */
+  { sec:'§ 5a', note:'<em>Raptores orbis</em> è in apposizione al soggetto implicito [Romani]. La temporale <em>postquam…defuere</em> usa il perfetto indicativo (fatto compiuto). <em>Vastantibus</em> è dativo: "a chi devasta".',
+    q:'raptores orbis, postquam cuncta vastantibus defuere terrae, mare scrutantur',
+    t:{ w:'scrutantur', t:'v', r:'verb. princ.', ch:[
+      { w:'Raptores', t:'s', r:'soggetto (appos.)', ch:[
+        { w:'orbis', t:'i', r:'gen. sogg.' }
+      ]},
+      { w:'mare', t:'o', r:'compl. ogg.' },
+      { w:'defuere', t:'v', r:'prop. temp. (postquam)', ch:[
+        { w:'terrae', t:'s', r:'soggetto' },
+        { w:'cuncta', t:'o', r:'compl. ogg.' },
+        { w:'vastantibus', t:'i', r:'dat. (a chi devasta)' }
+      ]}
+    ]}
+  },
+
+  /* ── § 5b ── */
+  { sec:'§ 5b', note:'Due protasi-apodosi in perfetto parallelismo. Il verbo dell\'apodosi è sottinteso. La struttura speculare mostra che ogni circostanza del nemico è pretesto: <em>avari</em> ↔ <em>ambitiosi</em>.',
+    q:'si locuples hostis est, avari [sunt]; si pauper [est], ambitiosi [sunt]',
+    t:{ w:'[sunt]', t:'v', r:'apodosi 1', ch:[
+      { w:'[Romani]', t:'s', r:'sogg. imp.' },
+      { w:'avari', t:'i', r:'pred. nom.' },
+      { w:'est', t:'v', r:'protasi 1 (si)', ch:[
+        { w:'hostis', t:'s', r:'soggetto' },
+        { w:'locuples', t:'i', r:'pred. nom.' }
+      ]},
+      { w:'[sunt]', t:'v', r:'apodosi 2', ch:[
+        { w:'[Romani]', t:'s', r:'sogg. imp.' },
+        { w:'ambitiosi', t:'i', r:'pred. nom.' },
+        { w:'[est]', t:'v', r:'protasi 2 (si)', ch:[
+          { w:'[hostis]', t:'s', r:'sogg. imp.' },
+          { w:'pauper', t:'i', r:'pred. nom.' }
+        ]}
+      ]}
+    ]}
+  },
+
+  /* ── § 5c ── */
+  { sec:'§ 5c', note:'Relativa con congiuntivo perfetto (<em>satiaverit</em>) di valore consecutivo-relativo. I due soggetti (<em>Oriens</em>, <em>Occidens</em>) sono negati separatamente: il mondo intero non è abbastanza.',
+    q:'quos non Oriens, non Occidens satiaverit',
+    t:{ w:'satiaverit', t:'v', r:'prop. rel. consec. (quos)', ch:[
+      { w:'Oriens', t:'s', r:'soggetto', ch:[
+        { w:'non', t:'i', r:'negazione' }
+      ]},
+      { w:'Occidens', t:'s', r:'soggetto', ch:[
+        { w:'non', t:'i', r:'negazione' }
+      ]},
+      { w:'quos', t:'o', r:'compl. ogg. (= Romanos)' }
+    ]}
+  },
+
+  /* ── § 5d ── */
+  { sec:'§ 5d', note:'<em>Soli omnium</em> è predicativo del soggetto. <em>Opes atque inopiam</em> è dittologia ossimorica: la ricchezza e la povertà dell\'avversario sono ugualmente desiderate. <em>Pari adfectu</em> è il nodo semanticamente centrale.',
+    q:'soli omnium opes atque inopiam pari adfectu concupiscunt',
+    t:{ w:'concupiscunt', t:'v', r:'verb. princ.', ch:[
+      { w:'[Romani]', t:'s', r:'sogg. imp.', ch:[
+        { w:'soli', t:'i', r:'pred. nom.', ch:[
+          { w:'omnium', t:'i', r:'gen. part.' }
+        ]}
+      ]},
+      { w:'opes', t:'o', r:'compl. ogg.', ch:[
+        { w:'inopiam', t:'o', r:'coord. (atque)' }
+      ]},
+      { w:'pari adfectu', t:'i', r:'abl. modo' }
+    ]}
+  },
+
+  /* ── § 6a ── */
+  { sec:'§ 6a', note:'Tre infiniti storici asindetici (<em>auferre, trucidare, rapere</em>) fungono da soggetti del verbo implicito. L\'asindeto accelera il ritmo: tre azioni in fila senza respiro, poi la rivelazione: <em>falsis nominibus imperium</em>.',
+    q:'auferre trucidare rapere falsis nominibus imperium [vocant]',
+    t:{ w:'[vocant]', t:'v', r:'verb. imp.', ch:[
+      { w:'auferre', t:'s', r:'sogg. inf.' },
+      { w:'trucidare', t:'s', r:'sogg. inf.' },
+      { w:'rapere', t:'s', r:'sogg. inf.' },
+      { w:'imperium', t:'o', r:'compl. ogg.' },
+      { w:'falsis nominibus', t:'i', r:'abl. mezzo' }
+    ]}
+  },
+
+  /* ── § 6b ── */
+  { sec:'§ 6b', note:'Il paradosso è strutturale: <em>solitudinem</em> (OBJ della sub.) vs <em>pacem</em> (OBJ della princ.). Due oggetti di due verbi diversi: uno reale (il deserto), uno falsamente nominato (la pace). Questo è il cuore dell\'argomentazione di Calgàco.',
+    q:'atque ubi solitudinem faciunt, pacem appellant',
+    t:{ w:'appellant', t:'v', r:'verb. princ.', ch:[
+      { w:'[Romani]', t:'s', r:'sogg. imp.' },
+      { w:'pacem', t:'o', r:'compl. ogg.' },
+      { w:'faciunt', t:'v', r:'prop. temp. (ubi)', ch:[
+        { w:'[Romani]', t:'s', r:'sogg. imp.' },
+        { w:'solitudinem', t:'o', r:'compl. ogg.' }
+      ]}
+    ]}
+  }
+
+]; /* fine TREES */
+
+
+/* ═══════════════════════════════════════════
+   RENDERER TESNIÈRE
+   ═══════════════════════════════════════════ */
+var CFG = {
+  NH: 50,       /* altezza nodo */
+  HG: 20,       /* gap orizzontale tra nodi fratelli */
+  VG: 68,       /* gap verticale tra livelli */
+  PT: 28,       /* padding top SVG */
+  PS: 28,       /* padding laterale SVG */
+  CW: 8.2,      /* px per char (parola) */
+  RW: 6.0,      /* px per char (ruolo) */
+  CP: 26,       /* padding interno nodo (tot dx+sx) */
+  MW: 82,       /* larghezza minima nodo */
+  COLS: {
+    v: { f:'#fff8e0', s:'#f4d35e', t:'#6e5200' },
+    s: { f:'#fdeaea', s:'#e85d5d', t:'#7a1212' },
+    o: { f:'#eafaec', s:'#78c878', t:'#155a15' },
+    i: { f:'#e8f6fb', s:'#6db5d4', t:'#124a72' }
+  }
+};
+
+function nW(node) {
+  var ww = node.w.length * CFG.CW + CFG.CP;
+  var rw = node.r.length * CFG.RW + CFG.CP;
+  return Math.max(CFG.MW, ww, rw);
+}
+
+function computeSW(node) {
+  var own = nW(node) + CFG.HG;
+  if (!node.ch || !node.ch.length) { node._sw = own; return; }
+  node.ch.forEach(computeSW);
+  var childSum = node.ch.reduce(function(a,c){ return a + c._sw; }, 0);
+  node._sw = Math.max(own, childSum);
+}
+
+function assignCX(node, x0) {
+  if (!node.ch || !node.ch.length) {
+    node._cx = x0 + node._sw / 2;
+    return;
+  }
+  var cx = x0;
+  node.ch.forEach(function(c){ assignCX(c, cx); cx += c._sw; });
+  node._cx = (node.ch[0]._cx + node.ch[node.ch.length-1]._cx) / 2;
+}
+
+function assignCY(node, d) {
+  node._cy = CFG.PT + d * (CFG.NH + CFG.VG);
+  if (node.ch) node.ch.forEach(function(c){ assignCY(c, d+1); });
+}
+
+function maxD(node) {
+  if (!node.ch || !node.ch.length) return 0;
+  return 1 + Math.max.apply(null, node.ch.map(maxD));
+}
+
+function svgE(tag, a) {
+  var e = document.createElementNS('http://www.w3.org/2000/svg', tag);
+  Object.keys(a).forEach(function(k){ e.setAttribute(k, a[k]); });
+  return e;
+}
+
+function drawEdges(svg, node) {
+  if (!node.ch) return;
+  var px = node._cx, py = node._cy + CFG.NH;
+  node.ch.forEach(function(c){
+    svg.appendChild(svgE('line',{
+      x1:px, y1:py, x2:c._cx, y2:c._cy,
+      stroke:'#b0a090', 'stroke-width':'1.5'
+    }));
+    drawEdges(svg, c);
+  });
+}
+
+function drawNodes(svg, node) {
+  var col = CFG.COLS[node.t] || CFG.COLS.i;
+  var w = nW(node);
+  var x = node._cx - w/2;
+  var y = node._cy;
+  var isImp = node.w.charAt(0) === '[';
+
+  svg.appendChild(svgE('rect',{
+    x:x, y:y, width:w, height:CFG.NH,
+    rx:9, fill:col.f, stroke:col.s, 'stroke-width':'2'
+  }));
+
+  var t1 = svgE('text',{
+    x:node._cx, y:y+18,
+    'text-anchor':'middle',
+    'font-family':'Cardo, serif',
+    'font-size':'14',
+    'font-weight':'700',
+    'font-style': isImp ? 'italic' : 'normal',
+    fill:col.t
+  });
+  t1.textContent = node.w;
+  svg.appendChild(t1);
+
+  var t2 = svgE('text',{
+    x:node._cx, y:y+34,
+    'text-anchor':'middle',
+    'font-family':'Cardo, serif',
+    'font-size':'9.5',
+    'font-style':'italic',
+    fill:col.t
+  });
+  t2.textContent = node.r;
+  svg.appendChild(t2);
+
+  if (node.ch) node.ch.forEach(function(c){ drawNodes(svg, c); });
+}
+
+function renderAll() {
+  var cont = document.getElementById('trees');
+  TREES.forEach(function(data){
+    var root = JSON.parse(JSON.stringify(data.t));
+    computeSW(root);
+    assignCX(root, CFG.PS);
+    assignCY(root, 0);
+
+    var md = maxD(root);
+    var svgW = root._sw + CFG.PS * 2;
+    var svgH = CFG.PT + (md+1)*(CFG.NH+CFG.VG) + 20;
+
+    var svg = svgE('svg',{
+      viewBox:'0 0 '+svgW+' '+svgH,
+      style:'display:block; width:100%; min-width:'+Math.min(svgW,400)+'px;'
+    });
+
+    drawEdges(svg, root);
+    drawNodes(svg, root);
+
+    var block = document.createElement('div');
+    block.className = 'stemma-block';
+    block.innerHTML =
+      '<h2>'+data.sec+'</h2>'+
+      '<div class="lat-q"><em>'+data.q+'</em></div>';
+    block.appendChild(svg);
+    if (data.note) {
+      var nb = document.createElement('div');
+      nb.className = 'nota-box';
+      nb.innerHTML = data.note;
+      block.appendChild(nb);
+    }
+    cont.appendChild(block);
+  });
+}
+
+renderAll();
+</script>
 </body>
 </html>

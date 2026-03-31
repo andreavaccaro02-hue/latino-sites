@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Virgilio — Eneide IV: Didone | Lezione Interattiva</title>
+<meta name="description" content="Lezione interattiva sull'Eneide IV di Virgilio: Didone ed Enea, amor vs pietas, brani in latino con commento.">
+<meta property="og:title" content="Virgilio — Eneide IV: Didone | Lezione Interattiva">
+<meta property="og:description" content="Lezione interattiva sull'Eneide IV di Virgilio: Didone ed Enea, amor vs pietas, brani in latino con commento.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="it_IT">
+<meta property="og:url" content="https://andreavaccaro02-hue.github.io/latino-sites/autori/virgilio/eneide_iv.html">
+<link rel="canonical" href="https://andreavaccaro02-hue.github.io/latino-sites/autori/virgilio/eneide_iv.html">
+<link rel="stylesheet" href="../../css/style.css">
+<style>
+  /* ═══ STILI SPECIFICI LEZIONE ENEIDE IV ═══ */
+
+  .lesson-intro {
+    background: var(--card);
+    border: 2px solid var(--border);
+    border-radius: 16px;
+    padding: 30px;
+    margin-bottom: 30px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  }
+
+  .lesson-intro h2 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 22px;
+    color: var(--gold);
+    margin-bottom: 14px;
+  }
+
+  .lesson-intro p {
+    font-size: 16px;
+    line-height: 1.8;
+    margin-bottom: 10px;
+  }
+
+  .context-badge {
+    display: inline-block;
+    padding: 4px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 700;
+    margin-right: 8px;
+    margin-bottom: 6px;
+  }
+
+  .context-badge.autore { background: rgba(184,145,90,0.15); color: var(--gold); }
+  .context-badge.opera { background: rgba(45,106,79,0.12); color: var(--eulalia); }
+  .context-badge.data { background: rgba(107,100,86,0.12); color: var(--text-dim); }
+  .context-badge.genere { background: rgba(192,132,212,0.12); color: #7a3a9a; }
+
+  /* ═══ TLAC BOXES ═══ */
+  .tlac-box {
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin: 24px 0;
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  .tlac-box .tlac-label {
+    font-family: 'Libre Baskerville', serif;
+    font-weight: 700;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .tlac-donow {
+    background: rgba(232, 93, 93, 0.08);
+    border-left: 4px solid var(--latino1);
+  }
+  .tlac-donow .tlac-label { color: var(--latino1); }
+
+  .tlac-coldcall {
+    background: rgba(109, 181, 212, 0.1);
+    border-left: 4px solid var(--latino3);
+  }
+  .tlac-coldcall .tlac-label { color: #1a6b8a; }
+
+  .tlac-turntalk {
+    background: rgba(120, 200, 120, 0.08);
+    border-left: 4px solid var(--latino2);
+  }
+  .tlac-turntalk .tlac-label { color: #2a7a2a; }
+
+  .tlac-stretch {
+    background: rgba(192, 132, 212, 0.08);
+    border-left: 4px solid var(--latino5);
+  }
+  .tlac-stretch .tlac-label { color: #7a3a9a; }
+
+  .tlac-exit {
+    background: rgba(244, 211, 94, 0.12);
+    border-left: 4px solid var(--latino4);
+  }
+  .tlac-exit .tlac-label { color: #8a6a0a; }
+
+  .tlac-reveal-btn {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 7px 16px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--card);
+    font-family: 'Cardo', serif;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s;
+    color: var(--text-dim);
+  }
+
+  .tlac-reveal-btn:hover {
+    border-color: var(--gold);
+    color: var(--gold);
+  }
+
+  .tlac-hint {
+    display: none;
+    margin-top: 10px;
+    padding: 12px 16px;
+    background: rgba(184,145,90,0.06);
+    border-radius: 8px;
+    font-style: italic;
+    color: var(--text-dim);
+    line-height: 1.6;
+  }
+
+  .tlac-hint.visible { display: block; }
+
+  /* ═══ SEZIONE CONTENUTO ═══ */
+  .content-section {
+    background: var(--card);
+    border: 2px solid var(--border);
+    border-radius: 16px;
+    margin-bottom: 30px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  }
+
+  .content-header {
+    background: linear-gradient(135deg, #2c2416 0%, #5a4e3c 100%);
+    color: #f5f0e8;
+    padding: 24px 30px;
+  }
+
+  .content-header h2 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 24px;
+    margin-bottom: 4px;
+  }
+
+  .content-header .section-ref {
+    font-size: 15px;
+    color: var(--gold-light);
+    font-style: italic;
+  }
+
+  .content-body {
+    padding: 30px;
+  }
+
+  .content-body h3 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 19px;
+    color: var(--text);
+    margin: 24px 0 12px;
+  }
+
+  .content-body h3:first-child { margin-top: 0; }
+
+  .content-body p {
+    font-size: 16px;
+    line-height: 1.8;
+    margin-bottom: 12px;
+  }
+
+  .lat-cite {
+    font-family: 'Libre Baskerville', serif;
+    font-style: italic;
+    color: var(--gold);
+    font-weight: 600;
+  }
+
+  .nota-fonte {
+    display: block;
+    font-size: 13px;
+    color: var(--text-dim);
+    font-style: italic;
+    margin-top: 4px;
+  }
+
+  /* ═══ BRANO ANTOLOGICO ═══ */
+  .brano-box {
+    background: rgba(184,145,90,0.04);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--gold);
+    border-radius: 10px;
+    padding: 20px 24px;
+    margin: 20px 0;
+    font-size: 15px;
+    line-height: 1.8;
+  }
+
+  .brano-box .brano-titolo {
+    font-family: 'Libre Baskerville', serif;
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--gold);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .brano-box .brano-testo {
+    font-family: 'Cardo', serif;
+    font-size: 15px;
+    line-height: 1.9;
+    color: var(--text);
+  }
+
+  .brano-box .brano-commento {
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px solid var(--border);
+    font-size: 14px;
+    color: var(--text-dim);
+    line-height: 1.6;
+  }
+
+  /* ═══ CONFRONTO TABLE ═══ */
+  .confronto-grid {
+    display: grid;
+    grid-template-columns: auto 1fr 1fr;
+    gap: 0;
+    border: 2px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    margin: 24px 0;
+  }
+
+  .confronto-grid .cg-header {
+    background: linear-gradient(135deg, #2c2416, #5a4e3c);
+    color: #f5f0e8;
+    padding: 14px 18px;
+    font-family: 'Libre Baskerville', serif;
+    font-size: 15px;
+    font-weight: 700;
+    text-align: center;
+  }
+
+  .confronto-grid .cg-label {
+    padding: 14px 18px;
+    font-family: 'Libre Baskerville', serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--gold);
+    background: rgba(184,145,90,0.06);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+  }
+
+  .confronto-grid .cg-cell {
+    padding: 14px 18px;
+    font-size: 15px;
+    line-height: 1.6;
+    border-bottom: 1px solid var(--border);
+    background: var(--card);
+  }
+
+  .confronto-grid .cg-cell.left {
+    border-right: 1px solid var(--border);
+  }
+
+  .cg-highlight {
+    font-weight: 700;
+    color: var(--gold);
+  }
+
+  /* ═══ PERSONAGGI CARDS ═══ */
+  .personaggi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 16px;
+    margin: 20px 0;
+  }
+
+  .personaggio-card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px;
+    transition: all 0.3s;
+    cursor: pointer;
+  }
+
+  .personaggio-card:hover {
+    border-color: var(--gold);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  }
+
+  .personaggio-card .pc-nome {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--gold);
+    margin-bottom: 6px;
+  }
+
+  .personaggio-card .pc-ruolo {
+    font-size: 13px;
+    color: var(--text-dim);
+    font-style: italic;
+    margin-bottom: 8px;
+  }
+
+  .personaggio-card .pc-desc {
+    font-size: 14px;
+    line-height: 1.6;
+    display: none;
+  }
+
+  .personaggio-card.open .pc-desc {
+    display: block;
+  }
+
+  /* ═══ SCHEMA NARRATIVO ═══ */
+  .fasi-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+    margin: 20px 0;
+  }
+
+  .fase-item {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 0;
+    border: 1px solid var(--border);
+    border-bottom: none;
+  }
+
+  .fase-item:last-child { border-bottom: 1px solid var(--border); }
+  .fase-item:first-child { border-radius: 12px 12px 0 0; }
+  .fase-item:last-child { border-radius: 0 0 12px 12px; }
+
+  .fase-num {
+    background: linear-gradient(135deg, #2c2416, #5a4e3c);
+    color: var(--gold-light);
+    font-family: 'Libre Baskerville', serif;
+    font-size: 20px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+  }
+
+  .fase-body {
+    padding: 16px 20px;
+    background: var(--card);
+  }
+
+  .fase-body .fase-titolo {
+    font-family: 'Libre Baskerville', serif;
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--gold);
+    margin-bottom: 4px;
+  }
+
+  .fase-body .fase-versi {
+    font-size: 12px;
+    color: var(--text-dim);
+    margin-bottom: 6px;
+  }
+
+  .fase-body .fase-desc {
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  /* ═══ QUIZ ═══ */
+  .esercizio-section {
+    background: var(--card);
+    border: 2px solid var(--eulalia);
+    border-radius: 16px;
+    padding: 30px;
+    margin-bottom: 30px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  }
+
+  .esercizio-section h2 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 22px;
+    color: var(--eulalia);
+    margin-bottom: 20px;
+  }
+
+  .esercizio-section h3 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 17px;
+    color: var(--text);
+    margin: 20px 0 12px;
+  }
+
+  .quiz-item {
+    background: rgba(45,106,79,0.05);
+    border-radius: 10px;
+    padding: 18px;
+    margin-bottom: 14px;
+  }
+
+  .quiz-item .quiz-q {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    line-height: 1.5;
+  }
+
+  .quiz-options {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .quiz-option {
+    padding: 12px 16px;
+    border: 2px solid var(--border);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 15px;
+    background: var(--card);
+  }
+
+  .quiz-option:hover { border-color: var(--eulalia); background: rgba(45,106,79,0.04); }
+  .quiz-option.correct { border-color: #28a745; background: rgba(40,167,69,0.1); color: #155724; }
+  .quiz-option.wrong { border-color: #dc3545; background: rgba(220,53,69,0.08); color: #721c24; }
+  .quiz-option.disabled { pointer-events: none; opacity: 0.6; }
+
+  .quiz-feedback {
+    margin-top: 10px;
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-size: 14px;
+    line-height: 1.5;
+    display: none;
+  }
+
+  .quiz-feedback.show { display: block; }
+  .quiz-feedback.correct-fb { background: rgba(40,167,69,0.1); border-left: 3px solid #28a745; color: #155724; }
+  .quiz-feedback.wrong-fb { background: rgba(220,53,69,0.08); border-left: 3px solid #dc3545; color: #721c24; }
+
+  /* ═══ SCORE BAR ═══ */
+  .score-bar {
+    background: var(--card);
+    border: 2px solid var(--border);
+    border-radius: 12px;
+    padding: 16px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    position: sticky;
+    top: 60px;
+    z-index: 50;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  }
+
+  .score-label {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 15px;
+    font-weight: 700;
+  }
+
+  .score-value {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--eulalia);
+  }
+
+  /* ═══ RESPONSIVE ═══ */
+  @media (max-width: 768px) {
+    .content-body { padding: 20px; }
+    .content-header { padding: 18px 20px; }
+    .confronto-grid { grid-template-columns: 1fr; }
+    .confronto-grid .cg-header { display: block; }
+    .personaggi-grid { grid-template-columns: 1fr; }
+    .score-bar { flex-direction: column; gap: 6px; top: 50px; }
+    .fase-item { grid-template-columns: 60px 1fr; }
+  }
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "name": "Virgilio — Eneide IV: Didone | Lezione Interattiva",
+  "description": "Lezione interattiva sull'Eneide IV di Virgilio: Didone ed Enea, amor vs pietas, brani in latino con commento.",
+  "author": {
+    "@type": "Person",
+    "name": "Prof. Andrea Vaccaro"
+  },
+  "inLanguage": "it",
+  "educationalUse": "Lezione interattiva",
+  "learningResourceType": "Lesson"
+}
+</script>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="container">
+      <a href="../../index.html" class="site-name">Lingua e Cultura Latina</a>
+      <div class="nav-links">
+      <a href="../../index.html">Home</a>
+      <a href="../../strumenti/raccoglitore.html">Raccoglitore</a>
+      <a href="../../grammatica/index.html">Grammatica</a>
+      <a href="../../strumenti/glossario-eulalia.html">Strumenti</a>
+      <a href="../../chi-sono.html">Chi sono</a>
+    </div>
+    </div>
+  </nav>
+
+  <!-- Page Header -->
+  <div class="page-header">
+    <h1>Virgilio &mdash; Eneide IV: la tragedia di Didone</h1>
+    <div class="divider"></div>
+    <p class="subtitle">Lezione interattiva &mdash; Latino 4 Classico</p>
+  </div>
+
+  <div class="container">
+    <a href="../../percorsi/latino4-classico.html" class="back-link">&larr; Torna a Latino 4 Classico</a>
+
+    <!-- Punteggio -->
+    <div class="score-bar">
+      <span class="score-label">Punteggio</span>
+      <span class="score-value" id="scoreDisplay">0 / 10</span>
+    </div>
+
+    <!-- ═══════════════════ DO NOW ═══════════════════ -->
+    <div class="tlac-box tlac-donow">
+      <div class="tlac-label">Do Now &mdash; Attivit&agrave; di avvio (3 min)</div>
+      <p>Scrivi sul quaderno una risposta in 3&ndash;4 righe: <strong>&laquo;Pensa a una storia (libro, film, mito) in cui un personaggio deve scegliere tra l&rsquo;amore e il dovere. Come finisce? Chi &laquo;vince&raquo; tra i due?&raquo;</strong></p>
+      <p>Il quarto libro dell&rsquo;Eneide racconta esattamente questo conflitto: l&rsquo;amore tra Didone ed Enea si scontra con il destino di Roma. Nessuno ne esce illeso.</p>
+    </div>
+
+    <!-- ═══════════════════ INTRODUZIONE ═══════════════════ -->
+    <div class="lesson-intro">
+      <h2>Il quarto libro dell&rsquo;Eneide</h2>
+      <div style="margin-bottom: 14px;">
+        <span class="context-badge autore">P. Vergilius Maro</span>
+        <span class="context-badge opera">Aeneis IV</span>
+        <span class="context-badge data">29&ndash;19 a.C.</span>
+        <span class="context-badge genere">Epica &bull; Tragedia &bull; Pathos</span>
+      </div>
+      <p>Il libro IV &egrave; il cuore emotivo dell&rsquo;Eneide. Virgilio vi concentra una storia d&rsquo;amore e di morte che ha attraversato tutta la letteratura occidentale: da Ovidio a Dante, da Purcell a Berlioz. Non &egrave; solo il racconto di una passione: &egrave; il punto in cui il poema rivela la sua natura tragica, mostrando che la fondazione di Roma ha un costo umano enorme.</p>
+      <p>Didone, regina di Cartagine, si innamora di Enea dopo averne ascoltato il racconto delle sventure troiane (libri I&ndash;III). Ma Enea &egrave; vincolato dal <span class="lat-cite">fatum</span> a raggiungere l&rsquo;Italia. Quando Giove gli ordina di partire, la regina abbandonata si toglie la vita. La storia di Didone &egrave; la prima grande tragedia femminile della letteratura latina.</p>
+    </div>
+
+    <!-- ═══════════════════ COLD CALL 1 ═══════════════════ -->
+    <div class="tlac-box tlac-coldcall">
+      <div class="tlac-label">Fermati e rispondi</div>
+      <p><strong>Virgilio scrive l&rsquo;Eneide su commissione di Augusto, per celebrare le origini di Roma. Eppure il libro IV sembra dare ragione a Didone, non a Enea. Come si spiega questa contraddizione? Pu&ograve; un poema &laquo;di propaganda&raquo; contenere una critica al proprio messaggio?</strong></p>
+      <button class="tlac-reveal-btn" onclick="toggleHint(this)">Mostra spunto</button>
+      <div class="tlac-hint">L&rsquo;Eneide non &egrave; propaganda semplice: Virgilio mostra che il <em>fatum</em> romano si realizza attraverso la sofferenza di individui innocenti. Didone non ha colpa: &egrave; vittima degli d&egrave;i (Venere e Giunone la manipolano) e di un destino pi&ugrave; grande di lei. Virgilio chiede al lettore di ammirare la grandezza di Roma e, allo stesso tempo, di riconoscerne il prezzo. Questa ambiguit&agrave; &egrave; ci&ograve; che rende l&rsquo;Eneide un capolavoro e non un manifesto politico.</div>
+    </div>
+
+    <!-- ═══════════════════ STRUTTURA NARRATIVA ═══════════════════ -->
+    <div class="content-section">
+      <div class="content-header">
+        <h2>La struttura del libro IV</h2>
+        <span class="section-ref">Le cinque fasi della tragedia</span>
+      </div>
+      <div class="content-body">
+        <h3>Architettura drammatica</h3>
+        <p>Il libro IV &egrave; costruito come una tragedia in cinque atti. Virgilio non racconta semplicemente una storia d&rsquo;amore: applica la struttura del dramma attico &mdash; con prologo, crisi, peripeteia e catastrofe &mdash; dentro la cornice dell&rsquo;epos. Il risultato &egrave; un libro che si pu&ograve; leggere quasi come un&rsquo;opera teatrale autonoma.</p>
+
+        <div class="fasi-grid">
+          <div class="fase-item">
+            <div class="fase-num">I</div>
+            <div class="fase-body">
+              <div class="fase-titolo">La confessione e l&rsquo;inganno divino</div>
+              <div class="fase-versi">vv. 1&ndash;172</div>
+              <div class="fase-desc">Didone confessa alla sorella Anna la passione per Enea. Giunone e Venere organizzano l&rsquo;unione: durante una caccia, un temporale spinge i due in una grotta. L&igrave;, secondo Didone, si celebra un matrimonio; secondo Enea, nulla di vincolante &egrave; accaduto.</div>
+            </div>
+          </div>
+          <div class="fase-item">
+            <div class="fase-num">II</div>
+            <div class="fase-body">
+              <div class="fase-titolo">La Fama e l&rsquo;intervento di Giove</div>
+              <div class="fase-versi">vv. 173&ndash;295</div>
+              <div class="fase-desc">La Fama (<span class="lat-cite">Fama, malum qua non aliud velocius ullum</span>) diffonde la notizia. Iarba, pretendente respinto, invoca Giove. Il padre degli d&egrave;i invia Mercurio: Enea deve partire. Il destino prevale.</div>
+            </div>
+          </div>
+          <div class="fase-item">
+            <div class="fase-num">III</div>
+            <div class="fase-body">
+              <div class="fase-titolo">Lo scontro: Didone contro Enea</div>
+              <div class="fase-versi">vv. 296&ndash;449</div>
+              <div class="fase-desc">Il grande confronto. Didone supplica, accusa, minaccia. Enea risponde con parole misurate: non nega l&rsquo;amore ma si dichiara sottomesso al fato. &Egrave; il momento in cui il conflitto tra <em>amor</em> e <em>pietas</em> diventa insanabile. Nessuno dei due ha completamente torto.</div>
+            </div>
+          </div>
+          <div class="fase-item">
+            <div class="fase-num">IV</div>
+            <div class="fase-body">
+              <div class="fase-titolo">La disperazione di Didone</div>
+              <div class="fase-versi">vv. 450&ndash;583</div>
+              <div class="fase-desc">Didone oscilla tra preghiera e furore. Manda Anna a supplicare Enea, ha visioni notturne, sogna di vagare sola per terre deserte. Prepara il suicidio fingendo un rito magico: fa innalzare una pira con le armi e le vesti di Enea.</div>
+            </div>
+          </div>
+          <div class="fase-item">
+            <div class="fase-num">V</div>
+            <div class="fase-body">
+              <div class="fase-titolo">Il suicidio e la maledizione</div>
+              <div class="fase-versi">vv. 584&ndash;705</div>
+              <div class="fase-desc">All&rsquo;alba, vedendo le navi troiane in mare, Didone pronuncia la maledizione finale: un vendicatore sorger&agrave; dalle sue ceneri (prefigurazione di Annibale). Si trafigge con la spada di Enea. Giunone invia Iride a recidere il filo della vita. Didone muore con gli occhi aperti sul cielo di Cartagine.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════ TURN AND TALK ═══════════════════ -->
+    <div class="tlac-box tlac-turntalk">
+      <div class="tlac-label">Turn and Talk &mdash; Confronto a coppie (3 min)</div>
+      <p><strong>Nella scena della grotta (fase I), Didone parla di &laquo;matrimonio&raquo; mentre Enea no. Chi ha ragione? Virgilio d&agrave; ragione a uno dei due o lascia l&rsquo;ambiguit&agrave;? Trovate insieme almeno un argomento per ciascuna posizione.</strong></p>
+      <button class="tlac-reveal-btn" onclick="toggleHint(this)">Mostra spunto</button>
+      <div class="tlac-hint">Virgilio scrive: <em>coniugium vocat; hoc praetexit nomine culpam</em> (IV, 172) &mdash; &laquo;lo chiama matrimonio; con questo nome copre la sua colpa&raquo;. Il narratore sembra dare torto a Didone. Ma la responsabilit&agrave; principale &egrave; degli d&egrave;i: Giunone e Venere hanno orchestrato tutto. Didone &egrave; manipolata. L&rsquo;ambiguit&agrave; &egrave; voluta: Virgilio non assolve n&eacute; condanna, mostra la complessit&agrave;.</div>
+    </div>
+
+    <!-- ═══════════════════ I PERSONAGGI ═══════════════════ -->
+    <div class="content-section">
+      <div class="content-header">
+        <h2>I personaggi del libro IV</h2>
+        <span class="section-ref">Didone, Enea, Anna, gli d&egrave;i</span>
+      </div>
+      <div class="content-body">
+        <p style="font-size:14px; color: var(--text-dim); margin-bottom: 14px;">Clicca su ciascun personaggio per i dettagli.</p>
+        <div class="personaggi-grid">
+          <div class="personaggio-card" onclick="this.classList.toggle('open')">
+            <div class="pc-nome">Didone</div>
+            <div class="pc-ruolo">Regina di Cartagine</div>
+            <div class="pc-desc">Vedova di Sicheo, ha fondato Cartagine fuggendo dalla Fenicia. &Egrave; una regina forte e capace, ma l&rsquo;amore per Enea la trasforma. Virgilio la presenta attraverso una serie di similitudini tragiche: &egrave; come una cerva ferita che porta la freccia nel fianco (<em>Aen.</em> IV, 69&ndash;73), come una baccante invasata. Il suo percorso va dalla dignit&agrave; regale al <span class="lat-cite">furor</span>, dalla ragione alla follia. Nel libro VI, quando Enea la incontra nell&rsquo;oltretomba, Didone non gli rivolge neppure lo sguardo.</div>
+          </div>
+          <div class="personaggio-card" onclick="this.classList.toggle('open')">
+            <div class="pc-nome">Enea</div>
+            <div class="pc-ruolo">Eroe troiano, <em>pius Aeneas</em></div>
+            <div class="pc-desc">Nel libro IV Enea &egrave; un personaggio diviso. Ama Didone ma obbedisce al <em>fatum</em>. Non &egrave; insensibile: Virgilio scrive che soffre, che vorrebbe consolarla, ma resta fermo. La sua celebre risposta &mdash; <span class="lat-cite">Italiam non sponte sequor</span> (IV, 361) &mdash; &egrave; insieme sincera e insufficiente. Enea non &egrave; un eroe omerico: non agisce per gloria ma per dovere, e questo lo rende meno affascinante ma pi&ugrave; moderno.</div>
+          </div>
+          <div class="personaggio-card" onclick="this.classList.toggle('open')">
+            <div class="pc-nome">Anna</div>
+            <div class="pc-ruolo">Sorella di Didone</div>
+            <div class="pc-desc">Confidente e consigliera. &Egrave; Anna a persuadere Didone che amare Enea non &egrave; un tradimento della memoria di Sicheo. Il suo ruolo &egrave; quello della <em>nutrix</em> tragica: facilita involontariamente la catastrofe. La scoperta del suicidio la distrugge.</div>
+          </div>
+          <div class="personaggio-card" onclick="this.classList.toggle('open')">
+            <div class="pc-nome">Venere e Giunone</div>
+            <div class="pc-ruolo">Le dee registe</div>
+            <div class="pc-desc">Venere vuole proteggere Enea facendo innamorare Didone; Giunone vuole trattenere i Troiani a Cartagine. Le due dee collaborano per scopi opposti: il risultato &egrave; la rovina di Didone, strumento inconsapevole di un gioco divino che la supera. La responsabilit&agrave; morale degli d&egrave;i &egrave; uno dei temi pi&ugrave; inquietanti del libro.</div>
+          </div>
+          <div class="personaggio-card" onclick="this.classList.toggle('open')">
+            <div class="pc-nome">Mercurio</div>
+            <div class="pc-ruolo">Messaggero di Giove</div>
+            <div class="pc-desc">Porta a Enea l&rsquo;ordine di partire. La sua apparizione (IV, 259&ndash;278) &egrave; tra le pi&ugrave; visivamente potenti del poema: scende dal cielo, cammina sulle onde, trova Enea vestito di porpora cartaginese &mdash; un eroe quasi irriconoscibile, assorbito dalla vita straniera. Il rimprovero divino risveglia la <em>pietas</em>.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════ I TEMI ═══════════════════ -->
+    <div class="content-section">
+      <div class="content-header">
+        <h2>I grandi temi</h2>
+        <span class="section-ref">Amor vs pietas, furor, fatum, colpa</span>
+      </div>
+      <div class="content-body">
+        <h3>Amor e furor</h3>
+        <p>L&rsquo;amore di Didone non &egrave; mai presentato come sentimento sereno: fin dal primo verso del libro &egrave; una <strong>ferita</strong> (<span class="lat-cite">vulnus</span>) che si nutre di <span class="lat-cite">furor</span>. Virgilio usa un lessico medico e bellico: l&rsquo;amore &egrave; fiamma (<span class="lat-cite">ignis</span>), veleno (<span class="lat-cite">venenum</span>), malattia. Didone &laquo;brucia&raquo; (<span class="lat-cite">uritur</span>) e vaga per la citt&agrave; come una cerva trafitta. Non c&rsquo;&egrave; idillio: la passione &egrave; fin dall&rsquo;inizio una forza distruttiva.</p>
+
+        <h3>Pietas e fatum</h3>
+        <p>Enea incarna la <span class="lat-cite">pietas</span>: il rispetto del volere divino, degli antenati, del destino collettivo di Roma. Nel libro IV la <em>pietas</em> entra in collisione frontale con l&rsquo;<em>amor</em>. Enea non &egrave; indifferente: soffre, ma sceglie il dovere. Il <span class="lat-cite">fatum</span> &egrave; la forza che muove tutto il poema &mdash; una provvidenza stoica che garantisce la nascita di Roma ma impone sacrifici terribili agli individui.</p>
+
+        <h3>La colpa e l&rsquo;ambiguit&agrave; morale</h3>
+        <p>Chi &egrave; colpevole? Didone, che ha tradito il giuramento di fedelt&agrave; a Sicheo? Enea, che parte senza una vera spiegazione? Gli d&egrave;i, che hanno manipolato entrambi? Virgilio non d&agrave; una risposta univoca. Il verso chiave &egrave; <span class="lat-cite">coniugium vocat; hoc praetexit nomine culpam</span> (IV, 172): il narratore chiama &laquo;colpa&raquo; la relazione di Didone, ma l&rsquo;intero contesto mostra che la vera responsabilit&agrave; &egrave; divina. L&rsquo;ambiguit&agrave; non &egrave; un difetto: &egrave; il cuore della poetica virgiliana.</p>
+
+        <h3>Didone e la tradizione tragica</h3>
+        <p>Didone &egrave; costruita sul modello della <strong>Medea</strong> di Apollonio Rodio e di Euripide: donna straniera, potente, innamorata, abbandonata, vendicativa. Ma Virgilio va oltre: Didone non uccide i figli (non ne ha), la sua vendetta &egrave; una profezia storica &mdash; la maledizione che genera le guerre puniche. La trasformazione dalla regina alla donna distrutta dal furor segue un arco tragico perfetto.</p>
+      </div>
+    </div>
+
+    <!-- ═══════════════════ STRETCH IT ═══════════════════ -->
+    <div class="tlac-box tlac-stretch">
+      <div class="tlac-label">Stretch It &mdash; Approfondimento</div>
+      <p><strong>Confronta la Didone di Virgilio con la Medea di Euripide. Entrambe sono donne straniere abbandonate dall&rsquo;uomo amato. Ma c&rsquo;&egrave; una differenza fondamentale nel tipo di vendetta. Qual &egrave;? E cosa ci dice sulla visione virgiliana della storia?</strong></p>
+      <button class="tlac-reveal-btn" onclick="toggleHint(this)">Mostra spunto</button>
+      <div class="tlac-hint">Medea si vendica nel presente, uccidendo i figli di Giasone. Didone si vendica nel futuro, maledicendo Roma e invocando un vendicatore dalle sue ceneri &mdash; Annibale. La vendetta di Didone &egrave; storica, non personale: trasforma una vicenda privata in destino collettivo. Virgilio lega cos&igrave; il mito alla storia, facendo dell&rsquo;amore tradito di Didone la causa mitica delle guerre puniche. &Egrave; un procedimento tipicamente romano: l&rsquo;eziologia.</div>
+    </div>
+
+    <!-- ═══════════════════ BRANI CHIAVE ═══════════════════ -->
+    <div class="content-section">
+      <div class="content-header">
+        <h2>I brani chiave</h2>
+        <span class="section-ref">Passi antologici dal libro IV</span>
+      </div>
+      <div class="content-body">
+
+        <div class="brano-box">
+          <div class="brano-titolo">La similitudine della cerva ferita (IV, 68&ndash;73)</div>
+          <div class="brano-testo">
+            <span class="lat-cite">Uritur infelix Dido totaque vagatur / urbe furens, qualis coniecta cerva sagitta, / quam procul incautam nemora inter Cresia fixit / pastor agens telis liquitque volatile ferrum / nescius: illa fuga silvas saltusque peragrat / Dictaeos; haeret lateri letalis harundo.</span>
+          </div>
+          <div class="brano-commento">
+            Didone &egrave; paragonata a una cerva colpita da un pastore che non sa nemmeno di averla ferita. La freccia resta conficcata nel fianco: l&rsquo;amore &egrave; una ferita mortale, e chi l&rsquo;ha inferta (Enea/Cupido) non ne &egrave; consapevole. La similitudine opera su pi&ugrave; livelli: il pastore ignaro &egrave; Enea, ma anche Cupido travestito da Ascanio nel libro I.
+          </div>
+        </div>
+
+        <div class="brano-box">
+          <div class="brano-titolo">La Fama (IV, 174&ndash;177)</div>
+          <div class="brano-testo">
+            <span class="lat-cite">Extemplo Libyae magnas it Fama per urbes, / Fama, malum qua non aliud velocius ullum: / mobilitate viget virisque adquirit eundo, / parva metu primo, mox sese attollit in auras.</span>
+          </div>
+          <div class="brano-commento">
+            La personificazione della Fama &egrave; tra i passi pi&ugrave; celebri dell&rsquo;intera letteratura latina. Mostro alato, ricoperta di occhi, orecchie e lingue, la Fama cresce quanto pi&ugrave; si muove. Virgilio ne fa un principio universale: la voce pubblica &egrave; una forza incontrollabile che trasforma la vita privata in fatto politico.
+          </div>
+        </div>
+
+        <div class="brano-box">
+          <div class="brano-titolo">La risposta di Enea (IV, 333&ndash;361)</div>
+          <div class="brano-testo">
+            <span class="lat-cite">Desine meque tuis incendere teque querelis; / Italiam non sponte sequor.</span>
+          </div>
+          <div class="brano-commento">
+            &laquo;Smetti di tormentare me e te con le tue lamentele; non &egrave; di mia volont&agrave; che mi dirigo in Italia.&raquo; La risposta di Enea &egrave; il punto di massima tensione del conflitto <em>amor/pietas</em>. Enea non mente: la sua partenza &egrave; un ordine divino, non una scelta. Ma la sincerit&agrave; non basta: Didone non pu&ograve; accettare che l&rsquo;amore venga subordinato a un dovere astratto.
+          </div>
+        </div>
+
+        <div class="brano-box">
+          <div class="brano-titolo">La maledizione e il suicidio (IV, 622&ndash;629)</div>
+          <div class="brano-testo">
+            <span class="lat-cite">Exoriare aliquis nostris ex ossibus ultor / qui face Dardanios ferroque sequare colonos.</span>
+          </div>
+          <div class="brano-commento">
+            &laquo;Sorgi, o vendicatore, dalle mie ossa, tu che perseguiterai col fuoco e col ferro i coloni troiani.&raquo; Didone profetizza Annibale. L&rsquo;amore tradito si trasforma in odio storico tra Cartagine e Roma. &Egrave; il momento in cui la vicenda individuale diventa mito eziologico delle guerre puniche. Il verso &egrave; considerato uno dei pi&ugrave; potenti dell&rsquo;intera letteratura latina.
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ═══════════════════ COLD CALL 2 ═══════════════════ -->
+    <div class="tlac-box tlac-coldcall">
+      <div class="tlac-label">Fermati e rispondi</div>
+      <p><strong>Virgilio descrive la Fama come un mostro che &laquo;cresce camminando&raquo;. Riesci a pensare a un equivalente contemporaneo di questo meccanismo? In che modo la Fama virgiliana anticipa dinamiche che conosciamo bene?</strong></p>
+      <button class="tlac-reveal-btn" onclick="toggleHint(this)">Mostra spunto</button>
+      <div class="tlac-hint">La Fama virgiliana funziona esattamente come la viralit&agrave; sui social media: una notizia (vera o falsa) che parte piccola e diventa enorme quanto pi&ugrave; circola. La caratteristica chiave &egrave; la stessa: <em>mobilitate viget virisque adquirit eundo</em> &mdash; la velocit&agrave; &egrave; la sua forza, e cresce alimentandosi del proprio movimento. Virgilio coglie un meccanismo universale della comunicazione umana.</div>
+    </div>
+
+    <!-- ═══════════════════ CONFRONTO DIDONE/MEDEA ═══════════════════ -->
+    <div class="content-section">
+      <div class="content-header">
+        <h2>Didone e i suoi modelli</h2>
+        <span class="section-ref">Apollonio Rodio, Euripide, Catullo</span>
+      </div>
+      <div class="content-body">
+        <h3>La Medea di Apollonio e la Didone di Virgilio</h3>
+        <p>Virgilio costruisce Didone guardando a tre modelli principali: la Medea delle <em>Argonautiche</em> di Apollonio Rodio (la donna straniera che aiuta l&rsquo;eroe e ne viene abbandonata), la Medea di Euripide (la furia vendicativa), e l&rsquo;Arianna di Catullo nel carme 64 (il lamento dell&rsquo;abbandonata). Ma le differenze sono decisive quanto le somiglianze.</p>
+
+        <div class="confronto-grid">
+          <div class="cg-header">&nbsp;</div>
+          <div class="cg-header">Medea (Apollonio / Euripide)</div>
+          <div class="cg-header">Didone (Virgilio)</div>
+
+          <div class="cg-label">Condizione sociale</div>
+          <div class="cg-cell left">Principessa, poi esule</div>
+          <div class="cg-cell">Regina e fondatrice di una citt&agrave;</div>
+
+          <div class="cg-label">L&rsquo;amore</div>
+          <div class="cg-cell left">Colpo di fulmine per volere divino</div>
+          <div class="cg-cell">Passione progressiva, alimentata dagli d&egrave;i</div>
+
+          <div class="cg-label">La colpa</div>
+          <div class="cg-cell left">Tradisce la famiglia per aiutare Giasone</div>
+          <div class="cg-cell">Tradisce il giuramento a Sicheo (il <span class="lat-cite">pudor</span>)</div>
+
+          <div class="cg-label">La vendetta</div>
+          <div class="cg-cell left"><span class="cg-highlight">Personale</span>: uccide i propri figli</div>
+          <div class="cg-cell"><span class="cg-highlight">Storica</span>: maledice Roma, profetizza Annibale</div>
+
+          <div class="cg-label">La morte</div>
+          <div class="cg-cell left">Fugge sul carro del Sole</div>
+          <div class="cg-cell">Suicidio sulla pira con la spada di Enea</div>
+
+          <div class="cg-label">Funzione nel poema</div>
+          <div class="cg-cell left">Esplorazione della passione femminile</div>
+          <div class="cg-cell">Eziologia delle guerre puniche + costo umano del <em>fatum</em></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════ LO STILE ═══════════════════ -->
+    <div class="content-section">
+      <div class="content-header">
+        <h2>Lo stile del libro IV</h2>
+        <span class="section-ref">Lingua, retorica, figure</span>
+      </div>
+      <div class="content-body">
+        <h3>La lingua della passione</h3>
+        <p>Il libro IV &egrave; il pi&ugrave; &laquo;tragico&raquo; dell&rsquo;Eneide anche sul piano stilistico. Virgilio adotta un registro alto e patetico: periodi lunghi e articolati, frequenti esclamazioni, apostrofi, interrogative retoriche. Il lessico &egrave; dominato dal campo semantico del fuoco (<span class="lat-cite">ignis, flamma, ardere, urere</span>), della ferita (<span class="lat-cite">vulnus, sagitta, harundo</span>) e della follia (<span class="lat-cite">furor, furere, demens, amens</span>).</p>
+
+        <h3>Le similitudini</h3>
+        <p>Virgilio usa le similitudini omeriche in modo nuovo: non sono ornamenti ma strumenti interpretativi. La cerva ferita (IV, 69) rivela la natura inconsapevole della ferita amorosa. Le Baccanti (IV, 301) mostrano Didone in preda al <em>furor</em> dionisiaco. Il confronto con Penteo e Oreste (IV, 469&ndash;473) &mdash; entrambi perseguitati da visioni &mdash; colloca Didone nel territorio della tragedia greca.</p>
+
+        <h3>I discorsi diretti</h3>
+        <p>I quattro grandi discorsi di Didone (a Anna, a Enea, a Anna di nuovo, il monologo finale) scandiscono la progressione psicologica: dalla confessione pudica al furore, dalla supplica alla maledizione. &Egrave; una delle prime grandi analisi dell&rsquo;interiorit&agrave; femminile nella letteratura occidentale.</p>
+      </div>
+    </div>
+
+    <!-- ═══════════════════ QUIZ ═══════════════════ -->
+    <div class="esercizio-section">
+      <h2>Verifica le tue conoscenze</h2>
+
+      <h3>A. Contenuto e struttura</h3>
+
+      <!-- Quiz 1 -->
+      <div class="quiz-item" data-quiz="q1">
+        <div class="quiz-q">1. A chi confessa Didone il suo amore per Enea all&rsquo;inizio del libro IV?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">A Enea stesso</div>
+          <div class="quiz-option" data-correct="true" onclick="checkQuiz(this)">Alla sorella Anna</div>
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">Alla nutrice Barce</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <!-- Quiz 2 -->
+      <div class="quiz-item" data-quiz="q2">
+        <div class="quiz-q">2. Cosa accade nella grotta durante la caccia?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">Enea chiede ufficialmente la mano di Didone</div>
+          <div class="quiz-option" data-correct="true" onclick="checkQuiz(this)">Didone ed Enea si uniscono; Didone lo considera un matrimonio, Enea no</div>
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">Giunone appare e benedice la loro unione</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <!-- Quiz 3 -->
+      <div class="quiz-item" data-quiz="q3">
+        <div class="quiz-q">3. Chi invia Mercurio a ordinare la partenza di Enea?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">Venere, per proteggere il figlio</div>
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">Giunone, per punire Didone</div>
+          <div class="quiz-option" data-correct="true" onclick="checkQuiz(this)">Giove, sollecitato dalla preghiera di Iarba</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <!-- Quiz 4 -->
+      <div class="quiz-item" data-quiz="q4">
+        <div class="quiz-q">4. Cosa significa <em>Italiam non sponte sequor</em>?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">Andr&ograve; in Italia di mia spontanea volont&agrave;</div>
+          <div class="quiz-option" data-correct="true" onclick="checkQuiz(this)">Non &egrave; di mia volont&agrave; che mi dirigo in Italia</div>
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">L&rsquo;Italia non mi seguir&agrave; spontaneamente</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <h3>B. Temi e interpretazione</h3>
+
+      <!-- Quiz 5 -->
+      <div class="quiz-item" data-quiz="q5">
+        <div class="quiz-q">5. A cosa &egrave; paragonata Didone nella celebre similitudine di IV, 69&ndash;73?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="true" onclick="checkQuiz(this)">A una cerva ferita che porta la freccia nel fianco</div>
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">A una leonessa che protegge i cuccioli</div>
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">A una nave in balia della tempesta</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <!-- Quiz 6 -->
+      <div class="quiz-item" data-quiz="q6">
+        <div class="quiz-q">6. Qual &egrave; il conflitto centrale del libro IV?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">Tra Greci e Troiani</div>
+          <div class="quiz-option" data-correct="true" onclick="checkQuiz(this)">Tra <em>amor</em> (passione) e <em>pietas</em> (dovere verso il fato)</div>
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">Tra Giunone e Venere per il controllo di Cartagine</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <!-- Quiz 7 -->
+      <div class="quiz-item" data-quiz="q7">
+        <div class="quiz-q">7. Chi &egrave; il &laquo;vendicatore&raquo; che Didone invoca nella maledizione finale?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">Il figlio che avrebbe voluto avere da Enea</div>
+          <div class="quiz-option" data-correct="true" onclick="checkQuiz(this)">Annibale, che distrugger&agrave; l&rsquo;Italia nelle guerre puniche</div>
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">Turno, re dei Rutuli</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <!-- Quiz 8 -->
+      <div class="quiz-item" data-quiz="q8">
+        <div class="quiz-q">8. Quale personaggio della tradizione greca &egrave; il principale modello di Didone?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">Penelope, moglie di Ulisse</div>
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">Elena di Troia</div>
+          <div class="quiz-option" data-correct="true" onclick="checkQuiz(this)">Medea (in Apollonio Rodio e in Euripide)</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <h3>C. Stile e analisi critica</h3>
+
+      <!-- Quiz 9 -->
+      <div class="quiz-item" data-quiz="q9">
+        <div class="quiz-q">9. Qual &egrave; la differenza principale tra la vendetta di Medea e quella di Didone?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="true" onclick="checkQuiz(this)">Medea si vendica nel presente (uccide i figli); Didone si vendica nel futuro (profetizza le guerre puniche)</div>
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">Medea perdona Giasone; Didone non perdona mai Enea</div>
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">Non c&rsquo;&egrave; differenza: entrambe si suicidano</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <!-- Quiz 10 -->
+      <div class="quiz-item" data-quiz="q10">
+        <div class="quiz-q">10. Perch&eacute; il libro IV &egrave; considerato il pi&ugrave; &laquo;tragico&raquo; dell&rsquo;Eneide?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">Perch&eacute; muoiono pi&ugrave; personaggi che in qualsiasi altro libro</div>
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">Perch&eacute; &egrave; scritto in versi tragici anzich&eacute; in esametri</div>
+          <div class="quiz-option" data-correct="true" onclick="checkQuiz(this)">Per la struttura drammatica in cinque atti, i modelli tragici (Medea), l&rsquo;analisi psicologica di Didone e il conflitto irrisolvibile tra amor e pietas</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════ EXIT TICKET ═══════════════════ -->
+    <div class="tlac-box tlac-exit">
+      <div class="tlac-label">Exit Ticket &mdash; Verifica finale (5 min)</div>
+      <p>Rispondi per iscritto su un foglio e consegna al professore:</p>
+      <p><strong>1.</strong> Spiega in 4&ndash;5 righe il conflitto tra <em>amor</em> e <em>pietas</em> nel libro IV e indica chi, secondo te, Virgilio &laquo;assolve&raquo; tra Didone ed Enea. Motiva la tua risposta con un riferimento al testo.</p>
+      <p><strong>2.</strong> Illustra la funzione della maledizione di Didone: perch&eacute; non &egrave; solo un gesto di rabbia personale ma un elemento strutturale del poema?</p>
+      <p><strong>3.</strong> Scegli una delle similitudini studiate (la cerva ferita, le Baccanti, la Fama) e spiega come Virgilio la usa per rivelare qualcosa del personaggio che non potrebbe dire con una narrazione diretta.</p>
+    </div>
+
+    <!-- Strumenti Correlati -->
+    <section class="tools-section">
+      <h2>Strumenti Correlati</h2>
+      <div class="tools-grid">
+        <a href="../../percorsi/latino4-classico.html" class="tool-link">
+          <span class="tool-icon">&#x1F4D2;</span>
+          <span class="tool-name">Latino 4 Classico</span>
+        </a>
+        <a href="../../index.html" class="tool-link">
+          <span class="tool-icon">&#x1F4D6;</span>
+          <span class="tool-name">Lezione Virgilio</span>
+        </a>
+        <a href="../../strumenti/raccoglitore.html" class="tool-link">
+          <span class="tool-icon">&#x1F4DA;</span>
+          <span class="tool-name">Raccoglitore Testi</span>
+        </a>
+        <a href="../../strumenti/analisi_latino.html" class="tool-link">
+          <span class="tool-icon">&#x1F4DD;</span>
+          <span class="tool-name">Analisi Testi</span>
+        </a>
+      </div>
+    </section>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p><strong>Prof. Andrea Vaccaro</strong></p>
+    <p>Lingua e Cultura Latina &mdash; Liceo Classico e Liceo Scientifico</p>
+    <div class="footer-links">
+      <a href="../../index.html">Home</a>
+      <a href="../../strumenti/raccoglitore.html">Raccoglitore Testi</a>
+      <a href="../../strumenti/glossario-eulalia.html">Strumenti</a>
+    </div>
+  </footer>
+
+<script>
+// ═══ TLAC HINT TOGGLE ═══
+function toggleHint(btn) {
+  var hint = btn.nextElementSibling;
+  hint.classList.toggle('visible');
+  btn.textContent = hint.classList.contains('visible') ? 'Nascondi spunto' : 'Mostra spunto';
+}
+
+// ═══ QUIZ ═══
+var score = 0;
+var totalQuiz = 10;
+
+function checkQuiz(option) {
+  var item = option.closest('.quiz-item');
+  if (item.classList.contains('answered')) return;
+
+  item.classList.add('answered');
+  var isCorrect = option.getAttribute('data-correct') === 'true';
+  var feedback = item.querySelector('.quiz-feedback');
+  var allOptions = item.querySelectorAll('.quiz-option');
+
+  allOptions.forEach(function(opt) {
+    opt.classList.add('disabled');
+    if (opt.getAttribute('data-correct') === 'true') {
+      opt.classList.add('correct');
+    }
+  });
+
+  if (isCorrect) {
+    option.classList.add('correct');
+    feedback.className = 'quiz-feedback show correct-fb';
+    feedback.textContent = 'Corretto!';
+    score++;
+  } else {
+    option.classList.add('wrong');
+    feedback.className = 'quiz-feedback show wrong-fb';
+    var correctText = item.querySelector('.quiz-option[data-correct="true"]').textContent;
+    feedback.innerHTML = 'Non esatto. La risposta corretta \u00e8: <strong>' + correctText + '</strong>. Rileggila e assicurati di aver capito perch\u00e9.';
+  }
+
+  document.getElementById('scoreDisplay').textContent = score + ' / ' + totalQuiz;
+}
+</script>
+
+</body>
+</html>

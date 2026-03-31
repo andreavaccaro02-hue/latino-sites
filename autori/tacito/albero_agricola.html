@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stemma sintattico (Tesnière) — Tacito, Agricola 30</title>
+<meta name="description" content="Analisi sintattica per stemma tesnieriano del discorso di Calgàco (Tacito, Agricola 30).">
+<link rel="stylesheet" href="../../css/style.css">
+<style>
+  .legenda-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 8px 16px;
+    margin: 16px 0 28px;
+  }
+  .legenda-item {
+    display: flex; align-items: center; gap: 9px;
+    font-size: 13px; font-weight: 700;
+  }
+  .legenda-dot {
+    width: 20px; height: 20px; border-radius: 5px;
+    border: 2px solid; flex-shrink: 0;
+  }
+  .ld-v { background:rgba(244,211, 94,.30); border-color:#f4d35e; }
+  .ld-s { background:rgba(232, 93, 93,.20); border-color:#e85d5d; }
+  .ld-o { background:rgba(120,200,120,.22); border-color:#78c878; }
+  .ld-i { background:rgba(109,181,212,.22); border-color:#6db5d4; }
+  .ld-rg { background:linear-gradient(90deg,rgba(232,93,93,.22) 50%,rgba(120,200,120,.28) 50%); border-color:#9b3a3a; }
+  .ld-g { background:rgba(173,181,189,.25); border-color:#adb5bd; }
+
+  .stemma-wrap { overflow-x: auto; padding-bottom: 6px; }
+
+  .nota-sintattica {
+    margin-top: 16px; padding: 13px 17px;
+    background: rgba(184,145,90,.06);
+    border-left: 4px solid var(--gold);
+    border-radius: 0 10px 10px 0;
+    font-size: 14px; line-height: 1.75; color: var(--text-dim);
+  }
+  .nota-sintattica strong { color: var(--text); }
+
+  .intro-tesniere {
+    background: linear-gradient(135deg,rgba(184,145,90,.08) 0%,rgba(244,211,94,.06) 100%);
+    border: 2px solid var(--gold); border-radius: 16px;
+    padding: 22px 26px; margin-bottom: 28px;
+  }
+  .intro-tesniere .intro-label {
+    font-family: 'Libre Baskerville',serif; font-weight: 700; font-size: 13px;
+    text-transform: uppercase; letter-spacing: 1.2px; color: var(--gold); margin-bottom: 10px;
+  }
+  .intro-tesniere p { font-size: 15px; line-height: 1.8; margin-bottom: 8px; color: var(--text-dim); }
+  .intro-tesniere p:last-child { margin-bottom: 0; }
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="container">
+    <a href="../../index.html" class="site-name">Lingua e Cultura Latina</a>
+    <div class="nav-links">
+      <a href="../../index.html">Home</a>
+      <a href="../../strumenti/raccoglitore.html">Raccoglitore</a>
+      <a href="../../grammatica/index.html">Grammatica</a>
+      <a href="../../strumenti/glossario-eulalia.html">Strumenti</a>
+      <a href="../../chi-sono.html">Chi sono</a>
+    </div>
+    </div>
+</nav>
+
+<div class="page-header">
+  <h1>Stemma sintattico (Tesnière)</h1>
+  <div class="divider"></div>
+  <p class="subtitle">Tacito, <em>Agricola</em> 30 &mdash; Discorso di Calgàco</p>
+</div>
+
+<div class="container">
+  <a href="../../index.html" class="back-link">&larr; Torna alla lezione su Tacito</a>
+
+  <div class="intro-tesniere" style="margin-top:20px;">
+    <div class="intro-label">Metodo — Stemma di dipendenze (Tesnière)</div>
+    <p>Il <strong>verbo</strong> è il nodo reggente da cui discende ogni elemento. Il colore dipende dal <strong>caso morfologico</strong>: il <strong>nominativo</strong> (soggetto) e tutto ciò che concorda con esso è <strong style="color:#c0392b">rosso</strong>; il <strong>soggetto dell'AcI</strong>, accusativo con funzione di soggetto, è <strong>metà rosso / metà verde</strong> (doppia natura); l'<strong>accusativo</strong> come complemento oggetto e le parti concordanti sono <strong style="color:#27ae60">verdi</strong>; <strong>genitivo, dativo e ablativo</strong> sono sempre <strong style="color:#2471a3">blu</strong> — anche quando dipendono da un accusativo.</p>
+    <p>Le <strong>parti invariabili</strong> (congiunzioni, preposizioni, avverbi, negazioni, particelle) compaiono come nodi espliciti e sono sempre <strong>grigie</strong>. Gli elementi fra parentesi quadre <em>[così]</em> sono sottintesi nel testo.</p>
+  </div>
+
+  <div class="legenda-grid" style="grid-template-columns:repeat(auto-fill,minmax(300px,1fr));">
+    <div class="legenda-item"><div class="legenda-dot ld-v"></div>Verbo / prop. subordinata — <em>il nodo reggente</em></div>
+    <div class="legenda-item"><div class="legenda-dot ld-s"></div>Nominativo (soggetto) + attributi e predicativi concordanti</div>
+    <div class="legenda-item"><div class="legenda-dot ld-rg"></div>Soggetto AcI in accusativo (funzione di sogg. + caso acc.)</div>
+    <div class="legenda-item"><div class="legenda-dot ld-o"></div>Accusativo (compl. ogg.) + attributi e predicativi concordanti</div>
+    <div class="legenda-item"><div class="legenda-dot ld-i"></div>Genitivo, dativo, ablativo — sempre blu</div>
+    <div class="legenda-item"><div class="legenda-dot ld-g"></div>Parti invariabili (cong., prep., avv., particelle) — sempre grigie</div>
+  </div>
+
+  <div id="trees"></div>
+</div>
+
+<footer>
+  <p><strong>Prof. Andrea Vaccaro</strong></p>
+  <p>Lingua e Cultura Latina &mdash; Liceo Classico e Liceo Scientifico</p>
+  <div class="footer-links">
+    <a href="../../index.html">Home</a>
+    <a href="../../strumenti/raccoglitore.html">Raccoglitore Testi</a>
+    <a href="../../index.html">Tacito</a>
+  </div>
+</footer>
+
+<script>
+/* ════════════════════════════════════════
+   4 DOMINI DI COLORE — ereditati a cascata
+   y  verbo / prop. sub.    giallo
+   r  gruppo soggetto       rosso
+   g  gruppo oggetto        verde
+   b  complementi indiretti blu/celeste
+   ════════════════════════════════════════ */
+var CFG = {
+  NH:52, HG:20, VG:70, PT:28, PS:28,
+  CW:8.2, RW:6.0, CP:26, MW:84,
+  COLS:{
+    y:{f:'rgba(244,211, 94,.30)',s:'#f4d35e',t:'#5c4400'},
+    r:{f:'rgba(232, 93, 93,.20)',s:'#e85d5d',t:'#7a1212'},
+    g:{f:'rgba(120,200,120,.22)',s:'#78c878',t:'#155a15'},
+    b:{f:'rgba(109,181,212,.22)',s:'#6db5d4',t:'#0e3d70'}
+  }
+};
+
+/* Assegna il dominio cromatico basato sul CASO morfologico.
+   Regola generale (indipendente dal genitore):
+     v / sub          → giallo
+     s                → rosso (nom.); verde se il ruolo contiene 'acc'/'ogg' (AcI); blu se 'abl' (abl. ass.)
+     o                → verde (accusativo = compl. ogg.)
+     spec / term / ind→ sempre blu (genitivo / dativo / ablativo)
+     pred             → se figlio diretto di verbo: controlla 'acc' nel ruolo (verde) o rosso;
+                        se figlio di non-verbo: eredita dal padre (concorda col nome che regge)
+     agg e altri      → ereditano il colore del nodo padre */
+function assignDomain(nd, dom) {
+  var isVerb = (nd.t==='v'||nd.t==='sub');
+  nd._dom = isVerb ? 'y' : dom;
+  if (!nd.ch) return;
+  nd.ch.forEach(function(c){
+    var childDom;
+    if (c.t==='v'||c.t==='sub') {
+      childDom = 'y';
+    } else if (c.t==='o') {
+      childDom = 'g';
+    } else if (c.t==='spec'||c.t==='term'||c.t==='ind') {
+      childDom = 'b'; /* genitivo / dativo / ablativo → sempre blu */
+    } else if (c.t==='s') {
+      /* nominativo→rosso; accusativo (AcI)→verde; ablativo (abl. ass.)→blu */
+      childDom = /acc/.test(c.r) ? 'rg' : /abl/.test(c.r) ? 'b' : 'r';
+    } else if (c.t==='pred' && isVerb) {
+      /* predicativo figlio diretto di verbo: controlla il caso */
+      childDom = /acc/.test(c.r) ? 'g' : 'r';
+    } else {
+      /* agg, pred (figlio di non-verbo), avv, prep, cong: ereditano dal padre.
+         Se il padre è un verbo (giallo) → blu di default. */
+      childDom = (nd._dom==='y') ? 'b' : (nd._dom==='rg') ? 'g' : nd._dom;
+    }
+    assignDomain(c, childDom);
+  });
+}
+
+/* ════════════════════════════════════════
+   DATI — Agricola 30, §§ 1–6
+   Ogni parola invariabile = nodo esplicito
+   ════════════════════════════════════════ */
+var TREES = [
+
+/* ── § 1a ── */
+{ sec:'§ 1a',
+  q:'<em>Quotiens</em> causas belli <em>et</em> necessitatem nostram <strong>intueor</strong>, magnus mihi animus <strong>est</strong> hodiernum diem consensum<em>que</em> vestrum initium libertatis toti Britanniae <strong>fore</strong>',
+  note:'<strong>Struttura:</strong> <em>est</em> + AcI (<em>fore</em>). La prop. temporale <em>quotiens intueor</em> è circostante. <em>Quotiens</em> e <em>et</em> sono nodi espliciti. Il ‑<em>que</em> enclitico in <em>consensumque</em> marca la coordinazione del secondo soggetto accusativo.',
+  t:{w:'est',t:'v',r:'verb. princ.',ch:[
+    {w:'animus',t:'s',r:'soggetto'},
+    {w:'magnus',t:'pred',r:'pred. nom.'},
+    {w:'mihi',t:'term',r:'dat. poss.'},
+    {w:'fore',t:'sub',r:'AcI',ch:[
+      {w:'diem',t:'s',r:'sogg. acc.',ch:[
+        {w:'hodiernum',t:'agg',r:'agg.'},
+        {w:'-que',t:'cong',r:'coord. enclit.'}
+      ]},
+      {w:'consensum',t:'s',r:'sogg. acc.',ch:[
+        {w:'vestrum',t:'agg',r:'agg. poss.'}
+      ]},
+      {w:'initium',t:'pred',r:'pred. acc.',ch:[
+        {w:'libertatis',t:'spec',r:'gen. ogg.',ch:[
+          {w:'Britanniae',t:'spec',r:'gen. poss.',ch:[
+            {w:'toti',t:'agg',r:'agg.'}
+          ]}
+        ]}
+      ]}
+    ]},
+    {w:'intueor',t:'sub',r:'prop. temp.',ch:[
+      {w:'quotiens',t:'cong',r:'cong. temp.'},
+      {w:'[ego]',t:'s',r:'sogg. imp.'},
+      {w:'causas',t:'o',r:'compl. ogg.',ch:[
+        {w:'belli',t:'spec',r:'gen. sogg.'}
+      ]},
+      {w:'et',t:'cong',r:'cong. coord.'},
+      {w:'necessitatem',t:'o',r:'compl. ogg.',ch:[
+        {w:'nostram',t:'agg',r:'agg. poss.'}
+      ]}
+    ]}
+  ]}
+},
+
+/* ── § 1b ── */
+{ sec:'§ 1b',
+  q:'<em>nam et</em> universi <strong>coistis</strong> <em>et</em> servitutis expertes [<strong>estis</strong>], <em>et</em> nullae <em>ultra</em> terrae <em>ac ne</em> mare <em>quidem</em> securum inminente <em>nobis</em> classe Romana [<strong>sunt</strong>]',
+  note:'Tre clausole coordinate da <em>nam et…et…et</em>: ogni congiunzione è nodo esplicito. <em>Nullae</em> (agg. neg.) e <em>ultra</em> (avv.) dipendono separatamente da <em>terrae</em>. <em>Ne…quidem</em> è particella di negazione rafforzata.',
+  t:{w:'coistis',t:'v',r:'verb. 1ª prop.',ch:[
+    {w:'nam',t:'cong',r:'cong. espl.'},
+    {w:'et',t:'cong',r:'cong. coord.'},
+    {w:'universi',t:'s',r:'soggetto'},
+    {w:'et',t:'cong',r:'cong. coord.'},
+    {w:'[estis]',t:'sub',r:'verb. 2ª prop.',ch:[
+      {w:'[vos]',t:'s',r:'sogg. imp.'},
+      {w:'expertes',t:'pred',r:'pred. nom.',ch:[
+        {w:'servitutis',t:'spec',r:'gen. sett.'}
+      ]}
+    ]},
+    {w:'et',t:'cong',r:'cong. coord.'},
+    {w:'[sunt]',t:'sub',r:'verb. 3ª prop.',ch:[
+      {w:'terrae',t:'s',r:'soggetto',ch:[
+        {w:'nullae',t:'agg',r:'agg. neg.'},
+        {w:'ultra',t:'avv',r:'avv. luogo'}
+      ]},
+      {w:'ac',t:'cong',r:'cong. coord.'},
+      {w:'mare',t:'s',r:'soggetto',ch:[
+        {w:'ne…quidem',t:'cong',r:'neg. raff.'},
+        {w:'securum',t:'agg',r:'agg.'}
+      ]},
+      {w:'inminente',t:'sub',r:'abl. ass. (part.)',ch:[
+        {w:'classe',t:'s',r:'sogg. abl.',ch:[
+          {w:'Romana',t:'agg',r:'agg.'}
+        ]},
+        {w:'nobis',t:'term',r:'dat. svant.'}
+      ]}
+    ]}
+  ]}
+},
+
+/* ── § 2 ── */
+{ sec:'§ 2',
+  q:'<em>ita</em> proelium <em>atque</em> arma, quae fortibus honesta [sunt], eadem <em>etiam</em> ignavis tutissima <strong>sunt</strong>',
+  note:'<em>Ita</em> (avv.) è circostante della principale. <em>Atque</em> coordina i due soggetti. <em>Etiam</em> (avv. aggiuntivo) dipende da <em>ignavis</em>. La relativa <em>quae…honesta [sunt]</em> ha verbo sottinteso.',
+  t:{w:'sunt',t:'v',r:'verb. princ.',ch:[
+    {w:'ita',t:'avv',r:'avv. modo'},
+    {w:'proelium',t:'s',r:'soggetto',ch:[
+      {w:'atque',t:'cong',r:'cong. coord.'},
+      {w:'arma',t:'s',r:'sogg. coord.'},
+      {w:'[sunt]',t:'sub',r:'prop. rel. (quae)',ch:[
+        {w:'quae',t:'s',r:'sogg. rel.'},
+        {w:'honesta',t:'pred',r:'pred. nom.'},
+        {w:'fortibus',t:'term',r:'dat. vant.'}
+      ]}
+    ]},
+    {w:'eadem',t:'s',r:'pron. idem'},
+    {w:'ignavis',t:'term',r:'dat. vant.',ch:[
+      {w:'etiam',t:'avv',r:'avv. agg.'}
+    ]},
+    {w:'tutissima',t:'pred',r:'pred. nom.'}
+  ]}
+},
+
+/* ── § 3a ── */
+{ sec:'§ 3a',
+  q:'priores pugnae, quibus <em>adversus</em> Romanos varia fortuna certatum <strong>est</strong>, spem <em>ac</em> subsidium <em>in</em> nostris manibus <strong>habebant</strong>',
+  note:'<em>Adversus</em> = preposizione che governa <em>Romanos</em>. <em>In</em> = preposizione che governa <em>manibus</em>. <em>Ac</em> coordina <em>spem</em> e <em>subsidium</em>. <em>Varia</em> (agg.) dipende da <em>fortuna</em> (abl. modo).',
+  t:{w:'habebant',t:'v',r:'verb. princ.',ch:[
+    {w:'pugnae',t:'s',r:'soggetto',ch:[
+      {w:'priores',t:'agg',r:'agg.'},
+      {w:'certatum est',t:'sub',r:'prop. rel. (quibus)',ch:[
+        {w:'quibus',t:'ind',r:'abl. strum.'},
+        {w:'adversus',t:'prep',r:'preposizione',ch:[
+          {w:'Romanos',t:'ind',r:'compl. avvers.'}
+        ]},
+        {w:'fortuna',t:'avv',r:'abl. modo',ch:[
+          {w:'varia',t:'agg',r:'agg.'}
+        ]}
+      ]}
+    ]},
+    {w:'spem',t:'o',r:'compl. ogg.',ch:[
+      {w:'ac',t:'cong',r:'cong. coord.'},
+      {w:'subsidium',t:'o',r:'coord.'}
+    ]},
+    {w:'in',t:'prep',r:'preposizione',ch:[
+      {w:'manibus',t:'ind',r:'stato in luogo',ch:[
+        {w:'nostris',t:'agg',r:'agg. poss.'}
+      ]}
+    ]}
+  ]}
+},
+
+/* ── § 3b ── */
+{ sec:'§ 3b',
+  q:'<em>quia</em> nobilissimi totius Britanniae <em>eoque</em> <em>in</em> ipsis penetralibus siti <em>nec</em> ulla servientium litora aspicientes, oculos <em>quoque</em> <em>a</em> contactu dominationis inviolatos <strong>habebamus</strong>',
+  note:'<em>Quia</em> è la congiunzione causale. <em>Eoque</em> = et+eo (avv. consecutivo). <em>Nec</em> nega il participio <em>aspicientes</em>. <em>In</em> e <em>a</em> sono preposizioni che governano i rispettivi complementi. <em>Quoque</em> è particella aggiuntiva.',
+  t:{w:'habebamus',t:'v',r:'prop. caus.',ch:[
+    {w:'quia',t:'cong',r:'cong. caus.'},
+    {w:'[nos]',t:'s',r:'soggetto imp.',ch:[
+      {w:'nobilissimi',t:'pred',r:'pred. nom.',ch:[
+        {w:'Britanniae',t:'spec',r:'gen. poss.',ch:[
+          {w:'totius',t:'agg',r:'agg.'}
+        ]}
+      ]},
+      {w:'eoque',t:'avv',r:'avv. consec.'},
+      {w:'siti',t:'sub',r:'part. pred. (perf.)',ch:[
+        {w:'in',t:'prep',r:'preposizione',ch:[
+          {w:'penetralibus',t:'ind',r:'stato in luogo',ch:[
+            {w:'ipsis',t:'agg',r:'agg. enf.'}
+          ]}
+        ]}
+      ]},
+      {w:'nec',t:'cong',r:'cong. neg.'},
+      {w:'aspicientes',t:'sub',r:'part. pred. (pres.)',ch:[
+        {w:'litora',t:'o',r:'compl. ogg.',ch:[
+          {w:'ulla',t:'agg',r:'agg. neg.'},
+          {w:'servientium',t:'spec',r:'gen. sogg.'}
+        ]}
+      ]}
+    ]},
+    {w:'oculos',t:'o',r:'compl. ogg.',ch:[
+      {w:'quoque',t:'cong',r:'partic. agg.'},
+      {w:'a',t:'prep',r:'preposizione',ch:[
+        {w:'contactu',t:'ind',r:'allontanam.',ch:[
+          {w:'dominationis',t:'spec',r:'gen. sogg.'}
+        ]}
+      ]},
+      {w:'inviolatos',t:'pred',r:'pred. agg.'}
+    ]}
+  ]}
+},
+
+/* ── § 4a ── */
+{ sec:'§ 4a',
+  q:'nos terrarum <em>ac</em> libertatis extremos recessus ipse <em>ac</em> sinus famae <em>in</em> hunc diem <strong>defendit</strong>',
+  note:'Iperbato: <em>nos</em> (OBJ) precede il soggetto. I due <em>ac</em> coordinano rispettivamente i genitivi (<em>terrarum ac libertatis</em>) e i soggetti (<em>recessus ac sinus</em>). <em>In</em> governa <em>diem</em> con l\'attributo <em>hunc</em>.',
+  t:{w:'defendit',t:'v',r:'verb. princ.',ch:[
+    {w:'recessus',t:'s',r:'soggetto',ch:[
+      {w:'ipse',t:'agg',r:'pron. enf.'},
+      {w:'ac',t:'cong',r:'cong. coord.'},
+      {w:'sinus',t:'s',r:'sogg. coord.',ch:[
+        {w:'famae',t:'spec',r:'gen. sogg.'}
+      ]}
+    ]},
+    {w:'nos',t:'o',r:'compl. ogg.',ch:[
+      {w:'extremos',t:'agg',r:'agg.'},
+      {w:'terrarum',t:'spec',r:'gen. poss.'},
+      {w:'ac',t:'cong',r:'cong. coord.'},
+      {w:'libertatis',t:'spec',r:'gen. poss.'}
+    ]},
+    {w:'in',t:'prep',r:'preposizione',ch:[
+      {w:'diem',t:'ind',r:'compl. tempo',ch:[
+        {w:'hunc',t:'agg',r:'agg. dim.'}
+      ]}
+    ]}
+  ]}
+},
+
+/* ── § 4b ── */
+{ sec:'§ 4b',
+  q:'<em>nunc</em> terminus Britanniae <strong>patet</strong>, <em>atque</em> omne ignotum <em>pro</em> magnifico <strong>est</strong>',
+  note:'<em>Nunc</em> (avv. tempo) dipende da <em>patet</em>. <em>Atque</em> coordina le due proposizioni. <em>Pro</em> è preposizione che governa <em>magnifico</em> (predicativo con <em>pro</em> + ablativo).',
+  t:{w:'patet',t:'v',r:'verb. 1ª prop.',ch:[
+    {w:'nunc',t:'avv',r:'avv. tempo'},
+    {w:'terminus',t:'s',r:'soggetto',ch:[
+      {w:'Britanniae',t:'spec',r:'gen. poss.'}
+    ]},
+    {w:'atque',t:'cong',r:'cong. coord.'},
+    {w:'est',t:'sub',r:'verb. 2ª prop.',ch:[
+      {w:'ignotum',t:'s',r:'soggetto',ch:[
+        {w:'omne',t:'agg',r:'agg./pron. indef.'}
+      ]},
+      {w:'pro',t:'prep',r:'preposizione',ch:[
+        {w:'magnifico',t:'ind',r:'abl. pred. (pro+abl.)'}
+      ]}
+    ]}
+  ]}
+},
+
+/* ── § 4c ── */
+{ sec:'§ 4c',
+  q:'<em>sed</em> nulla <em>iam ultra</em> gens, nihil <em>nisi</em> fluctus <em>ac</em> saxa, <em>et</em> infestiores Romani, quorum superbiam <em>frustra</em> <em>per</em> obsequium <em>ac</em> modestiam <strong>effugias</strong>',
+  note:'<em>Sed</em> (cong. avvers.), <em>nisi</em> (cong. eccett.), <em>iam ultra</em> (avv.), <em>et</em> (coord.), <em>frustra</em> (avv.), <em>per</em> (prep.) e i due <em>ac</em>: tutte parti invariabili con nodo proprio. <em>Quorum</em> = genitivo soggettivo dipendente da <em>superbiam</em>.',
+  t:{w:'[relinquuntur]',t:'v',r:'verb. sottinteso',ch:[
+    {w:'sed',t:'cong',r:'cong. avvers.'},
+    {w:'gens',t:'s',r:'soggetto',ch:[
+      {w:'nulla',t:'agg',r:'agg. neg.'},
+      {w:'iam',t:'avv',r:'avv. tempo'},
+      {w:'ultra',t:'avv',r:'avv. luogo'}
+    ]},
+    {w:'nihil',t:'s',r:'soggetto',ch:[
+      {w:'nisi',t:'cong',r:'cong. eccett.'},
+      {w:'fluctus',t:'s',r:'nom. eccettuato',ch:[
+        {w:'ac',t:'cong',r:'cong. coord.'},
+        {w:'saxa',t:'s',r:'coord.'}
+      ]}
+    ]},
+    {w:'et',t:'cong',r:'cong. coord.'},
+    {w:'Romani',t:'s',r:'soggetto',ch:[
+      {w:'infestiores',t:'pred',r:'pred. agg. comp.'},
+      {w:'effugias',t:'sub',r:'prop. rel. pot. (quorum)',ch:[
+        {w:'quorum',t:'spec',r:'gen. sogg.'},
+        {w:'[tu]',t:'s',r:'sogg. imp.'},
+        {w:'superbiam',t:'o',r:'compl. ogg.'},
+        {w:'frustra',t:'avv',r:'avv. modo'},
+        {w:'per',t:'prep',r:'preposizione',ch:[
+          {w:'obsequium',t:'ind',r:'compl. mezzo',ch:[
+            {w:'ac',t:'cong',r:'cong. coord.'},
+            {w:'modestiam',t:'ind',r:'coord.'}
+          ]}
+        ]}
+      ]}
+    ]}
+  ]}
+},
+
+/* ── § 5a ── */
+{ sec:'§ 5a',
+  q:'raptores orbis, <em>postquam</em> cuncta vastantibus defuere terrae, mare <strong>scrutantur</strong>',
+  note:'<em>Postquam</em> (cong. temp.) è nodo esplicito figlio di <em>defuere</em>. <em>Raptores</em> è apposizione al soggetto implicito [Romani]: il genitivo <em>orbis</em> dipende da <em>Raptores</em>.',
+  t:{w:'scrutantur',t:'v',r:'verb. princ.',ch:[
+    {w:'Raptores',t:'s',r:'sogg. (apposiz.)',ch:[
+      {w:'orbis',t:'spec',r:'gen. sogg.'}
+    ]},
+    {w:'mare',t:'o',r:'compl. ogg.'},
+    {w:'defuere',t:'sub',r:'prop. temp.',ch:[
+      {w:'postquam',t:'cong',r:'cong. temp.'},
+      {w:'terrae',t:'s',r:'soggetto'},
+      {w:'vastantibus',t:'term',r:'dat. intere.',ch:[
+        {w:'cuncta',t:'o',r:'compl. ogg.'}
+      ]}
+    ]}
+  ]}
+},
+
+/* ── § 5b ── */
+{ sec:'§ 5b',
+  q:'<em>si</em> locuples hostis <strong>est</strong>, avari [<strong>sunt</strong>]; <em>si</em> pauper [<strong>est</strong>], ambitiosi [<strong>sunt</strong>]',
+  note:'Ogni <em>si</em> (cong. condizionale) è nodo esplicito figlio del verbo della protasi. Parallelismo binario: struttura identica nei due blocchi. I verbi delle apodosi sono sottintesi per ellissi.',
+  t:{w:'[sunt]',t:'v',r:'apodosi 1',ch:[
+    {w:'[Romani]',t:'s',r:'sogg. imp.'},
+    {w:'avari',t:'pred',r:'pred. nom.'},
+    {w:'est',t:'sub',r:'protasi 1',ch:[
+      {w:'si',t:'cong',r:'cong. cond.'},
+      {w:'hostis',t:'s',r:'soggetto'},
+      {w:'locuples',t:'pred',r:'pred. nom.'}
+    ]},
+    {w:'[sunt]',t:'sub',r:'apodosi 2 (coord.)',ch:[
+      {w:'[Romani]',t:'s',r:'sogg. imp.'},
+      {w:'ambitiosi',t:'pred',r:'pred. nom.'},
+      {w:'[est]',t:'sub',r:'protasi 2',ch:[
+        {w:'si',t:'cong',r:'cong. cond.'},
+        {w:'[hostis]',t:'s',r:'sogg. imp.'},
+        {w:'pauper',t:'pred',r:'pred. nom.'}
+      ]}
+    ]}
+  ]}
+},
+
+/* ── § 5c ── */
+{ sec:'§ 5c',
+  q:'quos <em>non</em> Oriens, <em>non</em> Occidens satiaverit',
+  note:'Anafora di <em>non</em>: ogni negazione dipende dal proprio soggetto. Il congiuntivo perfetto <em>satiaverit</em> ha valore consecutivo. <em>Quos</em> (= Romanos) è oggetto della relativa.',
+  t:{w:'satiaverit',t:'v',r:'prop. rel. consec. (quos)',ch:[
+    {w:'Oriens',t:'s',r:'soggetto',ch:[
+      {w:'non',t:'avv',r:'negazione'}
+    ]},
+    {w:'Occidens',t:'s',r:'soggetto',ch:[
+      {w:'non',t:'avv',r:'negazione'}
+    ]},
+    {w:'quos',t:'o',r:'compl. ogg. (= Romanos)'}
+  ]}
+},
+
+/* ── § 5d ── */
+{ sec:'§ 5d',
+  q:'soli omnium opes <em>atque</em> inopiam pari adfectu <strong>concupiscunt</strong>',
+  note:'<em>Atque</em> coordina <em>opes</em> e <em>inopiam</em>. <em>Pari</em> (agg.) dipende da <em>adfectu</em> (abl. modo). <em>Soli</em> (pred. nom.) + <em>omnium</em> (gen. part.): predicativo del soggetto con genitivo partitivo.',
+  t:{w:'concupiscunt',t:'v',r:'verb. princ.',ch:[
+    {w:'[Romani]',t:'s',r:'sogg. imp.',ch:[
+      {w:'soli',t:'pred',r:'pred. nom.',ch:[
+        {w:'omnium',t:'spec',r:'gen. part.'}
+      ]}
+    ]},
+    {w:'opes',t:'o',r:'compl. ogg.',ch:[
+      {w:'atque',t:'cong',r:'cong. coord.'},
+      {w:'inopiam',t:'o',r:'coord.'}
+    ]},
+    {w:'adfectu',t:'avv',r:'abl. modo',ch:[
+      {w:'pari',t:'agg',r:'agg.'}
+    ]}
+  ]}
+},
+
+/* ── § 6a ── */
+{ sec:'§ 6a',
+  q:'auferre trucidare rapere falsis nominibus imperium [<strong>vocant</strong>]',
+  note:'Tre infiniti storici asindetici come soggetti del verbo implicito. <em>Falsis</em> (agg.) dipende da <em>nominibus</em> (abl. mezzo), che dipende dal verbo. Asindeto = accelerazione ritmica senza pausa tra i tre soggetti.',
+  t:{w:'[vocant]',t:'v',r:'verb. sottinteso',ch:[
+    {w:'[Romani]',t:'s',r:'sogg. imp.'},
+    {w:'auferre',t:'o',r:'compl. ogg. (doppio acc.)'},
+    {w:'trucidare',t:'o',r:'compl. ogg. (doppio acc.)'},
+    {w:'rapere',t:'o',r:'compl. ogg. (doppio acc.)'},
+    {w:'imperium',t:'pred',r:'pred. acc.'},
+    {w:'nominibus',t:'ind',r:'abl. mezzo',ch:[
+      {w:'falsis',t:'agg',r:'agg.'}
+    ]}
+  ]}
+},
+
+/* ── § 6b ── */
+{ sec:'§ 6b',
+  q:'<em>atque</em> <em>ubi</em> solitudinem <strong>faciunt</strong>, pacem <strong>appellant</strong>',
+  note:'<em>Atque</em> coordina §6b con §6a. <em>Ubi</em> (cong. temp.) è nodo esplicito figlio di <em>faciunt</em>. Il paradosso è strutturale: <em>solitudinem</em> (OBJ della sub.) vs <em>pacem</em> (OBJ della princ.) = stesso ruolo, realtà opposta.',
+  t:{w:'appellant',t:'v',r:'verb. princ.',ch:[
+    {w:'atque',t:'cong',r:'cong. coord.'},
+    {w:'[Romani]',t:'s',r:'sogg. imp.'},
+    {w:'pacem',t:'o',r:'compl. ogg.'},
+    {w:'faciunt',t:'sub',r:'prop. temp.',ch:[
+      {w:'ubi',t:'cong',r:'cong. temp.'},
+      {w:'[Romani]',t:'s',r:'sogg. imp.'},
+      {w:'solitudinem',t:'o',r:'compl. ogg.'}
+    ]}
+  ]}
+}
+
+]; /* fine TREES */
+
+
+/* ════════════════════════════════════════
+   RENDERER
+   ════════════════════════════════════════ */
+function nW(nd){
+  var ww=nd.w.length*CFG.CW+CFG.CP;
+  var rw=nd.r.length*CFG.RW+CFG.CP;
+  return Math.max(CFG.MW,ww,rw);
+}
+function computeSW(nd){
+  var own=nW(nd)+CFG.HG;
+  if(!nd.ch||!nd.ch.length){nd._sw=own;return;}
+  nd.ch.forEach(computeSW);
+  var sum=nd.ch.reduce(function(a,c){return a+c._sw;},0);
+  nd._sw=Math.max(own,sum);
+}
+function assignCX(nd,x0){
+  if(!nd.ch||!nd.ch.length){nd._cx=x0+nd._sw/2;return;}
+  var cx=x0;
+  nd.ch.forEach(function(c){assignCX(c,cx);cx+=c._sw;});
+  nd._cx=(nd.ch[0]._cx+nd.ch[nd.ch.length-1]._cx)/2;
+}
+function assignCY(nd,d){
+  nd._cy=CFG.PT+d*(CFG.NH+CFG.VG);
+  if(nd.ch)nd.ch.forEach(function(c){assignCY(c,d+1);});
+}
+function maxD(nd){
+  if(!nd.ch||!nd.ch.length)return 0;
+  return 1+Math.max.apply(null,nd.ch.map(maxD));
+}
+function svgEl(tag,a){
+  var el=document.createElementNS('http://www.w3.org/2000/svg',tag);
+  Object.keys(a).forEach(function(k){el.setAttribute(k,a[k]);});
+  return el;
+}
+function drawEdges(svg,nd){
+  if(!nd.ch)return;
+  var px=nd._cx,py=nd._cy+CFG.NH;
+  nd.ch.forEach(function(c){
+    svg.appendChild(svgEl('line',{x1:px,y1:py,x2:c._cx,y2:c._cy,stroke:'#c0b09a','stroke-width':'1.8'}));
+    drawEdges(svg,c);
+  });
+}
+var INVAR = {cong:1, prep:1, avv:1};
+var GRAY  = {f:'rgba(173,181,189,.25)', s:'#adb5bd', t:'#444d55'};
+var RG    = {s:'#9b3a3a', t:'#5a1010'}; /* sogg. AcI: metà rosso / metà verde */
+var _curGradId = '';
+
+function drawNodes(svg,nd){
+  var fill,stroke,textCol;
+  if (INVAR[nd.t]) {
+    fill=GRAY.f; stroke=GRAY.s; textCol=GRAY.t;
+  } else if (nd._dom==='rg') {
+    fill='url(#'+_curGradId+')'; stroke=RG.s; textCol=RG.t;
+  } else {
+    var col=CFG.COLS[nd._dom]||CFG.COLS.b;
+    fill=col.f; stroke=col.s; textCol=col.t;
+  }
+  var w=nW(nd),x=nd._cx-w/2,y=nd._cy;
+  var isImp=nd.w.charAt(0)==='[';
+  svg.appendChild(svgEl('rect',{x:x,y:y,width:w,height:CFG.NH,rx:10,fill:fill,stroke:stroke,'stroke-width':'2.2'}));
+  var t1=svgEl('text',{x:nd._cx,y:y+20,'text-anchor':'middle','font-family':'Cardo, serif','font-size':'14','font-weight':'700','font-style':isImp?'italic':'normal',fill:textCol});
+  t1.textContent=nd.w;svg.appendChild(t1);
+  var t2=svgEl('text',{x:nd._cx,y:y+37,'text-anchor':'middle','font-family':'Cardo, serif','font-size':'9.5','font-style':'italic',fill:textCol});
+  t2.textContent=nd.r;svg.appendChild(t2);
+  if(nd.ch)nd.ch.forEach(function(c){drawNodes(svg,c);});
+}
+function renderAll(){
+  var cont=document.getElementById('trees');
+  TREES.forEach(function(data,idx){
+    var root=JSON.parse(JSON.stringify(data.t));
+    assignDomain(root,'y');
+    computeSW(root);assignCX(root,CFG.PS);assignCY(root,0);
+    var md=maxD(root);
+    var svgW=root._sw+CFG.PS*2;
+    var svgH=CFG.PT+(md+1)*(CFG.NH+CFG.VG)+24;
+    var svg=svgEl('svg',{viewBox:'0 0 '+svgW+' '+svgH,style:'display:block;width:100%;min-width:'+Math.min(svgW,380)+'px;'});
+    /* gradiente per sogg. AcI: metà sinistra rossa, metà destra verde */
+    _curGradId='rg-g-'+idx;
+    var defs=document.createElementNS('http://www.w3.org/2000/svg','defs');
+    var grad=document.createElementNS('http://www.w3.org/2000/svg','linearGradient');
+    grad.setAttribute('id',_curGradId);grad.setAttribute('x1','0');grad.setAttribute('x2','1');
+    grad.setAttribute('y1','0');grad.setAttribute('y2','0');
+    [['50%','rgba(232,93,93,.22)'],['50%','rgba(120,200,120,.28)']].forEach(function(s){
+      var st=document.createElementNS('http://www.w3.org/2000/svg','stop');
+      st.setAttribute('offset',s[0]);st.setAttribute('stop-color',s[1]);grad.appendChild(st);
+    });
+    defs.appendChild(grad);svg.appendChild(defs);
+    drawEdges(svg,root);drawNodes(svg,root);
+
+    var section=document.createElement('div');
+    section.className='content-section';section.style.marginBottom='28px';
+    var hdr=document.createElement('div');hdr.className='content-header';
+    hdr.innerHTML='<h2>'+data.sec+'</h2>';section.appendChild(hdr);
+    var body=document.createElement('div');body.className='content-body';
+    var brano=document.createElement('div');brano.className='brano-box';
+    brano.innerHTML='<div class="brano-titolo">Testo</div><div class="brano-testo">'+data.q+'</div>';
+    body.appendChild(brano);
+    var wrap=document.createElement('div');wrap.className='stemma-wrap';wrap.style.marginTop='20px';
+    wrap.appendChild(svg);body.appendChild(wrap);
+    if(data.note){var nota=document.createElement('div');nota.className='nota-sintattica';nota.innerHTML=data.note;body.appendChild(nota);}
+    section.appendChild(body);cont.appendChild(section);
+  });
+}
+renderAll();
+</script>
+</body>
+</html>

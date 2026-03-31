@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stemma sintattico (Tesnière) — Cesare, De bello Gallico I, 1</title>
+<meta name="description" content="Analisi sintattica per stemma tesnieriano di Cesare, De bello Gallico I, 1 (Gallia est omnis divisa...).">
+<link rel="stylesheet" href="../../css/style.css">
+<style>
+  .legenda-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 8px 16px;
+    margin: 16px 0 28px;
+  }
+  .legenda-item {
+    display: flex; align-items: center; gap: 9px;
+    font-size: 13px; font-weight: 700;
+  }
+  .legenda-dot {
+    width: 20px; height: 20px; border-radius: 5px;
+    border: 2px solid; flex-shrink: 0;
+  }
+  .ld-v  { background:rgba(244,211, 94,.30); border-color:#f4d35e; }
+  .ld-s  { background:rgba(232, 93, 93,.20); border-color:#e85d5d; }
+  .ld-o  { background:rgba(120,200,120,.22); border-color:#78c878; }
+  .ld-i  { background:rgba(109,181,212,.22); border-color:#6db5d4; }
+  .ld-rg { background:linear-gradient(90deg,rgba(232,93,93,.22) 50%,rgba(120,200,120,.28) 50%); border-color:#9b3a3a; }
+  .ld-g  { background:rgba(173,181,189,.25); border-color:#adb5bd; }
+
+  .stemma-wrap { overflow-x: auto; padding-bottom: 6px; }
+
+  .nota-sintattica {
+    margin-top: 16px; padding: 13px 17px;
+    background: rgba(184,145,90,.06);
+    border-left: 4px solid var(--gold);
+    border-radius: 0 10px 10px 0;
+    font-size: 14px; line-height: 1.75; color: var(--text-dim);
+  }
+  .nota-sintattica strong { color: var(--text); }
+
+  .intro-tesniere {
+    background: linear-gradient(135deg,rgba(184,145,90,.08) 0%,rgba(244,211,94,.06) 100%);
+    border: 2px solid var(--gold); border-radius: 16px;
+    padding: 22px 26px; margin-bottom: 28px;
+  }
+  .intro-tesniere .intro-label {
+    font-family: 'Libre Baskerville',serif; font-weight: 700; font-size: 13px;
+    text-transform: uppercase; letter-spacing: 1.2px; color: var(--gold); margin-bottom: 10px;
+  }
+  .intro-tesniere p { font-size: 15px; line-height: 1.8; margin-bottom: 8px; color: var(--text-dim); }
+  .intro-tesniere p:last-child { margin-bottom: 0; }
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="container">
+    <a href="../../index.html" class="site-name">Lingua e Cultura Latina</a>
+    <div class="nav-links">
+      <a href="../../index.html">Home</a>
+      <a href="../../strumenti/raccoglitore.html">Raccoglitore</a>
+      <a href="../../grammatica/index.html">Grammatica</a>
+      <a href="../../strumenti/glossario-eulalia.html">Strumenti</a>
+      <a href="../../chi-sono.html">Chi sono</a>
+    </div>
+    </div>
+</nav>
+
+<div class="page-header">
+  <h1>Stemma sintattico (Tesnière)</h1>
+  <div class="divider"></div>
+  <p class="subtitle">Cesare, <em>De bello Gallico</em> I, 1 &mdash; <em>Gallia est omnis divisa&hellip;</em></p>
+</div>
+
+<div class="container">
+  <a href="../../index.html" class="back-link">&larr; Torna alla lezione su Cesare</a>
+
+  <div class="intro-tesniere" style="margin-top:20px;">
+    <div class="intro-label">Metodo — Stemma di dipendenze (Tesnière)</div>
+    <p>Il <strong>verbo</strong> è il nodo reggente da cui discende ogni elemento. Il colore segue il <strong>caso morfologico</strong>: il <strong>nominativo</strong> (soggetto) è <strong style="color:#c0392b">rosso</strong>; l'<strong>accusativo</strong> (compl. oggetto) è <strong style="color:#27ae60">verde</strong>; <strong>genitivo, dativo e ablativo</strong> sono <strong style="color:#2471a3">blu</strong>. Le <strong>proposizioni infinitive</strong> (ACI / NCI) avrebbero nodo bicolore <strong>rosso–verde</strong>; in questo brano non compaiono.</p>
+    <p>Le <strong>parti invariabili</strong> (congiunzioni, preposizioni, avverbi, negazioni) sono <strong>grigie</strong>. Gli elementi fra parentesi quadre <em>[così]</em> sono sottintesi nel testo.</p>
+  </div>
+
+  <div class="legenda-grid" style="grid-template-columns:repeat(auto-fill,minmax(320px,1fr));">
+    <div class="legenda-item"><div class="legenda-dot ld-v"></div>Verbo / proposizione subordinata — <em>nodo reggente</em></div>
+    <div class="legenda-item"><div class="legenda-dot ld-s"></div>Nominativo (soggetto) + attributi e predicativi concordanti</div>
+    <div class="legenda-item"><div class="legenda-dot ld-rg"></div>Proposizione infinitiva (ACI / NCI) — nodo bicolore</div>
+    <div class="legenda-item"><div class="legenda-dot ld-o"></div>Accusativo (compl. oggetto) + attributi e predicativi concordanti</div>
+    <div class="legenda-item"><div class="legenda-dot ld-i"></div>Genitivo, dativo, ablativo — sempre blu</div>
+    <div class="legenda-item"><div class="legenda-dot ld-g"></div>Parti invariabili (cong., prep., avv., negazioni) — sempre grigie</div>
+  </div>
+
+  <div id="trees"></div>
+</div>
+
+<footer>
+  <p><strong>Prof. Andrea Vaccaro</strong></p>
+  <p>Lingua e Cultura Latina &mdash; Liceo Classico e Liceo Scientifico</p>
+  <div class="footer-links">
+    <a href="../../index.html">Home</a>
+    <a href="../../strumenti/raccoglitore.html">Raccoglitore Testi</a>
+    <a href="../../index.html">Cesare</a>
+  </div>
+</footer>
+
+<script>
+/* ════════════════════════════════════════
+   4 DOMINI DI COLORE — ereditati a cascata
+   y  verbo / prop. sub.    giallo
+   r  gruppo soggetto       rosso
+   g  gruppo oggetto        verde
+   b  complementi indiretti blu/celeste
+   rg proposizione infinitiva (bicolore)
+   ════════════════════════════════════════ */
+var CFG = {
+  NH:52, HG:18, VG:72, PT:28, PS:28,
+  CW:8.2, RW:6.0, CP:26, MW:88,
+  COLS:{
+    y:{f:'rgba(244,211, 94,.30)',s:'#f4d35e',t:'#5c4400'},
+    r:{f:'rgba(232, 93, 93,.20)',s:'#e85d5d',t:'#7a1212'},
+    g:{f:'rgba(120,200,120,.22)',s:'#78c878',t:'#155a15'},
+    b:{f:'rgba(109,181,212,.22)',s:'#6db5d4',t:'#0e3d70'}
+  }
+};
+
+function assignDomain(nd, dom) {
+  var isVerb = (nd.t==='v'||nd.t==='sub');
+  nd._dom = nd.rg ? 'rg' : (isVerb ? 'y' : dom);
+  if (!nd.ch) return;
+  nd.ch.forEach(function(c){
+    var childDom;
+    if (c.rg) {
+      childDom = 'rg';
+    } else if (c.t==='v'||c.t==='sub') {
+      childDom = 'y';
+    } else if (c.t==='o') {
+      childDom = 'g';
+    } else if (c.t==='spec'||c.t==='term'||c.t==='ind') {
+      childDom = 'b';
+    } else if (c.t==='s') {
+      childDom = /acc/.test(c.r) ? 'rg' : /abl/.test(c.r) ? 'b' : 'r';
+    } else if (c.t==='pred' && isVerb) {
+      childDom = /acc/.test(c.r) ? 'g' : 'r';
+    } else {
+      childDom = (nd._dom==='y') ? 'b' : (nd._dom==='rg') ? 'g' : nd._dom;
+    }
+    assignDomain(c, childDom);
+  });
+}
+
+/* ════════════════════════════════════════
+   DATI — Cesare, De bello Gallico I, 1
+   Ogni parola invariabile = nodo esplicito
+   ════════════════════════════════════════ */
+var TREES = [
+
+/* ── § 1 — divisa est ── */
+{ sec:'§ 1 — divisa est',
+  q:'Gallia <strong>est</strong> omnis <strong>divisa</strong> in partes tres, quarum unam <strong>incolunt</strong> Belgae, aliam [<strong>incolunt</strong>] Aquitani, tertiam quī ipsōrum linguā Celtae, nostrā [linguā] Gallī <strong>appellantur</strong>',
+  note:'<strong>Struttura:</strong> la perifrastica passiva <em>divisa est</em> regge il soggetto <em>Gallia</em> e il predicativo del soggetto <em>omnis</em>. <em>In partes tres</em> è complemento di estensione/fine. La relativa <em>quarum</em> (gen. partitivo riferito a <em>partes</em>) introduce tre proposizioni coordinate: le prime due con il verbo <em>incolunt</em> (la seconda con verbo sottinteso), la terza con <em>appellantur</em>, dove <em>Celtae</em> e <em>Galli</em> sono predicativi del soggetto e <em>lingua</em> è ablativo di mezzo.',
+  t:{w:'divisa est', t:'v', r:'verb. princ. (pass. perif.)', ch:[
+    {w:'Gallia', t:'s', r:'soggetto'},
+    {w:'omnis', t:'pred', r:'pred. nominativo'},
+    {w:'in', t:'prep', r:'preposizione', ch:[
+      {w:'partes', t:'ind', r:'acc. con prep. (in partes)', ch:[
+        {w:'tres', t:'agg', r:'agg. numerale'},
+        {w:'incolunt', t:'sub', r:'prop. relativa (quarum)', ch:[
+          {w:'unam', t:'o', r:'compl. oggetto', ch:[
+            {w:'quarum', t:'spec', r:'gen. part. (pron. rel.)'}
+          ]},
+          {w:'Belgae', t:'s', r:'soggetto'},
+          {w:'[incolunt]', t:'sub', r:'prop. coord.', ch:[
+            {w:'aliam', t:'o', r:'compl. oggetto'},
+            {w:'Aquitani', t:'s', r:'soggetto'}
+          ]},
+          {w:'appellantur', t:'sub', r:'prop. rel. coord. (tertiam)', ch:[
+            {w:'tertiam', t:'o', r:'compl. oggetto (= partem)'},
+            {w:'qui', t:'s', r:'soggetto relativo'},
+            {w:'Celtae', t:'pred', r:'pred. nominativo', ch:[
+              {w:'lingua', t:'ind', r:'abl. di mezzo', ch:[
+                {w:'ipsorum', t:'spec', r:'gen. possessivo'}
+              ]}
+            ]},
+            {w:'Galli', t:'pred', r:'pred. nominativo', ch:[
+              {w:'nostra', t:'ind', r:'abl. di mezzo (linguā s.e.)'}
+            ]}
+          ]}
+        ]}
+      ]}
+    ]}
+  ]}
+},
+
+/* ── § 2 — differunt ── */
+{ sec:'§ 2 — differunt',
+  q:'Hi omnes linguā, institūtīs, lēgibus inter sē <strong>differunt</strong>',
+  note:'<strong>Struttura:</strong> <em>differunt</em> regge il soggetto <em>Hi omnes</em>. I tre ablativi <em>lingua, institutis, legibus</em> sono ablativi di limitazione (indicano <em>in che cosa</em> differiscono). <em>Inter se</em> è complemento di reciprocità (la preposizione <em>inter</em> è nodo esplicito grigio).',
+  t:{w:'differunt', t:'v', r:'verb. princ.', ch:[
+    {w:'Hi', t:'s', r:'soggetto', ch:[
+      {w:'omnes', t:'agg', r:'agg./pron. indef.'}
+    ]},
+    {w:'lingua', t:'ind', r:'abl. di limitazione'},
+    {w:'institutis', t:'ind', r:'abl. di limitazione'},
+    {w:'legibus', t:'ind', r:'abl. di limitazione'},
+    {w:'inter', t:'prep', r:'preposizione', ch:[
+      {w:'se', t:'ind', r:'pron. rifl. (acc. con inter)'}
+    ]}
+  ]}
+},
+
+/* ── § 3 — dividit ── */
+{ sec:'§ 3 — dividit',
+  q:'Gallōs ab Aquītānīs Garumna flūmen, ā Belgīs Matrona et Sequana <strong>dīvidit</strong>',
+  note:'<strong>Struttura:</strong> il verbo <em>dividit</em> ha due soggetti coordinati: <em>Garumna flumen</em> (con apposizione) e <em>Matrona et Sequana</em>. <em>Gallos</em> è il complemento oggetto. I due complementi di separazione (<em>ab Aquitanis</em>, <em>a Belgis</em>) dipendono entrambi dal verbo attraverso la preposizione <em>ab/a</em>. La coordinazione del secondo soggetto è asindeto con <em>et</em> inserito tra i due nomi fluviali.',
+  t:{w:'dividit', t:'v', r:'verb. princ.', ch:[
+    {w:'Garumna', t:'s', r:'soggetto', ch:[
+      {w:'flumen', t:'pred', r:'apposizione (nom.)'}
+    ]},
+    {w:'Gallos', t:'o', r:'compl. oggetto'},
+    {w:'ab', t:'prep', r:'preposizione', ch:[
+      {w:'Aquitanis', t:'ind', r:'abl. di separazione'}
+    ]},
+    {w:'Matrona', t:'s', r:'sogg. coordinato', ch:[
+      {w:'et', t:'cong', r:'cong. coordinativa'},
+      {w:'Sequana', t:'s', r:'sogg. coordinato'}
+    ]},
+    {w:'a', t:'prep', r:'preposizione', ch:[
+      {w:'Belgis', t:'ind', r:'abl. di separazione'}
+    ]}
+  ]}
+},
+
+/* ── § 4a — sunt Belgae ── */
+{ sec:'§ 4a — sunt Belgae (fortissimi)',
+  q:'Hōrum omnium fortissimī <strong>sunt</strong> Belgae, proptereā quod ā cultū atque hūmānitāte prōvinciae longissimē <strong>absunt</strong>',
+  note:'<strong>Struttura:</strong> <em>sunt</em> è copula con soggetto <em>Belgae</em> e predicativo del soggetto <em>fortissimi</em>. Il genitivo partitivo <em>Horum omnium</em> dipende dal superlativo <em>fortissimi</em>. La proposizione causale (<em>propterea quod + indicativo</em>) dipende dalla principale; <em>a cultu atque humanitate</em> è complemento di allontanamento (ablativo con <em>a</em>); <em>provinciae</em> è genitivo soggettivo; <em>longissime</em> è avverbio superlativo di grado.',
+  t:{w:'sunt', t:'v', r:'verb. princ. (copula)', ch:[
+    {w:'Belgae', t:'s', r:'soggetto'},
+    {w:'fortissimi', t:'pred', r:'pred. nominativo (superl.)', ch:[
+      {w:'omnium', t:'spec', r:'gen. partitivo', ch:[
+        {w:'Horum', t:'agg', r:'pron./agg. dimostr.'}
+      ]}
+    ]},
+    {w:'absunt', t:'sub', r:'prop. causale (propterea quod)', ch:[
+      {w:'propterea', t:'avv', r:'avv. di causa (correl.)'},
+      {w:'quod', t:'cong', r:'cong. causale'},
+      {w:'[Belgae]', t:'s', r:'sogg. sottinteso'},
+      {w:'a', t:'prep', r:'preposizione', ch:[
+        {w:'cultu', t:'ind', r:'abl. di allontanamento', ch:[
+          {w:'atque', t:'cong', r:'cong. coordinativa'},
+          {w:'humanitate', t:'ind', r:'abl. coordinato', ch:[
+            {w:'provinciae', t:'spec', r:'gen. soggettivo'}
+          ]}
+        ]}
+      ]},
+      {w:'longissime', t:'avv', r:'avv. di grado (superl.)'}
+    ]}
+  ]}
+},
+
+/* ── § 4b — commeant / important ── */
+{ sec:'§ 4b — commeant / important',
+  q:'minimē<em>que</em> ad eōs mercātōrēs saepe <strong>commeant</strong> atque ea quae ad effēminandōs animōs <strong>pertinent important</strong>',
+  note:'<strong>Struttura:</strong> <em>-que</em> enclitico coordina questa proposizione alla principale precedente. <em>Mercatores</em> è soggetto; <em>ad eos</em> è complemento di moto a luogo figurato; <em>minime</em> e <em>saepe</em> sono avverbi. <em>Important</em> è coordinato da <em>atque</em> con soggetto sottinteso <em>mercatores</em>. <em>Ea</em> (acc. pl. n.) è complemento oggetto di <em>important</em>, qualificato dalla relativa <em>quae…pertinent</em>. <em>Ad effeminandos animos</em>: gerundivo d\'uso (<em>effeminandos</em> concorda con <em>animos</em>, acc. pl.) con valore di scopo.',
+  t:{w:'commeant', t:'v', r:'verb. coord. (minimeque)', ch:[
+    {w:'-que', t:'cong', r:'cong. enclitica (coord.)'},
+    {w:'mercatores', t:'s', r:'soggetto'},
+    {w:'ad', t:'prep', r:'preposizione', ch:[
+      {w:'eos', t:'ind', r:'acc. con prep. (ad eos)'}
+    ]},
+    {w:'saepe', t:'avv', r:'avv. di frequenza'},
+    {w:'minime', t:'avv', r:'avv. di grado (superl.)'},
+    {w:'important', t:'sub', r:'prop. coord. (atque)', ch:[
+      {w:'atque', t:'cong', r:'cong. coordinativa'},
+      {w:'[mercatores]', t:'s', r:'sogg. sottinteso'},
+      {w:'ea', t:'o', r:'compl. oggetto', ch:[
+        {w:'pertinent', t:'sub', r:'prop. relativa (quae)', ch:[
+          {w:'quae', t:'s', r:'sogg. relativo'},
+          {w:'ad', t:'prep', r:'preposizione', ch:[
+            {w:'animos', t:'ind', r:'acc. con prep. (gerundivo)', ch:[
+              {w:'effeminandos', t:'agg', r:'gerundivo attributivo'}
+            ]}
+          ]}
+        ]}
+      ]}
+    ]}
+  ]}
+},
+
+/* ── § 4c — proximi sunt / gerunt ── */
+{ sec:'§ 4c — proximi sunt / gerunt',
+  q:'proximī<em>que</em> <strong>sunt</strong> Germānīs, quī trāns Rhēnum <strong>incolunt</strong>, quibuscum continenter bellum <strong>gerunt</strong>',
+  note:'<strong>Struttura:</strong> terza proposizione coordinata da <em>-que</em>. <em>Proximi</em> è predicativo del soggetto; <em>Germanis</em> è dativo di relazione. La relativa <em>qui trans Rhenum incolunt</em> dipende da <em>Germanis</em>; <em>trans Rhenum</em> è complemento di stato in luogo con preposizione (valore di moto nella prospettiva germanica). La relativa <em>quibuscum…gerunt</em> dipende ancora da <em>Germanis</em>: <em>quibuscum</em> = <em>cum quibus</em>, ablativo di compagnia con pron. relativo enclitico.',
+  t:{w:'sunt', t:'v', r:'verb. coord. (proximique)', ch:[
+    {w:'-que', t:'cong', r:'cong. enclitica (coord.)'},
+    {w:'[Belgae]', t:'s', r:'sogg. sottinteso'},
+    {w:'proximi', t:'pred', r:'pred. nominativo'},
+    {w:'Germanis', t:'term', r:'dativo di relazione', ch:[
+      {w:'incolunt', t:'sub', r:'prop. relativa (qui)', ch:[
+        {w:'qui', t:'s', r:'sogg. relativo (= Germani)'},
+        {w:'trans', t:'prep', r:'preposizione', ch:[
+          {w:'Rhenum', t:'ind', r:'acc. con trans'}
+        ]}
+      ]},
+      {w:'gerunt', t:'sub', r:'prop. relativa (quibuscum)', ch:[
+        {w:'quibuscum', t:'ind', r:'abl. di compagnia (cum quibus)'},
+        {w:'[Germani]', t:'s', r:'sogg. sottinteso'},
+        {w:'bellum', t:'o', r:'compl. oggetto'},
+        {w:'continenter', t:'avv', r:'avv. di modo'}
+      ]}
+    ]}
+  ]}
+},
+
+/* ── § 5 — praecedunt ── */
+{ sec:'§ 5 — praecedunt / contendunt / prohibent / gerunt',
+  q:'Quā dē causā Helvētiī quoque reliquōs Gallōs virtūte <strong>praecēdunt</strong>, quod ferē cotīdiānīs proeliīs cum Germānīs <strong>contendunt</strong>, cum aut suīs fīnibus eōs <strong>prohibent</strong> aut ipsī in eōrum fīnibus bellum <strong>gerunt</strong>',
+  note:'<strong>Struttura:</strong> <em>Qua de causa</em> è nesso relativo (ablativo di causa; <em>de</em> è nodo esplicito). <em>Praecedunt</em> regge l\'accusativo <em>reliquos Gallos</em> (compl. ogg.) e l\'ablativo <em>virtute</em> (abl. di mezzo/vantaggio). La causale <em>quod…contendunt</em> dipende dalla principale. La temporale <em>cum aut…prohibent aut…gerunt</em> contiene due proposizioni coordinate da <em>aut…aut</em>: nella prima <em>eos</em> è oggetto di <em>prohibent</em>, con <em>suis finibus</em> ablativo di separazione; nella seconda <em>ipsi</em> (sogg. enfatico) e <em>in eorum finibus</em> è complemento di stato in luogo.',
+  t:{w:'praecedunt', t:'v', r:'verb. princ.', ch:[
+    {w:'Helvetii', t:'s', r:'soggetto', ch:[
+      {w:'quoque', t:'avv', r:'avv. aggiuntivo'}
+    ]},
+    {w:'Gallos', t:'o', r:'compl. oggetto', ch:[
+      {w:'reliquos', t:'agg', r:'agg.'}
+    ]},
+    {w:'virtute', t:'ind', r:'abl. di mezzo/vantaggio'},
+    {w:'de', t:'prep', r:'preposizione', ch:[
+      {w:'causa', t:'ind', r:'abl. di causa (nesso rel.)', ch:[
+        {w:'Qua', t:'agg', r:'agg. relativo'}
+      ]}
+    ]},
+    {w:'contendunt', t:'sub', r:'prop. causale (quod)', ch:[
+      {w:'quod', t:'cong', r:'cong. causale'},
+      {w:'[Helvetii]', t:'s', r:'sogg. sottinteso'},
+      {w:'proeliis', t:'ind', r:'abl. strumentale', ch:[
+        {w:'cotidianis', t:'agg', r:'agg.'}
+      ]},
+      {w:'fere', t:'avv', r:'avv. di approssimazione'},
+      {w:'cum', t:'prep', r:'preposizione', ch:[
+        {w:'Germanis', t:'ind', r:'abl. con cum'}
+      ]}
+    ]},
+    {w:'prohibent', t:'sub', r:'prop. temp. (cum aut…)', ch:[
+      {w:'cum', t:'cong', r:'cong. temporale'},
+      {w:'aut', t:'cong', r:'cong. disgiuntiva'},
+      {w:'[Helvetii]', t:'s', r:'sogg. sottinteso'},
+      {w:'eos', t:'o', r:'compl. oggetto'},
+      {w:'finibus', t:'ind', r:'abl. di separazione', ch:[
+        {w:'suis', t:'agg', r:'agg. possessivo'}
+      ]},
+      {w:'gerunt', t:'sub', r:'prop. coord. (aut ipsi)', ch:[
+        {w:'aut', t:'cong', r:'cong. disgiuntiva'},
+        {w:'ipsi', t:'s', r:'soggetto (Helvetii ipsi)'},
+        {w:'bellum', t:'o', r:'compl. oggetto'},
+        {w:'in', t:'prep', r:'preposizione', ch:[
+          {w:'finibus', t:'ind', r:'abl. di stato in luogo', ch:[
+            {w:'eorum', t:'spec', r:'gen. possessivo'}
+          ]}
+        ]}
+      ]}
+    ]}
+  ]}
+}
+
+]; /* fine TREES */
+
+
+/* ════════════════════════════════════════
+   RENDERER (identico ad albero_prometeo)
+   ════════════════════════════════════════ */
+function nW(nd){
+  var ww=nd.w.length*CFG.CW+CFG.CP;
+  var rw=nd.r.length*CFG.RW+CFG.CP;
+  return Math.max(CFG.MW,ww,rw);
+}
+function computeSW(nd){
+  var own=nW(nd)+CFG.HG;
+  if(!nd.ch||!nd.ch.length){nd._sw=own;return;}
+  nd.ch.forEach(computeSW);
+  var sum=nd.ch.reduce(function(a,c){return a+c._sw;},0);
+  nd._sw=Math.max(own,sum);
+}
+function assignCX(nd,x0){
+  if(!nd.ch||!nd.ch.length){nd._cx=x0+nd._sw/2;return;}
+  var cx=x0;
+  nd.ch.forEach(function(c){assignCX(c,cx);cx+=c._sw;});
+  nd._cx=(nd.ch[0]._cx+nd.ch[nd.ch.length-1]._cx)/2;
+}
+function assignCY(nd,d){
+  nd._cy=CFG.PT+d*(CFG.NH+CFG.VG);
+  if(nd.ch)nd.ch.forEach(function(c){assignCY(c,d+1);});
+}
+function maxD(nd){
+  if(!nd.ch||!nd.ch.length)return 0;
+  return 1+Math.max.apply(null,nd.ch.map(maxD));
+}
+function svgEl(tag,a){
+  var el=document.createElementNS('http://www.w3.org/2000/svg',tag);
+  Object.keys(a).forEach(function(k){el.setAttribute(k,a[k]);});
+  return el;
+}
+function drawEdges(svg,nd){
+  if(!nd.ch)return;
+  var px=nd._cx,py=nd._cy+CFG.NH;
+  nd.ch.forEach(function(c){
+    svg.appendChild(svgEl('line',{x1:px,y1:py,x2:c._cx,y2:c._cy,stroke:'#c0b09a','stroke-width':'1.8'}));
+    drawEdges(svg,c);
+  });
+}
+var INVAR = {cong:1,prep:1,avv:1};
+var GRAY  = {f:'rgba(173,181,189,.25)',s:'#adb5bd',t:'#444d55'};
+var RG    = {s:'#9b3a3a',t:'#5a1010'};
+var _curGradId = '';
+
+function drawNodes(svg,nd){
+  var fill,stroke,textCol;
+  if(INVAR[nd.t]){
+    fill=GRAY.f; stroke=GRAY.s; textCol=GRAY.t;
+  } else if(nd._dom==='rg'){
+    fill='url(#'+_curGradId+')'; stroke=RG.s; textCol=RG.t;
+  } else {
+    var col=CFG.COLS[nd._dom]||CFG.COLS.b;
+    fill=col.f; stroke=col.s; textCol=col.t;
+  }
+  var w=nW(nd),x=nd._cx-w/2,y=nd._cy;
+  var isImp=nd.w.charAt(0)==='[';
+  svg.appendChild(svgEl('rect',{x:x,y:y,width:w,height:CFG.NH,rx:10,fill:fill,stroke:stroke,'stroke-width':'2.2'}));
+  var t1=svgEl('text',{x:nd._cx,y:y+20,'text-anchor':'middle','font-family':'Cardo, serif','font-size':'14','font-weight':'700','font-style':isImp?'italic':'normal',fill:textCol});
+  t1.textContent=nd.w; svg.appendChild(t1);
+  var t2=svgEl('text',{x:nd._cx,y:y+37,'text-anchor':'middle','font-family':'Cardo, serif','font-size':'9.5','font-style':'italic',fill:textCol});
+  t2.textContent=nd.r; svg.appendChild(t2);
+  if(nd.ch)nd.ch.forEach(function(c){drawNodes(svg,c);});
+}
+
+function renderAll(){
+  var cont=document.getElementById('trees');
+  TREES.forEach(function(data,idx){
+    var root=JSON.parse(JSON.stringify(data.t));
+    assignDomain(root,'y');
+    computeSW(root); assignCX(root,CFG.PS); assignCY(root,0);
+    var md=maxD(root);
+    var svgW=root._sw+CFG.PS*2;
+    var svgH=CFG.PT+(md+1)*(CFG.NH+CFG.VG)+24;
+    var svg=svgEl('svg',{viewBox:'0 0 '+svgW+' '+svgH,style:'display:block;width:100%;min-width:'+Math.min(svgW,380)+'px;'});
+    /* gradiente per proposizioni infinitive: sinistra rossa, destra verde */
+    _curGradId='rg-g-'+idx;
+    var defs=document.createElementNS('http://www.w3.org/2000/svg','defs');
+    var grad=document.createElementNS('http://www.w3.org/2000/svg','linearGradient');
+    grad.setAttribute('id',_curGradId);
+    grad.setAttribute('x1','0'); grad.setAttribute('x2','1');
+    grad.setAttribute('y1','0'); grad.setAttribute('y2','0');
+    [['50%','rgba(232,93,93,.22)'],['50%','rgba(120,200,120,.28)']].forEach(function(s){
+      var st=document.createElementNS('http://www.w3.org/2000/svg','stop');
+      st.setAttribute('offset',s[0]); st.setAttribute('stop-color',s[1]);
+      grad.appendChild(st);
+    });
+    defs.appendChild(grad); svg.appendChild(defs);
+    drawEdges(svg,root); drawNodes(svg,root);
+
+    var section=document.createElement('div');
+    section.className='content-section'; section.style.marginBottom='28px';
+    var hdr=document.createElement('div'); hdr.className='content-header';
+    hdr.innerHTML='<h2>'+data.sec+'</h2>'; section.appendChild(hdr);
+    var body=document.createElement('div'); body.className='content-body';
+    var brano=document.createElement('div'); brano.className='brano-box';
+    brano.innerHTML='<div class="brano-titolo">Testo</div><div class="brano-testo">'+data.q+'</div>';
+    body.appendChild(brano);
+    var wrap=document.createElement('div'); wrap.className='stemma-wrap'; wrap.style.marginTop='20px';
+    wrap.appendChild(svg); body.appendChild(wrap);
+    if(data.note){
+      var nota=document.createElement('div');
+      nota.className='nota-sintattica'; nota.innerHTML=data.note;
+      body.appendChild(nota);
+    }
+    section.appendChild(body); cont.appendChild(section);
+  });
+}
+renderAll();
+</script>
+</body>
+</html>

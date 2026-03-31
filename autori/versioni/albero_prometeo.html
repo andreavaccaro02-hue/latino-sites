@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stemma sintattico (Tesnière) — Iuppiter et Prometheus</title>
+<meta name="description" content="Analisi sintattica per stemma tesnieriano del testo latino su Giove e Prometeo.">
+<link rel="stylesheet" href="../../css/style.css">
+<style>
+  .legenda-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 8px 16px;
+    margin: 16px 0 28px;
+  }
+  .legenda-item {
+    display: flex; align-items: center; gap: 9px;
+    font-size: 13px; font-weight: 700;
+  }
+  .legenda-dot {
+    width: 20px; height: 20px; border-radius: 5px;
+    border: 2px solid; flex-shrink: 0;
+  }
+  .ld-v  { background:rgba(244,211, 94,.30); border-color:#f4d35e; }
+  .ld-s  { background:rgba(232, 93, 93,.20); border-color:#e85d5d; }
+  .ld-o  { background:rgba(120,200,120,.22); border-color:#78c878; }
+  .ld-i  { background:rgba(109,181,212,.22); border-color:#6db5d4; }
+  .ld-rg { background:linear-gradient(90deg,rgba(232,93,93,.22) 50%,rgba(120,200,120,.28) 50%); border-color:#9b3a3a; }
+  .ld-g  { background:rgba(173,181,189,.25); border-color:#adb5bd; }
+
+  .stemma-wrap { overflow-x: auto; padding-bottom: 6px; }
+
+  .nota-sintattica {
+    margin-top: 16px; padding: 13px 17px;
+    background: rgba(184,145,90,.06);
+    border-left: 4px solid var(--gold);
+    border-radius: 0 10px 10px 0;
+    font-size: 14px; line-height: 1.75; color: var(--text-dim);
+  }
+  .nota-sintattica strong { color: var(--text); }
+
+  .intro-tesniere {
+    background: linear-gradient(135deg,rgba(184,145,90,.08) 0%,rgba(244,211,94,.06) 100%);
+    border: 2px solid var(--gold); border-radius: 16px;
+    padding: 22px 26px; margin-bottom: 28px;
+  }
+  .intro-tesniere .intro-label {
+    font-family: 'Libre Baskerville',serif; font-weight: 700; font-size: 13px;
+    text-transform: uppercase; letter-spacing: 1.2px; color: var(--gold); margin-bottom: 10px;
+  }
+  .intro-tesniere p { font-size: 15px; line-height: 1.8; margin-bottom: 8px; color: var(--text-dim); }
+  .intro-tesniere p:last-child { margin-bottom: 0; }
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="container">
+    <a href="../../index.html" class="site-name">Lingua e Cultura Latina</a>
+    <div class="nav-links">
+      <a href="../../index.html">Home</a>
+      <a href="../../strumenti/raccoglitore.html">Raccoglitore</a>
+      <a href="../../grammatica/index.html">Grammatica</a>
+      <a href="../../strumenti/glossario-eulalia.html">Strumenti</a>
+      <a href="../../chi-sono.html">Chi sono</a>
+    </div>
+    </div>
+</nav>
+
+<div class="page-header">
+  <h1>Stemma sintattico (Tesnière)</h1>
+  <div class="divider"></div>
+  <p class="subtitle">Iuppiter, Prometheus et Vulcanus &mdash; testo di versione</p>
+</div>
+
+<div class="container">
+  <a href="../../index.html" class="back-link">&larr; Torna alla home</a>
+
+  <div class="intro-tesniere" style="margin-top:20px;">
+    <div class="intro-label">Metodo — Stemma di dipendenze (Tesnière)</div>
+    <p>Il <strong>verbo</strong> è il nodo reggente da cui discende ogni elemento. Il colore segue il <strong>caso morfologico</strong>: il <strong>nominativo</strong> (soggetto) è <strong style="color:#c0392b">rosso</strong>; l'<strong>accusativo</strong> (compl. oggetto) è <strong style="color:#27ae60">verde</strong>; <strong>genitivo, dativo e ablativo</strong> sono <strong style="color:#2471a3">blu</strong>. Le <strong>proposizioni infinitive</strong> (ACI e NCI) hanno nodo bicolore <strong>rosso–verde</strong>, perché il soggetto dell'infinito ha valore di soggetto (rosso) in forma accusativa (verde).</p>
+    <p>Le <strong>parti invariabili</strong> (congiunzioni, preposizioni, avverbi, negazioni) sono <strong>grigie</strong>. Gli elementi fra parentesi quadre <em>[così]</em> sono sottintesi nel testo.</p>
+  </div>
+
+  <div class="legenda-grid" style="grid-template-columns:repeat(auto-fill,minmax(320px,1fr));">
+    <div class="legenda-item"><div class="legenda-dot ld-v"></div>Verbo / proposizione subordinata — <em>nodo reggente</em></div>
+    <div class="legenda-item"><div class="legenda-dot ld-s"></div>Nominativo (soggetto) + attributi e predicativi concordanti</div>
+    <div class="legenda-item"><div class="legenda-dot ld-rg"></div>Proposizione infinitiva (ACI / NCI) — nodo bicolore</div>
+    <div class="legenda-item"><div class="legenda-dot ld-o"></div>Accusativo (compl. oggetto) + attributi e predicativi concordanti</div>
+    <div class="legenda-item"><div class="legenda-dot ld-i"></div>Genitivo, dativo, ablativo — sempre blu</div>
+    <div class="legenda-item"><div class="legenda-dot ld-g"></div>Parti invariabili (cong., prep., avv., negazioni) — sempre grigie</div>
+  </div>
+
+  <div id="trees"></div>
+</div>
+
+<footer>
+  <p><strong>Prof. Andrea Vaccaro</strong></p>
+  <p>Lingua e Cultura Latina &mdash; Liceo Classico e Liceo Scientifico</p>
+  <div class="footer-links">
+    <a href="../../index.html">Home</a>
+    <a href="../../strumenti/raccoglitore.html">Raccoglitore Testi</a>
+  </div>
+</footer>
+
+<script>
+/* ════════════════════════════════════════
+   4 DOMINI DI COLORE — ereditati a cascata
+   y  verbo / prop. sub.    giallo
+   r  gruppo soggetto       rosso
+   g  gruppo oggetto        verde
+   b  complementi indiretti blu/celeste
+   rg proposizione infinitiva (bicolore)
+   ════════════════════════════════════════ */
+var CFG = {
+  NH:52, HG:18, VG:72, PT:28, PS:28,
+  CW:8.2, RW:6.0, CP:26, MW:88,
+  COLS:{
+    y:{f:'rgba(244,211, 94,.30)',s:'#f4d35e',t:'#5c4400'},
+    r:{f:'rgba(232, 93, 93,.20)',s:'#e85d5d',t:'#7a1212'},
+    g:{f:'rgba(120,200,120,.22)',s:'#78c878',t:'#155a15'},
+    b:{f:'rgba(109,181,212,.22)',s:'#6db5d4',t:'#0e3d70'}
+  }
+};
+
+function assignDomain(nd, dom) {
+  var isVerb = (nd.t==='v'||nd.t==='sub');
+  /* le proposizioni infinitive (rg:true) mantengono il dominio rg */
+  nd._dom = nd.rg ? 'rg' : (isVerb ? 'y' : dom);
+  if (!nd.ch) return;
+  nd.ch.forEach(function(c){
+    var childDom;
+    if (c.rg) {
+      childDom = 'rg';
+    } else if (c.t==='v'||c.t==='sub') {
+      childDom = 'y';
+    } else if (c.t==='o') {
+      childDom = 'g';
+    } else if (c.t==='spec'||c.t==='term'||c.t==='ind') {
+      childDom = 'b';
+    } else if (c.t==='s') {
+      childDom = /acc/.test(c.r) ? 'rg' : /abl/.test(c.r) ? 'b' : 'r';
+    } else if (c.t==='pred' && isVerb) {
+      childDom = /acc/.test(c.r) ? 'g' : 'r';
+    } else {
+      childDom = (nd._dom==='y') ? 'b' : (nd._dom==='rg') ? 'g' : nd._dom;
+    }
+    assignDomain(c, childDom);
+  });
+}
+
+/* ════════════════════════════════════════
+   DATI — Iuppiter, Prometheus et Vulcanus
+   Ogni parola invariabile = nodo esplicito
+   ════════════════════════════════════════ */
+var TREES = [
+
+/* ── § 1 — erat (īrātus) ── */
+{ sec:'§ 1 — erat',
+  q:'Iuppiter, quī deōrum <strong>est</strong> princeps et terrās caelumque suā potestāte <strong>regit</strong>, valdē <strong>īrātus erat</strong>, quod Promētheus, Drānī nepōs, ignem deīs surreptum hominibus <strong>dōnāverat</strong>',
+  note:'<strong>Struttura:</strong> verbo principale <em>erat</em> con predicativo del soggetto <em>īrātus</em>. La prop. relativa (<em>quī…regit</em>) dipende da <em>Iuppiter</em> e ha due predicati coordinati (<em>est</em> e <em>regit</em>). La prop. causale (<em>quod…dōnāverat</em>) è circostante del verbo principale. <em>Deis</em> dipende da <em>surreptum</em> (ablativo di allontanamento del participio); <em>hominibus</em> è dativo di vantaggio di <em>dōnāverat</em>.',
+  t:{w:'erat', t:'v', r:'verb. princ.',ch:[
+    {w:'Iuppiter', t:'s', r:'soggetto nominativo', ch:[
+      {w:'est', t:'sub', r:'prop. rel. (quī…regit)', ch:[
+        {w:'quī', t:'s', r:'sogg. rel. (= Iuppiter)'},
+        {w:'princeps', t:'pred', r:'pred. nominativo', ch:[
+          {w:'deōrum', t:'spec', r:'gen. partitivo'}
+        ]},
+        {w:'et', t:'cong', r:'cong. coordinativa', ch:[
+          {w:'regit', t:'sub', r:'verb. coord. rel.', ch:[
+            {w:'terrās', t:'o', r:'compl. oggetto', ch:[
+              {w:'-que', t:'cong', r:'cong. enclitica'},
+              {w:'caelum', t:'o', r:'compl. ogg. coord.'}
+            ]},
+            {w:'potestāte', t:'ind', r:'abl. di mezzo', ch:[
+              {w:'suā', t:'agg', r:'agg. possessivo'}
+            ]}
+          ]}
+        ]}
+      ]}
+    ]},
+    {w:'īrātus', t:'pred', r:'pred. nominativo'},
+    {w:'valdē', t:'avv', r:'avv. di modo'},
+    {w:'dōnāverat', t:'sub', r:'prop. causale (quod)', ch:[
+      {w:'quod', t:'cong', r:'cong. causale'},
+      {w:'Promētheus', t:'s', r:'soggetto', ch:[
+        {w:'nepōs', t:'pred', r:'apposizione', ch:[
+          {w:'Drānī', t:'spec', r:'gen. patronimico'}
+        ]}
+      ]},
+      {w:'ignem', t:'o', r:'compl. oggetto', ch:[
+        {w:'surreptum', t:'agg', r:'part. perf. pass.', ch:[
+          {w:'deīs', t:'ind', r:'abl. allontanamento'}
+        ]}
+      ]},
+      {w:'hominibus', t:'term', r:'dativo di vantaggio'}
+    ]}
+  ]}
+},
+
+/* ── § 2 — invēnerant / reddiderant / vidērentur ── */
+{ sec:'§ 2 — invēnerant / reddiderant',
+  q:'quī, hōc beneficiō ūsī, tam multās <strong>invēnerant</strong> artēs tamque meliōrem suam vītam <strong>reddiderant</strong>, ut deōrum auxiliō nōn iam <strong>egēre vidērentur</strong>',
+  note:'<strong>Struttura:</strong> proposizione relativa con antecedente <em>hominibus</em>. Due predicati coordinati da <em>-que</em>: <em>invēnerant</em> e <em>reddiderant</em>. <em>Ūsī</em> (part. conc. col sogg.) dipende dal soggetto implicito. La prop. consecutiva (<em>ut…vidērentur</em>) si lega a <em>reddiderant</em>. <em>Egēre</em> è infinito in costruzione NCI con <em>vidērentur</em> ("sembravano non aver bisogno").',
+  t:{w:'invēnerant', t:'v', r:'verb. 1ª prop. rel. (quī = hominēs)', ch:[
+    {w:'quī', t:'s', r:'sogg. rel. (= hominēs)'},
+    {w:'ūsī', t:'agg', r:'part. conc. col sogg.', ch:[
+      {w:'beneficiō', t:'ind', r:'abl. di mezzo', ch:[
+        {w:'hōc', t:'agg', r:'pron./agg. dimostr.'}
+      ]}
+    ]},
+    {w:'artēs', t:'o', r:'compl. oggetto', ch:[
+      {w:'multās', t:'agg', r:'agg.', ch:[
+        {w:'tam', t:'avv', r:'avv. di grado (correl.)'}
+      ]}
+    ]},
+    {w:'-que', t:'cong', r:'cong. enclitica (coord.)', ch:[
+      {w:'reddiderant', t:'sub', r:'verb. 2ª prop. rel.', ch:[
+        {w:'vītam', t:'o', r:'compl. oggetto', ch:[
+          {w:'meliōrem', t:'agg', r:'agg. comparativo', ch:[
+            {w:'tamque', t:'cong', r:'avv. correl. + cong. enc.'}
+          ]},
+          {w:'suam', t:'agg', r:'agg. possessivo'}
+        ]},
+        {w:'vidērentur', t:'sub', r:'prop. consecutiva (ut)', ch:[
+          {w:'ut', t:'cong', r:'cong. consecutiva'},
+          {w:'[quī]', t:'s', r:'sogg. imp.'},
+          {w:'egēre', t:'sub', r:'inf. (NCI: vidēri + inf.)', rg:true, ch:[
+            {w:'auxiliō', t:'ind', r:'abl. di privazione', ch:[
+              {w:'deōrum', t:'spec', r:'gen. soggettivo'}
+            ]}
+          ]},
+          {w:'nōn', t:'avv', r:'negazione'},
+          {w:'iam', t:'avv', r:'avv. di tempo'}
+        ]}
+      ]}
+    ]}
+  ]}
+},
+
+/* ── § 3 — cōnstituit / excōgitāvit ── */
+{ sec:'§ 3 — cōnstituit / excōgitāvit',
+  q:'itaque cum Iuppiter hominēs <strong>vidēret</strong>, neglēctō deōrum cultū, terrās multīs maleficiīs <strong>implēre</strong>, eōs sevērē <strong>pūnīre cōnstituit</strong>, modum<em>que</em> <strong>excōgitāvit</strong>, quō malīs anteā ignōtīs eōs <strong>perdere posset</strong>',
+  note:'<strong>Struttura:</strong> due verbi principali coordinati da <em>-que</em>: <em>cōnstituit</em> e <em>excōgitāvit</em>. <em>Cōnstituit</em> regge l\'infinito <em>pūnīre</em> (compl. ogg. dell\'infinito), con <em>eōs</em> come accusativo oggetto di <em>pūnīre</em>. La prop. temporale <em>cum…vidēret</em> contiene un ACI: <em>hominēs</em> è soggetto accusativo di <em>implēre</em> (e oggetto di <em>vidēret</em>). <em>Neglēctō cultū</em> = ablativo assoluto. <em>Excōgitāvit</em> regge <em>modum</em> (ogg.) e la prop. relativa modale <em>quō posset perdere</em>.',
+  t:{w:'cōnstituit', t:'v', r:'verb. princ.',ch:[
+    {w:'[Iuppiter]', t:'s', r:'sogg. sottinteso'},
+    {w:'itaque', t:'cong', r:'cong. illativa'},
+    {w:'vidēret', t:'sub', r:'prop. temporale (cum + cong.)', ch:[
+      {w:'cum', t:'cong', r:'cong. temporale'},
+      {w:'Iuppiter', t:'s', r:'soggetto'},
+      {w:'implēre', t:'sub', r:'inf. (ACI ogg. di vidēret)', rg:true, ch:[
+        {w:'hominēs', t:'s', r:'sogg. acc. (ACI)'},
+        {w:'terrās', t:'o', r:'compl. oggetto'},
+        {w:'maleficiīs', t:'ind', r:'abl. strumentale', ch:[
+          {w:'multīs', t:'agg', r:'agg.'}
+        ]}
+      ]},
+      {w:'cultū', t:'ind', r:'abl. assoluto (neglēctō cultū)', ch:[
+        {w:'neglēctō', t:'agg', r:'part. perf. pass. (abl. ass.)'},
+        {w:'deōrum', t:'spec', r:'gen. soggettivo'}
+      ]}
+    ]},
+    {w:'pūnīre', t:'sub', r:'inf. (compl. ogg. di cōnstituit)', rg:true, ch:[
+      {w:'eōs', t:'o', r:'compl. oggetto'},
+      {w:'sevērē', t:'avv', r:'avv. di modo'}
+    ]},
+    {w:'-que', t:'cong', r:'cong. enclitica (coord.)', ch:[
+      {w:'excōgitāvit', t:'sub', r:'verb. coord.', ch:[
+        {w:'modum', t:'o', r:'compl. oggetto'},
+        {w:'posset', t:'sub', r:'prop. rel. modale (quō)', ch:[
+          {w:'quō', t:'cong', r:'pron. rel. (= ut eō)'},
+          {w:'[is]', t:'s', r:'sogg. imp.'},
+          {w:'perdere', t:'sub', r:'inf. (compl. ogg. di posset)', rg:true, ch:[
+            {w:'eōs', t:'o', r:'compl. oggetto'},
+            {w:'malīs ignōtīs', t:'ind', r:'abl. strumentale', ch:[
+              {w:'anteā', t:'avv', r:'avv. di tempo'}
+            ]}
+          ]}
+        ]}
+      ]}
+    ]}
+  ]}
+},
+
+/* ── § 4 — arcessīvit / iussit ── */
+{ sec:'§ 4 — arcessīvit / iussit',
+  q:'Vulcānum igitur fīlium <strong>arcessīvit</strong>, eum<em>que</em> <strong>iussit</strong> mulierem ex aquā et terrā <strong>cōnficere</strong>, quae fōrmā pulcherrimā <strong>esse vidērētur</strong>',
+  note:'<strong>Struttura:</strong> nuova frase con due predicati coordinati da <em>-que</em>: <em>arcessīvit</em> e <em>iussit</em>. <em>Fīlium</em> è apposizione di <em>Vulcānum</em>. <em>Iussit</em> regge l\'infinito <em>cōnficere</em> (ACI: <em>eum</em> è oggetto di <em>iussit</em> e soggetto implicito di <em>cōnficere</em>). La prop. relativa (<em>quae…vidērētur</em>) dipende da <em>mulierem</em>; contiene una costruzione NCI: <em>esse</em> è l\'infinito di <em>vidērētur</em>, con <em>fōrmā pulcherrimā</em> ablativo di qualità.',
+  t:{w:'arcessīvit', t:'v', r:'verb. princ.',ch:[
+    {w:'[Iuppiter]', t:'s', r:'sogg. sottinteso'},
+    {w:'igitur', t:'cong', r:'cong. illativa'},
+    {w:'Vulcānum', t:'o', r:'compl. oggetto', ch:[
+      {w:'fīlium', t:'pred', r:'apposizione (acc.)'}
+    ]},
+    {w:'-que', t:'cong', r:'cong. enclitica (coord.)', ch:[
+      {w:'iussit', t:'sub', r:'verb. coord.', ch:[
+        {w:'eum', t:'o', r:'compl. oggetto (= Vulcānum)'},
+        {w:'cōnficere', t:'sub', r:'inf. (ACI ogg. di iussit)', rg:true, ch:[
+          {w:'[eum]', t:'s', r:'sogg. acc. imp. (= Vulcānum)'},
+          {w:'mulierem', t:'o', r:'compl. oggetto', ch:[
+            {w:'vidērētur', t:'sub', r:'prop. relativa (quae)', ch:[
+              {w:'quae', t:'s', r:'sogg. rel. (= mulier)'},
+              {w:'esse', t:'sub', r:'inf. (NCI: vidēri + inf.)', rg:true, ch:[
+                {w:'fōrmā pulcherrimā', t:'ind', r:'abl. di qualità'}
+              ]}
+            ]}
+          ]},
+          {w:'ex', t:'prep', r:'preposizione', ch:[
+            {w:'aquā', t:'ind', r:'abl. di materia'},
+            {w:'et', t:'cong', r:'cong. coordinativa'},
+            {w:'terrā', t:'ind', r:'abl. di materia'}
+          ]}
+        ]}
+      ]}
+    ]}
+  ]}
+}
+
+]; /* fine TREES */
+
+
+/* ════════════════════════════════════════
+   RENDERER (identico ad albero_agricola)
+   ════════════════════════════════════════ */
+function nW(nd){
+  var ww=nd.w.length*CFG.CW+CFG.CP;
+  var rw=nd.r.length*CFG.RW+CFG.CP;
+  return Math.max(CFG.MW,ww,rw);
+}
+function computeSW(nd){
+  var own=nW(nd)+CFG.HG;
+  if(!nd.ch||!nd.ch.length){nd._sw=own;return;}
+  nd.ch.forEach(computeSW);
+  var sum=nd.ch.reduce(function(a,c){return a+c._sw;},0);
+  nd._sw=Math.max(own,sum);
+}
+function assignCX(nd,x0){
+  if(!nd.ch||!nd.ch.length){nd._cx=x0+nd._sw/2;return;}
+  var cx=x0;
+  nd.ch.forEach(function(c){assignCX(c,cx);cx+=c._sw;});
+  nd._cx=(nd.ch[0]._cx+nd.ch[nd.ch.length-1]._cx)/2;
+}
+function assignCY(nd,d){
+  nd._cy=CFG.PT+d*(CFG.NH+CFG.VG);
+  if(nd.ch)nd.ch.forEach(function(c){assignCY(c,d+1);});
+}
+function maxD(nd){
+  if(!nd.ch||!nd.ch.length)return 0;
+  return 1+Math.max.apply(null,nd.ch.map(maxD));
+}
+function svgEl(tag,a){
+  var el=document.createElementNS('http://www.w3.org/2000/svg',tag);
+  Object.keys(a).forEach(function(k){el.setAttribute(k,a[k]);});
+  return el;
+}
+function drawEdges(svg,nd){
+  if(!nd.ch)return;
+  var px=nd._cx,py=nd._cy+CFG.NH;
+  nd.ch.forEach(function(c){
+    svg.appendChild(svgEl('line',{x1:px,y1:py,x2:c._cx,y2:c._cy,stroke:'#c0b09a','stroke-width':'1.8'}));
+    drawEdges(svg,c);
+  });
+}
+var INVAR = {cong:1,prep:1,avv:1};
+var GRAY  = {f:'rgba(173,181,189,.25)',s:'#adb5bd',t:'#444d55'};
+var RG    = {s:'#9b3a3a',t:'#5a1010'};
+var _curGradId = '';
+
+function drawNodes(svg,nd){
+  var fill,stroke,textCol;
+  if(INVAR[nd.t]){
+    fill=GRAY.f; stroke=GRAY.s; textCol=GRAY.t;
+  } else if(nd._dom==='rg'){
+    fill='url(#'+_curGradId+')'; stroke=RG.s; textCol=RG.t;
+  } else {
+    var col=CFG.COLS[nd._dom]||CFG.COLS.b;
+    fill=col.f; stroke=col.s; textCol=col.t;
+  }
+  var w=nW(nd),x=nd._cx-w/2,y=nd._cy;
+  var isImp=nd.w.charAt(0)==='[';
+  svg.appendChild(svgEl('rect',{x:x,y:y,width:w,height:CFG.NH,rx:10,fill:fill,stroke:stroke,'stroke-width':'2.2'}));
+  var t1=svgEl('text',{x:nd._cx,y:y+20,'text-anchor':'middle','font-family':'Cardo, serif','font-size':'14','font-weight':'700','font-style':isImp?'italic':'normal',fill:textCol});
+  t1.textContent=nd.w; svg.appendChild(t1);
+  var t2=svgEl('text',{x:nd._cx,y:y+37,'text-anchor':'middle','font-family':'Cardo, serif','font-size':'9.5','font-style':'italic',fill:textCol});
+  t2.textContent=nd.r; svg.appendChild(t2);
+  if(nd.ch)nd.ch.forEach(function(c){drawNodes(svg,c);});
+}
+
+function renderAll(){
+  var cont=document.getElementById('trees');
+  TREES.forEach(function(data,idx){
+    var root=JSON.parse(JSON.stringify(data.t));
+    assignDomain(root,'y');
+    computeSW(root); assignCX(root,CFG.PS); assignCY(root,0);
+    var md=maxD(root);
+    var svgW=root._sw+CFG.PS*2;
+    var svgH=CFG.PT+(md+1)*(CFG.NH+CFG.VG)+24;
+    var svg=svgEl('svg',{viewBox:'0 0 '+svgW+' '+svgH,style:'display:block;width:100%;min-width:'+Math.min(svgW,380)+'px;'});
+    /* gradiente per proposizioni infinitive: sinistra rossa, destra verde */
+    _curGradId='rg-g-'+idx;
+    var defs=document.createElementNS('http://www.w3.org/2000/svg','defs');
+    var grad=document.createElementNS('http://www.w3.org/2000/svg','linearGradient');
+    grad.setAttribute('id',_curGradId);
+    grad.setAttribute('x1','0'); grad.setAttribute('x2','1');
+    grad.setAttribute('y1','0'); grad.setAttribute('y2','0');
+    [['50%','rgba(232,93,93,.22)'],['50%','rgba(120,200,120,.28)']].forEach(function(s){
+      var st=document.createElementNS('http://www.w3.org/2000/svg','stop');
+      st.setAttribute('offset',s[0]); st.setAttribute('stop-color',s[1]);
+      grad.appendChild(st);
+    });
+    defs.appendChild(grad); svg.appendChild(defs);
+    drawEdges(svg,root); drawNodes(svg,root);
+
+    var section=document.createElement('div');
+    section.className='content-section'; section.style.marginBottom='28px';
+    var hdr=document.createElement('div'); hdr.className='content-header';
+    hdr.innerHTML='<h2>'+data.sec+'</h2>'; section.appendChild(hdr);
+    var body=document.createElement('div'); body.className='content-body';
+    var brano=document.createElement('div'); brano.className='brano-box';
+    brano.innerHTML='<div class="brano-titolo">Testo</div><div class="brano-testo">'+data.q+'</div>';
+    body.appendChild(brano);
+    var wrap=document.createElement('div'); wrap.className='stemma-wrap'; wrap.style.marginTop='20px';
+    wrap.appendChild(svg); body.appendChild(wrap);
+    if(data.note){
+      var nota=document.createElement('div');
+      nota.className='nota-sintattica'; nota.innerHTML=data.note;
+      body.appendChild(nota);
+    }
+    section.appendChild(body); cont.appendChild(section);
+  });
+}
+renderAll();
+</script>
+</body>
+</html>

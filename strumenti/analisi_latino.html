@@ -335,6 +335,7 @@
   "inLanguage": "it"
 }
 </script>
+<link rel="stylesheet" href="../css/style.css">
 <link rel="icon" type="image/svg+xml" href="../favicon.svg">
 <meta property="og:image" content="https://andreavaccaro02-hue.github.io/latino-sites/og-image.svg">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/alpheios-components@latest/dist/style/style-components.min.css">
@@ -801,7 +802,6 @@ function exportAnalysis() {
     <a href="glossario-eulalia.html">Strumenti</a>
   </div>
 </footer>
-<script src="../js/alpheios-init.js"></script>
 </body></html>';
   var blob = new Blob([html], { type: 'text/html' });
   var url = URL.createObjectURL(blob);
@@ -826,6 +826,6 @@ document.getElementById('noteModal').addEventListener('click', function(e) {
 document.getElementById('textSelect').value = currentText;
 initializeText();
 </script>
-
+<script src="../js/alpheios-init.js"></script>
 </body>
 </html>

@@ -491,7 +491,12 @@ const lucanoTexts = {
   }
 };
 
-let currentText = 'text1';
+/* Leggi ?text= dalla URL per precaricare il brano giusto */
+let currentText = (function() {
+  var p = new URLSearchParams(window.location.search);
+  var t = p.get('text');
+  return (t && lucanoTexts[t]) ? t : 'text1';
+})();
 let currentWordElement = null;
 let wordData = {};
 let translationVisible = true;
@@ -817,6 +822,8 @@ document.getElementById('noteModal').addEventListener('click', function(e) {
   if (e.target === this) closeNoteModal();
 });
 
+/* Sincronizza il select con il testo corrente (da query string) */
+document.getElementById('textSelect').value = currentText;
 initializeText();
 </script>
 

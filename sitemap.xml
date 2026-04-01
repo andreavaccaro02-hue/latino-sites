@@ -1,127 +1,207 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://andreavaccaro02-hue.github.io/latino-sites/</loc>
+    <loc>https://andreavaccaro02-hue.github.io/latino-sites/index.html</loc>
+    <lastmod>2025-03-31</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://andreavaccaro02-hue.github.io/latino-sites/latino1.html</loc>
+    <loc>https://andreavaccaro02-hue.github.io/latino-sites/grammatica/index.html</loc>
+    <lastmod>2025-03-31</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://andreavaccaro02-hue.github.io/latino-sites/latino2.html</loc>
+    <loc>https://andreavaccaro02-hue.github.io/latino-sites/strumenti/raccoglitore.html</loc>
+    <lastmod>2025-03-31</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://andreavaccaro02-hue.github.io/latino-sites/latino3-classico.html</loc>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://andreavaccaro02-hue.github.io/latino-sites/latino3-scientifico.html</loc>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://andreavaccaro02-hue.github.io/latino-sites/latino4-classico.html</loc>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://andreavaccaro02-hue.github.io/latino-sites/latino4-scientifico.html</loc>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://andreavaccaro02-hue.github.io/latino-sites/latino5-classico.html</loc>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://andreavaccaro02-hue.github.io/latino-sites/latino5-scientifico.html</loc>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://andreavaccaro02-hue.github.io/latino-sites/lezione_cesare.html</loc>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://andreavaccaro02-hue.github.io/latino-sites/lezione_eneide_iv.html</loc>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://andreavaccaro02-hue.github.io/latino-sites/lezione_virgilio.html</loc>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://andreavaccaro02-hue.github.io/latino-sites/lezione_bucoliche.html</loc>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://andreavaccaro02-hue.github.io/latino-sites/lezione_georgiche.html</loc>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://andreavaccaro02-hue.github.io/latino-sites/lezione_petronio.html</loc>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://andreavaccaro02-hue.github.io/latino-sites/lezione_tacito.html</loc>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://andreavaccaro02-hue.github.io/latino-sites/lezione_terenzio.html</loc>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://andreavaccaro02-hue.github.io/latino-sites/raccoglitore-testi.html</loc>
+    <loc>https://andreavaccaro02-hue.github.io/latino-sites/percorsi/latino1.html</loc>
+    <lastmod>2025-03-31</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://andreavaccaro02-hue.github.io/latino-sites/analisi_latino.html</loc>
+    <loc>https://andreavaccaro02-hue.github.io/latino-sites/percorsi/latino2.html</loc>
+    <lastmod>2025-03-31</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://andreavaccaro02-hue.github.io/latino-sites/congiuntivo-perfetto-piuccheperfetto.html</loc>
+    <loc>https://andreavaccaro02-hue.github.io/latino-sites/percorsi/latino3-classico.html</loc>
+    <lastmod>2025-03-31</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://andreavaccaro02-hue.github.io/latino-sites/infinitiva_lezione_interattiva.html</loc>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://andreavaccaro02-hue.github.io/latino-sites/consecutiva_lezione_interattiva.html</loc>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://andreavaccaro02-hue.github.io/latino-sites/cum_narrativum_lezione_interattiva.html</loc>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://andreavaccaro02-hue.github.io/latino-sites/finale_lezione_interattiva.html</loc>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://andreavaccaro02-hue.github.io/latino-sites/declinazioni_latine.html</loc>
+    <loc>https://andreavaccaro02-hue.github.io/latino-sites/percorsi/latino3-scientifico.html</loc>
+    <lastmod>2025-03-31</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://andreavaccaro02-hue.github.io/latino-sites/declinazioni_confronto.html</loc>
-    <priority>0.6</priority>
+    <loc>https://andreavaccaro02-hue.github.io/latino-sites/percorsi/latino4-classico.html</loc>
+    <lastmod>2025-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://andreavaccaro02-hue.github.io/latino-sites/diario_latina.html</loc>
-    <priority>0.5</priority>
+    <loc>https://andreavaccaro02-hue.github.io/latino-sites/percorsi/latino4-scientifico.html</loc>
+    <lastmod>2025-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://andreavaccaro02-hue.github.io/latino-sites/strumenti/glossario-eulalia.html</loc>
+    <loc>https://andreavaccaro02-hue.github.io/latino-sites/percorsi/latino5-classico.html</loc>
+    <lastmod>2025-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://andreavaccaro02-hue.github.io/latino-sites/percorsi/latino5-scientifico.html</loc>
+    <lastmod>2025-03-31</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://andreavaccaro02-hue.github.io/latino-sites/chi-sono.html</loc>
-    <priority>0.9</priority>
+    <lastmod>2025-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://andreavaccaro02-hue.github.io/latino-sites/albero_agricola.html</loc>
-    <priority>0.8</priority>
+    <loc>https://andreavaccaro02-hue.github.io/latino-sites/autori/cesare/index.html</loc>
+    <lastmod>2025-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://andreavaccaro02-hue.github.io/latino-sites/analisi_sintattica_cesare.html</loc>
-    <priority>0.8</priority>
+    <loc>https://andreavaccaro02-hue.github.io/latino-sites/autori/cesare/albero_bg1.html</loc>
+    <lastmod>2025-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://andreavaccaro02-hue.github.io/latino-sites/autori/cesare/analisi_sintattica.html</loc>
+    <lastmod>2025-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://andreavaccaro02-hue.github.io/latino-sites/autori/petronio/index.html</loc>
+    <lastmod>2025-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://andreavaccaro02-hue.github.io/latino-sites/autori/tacito/index.html</loc>
+    <lastmod>2025-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://andreavaccaro02-hue.github.io/latino-sites/autori/tacito/albero_agricola.html</loc>
+    <lastmod>2025-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://andreavaccaro02-hue.github.io/latino-sites/autori/terenzio/index.html</loc>
+    <lastmod>2025-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://andreavaccaro02-hue.github.io/latino-sites/autori/versioni/albero_prometeo.html</loc>
+    <lastmod>2025-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://andreavaccaro02-hue.github.io/latino-sites/autori/virgilio/index.html</loc>
+    <lastmod>2025-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://andreavaccaro02-hue.github.io/latino-sites/autori/virgilio/bucoliche.html</loc>
+    <lastmod>2025-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://andreavaccaro02-hue.github.io/latino-sites/autori/virgilio/eneide_iv.html</loc>
+    <lastmod>2025-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://andreavaccaro02-hue.github.io/latino-sites/autori/virgilio/georgiche.html</loc>
+    <lastmod>2025-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://andreavaccaro02-hue.github.io/latino-sites/grammatica/congiuntivo.html</loc>
+    <lastmod>2025-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://andreavaccaro02-hue.github.io/latino-sites/grammatica/consecutiva.html</loc>
+    <lastmod>2025-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://andreavaccaro02-hue.github.io/latino-sites/grammatica/cum_narrativum.html</loc>
+    <lastmod>2025-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://andreavaccaro02-hue.github.io/latino-sites/grammatica/declinazioni.html</loc>
+    <lastmod>2025-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://andreavaccaro02-hue.github.io/latino-sites/grammatica/declinazioni_confronto.html</loc>
+    <lastmod>2025-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://andreavaccaro02-hue.github.io/latino-sites/grammatica/finale.html</loc>
+    <lastmod>2025-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://andreavaccaro02-hue.github.io/latino-sites/grammatica/infinitiva.html</loc>
+    <lastmod>2025-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://andreavaccaro02-hue.github.io/latino-sites/strumenti/analisi_latino.html</loc>
+    <lastmod>2025-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://andreavaccaro02-hue.github.io/latino-sites/strumenti/diario_latina.html</loc>
+    <lastmod>2025-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://andreavaccaro02-hue.github.io/latino-sites/strumenti/glossario-eulalia.html</loc>
+    <lastmod>2025-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
   </url>
 </urlset>

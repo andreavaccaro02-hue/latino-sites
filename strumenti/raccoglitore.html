@@ -105,6 +105,16 @@
       font-style: italic;
       font-size: 15px;
     }
+    .author-card.is-empty { display: none; }
+    .author-card.is-empty.show-empty { display: block; opacity: 0.55; }
+    .toggle-empty { cursor:pointer; font-size:13px; color:var(--text-dim); background:none; border:1.5px solid var(--border); border-radius:8px; padding:6px 14px; transition:all 0.2s; }
+    .toggle-empty:hover { border-color:var(--gold); color:var(--gold); }
+    .stemmi-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:14px; margin-top:16px; }
+    .stemma-card { display:flex; align-items:center; gap:12px; padding:14px 18px; background:var(--card); border:2px solid var(--border); border-radius:12px; text-decoration:none; color:var(--text); transition:all 0.2s; }
+    .stemma-card:hover { border-color:var(--gold); transform:translateY(-2px); box-shadow:0 4px 12px rgba(0,0,0,0.08); }
+    .stemma-icon { font-size:24px; flex-shrink:0; }
+    .stemma-info strong { display:block; font-family:'Libre Baskerville',serif; font-size:15px; }
+    .stemma-info span { font-size:13px; color:var(--text-dim); }
     .filter-bar {
       display: flex;
       gap: 12px;
@@ -175,12 +185,42 @@
   <div class="container">
     <a href="../index.html" class="back-link">← Torna alla Home</a>
 
+    <!-- Stemmi tesnieriani -->
+    <section style="margin-top:24px; margin-bottom:32px;">
+      <h2 class="section-title" style="margin-bottom:6px;">Stemmi sintattici (Tesnière)</h2>
+      <p style="font-size:14px; color:var(--text-dim); margin-bottom:12px;">Tutti gli alberi di dipendenza disponibili.</p>
+      <div class="stemmi-grid">
+        <a href="../autori/cesare/albero_bg1.html" class="stemma-card">
+          <span class="stemma-icon">🌳</span>
+          <div class="stemma-info">
+            <strong>Cesare, BG I, 1</strong>
+            <span>Gallia est omnis divisa in partes tres</span>
+          </div>
+        </a>
+        <a href="../autori/tacito/albero_agricola.html" class="stemma-card">
+          <span class="stemma-icon">🌳</span>
+          <div class="stemma-info">
+            <strong>Tacito, Agricola 30</strong>
+            <span>Discorso di Calgaco</span>
+          </div>
+        </a>
+        <a href="../autori/versioni/albero_prometeo.html" class="stemma-card">
+          <span class="stemma-icon">🌳</span>
+          <div class="stemma-info">
+            <strong>Iuppiter et Prometheus</strong>
+            <span>Testo di versione</span>
+          </div>
+        </a>
+      </div>
+    </section>
+
     <!-- Filter -->
     <div class="filter-bar">
       <input type="text" id="authorFilter" placeholder="Cerca autore..." oninput="filterAuthors()">
+      <button class="toggle-empty" onclick="toggleEmpty(this)">Mostra tutti gli autori</button>
     </div>
 
-    <p class="stats">27 autori nel raccoglitore — clicca su un autore per espandere</p>
+    <p class="stats" id="statsLine">Autori con contenuti disponibili — clicca su un autore per espandere</p>
 
     <div id="authorList">
 
@@ -791,9 +831,33 @@
       const cards = document.querySelectorAll('.author-card');
       cards.forEach(card => {
         const name = card.getAttribute('data-author');
-        card.style.display = name.includes(query) ? '' : 'none';
+        const match = name.includes(query);
+        if (card.classList.contains('is-empty')) {
+          card.style.display = (match && card.classList.contains('show-empty')) ? '' : 'none';
+        } else {
+          card.style.display = match ? '' : 'none';
+        }
       });
     }
+
+    function toggleEmpty(btn) {
+      const empties = document.querySelectorAll('.author-card.is-empty');
+      const showing = empties[0] && empties[0].classList.contains('show-empty');
+      empties.forEach(c => {
+        c.classList.toggle('show-empty', !showing);
+        c.style.display = !showing ? '' : 'none';
+      });
+      btn.textContent = showing ? 'Mostra tutti gli autori' : 'Nascondi autori vuoti';
+    }
+
+    // Al caricamento: marca come vuoti gli autori senza contenuti
+    document.addEventListener('DOMContentLoaded', function() {
+      document.querySelectorAll('.author-card').forEach(function(card) {
+        if (card.querySelector('.empty-author')) {
+          card.classList.add('is-empty');
+        }
+      });
+    });
   </script>
 </body>
 </html>

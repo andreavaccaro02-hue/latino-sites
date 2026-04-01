@@ -14,96 +14,7 @@
 <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
 <link rel="stylesheet" href="../../css/style.css">
 <style>
-  /* ═══ STILI SPECIFICI LEZIONE TACITO ═══ */
-
-  .lesson-intro {
-    background: var(--card);
-    border: 2px solid var(--border);
-    border-radius: 16px;
-    padding: 30px;
-    margin-bottom: 30px;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-  }
-  .lesson-intro h2 {
-    font-family: 'Libre Baskerville', serif;
-    font-size: 22px;
-    color: var(--gold);
-    margin-bottom: 14px;
-  }
-  .lesson-intro p {
-    font-size: 16px;
-    line-height: 1.8;
-    margin-bottom: 10px;
-  }
-
-  .context-badge {
-    display: inline-block;
-    padding: 4px 14px;
-    border-radius: 20px;
-    font-size: 13px;
-    font-weight: 700;
-    margin-right: 8px;
-    margin-bottom: 6px;
-  }
-  .context-badge.autore { background: rgba(184,145,90,0.15); color: var(--gold); }
-  .context-badge.data   { background: rgba(107,100,86,0.12); color: var(--text-dim); }
-  .context-badge.genere { background: rgba(192,132,212,0.12); color: #7a3a9a; }
-  .context-badge.opera  { background: rgba(45,106,79,0.12);  color: var(--eulalia); }
-
-  /* ═══ TLAC BOXES ═══ */
-  .tlac-box {
-    border-radius: 12px;
-    padding: 20px 24px;
-    margin: 24px 0;
-    font-size: 15px;
-    line-height: 1.7;
-  }
-  .tlac-box .tlac-label {
-    font-family: 'Libre Baskerville', serif;
-    font-weight: 700;
-    font-size: 13px;
-    text-transform: uppercase;
-    letter-spacing: 1.2px;
-    margin-bottom: 10px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .tlac-donow   { background: rgba(232,93,93,0.08);   border-left: 4px solid var(--latino1); }
-  .tlac-donow   .tlac-label { color: var(--latino1); }
-  .tlac-coldcall{ background: rgba(109,181,212,0.10); border-left: 4px solid var(--latino3); }
-  .tlac-coldcall .tlac-label { color: #1a6b8a; }
-  .tlac-turntalk{ background: rgba(120,200,120,0.08); border-left: 4px solid var(--latino2); }
-  .tlac-turntalk .tlac-label { color: #2a7a2a; }
-  .tlac-stretch { background: rgba(192,132,212,0.08); border-left: 4px solid var(--latino5); }
-  .tlac-stretch  .tlac-label { color: #7a3a9a; }
-  .tlac-exit    { background: rgba(244,211,94,0.12);  border-left: 4px solid var(--latino4); }
-  .tlac-exit    .tlac-label { color: #8a6a0a; }
-
-  .tlac-reveal-btn {
-    display: inline-block;
-    margin-top: 10px;
-    padding: 7px 16px;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    background: var(--card);
-    font-family: 'Cardo', serif;
-    font-size: 14px;
-    cursor: pointer;
-    transition: all 0.2s;
-    color: var(--text-dim);
-  }
-  .tlac-reveal-btn:hover { border-color: var(--gold); color: var(--gold); }
-  .tlac-hint {
-    display: none;
-    margin-top: 10px;
-    padding: 12px 16px;
-    background: rgba(184,145,90,0.08);
-    border-radius: 8px;
-    font-size: 14px;
-    line-height: 1.75;
-  }
-  .tlac-hint.visible { display: block; }
+/* ═══ TLAC BOXES ═══ */
 
   /* ═══ TIMELINE VITA ═══ */
   .vita-timeline {
@@ -321,27 +232,7 @@
   .stile-card .sc-term { font-family: 'Libre Baskerville', serif; font-size: 15px; font-weight: 700; color: var(--gold); font-style: italic; margin-bottom: 8px; display: block; }
   .stile-card .sc-def  { font-size: 13px; line-height: 1.65; color: var(--text-dim); }
   .stile-card .sc-ex   { font-family: 'Cardo', serif; font-size: 13px; font-style: italic; color: #1a1008; margin-top: 10px; padding-top: 10px; border-top: 1px dashed var(--border); display: block; }
-
-  /* ═══ NOTA FONTE ═══ */
-  .nota-fonte { font-size: 12px; color: var(--text-dim); font-style: italic; margin-top: 12px; display: block; }
-
   /* ═══ SCORE BAR ═══ */
-  .score-bar {
-    position: sticky;
-    top: 70px;
-    float: right;
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 10px 18px;
-    margin-left: 20px;
-    margin-bottom: 20px;
-    text-align: center;
-    z-index: 10;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-  }
-  .score-label { font-size: 11px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px; display: block; }
-  .score-value { font-family: 'Libre Baskerville', serif; font-size: 20px; color: var(--gold); font-weight: 700; }
 
   /* ═══ MAPPA ═══ */
   .mappa-container {
@@ -371,61 +262,13 @@
   }
 
   /* ═══ QUIZ ═══ */
-  .esercizio-section {
-    background: var(--card);
-    border: 2px solid var(--border);
-    border-radius: 16px;
-    padding: 28px;
-    margin: 30px 0;
-  }
-  .esercizio-section h2 {
-    font-family: 'Libre Baskerville', serif;
-    font-size: 20px;
-    color: var(--gold);
-    margin-bottom: 20px;
-  }
-  .esercizio-section h3 {
-    font-size: 14px;
-    color: var(--text-dim);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin: 22px 0 12px;
-    padding-bottom: 6px;
-    border-bottom: 1px solid var(--border);
-  }
-  .quiz-item { margin-bottom: 22px; }
   .quiz-q { font-size: 15px; font-weight: 700; margin-bottom: 10px; line-height: 1.5; }
-  .quiz-options { display: flex; flex-direction: column; gap: 7px; }
-  .quiz-option {
-    padding: 9px 15px;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 14px;
-    line-height: 1.5;
-    transition: all 0.15s;
-    background: var(--card);
-    display: flex;
-    align-items: center;
-    box-sizing: border-box;
-  }
   .quiz-option:hover:not(.disabled) { border-color: var(--gold); background: rgba(184,145,90,0.06); }
-  .quiz-option.correct  { background: rgba(45,106,79,0.12); border-color: var(--eulalia); color: var(--eulalia); }
-  .quiz-option.wrong    { background: rgba(232,93,93,0.10); border-color: var(--latino1); }
-  .quiz-option.disabled { cursor: default; }
-  .quiz-feedback { display: none; font-size: 13px; margin-top: 8px; padding: 8px 12px; border-radius: 6px; }
-  .quiz-feedback.show        { display: block; }
-  .quiz-feedback.correct-fb  { background: rgba(45,106,79,0.10); color: var(--eulalia); }
-  .quiz-feedback.wrong-fb    { background: rgba(232,93,93,0.08); color: #8a2020; }
-
-  /* ═══ RESPONSIVE ═══ */
   @media (max-width: 768px) {
+
     .opere-grid  { grid-template-columns: 1fr; }
     .stile-grid  { grid-template-columns: 1fr; }
-    .score-bar   { position: static; float: none; margin: 0 0 20px; }
-    .latino-text { font-size: 17px; }
-  }
-</style>
+    .latino-text { font-size: 17px; }}</style>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",

@@ -14,45 +14,7 @@
 <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
 <link rel="stylesheet" href="../../css/style.css">
 <style>
-  /* ═══ STILI SPECIFICI LEZIONE BUCOLICHE ═══ */
-
-  .lesson-intro {
-    background: var(--card);
-    border: 2px solid var(--border);
-    border-radius: 16px;
-    padding: 30px;
-    margin-bottom: 30px;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-  }
-
-  .lesson-intro h2 {
-    font-family: 'Libre Baskerville', serif;
-    font-size: 22px;
-    color: var(--gold);
-    margin-bottom: 14px;
-  }
-
-  .lesson-intro p {
-    font-size: 16px;
-    line-height: 1.8;
-    margin-bottom: 10px;
-  }
-
-  .context-badge {
-    display: inline-block;
-    padding: 4px 14px;
-    border-radius: 20px;
-    font-size: 13px;
-    font-weight: 700;
-    margin-right: 8px;
-    margin-bottom: 6px;
-  }
-
-  .context-badge.autore { background: rgba(184,145,90,0.15); color: var(--gold); }
-  .context-badge.opera { background: rgba(45,106,79,0.12); color: var(--eulalia); }
-  .context-badge.data { background: rgba(107,100,86,0.12); color: var(--text-dim); }
-
-  /* ═══ BRANO ═══ */
+/* ═══ BRANO ═══ */
   .brano-section {
     background: var(--card);
     border: 2px solid var(--border);
@@ -300,108 +262,6 @@
     color: white;
     border-color: var(--gold);
   }
-
-  /* ═══ ESERCIZI ═══ */
-  .esercizio-section {
-    background: var(--card);
-    border: 2px solid var(--eulalia);
-    border-radius: 16px;
-    padding: 30px;
-    margin-bottom: 30px;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-  }
-
-  .esercizio-section h2 {
-    font-family: 'Libre Baskerville', serif;
-    font-size: 22px;
-    color: var(--eulalia);
-    margin-bottom: 20px;
-  }
-
-  .esercizio-section h3 {
-    font-family: 'Libre Baskerville', serif;
-    font-size: 17px;
-    color: var(--text);
-    margin: 20px 0 12px;
-  }
-
-  .quiz-item {
-    background: rgba(45,106,79,0.05);
-    border-radius: 10px;
-    padding: 18px;
-    margin-bottom: 14px;
-  }
-
-  .quiz-item .quiz-q {
-    font-size: 16px;
-    font-weight: 700;
-    margin-bottom: 12px;
-    line-height: 1.5;
-  }
-
-  .quiz-options {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-
-  .quiz-option {
-    padding: 12px 16px;
-    border: 2px solid var(--border);
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.2s;
-    font-size: 15px;
-    background: var(--card);
-  }
-
-  .quiz-option:hover {
-    border-color: var(--eulalia);
-    background: rgba(45,106,79,0.04);
-  }
-
-  .quiz-option.correct {
-    border-color: #28a745;
-    background: rgba(40,167,69,0.1);
-    color: #155724;
-  }
-
-  .quiz-option.wrong {
-    border-color: #dc3545;
-    background: rgba(220,53,69,0.08);
-    color: #721c24;
-  }
-
-  .quiz-option.disabled {
-    pointer-events: none;
-    opacity: 0.6;
-  }
-
-  .quiz-feedback {
-    margin-top: 10px;
-    padding: 10px 14px;
-    border-radius: 8px;
-    font-size: 14px;
-    line-height: 1.5;
-    display: none;
-  }
-
-  .quiz-feedback.show {
-    display: block;
-  }
-
-  .quiz-feedback.correct-fb {
-    background: rgba(40,167,69,0.1);
-    border-left: 3px solid #28a745;
-    color: #155724;
-  }
-
-  .quiz-feedback.wrong-fb {
-    background: rgba(220,53,69,0.08);
-    border-left: 3px solid #dc3545;
-    color: #721c24;
-  }
-
   /* ═══ TRADUZIONE GUIDATA ═══ */
   .trad-exercise {
     margin-top: 16px;
@@ -472,46 +332,15 @@
   .trad-solution.visible {
     display: block;
   }
-
-  /* ═══ SCORE ═══ */
-  .score-bar {
-    background: var(--card);
-    border: 2px solid var(--border);
-    border-radius: 12px;
-    padding: 16px 24px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 30px;
-    position: sticky;
-    top: 60px;
-    z-index: 50;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-  }
-
-  .score-label {
-    font-family: 'Libre Baskerville', serif;
-    font-size: 15px;
-    font-weight: 700;
-  }
-
-  .score-value {
-    font-size: 24px;
-    font-weight: 700;
-    color: var(--eulalia);
-  }
-
   /* ═══ RESPONSIVE ═══ */
   @media (max-width: 768px) {
+
     .verso-latino { font-size: 16px; }
     .brano-body { padding: 20px; }
     .brano-header { padding: 18px 20px; }
     .word-tooltip { font-size: 12px; }
     .controls { gap: 6px; }
-    .ctrl-btn { padding: 8px 12px; font-size: 13px; }
-    .score-bar { flex-direction: column; gap: 6px; top: 50px; }
-  }
-</style>
+    .ctrl-btn { padding: 8px 12px; font-size: 13px; }}</style>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",

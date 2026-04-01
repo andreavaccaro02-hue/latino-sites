@@ -13,7 +13,7 @@
     <link rel="canonical" href="https://andreavaccaro02-hue.github.io/latino-sites/autori/virgilio/index.html">
     <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600;700&family=Cormorant+Garamond:wght@400;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
-        * {
+* {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -236,36 +236,9 @@
             margin-bottom: 1.5rem;
         }
 
-        .quiz-options {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .quiz-option {
-            padding: 1.2rem;
-            background: var(--color-light);
-            border: 2px solid transparent;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 1.1rem;
-        }
-
-        .quiz-option:hover {
-            background: #FFF3D4;
-            border-color: var(--color-accent);
-            transform: translateX(5px);
-        }
-
         .quiz-option.selected {
             background: #E8F4F8;
             border-color: #4A90A4;
-        }
-
-        .quiz-option.correct {
-            background: #D4EDDA;
-            border-color: var(--color-success);
         }
 
         .quiz-option.incorrect {
@@ -273,21 +246,9 @@
             border-color: var(--color-error);
         }
 
-        .quiz-feedback {
-            margin-top: 1.5rem;
-            padding: 1.5rem;
-            border-radius: 8px;
-            display: none;
-            animation: slideDown 0.3s ease;
-        }
-
         @keyframes slideDown {
             from { opacity: 0; transform: translateY(-10px); }
             to { opacity: 1; transform: translateY(0); }
-        }
-
-        .quiz-feedback.show {
-            display: block;
         }
 
         .quiz-feedback.correct {
@@ -471,6 +432,7 @@
         }
 
         @media (max-width: 768px) {
+
             .timeline::before {
                 left: 20px;
             }
@@ -500,8 +462,7 @@
             .score-display {
                 position: static;
                 margin: 1rem 0;
-            }
-        }
+            }}
 
         .quote-box {
             background: white;
@@ -521,8 +482,7 @@
             font-style: normal;
             font-weight: 600;
             color: var(--color-primary);
-        }
-    </style>
+        }</style>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -553,7 +513,6 @@
     </div>
   </div>
 </nav>
-
 
     <div class="progress-bar">
         <div class="progress-fill" id="progressBar"></div>

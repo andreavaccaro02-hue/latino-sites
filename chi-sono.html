@@ -4,288 +4,86 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Chi sono — Prof. Andrea Vaccaro | Lingua e Cultura Latina</title>
-<meta name="description" content="Andrea Vaccaro, docente di Discipline letterarie e latino presso l'IISS Luigi Pirandello di Bivona. Bio, formazione e contatti.">
+<meta name="description" content="Andrea Vaccaro, docente di Discipline letterarie e latino presso l'IISS Luigi Pirandello di Bivona. Bio e contatti.">
 <link rel="canonical" href="https://andreavaccaro02-hue.github.io/latino-sites/chi-sono.html">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="stylesheet" href="css/style.css">
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Person",
-  "name": "Andrea Vaccaro",
-  "jobTitle": "Docente di Discipline letterarie e latino",
-  "description": "Docente di ruolo di Discipline letterarie e latino (A011) presso l'IISS Luigi Pirandello di Bivona (AG). Laureato in Lettere con curriculum classico all'Università di Palermo.",
-  "url": "https://andreavaccaro02-hue.github.io/latino-sites/chi-sono.html",
-  "sameAs": [],
-  "worksFor": {
-    "@type": "EducationalOrganization",
-    "name": "IISS Luigi Pirandello",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "C/da Paratore, 135",
-      "postalCode": "92010",
-      "addressLocality": "Bivona",
-      "addressRegion": "AG",
-      "addressCountry": "IT"
-    }
-  },
-  "knowsAbout": ["Lingua latina", "Letteratura latina", "Letteratura italiana", "Didattica", "Metodo Tesnière", "Analisi sintattica"],
-  "alumniOf": {
-    "@type": "CollegeOrUniversity",
-    "name": "Università degli Studi di Palermo"
-  },
-  "nationality": "IT"
-}
-</script>
 <style>
-
-  /* ── HERO PROFILE ── */
-  .profile-hero {
-    display: flex;
-    gap: 40px;
-    align-items: center;
-    padding: 40px 36px;
-    background: linear-gradient(135deg, #2c2416 0%, #5a4e3c 100%);
-    border-radius: 16px;
-    margin-bottom: 28px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+  .chi-sono-content {
+    max-width: 680px;
+    margin: 0 auto;
   }
 
-  .profile-avatar {
-    width: 110px;
-    height: 110px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, rgba(244,211,94,0.9) 0%, rgba(184,145,90,0.9) 100%);
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 40px;
-    color: #3a2a10;
-    font-family: 'Libre Baskerville', serif;
-    font-weight: 700;
-    box-shadow: 0 0 0 4px rgba(244,211,94,0.25), 0 8px 24px rgba(0,0,0,0.3);
-  }
-
-  .profile-hero-info {
-    flex: 1;
-  }
-
-  .profile-hero-info h2 {
-    font-family: 'Libre Baskerville', serif;
-    font-size: 28px;
-    color: #f5f0e8;
-    margin: 0 0 6px;
-    letter-spacing: 0.3px;
-  }
-
-  .profile-hero-info .hero-role {
-    font-size: 15px;
-    color: var(--gold-light, #f4d35e);
-    font-style: italic;
-    margin-bottom: 10px;
-  }
-
-  .profile-hero-info .hero-school {
-    font-size: 14px;
-    color: rgba(245,240,232,0.65);
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
-
-  .hero-divider {
-    width: 48px;
-    height: 3px;
-    background: linear-gradient(to right, var(--gold, #b8915a), transparent);
-    border-radius: 2px;
-    margin: 12px 0;
-  }
-
-  /* ── BIO ── */
   .bio-text {
     font-size: 16px;
-    line-height: 1.9;
+    line-height: 1.85;
     color: var(--text);
-    margin-bottom: 16px;
+    margin-bottom: 14px;
   }
 
   .bio-text:last-child { margin-bottom: 0; }
 
-  /* ── TIMELINE FORMAZIONE ── */
-  .timeline {
-    position: relative;
-    padding-left: 28px;
-  }
-
-  .timeline::before {
-    content: '';
-    position: absolute;
-    left: 7px;
-    top: 8px;
-    bottom: 8px;
-    width: 2px;
-    background: linear-gradient(to bottom, var(--gold, #b8915a), rgba(184,145,90,0.1));
-    border-radius: 2px;
-  }
-
-  .timeline-item {
-    position: relative;
-    margin-bottom: 28px;
-  }
-
-  .timeline-item:last-child { margin-bottom: 0; }
-
-  .timeline-item::before {
-    content: '';
-    position: absolute;
-    left: -24px;
-    top: 7px;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: var(--gold, #b8915a);
-    box-shadow: 0 0 0 3px rgba(184,145,90,0.2);
-  }
-
-  .timeline-periodo {
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 1.2px;
-    color: var(--gold, #b8915a);
-    font-weight: 700;
-    margin-bottom: 4px;
-  }
-
-  .timeline-titolo {
+  .cv-download {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 24px;
+    padding: 14px 28px;
+    background: var(--text);
+    color: var(--bg);
     font-family: 'Libre Baskerville', serif;
-    font-size: 15px;
-    font-weight: 700;
-    color: var(--text);
-    margin-bottom: 2px;
-    line-height: 1.4;
-  }
-
-  .timeline-ente {
-    font-size: 13px;
-    color: var(--text-dim);
-  }
-
-  .timeline-nota {
-    font-size: 12px;
-    color: var(--text-dim);
-    font-style: italic;
-    margin-top: 3px;
-  }
-
-  /* ── RUOLI CARDS ── */
-  .ruoli-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 14px;
-    margin-top: 4px;
-  }
-
-  .ruolo-card {
-    background: var(--bg);
-    border: 1px solid var(--border);
-    border-top: 3px solid var(--gold, #b8915a);
-    border-radius: 10px;
-    padding: 18px 20px;
     font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: opacity 0.2s;
+  }
+
+  .cv-download:hover { opacity: 0.85; }
+
+  .cv-download svg {
+    width: 18px;
+    height: 18px;
+    fill: currentColor;
+    flex-shrink: 0;
+  }
+
+  .contatti-lista {
+    list-style: none;
+    margin-top: 8px;
+  }
+
+  .contatti-lista li {
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 15px;
     line-height: 1.6;
-    color: var(--text);
   }
 
-  .ruolo-card strong {
-    display: block;
-    font-family: 'Libre Baskerville', serif;
-    font-size: 13px;
-    color: var(--gold, #b8915a);
+  .contatti-lista li:last-child { border-bottom: none; }
+
+  .contatti-lista .label {
+    font-size: 12px;
     text-transform: uppercase;
-    letter-spacing: 0.8px;
-    margin-bottom: 6px;
-  }
-
-  /* ── CONTATTI ── */
-  .contacts-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 16px;
-  }
-
-  .contact-card {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    padding: 24px 26px;
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 14px;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .contact-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 3px;
-    background: linear-gradient(to right, var(--gold, #b8915a), rgba(184,145,90,0.3));
-  }
-
-  .contact-card-icon {
-    font-size: 28px;
-    line-height: 1;
-    margin-bottom: 4px;
-  }
-
-  .contact-card-label {
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 1.2px;
+    letter-spacing: 1px;
     color: var(--text-dim);
     font-weight: 700;
+    display: block;
+    margin-bottom: 2px;
   }
 
-  .contact-card-value {
-    font-family: 'Libre Baskerville', serif;
-    font-size: 15px;
-    color: var(--text);
-    font-weight: 600;
-    word-break: break-all;
-  }
-
-  .contact-card-value a {
-    color: var(--gold, #b8915a);
+  .contatti-lista a {
+    color: var(--gold);
     text-decoration: none;
   }
 
-  .contact-card-value a:hover { text-decoration: underline; }
-
-  .contact-card-sub {
-    font-size: 12px;
-    color: var(--text-dim);
-    font-style: italic;
-  }
+  .contatti-lista a:hover { text-decoration: underline; }
 
   .contact-note {
     font-size: 13px;
     color: var(--text-dim);
     font-style: italic;
     margin-top: 16px;
-    padding: 12px 16px;
-    background: rgba(184,145,90,0.05);
-    border-radius: 8px;
-    border-left: 3px solid rgba(184,145,90,0.3);
-  }
-
-  @media (max-width: 600px) {
-    .profile-hero { flex-direction: column; text-align: center; padding: 28px 24px; }
-    .hero-divider { margin: 12px auto; }
-    .profile-hero-info .hero-school { justify-content: center; }
   }
 </style>
 <meta property="og:type" content="website">
@@ -293,7 +91,7 @@
 <meta property="og:url" content="https://andreavaccaro02-hue.github.io/latino-sites/chi-sono.html">
 <meta property="og:image" content="https://andreavaccaro02-hue.github.io/latino-sites/og-image.svg">
 <meta property="og:title" content="Chi sono — Prof. Andrea Vaccaro | Lingua e Cultura Latina">
-<meta property="og:description" content="Andrea Vaccaro, docente di Discipline letterarie e latino presso l'IISS Luigi Pirandello di Bivona. Bio, formazione e contatti.">
+<meta property="og:description" content="Andrea Vaccaro, docente di Discipline letterarie e latino presso l'IISS Luigi Pirandello di Bivona. Bio e contatti.">
 </head>
 <body>
 
@@ -313,161 +111,64 @@
   <div class="page-header">
     <h1>Chi sono</h1>
     <div class="divider"></div>
-    <p class="subtitle">Il docente &mdash; formazione, scuola, contatti</p>
   </div>
 
   <div class="container">
+    <div class="chi-sono-content">
 
-    <!-- ── Presentazione ── -->
-    <div class="content-section">
-      <div class="content-body" style="padding-top: 0; padding-bottom: 0;">
-
-        <div class="profile-hero">
-          <div class="profile-avatar">AV</div>
-          <div class="profile-hero-info">
-            <h2>Prof. Andrea Vaccaro</h2>
-            <div class="hero-role">Docente di Discipline letterarie e latino &mdash; A011</div>
-            <div class="hero-divider"></div>
-            <div class="hero-school">IISS &ldquo;Luigi Pirandello&rdquo; &mdash; Bivona (AG)</div>
-          </div>
+      <!-- In breve -->
+      <div class="content-section">
+        <div class="content-header">
+          <h2>In breve</h2>
         </div>
-
-        <div style="padding: 0 6px 36px;">
+        <div class="content-body">
           <p class="bio-text">
-            Insegno Discipline letterarie e latino presso l&rsquo;IISS &ldquo;Luigi Pirandello&rdquo; di Bivona,
-            dove sono docente di ruolo dal settembre 2022. All&rsquo;interno dell&rsquo;istituto coordino le attività
-            didattiche dell&rsquo;indirizzo Classico e sono referente del Progetto <strong>ME.MO. &mdash; Merito e
-            Mobilità Sociale</strong>, in collaborazione con la Scuola Superiore Sant&rsquo;Anna di Pisa,
-            per l&rsquo;orientamento e la selezione degli studenti meritevoli verso percorsi universitari di eccellenza.
+            Latinista e docente di ruolo di Discipline letterarie e latino (A011), attualmente insegno
+            presso l&rsquo;IISS &ldquo;Luigi Pirandello&rdquo; di Bivona (AG), dove coordino le attivit&agrave;
+            didattiche dell&rsquo;indirizzo Classico e sono referente del Progetto ME.MO. &mdash; Merito e
+            Mobilit&agrave; Sociale, in collaborazione con la Scuola Superiore Sant&rsquo;Anna di Pisa.
           </p>
           <p class="bio-text">
-            Mi sono formato all&rsquo;Università degli Studi di Palermo in Lettere con curriculum classico,
-            con una tesi in Lingua e letteratura Latina dal titolo <em>I volti di Giocasta tra Sofocle e Seneca</em>.
-            Sto completando la Laurea magistrale in <em>Scienze dell&rsquo;antichità</em>.
-            Prima di dedicarmi all&rsquo;insegnamento ho lavorato come <strong>tutor di Lingua e letteratura
-            Latina</strong> all&rsquo;Università di Palermo e come tutor di potenziamento metodologico in Latino e Greco.
+            Laureato in Lettere con curriculum classico all&rsquo;Universit&agrave; degli Studi di Palermo,
+            con una tesi in Lingua e letteratura latina, ho conseguito il Diploma accademico di Pianoforte
+            al Conservatorio &ldquo;Alessandro Scarlatti&rdquo; di Palermo.
+            Prima dell&rsquo;ingresso in ruolo ho lavorato come tutor di Lingua e letteratura latina
+            presso l&rsquo;Universit&agrave; di Palermo e come tutor di potenziamento metodologico
+            in Latino e Greco.
           </p>
           <p class="bio-text">
-            Parallelamente agli studi umanistici ho conseguito il <strong>Diploma accademico di Pianoforte</strong>
-            al Conservatorio &ldquo;Alessandro Scarlatti&rdquo; di Palermo: la musica &mdash; dai concerti da camera
-            alle masterclass con artisti internazionali &mdash; continua ad accompagnare il mio lavoro in aula
-            come forma di attenzione all&rsquo;espressione e al ritmo della lingua.
+            Progetto strumenti digitali per la didattica del latino con l&rsquo;obiettivo di rendere
+            accessibile la lingua antica senza banalizzarla, nella convinzione che rigore filologico
+            e chiarezza possano convivere.
           </p>
-          <p class="bio-text">
-            Questo sito nasce dalla convinzione che il latino non sia un reperto del passato ma uno strumento
-            vivo di comprensione del mondo. Qui trovi materiali, analisi e percorsi pensati per gli studenti
-            del Liceo Classico e Scientifico: il mio tentativo di rendere accessibile &mdash; senza renderlo
-            banale &mdash; quello che la tradizione classica ha ancora da dire.
-          </p>
-        </div>
-
-      </div>
-    </div>
-
-    <!-- ── Formazione ── -->
-    <div class="content-section">
-      <div class="content-header">
-        <h2>Formazione</h2>
-        <div class="section-ref">Titoli di studio e abilitazione</div>
-      </div>
-      <div class="content-body">
-        <div class="timeline">
-
-          <div class="timeline-item">
-            <div class="timeline-periodo">2019 &ndash; in corso</div>
-            <div class="timeline-titolo">Laurea magistrale in <em>Scienze dell&rsquo;antichità</em></div>
-            <div class="timeline-ente">Università degli Studi di Palermo</div>
-          </div>
-
-          <div class="timeline-item">
-            <div class="timeline-periodo">2014 &ndash; 2020</div>
-            <div class="timeline-titolo">Laurea triennale in Lettere &mdash; curriculum classico (L-10)</div>
-            <div class="timeline-ente">Università degli Studi di Palermo</div>
-            <div class="timeline-nota">Tesi: <em>I volti di Giocasta tra Sofocle e Seneca</em> &mdash; Lingua e letteratura Latina</div>
-          </div>
-
-          <div class="timeline-item">
-            <div class="timeline-periodo">2022</div>
-            <div class="timeline-titolo">Abilitazione A011 &mdash; Discipline letterarie e latino</div>
-            <div class="timeline-ente">Concorso ordinario per esami e titoli (D.D. 21 aprile 2020, n. 499)</div>
-          </div>
-
-          <div class="timeline-item">
-            <div class="timeline-periodo">2017</div>
-            <div class="timeline-titolo">Diploma accademico di Pianoforte principale (V.O.)</div>
-            <div class="timeline-ente">Conservatorio di Musica &ldquo;Alessandro Scarlatti&rdquo; &mdash; Palermo</div>
-            <div class="timeline-nota">Equipollente a Laurea di II livello in Musicologia (LM 45)</div>
-          </div>
-
-          <div class="timeline-item">
-            <div class="timeline-periodo">2014</div>
-            <div class="timeline-titolo">Diploma di maturità scientifica</div>
-            <div class="timeline-ente">Liceo Scientifico Statale &ldquo;Benedetto Croce&rdquo; &mdash; Palermo</div>
-          </div>
-
+          <a class="cv-download" href="pdf/cv-vaccaro-europass.pdf" download>
+            <svg viewBox="0 0 24 24"><path d="M5 20h14v-2H5v2zm7-18v12m0 0l-4-4m4 4l4-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Scarica il CV Europass (PDF)
+          </a>
         </div>
       </div>
-    </div>
 
-    <!-- ── Scuola e ruoli ── -->
-    <div class="content-section">
-      <div class="content-header">
-        <h2>Scuola e ruoli</h2>
-        <div class="section-ref">IISS &ldquo;Luigi Pirandello&rdquo; &mdash; Bivona (AG) &mdash; dal 2022</div>
-      </div>
-      <div class="content-body">
-        <div class="ruoli-grid">
-          <div class="ruolo-card">
-            <strong>Coordinamento didattico</strong>
-            Responsabile delle attività didattiche dell&rsquo;indirizzo Classico
-          </div>
-          <div class="ruolo-card">
-            <strong>Progetto ME.MO.</strong>
-            Referente per il Merito e la Mobilità Sociale in collaborazione con la Scuola Superiore Sant&rsquo;Anna di Pisa
-          </div>
-          <div class="ruolo-card">
-            <strong>Erasmus+</strong>
-            Job Shadowing Teaching Staff &mdash; Zaragoza, dicembre 2025
-          </div>
-          <div class="ruolo-card">
-            <strong>Coordinatore di classe</strong>
-            Liceo Classico &mdash; esperienza pluriennale come coordinatore e segretario
-          </div>
+      <!-- Contatti -->
+      <div class="content-section">
+        <div class="content-header">
+          <h2>Contatti</h2>
         </div>
-      </div>
-    </div>
-
-    <!-- ── Contatti ── -->
-    <div class="content-section">
-      <div class="content-header">
-        <h2>Contatti</h2>
-        <div class="section-ref">Per studenti, famiglie e colleghi</div>
-      </div>
-      <div class="content-body">
-        <div class="contacts-grid">
-          <div class="contact-card">
-            <div class="contact-card-icon">✉</div>
-            <div class="contact-card-label">Email istituzionale</div>
-            <div class="contact-card-value">
+        <div class="content-body">
+          <ul class="contatti-lista">
+            <li>
+              <span class="label">Email istituzionale</span>
               <a href="#" id="email-link">caricamento&hellip;</a>
-            </div>
-            <div class="contact-card-sub">Per comunicazioni didattiche e professionali</div>
-          </div>
-          <div class="contact-card">
-            <div class="contact-card-icon">🏫</div>
-            <div class="contact-card-label">Sede di servizio</div>
-            <div class="contact-card-value">IISS &ldquo;Luigi Pirandello&rdquo;</div>
-            <div class="contact-card-sub">C/da Paratore, 135 &mdash; 92010 Bivona (AG)</div>
-          </div>
+            </li>
+            <li>
+              <span class="label">Sede di servizio</span>
+              IISS &ldquo;Luigi Pirandello&rdquo; &mdash; C/da Paratore, 135 &mdash; 92010 Bivona (AG)
+            </li>
+          </ul>
         </div>
-        <p class="contact-note">
-          Per comunicazioni riguardanti valutazioni, assenze e registro elettronico, utilizzare
-          esclusivamente i canali ufficiali dell&rsquo;istituto.
-        </p>
       </div>
-    </div>
 
-  </div><!-- /container -->
+    </div>
+  </div>
 
   <footer>
     <p><strong>Prof. Andrea Vaccaro</strong></p>

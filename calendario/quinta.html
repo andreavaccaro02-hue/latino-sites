@@ -58,8 +58,26 @@
       .cal-table td { padding: 4px 8px; font-size: 0.8rem; }
     }
     @media (max-width: 768px) {
-      .cal-table th, .cal-table td { padding: 6px 6px; font-size: 0.82rem; }
+      .cal-table th, .cal-table td { padding: 6px 4px; font-size: 0.82rem; }
       .cal-day { display: none; }
+      .cal-ore { font-size: 0.75rem; }
+      .cal-legend { gap: 8px; }
+      .cal-stats { gap: 10px; }
+      .cal-stat { padding: 6px 10px; font-size: 0.82rem; }
+    }
+    @media (max-width: 480px) {
+      .cal-table { font-size: 0.78rem; }
+      .cal-table th { font-size: 0.72rem; padding: 6px 4px; }
+      .cal-table td { padding: 5px 3px; }
+      .cal-date { font-size: 0.78rem; min-width: 70px; }
+      .cal-ore { display: none; }
+      .cal-note { font-size: 0.75rem; word-break: break-word; }
+      .badge-tipo { font-size: 0.7rem; padding: 3px 6px; white-space: nowrap; }
+      .cal-legend { gap: 6px; }
+      .cal-legend-item { font-size: 0.75rem; }
+      .cal-legend-color { width: 12px; height: 12px; }
+      .cal-stats { flex-direction: column; gap: 6px; }
+      .settimana-header td { font-size: 0.75rem; }
     }
   </style>
 </head>
@@ -104,8 +122,8 @@
       <thead>
         <tr>
           <th>Data</th>
-          <th>Giorno</th>
-          <th>Ore</th>
+          <th class="cal-day">Giorno</th>
+          <th class="cal-ore">Ore</th>
           <th>Attività</th>
           <th>Note</th>
         </tr>

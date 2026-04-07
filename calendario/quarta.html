@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calendario Quarta — Lingua e Cultura Latina</title>
+  <meta name="description" content="Calendario attività classe quarta: lezioni, compiti, interrogazioni, assemblee.">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .cal-table { width: 100%; border-collapse: collapse; margin-top: 16px; }
+    .cal-table th { background: linear-gradient(135deg, #2c2416, #4a3c2a); color: #f8f6f0;
+      padding: 10px 12px; text-align: left; font-family: 'Libre Baskerville', serif;
+      font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px; }
+    .cal-table td { padding: 8px 12px; border-bottom: 1px solid var(--border);
+      font-family: 'Cardo', serif; font-size: 0.95rem; vertical-align: middle; }
+    .cal-table tr:hover { background: rgba(184,145,90,0.08); }
+    .cal-table tr.festa { background: #fff3cd; opacity: 0.7; }
+    .cal-table tr.festa td { text-decoration: line-through; color: var(--text-dim); }
+
+    .cal-date { font-weight: 700; white-space: nowrap; min-width: 100px; }
+    .cal-day { white-space: nowrap; min-width: 70px; color: var(--text-dim); }
+    .cal-ore { text-align: center; font-weight: 700; min-width: 40px; }
+
+    .cal-tipo { min-width: 130px; }
+    .cal-note { color: var(--text-dim); }
+
+    .badge-tipo { display: inline-block; padding: 4px 10px; border-radius: 6px;
+      font-size: 0.82rem; font-weight: 700; font-family: 'Libre Baskerville', serif; }
+    .badge-lezione { background: #d9edf7; color: #31708f; }
+    .badge-compito { background: #f2dede; color: #a94442; }
+    .badge-interrogazione { background: #fcf8e3; color: #8a6d3b; }
+    .badge-verifica { background: #e8d5f5; color: #7b4f9e; }
+    .badge-assemblea { background: #dff0d8; color: #3c763d; }
+    .badge-recupero { background: #fde8d0; color: #c25e10; }
+    .badge-altro { background: #e8e5e0; color: var(--text-dim); }
+    .badge-viaggio { background: #d0ecf9; color: #1a6b8a; }
+    .badge-teatro { background: #f5e6d0; color: #8b5e3c; }
+
+    .cal-legend { display: flex; gap: 16px; flex-wrap: wrap; margin: 16px 0; }
+    .cal-legend-item { display: flex; align-items: center; gap: 6px; font-size: 0.85rem;
+      font-family: 'Cardo', serif; color: var(--text-dim); }
+    .cal-legend-color { width: 16px; height: 16px; border-radius: 4px; }
+
+    .cal-stats { display: flex; gap: 20px; flex-wrap: wrap; margin: 12px 0 20px; }
+    .cal-stat { background: var(--card); border: 1px solid var(--border); border-radius: 10px;
+      padding: 10px 16px; font-family: 'Cardo', serif; font-size: 0.9rem; }
+    .cal-stat strong { color: var(--gold); }
+
+    .settimana-header td { background: rgba(184,145,90,0.12); font-weight: 700;
+      font-family: 'Libre Baskerville', serif; font-size: 0.85rem; color: var(--gold);
+      padding: 6px 12px; border-bottom: 2px solid var(--gold-light); }
+
+    @media print {
+      .navbar, .cal-actions, .back-link, footer { display: none; }
+      .cal-tipo select, .cal-note input { border: none; padding: 2px; font-size: 0.8rem; }
+      .cal-table td { padding: 4px 8px; font-size: 0.8rem; }
+    }
+    @media (max-width: 768px) {
+      .cal-table th, .cal-table td { padding: 6px 6px; font-size: 0.82rem; }
+      .cal-day { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="container">
+      <a href="../index.html" class="site-name">Lingua e Cultura Latina</a>
+      <div class="nav-links">
+        <a href="../index.html">Home</a>
+        <a href="../strumenti/raccoglitore.html">Raccoglitore</a>
+        <a href="../grammatica/index.html">Grammatica</a>
+        <a href="../strumenti/glossario-eulalia.html">Strumenti</a>
+        <a href="../chi-sono.html">Su di me</a>
+        <a href="../pdf/cv-vaccaro-europass.pdf" target="_blank">CV</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="page-header">
+    <h1>📅 Calendario Quarta</h1>
+    <div class="divider"></div>
+    <p class="subtitle">Aprile – Giugno 2026 · Lunedì (1h), Giovedì (2h), Venerdì (1h)</p>
+  </div>
+
+  <div class="container">
+    <a href="../index.html" class="back-link">← Torna alla Home</a>
+
+    <div class="cal-legend">
+      <div class="cal-legend-item"><div class="cal-legend-color" style="background:#6db5d4"></div> Lezione</div>
+      <div class="cal-legend-item"><div class="cal-legend-color" style="background:#e85d5d"></div> Compito</div>
+      <div class="cal-legend-item"><div class="cal-legend-color" style="background:#f4d35e"></div> Interrogazione</div>
+      <div class="cal-legend-item"><div class="cal-legend-color" style="background:#c084d4"></div> Verifica</div>
+      <div class="cal-legend-item"><div class="cal-legend-color" style="background:#78c878"></div> Assemblea</div>
+      <div class="cal-legend-item"><div class="cal-legend-color" style="background:#ff8c42"></div> Recupero</div>
+    </div>
+
+    <div class="cal-stats" id="stats"></div>
+
+    <table class="cal-table" id="calendario">
+      <thead>
+        <tr>
+          <th>Data</th>
+          <th>Giorno</th>
+          <th>Ore</th>
+          <th>Attività</th>
+          <th>Note</th>
+        </tr>
+      </thead>
+      <tbody id="cal-body"></tbody>
+    </table>
+
+    <div style="margin-top:20px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
+      <button onclick="window.print()" style="padding:8px 20px;border:2px solid var(--border);border-radius:10px;font-family:'Libre Baskerville',serif;font-size:0.9rem;cursor:pointer;background:var(--card);color:var(--text);transition:all 0.2s;">🖨️ Stampa</button>
+      <span style="font-size:0.85rem;color:var(--text-dim);font-family:'Cardo',serif;">Ultimo aggiornamento: <span id="last-update">—</span></span>
+    </div>
+  </div>
+
+  <footer>
+    <div class="container">
+      <div class="footer-links">
+        <a href="../index.html">Home</a>
+        <a href="../grammatica/index.html">Grammatica</a>
+        <a href="../strumenti/glossario-eulalia.html">Strumenti</a>
+        <a href="../chi-sono.html">Su di me</a>
+      </div>
+    </div>
+  </footer>
+
+<script>
+(function() {
+  var JSON_URL = 'dati-quarta.json';
+  var START = new Date(2026, 3, 6);
+  var END   = new Date(2026, 5, 10);
+  var ORARIO = { 1: 1, 4: 2, 5: 1 };
+
+  var FESTE = new Set(['2026-04-06', '2026-04-07', '2026-05-01', '2026-06-02']);
+  var SOSPESE = new Set(['2026-04-30']);
+
+  var GIORNI = ['Domenica','Lunedì','Martedì','Mercoledì','Giovedì','Venerdì','Sabato'];
+  var MESI = ['Gennaio','Febbraio','Marzo','Aprile','Maggio','Giugno',
+              'Luglio','Agosto','Settembre','Ottobre','Novembre','Dicembre'];
+
+  var BADGE = {
+    'Lezione':'lezione','Compito in classe':'compito','Interrogazione':'interrogazione',
+    'Verifica':'verifica','Assemblea':'assemblea','Recupero':'recupero',
+    'Viaggio d\'istruzione':'viaggio','Teatro':'teatro','Altro':'altro'
+  };
+
+  function dateKey(d) {
+    return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+  }
+  function formatDate(d) {
+    return d.getDate() + ' ' + MESI[d.getMonth()] + ' ' + d.getFullYear();
+  }
+  function tipoBadge(tipo) {
+    if (!tipo) return '<span style="color:var(--text-dim);font-size:0.85rem;">—</span>';
+    var cls = BADGE[tipo] || 'altro';
+    return '<span class="badge-tipo badge-' + cls + '">' + tipo + '</span>';
+  }
+
+  fetch(JSON_URL + '?v=' + Date.now())
+    .then(function(r) { return r.json(); })
+    .then(function(dati) { renderCalendario(dati); })
+    .catch(function() { renderCalendario({}); });
+
+  function renderCalendario(dati) {
+    var tbody = document.getElementById('cal-body');
+    var currentWeek = -1, totalOre = 0, totalLezioni = 0;
+
+    for (var d = new Date(START); d <= END; d.setDate(d.getDate() + 1)) {
+      var dow = d.getDay();
+      var isoDay = dow === 0 ? 7 : dow;
+      if (!(isoDay in ORARIO)) continue;
+
+      var key = dateKey(d);
+      var isFesta = FESTE.has(key);
+      var isSospesa = SOSPESE.has(key);
+      var ore = ORARIO[isoDay];
+      var weekNum = Math.floor((d - START) / (7*24*60*60*1000));
+
+      if (weekNum !== currentWeek) {
+        currentWeek = weekNum;
+        var ws = new Date(d); ws.setDate(ws.getDate() - (isoDay - 1));
+        var we = new Date(ws); we.setDate(we.getDate() + 6);
+        var wtr = document.createElement('tr');
+        wtr.className = 'settimana-header';
+        wtr.innerHTML = '<td colspan="5">Settimana ' + ws.getDate() + '–' + we.getDate() + ' ' + MESI[we.getMonth()] + '</td>';
+        tbody.appendChild(wtr);
+      }
+
+      var today = new Date(); today.setHours(0,0,0,0);
+      var thisDate = new Date(d); thisDate.setHours(0,0,0,0);
+      var isToday = thisDate.getTime() === today.getTime();
+
+      if (isFesta) {
+        var tr = document.createElement('tr');
+        tr.className = 'festa';
+        tr.innerHTML =
+          '<td class="cal-date">' + formatDate(d) + '</td>' +
+          '<td class="cal-day">' + GIORNI[dow] + '</td>' +
+          '<td class="cal-ore">' + ore + 'h</td>' +
+          '<td class="cal-tipo"><span style="color:#8a6d3b;font-weight:700;">No lezione</span></td>' +
+          '<td class="cal-note"></td>';
+        tbody.appendChild(tr);
+      } else if (isSospesa) {
+        if (ore === 2) {
+          for (var h = 1; h <= 2; h++) {
+            var info = dati[key + '-' + h] || dati[key] || {};
+            var tr = document.createElement('tr');
+            tr.className = 'festa';
+            if (h === 2) tr.style.borderBottom = '2px solid var(--border)';
+            tr.innerHTML =
+              '<td class="cal-date">' + (h === 1 ? formatDate(d) : '') + '</td>' +
+              '<td class="cal-day">' + (h === 1 ? GIORNI[dow] : '') + '</td>' +
+              '<td class="cal-ore">' + h + 'ª ora</td>' +
+              '<td class="cal-tipo">' + tipoBadge(info.tipo) + '</td>' +
+              '<td class="cal-note">' + (info.note || '') + '</td>';
+            tbody.appendChild(tr);
+          }
+        } else {
+          var info = dati[key] || {};
+          var tr = document.createElement('tr');
+          tr.className = 'festa';
+          tr.innerHTML =
+            '<td class="cal-date">' + formatDate(d) + '</td>' +
+            '<td class="cal-day">' + GIORNI[dow] + '</td>' +
+            '<td class="cal-ore">1h</td>' +
+            '<td class="cal-tipo">' + tipoBadge(info.tipo) + '</td>' +
+            '<td class="cal-note">' + (info.note || '') + '</td>';
+          tbody.appendChild(tr);
+        }
+      } else if (ore === 2) {
+        totalOre += 2; totalLezioni += 2;
+        for (var h = 1; h <= 2; h++) {
+          var hkey = key + '-' + h;
+          var info = dati[hkey] || {};
+          var tr = document.createElement('tr');
+          if (isToday) tr.style.background = 'rgba(184,145,90,0.15)';
+          if (h === 2) tr.style.borderBottom = '2px solid var(--border)';
+          tr.innerHTML =
+            '<td class="cal-date">' + (h === 1 ? formatDate(d) : '') + '</td>' +
+            '<td class="cal-day">' + (h === 1 ? GIORNI[dow] : '') + '</td>' +
+            '<td class="cal-ore">' + h + 'ª ora</td>' +
+            '<td class="cal-tipo">' + tipoBadge(info.tipo) + '</td>' +
+            '<td class="cal-note">' + (info.note || '') + '</td>';
+          tbody.appendChild(tr);
+        }
+      } else {
+        totalOre += 1; totalLezioni++;
+        var info = dati[key] || {};
+        var tr = document.createElement('tr');
+        if (isToday) tr.style.background = 'rgba(184,145,90,0.15)';
+        tr.innerHTML =
+          '<td class="cal-date">' + formatDate(d) + '</td>' +
+          '<td class="cal-day">' + GIORNI[dow] + '</td>' +
+          '<td class="cal-ore">1h</td>' +
+          '<td class="cal-tipo">' + tipoBadge(info.tipo) + '</td>' +
+          '<td class="cal-note">' + (info.note || '') + '</td>';
+        tbody.appendChild(tr);
+      }
+    }
+
+    document.getElementById('stats').innerHTML =
+      '<div class="cal-stat"><strong>' + totalLezioni + '</strong> lezioni</div>' +
+      '<div class="cal-stat"><strong>' + totalOre + '</strong> ore totali</div>' +
+      '<div class="cal-stat"><strong>' + Object.keys(ORARIO).length + '</strong> giorni/settimana</div>';
+
+    document.getElementById('last-update').textContent = new Date().toLocaleDateString('it-IT');
+  }
+})();
+</script>
+</body>
+</html>

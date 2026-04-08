@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stemma sintattico (Tesnière) — Tacito, Annales 1, 1</title>
+<meta name="description" content="Analisi sintattica per stemma tesnieriano del proemio degli Annales di Tacito (1, 1): Vrbem Romam a principio reges habuere.">
+<link rel="canonical" href="https://andreavaccaro02-hue.github.io/latino-sites/autori/tacito/albero_annales.html">
+<link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+<link rel="stylesheet" href="../../css/style.css">
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="it_IT">
+<meta property="og:url" content="https://andreavaccaro02-hue.github.io/latino-sites/autori/tacito/albero_annales.html">
+<meta property="og:image" content="https://andreavaccaro02-hue.github.io/latino-sites/og-image.svg">
+<meta property="og:title" content="Stemma sintattico (Tesnière) — Tacito, Annales 1, 1">
+<meta property="og:description" content="Analisi sintattica per stemma tesnieriano del proemio degli Annales di Tacito (1, 1): Vrbem Romam a principio reges habuere.">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/alpheios-components@latest/dist/style/style-components.min.css">
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="container">
+    <a href="../../index.html" class="site-name">Lingua e Cultura Latina</a>
+    <div class="nav-links">
+      <a href="../../index.html">Home</a>
+      <a href="../../strumenti/raccoglitore.html">Raccoglitore</a>
+      <a href="../../grammatica/index.html">Grammatica</a>
+      <a href="../../strumenti/glossario-eulalia.html">Strumenti</a>
+      <a href="../../chi-sono.html">Su di me</a>
+      <a href="../../pdf/cv-vaccaro-europass.pdf" target="_blank">CV</a>
+    </div>
+    </div>
+</nav>
+
+<div class="page-header">
+  <h1>Stemma sintattico (Tesnière)</h1>
+  <div class="divider"></div>
+  <p class="subtitle">Tacito, <em>Annales</em> 1, 1 &mdash; <em>Vrbem Romam a principio reges habuere&hellip;</em></p>
+</div>
+
+<div class="container">
+  <a href="../../index.html" class="back-link">&larr; Torna alla lezione su Tacito</a>
+
+  <div class="intro-tesniere" style="margin-top:20px;">
+    <div class="intro-label">Metodo — Stemma di dipendenze (Tesnière)</div>
+    <p>Il <strong>verbo</strong> è il nodo reggente da cui discende ogni elemento. Il colore dipende dal <strong>caso morfologico</strong>: il <strong>nominativo</strong> (soggetto) e tutto ciò che concorda con esso è <strong style="color:#c0392b">rosso</strong>; l'<strong>accusativo</strong> come complemento oggetto e le parti concordanti sono <strong style="color:#27ae60">verdi</strong>; <strong>genitivo, dativo e ablativo</strong> sono sempre <strong style="color:#2471a3">blu</strong>.</p>
+    <p>Le <strong>parti invariabili</strong> (congiunzioni, preposizioni, avverbi, negazioni, particelle) compaiono come nodi espliciti e sono sempre <strong>grigie</strong>. Gli elementi fra parentesi quadre <em>[così]</em> sono sottintesi nel testo.</p>
+  </div>
+
+  <div class="legenda-grid" style="grid-template-columns:repeat(auto-fill,minmax(300px,1fr));">
+    <div class="legenda-item"><div class="legenda-dot ld-v"></div>Verbo / prop. subordinata — <em>il nodo reggente</em></div>
+    <div class="legenda-item"><div class="legenda-dot ld-s"></div>Nominativo (soggetto) + attributi e predicativi concordanti</div>
+    <div class="legenda-item"><div class="legenda-dot ld-o"></div>Accusativo (compl. ogg.) + attributi e predicativi concordanti</div>
+    <div class="legenda-item"><div class="legenda-dot ld-i"></div>Genitivo, dativo, ablativo — sempre blu</div>
+    <div class="legenda-item"><div class="legenda-dot ld-g"></div>Parti invariabili (cong., prep., avv., particelle) — sempre grigie</div>
+  </div>
+
+  <div id="trees"></div>
+</div>
+
+<footer>
+  <p><strong>Prof. Andrea Vaccaro</strong></p>
+  <p>Lingua e Cultura Latina &mdash; Liceo Classico e Liceo Scientifico</p>
+  <div class="footer-links">
+    <a href="../../index.html">Home</a>
+    <a href="../../strumenti/raccoglitore.html">Raccoglitore Testi</a>
+    <a href="../../index.html">Tacito</a>
+  </div>
+</footer>
+
+<script>
+/* ════════════════════════════════════════
+   4 DOMINI DI COLORE — ereditati a cascata
+   y  verbo / prop. sub.    giallo
+   r  gruppo soggetto       rosso
+   g  gruppo oggetto        verde
+   b  complementi indiretti blu/celeste
+   ════════════════════════════════════════ */
+var CFG = {
+  NH:52, HG:20, VG:70, PT:28, PS:28,
+  CW:8.2, RW:6.0, CP:26, MW:84,
+  COLS:{
+    y:{f:'rgba(244,211, 94,.30)',s:'#f4d35e',t:'#5c4400'},
+    r:{f:'rgba(232, 93, 93,.20)',s:'#e85d5d',t:'#7a1212'},
+    g:{f:'rgba(120,200,120,.22)',s:'#78c878',t:'#155a15'},
+    b:{f:'rgba(109,181,212,.22)',s:'#6db5d4',t:'#0e3d70'}
+  }
+};
+
+function assignDomain(nd, dom) {
+  var isVerb = (nd.t==='v'||nd.t==='sub');
+  nd._dom = isVerb ? 'y' : dom;
+  if (!nd.ch) return;
+  nd.ch.forEach(function(c){
+    var childDom;
+    if (c.t==='v'||c.t==='sub') {
+      childDom = 'y';
+    } else if (c.t==='o') {
+      childDom = 'g';
+    } else if (c.t==='spec'||c.t==='term'||c.t==='ind') {
+      childDom = 'b';
+    } else if (c.t==='s') {
+      childDom = /acc/.test(c.r) ? 'rg' : /abl/.test(c.r) ? 'b' : 'r';
+    } else if (c.t==='pred' && isVerb) {
+      childDom = /acc/.test(c.r) ? 'g' : 'r';
+    } else {
+      childDom = (nd._dom==='y') ? 'b' : (nd._dom==='rg') ? 'g' : nd._dom;
+    }
+    assignDomain(c, childDom);
+  });
+}
+
+/* ════════════════════════════════════════
+   DATI — Annales 1, 1
+   Ogni parola invariabile = nodo esplicito
+   ════════════════════════════════════════ */
+var TREES = [
+
+/* ── § 1 — habuere; instituit ── */
+{sec:'§ 1 — habuere; instituit',
+ q:'Vrbem Romam <em>a</em> principio reges <strong>habuere</strong>; libertatem <em>et</em> consulatum L. Brutus <strong>instituit</strong>',
+ note:'<strong>Struttura:</strong> due proposizioni principali coordinate per asindeto. <em>Habuere</em> (= <em>habuerunt</em>) regge <em>Vrbem</em> (compl. ogg.) con <em>Romam</em> (apposizione) e il circostante <em>a principio</em> (abl. tempo). <em>Instituit</em> coordina <em>libertatem</em> e <em>consulatum</em> come oggetti.',
+ t:{w:'habuere',t:'v',r:'verb. princ.',ch:[
+   {w:'reges',t:'s',r:'soggetto'},
+   {w:'Vrbem',t:'o',r:'compl. ogg.',ch:[
+     {w:'Romam',t:'agg',r:'apposizione'}
+   ]},
+   {w:'a',t:'prep',r:'preposizione',ch:[
+     {w:'principio',t:'ind',r:'abl. tempo'}
+   ]},
+   {w:'instituit',t:'sub',r:'prop. coord.',ch:[
+     {w:'L. Brutus',t:'s',r:'soggetto'},
+     {w:'libertatem',t:'o',r:'compl. ogg.'},
+     {w:'et',t:'cong',r:'cong. coord.'},
+     {w:'consulatum',t:'o',r:'compl. ogg.'}
+   ]}
+ ]}
+},
+
+/* ── § 2 — sumebantur; valuit ── */
+{sec:'§ 2 — sumebantur; valuit',
+ q:'dictaturae <em>ad</em> tempus <strong>sumebantur</strong>; <em>neque</em> decemviralis potestas <em>ultra</em> biennium, <em>neque</em> tribunorum militum consulare ius diu <strong>valuit</strong>',
+ note:'<strong>Struttura:</strong> <em>sumebantur</em> regge il soggetto <em>dictaturae</em> e il circostante <em>ad tempus</em>. <em>Valuit</em> ha due soggetti coordinati da <em>neque…neque</em>: <em>potestas</em> (con <em>decemviralis</em> attributo e <em>ultra biennium</em> durata) e <em>ius</em> (con <em>consulare</em> attributo, <em>tribunorum militum</em> gen. di specificazione e <em>diu</em> avverbio).',
+ t:{w:'sumebantur',t:'v',r:'verb. princ.',ch:[
+   {w:'dictaturae',t:'s',r:'soggetto'},
+   {w:'ad',t:'prep',r:'preposizione',ch:[
+     {w:'tempus',t:'ind',r:'acc. durata'}
+   ]},
+   {w:'valuit',t:'sub',r:'prop. coord.',ch:[
+     {w:'neque',t:'cong',r:'cong. neg. coord.'},
+     {w:'potestas',t:'s',r:'soggetto',ch:[
+       {w:'decemviralis',t:'agg',r:'agg.'},
+       {w:'ultra',t:'prep',r:'preposizione',ch:[
+         {w:'biennium',t:'ind',r:'acc. durata'}
+       ]}
+     ]},
+     {w:'neque',t:'cong',r:'cong. neg. coord.'},
+     {w:'ius',t:'s',r:'soggetto',ch:[
+       {w:'consulare',t:'agg',r:'agg.'},
+       {w:'tribunorum',t:'spec',r:'gen. spec.',ch:[
+         {w:'militum',t:'spec',r:'gen. spec.'}
+       ]},
+       {w:'diu',t:'avv',r:'avv. tempo'}
+     ]}
+   ]}
+ ]}
+},
+
+/* ── § 3 — [fuit]; cessere ── */
+{sec:'§ 3 — [fuit]; cessere',
+ q:'<em>non</em> Cinnae, <em>non</em> Sullae longa dominatio; <em>et</em> Pompei Crassi<em>que</em> potentia cito <em>in</em> Caesarem, Lepidi <em>atque</em> Antonii arma <em>in</em> Augustum <strong>cessere</strong>',
+ note:'<strong>Struttura:</strong> la prima frase ha verbo sottinteso (<em>[fuit]</em>). L\'anafora <em>non…non</em> nega i genitivi possessivi <em>Cinnae</em> e <em>Sullae</em>. <em>Cessere</em> (= <em>cesserunt</em>) regge due soggetti coordinati (<em>potentia</em> e <em>arma</em>), ciascuno con genitivi possessivi e complementi di moto figurato (<em>in</em> + acc.).',
+ t:{w:'[fuit]',t:'v',r:'verb. sottinteso',ch:[
+   {w:'dominatio',t:'s',r:'soggetto',ch:[
+     {w:'longa',t:'agg',r:'agg.'}
+   ]},
+   {w:'Cinnae',t:'spec',r:'gen. poss.',ch:[
+     {w:'non',t:'avv',r:'negazione'}
+   ]},
+   {w:'Sullae',t:'spec',r:'gen. poss.',ch:[
+     {w:'non',t:'avv',r:'negazione'}
+   ]},
+   {w:'et',t:'cong',r:'cong. coord.'},
+   {w:'cessere',t:'sub',r:'prop. coord.',ch:[
+     {w:'potentia',t:'s',r:'soggetto',ch:[
+       {w:'Pompei',t:'spec',r:'gen. poss.'},
+       {w:'-que',t:'cong',r:'coord. enclit.'},
+       {w:'Crassi',t:'spec',r:'gen. poss.'}
+     ]},
+     {w:'cito',t:'avv',r:'avv. tempo'},
+     {w:'in',t:'prep',r:'preposizione',ch:[
+       {w:'Caesarem',t:'ind',r:'moto a luogo fig.'}
+     ]},
+     {w:'arma',t:'s',r:'soggetto',ch:[
+       {w:'Lepidi',t:'spec',r:'gen. poss.'},
+       {w:'atque',t:'cong',r:'cong. coord.'},
+       {w:'Antonii',t:'spec',r:'gen. poss.'}
+     ]},
+     {w:'in',t:'prep',r:'preposizione',ch:[
+       {w:'Augustum',t:'ind',r:'moto a luogo fig.'}
+     ]}
+   ]}
+ ]}
+},
+
+/* ── § 4 — accepit ── */
+{sec:'§ 4 — accepit',
+ q:'qui cuncta discordiis civilibus fessa nomine principis <em>sub</em> imperium <strong>accepit</strong>',
+ note:'<strong>Struttura:</strong> <em>qui</em> (= Augustus) è soggetto della relativa. <em>Cuncta</em> è compl. oggetto con il predicativo <em>fessa</em> e l\'ablativo di causa <em>discordiis civilibus</em>. <em>Nomine principis</em> è ablativo di modo (&laquo;col titolo di principe&raquo;). <em>Sub imperium</em> è moto a luogo figurato.',
+ t:{w:'accepit',t:'v',r:'prop. relativa (qui)',ch:[
+   {w:'qui',t:'s',r:'sogg. relativo'},
+   {w:'cuncta',t:'o',r:'compl. ogg.',ch:[
+     {w:'fessa',t:'pred',r:'pred. acc.',ch:[
+       {w:'discordiis',t:'ind',r:'abl. di causa',ch:[
+         {w:'civilibus',t:'agg',r:'agg.'}
+       ]}
+     ]}
+   ]},
+   {w:'nomine',t:'ind',r:'abl. di modo',ch:[
+     {w:'principis',t:'spec',r:'gen. spec.'}
+   ]},
+   {w:'sub',t:'prep',r:'preposizione',ch:[
+     {w:'imperium',t:'ind',r:'moto a luogo fig.'}
+   ]}
+ ]}
+},
+
+/* ── § 5 — memorata sunt; defuere ── */
+{sec:'§ 5 — memorata sunt; defuere',
+ q:'<em>sed</em> veteris populi Romani prospera <em>vel</em> adversa claris scriptoribus <strong>memorata sunt</strong>; temporibus<em>que</em> Augusti dicendis <em>non</em> <strong>defuere</strong> decora ingenia, <em>donec</em> gliscente adulatione <strong>deterrerentur</strong>',
+ note:'<strong>Struttura:</strong> <em>memorata sunt</em> (perfetto passivo) regge il soggetto <em>prospera vel adversa</em> con genitivo <em>populi Romani veteris</em> e ablativo d\'agente <em>scriptoribus claris</em>. <em>Defuere</em> (= <em>defuerunt</em>) regge <em>ingenia</em> (sogg.) e il dativo di fine <em>temporibus Augusti dicendis</em>. La prop. temporale <em>donec deterrerentur</em> ha come circostante l\'ablativo assoluto <em>gliscente adulatione</em>.',
+ t:{w:'memorata sunt',t:'v',r:'verb. princ. (perf. pass.)',ch:[
+   {w:'sed',t:'cong',r:'cong. avvers.'},
+   {w:'prospera',t:'s',r:'soggetto',ch:[
+     {w:'vel',t:'cong',r:'cong. disgiunt.'},
+     {w:'adversa',t:'s',r:'sogg. coord.'}
+   ]},
+   {w:'populi',t:'spec',r:'gen. spec.',ch:[
+     {w:'Romani',t:'agg',r:'agg.'},
+     {w:'veteris',t:'agg',r:'agg.'}
+   ]},
+   {w:'scriptoribus',t:'ind',r:'abl. d\'agente',ch:[
+     {w:'claris',t:'agg',r:'agg.'}
+   ]},
+   {w:'defuere',t:'sub',r:'prop. coord.',ch:[
+     {w:'-que',t:'cong',r:'coord. enclit.'},
+     {w:'ingenia',t:'s',r:'soggetto',ch:[
+       {w:'decora',t:'agg',r:'agg.'}
+     ]},
+     {w:'non',t:'avv',r:'negazione'},
+     {w:'temporibus',t:'term',r:'dat. di fine',ch:[
+       {w:'Augusti',t:'spec',r:'gen. spec.'},
+       {w:'dicendis',t:'agg',r:'gerundivo'}
+     ]},
+     {w:'deterrerentur',t:'sub',r:'prop. temp. (donec)',ch:[
+       {w:'donec',t:'cong',r:'cong. temp.'},
+       {w:'[ingenia]',t:'s',r:'sogg. imp.'},
+       {w:'adulatione',t:'sub',r:'abl. ass.',ch:[
+         {w:'gliscente',t:'agg',r:'part. pres.'}
+       ]}
+     ]}
+   ]}
+ ]}
+},
+
+/* ── § 6 — compositae sunt ── */
+{sec:'§ 6 — compositae sunt',
+ q:'Tiberii Gai<em>que</em> <em>et</em> Claudii <em>ac</em> Neronis res florentibus ipsis <em>ob</em> metum falsae, <em>postquam</em> occiderant recentibus odiis <strong>compositae sunt</strong>',
+ note:'<strong>Struttura:</strong> <em>compositae sunt</em> è il verbo principale. <em>Res</em> (sogg.) è specificato da quattro genitivi coordinati. <em>Falsae</em> è participio predicativo riferito a <em>res</em>, con circostante <em>ob metum</em> (causa) e ablativo assoluto <em>florentibus ipsis</em> (&laquo;quand\'essi erano in vita&raquo;). <em>Postquam occiderant</em> è prop. temporale; <em>recentibus odiis</em> è ablativo di causa riferito a <em>compositae sunt</em>.',
+ t:{w:'compositae sunt',t:'v',r:'verb. princ. (perf. pass.)',ch:[
+   {w:'res',t:'s',r:'soggetto',ch:[
+     {w:'Tiberii',t:'spec',r:'gen. spec.'},
+     {w:'-que',t:'cong',r:'coord. enclit.'},
+     {w:'Gai',t:'spec',r:'gen. spec.'},
+     {w:'et',t:'cong',r:'cong. coord.'},
+     {w:'Claudii',t:'spec',r:'gen. spec.'},
+     {w:'ac',t:'cong',r:'cong. coord.'},
+     {w:'Neronis',t:'spec',r:'gen. spec.'}
+   ]},
+   {w:'falsae',t:'pred',r:'pred. nom. (part.)',ch:[
+     {w:'ipsis',t:'sub',r:'abl. ass. (florent.)',ch:[
+       {w:'florentibus',t:'agg',r:'part. pres.'}
+     ]},
+     {w:'ob',t:'prep',r:'preposizione',ch:[
+       {w:'metum',t:'ind',r:'compl. causa'}
+     ]}
+   ]},
+   {w:'occiderant',t:'sub',r:'prop. temp. (postquam)',ch:[
+     {w:'postquam',t:'cong',r:'cong. temp.'},
+     {w:'[ii]',t:'s',r:'sogg. imp.'}
+   ]},
+   {w:'odiis',t:'ind',r:'abl. di causa',ch:[
+     {w:'recentibus',t:'agg',r:'agg.'}
+   ]}
+ ]}
+},
+
+/* ── § 7 — [est] consilium; habeo ── */
+{sec:'§ 7 — [est] consilium; habeo',
+ q:'<em>inde</em> consilium mihi pauca <em>de</em> Augusto <em>et</em> extrema <strong>tradere</strong>, <em>mox</em> Tiberii principatum <em>et</em> cetera, <em>sine</em> ira <em>et</em> studio, quorum causas <em>procul</em> <strong>habeo</strong>',
+ note:'<strong>Struttura:</strong> verbo copulativo sottinteso (<em>[est]</em>). <em>Consilium</em> è soggetto; <em>mihi</em> è dativo di possesso. L\'infinito <em>tradere</em> è epesegetico (spiega il contenuto di <em>consilium</em>) e regge gli oggetti <em>pauca</em>, <em>extrema</em>, <em>principatum</em>, <em>cetera</em>. <em>Sine ira et studio</em> è il celebre ablativo di modo: la formula metodologica di Tacito. La relativa <em>quorum causas procul habeo</em> chiude il proemio.',
+ t:{w:'[est]',t:'v',r:'verb. sottinteso',ch:[
+   {w:'inde',t:'avv',r:'avv. consec.'},
+   {w:'consilium',t:'s',r:'soggetto'},
+   {w:'mihi',t:'term',r:'dat. possesso'},
+   {w:'tradere',t:'sub',r:'inf. epesegetico',ch:[
+     {w:'pauca',t:'o',r:'compl. ogg.',ch:[
+       {w:'de',t:'prep',r:'preposizione',ch:[
+         {w:'Augusto',t:'ind',r:'compl. argom.'}
+       ]}
+     ]},
+     {w:'et',t:'cong',r:'cong. coord.'},
+     {w:'extrema',t:'o',r:'compl. ogg.'},
+     {w:'mox',t:'avv',r:'avv. tempo'},
+     {w:'principatum',t:'o',r:'compl. ogg.',ch:[
+       {w:'Tiberii',t:'spec',r:'gen. spec.'}
+     ]},
+     {w:'et',t:'cong',r:'cong. coord.'},
+     {w:'cetera',t:'o',r:'compl. ogg.'}
+   ]},
+   {w:'sine',t:'prep',r:'preposizione',ch:[
+     {w:'ira',t:'ind',r:'abl. di modo',ch:[
+       {w:'et',t:'cong',r:'cong. coord.'},
+       {w:'studio',t:'ind',r:'abl. di modo'}
+     ]}
+   ]},
+   {w:'habeo',t:'sub',r:'prop. rel. (quorum)',ch:[
+     {w:'[ego]',t:'s',r:'sogg. imp.'},
+     {w:'causas',t:'o',r:'compl. ogg.',ch:[
+       {w:'quorum',t:'spec',r:'gen. ogg.'}
+     ]},
+     {w:'procul',t:'avv',r:'avv. luogo'}
+   ]}
+ ]}
+}
+
+]; /* fine TREES */
+
+/* ════════════════════════════════════════
+   RENDERER
+   ════════════════════════════════════════ */
+function nW(nd){
+  var ww=nd.w.length*CFG.CW+CFG.CP;
+  var rw=nd.r.length*CFG.RW+CFG.CP;
+  return Math.max(CFG.MW,ww,rw);
+}
+function computeSW(nd){
+  var own=nW(nd)+CFG.HG;
+  if(!nd.ch||!nd.ch.length){nd._sw=own;return;}
+  nd.ch.forEach(computeSW);
+  var sum=nd.ch.reduce(function(a,c){return a+c._sw;},0);
+  nd._sw=Math.max(own,sum);
+}
+function assignCX(nd,x0){
+  if(!nd.ch||!nd.ch.length){nd._cx=x0+nd._sw/2;return;}
+  var cx=x0;
+  nd.ch.forEach(function(c){assignCX(c,cx);cx+=c._sw;});
+  nd._cx=(nd.ch[0]._cx+nd.ch[nd.ch.length-1]._cx)/2;
+}
+function assignCY(nd,d){
+  nd._cy=CFG.PT+d*(CFG.NH+CFG.VG);
+  if(nd.ch)nd.ch.forEach(function(c){assignCY(c,d+1);});
+}
+function maxD(nd){
+  if(!nd.ch||!nd.ch.length)return 0;
+  return 1+Math.max.apply(null,nd.ch.map(maxD));
+}
+function svgEl(tag,a){
+  var el=document.createElementNS('http://www.w3.org/2000/svg',tag);
+  Object.keys(a).forEach(function(k){el.setAttribute(k,a[k]);});
+  return el;
+}
+function drawEdges(svg,nd){
+  if(!nd.ch)return;
+  var px=nd._cx,py=nd._cy+CFG.NH;
+  nd.ch.forEach(function(c){
+    svg.appendChild(svgEl('line',{x1:px,y1:py,x2:c._cx,y2:c._cy,stroke:'#c0b09a','stroke-width':'1.8'}));
+    drawEdges(svg,c);
+  });
+}
+var INVAR = {cong:1, prep:1, avv:1};
+var GRAY  = {f:'rgba(173,181,189,.25)', s:'#adb5bd', t:'#444d55'};
+var RG    = {s:'#9b3a3a', t:'#5a1010'};
+var _curGradId = '';
+
+function drawNodes(svg,nd){
+  var fill,stroke,textCol;
+  if (INVAR[nd.t]) {
+    fill=GRAY.f; stroke=GRAY.s; textCol=GRAY.t;
+  } else if (nd._dom==='rg') {
+    fill='url(#'+_curGradId+')'; stroke=RG.s; textCol=RG.t;
+  } else {
+    var col=CFG.COLS[nd._dom]||CFG.COLS.b;
+    fill=col.f; stroke=col.s; textCol=col.t;
+  }
+  var w=nW(nd),x=nd._cx-w/2,y=nd._cy;
+  var isImp=nd.w.charAt(0)==='[';
+  svg.appendChild(svgEl('rect',{x:x,y:y,width:w,height:CFG.NH,rx:10,fill:fill,stroke:stroke,'stroke-width':'2.2'}));
+  var t1=svgEl('text',{x:nd._cx,y:y+20,'text-anchor':'middle','font-family':'Cardo, serif','font-size':'14','font-weight':'700','font-style':isImp?'italic':'normal',fill:textCol});
+  t1.textContent=nd.w;svg.appendChild(t1);
+  var t2=svgEl('text',{x:nd._cx,y:y+37,'text-anchor':'middle','font-family':'Cardo, serif','font-size':'9.5','font-style':'italic',fill:textCol});
+  t2.textContent=nd.r;svg.appendChild(t2);
+  if(nd.ch)nd.ch.forEach(function(c){drawNodes(svg,c);});
+}
+function renderAll(){
+  var cont=document.getElementById('trees');
+  TREES.forEach(function(data,idx){
+    var root=JSON.parse(JSON.stringify(data.t));
+    assignDomain(root,'y');
+    computeSW(root);assignCX(root,CFG.PS);assignCY(root,0);
+    var md=maxD(root);
+    var svgW=root._sw+CFG.PS*2;
+    var svgH=CFG.PT+(md+1)*(CFG.NH+CFG.VG)+24;
+    var svg=svgEl('svg',{viewBox:'0 0 '+svgW+' '+svgH,style:'display:block;width:100%;min-width:'+Math.min(svgW,380)+'px;'});
+    _curGradId='rg-g-'+idx;
+    var defs=document.createElementNS('http://www.w3.org/2000/svg','defs');
+    var grad=document.createElementNS('http://www.w3.org/2000/svg','linearGradient');
+    grad.setAttribute('id',_curGradId);grad.setAttribute('x1','0');grad.setAttribute('x2','1');
+    grad.setAttribute('y1','0');grad.setAttribute('y2','0');
+    [['50%','rgba(232,93,93,.22)'],['50%','rgba(120,200,120,.28)']].forEach(function(s){
+      var st=document.createElementNS('http://www.w3.org/2000/svg','stop');
+      st.setAttribute('offset',s[0]);st.setAttribute('stop-color',s[1]);grad.appendChild(st);
+    });
+    defs.appendChild(grad);svg.appendChild(defs);
+    drawEdges(svg,root);drawNodes(svg,root);
+
+    var section=document.createElement('div');
+    section.className='content-section';section.style.marginBottom='28px';
+    var hdr=document.createElement('div');hdr.className='content-header';
+    hdr.innerHTML='<h2>'+data.sec+'</h2>';section.appendChild(hdr);
+    var body=document.createElement('div');body.className='content-body';
+    var brano=document.createElement('div');brano.className='brano-box';
+    brano.innerHTML='<div class="brano-titolo">Testo</div><div class="brano-testo">'+data.q+'</div>';
+    body.appendChild(brano);
+    var wrap=document.createElement('div');wrap.className='stemma-wrap';wrap.style.marginTop='20px';
+    wrap.appendChild(svg);body.appendChild(wrap);
+    if(data.note){var nota=document.createElement('div');nota.className='nota-sintattica';nota.innerHTML=data.note;body.appendChild(nota);}
+    section.appendChild(body);cont.appendChild(section);
+  });
+}
+renderAll();
+</script>
+<script src="../../js/alpheios-init.js"></script>
+</body>
+</html>

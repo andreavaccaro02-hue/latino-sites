@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Schema a grappolo v2 — Congiunzioni subordinanti</title>
+<meta name="description" content="Schema interattivo completo: 16 congiunzioni subordinanti e tutte le subordinate che possono introdurre. Da Traina-Bertotti e Miraglia.">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="stylesheet" href="../css/style.css">
+<style>
+.grappolo{margin:32px 0}
+.cong-row{margin-bottom:32px;page-break-inside:avoid}
+.cong-node{display:inline-flex;align-items:center;gap:12px;background:linear-gradient(135deg,#1e1a12,#3a3024);color:#f5f0e8;padding:16px 28px;border-radius:14px;font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:700;cursor:pointer;transition:all .3s;user-select:none;touch-action:manipulation;box-shadow:0 4px 16px rgba(30,26,18,.15)}
+.cong-node:hover{transform:scale(1.03);box-shadow:0 6px 24px rgba(30,26,18,.25)}
+.cong-node .cn-gloss{font-family:'Crimson Pro',serif;font-size:14px;font-weight:400;color:rgba(245,240,232,.6);font-style:italic;margin-left:4px}
+.cong-node .cong-toggle{font-size:18px;transition:transform .3s;margin-left:4px}
+.cong-row.open .cong-node .cong-toggle{transform:rotate(90deg)}
+.cong-branches{display:none;margin-left:40px;padding-left:28px;border-left:3px solid var(--border-light);margin-top:12px}
+.cong-row.open .cong-branches{display:block}
+.branch{display:flex;align-items:flex-start;gap:16px;margin-bottom:12px;position:relative;animation:brIn .3s ease both}
+.branch::before{content:'';position:absolute;left:-28px;top:20px;width:24px;height:3px;background:var(--border-light)}
+@keyframes brIn{from{opacity:0;transform:translateX(-12px)}to{opacity:1;transform:translateX(0)}}
+.branch:nth-child(1){animation-delay:0s}.branch:nth-child(2){animation-delay:.05s}.branch:nth-child(3){animation-delay:.1s}.branch:nth-child(4){animation-delay:.15s}.branch:nth-child(5){animation-delay:.2s}.branch:nth-child(6){animation-delay:.25s}.branch:nth-child(7){animation-delay:.3s}.branch:nth-child(8){animation-delay:.35s}
+.bt{flex-shrink:0;padding:10px 18px;border-radius:10px;font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:700;min-width:160px;text-align:center;border:2px solid;transition:transform .2s}
+.bt:hover{transform:scale(1.05)}
+.bt-fin{background:rgba(74,138,170,.12);color:#1a6b8a;border-color:#4a8aaa}
+.bt-cons{background:rgba(201,74,74,.10);color:#8a1a1a;border-color:#c94a4a}
+.bt-caus{background:rgba(74,154,94,.12);color:#2a6a2a;border-color:#4a9a5e}
+.bt-temp{background:rgba(212,168,67,.12);color:#6a5a1a;border-color:#d4a843}
+.bt-conc{background:rgba(154,106,181,.12);color:#5a2a7a;border-color:#9a6ab5}
+.bt-cond{background:rgba(212,122,58,.12);color:#8a4a1a;border-color:#d47a3a}
+.bt-comp{background:rgba(156,122,60,.12);color:#6a5020;border-color:#9C7A3C}
+.bt-cmpr{background:rgba(173,181,189,.12);color:#444d55;border-color:#adb5bd}
+.bt-dich{background:rgba(30,91,139,.12);color:#1a4a7a;border-color:#1E5B8B}
+.bt-ecc{background:rgba(139,30,63,.12);color:#6a1a30;border-color:#8B1E3F}
+.bt-lim{background:rgba(45,106,79,.12);color:var(--eulalia);border-color:var(--eulalia)}
+.bd{flex:1;padding:6px 0}
+.bd .f{font-family:'Crimson Pro',serif;font-size:16px;font-weight:600;color:var(--text);margin-bottom:3px}
+.bd .f em{color:var(--gold)}
+.bd .t{font-size:14px;color:var(--text-dim);font-style:italic}
+.bd .ex{font-family:'Crimson Pro',serif;font-size:14px;color:var(--text-dim);margin-top:5px;padding:7px 12px;background:var(--gold-pale);border-radius:8px;line-height:1.6}
+.bd .ex b{color:var(--gold)}
+.bd .n{font-size:12px;color:var(--text-muted);margin-top:3px}
+.bd .src{font-size:11px;color:var(--text-muted);font-style:normal;margin-top:2px}
+.tip{margin:12px 0;padding:16px 20px;border-radius:12px;font-size:14px;line-height:1.7;border-left:5px solid;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.tip-it{background:#fce8e8;border-color:#c94a4a;color:#5a1a1a}
+.tip-it strong{color:#c94a4a}
+.tip-trap{background:#fff4d6;border-color:#d4a843;color:#4a3a08}
+.tip-trap strong{color:#8a6a0a}
+/* Icona prima del tip */
+.tip-it::before{content:'🇮🇹 ';font-size:16px}
+.tip-trap::before{content:'⚠️ ';font-size:16px}
+/* Gruppo */
+.cong-group{margin-top:40px;margin-bottom:8px;padding-bottom:8px;border-bottom:2px solid var(--border-light)}
+.cong-group-title{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:600;color:var(--text-dim);text-transform:uppercase;letter-spacing:1.5px}
+/* Expand/LIM */
+.expand-all,.lim-toggle{font-family:'Crimson Pro',serif;font-weight:600;padding:10px 22px;border:1px solid var(--border);border-radius:10px;background:var(--card);color:var(--text-dim);cursor:pointer;transition:all .25s;touch-action:manipulation}
+.expand-all:hover,.lim-toggle:hover{border-color:var(--gold);color:var(--gold)}
+.lim-toggle{position:fixed;bottom:24px;right:24px;z-index:200;font-size:16px;padding:14px 28px;border:none;background:var(--gold);color:#fff;box-shadow:0 4px 20px rgba(156,122,60,.4);border-radius:12px}
+.lim-mode .cong-node{font-size:30px;padding:18px 34px}
+.lim-mode .bt{font-size:20px;min-width:190px;padding:12px 22px}
+.lim-mode .bd .f{font-size:19px}
+.lim-mode .bd .t{font-size:17px}
+.lim-mode .bd .ex{font-size:17px}
+.lim-mode .cong-branches{margin-left:50px;padding-left:34px}
+.lim-mode .cong-group-title{font-size:24px}
+/* Legenda */
+.leg{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 24px}
+.leg span{padding:5px 12px;border-radius:8px;font-size:12px;font-weight:700;border:2px solid}
+@media(max-width:768px){.branch{flex-direction:column;gap:6px}.bt{min-width:auto;align-self:flex-start}.cong-branches{margin-left:20px;padding-left:16px}}
+/* ═══ PRESENTAZIONE LIM ═══ */
+.pres{position:fixed;inset:0;z-index:9000;background:var(--bg);display:none;flex-direction:column;overflow:hidden}
+.pres.active{display:flex}
+.pres-bar{display:flex;align-items:center;justify-content:space-between;padding:14px 32px;background:rgba(250,248,243,.95);backdrop-filter:blur(8px);border-bottom:1px solid var(--border-light);flex-shrink:0;gap:16px}
+.pres-title{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:600;color:var(--text)}
+.pres-info{font-family:'Crimson Pro',serif;font-size:15px;color:var(--text-muted);flex:1;text-align:center}
+.pres-b{font-family:'Crimson Pro',serif;font-size:16px;font-weight:600;padding:12px 28px;border:1px solid var(--border);border-radius:10px;background:var(--card);color:var(--text-dim);cursor:pointer;transition:all .25s;touch-action:manipulation;min-height:48px}
+.pres-b:hover{border-color:var(--gold);color:var(--gold)}
+.pres-b:disabled{opacity:.3;cursor:default}
+.pres-b-go{background:var(--gold);color:#fff;border-color:var(--gold)}
+.pres-b-go:hover{background:var(--text);border-color:var(--text)}
+.pres-prog{height:4px;background:var(--border-light);flex-shrink:0}
+.pres-prog-fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--gold-light));transition:width .4s}
+.pres-body{flex:1;overflow-y:auto;padding:40px 56px;-webkit-overflow-scrolling:touch}
+.pres-nav{display:flex;justify-content:space-between;align-items:center;padding:16px 32px;background:var(--card);border-top:1px solid var(--border-light);flex-shrink:0}
+.pres-cnt{font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--text-dim)}
+@media(max-height:800px){.pres-body{padding:24px 36px}}
+@media print{.lim-toggle,.expand-all,.cong-toggle,.pres{display:none!important}.cong-branches{display:block!important}.navbar,footer{display:none!important}}
+</style>
+</head>
+<body>
+<nav class="navbar"><div class="container"><a href="../index.html" class="site-name">Lingua e Cultura Latina</a><div class="nav-links"><a href="../index.html">Home</a><a href="../strumenti/raccoglitore.html">Raccoglitore</a><a href="index.html" class="active">Grammatica</a><a href="../strumenti/glossario-eulalia.html">Strumenti</a><a href="../chi-sono.html">Su di me</a></div></div></nav>
+
+<div class="page-header">
+  <h1>Congiunzioni subordinanti</h1>
+  <div class="divider"></div>
+  <p class="subtitle">Schema a grappolo v2 &mdash; 16 congiunzioni, tutte le subordinate<br><small>Da Traina-Bertotti, <em>Sintassi normativa</em> &amp; Miraglia, <em>Ripetitorio</em></small></p>
+</div>
+
+<main class="container">
+  <a href="index.html" class="back-link">&larr; Grammatica</a>
+
+  <div class="intro-tesniere" style="margin-top:20px;">
+    <div class="intro-label">Come leggere lo schema</div>
+    <p>Il nodo scuro &egrave; sempre la <strong>congiunzione</strong>. I rami sono le <strong>subordinate che pu&ograve; introdurre</strong>. Clicca per espandere. Per ogni ramo: formula, traduzione, esempio. I riferimenti (T-B §) rimandano a Traina-Bertotti.</p>
+  </div>
+
+  <div class="leg">
+    <span class="bt-cond" style="padding:4px 10px;border-radius:6px;font-size:11px;font-weight:700;border:2px solid">Condizionale</span>
+    <span class="bt-fin" style="padding:4px 10px;border-radius:6px;font-size:11px;font-weight:700;border:2px solid">Finale</span>
+    <span class="bt-cons" style="padding:4px 10px;border-radius:6px;font-size:11px;font-weight:700;border:2px solid">Consecutiva</span>
+    <span class="bt-caus" style="padding:4px 10px;border-radius:6px;font-size:11px;font-weight:700;border:2px solid">Causale</span>
+    <span class="bt-temp" style="padding:4px 10px;border-radius:6px;font-size:11px;font-weight:700;border:2px solid">Temporale</span>
+    <span class="bt-conc" style="padding:4px 10px;border-radius:6px;font-size:11px;font-weight:700;border:2px solid">Concessiva</span>
+    <span class="bt-comp" style="padding:4px 10px;border-radius:6px;font-size:11px;font-weight:700;border:2px solid">Completiva</span>
+    <span class="bt-dich" style="padding:4px 10px;border-radius:6px;font-size:11px;font-weight:700;border:2px solid">Dichiarativa</span>
+    <span class="bt-cmpr" style="padding:4px 10px;border-radius:6px;font-size:11px;font-weight:700;border:2px solid">Comparativa</span>
+    <span class="bt-ecc" style="padding:4px 10px;border-radius:6px;font-size:11px;font-weight:700;border:2px solid">Eccettuativa</span>
+    <span class="bt-lim" style="padding:4px 10px;border-radius:6px;font-size:11px;font-weight:700;border:2px solid">Limitativa</span>
+  </div>
+
+  <button class="expand-all" id="ea">Espandi tutto</button>
+
+  <div class="grappolo" id="grappolo">
+
+<!-- ═══════════ CONDIZIONALI ═══════════ -->
+<div class="cong-group"><span class="cong-group-title">Condizionali</span></div>
+
+<div class="cong-row"><div class="cong-node"><em>s&imacr;</em><span class="cn-gloss">&laquo;se&raquo;</span><span class="cong-toggle">&#9654;</span></div>
+<div class="cong-branches">
+  <div class="tip tip-it"><strong>In italiano:</strong> <em>si</em> = sempre &laquo;se&raquo;. Ma la <strong>reggente</strong> cambia modo: I tipo &rarr; indicativo; II &rarr; condizionale presente; III &rarr; condizionale passato. Col piuccheperfetto (<em>si dixisses... erravisses</em>) &rarr; &laquo;se avessi detto... avresti sbagliato&raquo;.</div>
+  <div class="branch"><div class="bt bt-cond">I &mdash; realt&agrave;</div><div class="bd"><div class="f"><em>s&imacr;</em> + <strong>ind.</strong> &hellip; <strong>ind.</strong></div><div class="ex"><b>Si</b> hoc <b>d&imacr;cis</b>, <b>err&amacr;s</b>. &mdash; &laquo;Se dici questo, sbagli.&raquo; <span class="src">T-B &sect;379 / Mir. XXXII</span></div></div></div>
+  <div class="branch"><div class="bt bt-cond">II &mdash; possibilit&agrave;</div><div class="bd"><div class="f"><em>s&imacr;</em> + <strong>cong. pres./perf.</strong> &hellip; <strong>cong. pres./perf.</strong></div><div class="ex"><b>S&imacr;</b> quis t&emacr; <b>interroget</b>, e&imacr; v&emacr;rum <b>d&imacr;c</b>. &mdash; &laquo;Se qualcuno ti interrogasse, digli la verit&agrave;.&raquo; <span class="src">Mir. XIX</span></div></div></div>
+  <div class="branch"><div class="bt bt-cond">III &mdash; irrealt&agrave;</div><div class="bd"><div class="f"><em>s&imacr;</em> + <strong>cong. impf./piucchep.</strong> &hellip; <strong>cong. impf./piucchep.</strong></div><div class="ex"><b>S&imacr;</b> v&imacr;veret pater tuus, hoc n&omacr;n <b>prob&amacr;ret</b>. &mdash; &laquo;Se tuo padre fosse vivo, non approverebbe.&raquo; <span class="src">Mir. XIX</span></div></div></div>
+</div></div>
+
+<div class="cong-row"><div class="cong-node"><em>nis&imacr;</em><span class="cn-gloss">&laquo;se non, a meno che&raquo;</span><span class="cong-toggle">&#9654;</span></div>
+<div class="cong-branches">
+  <div class="tip tip-it"><strong>In italiano:</strong> &laquo;se non&raquo; o &laquo;a meno che (non)&raquo;. Stessi 3 tipi di <em>s&imacr;</em>. Dopo negazione/interrogativa = eccettuativa: &laquo;tranne che&raquo;.</div>
+  <div class="branch"><div class="bt bt-cond">Condizionale neg.</div><div class="bd"><div class="f"><em>nis&imacr;</em> + <strong>ind./cong.</strong></div><div class="ex"><b>Nisi</b> id <b>f&emacr;ceris</b>, poen&amacr;s d&amacr;bis. &mdash; &laquo;Se non farai questo, sarai punito.&raquo;</div></div></div>
+  <div class="branch"><div class="bt bt-ecc">Eccettuativa</div><div class="bd"><div class="f"><em>nis&imacr;</em> dopo negazione = &laquo;tranne che&raquo;</div><div class="ex">Nihil agis <b>nisi</b> r&emacr;ct&emacr;. &mdash; &laquo;Non fai nulla se non rettamente.&raquo;</div></div></div>
+</div></div>
+
+<div class="cong-row"><div class="cong-node"><em>dummodo / modo / dum</em><span class="cn-gloss">&laquo;purch&eacute;&raquo;</span><span class="cong-toggle">&#9654;</span></div>
+<div class="cong-branches">
+  <div class="tip tip-it"><strong>In italiano:</strong> &laquo;purch&eacute;&raquo; + congiuntivo. Negazione: <em>n&emacr;</em> (non <em>n&omacr;n</em>).</div>
+  <div class="branch"><div class="bt bt-cond">Condiz. restrittiva</div><div class="bd"><div class="f"><em>dummodo / modo / dum</em> + <strong>cong.</strong></div><div class="ex"><b>Oderint, dum metuant</b>. &mdash; &laquo;Mi odino pure, purch&eacute; mi temano.&raquo; <span class="src">Accio ap. Cic. &mdash; Mir. XXXIII</span></div></div></div>
+</div></div>
+
+<!-- ═══════════ UT ═══════════ -->
+<div class="cong-group"><span class="cong-group-title">Ut e i suoi valori</span></div>
+
+<div class="cong-row"><div class="cong-node"><em>ut</em> <small style="font-size:16px;opacity:.6">(<em>ut&imacr;</em>)</small><span class="cn-gloss">7 valori</span><span class="cong-toggle">&#9654;</span></div>
+<div class="cong-branches">
+  <div class="tip tip-trap"><strong>Come distinguere:</strong> (1) C'&egrave; un correlativo (<em>tam, ita, tantus, sic, ade&omacr;</em>)? &rarr; <strong>consecutiva</strong>. (2) Verbo di volont&agrave;/preghiera? &rarr; <strong>completiva volitiva</strong>. (3) Verbo di accadere? &rarr; <strong>completiva di fatto</strong>. (4) C'&egrave; <em>tamen</em>? &rarr; <strong>concessiva</strong>. (5) <strong>Indicativo</strong>? &rarr; <strong>comparativa</strong> o <strong>temporale</strong>. (6) Nessuna spia &rarr; <strong>finale</strong>.</div>
+
+  <div class="branch"><div class="bt bt-fin">Finale</div><div class="bd"><div class="f"><em>ut</em> + <strong>cong.</strong> (nessun correlativo) &mdash; neg. <em>n&emacr;</em></div><div class="t">&laquo;affinch&eacute;, per&raquo; &mdash; T-B &sect;353, p. 396</div><div class="ex"><b>N&omacr;n ut</b> edam v&imacr;v&omacr;, sed <b>ut</b> v&imacr;vam <b>ed&omacr;</b>. &mdash; &laquo;Non vivo per mangiare, ma mangio per vivere.&raquo; <span class="src">Quint. 9,3,85</span></div><div class="n">Con comparativo si usa <em>qu&omacr;</em>: <em>qu&omacr; facilius explicent</em> (Cic., <em>Off.</em> 3,33).</div></div></div>
+
+  <div class="branch"><div class="bt bt-cons">Consecutiva</div><div class="bd"><div class="f"><em>sic / ita / tam / tantus / ade&omacr;</em> &hellip; <em>ut</em> + <strong>cong.</strong> &mdash; neg. <em>ut n&omacr;n</em></div><div class="t">&laquo;(tanto/cos&igrave;)... che&raquo;, &laquo;da&raquo; + inf. &mdash; T-B &sect;&sect;357-359, p. 399</div><div class="ex"><em>Tantus</em> c&omacr;nsensus fuit, <b>ut</b> m&amacr;t&umacr;r&emacr; prof&imacr;ciscer&emacr;mur. &mdash; &laquo;L'accordo fu <b>tanto</b> grande <b>che</b> si part&igrave; in fretta.&raquo; <span class="src">Cic., <em>Fam.</em> 3,2,1</span></div><div class="n"><em>Maior quam ut</em> = &laquo;troppo grande per&raquo; (Sen., <em>Ep.</em> 65,21 &mdash; T-B p. 404).</div></div></div>
+
+  <div class="branch"><div class="bt bt-comp">Compl. volitiva</div><div class="bd"><div class="f">verbo di volont&agrave;/preghiera + <em>ut</em> + <strong>cong.</strong> &mdash; neg. <em>n&emacr;</em></div><div class="t">&laquo;di&raquo; + inf. / &laquo;che&raquo; + cong. &mdash; T-B &sect;340, p. 377</div><div class="ex">T&emacr; hortor <b>ut</b> linguae Lat&imacr;nae <b>stude&amacr;s</b>. &mdash; &laquo;Ti esorto <b>a</b> studiare il latino.&raquo; <span class="src">Mir. XXI.2</span></div><div class="n">Anche: <em>C&umacr;r&amacr; ut vale&amacr;s</em>; <em>Fac ut v&imacr;vat!</em>. Dopo <em>iube&omacr;</em> si usa l'infinitiva, non <em>ut</em>.</div></div></div>
+
+  <div class="branch"><div class="bt bt-dich">Compl. di fatto</div><div class="bd"><div class="f">verbo di accadere (<em>accidit, fit, evenit</em>) + <em>ut</em> + <strong>cong.</strong></div><div class="t">&laquo;che&raquo; &mdash; T-B &sect;339, p. 374</div><div class="ex"><b>Accidit</b> <b>ut</b> n&emacr;m&omacr; <b>adesset</b>. &mdash; &laquo;Accadde che nessuno fosse presente.&raquo;</div></div></div>
+
+  <div class="branch"><div class="bt bt-cmpr">Comparativa</div><div class="bd"><div class="f"><em>ut</em> + <strong>indicativo</strong> &hellip; <em>ita / sic</em></div><div class="t">&laquo;come... cos&igrave;&raquo; &mdash; Mir. XXXI</div><div class="ex"><b>Ut</b> hom&omacr; <b>v&imacr;vit</b>, <em>ita</em> moritur. &mdash; &laquo;Come un uomo vive, cos&igrave; muore.&raquo;</div></div></div>
+
+  <div class="branch"><div class="bt bt-temp">Temporale</div><div class="bd"><div class="f"><em>ut / ut pr&imacr;mum</em> + <strong>ind. perfetto</strong></div><div class="t">&laquo;non appena, quando&raquo; &mdash; T-B &sect;367, p. 415</div><div class="ex"><b>Ut</b> R&omacr;mam <b>v&emacr;nit</b>, &omacr;r&amacr;ti&omacr;nem habuit. &mdash; &laquo;Non appena giunse a Roma, tenne un discorso.&raquo;</div></div></div>
+
+  <div class="branch"><div class="bt bt-conc">Concessiva (rara)</div><div class="bd"><div class="f"><em>ut</em> + <strong>cong.</strong> &hellip; <em>tamen</em></div><div class="t">&laquo;anche se, ammesso che&raquo;</div><div class="ex"><b>Ut</b> d&emacr;sint v&imacr;r&emacr;s, <em>tamen</em> est laudanda vol&umacr;nt&amacr;s. &mdash; &laquo;Anche se mancano le forze, va lodata la volont&agrave;.&raquo; <span class="src">Ov., <em>Pont.</em> 3,4,79</span></div></div></div>
+</div></div>
+
+<!-- ═══════════ CUM ═══════════ -->
+<div class="cong-group"><span class="cong-group-title">Cum e i rapporti temporali</span></div>
+
+<div class="cong-row"><div class="cong-node"><em>cum</em> <small style="font-size:16px;opacity:.6">(arc. <em>quom</em>)</small><span class="cn-gloss">5 valori</span><span class="cong-toggle">&#9654;</span></div>
+<div class="cong-branches">
+  <div class="tip tip-trap"><strong>Regola d'oro:</strong> <em>cum</em> + <strong>indicativo</strong> = &laquo;quando&raquo; (temporale pura). <em>Cum</em> + <strong>congiuntivo</strong> = narrativum (&laquo;quando/poich&eacute;&raquo;) oppure concessiva (spia: <em>tamen</em>).</div>
+
+  <div class="branch"><div class="bt bt-temp">Temporale pura</div><div class="bd"><div class="f"><em>cum</em> + <strong>indicativo</strong></div><div class="t">&laquo;quando&raquo; &mdash; T-B &sect;364, p. 411</div><div class="ex">Facile omn&emacr;s, <b>cum</b> val&emacr;mus, r&emacr;cta c&omacr;nsilia aegr&omacr;t&imacr;s <b>damus</b>. &mdash; &laquo;Quando stiamo bene, &egrave; facile dare buoni consigli ai malati.&raquo; <span class="src">Ter., <em>Andr.</em> 309</span></div><div class="n">Correlativo: <em>tum, tunc</em>. Valore iterativo (&laquo;ogni volta che&raquo;): T-B &sect;365d.</div></div></div>
+
+  <div class="branch"><div class="bt bt-temp">Cum narrativum</div><div class="bd"><div class="f"><em>cum</em> + <strong>cong. impf./piucchep.</strong> (in narrazione)</div><div class="t">&laquo;quando, poich&eacute;, siccome&raquo; &mdash; T-B &sect;366, p. 415</div><div class="ex"><b>Cum</b> tristem serv&imacr;t&umacr;tem <b>fl&emacr;rent</b> Attic&imacr;, Aes&omacr;pus f&amacr;bellam rettulit. &mdash; &laquo;Piangendo gli Ateniesi la loro schiavit&ugrave;, Esopo raccont&ograve; questo apologo.&raquo; <span class="src">Phaedr. 1,2,6</span></div><div class="tip tip-it"><strong>In italiano:</strong> gerundio (&laquo;piangendo&raquo;), &laquo;quando&raquo;, &laquo;poich&eacute;&raquo;, &laquo;siccome&raquo; &mdash; la sfumatura temporale e causale convivono, scegli in base al contesto.</div></div></div>
+
+  <div class="branch"><div class="bt bt-conc">Concessiva</div><div class="bd"><div class="f"><em>cum</em> + <strong>cong.</strong> &hellip; <em>tamen</em></div><div class="t">&laquo;sebbene, bench&eacute;&raquo; &mdash; spia: <em>tamen</em></div><div class="ex"><b>Cum</b> pauper <b>esset</b>, <em>tamen</em> f&emacr;l&imacr;x v&imacr;v&emacr;bat. &mdash; &laquo;Sebbene fosse povero, viveva tuttavia felice.&raquo;</div></div></div>
+
+  <div class="branch"><div class="bt bt-temp">Cum inversum</div><div class="bd"><div class="f">sovraord. (con <em>iam, vix, nondum</em>) &hellip; <em>cum</em> + <strong>ind.</strong> (perf./pres. stor.)</div><div class="t">&laquo;quando all'improvviso&raquo; &mdash; T-B &sect;365b, p. 413</div><div class="ex">Hannibal iam sub&imacr;bat m&umacr;r&omacr;s, <b>cum</b> repente <b>erumpunt</b> R&omacr;m&amacr;n&imacr;. &mdash; &laquo;Annibale era gi&agrave; sotto le mura, quand'ecco che i Romani fanno una sortita.&raquo; <span class="src">Liv. 29,7,8</span></div><div class="tip tip-trap"><strong>Trappola:</strong> Il <em>cum</em> porta l'evento inatteso: &egrave; lui la frase principale! La sovraordinata fa da sfondo.</div></div></div>
+</div></div>
+
+<div class="cong-row"><div class="cong-node"><em>dum / d&omacr;nec / quoad</em><span class="cn-gloss">&laquo;mentre, finch&eacute;&raquo;</span><span class="cong-toggle">&#9654;</span></div>
+<div class="cong-branches">
+  <div class="branch"><div class="bt bt-temp">Mentre</div><div class="bd"><div class="f"><em>dum</em> + <strong>presente indicativo</strong> (sempre, anche con reggente al passato!)</div><div class="t">&laquo;mentre, intanto che&raquo; &mdash; T-B &sect;370, p. 420</div><div class="ex"><b>Dum</b> R&omacr;mae <b>c&omacr;nsulitur</b>, Saguntum expugn&amacr;ta est. &mdash; &laquo;Mentre a Roma si deliberava, Sagunto fu espugnata.&raquo; <span class="src">Mir. XXVIII</span></div><div class="tip tip-trap"><strong>Trappola:</strong> Il presente latino va tradotto con l'<strong>imperfetto</strong> italiano (&laquo;si deliberava&raquo;, non &laquo;si delibera&raquo;).</div></div></div>
+  <div class="branch"><div class="bt bt-temp">Finch&eacute;</div><div class="bd"><div class="f"><em>dum / d&omacr;nec / quoad</em> + <strong>ind.</strong> (fatto) o <strong>cong.</strong> (attesa)</div><div class="t">&laquo;finch&eacute;, fino a quando&raquo; &mdash; T-B &sect;371</div><div class="ex"><b>Dum</b> sp&imacr;r&omacr;, sp&emacr;r&omacr;. &mdash; &laquo;Finch&eacute; respiro, spero.&raquo;</div></div></div>
+</div></div>
+
+<div class="cong-row"><div class="cong-node"><em>postquam</em><span class="cn-gloss">&laquo;dopo che&raquo;</span><span class="cong-toggle">&#9654;</span></div>
+<div class="cong-branches">
+  <div class="branch"><div class="bt bt-temp">Precedenza</div><div class="bd"><div class="f"><em>postquam</em> + <strong>ind. perfetto</strong></div><div class="t">&laquo;dopo che&raquo; + passato remoto &mdash; T-B &sect;368, p. 417</div><div class="ex"><b>Postquam</b> Caesar in Galliam <b>perv&emacr;nit</b>, bellum gessit. &mdash; &laquo;Dopo che Cesare giunse in Gallia, condusse la guerra.&raquo;</div><div class="n">Stesso valore: <em>cum pr&imacr;mum, ubi pr&imacr;mum, simul atque</em> = &laquo;non appena&raquo; (T-B &sect;367).</div></div></div>
+</div></div>
+
+<div class="cong-row"><div class="cong-node"><em>antequam / priusquam</em><span class="cn-gloss">&laquo;prima che&raquo;</span><span class="cong-toggle">&#9654;</span></div>
+<div class="cong-branches">
+  <div class="tip tip-it"><strong>In italiano:</strong> &laquo;prima che&raquo; + cong. oppure &laquo;prima di&raquo; + inf. Indicativo = fatto avvenuto; congiuntivo = atteso/voluto.</div>
+  <div class="branch"><div class="bt bt-temp">+ indicativo</div><div class="bd"><div class="f"><em>antequam</em> + <strong>ind.</strong> (fatto oggettivo)</div><div class="ex">Titus i&amacr;nuam pulsat <b>antequam</b> <b>intrat</b>. &mdash; &laquo;Tito bussa prima di entrare.&raquo; <span class="src">Mir. XXVIII</span></div></div></div>
+  <div class="branch"><div class="bt bt-temp">+ congiuntivo</div><div class="bd"><div class="f"><em>antequam</em> + <strong>cong.</strong> (evento atteso) &mdash; T-B &sect;369, p. 418</div><div class="ex">Stud&emacr; <b>antequam</b> magister t&emacr; <b>interroget</b>. &mdash; &laquo;Studia prima che il maestro ti interroghi.&raquo; <span class="src">Mir. XXVIII</span></div></div></div>
+</div></div>
+
+<!-- ═══════════ CAUSALI ═══════════ -->
+<div class="cong-group"><span class="cong-group-title">Causali</span></div>
+
+<div class="cong-row"><div class="cong-node"><em>quod / quia / quoniam</em><span class="cn-gloss">&laquo;poich&eacute;, perch&eacute;&raquo;</span><span class="cong-toggle">&#9654;</span></div>
+<div class="cong-branches">
+  <div class="tip tip-trap"><strong>Indicativo o congiuntivo?</strong> + <strong>indicativo</strong> = causa reale, che l'autore presenta come vera. + <strong>congiuntivo</strong> = causa riportata come opinione altrui (l'autore prende le distanze). <em>Quoniam</em> ha sfumatura &laquo;dato che ormai&raquo;.</div>
+  <div class="branch"><div class="bt bt-caus">Causale + ind.</div><div class="bd"><div class="f"><em>quod / quia / quoniam</em> + <strong>indicativo</strong></div><div class="t">&laquo;poich&eacute;, perch&eacute;&raquo; (causa reale) &mdash; T-B &sect;372, p. 424</div><div class="ex">Qu&imacr;dam c&emacr;nent t&emacr;cum, <b>quia</b> dign&imacr; <b>sunt</b>, qu&imacr;dam <b>ut</b> sint. &mdash; &laquo;Alcuni pranzano con te <b>perch&eacute;</b> ne sono degni, altri <b>per</b> diventarlo.&raquo; <span class="src">Sen., <em>Ep.</em> 47,15 &mdash; T-B p. 396</span></div><div class="n">Notare nella stessa frase <em>quia</em> (causale) vs <em>ut</em> (finale).</div></div></div>
+  <div class="branch"><div class="bt bt-caus">Causale + cong.</div><div class="bd"><div class="f"><em>quod / quia</em> + <strong>congiuntivo</strong></div><div class="t">&laquo;perch&eacute;&raquo; (causa come opinione / in <em>&omacr;r. obl.</em>) &mdash; T-B &sect;374, p. 426</div><div class="ex">Socrat&emacr;s acc&umacr;s&amacr;tus est <b>quod</b> iuven&emacr;s <b>corrumperet</b>. &mdash; &laquo;Fu accusato perch&eacute; [a loro dire] corrompeva i giovani.&raquo;</div></div></div>
+  <div class="branch"><div class="bt bt-dich">Dichiarativa (<em>quod</em>)</div><div class="bd"><div class="f"><em>quod</em> + <strong>ind.</strong> dopo verbi di sentimento/giudizio</div><div class="t">&laquo;il fatto che&raquo;, &laquo;a&raquo; + inf. &mdash; T-B &sect;335, p. 368</div><div class="ex">Bene facis <b>quod</b> linguae Lat&imacr;nae <b>stud&emacr;s</b>. &mdash; &laquo;Fai bene <b>a</b> studiare il latino.&raquo; <span class="src">Mir. XXI.1</span></div><div class="n">Anche: <em>Gaude&omacr; quod adv&emacr;nist&imacr;</em> = &laquo;mi rallegro che tu sia venuto&raquo;. Incisi: <em>quod sciam</em> = &laquo;per quanto ne so&raquo; (T-B &sect;362).</div></div></div>
+</div></div>
+
+<!-- ═══════════ NE ═══════════ -->
+<div class="cong-group"><span class="cong-group-title">N&emacr;</span></div>
+
+<div class="cong-row"><div class="cong-node"><em>n&emacr;</em><span class="cn-gloss">&laquo;affinch&eacute; non / che&raquo;</span><span class="cong-toggle">&#9654;</span></div>
+<div class="cong-branches">
+  <div class="tip tip-trap"><strong>Come distinguere:</strong> (1) Dopo verbo di azione &rarr; <strong>finale negativa</strong> (&laquo;per non&raquo;). (2) Dopo <em>mone&omacr;, rog&omacr;, hortor</em> &rarr; <strong>compl. volitiva</strong> (&laquo;di non&raquo;). (3) Dopo <em>time&omacr;, vereor</em> &rarr; <strong>verba timendi</strong> (logica invertita: <em>n&emacr;</em> = &laquo;che&raquo;!).</div>
+
+  <div class="branch"><div class="bt bt-fin">Finale negativa</div><div class="bd"><div class="f"><em>n&emacr;</em> + <strong>cong.</strong> &mdash; T-B &sect;353, p. 396</div><div class="t">&laquo;affinch&eacute; non, per non&raquo;</div><div class="ex">Eas epistulas concerpit&omacr;, <b>n&emacr;</b> quand&omacr; quid <b>&emacr;m&amacr;net</b>. &mdash; &laquo;Stracciale, perch&eacute; non ne trapeli qualcosa.&raquo; <span class="src">Cic., <em>Att.</em> 10,12,3</span></div></div></div>
+
+  <div class="branch"><div class="bt bt-comp">Compl. volitiva neg.</div><div class="bd"><div class="f">verbo di esortazione + <em>n&emacr;</em> + <strong>cong.</strong> &mdash; T-B &sect;340, p. 377</div><div class="t">&laquo;di non&raquo; + inf.</div><div class="ex">Monitus erat <b>n&emacr;</b> d&omacr;num <b>acciperet</b>. &mdash; &laquo;Era stato avvertito di non accettare il dono.&raquo;</div></div></div>
+
+  <div class="branch"><div class="bt bt-comp">Verba timend&imacr;</div><div class="bd"><div class="f"><em>time&omacr; / vereor</em> + <em>n&emacr;</em> + <strong>cong.</strong> &mdash; T-B &sect;&sect;341-342, p. 380</div><div class="ex">Time&omacr; <b>n&emacr;</b> host&emacr;s <b>adveniant</b>. = &laquo;Temo <b>che</b> i nemici arrivino.&raquo;<br>Time&omacr; <b>ut</b> pec&umacr;niam accipiam. = &laquo;Temo <b>di non</b> ricevere il denaro.&raquo; <span class="src">Mir. XXIV</span></div><div class="tip tip-trap"><strong>Memorizza:</strong> <em>time&omacr; <b>n&emacr;</b></em> = temo che <strong>S&Igrave;</strong> &bull; <em>time&omacr; <b>ut</b></em> (o <em>n&emacr; n&omacr;n</em>) = temo che <strong>NO</strong>. In italiano <em>n&emacr;</em> diventa &laquo;che&raquo;, non &laquo;che non&raquo;!</div></div></div>
+</div></div>
+
+<!-- ═══════════ QUIN ═══════════ -->
+<div class="cong-group"><span class="cong-group-title">Qu&imacr;n</span></div>
+
+<div class="cong-row"><div class="cong-node"><em>qu&imacr;n</em><span class="cn-gloss">(= <em>qu&imacr; n&omacr;n</em>) &mdash; solo dopo frase negativa</span><span class="cong-toggle">&#9654;</span></div>
+<div class="cong-branches">
+  <div class="tip tip-it"><strong>In italiano:</strong> si risolve il doppio negativo (reggente neg. + <em>qu&imacr;n</em> = &laquo;che non&raquo;) &rarr; significato positivo. &laquo;Non impedisco <b>di</b>&raquo;; &laquo;non dubito <b>che</b>&raquo;; &laquo;non c'&egrave; nessuno <b>che non</b>&raquo;. Se la reggente &egrave; positiva, si usa <em>quōminus</em> o <em>n&emacr;</em>.</div>
+
+  <div class="branch"><div class="bt bt-comp">Dopo v. impediend&imacr;</div><div class="bd"><div class="f"><em>n&omacr;n prohibe&omacr;</em> + <em>qu&imacr;n</em> + <strong>cong.</strong> &mdash; T-B &sect;&sect;344-345, p. 384</div><div class="ex">N&omacr;n prohibe&omacr; <b>qu&imacr;n</b> R&omacr;mam <b>e&amacr;s</b>. &mdash; &laquo;Non ti impedisco di andare a Roma.&raquo; <span class="src">Mir. XXIII.2</span></div></div></div>
+
+  <div class="branch"><div class="bt bt-comp">Dopo v. dubitand&imacr;</div><div class="bd"><div class="f"><em>n&omacr;n dubit&omacr;</em> + <em>qu&imacr;n</em> + <strong>cong.</strong> &mdash; T-B &sect;&sect;346-347, p. 387</div><div class="ex">N&omacr;n dubit&omacr; <b>qu&imacr;n</b> r&emacr;s ita s&emacr; <b>habeant</b>. &mdash; &laquo;Non dubito che le cose stiano cos&igrave;.&raquo; <span class="src">Mir. XXIII.1</span></div></div></div>
+
+  <div class="branch"><div class="bt bt-cons">Consecutiva neg.</div><div class="bd"><div class="f">frase neg. + <em>qu&imacr;n</em> + <strong>cong.</strong> (= <em>ut n&omacr;n</em>) &mdash; T-B &sect;360, p. 404</div><div class="ex">Nihil tam difficile est <b>qu&imacr;n</b> investig&amacr;r&imacr; <b>possit</b>. &mdash; &laquo;Non c'&egrave; nulla di cos&igrave; difficile che non si possa scoprire.&raquo; <span class="src">Ter., <em>Heaut.</em> 675</span></div></div></div>
+</div></div>
+
+<!-- ═══════════ CONCESSIVE ═══════════ -->
+<div class="cong-group"><span class="cong-group-title">Concessive</span></div>
+
+<div class="cong-row"><div class="cong-node"><em>ets&imacr; / tamets&imacr; / quamquam</em><span class="cn-gloss">&laquo;sebbene&raquo; + indicativo</span><span class="cong-toggle">&#9654;</span></div>
+<div class="cong-branches">
+  <div class="tip tip-it"><strong>In italiano:</strong> &laquo;sebbene&raquo;, &laquo;bench&eacute;&raquo;, &laquo;nonostante&raquo;. Tutte e tre reggono l'<strong>indicativo</strong> (fatto reale). <em>Quamquam</em> a inizio frase pu&ograve; valere &laquo;e tuttavia&raquo; (avversativo).</div>
+  <div class="branch"><div class="bt bt-conc">Concessiva reale</div><div class="bd"><div class="f"><em>ets&imacr; / tamets&imacr; / quamquam</em> + <strong>ind.</strong> &hellip; <em>tamen</em></div><div class="ex"><b>Ets&imacr;</b> doctus <b>est</b>, hist&omacr;riam n&amacr;t&umacr;r&amacr;lem <em>tamen</em> ign&omacr;rat. &mdash; &laquo;Sebbene sia colto, ignora la storia naturale.&raquo; <span class="src">Mir. XXIX</span></div></div></div>
+</div></div>
+
+<div class="cong-row"><div class="cong-node"><em>quamv&imacr;s / licet / etiams&imacr;</em><span class="cn-gloss">&laquo;per quanto, anche se&raquo; + congiuntivo</span><span class="cong-toggle">&#9654;</span></div>
+<div class="cong-branches">
+  <div class="tip tip-it"><strong>In italiano:</strong> &laquo;per quanto&raquo;, &laquo;anche se&raquo;. Tutte e tre reggono il <strong>congiuntivo</strong> (ipotesi). <em>Licet</em> &egrave; propriamente un verbo impersonale (&laquo;&egrave; lecito&raquo;).</div>
+  <div class="branch"><div class="bt bt-conc"><em>quamv&imacr;s</em></div><div class="bd"><div class="f"><em>quamv&imacr;s</em> + <strong>cong.</strong></div><div class="ex"><b>Quamv&imacr;s</b> doctus <b>sit</b>, hom&omacr; omnia sc&imacr;re n&omacr;n potest. &mdash; &laquo;Per quanto uno sia colto, non pu&ograve; sapere tutto.&raquo; <span class="src">Mir. XXIX</span></div></div></div>
+  <div class="branch"><div class="bt bt-conc"><em>licet</em></div><div class="bd"><div class="f"><em>licet</em> + <strong>cong.</strong></div><div class="ex"><b>Licet</b> m&emacr; reprehendant omn&emacr;s, d&imacr;cam quid sentiam. &mdash; &laquo;Anche se tutti mi criticano, dir&ograve; ci&ograve; che penso.&raquo; <span class="src">Mir. XXIX</span></div></div></div>
+  <div class="branch"><div class="bt bt-conc"><em>etiams&imacr;</em></div><div class="bd"><div class="f"><em>etiams&imacr;</em> + <strong>cong.</strong></div><div class="ex"><b>Etiams&imacr;</b> omn&emacr;s eum reprehendant, vir probus hon&emacr;st&emacr; agit. &mdash; &laquo;Anche se tutti lo criticassero, l'uomo onesto agisce rettamente.&raquo; <span class="src">Mir. XXIX</span></div></div></div>
+</div></div>
+
+  </div><!-- fine grappolo -->
+</main>
+
+<footer>
+  <p><strong>Prof. Andrea Vaccaro</strong></p>
+  <p>Lingua e Cultura Latina &mdash; Liceo Classico e Liceo Scientifico</p>
+  <div class="footer-links">
+    <a href="../index.html">Home</a>
+    <a href="../strumenti/raccoglitore.html">Raccoglitore Testi</a>
+    <a href="../strumenti/glossario-eulalia.html">Strumenti</a>
+  </div>
+</footer>
+
+<!-- Presentazione LIM -->
+<div class="pres" id="pres">
+  <div class="pres-bar">
+    <span class="pres-title" id="pres-title">Congiunzioni subordinanti</span>
+    <span class="pres-info" id="pres-info"></span>
+    <div style="display:flex;gap:8px;">
+      <button class="pres-b" id="pres-exit">Esci</button>
+    </div>
+  </div>
+  <div class="pres-prog"><div class="pres-prog-fill" id="pres-prog"></div></div>
+  <div class="pres-body" id="pres-body"></div>
+  <div class="pres-nav">
+    <button class="pres-b" id="pres-prev">&#8592; Precedente</button>
+    <span class="pres-cnt" id="pres-cnt"></span>
+    <button class="pres-b pres-b-go" id="pres-next">Successiva &#8594;</button>
+  </div>
+</div>
+
+<button class="lim-toggle" id="lt">Presenta sulla LIM</button>
+
+<script>
+(function(){
+  /* ═══ FIX: rimuovi onclick inline e usa solo JS ═══ */
+  document.querySelectorAll('.cong-node').forEach(function(n){
+    n.removeAttribute('onclick');
+    n.addEventListener('click', function(e){
+      e.stopPropagation();
+      this.closest('.cong-row').classList.toggle('open');
+    });
+  });
+
+  /* Espandi tutto */
+  document.getElementById('ea').addEventListener('click',function(){
+    var r=document.querySelectorAll('.cong-row');
+    var allOpen=Array.from(r).every(function(x){return x.classList.contains('open')});
+    r.forEach(function(x){ allOpen ? x.classList.remove('open') : x.classList.add('open'); });
+    this.textContent = allOpen ? 'Espandi tutto' : 'Chiudi tutto';
+  });
+
+  /* ═══ MODALITA PRESENTAZIONE ═══ */
+  var slides = [];
+  var cur = 0;
+  var presEl = document.getElementById('pres');
+
+  function collectSlides(){
+    slides = [];
+    /* Ogni cong-row diventa una slide. I cong-group diventano slide titolo. */
+    document.querySelectorAll('#grappolo > .cong-group, #grappolo > .cong-row').forEach(function(el){
+      if(el.classList.contains('cong-group')){
+        slides.push({ type:'group', title: el.querySelector('.cong-group-title').textContent, el: el });
+      } else {
+        var node = el.querySelector('.cong-node');
+        var label = node ? node.textContent.replace(/[\u25B6\u25C0]/g,'').trim() : '';
+        slides.push({ type:'cong', title: label, el: el });
+      }
+    });
+  }
+
+  function showSlide(){
+    var body = document.getElementById('pres-body');
+    body.innerHTML = '';
+    if(!slides[cur]) return;
+    var s = slides[cur];
+
+    if(s.type === 'group'){
+      /* Slide titolo di gruppo */
+      var div = document.createElement('div');
+      div.style.cssText = 'display:flex;align-items:center;justify-content:center;height:100%;';
+      div.innerHTML = '<h2 style="font-family:Cormorant Garamond,serif;font-size:52px;font-weight:600;color:var(--text);text-align:center;">' + s.title + '</h2>';
+      body.appendChild(div);
+    } else {
+      /* Slide congiunzione: clona il cong-row, forzalo aperto, ingrandisci */
+      var clone = s.el.cloneNode(true);
+      clone.classList.add('open');
+      clone.style.marginBottom = '0';
+      /* Ingrandisci */
+      clone.querySelectorAll('.cong-node').forEach(function(n){
+        n.style.fontSize = '36px';
+        n.style.padding = '22px 40px';
+        n.style.cursor = 'default';
+      });
+      clone.querySelectorAll('.cong-toggle').forEach(function(t){ t.style.display='none'; });
+      clone.querySelectorAll('.bt').forEach(function(b){
+        b.style.fontSize = '22px';
+        b.style.minWidth = '200px';
+        b.style.padding = '14px 24px';
+      });
+      clone.querySelectorAll('.bd .f').forEach(function(f){ f.style.fontSize = '20px'; });
+      clone.querySelectorAll('.bd .t').forEach(function(t){ t.style.fontSize = '18px'; });
+      clone.querySelectorAll('.bd .ex').forEach(function(e){ e.style.fontSize = '18px'; e.style.padding = '10px 16px'; });
+      clone.querySelectorAll('.bd .n').forEach(function(n){ n.style.fontSize = '14px'; });
+      clone.querySelectorAll('.cn-gloss').forEach(function(g){ g.style.fontSize = '18px'; });
+      clone.querySelectorAll('.cong-branches').forEach(function(b){
+        b.style.marginLeft = '56px';
+        b.style.paddingLeft = '36px';
+      });
+      body.appendChild(clone);
+    }
+
+    document.getElementById('pres-info').textContent = s.title;
+    document.getElementById('pres-cnt').textContent = (cur+1) + ' / ' + slides.length;
+    document.getElementById('pres-prog').style.width = Math.round(((cur+1)/slides.length)*100) + '%';
+    document.getElementById('pres-prev').disabled = cur === 0;
+    document.getElementById('pres-next').disabled = cur >= slides.length - 1;
+    body.scrollTop = 0;
+  }
+
+  function enterPres(){
+    collectSlides();
+    cur = 0;
+    presEl.classList.add('active');
+    document.getElementById('lt').style.display = 'none';
+    document.body.style.overflow = 'hidden';
+    showSlide();
+  }
+
+  function exitPres(){
+    presEl.classList.remove('active');
+    document.getElementById('lt').style.display = '';
+    document.body.style.overflow = '';
+  }
+
+  document.getElementById('lt').addEventListener('click', enterPres);
+  document.getElementById('pres-exit').addEventListener('click', exitPres);
+  document.getElementById('pres-prev').addEventListener('click', function(){ if(cur>0){cur--;showSlide();} });
+  document.getElementById('pres-next').addEventListener('click', function(){ if(cur<slides.length-1){cur++;showSlide();} });
+
+  document.addEventListener('keydown', function(e){
+    if(!presEl.classList.contains('active')) return;
+    if(e.key==='ArrowRight'||e.key===' '||e.key==='PageDown'){ if(cur<slides.length-1){cur++;showSlide();}e.preventDefault(); }
+    if(e.key==='ArrowLeft'||e.key==='PageUp'){ if(cur>0){cur--;showSlide();}e.preventDefault(); }
+    if(e.key==='Escape'){ exitPres(); }
+    if(e.key==='Home'){ cur=0;showSlide();e.preventDefault(); }
+    if(e.key==='End'){ cur=slides.length-1;showSlide();e.preventDefault(); }
+  });
+})();
+</script>
+<script src="../js/alpheios-init.js"></script>
+</body>
+</html>

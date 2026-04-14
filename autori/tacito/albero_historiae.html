@@ -89,29 +89,6 @@ var CFG = {
   }
 };
 
-function assignDomain(nd, dom) {
-  var isVerb = (nd.t==='v'||nd.t==='sub');
-  nd._dom = isVerb ? 'y' : dom;
-  if (!nd.ch) return;
-  nd.ch.forEach(function(c){
-    var childDom;
-    if (c.t==='v'||c.t==='sub') {
-      childDom = 'y';
-    } else if (c.t==='o') {
-      childDom = 'g';
-    } else if (c.t==='spec'||c.t==='term'||c.t==='ind') {
-      childDom = 'b';
-    } else if (c.t==='s') {
-      childDom = /acc/.test(c.r) ? 'rg' : /abl/.test(c.r) ? 'b' : 'r';
-    } else if (c.t==='pred' && isVerb) {
-      childDom = /acc/.test(c.r) ? 'g' : 'r';
-    } else {
-      childDom = (nd._dom==='y') ? 'b' : (nd._dom==='rg') ? 'g' : nd._dom;
-    }
-    assignDomain(c, childDom);
-  });
-}
-
 /* ════════════════════════════════════════
    DATI — Historiae 1, 1
    Ogni parola invariabile = nodo esplicito
@@ -394,111 +371,8 @@ var TREES = [
 }
 
 ]; /* fine TREES */
-
-/* ════════════════════════════════════════
-   RENDERER
-   ════════════════════════════════════════ */
-function nW(nd){
-  var ww=nd.w.length*CFG.CW+CFG.CP;
-  var rw=nd.r.length*CFG.RW+CFG.CP;
-  return Math.max(CFG.MW,ww,rw);
-}
-function computeSW(nd){
-  var own=nW(nd)+CFG.HG;
-  if(!nd.ch||!nd.ch.length){nd._sw=own;return;}
-  nd.ch.forEach(computeSW);
-  var sum=nd.ch.reduce(function(a,c){return a+c._sw;},0);
-  nd._sw=Math.max(own,sum);
-}
-function assignCX(nd,x0){
-  if(!nd.ch||!nd.ch.length){nd._cx=x0+nd._sw/2;return;}
-  var cx=x0;
-  nd.ch.forEach(function(c){assignCX(c,cx);cx+=c._sw;});
-  nd._cx=(nd.ch[0]._cx+nd.ch[nd.ch.length-1]._cx)/2;
-}
-function assignCY(nd,d){
-  nd._cy=CFG.PT+d*(CFG.NH+CFG.VG);
-  if(nd.ch)nd.ch.forEach(function(c){assignCY(c,d+1);});
-}
-function maxD(nd){
-  if(!nd.ch||!nd.ch.length)return 0;
-  return 1+Math.max.apply(null,nd.ch.map(maxD));
-}
-function svgEl(tag,a){
-  var el=document.createElementNS('http://www.w3.org/2000/svg',tag);
-  Object.keys(a).forEach(function(k){el.setAttribute(k,a[k]);});
-  return el;
-}
-function drawEdges(svg,nd){
-  if(!nd.ch)return;
-  var px=nd._cx,py=nd._cy+CFG.NH;
-  nd.ch.forEach(function(c){
-    svg.appendChild(svgEl('line',{x1:px,y1:py,x2:c._cx,y2:c._cy,stroke:'#c0b09a','stroke-width':'1.8'}));
-    drawEdges(svg,c);
-  });
-}
-var INVAR = {cong:1, prep:1, avv:1};
-var GRAY  = {f:'rgba(173,181,189,.25)', s:'#adb5bd', t:'#444d55'};
-var RG    = {s:'#9b3a3a', t:'#5a1010'};
-var _curGradId = '';
-
-function drawNodes(svg,nd){
-  var fill,stroke,textCol;
-  if (INVAR[nd.t]) {
-    fill=GRAY.f; stroke=GRAY.s; textCol=GRAY.t;
-  } else if (nd._dom==='rg') {
-    fill='url(#'+_curGradId+')'; stroke=RG.s; textCol=RG.t;
-  } else {
-    var col=CFG.COLS[nd._dom]||CFG.COLS.b;
-    fill=col.f; stroke=col.s; textCol=col.t;
-  }
-  var w=nW(nd),x=nd._cx-w/2,y=nd._cy;
-  var isImp=nd.w.charAt(0)==='[';
-  svg.appendChild(svgEl('rect',{x:x,y:y,width:w,height:CFG.NH,rx:10,fill:fill,stroke:stroke,'stroke-width':'2.2'}));
-  var t1=svgEl('text',{x:nd._cx,y:y+20,'text-anchor':'middle','font-family':'Cardo, serif','font-size':'14','font-weight':'700','font-style':isImp?'italic':'normal',fill:textCol});
-  t1.textContent=nd.w;svg.appendChild(t1);
-  var t2=svgEl('text',{x:nd._cx,y:y+37,'text-anchor':'middle','font-family':'Cardo, serif','font-size':'9.5','font-style':'italic',fill:textCol});
-  t2.textContent=nd.r;svg.appendChild(t2);
-  if(nd.ch)nd.ch.forEach(function(c){drawNodes(svg,c);});
-}
-function renderAll(){
-  var cont=document.getElementById('trees');
-  TREES.forEach(function(data,idx){
-    var root=JSON.parse(JSON.stringify(data.t));
-    assignDomain(root,'y');
-    computeSW(root);assignCX(root,CFG.PS);assignCY(root,0);
-    var md=maxD(root);
-    var svgW=root._sw+CFG.PS*2;
-    var svgH=CFG.PT+(md+1)*(CFG.NH+CFG.VG)+24;
-    var svg=svgEl('svg',{viewBox:'0 0 '+svgW+' '+svgH,style:'display:block;width:100%;min-width:'+Math.min(svgW,380)+'px;'});
-    _curGradId='rg-g-'+idx;
-    var defs=document.createElementNS('http://www.w3.org/2000/svg','defs');
-    var grad=document.createElementNS('http://www.w3.org/2000/svg','linearGradient');
-    grad.setAttribute('id',_curGradId);grad.setAttribute('x1','0');grad.setAttribute('x2','1');
-    grad.setAttribute('y1','0');grad.setAttribute('y2','0');
-    [['50%','rgba(232,93,93,.22)'],['50%','rgba(120,200,120,.28)']].forEach(function(s){
-      var st=document.createElementNS('http://www.w3.org/2000/svg','stop');
-      st.setAttribute('offset',s[0]);st.setAttribute('stop-color',s[1]);grad.appendChild(st);
-    });
-    defs.appendChild(grad);svg.appendChild(defs);
-    drawEdges(svg,root);drawNodes(svg,root);
-
-    var section=document.createElement('div');
-    section.className='content-section';section.style.marginBottom='28px';
-    var hdr=document.createElement('div');hdr.className='content-header';
-    hdr.innerHTML='<h2>'+data.sec+'</h2>';section.appendChild(hdr);
-    var body=document.createElement('div');body.className='content-body';
-    var brano=document.createElement('div');brano.className='brano-box';
-    brano.innerHTML='<div class="brano-titolo">Testo</div><div class="brano-testo">'+data.q+'</div>';
-    body.appendChild(brano);
-    var wrap=document.createElement('div');wrap.className='stemma-wrap';wrap.style.marginTop='20px';
-    wrap.appendChild(svg);body.appendChild(wrap);
-    if(data.note){var nota=document.createElement('div');nota.className='nota-sintattica';nota.innerHTML=data.note;body.appendChild(nota);}
-    section.appendChild(body);cont.appendChild(section);
-  });
-}
-renderAll();
 </script>
+<script src="../../js/stemma-renderer.js"></script>
 <script src="../../js/alpheios-init.js"></script>
 </body>
 </html>

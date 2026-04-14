@@ -10,15 +10,15 @@
 <style>
 .grappolo{margin:32px 0}
 .cong-row{margin-bottom:32px;page-break-inside:avoid}
-.cong-node{display:inline-flex;align-items:center;gap:12px;background:linear-gradient(135deg,#1e1a12,#3a3024);color:#f5f0e8;padding:16px 28px;border-radius:14px;font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:700;cursor:pointer;transition:all .3s;user-select:none;touch-action:manipulation;box-shadow:0 4px 16px rgba(30,26,18,.15)}
-.cong-node:hover{transform:scale(1.03);box-shadow:0 6px 24px rgba(30,26,18,.25)}
+.cong-node{display:inline-flex;align-items:center;gap:14px;background:linear-gradient(135deg,#14110c 0%,#2a2218 60%,#3a3024 100%);color:#f5f0e8;padding:18px 32px;border-radius:14px;font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:700;cursor:pointer;transition:all .3s;user-select:none;touch-action:manipulation;box-shadow:0 4px 20px rgba(30,26,18,.18),inset 0 1px 0 rgba(156,122,60,.15);border:1px solid rgba(156,122,60,.12)}
+.cong-node:hover{transform:scale(1.03);box-shadow:0 8px 32px rgba(30,26,18,.28),inset 0 1px 0 rgba(156,122,60,.25);border-color:rgba(156,122,60,.25)}
 .cong-node .cn-gloss{font-family:'Crimson Pro',serif;font-size:14px;font-weight:400;color:rgba(245,240,232,.6);font-style:italic;margin-left:4px}
 .cong-node .cong-toggle{font-size:18px;transition:transform .3s;margin-left:4px}
 .cong-row.open .cong-node .cong-toggle{transform:rotate(90deg)}
-.cong-branches{display:none;margin-left:40px;padding-left:28px;border-left:3px solid var(--border-light);margin-top:12px}
+.cong-branches{display:none;margin-left:44px;padding-left:32px;border-left:3px solid var(--border);margin-top:16px}
 .cong-row.open .cong-branches{display:block}
-.branch{display:flex;align-items:flex-start;gap:16px;margin-bottom:12px;position:relative;animation:brIn .3s ease both}
-.branch::before{content:'';position:absolute;left:-28px;top:20px;width:24px;height:3px;background:var(--border-light)}
+.branch{display:flex;align-items:flex-start;gap:16px;margin-bottom:14px;position:relative;animation:brIn .3s ease both;padding:12px 16px;background:var(--card);border-radius:12px;border:1px solid var(--border-light);box-shadow:0 1px 4px rgba(30,26,18,.04)}
+.branch::before{content:'';position:absolute;left:-32px;top:22px;width:28px;height:3px;background:var(--border)}
 @keyframes brIn{from{opacity:0;transform:translateX(-12px)}to{opacity:1;transform:translateX(0)}}
 .branch:nth-child(1){animation-delay:0s}.branch:nth-child(2){animation-delay:.05s}.branch:nth-child(3){animation-delay:.1s}.branch:nth-child(4){animation-delay:.15s}.branch:nth-child(5){animation-delay:.2s}.branch:nth-child(6){animation-delay:.25s}.branch:nth-child(7){animation-delay:.3s}.branch:nth-child(8){animation-delay:.35s}
 .bt{flex-shrink:0;padding:10px 18px;border-radius:10px;font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:700;min-width:160px;text-align:center;border:2px solid;transition:transform .2s}
@@ -51,8 +51,9 @@
 .tip-it::before{content:'🇮🇹 ';font-size:16px}
 .tip-trap::before{content:'⚠️ ';font-size:16px}
 /* Gruppo */
-.cong-group{margin-top:40px;margin-bottom:8px;padding-bottom:8px;border-bottom:2px solid var(--border-light)}
-.cong-group-title{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:600;color:var(--text-dim);text-transform:uppercase;letter-spacing:1.5px}
+.cong-group{margin-top:48px;margin-bottom:12px;padding-bottom:10px;border-bottom:2px solid var(--border);position:relative}
+.cong-group::before{content:'';position:absolute;bottom:-2px;left:0;width:60px;height:2px;background:var(--gold)}
+.cong-group-title{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:600;color:var(--gold);text-transform:uppercase;letter-spacing:2px}
 /* Expand/LIM */
 .expand-all,.lim-toggle{font-family:'Crimson Pro',serif;font-weight:600;padding:10px 22px;border:1px solid var(--border);border-radius:10px;background:var(--card);color:var(--text-dim);cursor:pointer;transition:all .25s;touch-action:manipulation}
 .expand-all:hover,.lim-toggle:hover{border-color:var(--gold);color:var(--gold)}

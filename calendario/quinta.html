@@ -116,6 +116,7 @@
       <div class="cal-legend-item"><div class="cal-legend-color" style="background:#c5cae9"></div> Ripasso</div>
     </div>
 
+    <div id="countdown" style="margin-bottom:16px;"></div>
     <div class="cal-stats" id="stats"></div>
 
     <table class="cal-table" id="calendario">
@@ -288,6 +289,50 @@
       '<div class="cal-stat"><strong>' + Object.keys(ORARIO).length + '</strong> giorni/settimana</div>';
 
     document.getElementById('last-update').textContent = new Date().toLocaleDateString('it-IT');
+
+    /* ── Conto alla rovescia ── */
+    var oggi = new Date(); oggi.setHours(0,0,0,0);
+    var lezioniRimaste = 0, oreRimaste = 0, prossimaData = null, prossimaInfo = null;
+    for (var d2 = new Date(START); d2 <= END; d2.setDate(d2.getDate() + 1)) {
+      var dow2 = d2.getDay();
+      var isoDay2 = dow2 === 0 ? 7 : dow2;
+      if (!(isoDay2 in ORARIO)) continue;
+      var key2 = dateKey(d2);
+      if (FESTE.has(key2) || SOSPESE.has(key2)) continue;
+      var d2copy = new Date(d2);
+      if (d2copy >= oggi) {
+        var ore2 = ORARIO[isoDay2];
+        lezioniRimaste++;
+        oreRimaste += ore2;
+        if (!prossimaData) {
+          prossimaData = new Date(d2);
+          prossimaInfo = dati[key2] || (ore2 > 1 ? dati[key2+'-1'] : null) || {};
+        }
+      }
+    }
+    var cdEl = document.getElementById('countdown');
+    if (prossimaData) {
+      var diff = Math.ceil((prossimaData - oggi) / (1000*60*60*24));
+      var quando = diff === 0 ? 'Oggi' : diff === 1 ? 'Domani' : 'Tra ' + diff + ' giorni';
+      cdEl.innerHTML =
+        '<div style="display:flex;gap:12px;flex-wrap:wrap;align-items:stretch;">' +
+          '<div class="cal-stat" style="background:linear-gradient(135deg,#1e1a12,#3a3024);color:#f5f0e8;border:none;flex:1;min-width:180px;text-align:center;padding:16px 20px;">' +
+            '<div style="font-size:32px;font-weight:700;color:var(--gold-light);font-family:Cormorant Garamond,serif;">' + lezioniRimaste + '</div>' +
+            '<div style="font-size:13px;opacity:.7;">lezioni rimaste</div>' +
+          '</div>' +
+          '<div class="cal-stat" style="background:linear-gradient(135deg,#1e1a12,#3a3024);color:#f5f0e8;border:none;flex:1;min-width:180px;text-align:center;padding:16px 20px;">' +
+            '<div style="font-size:32px;font-weight:700;color:var(--gold-light);font-family:Cormorant Garamond,serif;">' + oreRimaste + '</div>' +
+            '<div style="font-size:13px;opacity:.7;">ore rimaste</div>' +
+          '</div>' +
+          '<div class="cal-stat" style="flex:2;min-width:220px;padding:16px 20px;">' +
+            '<div style="font-size:13px;color:var(--text-muted);margin-bottom:4px;">Prossima lezione</div>' +
+            '<div style="font-size:17px;font-weight:700;color:var(--text);">' + quando + ' &mdash; ' + formatDate(prossimaData) + '</div>' +
+            (prossimaInfo.note ? '<div style="font-size:14px;color:var(--text-dim);margin-top:2px;">' + prossimaInfo.note + '</div>' : '') +
+          '</div>' +
+        '</div>';
+    } else {
+      cdEl.innerHTML = '<div class="cal-stat" style="text-align:center;width:100%;padding:20px;"><strong style="color:var(--gold);">Corso terminato</strong></div>';
+    }
   }
 })();
 </script>

@@ -152,7 +152,8 @@ a {
 /* ═══ HERO HEADER ═══ */
 .hero {
   background:
-    linear-gradient(180deg, rgba(26, 22, 16, 0.92) 0%, rgba(58, 48, 32, 0.88) 100%),
+    radial-gradient(ellipse at 50% 0%, rgba(156, 122, 60, 0.10) 0%, transparent 60%),
+    linear-gradient(180deg, rgba(22, 18, 12, 0.95) 0%, rgba(48, 40, 28, 0.92) 100%),
     repeating-linear-gradient(
       45deg,
       transparent,
@@ -160,30 +161,40 @@ a {
       rgba(156, 122, 60, 0.03) 20px,
       rgba(156, 122, 60, 0.03) 21px
     );
-  background-color: #1a1610;
+  background-color: #14110c;
   color: #f5f0e8;
-  padding: 80px 24px 72px;
+  padding: 88px 24px 80px;
   text-align: center;
   position: relative;
   overflow: hidden;
 }
 
-/* Bordo inferiore decorativo dorato */
+/* Vignettatura sottile ai bordi */
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, transparent 50%, rgba(10, 8, 4, 0.4) 100%);
+  pointer-events: none;
+}
+
+/* Bordo inferiore decorativo dorato — doppia linea */
 .hero::after {
   content: '';
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
-  height: 3px;
+  height: 4px;
   background: linear-gradient(
     90deg,
     transparent 0%,
-    var(--gold) 20%,
+    var(--gold) 15%,
     var(--gold-light) 50%,
-    var(--gold) 80%,
+    var(--gold) 85%,
     transparent 100%
   );
+  box-shadow: 0 -8px 0 0 rgba(156, 122, 60, 0.08);
 }
 
 .hero h1 {
@@ -348,6 +359,19 @@ a {
   font-weight: 600;
   margin-bottom: 8px;
   letter-spacing: 0.01em;
+  position: relative;
+  display: inline-block;
+}
+
+/* Ornamento dorato sotto il titolo di sezione */
+.section-title::after {
+  content: '';
+  display: block;
+  width: 48px;
+  height: 2px;
+  margin-top: 10px;
+  background: linear-gradient(90deg, var(--gold), var(--gold-light), transparent);
+  border-radius: 1px;
 }
 
 .section-desc {
@@ -408,13 +432,31 @@ a {
 }
 
 .card:hover {
-  transform: translateY(-8px);
-  box-shadow: var(--shadow-lg);
+  transform: translateY(-6px) scale(1.01);
+  box-shadow: var(--shadow-lg), 0 0 0 1px var(--gold-pale);
   border-color: var(--border);
 }
 
 .card:hover::before {
   height: 5px;
+}
+
+/* Bagliore dorato angolo in alto a destra al hover */
+.card::after {
+  content: '';
+  position: absolute;
+  top: -40px;
+  right: -40px;
+  width: 100px;
+  height: 100px;
+  background: radial-gradient(circle, rgba(156, 122, 60, 0.08) 0%, transparent 70%);
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 0.4s var(--ease-out);
+  pointer-events: none;
+}
+.card:hover::after {
+  opacity: 1;
 }
 
 /* Card accent colors by year */
@@ -725,6 +767,24 @@ a {
   margin-bottom: 24px;
   text-align: center;
   letter-spacing: 0.01em;
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+/* Ornamento simmetrico ai lati del titolo strumenti */
+.tools-section h2::before,
+.tools-section h2::after {
+  content: '';
+  display: inline-block;
+  width: 40px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold));
+  vertical-align: middle;
+  margin: 0 16px;
+}
+.tools-section h2::after {
+  background: linear-gradient(90deg, var(--gold), transparent);
 }
 
 .tools-grid {
@@ -744,14 +804,33 @@ a {
   display: flex;
   align-items: center;
   gap: 12px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Linea dorata a sinistra che appare al hover */
+.tool-link::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 0;
+  background: linear-gradient(180deg, var(--gold), var(--gold-light));
+  transition: width 0.3s var(--ease-out);
+  border-radius: 12px 0 0 12px;
 }
 
 .tool-link:hover {
   background: var(--text);
   color: var(--bg);
   border-color: var(--text);
-  transform: translateX(6px);
+  transform: translateX(4px);
   box-shadow: var(--shadow-md);
+}
+
+.tool-link:hover::before {
+  width: 4px;
 }
 
 .tool-link .tool-icon { font-size: 22px; }
@@ -790,11 +869,11 @@ a {
 
 /* ═══ FOOTER ═══ */
 footer {
-  background: #1a1610 !important;
-  color: rgba(245, 240, 232, 0.7);
-  padding: 40px 24px 36px;
+  background: #14110c !important;
+  color: rgba(245, 240, 232, 0.65);
+  padding: 48px 24px 40px;
   text-align: center;
-  margin-top: 72px;
+  margin-top: 80px;
   position: relative;
   width: 100%;
   border-radius: 0 !important;
@@ -808,8 +887,9 @@ footer::before {
   top: 0;
   left: 0;
   right: 0;
-  height: 2px;
-  background: linear-gradient(90deg, transparent 0%, var(--gold) 20%, var(--gold-light) 50%, var(--gold) 80%, transparent 100%);
+  height: 3px;
+  background: linear-gradient(90deg, transparent 0%, var(--gold) 15%, var(--gold-light) 50%, var(--gold) 85%, transparent 100%);
+  box-shadow: 0 8px 0 0 rgba(156, 122, 60, 0.05);
 }
 
 footer p {

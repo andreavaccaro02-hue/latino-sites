@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Test diagnostico — Morfologia del verbo e del nome</title>
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;0,700;1,400&family=Cormorant+Garamond:wght@400;600;700&display=swap');
+
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family: 'Crimson Pro', Georgia, serif;
+  font-size: 11.5pt;
+  line-height: 1.55;
+  color: #1e1a12;
+  padding: 20mm 18mm;
+  max-width: 210mm;
+  margin: 0 auto;
+}
+h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22pt;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 4px;
+}
+.subtitle {
+  text-align: center;
+  font-size: 12pt;
+  color: #6b6456;
+  font-style: italic;
+  margin-bottom: 6px;
+}
+.info-bar {
+  display: flex;
+  justify-content: space-between;
+  border-top: 2px solid #1e1a12;
+  border-bottom: 1px solid #d6cab4;
+  padding: 8px 0;
+  margin-bottom: 16px;
+  font-size: 10.5pt;
+}
+.info-bar .left { font-weight: 700; }
+
+/* Domande */
+.q {
+  margin-bottom: 14px;
+  page-break-inside: avoid;
+}
+.q-head {
+  font-weight: 700;
+  font-size: 10.5pt;
+  margin-bottom: 3px;
+}
+.q-latin {
+  font-size: 12pt;
+  line-height: 1.6;
+  margin-bottom: 2px;
+  padding: 4px 8px;
+  background: #f5f1e8;
+  border-left: 3px solid #9C7A3C;
+  border-radius: 0 4px 4px 0;
+}
+.q-latin b { color: #9C7A3C; }
+.q-prompt {
+  font-style: italic;
+  font-size: 10.5pt;
+  color: #6b6456;
+  margin-bottom: 4px;
+}
+.q-opts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px 16px;
+  font-size: 10.5pt;
+}
+.q-opts .opt {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+.q-opts .letter {
+  font-weight: 700;
+  width: 16px;
+  flex-shrink: 0;
+}
+.q-opts .box {
+  display: inline-block;
+  width: 12px; height: 12px;
+  border: 1.5px solid #1e1a12;
+  border-radius: 2px;
+  flex-shrink: 0;
+  margin-right: 2px;
+}
+
+/* Griglia risposte */
+.answer-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 4px;
+  margin: 12px 0 20px;
+  font-size: 10pt;
+  text-align: center;
+}
+.answer-grid .ag-head {
+  font-weight: 700;
+  background: #1e1a12;
+  color: #f5f0e8;
+  padding: 4px 2px;
+  border-radius: 3px;
+}
+.answer-grid .ag-cell {
+  border: 1.5px solid #d6cab4;
+  padding: 6px 2px;
+  border-radius: 3px;
+  min-height: 28px;
+}
+
+/* Separatore sezione */
+.section-sep {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 14pt;
+  font-weight: 700;
+  margin: 20px 0 10px;
+  padding-bottom: 4px;
+  border-bottom: 2px solid #9C7A3C;
+  color: #9C7A3C;
+}
+
+/* Pagina chiavi */
+.key-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 4px;
+  font-size: 10pt;
+  text-align: center;
+  margin-bottom: 16px;
+}
+.key-grid .kg-head {
+  font-weight: 700;
+  background: #1e1a12;
+  color: #f5f0e8;
+  padding: 4px 2px;
+  border-radius: 3px;
+}
+.key-grid .kg-ans {
+  background: #d4edda;
+  padding: 5px 2px;
+  border-radius: 3px;
+  font-weight: 700;
+  color: #155724;
+}
+
+/* Profilo diagnostico */
+.diag-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 10.5pt;
+  margin-bottom: 12px;
+}
+.diag-table th {
+  background: #1e1a12;
+  color: #f5f0e8;
+  padding: 7px 10px;
+  text-align: left;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 10pt;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.diag-table td {
+  padding: 8px 10px;
+  border-bottom: 1px solid #d6cab4;
+  vertical-align: top;
+}
+.diag-table tr:last-child td { border-bottom: none; }
+.diag-score {
+  display: inline-block;
+  width: 22px; height: 22px;
+  border: 1.5px solid #d6cab4;
+  border-radius: 3px;
+  text-align: center;
+  line-height: 22px;
+  font-size: 10pt;
+  margin-right: 2px;
+}
+
+/* Termometro */
+.thermo {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 8px 0;
+}
+.thermo-bar {
+  flex: 1;
+  height: 14px;
+  background: #e8dfcf;
+  border-radius: 7px;
+  overflow: hidden;
+  position: relative;
+}
+.thermo-fill {
+  height: 100%;
+  border-radius: 7px;
+  position: absolute;
+  left: 0; top: 0;
+}
+.thermo-label { font-size: 9pt; font-weight: 700; width: 30px; text-align: right; }
+
+/* Risultato finale */
+.result-box {
+  border: 2px solid #1e1a12;
+  border-radius: 8px;
+  padding: 14px 18px;
+  margin-top: 16px;
+  page-break-inside: avoid;
+}
+.result-box h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 14pt;
+  margin-bottom: 8px;
+}
+.result-levels {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  font-size: 10.5pt;
+}
+.result-level {
+  padding: 8px 12px;
+  border-radius: 6px;
+  border-left: 4px solid;
+}
+.rl-green { background: #d4edda; border-color: #28a745; }
+.rl-yellow { background: #fff3cd; border-color: #ffc107; }
+.rl-orange { background: #ffe0cc; border-color: #fd7e14; }
+.rl-red { background: #f8d7da; border-color: #dc3545; }
+
+/* Note a pie di pagina */
+.footer-note {
+  margin-top: 20px;
+  padding-top: 8px;
+  border-top: 1px solid #d6cab4;
+  font-size: 9pt;
+  color: #6b6456;
+  text-align: center;
+}
+
+/* Print */
+@media print {
+  body { padding: 12mm 14mm; font-size: 10.5pt; }
+  .no-print { display: none !important; }
+  .page-break { page-break-before: always; }
+  .q-latin { background: #f0ede5 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .key-grid .kg-ans { background: #d4edda !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .diag-table th { background: #1e1a12 !important; color: #f5f0e8 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .result-level { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
+
+/* Bottone stampa (solo a schermo) */
+.print-btn {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  font-family: 'Crimson Pro', serif;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 14px 28px;
+  border: none;
+  border-radius: 12px;
+  background: #9C7A3C;
+  color: #fff;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(156,122,60,0.4);
+  z-index: 100;
+}
+.print-btn:hover { background: #1e1a12; }
+@media print { .print-btn { display: none; } }
+</style>
+</head>
+<body>
+
+<button class="print-btn" onclick="window.print()">Stampa / Salva PDF</button>
+
+<!-- ══════════════════════════════════════════
+     PAGINA 1-2: DOMANDE
+     ══════════════════════════════════════════ -->
+<h1>Test diagnostico di morfologia</h1>
+<p class="subtitle">Verbo e nome &mdash; 36 domande &mdash; Corso &laquo;Pareto della traduzione latina&raquo;</p>
+
+<div class="info-bar">
+  <span class="left">Nome e cognome: ____________________________</span>
+  <span>Classe: ________</span>
+  <span>Data: ____/____/______</span>
+</div>
+
+<p style="font-size:10pt;color:#6b6456;margin-bottom:12px;"><strong>Istruzioni:</strong> per ogni frase, identifica la forma evidenziata in <b style="color:#9C7A3C;">grassetto dorato</b>. Segna con una X la casella della risposta scelta. Tempo: 30 minuti.</p>
+
+<!-- Griglia risposte rapida -->
+<div style="font-size:10pt;font-weight:700;margin-bottom:4px;">Griglia risposte (segna qui la lettera scelta)</div>
+<div class="answer-grid">
+  <div class="ag-head">1</div><div class="ag-head">2</div><div class="ag-head">3</div>
+  <div class="ag-head">4</div><div class="ag-head">5</div><div class="ag-head">6</div>
+  <div class="ag-head">7</div><div class="ag-head">8</div><div class="ag-head">9</div>
+  <div class="ag-head">10</div><div class="ag-head">11</div><div class="ag-head">12</div>
+  <div class="ag-cell"></div><div class="ag-cell"></div><div class="ag-cell"></div>
+  <div class="ag-cell"></div><div class="ag-cell"></div><div class="ag-cell"></div>
+  <div class="ag-cell"></div><div class="ag-cell"></div><div class="ag-cell"></div>
+  <div class="ag-cell"></div><div class="ag-cell"></div><div class="ag-cell"></div>
+  <div class="ag-head">13</div><div class="ag-head">14</div><div class="ag-head">15</div>
+  <div class="ag-head">16</div><div class="ag-head">17</div><div class="ag-head">18</div>
+  <div class="ag-head">19</div><div class="ag-head">20</div><div class="ag-head">21</div>
+  <div class="ag-head">22</div><div class="ag-head">23</div><div class="ag-head">24</div>
+  <div class="ag-cell"></div><div class="ag-cell"></div><div class="ag-cell"></div>
+  <div class="ag-cell"></div><div class="ag-cell"></div><div class="ag-cell"></div>
+  <div class="ag-cell"></div><div class="ag-cell"></div><div class="ag-cell"></div>
+  <div class="ag-cell"></div><div class="ag-cell"></div><div class="ag-cell"></div>
+  <div class="ag-head">25</div><div class="ag-head">26</div><div class="ag-head">27</div>
+  <div class="ag-head">28</div><div class="ag-head">29</div><div class="ag-head">30</div>
+  <div class="ag-head">31</div><div class="ag-head">32</div><div class="ag-head">33</div>
+  <div class="ag-head">34</div><div class="ag-head">35</div><div class="ag-head">36</div>
+  <div class="ag-cell"></div><div class="ag-cell"></div><div class="ag-cell"></div>
+  <div class="ag-cell"></div><div class="ag-cell"></div><div class="ag-cell"></div>
+  <div class="ag-cell"></div><div class="ag-cell"></div><div class="ag-cell"></div>
+  <div class="ag-cell"></div><div class="ag-cell"></div><div class="ag-cell"></div>
+</div>
+
+<div class="section-sep">Sezione A &mdash; Morfologia del verbo (domande 1&ndash;18)</div>
+
+<div class="q"><div class="q-head">1.</div>
+<div class="q-latin">Iuppiter valde ir&amacr;tus <b>erat</b>.</div>
+<div class="q-opts"><div class="opt"><span class="box"></span><span class="letter">A.</span> Ind. presente di <i>sum</i></div><div class="opt"><span class="box"></span><span class="letter">B.</span> Ind. imperfetto di <i>sum</i></div><div class="opt"><span class="box"></span><span class="letter">C.</span> Cong. imperfetto di <i>sum</i></div><div class="opt"><span class="box"></span><span class="letter">D.</span> Ind. perfetto di <i>sum</i></div></div></div>
+
+<div class="q"><div class="q-head">2.</div>
+<div class="q-latin">Pr&omacr;m&emacr;theus ignem hominibus <b>d&omacr;n&amacr;verat</b>.</div>
+<div class="q-opts"><div class="opt"><span class="box"></span><span class="letter">A.</span> Ind. perfetto attivo</div><div class="opt"><span class="box"></span><span class="letter">B.</span> Ind. piuccheperfetto attivo</div><div class="opt"><span class="box"></span><span class="letter">C.</span> Ind. imperfetto attivo</div><div class="opt"><span class="box"></span><span class="letter">D.</span> Cong. piuccheperfetto att.</div></div></div>
+
+<div class="q"><div class="q-head">3.</div>
+<div class="q-latin">Tam mult&amacr;s <b>inv&emacr;nerant</b> art&emacr;s.</div>
+<div class="q-opts"><div class="opt"><span class="box"></span><span class="letter">A.</span> Ind. perfetto attivo</div><div class="opt"><span class="box"></span><span class="letter">B.</span> Cong. imperfetto attivo</div><div class="opt"><span class="box"></span><span class="letter">C.</span> Ind. piuccheperfetto attivo</div><div class="opt"><span class="box"></span><span class="letter">D.</span> Ind. futuro anteriore</div></div></div>
+
+<div class="q"><div class="q-head">4.</div>
+<div class="q-latin">Auxili&omacr; n&omacr;n iam eg&emacr;re <b>vid&emacr;rentur</b>.</div>
+<div class="q-opts"><div class="opt"><span class="box"></span><span class="letter">A.</span> Ind. imperfetto passivo</div><div class="opt"><span class="box"></span><span class="letter">B.</span> Cong. presente passivo</div><div class="opt"><span class="box"></span><span class="letter">C.</span> Cong. imperfetto passivo</div><div class="opt"><span class="box"></span><span class="letter">D.</span> Ind. perfetto passivo</div></div></div>
+
+<div class="q"><div class="q-head">5.</div>
+<div class="q-latin">Cum Iuppiter homin&emacr;s <b>vid&emacr;ret</b>.</div>
+<div class="q-opts"><div class="opt"><span class="box"></span><span class="letter">A.</span> Ind. imperfetto attivo</div><div class="opt"><span class="box"></span><span class="letter">B.</span> Cong. presente attivo</div><div class="opt"><span class="box"></span><span class="letter">C.</span> Cong. imperfetto attivo</div><div class="opt"><span class="box"></span><span class="letter">D.</span> Ind. perfetto attivo</div></div></div>
+
+<div class="q"><div class="q-head">6.</div>
+<div class="q-latin">E&omacr;s p&umacr;n&imacr;re <b>c&omacr;nstituit</b>.</div>
+<div class="q-opts"><div class="opt"><span class="box"></span><span class="letter">A.</span> Ind. presente attivo</div><div class="opt"><span class="box"></span><span class="letter">B.</span> Ind. perfetto attivo</div><div class="opt"><span class="box"></span><span class="letter">C.</span> Cong. perfetto attivo</div><div class="opt"><span class="box"></span><span class="letter">D.</span> Ind. futuro semplice</div></div></div>
+
+<div class="q"><div class="q-head">7.</div>
+<div class="q-latin">E&omacr;s perdere <b>posset</b>.</div>
+<div class="q-opts"><div class="opt"><span class="box"></span><span class="letter">A.</span> Ind. imperfetto di <i>possum</i></div><div class="opt"><span class="box"></span><span class="letter">B.</span> Cong. imperfetto di <i>possum</i></div><div class="opt"><span class="box"></span><span class="letter">C.</span> Cong. presente di <i>possum</i></div><div class="opt"><span class="box"></span><span class="letter">D.</span> Ind. perfetto di <i>possum</i></div></div></div>
+
+<div class="q"><div class="q-head">8.</div>
+<div class="q-latin">Vulc&amacr;num f&imacr;lium <b>arcess&imacr;vit</b>.</div>
+<div class="q-opts"><div class="opt"><span class="box"></span><span class="letter">A.</span> Ind. imperfetto attivo</div><div class="opt"><span class="box"></span><span class="letter">B.</span> Ind. perfetto attivo</div><div class="opt"><span class="box"></span><span class="letter">C.</span> Ind. piuccheperfetto att.</div><div class="opt"><span class="box"></span><span class="letter">D.</span> Cong. perfetto attivo</div></div></div>
+
+<div class="q"><div class="q-head">9.</div>
+<div class="q-latin">Mulierem ex aqu&amacr; et terr&amacr; <b>c&omacr;nficere</b>.</div>
+<div class="q-opts"><div class="opt"><span class="box"></span><span class="letter">A.</span> Ind. presente attivo</div><div class="opt"><span class="box"></span><span class="letter">B.</span> Infinito presente attivo</div><div class="opt"><span class="box"></span><span class="letter">C.</span> Infinito perfetto attivo</div><div class="opt"><span class="box"></span><span class="letter">D.</span> Imperativo presente</div></div></div>
+
+<div class="q"><div class="q-head">10.</div>
+<div class="q-latin">R&emacr;s m&imacr;r&amacr;bil&emacr;s conficere <b>sol&emacr;bat</b>.</div>
+<div class="q-opts"><div class="opt"><span class="box"></span><span class="letter">A.</span> Ind. perfetto attivo</div><div class="opt"><span class="box"></span><span class="letter">B.</span> Cong. imperfetto attivo</div><div class="opt"><span class="box"></span><span class="letter">C.</span> Ind. imperfetto attivo</div><div class="opt"><span class="box"></span><span class="letter">D.</span> Ind. presente attivo</div></div></div>
+
+<div class="q"><div class="q-head">11.</div>
+<div class="q-latin">Opus perficere <b>potuit</b>.</div>
+<div class="q-opts"><div class="opt"><span class="box"></span><span class="letter">A.</span> Ind. presente di <i>possum</i></div><div class="opt"><span class="box"></span><span class="letter">B.</span> Ind. perfetto di <i>possum</i></div><div class="opt"><span class="box"></span><span class="letter">C.</span> Cong. perfetto di <i>possum</i></div><div class="opt"><span class="box"></span><span class="letter">D.</span> Ind. imperfetto di <i>possum</i></div></div></div>
+
+<div class="q"><div class="q-head">12.</div>
+<div class="q-latin">Philosophia animum <b>format</b> et fabricat. (Sen. 2017)</div>
+<div class="q-opts"><div class="opt"><span class="box"></span><span class="letter">A.</span> Ind. presente attivo</div><div class="opt"><span class="box"></span><span class="letter">B.</span> Cong. presente attivo</div><div class="opt"><span class="box"></span><span class="letter">C.</span> Ind. imperfetto attivo</div><div class="opt"><span class="box"></span><span class="letter">D.</span> Ind. perfetto attivo</div></div></div>
+
+<div class="q"><div class="q-head">13.</div>
+<div class="q-latin">&Amacr; fr&amacr;tre <b>monitus erat</b> n&emacr; d&omacr;num acciperet.</div>
+<div class="q-opts"><div class="opt"><span class="box"></span><span class="letter">A.</span> Ind. perfetto passivo</div><div class="opt"><span class="box"></span><span class="letter">B.</span> Ind. piuccheperfetto passivo</div><div class="opt"><span class="box"></span><span class="letter">C.</span> Cong. piuccheperfetto pass.</div><div class="opt"><span class="box"></span><span class="letter">D.</span> Ind. imperfetto passivo</div></div></div>
+
+<div class="q"><div class="q-head">14.</div>
+<div class="q-latin">Eius pulchrit&umacr;dine <b>all&emacr;ctus est</b>.</div>
+<div class="q-opts"><div class="opt"><span class="box"></span><span class="letter">A.</span> Ind. presente passivo</div><div class="opt"><span class="box"></span><span class="letter">B.</span> Ind. perfetto passivo</div><div class="opt"><span class="box"></span><span class="letter">C.</span> Ind. piuccheperfetto passivo</div><div class="opt"><span class="box"></span><span class="letter">D.</span> Cong. perfetto passivo</div></div></div>
+
+<div class="q"><div class="q-head">15.</div>
+<div class="q-latin">Eam ux&omacr;rem d&umacr;cere <b>cup&emacr;ret</b>.</div>
+<div class="q-opts"><div class="opt"><span class="box"></span><span class="letter">A.</span> Ind. imperfetto attivo</div><div class="opt"><span class="box"></span><span class="letter">B.</span> Cong. presente attivo</div><div class="opt"><span class="box"></span><span class="letter">C.</span> Cong. imperfetto attivo</div><div class="opt"><span class="box"></span><span class="letter">D.</span> Ind. perfetto attivo</div></div></div>
+
+<div class="q"><div class="q-head">16.</div>
+<div class="q-latin">Nihil quod magis <b>adliciat</b>. (Cic. 2025)</div>
+<div class="q-opts"><div class="opt"><span class="box"></span><span class="letter">A.</span> Ind. presente attivo</div><div class="opt"><span class="box"></span><span class="letter">B.</span> Cong. presente attivo</div><div class="opt"><span class="box"></span><span class="letter">C.</span> Ind. futuro semplice</div><div class="opt"><span class="box"></span><span class="letter">D.</span> Cong. imperfetto attivo</div></div></div>
+
+<div class="q"><div class="q-head">17.</div>
+<div class="q-latin">Sive f&amacr;ta immut&amacr;bilia <b>sunt</b>. (Sen. 2017)</div>
+<div class="q-opts"><div class="opt"><span class="box"></span><span class="letter">A.</span> Cong. presente di <i>sum</i></div><div class="opt"><span class="box"></span><span class="letter">B.</span> Ind. presente di <i>sum</i></div><div class="opt"><span class="box"></span><span class="letter">C.</span> Ind. imperfetto di <i>sum</i></div><div class="opt"><span class="box"></span><span class="letter">D.</span> Ind. perfetto di <i>sum</i></div></div></div>
+
+<div class="q"><div class="q-head">18.</div>
+<div class="q-latin">Philosophia n&omacr;s tu&emacr;r&imacr; <b>d&emacr;bet</b>. (Sen. 2017)</div>
+<div class="q-opts"><div class="opt"><span class="box"></span><span class="letter">A.</span> Ind. perfetto attivo</div><div class="opt"><span class="box"></span><span class="letter">B.</span> Cong. presente attivo</div><div class="opt"><span class="box"></span><span class="letter">C.</span> Ind. presente attivo</div><div class="opt"><span class="box"></span><span class="letter">D.</span> Ind. imperfetto attivo</div></div></div>
+
+<div class="section-sep">Sezione B &mdash; Morfologia del nome (domande 19&ndash;36)</div>
+
+<div class="q"><div class="q-head">19.</div><div class="q-latin"><b>Iuppiter</b> valde &imacr;r&amacr;tus erat.</div><div class="q-prompt">In che caso?</div><div class="q-opts"><div class="opt"><span class="box"></span><span class="letter">A.</span> Accusativo sing.</div><div class="opt"><span class="box"></span><span class="letter">B.</span> Vocativo sing.</div><div class="opt"><span class="box"></span><span class="letter">C.</span> Nominativo sing.</div><div class="opt"><span class="box"></span><span class="letter">D.</span> Ablativo sing.</div></div></div>
+
+<div class="q"><div class="q-head">20.</div><div class="q-latin">Ignem <b>de&imacr;s</b> surreptum hominibus d&omacr;n&amacr;verat.</div><div class="q-prompt">Caso e funzione di <i>deis</i>?</div><div class="q-opts"><div class="opt"><span class="box"></span><span class="letter">A.</span> Dat. &mdash; termine</div><div class="opt"><span class="box"></span><span class="letter">B.</span> Abl. &mdash; mezzo</div><div class="opt"><span class="box"></span><span class="letter">C.</span> Dat. &mdash; allontanamento</div><div class="opt"><span class="box"></span><span class="letter">D.</span> Gen. &mdash; specificazione</div></div></div>
+
+<div class="q"><div class="q-head">21.</div><div class="q-latin">Ignem de&imacr;s surreptum <b>hominibus</b> d&omacr;n&amacr;verat.</div><div class="q-prompt">Caso e funzione di <i>hominibus</i>?</div><div class="q-opts"><div class="opt"><span class="box"></span><span class="letter">A.</span> Abl. &mdash; agente</div><div class="opt"><span class="box"></span><span class="letter">B.</span> Dat. &mdash; termine</div><div class="opt"><span class="box"></span><span class="letter">C.</span> Abl. &mdash; mezzo</div><div class="opt"><span class="box"></span><span class="letter">D.</span> Dat. &mdash; vantaggio</div></div></div>
+
+<div class="q"><div class="q-head">22.</div><div class="q-latin">Tam mult&amacr;s inv&emacr;nerant <b>art&emacr;s</b>.</div><div class="q-prompt">In che caso?</div><div class="q-opts"><div class="opt"><span class="box"></span><span class="letter">A.</span> Nom. plur.</div><div class="opt"><span class="box"></span><span class="letter">B.</span> Gen. sing.</div><div class="opt"><span class="box"></span><span class="letter">C.</span> Acc. plur.</div><div class="opt"><span class="box"></span><span class="letter">D.</span> Abl. plur.</div></div></div>
+
+<div class="q"><div class="q-head">23.</div><div class="q-latin"><b>De&omacr;rum</b> auxili&omacr; n&omacr;n iam eg&emacr;re vid&emacr;rentur.</div><div class="q-prompt">In che caso?</div><div class="q-opts"><div class="opt"><span class="box"></span><span class="letter">A.</span> Nom. plur.</div><div class="opt"><span class="box"></span><span class="letter">B.</span> Dat. plur.</div><div class="opt"><span class="box"></span><span class="letter">C.</span> Gen. plur.</div><div class="opt"><span class="box"></span><span class="letter">D.</span> Acc. plur.</div></div></div>
+
+<div class="q"><div class="q-head">24.</div><div class="q-latin">De&omacr;rum <b>auxili&omacr;</b> eg&emacr;re vid&emacr;rentur.</div><div class="q-prompt">Caso e funzione?</div><div class="q-opts"><div class="opt"><span class="box"></span><span class="letter">A.</span> Dat. &mdash; termine</div><div class="opt"><span class="box"></span><span class="letter">B.</span> Abl. &mdash; privazione</div><div class="opt"><span class="box"></span><span class="letter">C.</span> Nom. &mdash; soggetto</div><div class="opt"><span class="box"></span><span class="letter">D.</span> Abl. &mdash; mezzo</div></div></div>
+
+<div class="q"><div class="q-head">25.</div><div class="q-latin">Terr&amacr;s mult&imacr;s <b>malefici&imacr;s</b> impl&emacr;re.</div><div class="q-prompt">In che caso?</div><div class="q-opts"><div class="opt"><span class="box"></span><span class="letter">A.</span> Dativo plur.</div><div class="opt"><span class="box"></span><span class="letter">B.</span> Genitivo plur.</div><div class="opt"><span class="box"></span><span class="letter">C.</span> Nominativo plur.</div><div class="opt"><span class="box"></span><span class="letter">D.</span> Ablativo plur.</div></div></div>
+
+<div class="q"><div class="q-head">26.</div><div class="q-latin"><b>Vulc&amacr;num</b> igitur f&imacr;lium arcess&imacr;vit.</div><div class="q-prompt">In che caso?</div><div class="q-opts"><div class="opt"><span class="box"></span><span class="letter">A.</span> Nominativo</div><div class="opt"><span class="box"></span><span class="letter">B.</span> Vocativo</div><div class="opt"><span class="box"></span><span class="letter">C.</span> Accusativo</div><div class="opt"><span class="box"></span><span class="letter">D.</span> Ablativo</div></div></div>
+
+<div class="q"><div class="q-head">27.</div><div class="q-latin"><b>Mulierem</b> ex aqu&amacr; et terr&amacr; c&omacr;nficere.</div><div class="q-prompt">In che caso?</div><div class="q-opts"><div class="opt"><span class="box"></span><span class="letter">A.</span> Nominativo</div><div class="opt"><span class="box"></span><span class="letter">B.</span> Ablativo</div><div class="opt"><span class="box"></span><span class="letter">C.</span> Genitivo</div><div class="opt"><span class="box"></span><span class="letter">D.</span> Accusativo</div></div></div>
+
+<div class="q"><div class="q-head">28.</div><div class="q-latin">Mulierem ex <b>aqu&amacr;</b> et <b>terr&amacr;</b> c&omacr;nficere.</div><div class="q-prompt">In che caso?</div><div class="q-opts"><div class="opt"><span class="box"></span><span class="letter">A.</span> Nominativo</div><div class="opt"><span class="box"></span><span class="letter">B.</span> Accusativo</div><div class="opt"><span class="box"></span><span class="letter">C.</span> Ablativo</div><div class="opt"><span class="box"></span><span class="letter">D.</span> Genitivo</div></div></div>
+
+<div class="q"><div class="q-head">29.</div><div class="q-latin"><b>Arte</b> su&amacr; r&emacr;s conficere sol&emacr;bat.</div><div class="q-prompt">Caso e funzione?</div><div class="q-opts"><div class="opt"><span class="box"></span><span class="letter">A.</span> Nom. &mdash; soggetto</div><div class="opt"><span class="box"></span><span class="letter">B.</span> Abl. &mdash; mezzo</div><div class="opt"><span class="box"></span><span class="letter">C.</span> Acc. &mdash; ogg.</div><div class="opt"><span class="box"></span><span class="letter">D.</span> Gen. &mdash; spec.</div></div></div>
+
+<div class="q"><div class="q-head">30.</div><div class="q-latin">Brev&imacr; <b>tempore</b> opus perficere potuit.</div><div class="q-prompt">In che caso?</div><div class="q-opts"><div class="opt"><span class="box"></span><span class="letter">A.</span> Nominativo</div><div class="opt"><span class="box"></span><span class="letter">B.</span> Accusativo</div><div class="opt"><span class="box"></span><span class="letter">C.</span> Ablativo</div><div class="opt"><span class="box"></span><span class="letter">D.</span> Genitivo</div></div></div>
+
+<div class="q"><div class="q-head">31.</div><div class="q-latin">Nihil est <b>virtute</b> amabilius. (Cic. 2025)</div><div class="q-prompt">Caso e funzione?</div><div class="q-opts"><div class="opt"><span class="box"></span><span class="letter">A.</span> Abl. &mdash; 2&ordm; termine di paragone</div><div class="opt"><span class="box"></span><span class="letter">B.</span> Abl. &mdash; causa</div><div class="opt"><span class="box"></span><span class="letter">C.</span> Dat. &mdash; termine</div><div class="opt"><span class="box"></span><span class="letter">D.</span> Abl. &mdash; modo</div></div></div>
+
+<div class="q"><div class="q-head">32.</div><div class="q-latin">Ne maior <b>poena</b> quam culpa sit. (Cic. 2009)</div><div class="q-prompt">In che caso?</div><div class="q-opts"><div class="opt"><span class="box"></span><span class="letter">A.</span> Ablativo</div><div class="opt"><span class="box"></span><span class="letter">B.</span> Accusativo</div><div class="opt"><span class="box"></span><span class="letter">C.</span> Genitivo</div><div class="opt"><span class="box"></span><span class="letter">D.</span> Nominativo</div></div></div>
+
+<div class="q"><div class="q-head">33.</div><div class="q-latin">F&omacr;rm&omacr;sissimae <b>virgin&imacr;</b> d&omacr;num d&emacr;dit.</div><div class="q-prompt">Caso e funzione?</div><div class="q-opts"><div class="opt"><span class="box"></span><span class="letter">A.</span> Gen. &mdash; spec.</div><div class="opt"><span class="box"></span><span class="letter">B.</span> Abl. &mdash; mezzo</div><div class="opt"><span class="box"></span><span class="letter">C.</span> Dat. &mdash; termine</div><div class="opt"><span class="box"></span><span class="letter">D.</span> Nom. &mdash; soggetto</div></div></div>
+
+<div class="q"><div class="q-head">34.</div><div class="q-latin">Merc&umacr;rius <b>c&omacr;nsilia</b> d&omacr;n&amacr;vit.</div><div class="q-prompt">In che caso?</div><div class="q-opts"><div class="opt"><span class="box"></span><span class="letter">A.</span> Nom. plur.</div><div class="opt"><span class="box"></span><span class="letter">B.</span> Gen. sing.</div><div class="opt"><span class="box"></span><span class="letter">C.</span> Abl. plur.</div><div class="opt"><span class="box"></span><span class="letter">D.</span> Acc. plur.</div></div></div>
+
+<div class="q"><div class="q-head">35.</div><div class="q-latin">Quibus hominum <b>anim&omacr;s</b> fall&emacr;ret.</div><div class="q-prompt">In che caso?</div><div class="q-opts"><div class="opt"><span class="box"></span><span class="letter">A.</span> Nom. plur.</div><div class="opt"><span class="box"></span><span class="letter">B.</span> Acc. plur.</div><div class="opt"><span class="box"></span><span class="letter">C.</span> Abl. plur.</div><div class="opt"><span class="box"></span><span class="letter">D.</span> Gen. plur.</div></div></div>
+
+<div class="q"><div class="q-head">36.</div><div class="q-latin">Pr&omacr;m&emacr;theus, Dr&amacr;n&imacr; <b>nep&omacr;s</b>.</div><div class="q-prompt">Caso e funzione?</div><div class="q-opts"><div class="opt"><span class="box"></span><span class="letter">A.</span> Acc. &mdash; ogg.</div><div class="opt"><span class="box"></span><span class="letter">B.</span> Gen. &mdash; spec.</div><div class="opt"><span class="box"></span><span class="letter">C.</span> Nom. &mdash; apposizione</div><div class="opt"><span class="box"></span><span class="letter">D.</span> Abl. &mdash; origine</div></div></div>
+
+<!-- ══════════════════════════════════════════
+     PAGINA 3: CHIAVE + PROFILO DIAGNOSTICO
+     ══════════════════════════════════════════ -->
+<div class="page-break"></div>
+
+<h1>Chiave di correzione e profilo diagnostico</h1>
+<p class="subtitle" style="margin-bottom:12px;">Stacca questo foglio prima di distribuire il test</p>
+
+<div class="section-sep">Risposte esatte</div>
+
+<div class="key-grid">
+  <div class="kg-head">1</div><div class="kg-head">2</div><div class="kg-head">3</div>
+  <div class="kg-head">4</div><div class="kg-head">5</div><div class="kg-head">6</div>
+  <div class="kg-head">7</div><div class="kg-head">8</div><div class="kg-head">9</div>
+  <div class="kg-head">10</div><div class="kg-head">11</div><div class="kg-head">12</div>
+  <div class="kg-ans">B</div><div class="kg-ans">B</div><div class="kg-ans">C</div>
+  <div class="kg-ans">C</div><div class="kg-ans">C</div><div class="kg-ans">B</div>
+  <div class="kg-ans">B</div><div class="kg-ans">B</div><div class="kg-ans">B</div>
+  <div class="kg-ans">C</div><div class="kg-ans">B</div><div class="kg-ans">A</div>
+  <div class="kg-head">13</div><div class="kg-head">14</div><div class="kg-head">15</div>
+  <div class="kg-head">16</div><div class="kg-head">17</div><div class="kg-head">18</div>
+  <div class="kg-head">19</div><div class="kg-head">20</div><div class="kg-head">21</div>
+  <div class="kg-head">22</div><div class="kg-head">23</div><div class="kg-head">24</div>
+  <div class="kg-ans">B</div><div class="kg-ans">B</div><div class="kg-ans">C</div>
+  <div class="kg-ans">B</div><div class="kg-ans">B</div><div class="kg-ans">C</div>
+  <div class="kg-ans">C</div><div class="kg-ans">C</div><div class="kg-ans">B</div>
+  <div class="kg-ans">C</div><div class="kg-ans">C</div><div class="kg-ans">B</div>
+  <div class="kg-head">25</div><div class="kg-head">26</div><div class="kg-head">27</div>
+  <div class="kg-head">28</div><div class="kg-head">29</div><div class="kg-head">30</div>
+  <div class="kg-head">31</div><div class="kg-head">32</div><div class="kg-head">33</div>
+  <div class="kg-head">34</div><div class="kg-head">35</div><div class="kg-head">36</div>
+  <div class="kg-ans">D</div><div class="kg-ans">C</div><div class="kg-ans">D</div>
+  <div class="kg-ans">C</div><div class="kg-ans">B</div><div class="kg-ans">C</div>
+  <div class="kg-ans">A</div><div class="kg-ans">D</div><div class="kg-ans">C</div>
+  <div class="kg-ans">D</div><div class="kg-ans">B</div><div class="kg-ans">C</div>
+</div>
+
+<div class="section-sep">Profilo diagnostico &mdash; calcola il tuo punteggio per area</div>
+
+<p style="font-size:10pt;margin-bottom:10px;">Conta le risposte corrette per ogni gruppo e scrivi il totale nella casella. Poi leggi il tuo profilo.</p>
+
+<table class="diag-table">
+  <thead>
+    <tr>
+      <th style="width:30%;">Area</th>
+      <th style="width:20%;">Domande</th>
+      <th style="width:15%;">Il tuo punteggio</th>
+      <th style="width:35%;">Cosa ripassare</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Tempi dell'indicativo attivo</strong><br><span style="font-size:9.5pt;color:#6b6456;">Presente, imperfetto, perfetto, piuccheperfetto</span></td>
+      <td>1, 2, 3, 6, 8, 10, 11, 12</td>
+      <td style="text-align:center;"><span class="diag-score"></span> / 8</td>
+      <td style="font-size:10pt;">Se &le; 5: rivedi le desinenze personali e la differenza tra tema del presente (<em>-ba-</em>) e del perfetto (<em>-v-/-u-/-s-</em>). Esercitati a distinguere <em>-vit</em> da <em>-bat</em>.</td>
+    </tr>
+    <tr>
+      <td><strong>Congiuntivo attivo</strong><br><span style="font-size:9.5pt;color:#6b6456;">Presente e imperfetto</span></td>
+      <td>5, 7, 15, 16</td>
+      <td style="text-align:center;"><span class="diag-score"></span> / 4</td>
+      <td style="font-size:10pt;">Se &le; 2: ripassa la vocale tematica del congiuntivo (<em>-a-</em> nella I, <em>-ea-</em> nella II, <em>-a-</em> nella III/IV) e il suffisso <em>-re-</em> dell'imperfetto.</td>
+    </tr>
+    <tr>
+      <td><strong>Passivo perifrastico</strong><br><span style="font-size:9.5pt;color:#6b6456;">Perfetto e piuccheperfetto passivo</span></td>
+      <td>4, 13, 14</td>
+      <td style="text-align:center;"><span class="diag-score"></span> / 3</td>
+      <td style="font-size:10pt;">Se &le; 1: ripassa la formula part. perfetto + <em>sum/eram</em>. Attenzione: <em>allectus est</em> = perfetto, <em>monitus erat</em> = piuccheperfetto.</td>
+    </tr>
+    <tr>
+      <td><strong>Verbi irregolari</strong><br><span style="font-size:9.5pt;color:#6b6456;"><em>sum, possum, soleo, debeo</em></span></td>
+      <td>1, 7, 10, 11, 17, 18</td>
+      <td style="text-align:center;"><span class="diag-score"></span> / 6</td>
+      <td style="font-size:10pt;">Se &le; 3: ripassa <em>sum</em> (eram/fui) e <em>possum</em> (poteram/potui) con attenzione alla differenza indicativo/congiuntivo.</td>
+    </tr>
+    <tr>
+      <td><strong>Infinito</strong></td>
+      <td>9</td>
+      <td style="text-align:center;"><span class="diag-score"></span> / 1</td>
+      <td style="font-size:10pt;">Se 0: ripassa le forme dell'infinito presente attivo (<em>-&amacr;re, -&emacr;re, -ere, -&imacr;re</em>).</td>
+    </tr>
+    <tr style="background:#f5f1e8;">
+      <td><strong style="color:#9C7A3C;">TOTALE VERBO</strong></td>
+      <td>1&ndash;18</td>
+      <td style="text-align:center;font-weight:700;color:#9C7A3C;"><span class="diag-score"></span> / 18</td>
+      <td></td>
+    </tr>
+    <tr><td colspan="4" style="padding:4px;border:none;"></td></tr>
+    <tr>
+      <td><strong>Nominativo</strong><br><span style="font-size:9.5pt;color:#6b6456;">Soggetto e apposizione</span></td>
+      <td>19, 32, 36</td>
+      <td style="text-align:center;"><span class="diag-score"></span> / 3</td>
+      <td style="font-size:10pt;">Se &le; 1: ripassa il nominativo come caso del soggetto e del predicativo. Attenzione alle apposizioni (<em>nepos</em> = nominativo!).</td>
+    </tr>
+    <tr>
+      <td><strong>Accusativo</strong><br><span style="font-size:9.5pt;color:#6b6456;">Compl. oggetto</span></td>
+      <td>22, 26, 27, 34, 35</td>
+      <td style="text-align:center;"><span class="diag-score"></span> / 5</td>
+      <td style="font-size:10pt;">Se &le; 3: ripassa le desinenze dell'accusativo (<em>-am, -um, -em</em> sing.; <em>-as, -os, -es, -a</em> plur.) e il neutro (<em>consilia</em> = acc. plur. n.).</td>
+    </tr>
+    <tr>
+      <td><strong>Genitivo</strong><br><span style="font-size:9.5pt;color:#6b6456;">Specificazione</span></td>
+      <td>23</td>
+      <td style="text-align:center;"><span class="diag-score"></span> / 1</td>
+      <td style="font-size:10pt;">Se 0: ripassa il genitivo plurale (<em>-orum, -arum, -um/-ium</em>).</td>
+    </tr>
+    <tr>
+      <td><strong>Dativo</strong><br><span style="font-size:9.5pt;color:#6b6456;">Termine, allontanamento</span></td>
+      <td>20, 21, 33</td>
+      <td style="text-align:center;"><span class="diag-score"></span> / 3</td>
+      <td style="font-size:10pt;">Se &le; 1: ripassa il dativo come caso del complemento di termine. Attenzione: <em>deis surreptum</em> ha dativo di allontanamento (raro).</td>
+    </tr>
+    <tr>
+      <td><strong>Ablativo</strong><br><span style="font-size:9.5pt;color:#6b6456;">Mezzo, materia, tempo, privazione, 2&ordm; termine</span></td>
+      <td>24, 25, 28, 29, 30, 31</td>
+      <td style="text-align:center;"><span class="diag-score"></span> / 6</td>
+      <td style="font-size:10pt;">Se &le; 3: l'ablativo &egrave; il caso con pi&ugrave; funzioni. Ripassa le principali: mezzo (<em>arte</em>), materia (<em>ex aqua</em>), tempo (<em>tempore</em>), 2&ordm; termine (<em>virtute</em>), privazione (<em>auxilio egere</em>).</td>
+    </tr>
+    <tr style="background:#f5f1e8;">
+      <td><strong style="color:#9C7A3C;">TOTALE NOME</strong></td>
+      <td>19&ndash;36</td>
+      <td style="text-align:center;font-weight:700;color:#9C7A3C;"><span class="diag-score"></span> / 18</td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="result-box">
+  <h3>Il tuo profilo: dove sei?</h3>
+  <div class="result-levels">
+    <div class="result-level rl-green">
+      <strong>30&ndash;36 corrette</strong><br>
+      Base solida. Sei pronto per il Tier 2 (consecutio, gerundivo, passivo impersonale). Concentrati sulle poche forme che hai sbagliato.
+    </div>
+    <div class="result-level rl-yellow">
+      <strong>22&ndash;29 corrette</strong><br>
+      Buona base con lacune mirate. Usa la tabella qui sopra per identificare le aree deboli e ripassa solo quelle. Non serve rifare tutto.
+    </div>
+    <div class="result-level rl-orange">
+      <strong>14&ndash;21 corrette</strong><br>
+      Serve ripasso sistematico. Parti dalle aree in cui hai preso meno di met&agrave; dei punti. Priorit&agrave;: indicativo attivo + accusativo/ablativo.
+    </div>
+    <div class="result-level rl-red">
+      <strong>0&ndash;13 corrette</strong><br>
+      Ripasso completo necessario. Riparti dalle basi: desinenze dei 5 casi + tempi dell'indicativo attivo. Usa il glossario Eulalia e le tabelle delle declinazioni sul sito.
+    </div>
+  </div>
+</div>
+
+<div class="footer-note">
+  Prof. Andrea Vaccaro &mdash; Corso &laquo;Il Pareto della traduzione latina&raquo; &mdash; Liceo Classico<br>
+  Sito: andreavaccaro02-hue.github.io/latino-sites/
+</div>
+
+</body>
+</html>

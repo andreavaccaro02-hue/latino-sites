@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quiz di riconoscimento — Grammatica latina</title>
+<meta name="description" content="32 domande a risposta multipla: pronomi, aggettivi, subordinate, participio perfetto. Ottimizzato per LIM e proiezione.">
+<link rel="canonical" href="https://andreavaccaro02-hue.github.io/latino-sites/strumenti/quiz-riconoscimento.html">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="stylesheet" href="../css/style.css">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="it_IT">
+<meta property="og:url" content="https://andreavaccaro02-hue.github.io/latino-sites/strumenti/quiz-riconoscimento.html">
+<meta property="og:image" content="https://andreavaccaro02-hue.github.io/latino-sites/og-image.svg">
+<meta property="og:title" content="Quiz di riconoscimento — Grammatica latina">
+<meta property="og:description" content="32 domande: pronomi, aggettivi, subordinate, participio perfetto. Per LIM.">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/alpheios-components@latest/dist/style/style-components.min.css">
+<style>
+/* ═══ QUIZ LIM — una domanda alla volta, testi grandi ═══ */
+
+/* Contenitore quiz (modalita normale) */
+.qz { max-width: 960px; margin: 0 auto; }
+
+/* Barra superiore */
+.qz-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 24px;
+  background: var(--card);
+  border: 1px solid var(--border-light);
+  border-radius: 14px;
+  margin-bottom: 24px;
+  box-shadow: var(--shadow-sm);
+  flex-wrap: wrap;
+}
+.qz-bar-left { display:flex; align-items:center; gap:16px; }
+.qz-bar-right { display:flex; align-items:center; gap:10px; }
+.qz-score {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--eulalia);
+}
+.qz-of {
+  font-size: 14px;
+  color: var(--text-muted);
+}
+.qz-pct {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text-dim);
+  min-width: 50px;
+  text-align: right;
+}
+.qz-progress {
+  flex: 1;
+  min-width: 120px;
+  height: 8px;
+  background: var(--border-light);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.qz-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--gold), var(--gold-light));
+  border-radius: 4px;
+  transition: width 0.4s;
+  width: 0%;
+}
+
+/* Bottoni navigazione */
+.qz-btn {
+  font-family: 'Crimson Pro', serif;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 12px 28px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--card);
+  color: var(--text-dim);
+  cursor: pointer;
+  transition: all 0.25s;
+  touch-action: manipulation;
+  user-select: none;
+  min-height: 48px;
+}
+.qz-btn:hover { border-color: var(--gold); color: var(--gold); }
+.qz-btn:disabled { opacity: 0.3; cursor: default; }
+.qz-btn-primary {
+  background: var(--gold);
+  color: #fff;
+  border-color: var(--gold);
+}
+.qz-btn-primary:hover { background: var(--text); border-color: var(--text); }
+.qz-btn-fs {
+  padding: 12px 16px;
+  font-size: 14px;
+}
+
+/* Slide della domanda */
+.qz-slide {
+  background: var(--card);
+  border: 1px solid var(--border-light);
+  border-radius: 18px;
+  padding: 48px 56px;
+  box-shadow: var(--shadow-md);
+  min-height: 420px;
+  display: flex;
+  flex-direction: column;
+  transition: border-color 0.3s;
+}
+.qz-slide.ok { border-color: #28a745; }
+.qz-slide.ko { border-color: #dc3545; }
+
+.qz-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 16px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--text-muted);
+  margin-bottom: 20px;
+}
+
+.qz-latin {
+  font-family: 'Crimson Pro', serif;
+  font-size: 32px;
+  line-height: 1.7;
+  color: var(--text);
+  margin-bottom: 24px;
+}
+.qz-latin .hl {
+  background: rgba(156,122,60,0.2);
+  color: var(--gold);
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 6px;
+  border-bottom: 3px solid var(--gold);
+}
+
+.qz-prompt {
+  font-size: 20px;
+  color: var(--text-dim);
+  margin-bottom: 28px;
+  font-style: italic;
+}
+
+/* Opzioni grandi per touch/LIM */
+.qz-opts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  flex: 1;
+}
+.qz-opt {
+  padding: 22px 28px;
+  border: 2px solid var(--border-light);
+  border-radius: 14px;
+  cursor: pointer;
+  font-size: 20px;
+  line-height: 1.5;
+  background: var(--bg);
+  transition: all 0.25s;
+  user-select: none;
+  touch-action: manipulation;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-height: 72px;
+}
+.qz-opt:hover:not(.locked) {
+  border-color: var(--gold);
+  background: var(--gold-pale);
+  transform: scale(1.02);
+}
+.qz-opt .qz-letter {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--text-muted);
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--card);
+  border: 2px solid var(--border-light);
+  flex-shrink: 0;
+  transition: all 0.25s;
+}
+.qz-opt.correct { border-color: #28a745; background: rgba(40,167,69,0.12); }
+.qz-opt.correct .qz-letter { background: #28a745; color: #fff; border-color: #28a745; }
+.qz-opt.wrong { border-color: #dc3545; background: rgba(220,53,69,0.08); }
+.qz-opt.wrong .qz-letter { background: #dc3545; color: #fff; border-color: #dc3545; }
+.qz-opt.locked { cursor: default; opacity: 0.5; }
+.qz-opt.correct.locked { opacity: 1; }
+
+/* Feedback grande */
+.qz-fb {
+  display: none;
+  margin-top: 20px;
+  padding: 20px 24px;
+  border-radius: 14px;
+  font-size: 19px;
+  line-height: 1.6;
+}
+.qz-fb.show { display: block; }
+.qz-fb.ok { background: rgba(40,167,69,0.1); border-left: 4px solid #28a745; color: #155724; }
+.qz-fb.ko { background: rgba(220,53,69,0.08); border-left: 4px solid #dc3545; color: #721c24; }
+
+/* Navigazione in basso */
+.qz-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 24px;
+  gap: 12px;
+}
+.qz-nav-center {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px;
+  color: var(--text-dim);
+}
+
+/* Filtri */
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+.filter-btn {
+  font-family: 'Crimson Pro', serif;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 8px 18px;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  background: var(--bg);
+  color: var(--text-dim);
+  cursor: pointer;
+  transition: all 0.25s;
+  min-height: 40px;
+  touch-action: manipulation;
+}
+.filter-btn:hover, .filter-btn.active { background: var(--gold); color: #fff; border-color: var(--gold); }
+
+/* Schermo intero — layout a 3 fasce */
+.qz-fullscreen {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.qz-fullscreen .qz-bar {
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  flex-shrink: 0;
+  padding: 16px 32px;
+}
+.qz-fs-scroll {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0 32px 32px;
+  -webkit-overflow-scrolling: touch;
+}
+.qz-fullscreen .qz-slide {
+  padding: 48px 64px;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  min-height: 0;
+  flex: none;
+}
+.qz-fullscreen .qz-latin { font-size: 36px; line-height: 1.65; }
+.qz-fullscreen .qz-prompt { font-size: 22px; margin-bottom: 24px; }
+.qz-fullscreen .qz-num { font-size: 18px; margin-bottom: 16px; }
+.qz-fullscreen .qz-opts { gap: 12px; }
+.qz-fullscreen .qz-opt { font-size: 22px; padding: 24px 28px; min-height: 76px; }
+.qz-fullscreen .qz-opt .qz-letter { font-size: 26px; width: 44px; height: 44px; }
+.qz-fullscreen .qz-fb { font-size: 20px; padding: 22px 28px; margin-top: 24px; }
+.qz-fullscreen .qz-nav {
+  max-width: 1200px;
+  margin: 20px auto 0;
+  width: 100%;
+  flex-shrink: 0;
+  padding: 16px 32px;
+  background: var(--card);
+  border-top: 1px solid var(--border-light);
+}
+.qz-fullscreen .qz-btn { font-size: 18px; padding: 14px 32px; min-height: 52px; }
+.qz-fullscreen .qz-score { font-size: 32px; }
+@media (max-height: 800px) {
+  .qz-fullscreen .qz-opts { grid-template-columns: 1fr; gap: 8px; }
+  .qz-fullscreen .qz-opt { padding: 16px 22px; min-height: 56px; font-size: 19px; }
+  .qz-fullscreen .qz-slide { padding: 32px 48px; }
+  .qz-fullscreen .qz-latin { font-size: 30px; }
+  .qz-fullscreen .qz-prompt { font-size: 19px; }
+}
+
+/* Schermata risultati */
+.qz-results {
+  text-align: center;
+  padding: 60px 40px;
+}
+.qz-results-score {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 72px;
+  font-weight: 700;
+  color: var(--eulalia);
+  margin-bottom: 12px;
+}
+.qz-results-pct {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 36px;
+  color: var(--text-dim);
+  margin-bottom: 32px;
+}
+.qz-results-msg {
+  font-size: 22px;
+  color: var(--text-dim);
+  line-height: 1.7;
+  margin-bottom: 32px;
+}
+
+@media (max-width: 768px) {
+  .qz-slide { padding: 28px 24px; min-height: auto; }
+  .qz-latin { font-size: 24px; }
+  .qz-prompt { font-size: 17px; }
+  .qz-opts { grid-template-columns: 1fr; }
+  .qz-opt { font-size: 17px; padding: 16px 20px; min-height: 56px; }
+  .qz-fb { font-size: 16px; }
+  .qz-bar { padding: 12px 16px; }
+}
+</style>
+</head>
+<body>
+
+<nav class="navbar" id="main-navbar">
+  <div class="container">
+    <a href="../index.html" class="site-name">Lingua e Cultura Latina</a>
+    <div class="nav-links">
+      <a href="../index.html">Home</a>
+      <a href="raccoglitore.html">Raccoglitore</a>
+      <a href="../grammatica/index.html">Grammatica</a>
+      <a href="glossario-eulalia.html">Strumenti</a>
+      <a href="../chi-sono.html">Su di me</a>
+    </div>
+  </div>
+</nav>
+
+<div class="page-header" id="main-header">
+  <h1>Quiz di riconoscimento</h1>
+  <div class="divider"></div>
+  <p class="subtitle">32 domande &mdash; pronomi, aggettivi, subordinate, participio</p>
+</div>
+
+<main class="container" id="main-content">
+  <a href="../grammatica/index.html" class="back-link">&larr; Grammatica</a>
+
+  <div class="intro-tesniere" style="margin-top:20px;">
+    <div class="intro-label">Istruzioni</div>
+    <p>In ogni domanda &egrave; evidenziata <span style="background:rgba(156,122,60,0.18);color:var(--gold);font-weight:700;padding:4px 8px;border-radius:4px;">una parola o un gruppo di parole</span> in una frase latina d'autore. Identifica di cosa si tratta. Una domanda alla volta &mdash; ottimizzato per LIM e proiezione.</p>
+  </div>
+
+  <!-- Filtri -->
+  <div class="filter-bar" style="margin-top:20px;" id="filters">
+    <button class="filter-btn active" data-cat="all">Tutte (32)</button>
+    <button class="filter-btn" data-cat="dim">Dimostrativi</button>
+    <button class="filter-btn" data-cat="det">Determinativi</button>
+    <button class="filter-btn" data-cat="rel">Relativi</button>
+    <button class="filter-btn" data-cat="sup">Superlativi</button>
+    <button class="filter-btn" data-cat="comp">Comparativi</button>
+    <button class="filter-btn" data-cat="conc">Concessiva</button>
+    <button class="filter-btn" data-cat="cons">Consecutiva</button>
+    <button class="filter-btn" data-cat="fin">Finale</button>
+    <button class="filter-btn" data-cat="vol">Completiva vol.</button>
+    <button class="filter-btn" data-cat="cum">Cum narrativum</button>
+    <button class="filter-btn" data-cat="part">Participio perf.</button>
+  </div>
+
+  <!-- Quiz container -->
+  <div class="qz" id="qz"></div>
+</main>
+
+<footer id="main-footer">
+  <p><strong>Prof. Andrea Vaccaro</strong></p>
+  <p>Lingua e Cultura Latina &mdash; Liceo Classico e Liceo Scientifico</p>
+  <div class="footer-links">
+    <a href="../index.html">Home</a>
+    <a href="raccoglitore.html">Raccoglitore Testi</a>
+    <a href="glossario-eulalia.html">Strumenti</a>
+  </div>
+</footer>
+
+<script>
+/* ════════════════════════════════════════
+   DATI — 32 domande
+   ════════════════════════════════════════ */
+var QS = [
+{cat:'dim',
+ lat:'<span class="hl">Hic</span> vir fortis est et patriae semper fidelis fuit.',
+ prompt:'Che cos\'è hic in questa frase?',
+ opts:['Pronome relativo','Pronome/aggettivo dimostrativo','Pronome determinativo','Aggettivo di grado superlativo'],
+ ans:1, fb:'<strong>Hic</strong> è un dimostrativo (hic, haec, hoc) che indica vicinanza a chi parla: «questo uomo».'},
+{cat:'dim',
+ lat:'Cives <span class="hl">illam</span> urbem magno cum gaudio condiderunt.',
+ prompt:'Identifica illam.',
+ opts:['Aggettivo comparativo','Pronome determinativo','Pronome/aggettivo dimostrativo','Pronome relativo'],
+ ans:2, fb:'<strong>Illam</strong> è acc. f. sing. di <em>ille, illa, illud</em> (dimostrativo di lontananza): «quella città».'},
+{cat:'dim',
+ lat:'<span class="hl">Iste</span> homo nihil boni fecit.',
+ prompt:'Che funzione ha iste?',
+ opts:['Pronome determinativo (is)','Aggettivo di grado superlativo','Pronome/aggettivo dimostrativo','Congiunzione concessiva'],
+ ans:2, fb:'<strong>Iste</strong> è un dimostrativo (iste, ista, istud) che indica vicinanza alla 2ª persona, spesso con sfumatura dispregiativa: «codesto uomo».'},
+{cat:'det',
+ lat:'<span class="hl">Is</span> qui hoc fecit poenas dabit.',
+ prompt:'Che cos\'è is?',
+ opts:['Pronome relativo','Pronome/aggettivo dimostrativo (hic)','Pronome determinativo','Congiunzione causale'],
+ ans:2, fb:'<strong>Is</strong> è il determinativo (is, ea, id): «colui che / quello che». Serve da antecedente del relativo <em>qui</em>.'},
+{cat:'det',
+ lat:'<span class="hl">Eadem</span> puella cotidie ad templum veniebat.',
+ prompt:'Identifica eadem.',
+ opts:['Pronome relativo','Aggettivo comparativo','Pronome/aggettivo determinativo (idem)','Pronome/aggettivo dimostrativo (ille)'],
+ ans:2, fb:'<strong>Eadem</strong> è nom. f. sing. di <em>idem, eadem, idem</em> (determinativo di identità): «la stessa ragazza».'},
+{cat:'det',
+ lat:'<span class="hl">Ipse</span> rex haec verba dixit.',
+ prompt:'Che cos\'è ipse?',
+ opts:['Pronome relativo','Pronome/aggettivo determinativo','Pronome dimostrativo (hic)','Participio perfetto'],
+ ans:1, fb:'<strong>Ipse</strong> è il determinativo di identità enfatica (ipse, ipsa, ipsum): «il re stesso / in persona».'},
+{cat:'rel',
+ lat:'Vir <span class="hl">quem</span> heri vidisti hodie rediit.',
+ prompt:'Identifica quem.',
+ opts:['Pronome determinativo','Congiunzione consecutiva','Pronome relativo','Aggettivo dimostrativo'],
+ ans:2, fb:'<strong>Quem</strong> è acc. m. sing. di <em>qui, quae, quod</em>: pronome relativo, compl. oggetto nella relativa.'},
+{cat:'rel',
+ lat:'Urbs in <span class="hl">qua</span> habitamus pulcherrima est.',
+ prompt:'Che cos\'è qua?',
+ opts:['Congiunzione causale','Pronome relativo','Pronome determinativo','Avverbio di luogo'],
+ ans:1, fb:'<strong>Qua</strong> è abl. f. sing. di <em>qui, quae, quod</em>: pronome relativo retto dalla preposizione <em>in</em>.'},
+{cat:'rel',
+ lat:'Milites <span class="hl">quorum</span> virtus nota erat praemio donati sunt.',
+ prompt:'Identifica quorum.',
+ opts:['Pronome relativo (gen. m. plur.)','Pronome determinativo','Aggettivo dimostrativo','Congiunzione temporale'],
+ ans:0, fb:'<strong>Quorum</strong> è gen. m. plur. di <em>qui, quae, quod</em>: «i soldati il cui valore era noto».'},
+{cat:'sup',
+ lat:'Vulcanus <span class="hl">formosissimae</span> virgini donum dedit.',
+ prompt:'Identifica formosissimae.',
+ opts:['Aggettivo di grado positivo','Aggettivo di grado comparativo','Aggettivo di grado superlativo','Pronome determinativo'],
+ ans:2, fb:'<strong>Formosissimae</strong> è il superlativo di <em>formosus</em> (dat. f. sing.): «alla fanciulla bellissima».'},
+{cat:'sup',
+ lat:'Homerus <span class="hl">clarissimus</span> poetarum Graecorum fuit.',
+ prompt:'Che cos\'è clarissimus?',
+ opts:['Participio perfetto','Aggettivo di grado comparativo','Pronome dimostrativo','Aggettivo di grado superlativo'],
+ ans:3, fb:'<strong>Clarissimus</strong> è superlativo di <em>clarus</em>: «il più illustre dei poeti greci».'},
+{cat:'sup',
+ lat:'Minerva <span class="hl">pulcherrima</span> ornamenta ei donavit.',
+ prompt:'Identifica pulcherrima.',
+ opts:['Aggettivo di grado superlativo','Aggettivo di grado comparativo','Pronome relativo','Aggettivo di grado positivo'],
+ ans:0, fb:'<strong>Pulcherrima</strong> è superlativo di <em>pulcher</em> (acc. n. plur.): «ornamenti bellissimi».'},
+{cat:'comp',
+ lat:'Nihil est virtute <span class="hl">amabilius</span>. (Cic. 2025)',
+ prompt:'Identifica amabilius.',
+ opts:['Aggettivo di grado positivo','Aggettivo di grado superlativo','Aggettivo di grado comparativo','Avverbio di modo'],
+ ans:2, fb:'<strong>Amabilius</strong> è comparativo neutro di <em>amabilis</em>: «nulla è più amabile della virtù». <em>Virtute</em> è ablativo del 2° termine.'},
+{cat:'comp',
+ lat:'Ne <span class="hl">maior</span> poena quam culpa sit. (Cic. 2009)',
+ prompt:'Che cos\'è maior?',
+ opts:['Aggettivo di grado superlativo','Aggettivo di grado comparativo','Pronome relativo','Participio presente'],
+ ans:1, fb:'<strong>Maior</strong> è comparativo di <em>magnus</em>: «che la pena non sia più grande della colpa». <em>Quam</em> introduce il 2° termine.'},
+{cat:'comp',
+ lat:'Tamque <span class="hl">meliorem</span> suam vitam reddiderant.',
+ prompt:'Identifica meliorem.',
+ opts:['Aggettivo di grado positivo','Pronome dimostrativo','Aggettivo di grado comparativo','Aggettivo di grado superlativo'],
+ ans:2, fb:'<strong>Meliorem</strong> è comparativo di <em>bonus</em> (acc. f. sing.): «avevano reso la loro vita migliore».'},
+{cat:'conc',
+ lat:'<span class="hl">Quamquam</span> a fratre monitus erat, donum accepit.',
+ prompt:'Che tipo di proposizione introduce quamquam?',
+ opts:['Consecutiva','Finale','Concessiva','Cum narrativum'],
+ ans:2, fb:'<strong>Quamquam</strong> + indicativo introduce una proposizione <strong>concessiva</strong>: «sebbene fosse stato avvertito dal fratello».'},
+{cat:'conc',
+ lat:'<span class="hl">Quamquam</span> id quod Iuppiter petebat haud facile factu erat, opus perficere potuit.',
+ prompt:'Identifica il tipo di subordinata.',
+ opts:['Completiva volitiva','Finale','Consecutiva','Concessiva'],
+ ans:3, fb:'<strong>Quamquam</strong> + indicativo = concessiva: «sebbene ciò che Giove chiedeva non fosse facile da fare, riuscì a completare l\'opera».'},
+{cat:'conc',
+ lat:'<span class="hl">Cum</span> pauper esset, tamen felix vivebat.',
+ prompt:'Che valore ha cum + congiuntivo in questa frase?',
+ opts:['Temporale','Causale','Concessivo','Finale'],
+ ans:2, fb:'<em>Tamen</em> nella reggente è la spia: <strong>cum</strong> + congiuntivo qui ha valore <strong>concessivo</strong>: «pur essendo povero, viveva felice».'},
+{cat:'cons',
+ lat:'Tam multum eius pulchritudine allectus est, <span class="hl">ut eam uxorem ducere cuperet</span>.',
+ prompt:'Che tipo di proposizione è ut + congiuntivo qui?',
+ opts:['Finale','Consecutiva','Completiva volitiva','Concessiva'],
+ ans:1, fb:'Il correlativo <strong>tam</strong> nella reggente segnala una <strong>consecutiva</strong>: «fu attratto a tal punto dalla sua bellezza che desiderava sposarla».'},
+{cat:'cons',
+ lat:'Ita confectae aliquod dedit donum, <span class="hl">ut illa homines allicere posset</span>.',
+ prompt:'Identifica il tipo di subordinata.',
+ opts:['Finale','Cum narrativum','Consecutiva','Concessiva'],
+ ans:2, fb:'Il correlativo <strong>ita</strong> nella reggente segnala una <strong>consecutiva</strong>: «le diede un dono tale che ella potesse attrarre gli uomini».'},
+{cat:'cons',
+ lat:'Tam multas invenerant artes, <span class="hl">ut deorum auxilio non iam egere viderentur</span>.',
+ prompt:'Che tipo di subordinata è questa?',
+ opts:['Consecutiva','Finale','Completiva volitiva','Causale'],
+ ans:0, fb:'<strong>Tam...ut + congiuntivo</strong> = consecutiva: «avevano inventato arti così numerose che sembravano non aver più bisogno dell\'aiuto degli dèi».'},
+{cat:'fin',
+ lat:'Mercurio tradidit <span class="hl">ut ad Epimetheum duceret</span>.',
+ prompt:'Che tipo di proposizione è ut + congiuntivo qui?',
+ opts:['Consecutiva','Concessiva','Finale','Completiva volitiva'],
+ ans:2, fb:'Nessun correlativo (tam, ita, tantus) nella reggente: <strong>ut</strong> + congiuntivo qui è <strong>finale</strong>: «la consegnò a Mercurio affinché la conducesse da Epimeteo».'},
+{cat:'fin',
+ lat:'Modumque excogitavit, <span class="hl">quo</span> malis antea ignotis eos perdere posset.',
+ prompt:'Che cos\'è quo in questa frase?',
+ opts:['Pronome relativo con valore finale','Congiunzione consecutiva','Avverbio di luogo','Pronome interrogativo'],
+ ans:0, fb:'<strong>Quo</strong> = relativo con valore finale (= <em>ut eo</em>), usato quando nella finale c\'è un comparativo: «un modo con il quale potesse distruggerli».'},
+{cat:'fin',
+ lat:'Legatos misit <span class="hl">ne hostes fines transirent</span>.',
+ prompt:'Che tipo di proposizione introduce ne?',
+ opts:['Consecutiva negativa','Completiva volitiva','Finale negativa','Concessiva'],
+ ans:2, fb:'<strong>Ne</strong> + congiuntivo dopo un verbo di azione (non di volontà/comando) = <strong>finale negativa</strong>: «mandò ambasciatori affinché i nemici non varcassero i confini».'},
+{cat:'vol',
+ lat:'Iuppiter <span class="hl">iussit</span> Vulcanum mulierem conficere.',
+ prompt:'Che tipo di costruzione regge iussit qui?',
+ opts:['Proposizione finale','Accusativo + infinito (completiva)','Proposizione consecutiva','Cum narrativum'],
+ ans:1, fb:'<strong>Iussit</strong> + acc. + infinito: i verbi di comando (<em>iubeo</em>) reggono l\'infinitiva con soggetto in accusativo: «ordinò a Vulcano di plasmare una donna».'},
+{cat:'vol',
+ lat:'Oravit <span class="hl">ne se desereret</span>.',
+ prompt:'Che tipo di subordinata è ne + congiuntivo dopo oravit?',
+ opts:['Finale negativa','Consecutiva negativa','Completiva volitiva negativa','Concessiva'],
+ ans:2, fb:'Dopo verbi di preghiera/esortazione (<em>oro, rogo, moneo, persuadeo</em>) <strong>ne</strong> + congiuntivo = <strong>completiva volitiva</strong>: «lo pregò di non abbandonarlo».'},
+{cat:'vol',
+ lat:'A fratre monitus erat <span class="hl">ne ullum donum a Iove missum acciperet</span>.',
+ prompt:'Che tipo di subordinata è ne + congiuntivo qui?',
+ opts:['Finale negativa','Completiva volitiva negativa','Consecutiva','Concessiva'],
+ ans:1, fb:'Dopo <em>moneo</em> (avvertire), <strong>ne</strong> + congiuntivo = <strong>completiva volitiva</strong>: «era stato avvertito di non accettare alcun dono mandato da Giove».'},
+{cat:'cum',
+ lat:'<span class="hl">Cum</span> Iuppiter homines videret terras maleficiis implere, eos punire constituit.',
+ prompt:'Che valore ha cum + congiuntivo qui?',
+ opts:['Concessivo','Temporale-causale (cum narrativum)','Finale','Consecutivo'],
+ ans:1, fb:'<strong>Cum</strong> + congiuntivo imperfetto in contesto narrativo = <strong>cum narrativum</strong> (temporale-causale): «quando/poiché Giove vedeva gli uomini riempire la terra di delitti».'},
+{cat:'cum',
+ lat:'<span class="hl">Cum</span> Caesar in Galliam pervenisset, oppida expugnare coepit.',
+ prompt:'Identifica il tipo di subordinata.',
+ opts:['Concessiva','Finale','Cum narrativum','Consecutiva'],
+ ans:2, fb:'<strong>Cum</strong> + congiuntivo piuccheperfetto in narrazione storica = <strong>cum narrativum</strong>: «essendo giunto / quando Cesare fu giunto in Gallia».'},
+{cat:'cum',
+ lat:'<span class="hl">Cum primum</span> formosissimam illam virginem vidit, allectus est.',
+ prompt:'Cum primum + indicativo: è un cum narrativum?',
+ opts:['Sì, è cum narrativum','No: cum primum + indicativo = temporale pura','No: è una concessiva','No: è una causale'],
+ ans:1, fb:'<strong>Cum primum</strong> + indicativo = proposizione <strong>temporale pura</strong> («non appena»), NON cum narrativum. Il cum narrativum vuole il congiuntivo.'},
+{cat:'part',
+ lat:'<span class="hl">Neglecto</span> deorum cultu, terras maleficiis implebant.',
+ prompt:'Che cos\'è neglecto in questa frase?',
+ opts:['Aggettivo di grado positivo','Participio perfetto in ablativo assoluto','Pronome determinativo','Aggettivo di grado superlativo'],
+ ans:1, fb:'<strong>Neglecto</strong> è participio perfetto di <em>neglego</em> (abl. m. sing.), in costruzione di <strong>ablativo assoluto</strong> con <em>cultu</em>: «trascurato il culto degli dèi».'},
+{cat:'part',
+ lat:'Ignem deis <span class="hl">surreptum</span> hominibus donaverat.',
+ prompt:'Identifica surreptum.',
+ opts:['Supino','Participio perfetto concordato con ignem','Aggettivo di grado comparativo','Pronome relativo'],
+ ans:1, fb:'<strong>Surreptum</strong> è participio perfetto di <em>surripio</em> (acc. m. sing.), concordato con <em>ignem</em>: «il fuoco sottratto agli dèi».'},
+{cat:'part',
+ lat:'Feminam illam \'Pandoram\' <span class="hl">vocatam</span> Mercurio tradidit.',
+ prompt:'Che cos\'è vocatam?',
+ opts:['Participio perfetto concordato con feminam','Aggettivo di grado superlativo','Pronome dimostrativo','Participio presente'],
+ ans:0, fb:'<strong>Vocatam</strong> è participio perfetto di <em>voco</em> (acc. f. sing.), concordato con <em>feminam</em>: «la donna chiamata Pandora».'},
+{cat:'part',
+ lat:'Hoc beneficio <span class="hl">usi</span>, tam multas invenerant artes.',
+ prompt:'Identifica usi.',
+ opts:['Aggettivo di grado positivo','Participio perfetto di utor (deponente)','Pronome determinativo','Participio presente'],
+ ans:1, fb:'<strong>Usi</strong> è participio perfetto di <em>utor</em> (deponente, nom. m. plur.): «avendo usufruito di questo beneficio». Attenzione: <em>utor</em> è deponente, quindi il participio perfetto ha valore attivo.'}
+];
+
+/* ════════════════════════════════════════
+   MOTORE QUIZ — layout a 3 fasce in fullscreen
+   ════════════════════════════════════════ */
+var pool = [], cur = 0, correct = 0, answered = 0, isFS = false;
+
+function startQuiz(filter) {
+  pool = filter === 'all' ? QS.slice() : QS.filter(function(q){return q.cat===filter;});
+  cur = 0; correct = 0; answered = 0;
+  renderCurrent();
+}
+
+function renderCurrent() {
+  var qz = document.getElementById('qz');
+  qz.innerHTML = '';
+
+  /* Barra superiore */
+  var bar = document.createElement('div');
+  bar.className = 'qz-bar';
+  bar.innerHTML =
+    '<div class="qz-bar-left">' +
+      '<span class="qz-score" id="sc">' + correct + ' / ' + answered + '</span>' +
+      '<span class="qz-pct" id="pct">' + (answered ? Math.round(correct/answered*100)+'%' : '') + '</span>' +
+    '</div>' +
+    '<div class="qz-progress"><div class="qz-progress-fill" style="width:' + (pool.length ? Math.round((cur/pool.length)*100) : 0) + '%"></div></div>' +
+    '<div class="qz-bar-right">' +
+      '<button class="qz-btn qz-btn-fs" id="btn-fs">' + (isFS ? 'Esci' : 'Schermo intero') + '</button>' +
+    '</div>';
+  qz.appendChild(bar);
+
+  /* Fine quiz? */
+  if (cur >= pool.length) { renderResults(qz); return; }
+
+  /* Area scrollabile */
+  var scrollArea = document.createElement('div');
+  scrollArea.className = 'qz-fs-scroll';
+  scrollArea.id = 'qz-scroll';
+
+  var q = pool[cur];
+  var slide = document.createElement('div');
+  slide.className = 'qz-slide';
+  slide.id = 'slide';
+  slide.innerHTML =
+    '<div class="qz-num">Domanda ' + (cur+1) + ' di ' + pool.length + '</div>' +
+    '<div class="qz-latin">' + q.lat + '</div>' +
+    '<div class="qz-prompt">' + q.prompt + '</div>' +
+    '<div class="qz-opts" id="opts">' +
+      q.opts.map(function(o,i){
+        return '<div class="qz-opt" data-idx="'+i+'">' +
+          '<span class="qz-letter">' + String.fromCharCode(65+i) + '</span>' +
+          '<span>' + o + '</span></div>';
+      }).join('') +
+    '</div>' +
+    '<div class="qz-fb" id="fb"></div>';
+  scrollArea.appendChild(slide);
+  qz.appendChild(scrollArea);
+
+  /* Navigazione */
+  var nav = document.createElement('div');
+  nav.className = 'qz-nav';
+  nav.innerHTML =
+    '<button class="qz-btn" id="btn-prev"' + (cur===0?' disabled':'') + '>&larr; Precedente</button>' +
+    '<span class="qz-nav-center">' + (cur+1) + ' / ' + pool.length + '</span>' +
+    '<button class="qz-btn qz-btn-primary" id="btn-next" style="visibility:hidden;">Successiva &rarr;</button>';
+  qz.appendChild(nav);
+
+  /* Listeners */
+  document.getElementById('btn-fs').addEventListener('click', toggleFS);
+  document.getElementById('btn-prev').addEventListener('click', function(){ if(cur>0){cur--;renderCurrent();} });
+
+  var opts = slide.querySelectorAll('.qz-opt');
+  var fb = document.getElementById('fb');
+  var answered_this = false;
+
+  opts.forEach(function(el){
+    el.addEventListener('click', function(){
+      if (answered_this) return;
+      answered_this = true;
+      opts.forEach(function(o){o.classList.add('locked');});
+      var chosen = parseInt(el.getAttribute('data-idx'));
+      answered++;
+      if (chosen === q.ans) {
+        el.classList.add('correct');
+        slide.classList.add('ok');
+        fb.className = 'qz-fb show ok';
+        fb.innerHTML = '&#10003; Corretto! ' + q.fb;
+        correct++;
+      } else {
+        el.classList.add('wrong');
+        opts[q.ans].classList.add('correct');
+        slide.classList.add('ko');
+        fb.className = 'qz-fb show ko';
+        fb.innerHTML = '&#10007; ' + q.fb;
+      }
+      document.getElementById('sc').textContent = correct + ' / ' + answered;
+      document.getElementById('pct').textContent = Math.round(correct/answered*100) + '%';
+      document.getElementById('btn-next').style.visibility = 'visible';
+      document.getElementById('btn-next').addEventListener('click', function(){ cur++; renderCurrent(); });
+      /* Auto-scroll al feedback */
+      setTimeout(function(){ fb.scrollIntoView({behavior:'smooth',block:'nearest'}); }, 100);
+    });
+  });
+
+  /* Scroll in alto */
+  scrollArea.scrollTop = 0;
+}
+
+function renderResults(qz) {
+  var pct = pool.length ? Math.round(correct/pool.length*100) : 0;
+  var msg = pct >= 90 ? 'Eccellente! Padronanza solida.' :
+            pct >= 70 ? 'Buon lavoro! Qualche punto da rivedere.' :
+            pct >= 50 ? 'Discreto. Rivedi gli argomenti sbagliati.' :
+            'Serve ripasso. Riprova filtrando per categoria.';
+  var scrollArea = document.createElement('div'); scrollArea.className = 'qz-fs-scroll';
+  var slide = document.createElement('div');
+  slide.className = 'qz-slide';
+  slide.innerHTML =
+    '<div class="qz-results">' +
+      '<div class="qz-results-score">' + correct + ' / ' + pool.length + '</div>' +
+      '<div class="qz-results-pct">' + pct + '%</div>' +
+      '<div class="qz-results-msg">' + msg + '</div>' +
+      '<button class="qz-btn qz-btn-primary" id="btn-restart">Ricomincia</button>' +
+    '</div>';
+  scrollArea.appendChild(slide); qz.appendChild(scrollArea);
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    var active = document.querySelector('.filter-btn.active');
+    startQuiz(active ? active.getAttribute('data-cat') : 'all');
+  });
+}
+
+/* Schermo intero */
+function toggleFS() {
+  var qz = document.getElementById('qz');
+  isFS = !isFS;
+  var els = {
+    nav: document.getElementById('main-navbar'),
+    hdr: document.getElementById('main-header'),
+    main: document.getElementById('main-content'),
+    ftr: document.getElementById('main-footer'),
+    intro: document.querySelector('.intro-tesniere'),
+    filt: document.getElementById('filters'),
+    back: document.querySelector('.back-link')
+  };
+  if (isFS) {
+    qz.classList.add('qz-fullscreen');
+    els.nav.style.display='none'; els.hdr.style.display='none';
+    els.main.style.maxWidth='none'; els.main.style.padding='0';
+    els.ftr.style.display='none'; els.intro.style.display='none';
+    els.filt.style.display='none'; els.back.style.display='none';
+  } else {
+    qz.classList.remove('qz-fullscreen');
+    els.nav.style.display=''; els.hdr.style.display='';
+    els.main.style.maxWidth=''; els.main.style.padding='';
+    els.ftr.style.display=''; els.intro.style.display='';
+    els.filt.style.display=''; els.back.style.display='';
+  }
+  renderCurrent();
+}
+
+/* Keyboard */
+document.addEventListener('keydown', function(e){
+  if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+    var btn = document.getElementById('btn-next');
+    if (btn && btn.style.visibility !== 'hidden') { cur++; renderCurrent(); e.preventDefault(); }
+  }
+  if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+    if (cur > 0) { cur--; renderCurrent(); e.preventDefault(); }
+  }
+  if (e.key === 'Escape' && isFS) { toggleFS(); }
+});
+
+/* Filtri */
+document.getElementById('filters').addEventListener('click', function(e) {
+  var btn = e.target.closest('.filter-btn');
+  if (!btn) return;
+  document.querySelectorAll('.filter-btn').forEach(function(b){b.classList.remove('active');});
+  btn.classList.add('active');
+  startQuiz(btn.getAttribute('data-cat'));
+});
+
+/* Init */
+startQuiz('all');
+</script>
+<script src="../js/alpheios-init.js"></script>
+</body>
+</html>

@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La maturità in 40 domande — Latino</title>
+<meta name="description" content="40 domande e risposte di letteratura latina per prepararsi all'Esame di Stato. Da Livio ad Apuleio, con domande trasversali.">
+<link rel="canonical" href="https://andreavaccaro02-hue.github.io/latino-sites/strumenti/maturita-latino.html">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="stylesheet" href="../css/style.css">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="it_IT">
+<meta property="og:url" content="https://andreavaccaro02-hue.github.io/latino-sites/strumenti/maturita-latino.html">
+<meta property="og:image" content="https://andreavaccaro02-hue.github.io/latino-sites/og-image.svg">
+<meta property="og:title" content="La maturità in 40 domande — Latino">
+<meta property="og:description" content="40 domande e risposte di letteratura latina per prepararsi all'Esame di Stato. Da Livio ad Apuleio, con domande trasversali.">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Course",
+  "name": "La maturità in 40 domande — Latino",
+  "description": "Domande e risposte di letteratura latina per la preparazione all'Esame di Stato",
+  "provider": {
+    "@type": "Person",
+    "name": "Prof. Andrea Vaccaro"
+  },
+  "inLanguage": "it",
+  "educationalLevel": "Scuola Secondaria di Secondo Grado"
+}
+</script>
+<style>
+  /* ── Indice autori ── */
+  .indice-autori {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 24px 0 32px;
+  }
+  .indice-autori a {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text);
+    text-decoration: none;
+    transition: all 0.25s var(--ease-out);
+  }
+  .indice-autori a:hover {
+    background: var(--text);
+    color: var(--bg);
+    border-color: var(--text);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+  }
+  .indice-autori a .indice-count {
+    font-size: 0.8rem;
+    font-weight: 400;
+    opacity: 0.5;
+  }
+
+  /* ── Barra controlli ── */
+  .controls-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 32px;
+    padding: 14px 20px;
+    background: linear-gradient(135deg, #1e1a12, #3a3024);
+    border-radius: 10px;
+    box-shadow: var(--shadow-md);
+  }
+  .progress-indicator {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    color: var(--gold-light);
+    letter-spacing: 0.3px;
+  }
+  .progress-indicator strong {
+    font-size: 1.15rem;
+  }
+  .btn-toggle {
+    padding: 9px 20px;
+    background: transparent;
+    border: 1px solid var(--gold);
+    border-radius: 6px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--gold-light);
+    cursor: pointer;
+    transition: all 0.25s var(--ease-out);
+    letter-spacing: 0.3px;
+  }
+  .btn-toggle:hover {
+    background: var(--gold);
+    color: #1e1a12;
+  }
+
+  /* ── Sezione autore ── */
+  .autore-section {
+    margin-bottom: 48px;
+    scroll-margin-top: 80px;
+  }
+  .autore-header {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--border);
+    margin-bottom: 20px;
+  }
+  .autore-header h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.7rem;
+    font-weight: 700;
+    color: var(--text);
+    margin: 0;
+  }
+  .autore-header .domande-count {
+    font-family: 'Crimson Pro', serif;
+    font-size: 0.95rem;
+    color: var(--text-muted);
+  }
+
+  /* ── Domanda (accordion) ── */
+  .domanda {
+    margin-bottom: 14px;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    background: var(--card);
+    transition: box-shadow 0.3s var(--ease-out), border-color 0.3s var(--ease-out);
+  }
+  .domanda:hover {
+    box-shadow: var(--shadow-md);
+  }
+  .domanda.open {
+    border-color: var(--gold);
+    box-shadow: 0 4px 20px rgba(156,122,60,0.1);
+  }
+  .domanda-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 16px 20px;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.2s;
+  }
+  .domanda-header:hover {
+    background: rgba(156,122,60,0.04);
+  }
+  .domanda-num {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background: linear-gradient(135deg, #2c2416, #4a3c2a);
+    color: var(--gold-light);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    border-radius: 50%;
+    margin-top: 1px;
+    letter-spacing: -0.5px;
+  }
+  .domanda-text {
+    flex: 1;
+    font-family: 'Crimson Pro', serif;
+    font-size: 1.05rem;
+    line-height: 1.55;
+    color: var(--text);
+    padding-top: 5px;
+  }
+  .domanda-text i {
+    font-style: italic;
+  }
+  .domanda-chevron {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    margin-top: 8px;
+    color: var(--text-muted);
+    transition: transform 0.35s var(--ease-out), color 0.2s;
+  }
+  .domanda.open .domanda-chevron {
+    transform: rotate(180deg);
+    color: var(--gold);
+  }
+
+  /* ── Risposta ── */
+  .domanda-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s var(--ease-out), padding 0.3s var(--ease-out);
+  }
+  .domanda.open .domanda-body {
+    max-height: 600px;
+  }
+  .domanda-risposta {
+    padding: 0 20px 20px 70px;
+    font-family: 'Crimson Pro', serif;
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--text-dim);
+  }
+  .domanda-risposta .placeholder {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    background: rgba(156,122,60,0.08);
+    border-radius: 6px;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    font-style: italic;
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 600px) {
+    .autore-header h2 { font-size: 1.35rem; }
+    .domanda-header { padding: 14px 14px; gap: 10px; }
+    .domanda-num { width: 30px; height: 30px; font-size: 0.75rem; }
+    .domanda-text { font-size: 0.95rem; }
+    .domanda-risposta { padding-left: 54px; }
+    .controls-bar { flex-direction: column; align-items: stretch; text-align: center; }
+    .indice-autori a { font-size: 0.9rem; padding: 6px 12px; }
+  }
+
+  /* ── Print ── */
+  @media print {
+    .navbar, footer, .controls-bar, .domanda-chevron { display: none; }
+    .domanda-body { max-height: none !important; }
+    .domanda { break-inside: avoid; border: 1px solid #ccc; }
+    .domanda-risposta { padding-left: 50px; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="container">
+    <a href="../index.html" class="site-name">Lingua e Cultura Latina</a>
+    <div class="nav-links">
+      <a href="../index.html">Home</a>
+      <a href="raccoglitore.html">Raccoglitore</a>
+      <a href="../grammatica/index.html">Grammatica</a>
+      <a href="glossario-eulalia.html">Strumenti</a>
+      <a href="../chi-sono.html">Su di me</a>
+      <a href="../pdf/cv-vaccaro-europass.pdf" target="_blank">CV</a>
+    </div>
+  </div>
+</nav>
+
+<div class="page-header">
+  <h1>La maturità in 40 domande</h1>
+  <div class="divider"></div>
+  <p class="subtitle">Domande e risposte di letteratura latina · Preparazione all'Esame di Stato</p>
+</div>
+
+<div class="container">
+  <a href="../index.html" class="back-link">&larr; Torna alla Home</a>
+
+  <!-- Indice per autore -->
+  <section class="section" style="margin-top: 24px;">
+    <div class="section-header-bar">
+      <span class="icon">&#128218;</span>
+      <h2 class="section-title">Indice per autore</h2>
+    </div>
+    <div class="indice-autori" id="indice">
+      <a href="#livio">Livio <span class="indice-count">5</span></a>
+      <a href="#seneca">Seneca <span class="indice-count">7</span></a>
+      <a href="#lucano">Lucano <span class="indice-count">4</span></a>
+      <a href="#petronio">Petronio <span class="indice-count">5</span></a>
+      <a href="#tacito">Tacito <span class="indice-count">7</span></a>
+      <a href="#persio-giovenale">Persio e Giovenale <span class="indice-count">3</span></a>
+      <a href="#quintiliano">Quintiliano <span class="indice-count">2</span></a>
+      <a href="#marziale">Marziale <span class="indice-count">2</span></a>
+      <a href="#apuleio">Apuleio <span class="indice-count">3</span></a>
+      <a href="#trasversali">Trasversali <span class="indice-count">2</span></a>
+    </div>
+  </section>
+
+  <!-- Controlli -->
+  <div class="controls-bar">
+    <span class="progress-indicator"><strong>0</strong>/40 risposte disponibili</span>
+    <button class="btn-toggle" id="toggleAll" onclick="toggleTutte()">Mostra tutte le risposte</button>
+  </div>
+
+  <!-- ════════════════════════════════════════ -->
+  <!-- LIVIO -->
+  <!-- ════════════════════════════════════════ -->
+  <section class="autore-section" id="livio">
+    <div class="autore-header">
+      <h2>Livio</h2>
+      <span class="domande-count">(5 domande)</span>
+    </div>
+
+    <div class="domanda">
+      <div class="domanda-header" onclick="toggleDomanda(this)">
+        <span class="domanda-num">1</span>
+        <div class="domanda-text">Illustra il proemio di Livio (<i>AUC</i> 1,1): il rapporto con il passato, la funzione degli <i>exempla</i> e il pessimismo liviano.</div>
+        <svg class="domanda-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="domanda-body"><div class="domanda-risposta"><span class="placeholder">Risposta in preparazione.</span></div></div>
+    </div>
+
+    <div class="domanda">
+      <div class="domanda-header" onclick="toggleDomanda(this)">
+        <span class="domanda-num">2</span>
+        <div class="domanda-text">Analizza <i>AUC</i> 1,1,1-5 dal punto di vista linguistico e stilistico: periodo, lessico, struttura sintattica.</div>
+        <svg class="domanda-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="domanda-body"><div class="domanda-risposta"><span class="placeholder">Risposta in preparazione.</span></div></div>
+    </div>
+
+    <div class="domanda">
+      <div class="domanda-header" onclick="toggleDomanda(this)">
+        <span class="domanda-num">3</span>
+        <div class="domanda-text">La fondazione di Roma (<i>AUC</i> 1,4; 1,7): il mito tra rito, provvidenza divina e identità nazionale.</div>
+        <svg class="domanda-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="domanda-body"><div class="domanda-risposta"><span class="placeholder">Risposta in preparazione.</span></div></div>
+    </div>
+
+    <div class="domanda">
+      <div class="domanda-header" onclick="toggleDomanda(this)">
+        <span class="domanda-num">4</span>
+        <div class="domanda-text">Lucrezia (<i>AUC</i> 1,57-59): <i>pudicitia</i>, violenza e legittimazione della svolta repubblicana.</div>
+        <svg class="domanda-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="domanda-body"><div class="domanda-risposta"><span class="placeholder">Risposta in preparazione.</span></div></div>
+    </div>
+
+    <div class="domanda">
+      <div class="domanda-header" onclick="toggleDomanda(this)">
+        <span class="domanda-num">5</span>
+        <div class="domanda-text">Lo stile di Livio: drammatizzazione, discorsi diretti, <i>Patavinitas</i> e il confronto con Sallustio e Tacito.</div>
+        <svg class="domanda-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="domanda-body"><div class="domanda-risposta"><span class="placeholder">Risposta in preparazione.</span></div></div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════ -->
+  <!-- SENECA -->
+  <!-- ════════════════════════════════════════ -->
+  <section class="autore-section" id="seneca">
+    <div class="autore-header">
+      <h2>Seneca</h2>
+      <span class="domande-count">(7 domande)</span>
+    </div>
+
+    <div class="domanda">
+      <div class="domanda-header" onclick="toggleDomanda(this)">
+        <span class="domanda-num">6</span>
+        <div class="domanda-text"><i>Vindica te tibi</i> (<i>Ep.</i> 1,1): il tempo come bene supremo e la filosofia come pratica quotidiana.</div>
+        <svg class="domanda-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="domanda-body"><div class="domanda-risposta"><span class="placeholder">Risposta in preparazione.</span></div></div>
+    </div>
+
+    <div class="domanda">
+      <div class="domanda-header" onclick="toggleDomanda(this)">
+        <span class="domanda-num">7</span>
+        <div class="domanda-text">Il <i>De brevitate vitae</i> (1,1-4): la vita è breve o la sprechiamo? Struttura argomentativa e stile.</div>
+        <svg class="domanda-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="domanda-body"><div class="domanda-risposta"><span class="placeholder">Risposta in preparazione.</span></div></div>
+    </div>
+
+    <div class="domanda">
+      <div class="domanda-header" onclick="toggleDomanda(this)">
+        <span class="domanda-num">8</span>
+        <div class="domanda-text">Confronta la riflessione sul tempo in <i>Ep.</i> 1,1 e <i>De brevitate vitae</i>: continuità e differenze.</div>
+        <svg class="domanda-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="domanda-body"><div class="domanda-risposta"><span class="placeholder">Risposta in preparazione.</span></div></div>
+    </div>
+
+    <div class="domanda">
+      <div class="domanda-header" onclick="toggleDomanda(this)">
+        <span class="domanda-num">9</span>
+        <div class="domanda-text">L'esame di coscienza e il dominio delle passioni: il <i>De ira</i> (2,18; 3,13; 3,36).</div>
+        <svg class="domanda-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="domanda-body"><div class="domanda-risposta"><span class="placeholder">Risposta in preparazione.</span></div></div>
+    </div>
+
+    <div class="domanda">
+      <div class="domanda-header" onclick="toggleDomanda(this)">
+        <span class="domanda-num">10</span>
+        <div class="domanda-text">Seneca tragico: caratteristiche delle tragedie, il tema del <i>furor</i> e l'Ade sulla terra.</div>
+        <svg class="domanda-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="domanda-body"><div class="domanda-risposta"><span class="placeholder">Risposta in preparazione.</span></div></div>
+    </div>
+
+    <div class="domanda">
+      <div class="domanda-header" onclick="toggleDomanda(this)">
+        <span class="domanda-num">11</span>
+        <div class="domanda-text">La <i>Medea</i> di Seneca (vv. 1-26): analisi del monologo d'apertura e confronto con Euripide.</div>
+        <svg class="domanda-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="domanda-body"><div class="domanda-risposta"><span class="placeholder">Risposta in preparazione.</span></div></div>
+    </div>
+
+    <div class="domanda">
+      <div class="domanda-header" onclick="toggleDomanda(this)">
+        <span class="domanda-num">12</span>
+        <div class="domanda-text">Seneca e Nerone: il filosofo e il potere, dal <i>De clementia</i> al suicidio.</div>
+        <svg class="domanda-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="domanda-body"><div class="domanda-risposta"><span class="placeholder">Risposta in preparazione.</span></div></div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════ -->
+  <!-- LUCANO -->
+  <!-- ════════════════════════════════════════ -->
+  <section class="autore-section" id="lucano">
+    <div class="autore-header">
+      <h2>Lucano</h2>
+      <span class="domande-count">(4 domande)</span>
+    </div>
+
+    <div class="domanda">
+      <div class="domanda-header" onclick="toggleDomanda(this)">
+        <span class="domanda-num">13</span>
+        <div class="domanda-text">Il proemio del <i>Bellum Civile</i> (1,1-9): l'inversione dell'epos virgiliano.</div>
+        <svg class="domanda-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="domanda-body"><div class="domanda-risposta"><span class="placeholder">Risposta in preparazione.</span></div></div>
+    </div>
+
+    <div class="domanda">
+      <div class="domanda-header" onclick="toggleDomanda(this)">
+        <span class="domanda-num">14</span>
+        <div class="domanda-text">Il tema della guerra civile come <i>nefas</i>: fratricidio, autodistruzione e la fine della <i>libertas</i> repubblicana.</div>
+        <svg class="domanda-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="domanda-body"><div class="domanda-risposta"><span class="placeholder">Risposta in preparazione.</span></div></div>
+    </div>
+
+    <div class="domanda">
+      <div class="domanda-header" onclick="toggleDomanda(this)">
+        <span class="domanda-num">15</span>
+        <div class="domanda-text">Cesare e Pompeo (1,126-157): i ritratti contrapposti e il crollo della <i>concordia</i>.</div>
+        <svg class="domanda-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="domanda-body"><div class="domanda-risposta"><span class="placeholder">Risposta in preparazione.</span></div></div>
+    </div>
+
+    <div class="domanda">
+      <div class="domanda-header" onclick="toggleDomanda(this)">
+        <span class="domanda-num">16</span>
+        <div class="domanda-text">L'allusività antifrastica (Narducci): come Lucano rovescia dall'interno il modello virgiliano — esempi dal testo.</div>
+        <svg class="domanda-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="domanda-body"><div class="domanda-risposta"><span class="placeholder">Risposta in preparazione.</span></div></div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════ -->
+  <!-- PETRONIO -->
+  <!-- ════════════════════════════════════════ -->
+  <section class="autore-section" id="petronio">
+    <div class="autore-header">
+      <h2>Petronio</h2>
+      <span class="domande-count">(5 domande)</span>
+    </div>
+
+    <div class="domanda">
+      <div class="domanda-header" onclick="toggleDomanda(this)">
+        <span class="domanda-num">17</span>
+        <div class="domanda-text">La <i>quaestio Petroniana</i>: chi è l'autore del <i>Satyricon</i>? Tacito, <i>Ann.</i> XVI,18-19 e le ipotesi.</div>
+        <svg class="domanda-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="domanda-body"><div class="domanda-risposta"><span class="placeholder">Risposta in preparazione.</span></div></div>
+    </div>
+
+    <div class="domanda">
+      <div class="domanda-header" onclick="toggleDomanda(this)">
+        <span class="domanda-num">18</span>
+        <div class="domanda-text">Il <i>Satyricon</i> come anti-romanzo: parodia, genere letterario e il narratore inattendibile.</div>
+        <svg class="domanda-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="domanda-body"><div class="domanda-risposta"><span class="placeholder">Risposta in preparazione.</span></div></div>
+    </div>
+
+    <div class="domanda">
+      <div class="domanda-header" onclick="toggleDomanda(this)">
+        <span class="domanda-num">19</span>
+        <div class="domanda-text">Agamennone e la decadenza dell'eloquenza (<i>Sat.</i> 1-2): retorica e società.</div>
+        <svg class="domanda-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="domanda-body"><div class="domanda-risposta"><span class="placeholder">Risposta in preparazione.</span></div></div>
+    </div>
+
+    <div class="domanda">
+      <div class="domanda-header" onclick="toggleDomanda(this)">
+        <span class="domanda-num">20</span>
+        <div class="domanda-text">La <i>Cena Trimalchionis</i> (<i>Sat.</i> 31-33): ricchezza, morte e volgarità del liberto.</div>
+        <svg class="domanda-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="domanda-body"><div class="domanda-risposta"><span class="placeholder">Risposta in preparazione.</span></div></div>
+    </div>
+
+    <div class="domanda">
+      <div class="domanda-header" onclick="toggleDomanda(this)">
+        <span class="domanda-num">21</span>
+        <div class="domanda-text">La matrona di Efeso (<i>Sat.</i> 111): analisi della novella e confronti con Calvino e Montale.</div>
+        <svg class="domanda-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="domanda-body"><div class="domanda-risposta"><span class="placeholder">Risposta in preparazione.</span></div></div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════ -->
+  <!-- TACITO -->
+  <!-- ════════════════════════════════════════ -->
+  <section class="autore-section" id="tacito">
+    <div class="autore-header">
+      <h2>Tacito</h2>
+      <span class="domande-count">(7 domande)</span>
+    </div>
+
+    <div class="domanda">
+      <div class="domanda-header" onclick="toggleDomanda(this)">
+        <span class="domanda-num">22</span>
+        <div class="domanda-text">Vita e opere di Tacito: dall'<i>Agricola</i> agli <i>Annales</i>, il percorso di uno storico sotto il principato.</div>
+        <svg class="domanda-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="domanda-body"><div class="domanda-risposta"><span class="placeholder">Risposta in preparazione.</span></div></div>
+    </div>
+
+    <div class="domanda">
+      <div class="domanda-header" onclick="toggleDomanda(this)">
+        <span class="domanda-num">23</span>
+        <div class="domanda-text">Il discorso di Calgàco (<i>Agr.</i> 30-31): l'imperialismo romano visto dai vinti.</div>
+        <svg class="domanda-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="domanda-body"><div class="domanda-risposta"><span class="placeholder">Risposta in preparazione.</span></div></div>
+    </div>
+
+    <div class="domanda">
+      <div class="domanda-header" onclick="toggleDomanda(this)">
+        <span class="domanda-num">24</span>
+        <div class="domanda-text">Il proemio degli <i>Annales</i> (1,1): <i>sine ira et studio</i>, la <i>brevitas</i> e l'infinito storico.</div>
+        <svg class="domanda-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="domanda-body"><div class="domanda-risposta"><span class="placeholder">Risposta in preparazione.</span></div></div>
+    </div>
+
+    <div class="domanda">
+      <div class="domanda-header" onclick="toggleDomanda(this)">
+        <span class="domanda-num">25</span>
+        <div class="domanda-text">Il proemio delle <i>Historiae</i> (1,1): confronto con <i>Ann.</i> 1,1 — due modi di raccontare il principato.</div>
+        <svg class="domanda-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="domanda-body"><div class="domanda-risposta"><span class="placeholder">Risposta in preparazione.</span></div></div>
+    </div>
+
+    <div class="domanda">
+      <div class="domanda-header" onclick="toggleDomanda(this)">
+        <span class="domanda-num">26</span>
+        <div class="domanda-text">La morte di Agrippina (<i>Ann.</i> 14,3-8): tecnica narrativa, <i>suspense</i> e giudizio morale.</div>
+        <svg class="domanda-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="domanda-body"><div class="domanda-risposta"><span class="placeholder">Risposta in preparazione.</span></div></div>
+    </div>
+
+    <div class="domanda">
+      <div class="domanda-header" onclick="toggleDomanda(this)">
+        <span class="domanda-num">27</span>
+        <div class="domanda-text">I Germani (<i>Germ.</i> 18-20): etnografia o specchio critico della corruzione romana?</div>
+        <svg class="domanda-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="domanda-body"><div class="domanda-risposta"><span class="placeholder">Risposta in preparazione.</span></div></div>
+    </div>
+
+    <div class="domanda">
+      <div class="domanda-header" onclick="toggleDomanda(this)">
+        <span class="domanda-num">28</span>
+        <div class="domanda-text">Lo stile di Tacito: <i>brevitas</i>, <i>inconcinnitas</i>, <i>variatio</i> e la sintassi come strumento ideologico.</div>
+        <svg class="domanda-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="domanda-body"><div class="domanda-risposta"><span class="placeholder">Risposta in preparazione.</span></div></div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════ -->
+  <!-- PERSIO E GIOVENALE -->
+  <!-- ════════════════════════════════════════ -->
+  <section class="autore-section" id="persio-giovenale">
+    <div class="autore-header">
+      <h2>Persio e Giovenale</h2>
+      <span class="domande-count">(3 domande)</span>
+    </div>
+
+    <div class="domanda">
+      <div class="domanda-header" onclick="toggleDomanda(this)">
+        <span class="domanda-num">29</span>
+        <div class="domanda-text">La satira di età imperiale: continuità e rottura rispetto a Lucilio e Orazio.</div>
+        <svg class="domanda-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="domanda-body"><div class="domanda-risposta"><span class="placeholder">Risposta in preparazione.</span></div></div>
+    </div>
+
+    <div class="domanda">
+      <div class="domanda-header" onclick="toggleDomanda(this)">
+        <span class="domanda-num">30</span>
+        <div class="domanda-text">Persio: l'oscurità programmatica e la satira come autocoscienza (<i>Sat.</i> 1 e 3).</div>
+        <svg class="domanda-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="domanda-body"><div class="domanda-risposta"><span class="placeholder">Risposta in preparazione.</span></div></div>
+    </div>
+
+    <div class="domanda">
+      <div class="domanda-header" onclick="toggleDomanda(this)">
+        <span class="domanda-num">31</span>
+        <div class="domanda-text">Giovenale: l'<i>indignatio</i>, il realismo deformante e la satira come denuncia (<i>Sat.</i> 1 e 6).</div>
+        <svg class="domanda-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="domanda-body"><div class="domanda-risposta"><span class="placeholder">Risposta in preparazione.</span></div></div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════ -->
+  <!-- QUINTILIANO -->
+  <!-- ════════════════════════════════════════ -->
+  <section class="autore-section" id="quintiliano">
+    <div class="autore-header">
+      <h2>Quintiliano</h2>
+      <span class="domande-count">(2 domande)</span>
+    </div>
+
+    <div class="domanda">
+      <div class="domanda-header" onclick="toggleDomanda(this)">
+        <span class="domanda-num">32</span>
+        <div class="domanda-text">Il <i>vir bonus dicendi peritus</i>: la pedagogia di Quintiliano e il rapporto maestro-allievo (<i>I.O.</i> 2,2).</div>
+        <svg class="domanda-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="domanda-body"><div class="domanda-risposta"><span class="placeholder">Risposta in preparazione.</span></div></div>
+    </div>
+
+    <div class="domanda">
+      <div class="domanda-header" onclick="toggleDomanda(this)">
+        <span class="domanda-num">33</span>
+        <div class="domanda-text">Retorica e morale (<i>I.O.</i> 12,1,1-13 e II,10,1-7): l'oratore ideale contro la decadenza dell'eloquenza.</div>
+        <svg class="domanda-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="domanda-body"><div class="domanda-risposta"><span class="placeholder">Risposta in preparazione.</span></div></div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════ -->
+  <!-- MARZIALE -->
+  <!-- ════════════════════════════════════════ -->
+  <section class="autore-section" id="marziale">
+    <div class="autore-header">
+      <h2>Marziale</h2>
+      <span class="domande-count">(2 domande)</span>
+    </div>
+
+    <div class="domanda">
+      <div class="domanda-header" onclick="toggleDomanda(this)">
+        <span class="domanda-num">34</span>
+        <div class="domanda-text">La poetica del <i>lusus</i>: Marziale e la scelta dell'epigramma come genere "vero".</div>
+        <svg class="domanda-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="domanda-body"><div class="domanda-risposta"><span class="placeholder">Risposta in preparazione.</span></div></div>
+    </div>
+
+    <div class="domanda">
+      <div class="domanda-header" onclick="toggleDomanda(this)">
+        <span class="domanda-num">35</span>
+        <div class="domanda-text">Marziale, il sistema clientelare e la vita quotidiana a Roma (<i>Epigr.</i> I,4; I,47; X,4).</div>
+        <svg class="domanda-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="domanda-body"><div class="domanda-risposta"><span class="placeholder">Risposta in preparazione.</span></div></div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════ -->
+  <!-- APULEIO -->
+  <!-- ════════════════════════════════════════ -->
+  <section class="autore-section" id="apuleio">
+    <div class="autore-header">
+      <h2>Apuleio</h2>
+      <span class="domande-count">(3 domande)</span>
+    </div>
+
+    <div class="domanda">
+      <div class="domanda-header" onclick="toggleDomanda(this)">
+        <span class="domanda-num">36</span>
+        <div class="domanda-text">Le <i>Metamorfosi</i>: struttura a cornice, <i>curiositas</i> e significato iniziatico della metamorfosi.</div>
+        <svg class="domanda-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="domanda-body"><div class="domanda-risposta"><span class="placeholder">Risposta in preparazione.</span></div></div>
+    </div>
+
+    <div class="domanda">
+      <div class="domanda-header" onclick="toggleDomanda(this)">
+        <span class="domanda-num">37</span>
+        <div class="domanda-text">La metamorfosi di Lucio (<i>Met.</i> 3,21-25): analisi del passo e confronto con Ovidio.</div>
+        <svg class="domanda-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="domanda-body"><div class="domanda-risposta"><span class="placeholder">Risposta in preparazione.</span></div></div>
+    </div>
+
+    <div class="domanda">
+      <div class="domanda-header" onclick="toggleDomanda(this)">
+        <span class="domanda-num">38</span>
+        <div class="domanda-text">L'<i>Apologia</i> (12-13): Apuleio tra filosofia, magia e autodifesa.</div>
+        <svg class="domanda-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="domanda-body"><div class="domanda-risposta"><span class="placeholder">Risposta in preparazione.</span></div></div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════ -->
+  <!-- DOMANDE TRASVERSALI -->
+  <!-- ════════════════════════════════════════ -->
+  <section class="autore-section" id="trasversali">
+    <div class="autore-header">
+      <h2>Domande trasversali</h2>
+      <span class="domande-count">(2 domande)</span>
+    </div>
+
+    <div class="domanda">
+      <div class="domanda-header" onclick="toggleDomanda(this)">
+        <span class="domanda-num">39</span>
+        <div class="domanda-text">Il potere e la libertà: traccia un percorso attraverso Seneca, Lucano, Petronio e Tacito.</div>
+        <svg class="domanda-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="domanda-body"><div class="domanda-risposta"><span class="placeholder">Risposta in preparazione.</span></div></div>
+    </div>
+
+    <div class="domanda">
+      <div class="domanda-header" onclick="toggleDomanda(this)">
+        <span class="domanda-num">40</span>
+        <div class="domanda-text">La crisi dell'eloquenza: da Petronio (<i>Sat.</i> 1-2) a Quintiliano a Tacito (<i>Dialogus</i>) — diagnosi a confronto.</div>
+        <svg class="domanda-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="domanda-body"><div class="domanda-risposta"><span class="placeholder">Risposta in preparazione.</span></div></div>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <p><strong>Prof. Andrea Vaccaro</strong></p>
+  <p>Lingua e Cultura Latina — Liceo Classico e Liceo Scientifico</p>
+  <div class="footer-links">
+    <a href="../index.html">Home</a>
+    <a href="raccoglitore.html">Raccoglitore Testi</a>
+    <a href="glossario-eulalia.html">Strumenti</a>
+  </div>
+</footer>
+
+<script>
+function toggleDomanda(header) {
+  var domanda = header.parentElement;
+  domanda.classList.toggle('open');
+}
+
+function toggleTutte() {
+  var domande = document.querySelectorAll('.domanda');
+  var btn = document.getElementById('toggleAll');
+  var aperte = document.querySelectorAll('.domanda.open').length;
+  var tutteAperte = aperte === domande.length;
+
+  domande.forEach(function(d) {
+    if (tutteAperte) {
+      d.classList.remove('open');
+    } else {
+      d.classList.add('open');
+    }
+  });
+
+  btn.textContent = tutteAperte ? 'Mostra tutte le risposte' : 'Nascondi tutte le risposte';
+}
+</script>
+</body>
+</html>

@@ -293,6 +293,12 @@
     document.getElementById('last-update').textContent = new Date().toLocaleDateString('it-IT');
 
     /* ── Conto alla rovescia ── */
+    function isEsclusa(info) {
+      if (!info) return false;
+      if (info.note === 'Assenza docente') return true;
+      if (info.tipo === "Viaggio d'istruzione" && info.note && info.note.indexOf('Siracusa') !== -1) return true;
+      return false;
+    }
     var oggi = new Date(); oggi.setHours(0,0,0,0);
     var lezioniRimaste = 0, oreRimaste = 0, prossimaData = null, prossimaInfo = null;
     for (var d2 = new Date(START); d2 <= END; d2.setDate(d2.getDate() + 1)) {
@@ -304,11 +310,22 @@
       var d2copy = new Date(d2);
       if (d2copy >= oggi) {
         var ore2 = ORARIO[isoDay2];
-        lezioniRimaste++;
-        oreRimaste += ore2;
-        if (!prossimaData) {
-          prossimaData = new Date(d2);
-          prossimaInfo = dati[key2] || (ore2 > 1 ? dati[key2+'-1'] : null) || {};
+        var oreEscluse = 0;
+        if (ore2 === 1) {
+          if (isEsclusa(dati[key2])) oreEscluse = 1;
+        } else {
+          for (var h = 1; h <= ore2; h++) {
+            if (isEsclusa(dati[key2 + '-' + h])) oreEscluse++;
+          }
+        }
+        var oreEffettive = ore2 - oreEscluse;
+        if (oreEffettive > 0) {
+          lezioniRimaste++;
+          oreRimaste += oreEffettive;
+          if (!prossimaData) {
+            prossimaData = new Date(d2);
+            prossimaInfo = dati[key2] || (ore2 > 1 ? dati[key2+'-1'] : null) || {};
+          }
         }
       }
     }

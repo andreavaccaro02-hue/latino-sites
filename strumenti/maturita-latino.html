@@ -237,9 +237,254 @@
     .indice-autori a { font-size: 0.9rem; padding: 6px 12px; }
   }
 
+  /* ── Bottoni modalità nella barra controlli ── */
+  .controls-modes {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .btn-mode {
+    padding: 9px 16px;
+    background: transparent;
+    border: 1px solid rgba(201,169,110,0.4);
+    border-radius: 6px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: rgba(201,169,110,0.7);
+    cursor: pointer;
+    transition: all 0.25s var(--ease-out);
+    letter-spacing: 0.3px;
+  }
+  .btn-mode:hover, .btn-mode.active {
+    background: var(--gold);
+    color: #1e1a12;
+    border-color: var(--gold);
+  }
+
+  /* ── LIM — area di testo sotto ogni domanda ── */
+  .lim-area {
+    display: none;
+    padding: 0 20px 20px 70px;
+  }
+  body.lim-mode .lim-area { display: block; }
+  body.lim-mode .domanda { border-color: var(--gold); }
+  body.lim-mode .domanda-body { max-height: 2000px; }
+  .lim-textarea {
+    width: 100%;
+    min-height: 100px;
+    padding: 14px 16px;
+    border: 2px dashed var(--border);
+    border-radius: 8px;
+    background: #fff;
+    font-family: 'Crimson Pro', serif;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--text);
+    resize: vertical;
+    transition: border-color 0.2s;
+  }
+  .lim-textarea:focus {
+    outline: none;
+    border-color: var(--gold);
+    box-shadow: 0 0 0 3px rgba(156,122,60,0.1);
+  }
+  .lim-textarea::placeholder {
+    color: var(--text-muted);
+    font-style: italic;
+  }
+  body.lim-mode .domanda-text { font-size: 1.2rem; }
+  body.lim-mode .domanda-num { width: 42px; height: 42px; font-size: 1rem; }
+
+  /* ── Anki overlay ── */
+  .anki-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    background: var(--bg);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .anki-overlay.active { display: flex; }
+  .anki-topbar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 24px;
+    background: linear-gradient(135deg, #1e1a12, #3a3024);
+  }
+  .anki-topbar-left, .anki-topbar-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .anki-counter {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    color: var(--gold-light);
+  }
+  .anki-btn {
+    padding: 7px 14px;
+    background: transparent;
+    border: 1px solid rgba(201,169,110,0.4);
+    border-radius: 6px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--gold-light);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .anki-btn:hover { background: var(--gold); color: #1e1a12; border-color: var(--gold); }
+  .anki-card-container {
+    perspective: 1000px;
+    width: min(90vw, 700px);
+    min-height: 320px;
+  }
+  .anki-card {
+    position: relative;
+    width: 100%;
+    min-height: 320px;
+    transition: transform 0.6s var(--ease-out);
+    transform-style: preserve-3d;
+    cursor: pointer;
+  }
+  .anki-card.flipped { transform: rotateY(180deg); }
+  .anki-card-face {
+    position: absolute;
+    inset: 0;
+    backface-visibility: hidden;
+    border-radius: 16px;
+    padding: 40px 36px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-shadow: var(--shadow-lg);
+  }
+  .anki-front {
+    background: var(--card);
+    border: 1px solid var(--border);
+  }
+  .anki-front .anki-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--gold);
+    margin-bottom: 16px;
+  }
+  .anki-front .anki-autore {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+  }
+  .anki-front .anki-question {
+    font-family: 'Crimson Pro', serif;
+    font-size: 1.2rem;
+    line-height: 1.6;
+    color: var(--text);
+  }
+  .anki-front .anki-hint {
+    margin-top: 24px;
+    font-family: 'Crimson Pro', serif;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    font-style: italic;
+  }
+  .anki-back {
+    background: linear-gradient(135deg, #1e1a12, #3a3024);
+    border: 1px solid rgba(156,122,60,0.3);
+    transform: rotateY(180deg);
+  }
+  .anki-back .anki-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--gold);
+    margin-bottom: 16px;
+  }
+  .anki-back .anki-answer {
+    font-family: 'Crimson Pro', serif;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: #e8e0d4;
+  }
+  .anki-nav {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-top: 32px;
+  }
+  .anki-nav-btn {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 2px solid var(--border);
+    background: var(--card);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.25s var(--ease-out);
+    color: var(--text);
+  }
+  .anki-nav-btn:hover {
+    background: var(--text);
+    color: var(--bg);
+    border-color: var(--text);
+    transform: scale(1.1);
+  }
+  .anki-nav-btn:disabled {
+    opacity: 0.3;
+    cursor: default;
+    transform: none;
+  }
+  .anki-nav-btn:disabled:hover {
+    background: var(--card);
+    color: var(--text);
+    border-color: var(--border);
+  }
+  .anki-progress-bar {
+    width: min(90vw, 700px);
+    height: 4px;
+    background: var(--border);
+    border-radius: 2px;
+    margin-top: 20px;
+    overflow: hidden;
+  }
+  .anki-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--gold), var(--gold-light));
+    border-radius: 2px;
+    transition: width 0.4s var(--ease-out);
+  }
+
+  @media (max-width: 600px) {
+    .anki-card-container { width: 92vw; min-height: 260px; }
+    .anki-card { min-height: 260px; }
+    .anki-card-face { padding: 28px 20px; }
+    .anki-front .anki-question { font-size: 1.05rem; }
+    .anki-topbar { padding: 12px 16px; }
+    .lim-textarea { min-height: 80px; font-size: 0.95rem; }
+    .lim-area { padding-left: 54px; }
+    .controls-modes { justify-content: center; }
+  }
+
   /* ── Print ── */
   @media print {
-    .navbar, footer, .controls-bar, .domanda-chevron { display: none; }
+    .navbar, footer, .controls-bar, .domanda-chevron, .anki-overlay { display: none !important; }
+    .lim-area { display: block !important; }
+    .lim-textarea { border: 1px solid #ccc; }
     .domanda-body { max-height: none !important; }
     .domanda { break-inside: avoid; border: 1px solid #ccc; }
     .domanda-risposta { padding-left: 50px; }
@@ -294,7 +539,13 @@
   <!-- Controlli -->
   <div class="controls-bar">
     <span class="progress-indicator"><strong>0</strong>/40 risposte disponibili</span>
-    <button class="btn-toggle" id="toggleAll" onclick="toggleTutte()">Mostra tutte le risposte</button>
+    <div class="controls-modes">
+      <button class="btn-toggle" id="toggleAll" onclick="toggleTutte()">Mostra tutte</button>
+      <button class="btn-mode" onclick="toggleLIM()">LIM</button>
+      <button class="btn-mode lim-only" onclick="limSalva()" style="display:none;">Salva note</button>
+      <button class="btn-mode lim-only" onclick="limScarica()" style="display:none;">Scarica .txt</button>
+      <button class="btn-mode" onclick="apriAnki()">Anki</button>
+    </div>
   </div>
 
   <!-- ════════════════════════════════════════ -->
@@ -759,6 +1010,44 @@
 
 </div>
 
+<!-- ── Anki Overlay ── -->
+<div class="anki-overlay" id="ankiOverlay">
+  <div class="anki-topbar">
+    <div class="anki-topbar-left">
+      <span class="anki-counter" id="ankiCounter">1 / 40</span>
+    </div>
+    <div class="anki-topbar-right">
+      <button class="anki-btn" onclick="ankiShuffle()">Mescola</button>
+      <button class="anki-btn" onclick="chiudiAnki()">Chiudi</button>
+    </div>
+  </div>
+  <div class="anki-card-container">
+    <div class="anki-card" id="ankiCard" onclick="ankiFlip()">
+      <div class="anki-card-face anki-front">
+        <div class="anki-label" id="ankiLabel">Domanda 1</div>
+        <div class="anki-autore" id="ankiAutore"></div>
+        <div class="anki-question" id="ankiQuestion"></div>
+        <div class="anki-hint">Clicca per vedere la risposta</div>
+      </div>
+      <div class="anki-card-face anki-back">
+        <div class="anki-label">Risposta</div>
+        <div class="anki-answer" id="ankiAnswer"></div>
+      </div>
+    </div>
+  </div>
+  <div class="anki-nav">
+    <button class="anki-nav-btn" id="ankiPrev" onclick="ankiNav(-1)">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+    </button>
+    <button class="anki-nav-btn" id="ankiNext" onclick="ankiNav(1)">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 6 15 12 9 18"/></svg>
+    </button>
+  </div>
+  <div class="anki-progress-bar">
+    <div class="anki-progress-fill" id="ankiProgress" style="width:2.5%"></div>
+  </div>
+</div>
+
 <footer>
   <p><strong>Prof. Andrea Vaccaro</strong></p>
   <p>Lingua e Cultura Latina — Liceo Classico e Liceo Scientifico</p>
@@ -789,8 +1078,158 @@ function toggleTutte() {
     }
   });
 
-  btn.textContent = tutteAperte ? 'Mostra tutte le risposte' : 'Nascondi tutte le risposte';
+  btn.textContent = tutteAperte ? 'Mostra tutte' : 'Nascondi tutte';
 }
+
+/* ══════════════════════════════════════════
+   LIM — Modalità lavagna con textarea
+   ══════════════════════════════════════════ */
+var limInited = false;
+var LIM_KEY = 'maturita40-lim-notes';
+
+function initLIMTextareas() {
+  if (limInited) return;
+  limInited = true;
+  var saved = {};
+  try { saved = JSON.parse(localStorage.getItem(LIM_KEY)) || {}; } catch(e) {}
+  document.querySelectorAll('.domanda').forEach(function(d) {
+    var num = d.querySelector('.domanda-num').textContent;
+    var area = document.createElement('div');
+    area.className = 'lim-area';
+    var ta = document.createElement('textarea');
+    ta.className = 'lim-textarea';
+    ta.placeholder = 'Scrivi qui le note per la domanda ' + num + '...';
+    ta.value = saved[num] || '';
+    ta.dataset.num = num;
+    area.appendChild(ta);
+    d.querySelector('.domanda-body').appendChild(area);
+  });
+}
+
+function toggleLIM() {
+  initLIMTextareas();
+  document.body.classList.toggle('lim-mode');
+  var attiva = document.body.classList.contains('lim-mode');
+  var btn = document.querySelector('.btn-mode[onclick="toggleLIM()"]');
+  btn.classList.toggle('active');
+  document.querySelectorAll('.lim-only').forEach(function(b) {
+    b.style.display = attiva ? '' : 'none';
+  });
+}
+
+function limSalva() {
+  var notes = {};
+  document.querySelectorAll('.lim-textarea').forEach(function(ta) {
+    if (ta.value.trim()) notes[ta.dataset.num] = ta.value;
+  });
+  localStorage.setItem(LIM_KEY, JSON.stringify(notes));
+}
+
+function limScarica() {
+  var notes = {};
+  document.querySelectorAll('.lim-textarea').forEach(function(ta) {
+    if (ta.value.trim()) notes[ta.dataset.num] = ta.value;
+  });
+  var righe = [];
+  document.querySelectorAll('.domanda').forEach(function(d) {
+    var num = d.querySelector('.domanda-num').textContent;
+    var testo = d.querySelector('.domanda-text').textContent;
+    var nota = notes[num] || '';
+    if (nota) {
+      righe.push('DOMANDA ' + num + ': ' + testo);
+      righe.push(nota);
+      righe.push('');
+    }
+  });
+  if (righe.length === 0) { alert('Nessuna nota scritta.'); return; }
+  var blob = new Blob([righe.join('\n')], { type: 'text/plain;charset=utf-8' });
+  var link = document.createElement('a');
+  link.download = 'note-maturita-' + new Date().toISOString().slice(0,10) + '.txt';
+  link.href = URL.createObjectURL(blob);
+  link.click();
+}
+
+// Salvataggio automatico ogni 10 secondi quando in modalità LIM
+setInterval(function() {
+  if (document.body.classList.contains('lim-mode')) limSalva();
+}, 10000);
+
+/* ══════════════════════════════════════════
+   ANKI — Flashcard
+   ══════════════════════════════════════════ */
+var ankiDomande = [];
+var ankiOrdine = [];
+var ankiIdx = 0;
+
+function buildAnkiData() {
+  ankiDomande = [];
+  var sezioni = document.querySelectorAll('.autore-section');
+  sezioni.forEach(function(sez) {
+    var autore = sez.querySelector('.autore-header h2').textContent;
+    var domande = sez.querySelectorAll('.domanda');
+    domande.forEach(function(d) {
+      var num = d.querySelector('.domanda-num').textContent;
+      var testo = d.querySelector('.domanda-text').innerHTML;
+      var risposta = d.querySelector('.domanda-risposta').innerHTML;
+      ankiDomande.push({ num: num, autore: autore, testo: testo, risposta: risposta });
+    });
+  });
+  ankiOrdine = ankiDomande.map(function(_, i) { return i; });
+}
+
+function apriAnki() {
+  if (ankiDomande.length === 0) buildAnkiData();
+  ankiIdx = 0;
+  document.getElementById('ankiOverlay').classList.add('active');
+  document.body.style.overflow = 'hidden';
+  ankiRender();
+}
+
+function chiudiAnki() {
+  document.getElementById('ankiOverlay').classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+function ankiRender() {
+  var i = ankiOrdine[ankiIdx];
+  var d = ankiDomande[i];
+  document.getElementById('ankiLabel').textContent = 'Domanda ' + d.num;
+  document.getElementById('ankiAutore').textContent = d.autore;
+  document.getElementById('ankiQuestion').innerHTML = d.testo;
+  document.getElementById('ankiAnswer').innerHTML = d.risposta;
+  document.getElementById('ankiCounter').textContent = (ankiIdx + 1) + ' / ' + ankiOrdine.length;
+  document.getElementById('ankiCard').classList.remove('flipped');
+  document.getElementById('ankiPrev').disabled = ankiIdx === 0;
+  document.getElementById('ankiNext').disabled = ankiIdx === ankiOrdine.length - 1;
+  document.getElementById('ankiProgress').style.width = ((ankiIdx + 1) / ankiOrdine.length * 100) + '%';
+}
+
+function ankiFlip() {
+  document.getElementById('ankiCard').classList.toggle('flipped');
+}
+
+function ankiNav(dir) {
+  ankiIdx = Math.max(0, Math.min(ankiOrdine.length - 1, ankiIdx + dir));
+  ankiRender();
+}
+
+function ankiShuffle() {
+  for (var i = ankiOrdine.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var tmp = ankiOrdine[i]; ankiOrdine[i] = ankiOrdine[j]; ankiOrdine[j] = tmp;
+  }
+  ankiIdx = 0;
+  ankiRender();
+}
+
+// Navigazione Anki con tastiera
+document.addEventListener('keydown', function(e) {
+  if (!document.getElementById('ankiOverlay').classList.contains('active')) return;
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown') { e.preventDefault(); ankiNav(1); }
+  if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); ankiNav(-1); }
+  if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); ankiFlip(); }
+  if (e.key === 'Escape') { chiudiAnki(); }
+});
 </script>
 </body>
 </html>

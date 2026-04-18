@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flashcard — Sintassi latina</title>
+<meta name="description" content="Flashcard interattive sul ripetitorio di sintassi latina di Luigi Miraglia (Latine Disco, Appendice A). Due modalità: riconosci il costrutto, produci l'esempio.">
+<link rel="canonical" href="https://andreavaccaro02-hue.github.io/latino-sites/flashcard/sintassi-latina.html">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="stylesheet" href="../css/style.css">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="it_IT">
+<meta property="og:url" content="https://andreavaccaro02-hue.github.io/latino-sites/flashcard/sintassi-latina.html">
+<meta property="og:image" content="https://andreavaccaro02-hue.github.io/latino-sites/og-image.svg">
+<meta property="og:title" content="Flashcard — Sintassi latina">
+<meta property="og:description" content="Flashcard interattive sul ripetitorio di sintassi latina di Luigi Miraglia.">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Course",
+  "name": "Flashcard — Sintassi latina",
+  "description": "Ripetitorio interattivo di sintassi latina (Miraglia, Latine Disco)",
+  "provider": { "@type": "Person", "name": "Prof. Andrea Vaccaro" },
+  "inLanguage": "it"
+}
+</script>
+<style>
+  body { overflow-x: hidden; }
+
+  /* Header compatto */
+  .fc-header {
+    padding: 32px 24px 18px;
+    text-align: center;
+  }
+  .fc-header h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.4rem;
+    font-weight: 600;
+    color: var(--text);
+    margin: 0 0 8px;
+    letter-spacing: -0.5px;
+  }
+  .fc-header .divider {
+    width: 60px;
+    height: 2px;
+    margin: 10px auto;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+  .fc-header .subtitle {
+    font-family: 'Crimson Pro', serif;
+    font-size: 1rem;
+    color: var(--text-muted);
+    font-style: italic;
+    max-width: 560px;
+    margin: 0 auto;
+  }
+  .fc-header .attribution {
+    font-family: 'Crimson Pro', serif;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-top: 6px;
+  }
+
+  /* Setup screen */
+  .fc-setup {
+    max-width: 720px;
+    margin: 10px auto 40px;
+    padding: 0 20px;
+  }
+  .fc-setup-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 28px 28px 24px;
+    box-shadow: var(--shadow-md);
+  }
+  .fc-setup-section { margin-bottom: 24px; }
+  .fc-setup-section:last-child { margin-bottom: 0; }
+  .fc-setup-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.82rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--gold);
+    margin-bottom: 12px;
+  }
+
+  .fc-modalities {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .fc-mod-opt {
+    padding: 18px 16px;
+    border: 2px solid var(--border);
+    border-radius: 10px;
+    background: #fff;
+    cursor: pointer;
+    transition: all 0.25s var(--ease-out);
+    text-align: left;
+  }
+  .fc-mod-opt:hover { border-color: var(--gold-light); }
+  .fc-mod-opt.active {
+    border-color: var(--gold);
+    background: rgba(156,122,60,0.06);
+    box-shadow: 0 0 0 3px rgba(156,122,60,0.1);
+  }
+  .fc-mod-opt .mod-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+  .fc-mod-opt .mod-desc {
+    font-family: 'Crimson Pro', serif;
+    font-size: 0.88rem;
+    color: var(--text-dim);
+    line-height: 1.4;
+  }
+  .fc-mod-opt .mod-arrow {
+    font-family: 'Cardo', serif;
+    color: var(--gold);
+    margin: 0 6px;
+  }
+
+  .fc-capitoli {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .fc-cap-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 6px 12px;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    background: #fff;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-dim);
+    cursor: pointer;
+    transition: all 0.2s;
+    user-select: none;
+  }
+  .fc-cap-chip:hover { border-color: var(--gold); color: var(--text); }
+  .fc-cap-chip.active {
+    background: var(--text);
+    border-color: var(--text);
+    color: var(--gold-light);
+  }
+  .fc-cap-chip .cap-count {
+    font-size: 0.72rem;
+    opacity: 0.6;
+  }
+  .fc-cap-all {
+    border-color: var(--gold) !important;
+    color: var(--gold) !important;
+  }
+  .fc-cap-all.active {
+    background: var(--gold) !important;
+    color: #1e1a12 !important;
+  }
+
+  .fc-start {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    justify-content: space-between;
+    padding-top: 4px;
+  }
+  .fc-card-count {
+    font-family: 'Crimson Pro', serif;
+    font-size: 0.95rem;
+    color: var(--text-dim);
+  }
+  .fc-card-count strong {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    color: var(--gold);
+    margin-right: 4px;
+  }
+  .fc-start-btn {
+    padding: 12px 28px;
+    background: linear-gradient(135deg, #2c2416, #4a3c2a);
+    border: 1px solid var(--gold);
+    border-radius: 8px;
+    color: var(--gold-light);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: all 0.25s var(--ease-out);
+  }
+  .fc-start-btn:hover {
+    background: var(--gold);
+    color: #1e1a12;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(156,122,60,0.3);
+  }
+  .fc-start-btn:disabled {
+    opacity: 0.4;
+    cursor: default;
+    transform: none;
+    box-shadow: none;
+  }
+
+  /* ── Study screen ── */
+  .fc-study {
+    display: none;
+    min-height: calc(100vh - 60px);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 24px 20px 120px;
+    position: relative;
+  }
+  .fc-study.active { display: flex; }
+
+  .fc-topbar {
+    position: sticky;
+    top: 60px;
+    width: 100%;
+    max-width: 760px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 18px;
+    background: linear-gradient(135deg, #1e1a12, #3a3024);
+    border-radius: 10px;
+    margin-bottom: 24px;
+    box-shadow: var(--shadow-md);
+  }
+  .fc-topbar-info {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+  .fc-counter {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+    color: var(--gold-light);
+    font-weight: 600;
+  }
+  .fc-mod-indicator {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 3px 10px;
+    background: rgba(156,122,60,0.2);
+    border-radius: 20px;
+    color: var(--gold-light);
+  }
+  .fc-topbar-actions { display: flex; gap: 6px; }
+  .fc-top-btn {
+    padding: 6px 12px;
+    background: transparent;
+    border: 1px solid rgba(201,169,110,0.35);
+    border-radius: 6px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--gold-light);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .fc-top-btn:hover { background: var(--gold); color: #1e1a12; border-color: var(--gold); }
+
+  .fc-card-container {
+    perspective: 1400px;
+    width: min(92vw, 680px);
+    min-height: 380px;
+  }
+  .fc-card {
+    position: relative;
+    width: 100%;
+    min-height: 380px;
+    transition: transform 0.6s var(--ease-out);
+    transform-style: preserve-3d;
+    cursor: pointer;
+  }
+  .fc-card.flipped { transform: rotateY(180deg); }
+  .fc-face {
+    position: absolute;
+    inset: 0;
+    backface-visibility: hidden;
+    border-radius: 16px;
+    padding: 40px 38px 28px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: var(--shadow-lg);
+    overflow: hidden;
+  }
+
+  .fc-face-front {
+    background: var(--card);
+    border: 1px solid var(--border);
+  }
+  .fc-face-back {
+    background: linear-gradient(135deg, #1e1a12, #3a3024);
+    border: 1px solid rgba(156,122,60,0.35);
+    transform: rotateY(180deg);
+    color: #e8e0d4;
+  }
+  .fc-face-back::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--gold-light), transparent);
+  }
+
+  .fc-cap-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--gold);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .fc-cap-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, var(--gold-pale), transparent);
+  }
+  .fc-face-back .fc-cap-label { color: var(--gold-light); }
+  .fc-face-back .fc-cap-label::after {
+    background: linear-gradient(90deg, rgba(201,169,110,0.3), transparent);
+  }
+
+  .fc-front-content, .fc-back-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .fc-esempio {
+    font-family: 'Cardo', serif;
+    font-size: 1.35rem;
+    line-height: 1.55;
+    color: var(--text);
+    margin: 4px 0;
+    font-style: normal;
+  }
+  .fc-esempio i { font-style: italic; }
+  .fc-face-back .fc-esempio { color: #f5f0e8; }
+
+  .fc-nome {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem;
+    font-weight: 600;
+    line-height: 1.35;
+    color: var(--text);
+    text-align: center;
+  }
+  .fc-nome i { font-style: italic; }
+  .fc-face-back .fc-nome { color: #f5f0e8; }
+
+  .fc-hint {
+    margin-top: auto;
+    padding-top: 20px;
+    font-family: 'Crimson Pro', serif;
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    font-style: italic;
+    text-align: center;
+    border-top: 1px solid var(--border-light);
+    margin-top: 20px;
+  }
+  .fc-face-back .fc-hint {
+    color: rgba(201,169,110,0.55);
+    border-top-color: rgba(156,122,60,0.15);
+  }
+
+  .fc-controls {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-top: 28px;
+  }
+  .fc-nav-btn {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    border: 2px solid var(--border);
+    background: var(--card);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.25s var(--ease-out);
+    color: var(--text);
+  }
+  .fc-nav-btn:hover:not(:disabled) {
+    background: var(--text);
+    color: var(--bg);
+    border-color: var(--text);
+    transform: scale(1.08);
+  }
+  .fc-nav-btn:disabled { opacity: 0.25; cursor: default; }
+  .fc-flip-btn {
+    padding: 12px 28px;
+    border-radius: 26px;
+    border: 1px solid var(--gold);
+    background: transparent;
+    color: var(--gold);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: all 0.25s;
+  }
+  .fc-flip-btn:hover { background: var(--gold); color: #1e1a12; }
+
+  .fc-progress {
+    width: min(92vw, 680px);
+    height: 4px;
+    background: var(--border);
+    border-radius: 2px;
+    margin-top: 24px;
+    overflow: hidden;
+  }
+  .fc-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--gold), var(--gold-light));
+    border-radius: 2px;
+    transition: width 0.4s var(--ease-out);
+  }
+
+  .fc-shortcuts {
+    margin-top: 16px;
+    font-family: 'Crimson Pro', serif;
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    text-align: center;
+  }
+  .fc-shortcuts kbd {
+    font-family: 'Cardo', serif;
+    background: var(--border-light);
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    margin: 0 2px;
+  }
+
+  @media (max-width: 640px) {
+    .fc-header { padding-top: 24px; }
+    .fc-header h1 { font-size: 1.8rem; }
+    .fc-setup-card { padding: 22px 18px; }
+    .fc-modalities { grid-template-columns: 1fr; }
+    .fc-card-container { min-height: 320px; }
+    .fc-card { min-height: 320px; }
+    .fc-face { padding: 28px 22px 22px; }
+    .fc-esempio { font-size: 1.15rem; }
+    .fc-nome { font-size: 1.4rem; }
+    .fc-start { flex-direction: column; align-items: stretch; gap: 10px; }
+    .fc-start-btn { width: 100%; }
+    .fc-topbar { flex-direction: column; gap: 10px; align-items: flex-start; }
+    .fc-shortcuts { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="container">
+    <a href="../index.html" class="site-name">Lingua e Cultura Latina</a>
+    <div class="nav-links">
+      <a href="../index.html">Home</a>
+      <a href="../strumenti/raccoglitore.html">Raccoglitore</a>
+      <a href="../grammatica/index.html">Grammatica</a>
+      <a href="../strumenti/glossario-eulalia.html">Strumenti</a>
+      <a href="../chi-sono.html">Su di me</a>
+      <a href="../pdf/cv-vaccaro-europass.pdf" target="_blank">CV</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ══════════════════════════════════════════
+     SETUP SCREEN
+     ══════════════════════════════════════════ -->
+<div id="setup">
+  <div class="fc-header">
+    <h1>Ripetitorio di sintassi latina</h1>
+    <div class="divider"></div>
+    <p class="subtitle">Flashcard interattive su tutti i costrutti fondamentali della sintassi latina</p>
+    <p class="attribution">Esempi tratti da Luigi Miraglia, <i>Latine Disco</i>, Appendice A</p>
+  </div>
+
+  <div class="fc-setup">
+    <a href="../index.html" class="back-link" style="display:inline-block; margin-bottom: 18px;">&larr; Torna alla Home</a>
+
+    <div class="fc-setup-card">
+
+      <div class="fc-setup-section">
+        <div class="fc-setup-label">Modalità</div>
+        <div class="fc-modalities">
+          <div class="fc-mod-opt active" data-mod="1" onclick="setMod(1)">
+            <div class="mod-title">Riconosci il costrutto</div>
+            <div class="mod-desc">Esempio latino <span class="mod-arrow">&rarr;</span> nome del costrutto</div>
+          </div>
+          <div class="fc-mod-opt" data-mod="2" onclick="setMod(2)">
+            <div class="mod-title">Produci l'esempio</div>
+            <div class="mod-desc">Nome del costrutto <span class="mod-arrow">&rarr;</span> esempi latini</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="fc-setup-section">
+        <div class="fc-setup-label">Capitoli <span id="countBadge" style="font-weight:400; letter-spacing:0; text-transform:none; color:var(--text-muted); margin-left:6px;"></span></div>
+        <div class="fc-capitoli" id="capitoli"></div>
+      </div>
+
+      <div class="fc-start">
+        <span class="fc-card-count"><strong id="numCards">0</strong> card selezionate</span>
+        <button class="fc-start-btn" id="startBtn" onclick="start()">Inizia &rarr;</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     STUDY SCREEN
+     ══════════════════════════════════════════ -->
+<div class="fc-study" id="study">
+  <div class="fc-topbar">
+    <div class="fc-topbar-info">
+      <span class="fc-counter" id="counter">1 / 1</span>
+      <span class="fc-mod-indicator" id="modInd">Modalità 1</span>
+    </div>
+    <div class="fc-topbar-actions">
+      <button class="fc-top-btn" onclick="mescola()">Mescola</button>
+      <button class="fc-top-btn" onclick="esci()">Esci</button>
+    </div>
+  </div>
+
+  <div class="fc-card-container">
+    <div class="fc-card" id="card" onclick="flip()">
+      <div class="fc-face fc-face-front">
+        <div class="fc-cap-label" id="frontLabel"></div>
+        <div class="fc-front-content" id="frontContent"></div>
+        <div class="fc-hint">Clicca la card per girarla</div>
+      </div>
+      <div class="fc-face fc-face-back">
+        <div class="fc-cap-label" id="backLabel"></div>
+        <div class="fc-back-content" id="backContent"></div>
+        <div class="fc-hint">Usa le frecce per navigare</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="fc-controls">
+    <button class="fc-nav-btn" id="prevBtn" onclick="nav(-1)" title="Precedente">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+    </button>
+    <button class="fc-flip-btn" onclick="flip()">Gira</button>
+    <button class="fc-nav-btn" id="nextBtn" onclick="nav(1)" title="Successiva">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 6 15 12 9 18"/></svg>
+    </button>
+  </div>
+
+  <div class="fc-progress">
+    <div class="fc-progress-fill" id="progressFill" style="width:0%"></div>
+  </div>
+
+  <div class="fc-shortcuts">
+    <kbd>&larr;</kbd> <kbd>&rarr;</kbd> navigare &nbsp;·&nbsp; <kbd>Spazio</kbd> girare &nbsp;·&nbsp; <kbd>Esc</kbd> uscire
+  </div>
+</div>
+
+<footer>
+  <p><strong>Prof. Andrea Vaccaro</strong></p>
+  <p>Lingua e Cultura Latina — Liceo Classico e Liceo Scientifico</p>
+  <div class="footer-links">
+    <a href="../index.html">Home</a>
+    <a href="index.html">Flashcard</a>
+    <a href="../strumenti/glossario-eulalia.html">Strumenti</a>
+  </div>
+</footer>
+
+<script>
+/* ══════════════════════════════════════════
+   DATA — Ripetitorio della sintassi latina
+   (Miraglia, Latine Disco, Appendice A)
+   ══════════════════════════════════════════ */
+
+// Titoli tematici dei capitoli di Latine Disco
+var CAPITOLI = {
+  'I':      'Doppio caso e verbi di stima',
+  'II':     'Accusativo',
+  'III':    'Genitivo',
+  'IV':     'Dativo',
+  'V':      'Ablativo',
+  'VI':     'Complementi di tempo',
+  'VII':    'Complementi di luogo',
+  'X':      'Indicativo vs. congiuntivo',
+  'XI':     'Congiuntivo indipendente',
+  'XII':    'Imperativo negativo',
+  'XIII':   'Accusativo con l\u0027infinito',
+  'XIV':    'Participio',
+  'XV':     'Gerundio e gerundivo',
+  'XVI':    'Supino',
+  'XVIII':  'Riflessivi',
+  'XIX':    'Congiuntivo nelle subordinate',
+  'XX':     'Proposizioni interrogative',
+  'XXI':    'Proposizioni sostantive',
+  'XXIII':  'Non dubito quin; impediendi',
+  'XXIV':   'Verba timendi',
+  'XXV':    'Proposizioni finali',
+  'XXVI':   'Proposizioni consecutive',
+  'XXVII':  'Proposizioni causali',
+  'XXVIII': 'Proposizioni temporali',
+  'XXIX':   'Proposizioni concessive',
+  'XXX':    'Proposizioni relative',
+  'XXXI':   'Proposizioni comparative',
+  'XXXII':  'Periodo ipotetico',
+  'XXXIII': 'Proposizioni condizionali'
+};
+
+// Ogni card: { cap, par, nome, esempi: [] }
+var CARDS = [
+  // I. Doppio caso e verbi di stima
+  { cap: 'I', par: 1, nome: 'Doppio nominativo / doppio accusativo', esempi: ['Cicerō cōnsul creātus est.', 'Rōmānī Cicerōnem cōnsulem creāvērunt.'] },
+  { cap: 'I', par: 2, nome: '<i>Vidērī</i>: costruzione personale', esempi: ['Iūlius mihi vidētur pater sevērus esse.'] },
+  { cap: 'I', par: 3, nome: '<i>Vidērī</i>: costruzione particolare', esempi: ['Magistrō necessārium esse vidētur tabellārium mittere ad Iūlium.', 'Discipulīs nōn vidēbātur magistrum recitantem interrogāre.', 'Iūliō vidētur Mārcum paenitēre pigritiae suae.', 'Dāvō vidēbātur fore (futūrum esse) ut Mēdus fugeret.'] },
+  { cap: 'I', par: 4, nome: '<i>Dīcitur, nārrātur, trāditur, fertur</i>, ecc.', esempi: ['Daedalus labyrinthum aedificāvisse nārrātur.', 'Trāditum est Ariadnam fīlum Thēseō dedisse.'] },
+
+  // II. Accusativo
+  { cap: 'II', par: 1, nome: '<i>Verba iubendī</i>, ecc.', esempi: ['Iūlius servum saccum portāre iubet.', 'Dāvus iubētur crumēnam suam pōnere in mēnsā.', 'Aemilia iānuam claudī iussit.'] },
+  { cap: 'II', par: 2, nome: 'Verbi assolutamente impersonali', esempi: ['Puerum pudet factī suī.', 'Mē paenitet dīxisse hoc.', 'Mē pudet hoc ā fīliō meō factum esse.', 'Mē paenitet quod tē offendī.'] },
+  { cap: 'II', par: 3, nome: 'Verbi relativamente impersonali', esempi: ['Tē decet honestē vīvere.', 'Puellās decet verēcundia.', 'Mē fugit nōmen illīus.', 'Mē fugit quod nōmen eī sit.', 'Mē iuvat Latīnē discere.', 'Mē iuvat lingua Latīna.', 'Mē fallit memoria.'] },
+  { cap: 'II', par: 4, nome: 'Doppio accusativo', esempi: ['Doceō discipulōs grammaticam.', 'Cēlō mātrem vēritātem.', 'Poscō sociōs frūmentum.', 'Flāgitō rēgem senātum / ā senātū.', 'Rōmānī Cicerōnem cōnsulem creāvērunt.'] },
+  { cap: 'II', par: 5, nome: '<i>Verba petendī et interrogandī</i>', esempi: ['Aemilia Quīntum interrogat.', 'Pāstor Iūlium ōrat.', 'Senātōrēs rogāvērunt cōnsulem sententiam.', 'Petō ā tē librum.', 'Quaerō ex tē vēritātem.'] },
+  { cap: 'II', par: 6, nome: 'Verbi transitivi in latino e intransitivi in italiano', esempi: ['Mē dēficiunt vīrēs.', 'Mē dēlectat lūdere. / Mē dēlectant rosae.', 'Antōnium pecūniā iūvī / adiūvī.', 'Ulcīscor mortem amīcī.', 'Ulcīscor iniūriās.'] },
+  { cap: 'II', par: 7, nome: '<i>Verba affectuum</i>', esempi: ['Mārcus Iūliam rīdet.', 'Antōnius flet / lūget patrem mortuum.', 'Quīntus horret medicum.'] },
+  { cap: 'II', par: 8, nome: '<i>Olēre, redolēre, sapere, resipere, sitīre</i>', esempi: ['Sitiō honōrēs.', 'Haec sententia sapit Cicerōnem.'] },
+  { cap: 'II', par: 9, nome: 'Verbi composti con preposizioni', esempi: ['Circumīre īnsulam.', 'Illum hominem / ad illum hominem adiī.'] },
+  { cap: 'II', par: 10, nome: 'Accusativo dell\u0027oggetto interno', esempi: ['Pugnāre pugnam.', 'Vīvere vītam.'] },
+  { cap: 'II', par: 11, nome: 'Accusativo di relazione (o "alla greca")', esempi: ['Nūdus pedem.'] },
+  { cap: 'II', par: 12, nome: 'Accusativo d\u0027estensione nello spazio', esempi: ['Vāllum decem pedēs altum.', 'Via centum pedēs lāta.', 'Fossa decem pedum.'] },
+  { cap: 'II', par: 13, nome: 'Complemento di distanza', esempi: ['Urbs distāns trium mīlium passuum spatiō.', 'Hadrūmētum abest ā Zamā trecenta mīlia passuum.'] },
+  { cap: 'II', par: 14, nome: 'Complemento d\u0027età', esempi: ['Mārcus octō annōs nātus est.', 'Mārcus nōnum annum agit.', 'Mārcus est puer octō annōrum.', 'Mārcus octō annōs habet.'] },
+  { cap: 'II', par: 15, nome: 'Accusativo esclamativo', esempi: ['Beātōs agricolās!', 'Bene Antōnium!'] },
+  { cap: 'II', par: 16, nome: 'Accusativo avverbiale', esempi: ['Māgnam, māximam partem.', 'Librī id genus.', 'Hostēs partim occīsī, partim captī sunt.', 'Verba tua multum mē commovent.'] },
+
+  // III. Genitivo
+  { cap: 'III', par: 1, nome: 'Genitivo soggettivo e oggettivo', esempi: ['Amor mātris.', 'Timor mortis.'] },
+  { cap: 'III', par: 2, nome: 'Genitivo partitivo', esempi: ['Paulum aquae.', 'Plūs pecūniae.', 'Parum cibī.', 'Multum vīnī.', 'Ūnus discipulōrum.', 'Ūnus ex discipulīs.', 'Quid novī?', 'Aliquid novī.', 'Satis pecūniae.', 'Nēmō vestrum.', 'Nihil malī.', 'Nihil malum.', 'Nihil turpe.'] },
+  { cap: 'III', par: 3, nome: 'Genitivo di pertinenza', esempi: ['Mātris est līberōs cūrāre.', 'Meum est id facere.'] },
+  { cap: 'III', par: 4, nome: 'Genitivo di qualità', esempi: ['Vir summae sapientiae.', 'Vir summā sapientiā.', 'Vir brevī statūrā.'] },
+  { cap: 'III', par: 5, nome: 'Genitivo di stima e di prezzo', esempi: ['Quantī stat?', 'Māgnō stat.', 'Decem sēstertiīs stat.', 'Māgnī aestimāre.', 'Parvī aestimāre.', 'Parī pretiō.', 'Decem sēstertiīs aestimāre.', 'Prō nihilō facere.', 'Māgnī mōmentī esse.', 'Floccī nōn facere.'] },
+  { cap: 'III', par: 6, nome: 'Genitivo di colpa', esempi: ['Accūsāre fūrtī.'] },
+  { cap: 'III', par: 7, nome: 'Genitivo di pena', esempi: ['Morte damnāre.', 'Capite / capitis damnāre.'] },
+  { cap: 'III', par: 8, nome: 'Genitivo di memoria', esempi: ['Meminisse / oblīvīscī illīus reī / illam rem.', 'Meminisse / oblīvīscī illīus hominis.'] },
+  { cap: 'III', par: 9, nome: 'Costruzione di <i>interest</i> e <i>rēfert</i>', esempi: ['Iūliī interest agrōs invīsere.', 'Meā / Tuā / Eius [interest].'] },
+
+  // IV. Dativo
+  { cap: 'IV', par: 1, nome: 'Dativo d\u0027interesse (<i>dativus commodi / incommodi</i>)', esempi: ['Nihil difficile est amantī.', 'Nōn vītae, sed scholae discimus.'] },
+  { cap: 'IV', par: 2, nome: 'Dativo di possesso', esempi: ['Mihi est liber.', 'Mihi nōmen est Iūlius / Iūliō.'] },
+  { cap: 'IV', par: 3, nome: 'Dativo finale / doppio dativo', esempi: ['Diem colloquiō statuere.', 'Hoc est mihi cordī.', 'Dōnō tibi dō hunc librum.', 'Auxiliō vēnērunt Iūliō.'] },
+  { cap: 'IV', par: 4, nome: 'Dativo d\u0027agente', esempi: ['Omnibus patria amanda est.'] },
+  { cap: 'IV', par: 5, nome: 'Dativo di relazione', esempi: ['Nāvigantibus Prochytam, mōns Mīsēnus est ad dextram.'] },
+  { cap: 'IV', par: 6, nome: 'Verbi costruiti col dativo', esempi: ['Tibi assentior.', 'Tibi grātulor.', 'Tibi cōnfīdō.', 'Mihi persuāsit.', 'Ignōsce mihi!', 'Lesbia Catullō nōn nūpsit.', 'Multī dīvitibus invident.', 'Eī persuādēre nōn potuī.', 'Parce mihi!', 'Linguae Latīnae libenter studēmus.', 'Dīvitibus invidētur.'] },
+  { cap: 'IV', par: 7, nome: 'Costruzione di <i>dōnāre, circúmdare, exuere, induere, aspergere</i>', esempi: ['Dōnō tibi librum.', 'Dōnō tē librō.', 'Induō tē veste.', 'Induō tibi vestem.'] },
+  { cap: 'IV', par: 8, nome: 'Verbi con diversi costrutti e significati', esempi: ['Cavē canem!', 'Cavē canī!', 'Sextus litterīs vacāre solet.', 'Ab officiīs vacāre.'] },
+  { cap: 'IV', par: 9, nome: 'Dativo con verbi composti', esempi: ['Librōs addere bibliothēcae / ad bibliothēcam.'] },
+  { cap: 'IV', par: 10, nome: 'Verbi di eccellenza', esempi: ['Cicerō omnēs / omnibus praestat ēloquentiā.', 'Cicerō omnēs superat ēloquentiā.'] },
+
+  // V. Ablativo
+  { cap: 'V', par: 1, nome: 'Costruzione di <i>opus est</i>', esempi: ['Properāre / properātō opus est.', 'Nummīs mihi opus est.', 'Nummī mihi opus sunt.'] },
+  { cap: 'V', par: 2, nome: 'Ablativo di materia', esempi: ['Ānulus ex aurō / aureus.'] },
+  { cap: 'V', par: 3, nome: 'Ablativo di paragone', esempi: ['Melior sum frātre / quam frāter.', 'Mihi is doctior vidētur quam tibi.', 'Mālō esse quam vidērī bonus.', 'Amīcus ille, quō nēmō mihi cārior est.'] },
+  { cap: 'V', par: 4, nome: 'Ablativo strumentale', esempi: ['Equō vehī.', 'Per tabellārium aliquid dē mē sciēs.'] },
+  { cap: 'V', par: 5, nome: '<i>Ūtī, fruī, fungī, vēscī, potīrī</i>', esempi: ['Agricola arātrō ūtitur.', 'Carne vēscī.', 'Iugurtha Numidiā / Numidiae potītur.', 'Rērum potīrī.'] },
+  { cap: 'V', par: 6, nome: 'Ablativo di limitazione', esempi: ['Mārcus et Sextus differēbant mōribus.'] },
+  { cap: 'V', par: 7, nome: 'Costruzione di <i>dīgnus</i> e <i>indīgnus</i>', esempi: ['Dīgnus laude.', 'Dīgnus quī laudētur.'] },
+  { cap: 'V', par: 8, nome: 'Ablativo d\u0027argomento', esempi: ['Dē amīcitiā disputāre.', 'Liber dē amīcitiā.'] },
+  { cap: 'V', par: 9, nome: 'Ablativo di privazione e d\u0027abbondanza', esempi: ['Carēre pecūniā.', 'Egēre auxiliō.', 'Implēre aquā.', 'Plēnus nummōrum.', 'Refertus nummīs.'] },
+
+  // VI. Complementi di tempo
+  { cap: 'VI', par: 1, nome: '<i>Quandō?</i>', esempi: ['Kalendīs Iānuāriīs.', 'Hōrā nōnā.', 'Aestāte.', 'Annō quadrāgēsimō quārtō ante Chrīstum nātum Caesar necātus est.', 'In bellō.', 'Bellō Iugurthīnō.', 'Sub fīnem diēī.', 'Circā illum annum.'] },
+  { cap: 'VI', par: 2, nome: '<i>Quō temporis spatiō? Intrā quod tempus?</i>', esempi: ['Decem diēbus.', 'Intrā decem diēs.'] },
+  { cap: 'VI', par: 3, nome: '<i>Quō temporis intervāllō?</i>', esempi: ['Quīntō quōque annō lūdī Olympiī celebrābantur.'] },
+  { cap: 'VI', par: 4, nome: '<i>Quotiēs in temporis spatiō?</i>', esempi: ['Semel in annō.'] },
+  { cap: 'VI', par: 5, nome: '<i>Quantō ante? Quantō post?</i>', esempi: ['Decem annīs ante.', 'Ante decem annōs.', 'Decem ante annīs.', 'Decem ante annōs.'] },
+  { cap: 'VI', par: 6, nome: '<i>Quamdiū?</i>', esempi: ['Per decem annōs.', 'Decem annōs.'] },
+  { cap: 'VI', par: 7, nome: '<i>Ex quō tempore?</i>', esempi: ['Tertium iam annum.', 'Tot annōs.', 'Decem abhinc annōs.', 'Ante (hōs) quīnque annōs.'] },
+  { cap: 'VI', par: 8, nome: '<i>Post quod tempus?</i>', esempi: ['Post ūnum annum.'] },
+  { cap: 'VI', par: 9, nome: '<i>In quod tempus?</i>', esempi: ['In posterum!', 'Ūsque ad mortem.'] },
+
+  // VII. Complementi di luogo
+  { cap: 'VII', par: 1, nome: '<i>Ubi?</i>', esempi: ['In Italiā.', 'Rōmae.', 'Athēnīs.', 'Neāpolī.'] },
+  { cap: 'VII', par: 2, nome: '<i>Quō?</i>', esempi: ['In / ad Italiam.', 'Rōmam.', 'Athēnās.', 'Neāpolim.'] },
+  { cap: 'VII', par: 3, nome: '<i>Unde?</i>', esempi: ['Ab urbe venīre.', 'Ē patriā ēgredī.', 'Dē caelō dēscendere.', 'Rōmā.', 'Athēnīs.', 'Neāpolī.'] },
+  { cap: 'VII', par: 4, nome: '<i>Quā?</i>', esempi: ['Per Rōmam.', 'Ībam forte viā Sacrā.'] },
+
+  // X. Indicativo vs congiuntivo
+  { cap: 'X', par: 1, nome: 'Uso dell\u0027indicativo latino dove l\u0027italiano usa il condizionale', esempi: ['Longum est omnia explicāre.'] },
+  { cap: 'X', par: 2, nome: 'Indicativo latino al posto del congiuntivo italiano', esempi: ['Quisquis / quīcumque est ille...', 'Sīve hoc vērum (est) sīve falsum est...'] },
+  { cap: 'X', par: 3, nome: 'Legge dell\u0027anteriorità', esempi: ['Cum pervēnerō Rōmam, vidēbō Colossēum.'] },
+
+  // XI. Congiuntivo indipendente
+  { cap: 'XI', par: 1, nome: 'Congiuntivo esortativo', esempi: ['Bonum vīnum bibāmus!'] },
+  { cap: 'XI', par: 2, nome: 'Congiuntivo dubitativo / potenziale', esempi: ['Quid dīcam?', 'Quid dīcerem?', 'Aliquis dīxerit.'] },
+  { cap: 'XI', par: 3, nome: 'Congiuntivo ottativo (o desiderativo)', esempi: ['Utinam veniās!', 'Utinam vēnerit!', 'Utinam venīret!', 'Utinam vēnisset!'] },
+  { cap: 'XI', par: 4, nome: 'Congiuntivo concessivo', esempi: ['Dīcat sānē hoc Mārcus: tamen nōn crēdō.'] },
+
+  // XII. Imperativo negativo
+  { cap: 'XII', par: 1, nome: 'Imperativo negativo', esempi: ['Nōlī hoc facere!', 'Nōlīte hoc facere!', 'Nē hoc fēceris!', 'Nē hoc faciās!'] },
+
+  // XIII. Accusativo con l'infinito
+  { cap: 'XIII', par: 1, nome: 'Costruzione dell\u0027accusativo con l\u0027infinito', esempi: ['Dīcō "tē bonum puerum esse".', 'Tē advēnisse gaudeō.', 'Gaudeō quod advēnistī.'] },
+
+  // XIV. Participio
+  { cap: 'XIV', par: 1, nome: 'Uso del participio coi verbi di percezione', esempi: ['Videō Mārcum scrībentem.', 'Videō Mārcum scrībere.'] },
+  { cap: 'XIV', par: 2, nome: 'Participio congiunto', esempi: ['Hostēs urbem captam incendērunt.'] },
+  { cap: 'XIV', par: 3, nome: 'Ablativo assoluto', esempi: ['Mortuō Caesare.', 'Omnibus spectantibus.', 'Caesar, hortātus mīlitēs, commīsit proelium.'] },
+
+  // XV. Gerundio / gerundivo
+  { cap: 'XV', par: 1, nome: 'Gerundio e gerundivo', esempi: ['Mihi legendus est liber.', 'Dēsīderium legendī librōs.', 'Dēsīderium legendōrum librōrum.'] },
+  { cap: 'XV', par: 2, nome: 'Coniugazione perifrastica', esempi: ['Moritūrus sum!', 'Omnibus moriendum est.'] },
+
+  // XVI. Supino
+  { cap: 'XVI', par: 1, nome: 'Il supino', esempi: ['Veniō tē salūtātum.', 'Difficile dictū.'] },
+
+  // XVIII. Riflessivi
+  { cap: 'XVIII', par: 1, nome: 'L\u0027uso di <i>suī, sibi, sē</i> e di <i>suus, sua, suum</i>', esempi: ['Iūlius loquitur cum Cornēliō et cum frātre suō (= Iūliī).', 'Iūlius loquitur cum Cornēliō et cum frātre eius (= Cornēliī).', 'Paulus effēcit ut omnēs sibi crēderent.', 'Factum est ut nēmō eī crēderet.'] },
+
+  // XIX. Congiuntivo nelle subordinate
+  { cap: 'XIX', par: 1, nome: 'I valori del congiuntivo nelle proposizioni subordinate e l\u0027attrazione modale', esempi: ['Putō eum esse virum quī tē adiuvāre possit.', 'Sī vīveret pater tuus, hoc nōn probāret.', 'Sī quis tē interroget, eī vērum dīc.'] },
+
+  // XX. Interrogative
+  { cap: 'XX', par: 1, nome: 'Le proposizioni interrogative dirette', esempi: ['Ubi est Rōma?', 'Est-ne Rōma in Italiā?', 'Num Rōma in Graeciā est?', 'Nōnne Rōma in Italiā est?', 'Utrum hoc vērum est an falsum?', 'Vērumne est hoc an falsum?', 'Vērum est hoc an falsum?'] },
+  { cap: 'XX', par: 2, nome: 'Le proposizioni interrogative indirette', esempi: ['Nesciō utrum hoc vērum sit an falsum.', 'Nesciō vērumne sit hoc an falsum.', 'Nesciō vērum sit hoc an falsum.'] },
+
+  // XXI. Sostantive
+  { cap: 'XXI', par: 1, nome: 'Le proposizioni sostantive (dichiarative) con <i>quod</i>', esempi: ['Bene facis quod linguae Latīnae studēs.', 'Tē laudō quod linguae Latīnae studēs.', 'Gaudeō quod linguae Latīnae studēs.'] },
+  { cap: 'XXI', par: 2, nome: 'Le proposizioni sostantive con <i>ut</i>', esempi: ['Bone Deus, fac ut vīvat!', 'Tē hortor ut linguae Latīnae studeās.', 'Tē rogō ut linguae Latīnae studeās.', 'Cūrā ut valeās.'] },
+
+  // XXIII. Non dubito quin / impediendi
+  { cap: 'XXIII', par: 1, nome: '<i>Nōn dubitō quīn</i>', esempi: ['Nōn dubitō quīn rēs ita sē habeant.'] },
+  { cap: 'XXIII', par: 2, nome: 'I <i>verba impediendī et recūsandī</i>', esempi: ['Prohibeō quōminus id faciās.', 'Prohibeō nē ē cubiculō exeās.', 'Nōn prohibeō quīn Rōmam eās.', 'Nōn prohibeō quōminus illum librum legās.'] },
+
+  // XXIV. Timendi
+  { cap: 'XXIV', par: 1, nome: 'I <i>verba timendī</i>', esempi: ['Timeō nē hostēs adveniant.', 'Timeō nē nōn discam bene linguam Latīnam.', 'Timeō ut pecūniam māgnam accipiam.'] },
+
+  // XXV. Finali
+  { cap: 'XXV', par: 1, nome: 'Le proposizioni finali', esempi: ['Studeō / studēbō ut discam.', 'Studēbam / studuī / studueram ut discerem.'] },
+
+  // XXVI. Consecutive
+  { cap: 'XXVI', par: 1, nome: 'Le proposizioni consecutive', esempi: ['Tam bonus est ut omnēs eum ament.', 'Tam bonus erat ut omnēs eum amārent.', 'Hic saccus maior est quam ut ā puerō portārī possit.'] },
+
+  // XXVII. Causali
+  { cap: 'XXVII', par: 1, nome: 'Le proposizioni causali', esempi: ['Eum amō quod bonus est.', 'Dīcit sē eum amāre quod bonus sit.'] },
+
+  // XXVIII. Temporali
+  { cap: 'XXVIII', par: 1, nome: 'Le proposizioni temporali', esempi: ['Cum prīmum / Ubi prīmum / Ut prīmum / Simul ac (atque) / Postquam eum vīdit, (eum) amplexus est.', 'Tītus iānuam pulsat antequam intrat.', 'Studē antequam magister tē interroget.', 'Dum Rōmae cōnsulitur, Saguntum expugnāta est.', 'Dum spīrō, spērō.'] },
+
+  // XXIX. Concessive
+  { cap: 'XXIX', par: 1, nome: 'Le proposizioni concessive', esempi: ['Etsī / Tametsī / Quamquam doctus est, historiam nātūrālem tamen ignōrat.', 'Quamvīs doctus sit, homō omnia scīre nōn potest.', 'Etiamsī omnēs eum reprehendant, vir probus semper honestē agit.', 'Licet mē reprehendant omnēs, dīcam quid sentiam.'] },
+
+  // XXX. Relative
+  { cap: 'XXX', par: 1, nome: 'Le proposizioni relative', esempi: ['Quā sapientiā es.', 'Quae tua sapientia est.'] },
+
+  // XXXI. Comparative
+  { cap: 'XXXI', par: 1, nome: 'Le proposizioni comparative semplici', esempi: ['Ut homō vīvit, ita moritur.', 'Antōnius tam bonus est quam Paulus fuit.', 'Idem sentiō atque tū.'] },
+  { cap: 'XXXI', par: 2, nome: 'Le proposizioni comparative suppositive', esempi: ['Quasi / Tamquam stultus sim omnīnō, sīc mē alloqueris.'] },
+
+  // XXXII. Periodo ipotetico
+  { cap: 'XXXII', par: 1, nome: 'Il periodo ipotetico', esempi: ['Sī hoc dīcis, errās.', 'Sī hoc dīcās, errēs.', 'Sī hoc dīcerēs, errārēs.'] },
+
+  // XXXIII. Condizionali
+  { cap: 'XXXIII', par: 1, nome: 'Le proposizioni condizionali', esempi: ['Ōderint, dum metuant.', 'Sextus potest sē dēfendere, dummodo cum singulīs certet.'] }
+];
+
+/* ══════════════════════════════════════════
+   STATE & LOGIC
+   ══════════════════════════════════════════ */
+var modalita = 1;          // 1: esempio -> nome · 2: nome -> esempi
+var capSel = {};           // { 'I': true, 'II': true, ... }
+var deck = [];             // array di indici in CARDS
+var idx = 0;
+
+// Init capitoli
+(function initCapitoli() {
+  Object.keys(CAPITOLI).forEach(function(r) { capSel[r] = true; });
+  var cont = document.getElementById('capitoli');
+  // bottone "tutti"
+  var allBtn = document.createElement('button');
+  allBtn.className = 'fc-cap-chip fc-cap-all active';
+  allBtn.textContent = 'Tutti';
+  allBtn.onclick = function() {
+    var anyOff = Object.keys(capSel).some(function(k) { return !capSel[k]; });
+    Object.keys(capSel).forEach(function(k) { capSel[k] = anyOff; });
+    syncCapChips();
+    aggiornaConteggio();
+  };
+  cont.appendChild(allBtn);
+
+  Object.keys(CAPITOLI).forEach(function(r) {
+    var count = CARDS.filter(function(c) { return c.cap === r; }).length;
+    var b = document.createElement('button');
+    b.className = 'fc-cap-chip active';
+    b.dataset.cap = r;
+    b.innerHTML = r + ' · ' + CAPITOLI[r] + ' <span class="cap-count">(' + count + ')</span>';
+    b.onclick = function() {
+      capSel[r] = !capSel[r];
+      syncCapChips();
+      aggiornaConteggio();
+    };
+    cont.appendChild(b);
+  });
+  aggiornaConteggio();
+})();
+
+function syncCapChips() {
+  document.querySelectorAll('.fc-cap-chip[data-cap]').forEach(function(b) {
+    if (capSel[b.dataset.cap]) b.classList.add('active');
+    else b.classList.remove('active');
+  });
+  var allOn = Object.keys(capSel).every(function(k) { return capSel[k]; });
+  var allBtn = document.querySelector('.fc-cap-all');
+  if (allOn) allBtn.classList.add('active'); else allBtn.classList.remove('active');
+}
+
+function aggiornaConteggio() {
+  var n = CARDS.filter(function(c) { return capSel[c.cap]; }).length;
+  document.getElementById('numCards').textContent = n;
+  document.getElementById('countBadge').textContent = '(totale: ' + CARDS.length + ')';
+  document.getElementById('startBtn').disabled = n === 0;
+}
+
+function setMod(n) {
+  modalita = n;
+  document.querySelectorAll('.fc-mod-opt').forEach(function(o) {
+    o.classList.toggle('active', parseInt(o.dataset.mod) === n);
+  });
+}
+
+function start() {
+  deck = [];
+  CARDS.forEach(function(c, i) { if (capSel[c.cap]) deck.push(i); });
+  if (deck.length === 0) return;
+  shuffle(deck);
+  idx = 0;
+  document.getElementById('setup').style.display = 'none';
+  document.getElementById('study').classList.add('active');
+  document.getElementById('modInd').textContent = modalita === 1 ? 'Esempio → Nome' : 'Nome → Esempio';
+  render();
+  window.scrollTo(0, 0);
+}
+
+function esci() {
+  document.getElementById('setup').style.display = '';
+  document.getElementById('study').classList.remove('active');
+  window.scrollTo(0, 0);
+}
+
+function render() {
+  var c = CARDS[deck[idx]];
+  var capoLabel = c.cap + ' · ' + CAPITOLI[c.cap] + ' &middot; §' + c.par;
+  document.getElementById('frontLabel').innerHTML = capoLabel;
+  document.getElementById('backLabel').innerHTML = capoLabel;
+
+  var esempiHTML = c.esempi.map(function(e) { return '<div class="fc-esempio">' + e + '</div>'; }).join('');
+  var nomeHTML = '<div class="fc-nome">' + c.nome + '</div>';
+
+  if (modalita === 1) {
+    document.getElementById('frontContent').innerHTML = esempiHTML;
+    document.getElementById('backContent').innerHTML = nomeHTML;
+  } else {
+    document.getElementById('frontContent').innerHTML = nomeHTML;
+    document.getElementById('backContent').innerHTML = esempiHTML;
+  }
+
+  document.getElementById('card').classList.remove('flipped');
+  document.getElementById('counter').textContent = (idx + 1) + ' / ' + deck.length;
+  document.getElementById('prevBtn').disabled = idx === 0;
+  document.getElementById('nextBtn').disabled = idx === deck.length - 1;
+  document.getElementById('progressFill').style.width = ((idx + 1) / deck.length * 100) + '%';
+}
+
+function flip() { document.getElementById('card').classList.toggle('flipped'); }
+
+function nav(dir) {
+  idx = Math.max(0, Math.min(deck.length - 1, idx + dir));
+  render();
+}
+
+function mescola() {
+  shuffle(deck);
+  idx = 0;
+  render();
+}
+
+function shuffle(arr) {
+  for (var i = arr.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var t = arr[i]; arr[i] = arr[j]; arr[j] = t;
+  }
+}
+
+document.addEventListener('keydown', function(e) {
+  if (!document.getElementById('study').classList.contains('active')) return;
+  if (e.key === 'ArrowRight') { e.preventDefault(); nav(1); }
+  else if (e.key === 'ArrowLeft') { e.preventDefault(); nav(-1); }
+  else if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); flip(); }
+  else if (e.key === 'Escape') { esci(); }
+});
+</script>
+</body>
+</html>

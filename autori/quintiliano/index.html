@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quintiliano e l'Institutio oratoria — il vir bonus dicendi peritus | Lezione interattiva</title>
+<meta name="description" content="Lezione interattiva su Quintiliano: la cattedra di Stato, l'Institutio oratoria, il vir bonus dicendi peritus, la polemica con Seneca. Brani con testo a fronte, quiz, modalità LIM.">
+<meta property="og:title" content="Quintiliano e l'Institutio oratoria | Lezione interattiva">
+<meta property="og:description" content="La cattedra di Stato, il programma pedagogico, vir bonus dicendi peritus, la polemica con Seneca.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="it_IT">
+<meta property="og:url" content="https://andreavaccaro02-hue.github.io/latino-sites/autori/quintiliano/index.html">
+<link rel="canonical" href="https://andreavaccaro02-hue.github.io/latino-sites/autori/quintiliano/index.html">
+<link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+<link rel="stylesheet" href="../../css/style.css">
+<style>
+  /* ═══ BRANO ANTOLOGICO — testo a fronte ═══ */
+  .brano-fronte {
+    margin: 24px 0;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--card);
+  }
+  .brano-fronte .bf-titolo {
+    background: var(--bg-warm);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 18px;
+    font-family: 'Libre Baskerville', serif;
+    font-weight: 700;
+    color: var(--gold);
+    font-size: 15px;
+  }
+  .brano-fronte .bf-titolo .bf-rif {
+    color: var(--text-dim);
+    font-weight: 400;
+    font-style: italic;
+    font-size: 13px;
+    margin-left: 8px;
+  }
+  .brano-fronte .bf-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  .brano-fronte .bf-lat,
+  .brano-fronte .bf-ita {
+    padding: 18px 22px;
+    font-family: 'Cardo', serif;
+    font-size: 16px;
+    line-height: 1.75;
+  }
+  .brano-fronte .bf-lat {
+    border-right: 1px solid var(--border-light);
+    background: #faf6ec;
+    font-style: normal;
+  }
+  .brano-fronte .bf-ita {
+    background: var(--card);
+    color: var(--text);
+  }
+  .brano-fronte .bf-note {
+    background: var(--bg-warm);
+    border-top: 1px solid var(--border);
+    padding: 14px 22px;
+    font-size: 13.5px;
+    line-height: 1.65;
+    color: var(--text-dim);
+  }
+  .brano-fronte .bf-note ol {
+    margin: 0;
+    padding-left: 22px;
+  }
+  .brano-fronte .bf-note li { margin-bottom: 4px; }
+  .brano-fronte mark.kw {
+    background: rgba(156, 122, 60, 0.18);
+    border-bottom: 2px solid var(--gold);
+    padding: 0 2px;
+    color: var(--text);
+  }
+  .brano-fronte mark.kw-ita {
+    background: rgba(156, 122, 60, 0.10);
+    padding: 0 2px;
+    color: var(--text);
+  }
+  .brano-fronte sup.bf-n {
+    color: var(--gold);
+    font-weight: 700;
+    font-size: 11px;
+    vertical-align: super;
+    margin-left: 1px;
+  }
+  .brano-fronte .bf-commento {
+    padding: 14px 22px;
+    background: var(--gold-pale);
+    border-top: 1px solid var(--border);
+    font-size: 14.5px;
+    line-height: 1.7;
+  }
+  .brano-fronte .bf-commento strong { color: var(--gold); }
+
+  /* Brano "estensione" collassato */
+  .brano-estensione {
+    margin: 18px 0;
+  }
+  .brano-estensione summary {
+    cursor: pointer;
+    background: var(--bg-warm);
+    border: 1px dashed var(--border);
+    border-radius: 10px;
+    padding: 12px 18px;
+    font-family: 'Libre Baskerville', serif;
+    font-weight: 700;
+    color: var(--gold);
+    font-size: 14.5px;
+    list-style: none;
+    user-select: none;
+  }
+  .brano-estensione summary::before {
+    content: '▸ ';
+    color: var(--gold);
+    margin-right: 4px;
+  }
+  .brano-estensione[open] summary::before { content: '▾ '; }
+  .brano-estensione summary:hover { background: var(--gold-pale); }
+
+  /* ═══ TABELLA 12 LIBRI ═══ */
+  .libri-grid {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0;
+    margin: 18px 0;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    background: var(--card);
+  }
+  .libri-grid .lg-num {
+    background: var(--bg-warm);
+    padding: 12px 16px;
+    font-family: 'Libre Baskerville', serif;
+    font-weight: 700;
+    color: var(--gold);
+    border-bottom: 1px solid var(--border-light);
+    border-right: 1px solid var(--border-light);
+    text-align: center;
+    min-width: 90px;
+    font-size: 14px;
+  }
+  .libri-grid .lg-row {
+    padding: 12px 18px;
+    border-bottom: 1px solid var(--border-light);
+    font-size: 14.5px;
+    line-height: 1.6;
+  }
+  .libri-grid .lg-num:last-of-type,
+  .libri-grid .lg-row:last-of-type { border-bottom: none; }
+  .libri-grid .lg-row strong { color: var(--gold); }
+
+  /* ═══ CONFRONTO docere/movere ═══ */
+  .confronto-docmov {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin: 20px 0;
+  }
+  .confronto-docmov .cdm-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px 20px;
+  }
+  .confronto-docmov .cdm-card h4 {
+    font-family: 'Libre Baskerville', serif;
+    color: var(--gold);
+    margin: 0 0 10px 0;
+    font-size: 16px;
+  }
+  .confronto-docmov .cdm-card .cdm-aut {
+    font-style: italic;
+    color: var(--text-dim);
+    font-size: 13px;
+    margin-bottom: 8px;
+  }
+  .confronto-docmov .cdm-card ul {
+    margin: 8px 0 0 0;
+    padding-left: 18px;
+    font-size: 14.5px;
+    line-height: 1.65;
+  }
+
+  /* ═══ MAPPA CONCETTUALE ═══ */
+  .mappa-container {
+    margin: 24px 0;
+    padding: 26px;
+    background: var(--bg);
+    border: 2px solid var(--border);
+    border-radius: 16px;
+    overflow-x: auto;
+  }
+  .mappa-svg {
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+    height: auto;
+  }
+  .mappa-node {
+    cursor: pointer;
+    transition: filter 0.2s;
+  }
+  .mappa-node:hover rect,
+  .mappa-node:hover ellipse {
+    filter: brightness(0.93);
+  }
+  .mappa-tooltip {
+    display: none;
+    position: fixed;
+    background: #2c2416;
+    color: #f5f0e8;
+    padding: 12px 16px;
+    border-radius: 10px;
+    font-size: 14px;
+    line-height: 1.5;
+    max-width: 320px;
+    z-index: 200;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.35);
+    font-family: 'Cardo', serif;
+    pointer-events: none;
+  }
+
+  /* ═══ MODALITÀ LIM ═══ */
+  .lim-toggle {
+    position: fixed;
+    top: 14px;
+    right: 14px;
+    z-index: 90;
+    background: var(--gold);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 9px 14px;
+    font-family: 'Libre Baskerville', serif;
+    font-size: 13.5px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.18);
+    transition: background 0.2s;
+  }
+  .lim-toggle:hover { background: #b8915a; }
+  .lim-hud {
+    display: none;
+    position: fixed;
+    bottom: 18px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 95;
+    background: rgba(30, 26, 18, 0.92);
+    color: #f5f0e8;
+    padding: 10px 18px;
+    border-radius: 999px;
+    font-family: 'Libre Baskerville', serif;
+    font-size: 14px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.3);
+    user-select: none;
+  }
+  .lim-hud .lh-counter { color: var(--gold-light); font-weight: 700; margin: 0 6px; }
+  .lim-hud .lh-hint { font-size: 12px; color: #c9b896; margin-left: 14px; }
+  .lim-hud .lh-btn {
+    background: transparent;
+    border: 1px solid #c9b896;
+    color: #f5f0e8;
+    border-radius: 6px;
+    padding: 4px 10px;
+    margin: 0 4px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 12px;
+  }
+  .lim-hud .lh-btn:hover { background: rgba(255,255,255,0.08); }
+
+  body.lim-mode {
+    background: #f8f4ea;
+  }
+  body.lim-mode .navbar,
+  body.lim-mode .page-header,
+  body.lim-mode .back-link,
+  body.lim-mode .score-bar,
+  body.lim-mode .esercizio-section,
+  body.lim-mode .tools-section,
+  body.lim-mode footer,
+  body.lim-mode .lim-toggle { display: none !important; }
+  body.lim-mode .lim-hud { display: flex; align-items: center; gap: 6px; }
+  body.lim-mode .container { max-width: 100%; padding: 0; margin: 0; }
+  body.lim-mode .slide {
+    display: none;
+    min-height: 100vh;
+    box-sizing: border-box;
+    padding: 70px 8vw 90px 8vw;
+    margin: 0;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    background: transparent;
+    font-size: 1.35em;
+    line-height: 1.7;
+  }
+  body.lim-mode .slide.lim-active { display: block; }
+  body.lim-mode .slide h2,
+  body.lim-mode .slide h3 { font-size: 1.45em; }
+  body.lim-mode .slide .content-header { border: none; padding-bottom: 8px; }
+  body.lim-mode .slide.brano-fronte { padding: 0; }
+  body.lim-mode .slide.brano-fronte .bf-titolo { padding: 24px 8vw; font-size: 1.3em; }
+  body.lim-mode .slide.brano-fronte .bf-grid { padding: 0 4vw; }
+  body.lim-mode .slide.brano-fronte .bf-lat,
+  body.lim-mode .slide.brano-fronte .bf-ita { padding: 28px 4vw; font-size: 1.05em; }
+  body.lim-mode .slide.brano-fronte .bf-note,
+  body.lim-mode .slide.brano-fronte .bf-commento { padding: 22px 8vw; font-size: 0.92em; }
+  body.lim-mode details.brano-estensione { display: none; }
+
+  /* ═══ STAMPA ═══ */
+  @media print {
+    .lim-toggle, .lim-hud, .navbar, footer, .back-link, .score-bar,
+    .tools-section, .esercizio-section, .tlac-box { display: none !important; }
+  }
+
+  /* ═══ MOBILE ═══ */
+  @media (max-width: 768px) {
+    .brano-fronte .bf-grid { grid-template-columns: 1fr; }
+    .brano-fronte .bf-lat { border-right: none; border-bottom: 1px solid var(--border-light); }
+    .confronto-docmov { grid-template-columns: 1fr; }
+    .lim-toggle { font-size: 12px; padding: 7px 10px; }
+  }
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "name": "Quintiliano e l'Institutio oratoria — vir bonus dicendi peritus",
+  "description": "Lezione interattiva su Quintiliano: la cattedra di Stato, il programma pedagogico, vir bonus dicendi peritus, la polemica con Seneca.",
+  "author": { "@type": "Person", "name": "Prof. Andrea Vaccaro" },
+  "inLanguage": "it",
+  "educationalUse": "Lezione interattiva",
+  "learningResourceType": "Lesson"
+}
+</script>
+<meta property="og:image" content="https://andreavaccaro02-hue.github.io/latino-sites/og-image.svg">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/alpheios-components@latest/dist/style/style-components.min.css">
+</head>
+<body>
+  <button class="lim-toggle" id="limToggle" title="Attiva modalità presentazione (tasto L)">▶ Modalità LIM</button>
+  <div class="lim-hud" id="limHud">
+    <button class="lh-btn" id="limPrev" title="Precedente (←)">◀</button>
+    <span><span class="lh-counter" id="limCounter">1 / 1</span></span>
+    <button class="lh-btn" id="limNext" title="Successiva (→)">▶</button>
+    <span class="lh-hint">← → per navigare · Esc per uscire · F per fullscreen</span>
+  </div>
+
+  <nav class="navbar">
+    <div class="container">
+      <a href="../../index.html" class="site-name">Lingua e Cultura Latina</a>
+      <div class="nav-links">
+        <a href="../../index.html">Home</a>
+        <a href="../../strumenti/raccoglitore.html">Raccoglitore</a>
+        <a href="../../grammatica/index.html">Grammatica</a>
+        <a href="../../strumenti/glossario-eulalia.html">Strumenti</a>
+        <a href="../../chi-sono.html">Su di me</a>
+        <a href="../../pdf/cv-vaccaro-europass.pdf" target="_blank">CV</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="page-header">
+    <h1>Quintiliano e l'<em>Institutio oratoria</em></h1>
+    <div class="divider"></div>
+    <p class="subtitle">Lezione interattiva &mdash; Latino 5 Classico</p>
+  </div>
+
+  <div class="container">
+    <a href="../../percorsi/latino5-classico.html" class="back-link">&larr; Torna a Latino 5 Classico</a>
+
+    <div class="score-bar">
+      <span class="score-label">Punteggio</span>
+      <span class="score-value" id="scoreDisplay">0 / 12</span>
+    </div>
+
+    <!-- ═══ DO NOW ═══ -->
+    <div class="tlac-box tlac-donow slide" data-slide-title="Do Now">
+      <div class="tlac-label">Do Now &mdash; San Gallo, 1416 (3 min)</div>
+      <p style="font-family:'Cardo',serif; font-size:18px; line-height:1.7; font-style: italic; margin: 10px 0 14px 0;">
+        &laquo;<span class="lat-cite">in teterrimo quodam et obscuro carcere, fundo scilicet unius turris, quo ne capitalis quidem rei damnati retruderentur</span>&raquo;
+      </p>
+      <p>Scrivete sul quaderno una risposta in 3&ndash;4 righe a queste tre domande, senza guardare il vicino:</p>
+      <ol>
+        <li>Chi parla, e di chi sta parlando?</li>
+        <li>Si tratta di un detenuto in carne e ossa?</li>
+        <li>Cosa potrebbe meritare un trattamento del genere?</li>
+      </ol>
+      <p style="margin-top: 14px; font-size: 14px; color: var(--text-dim);">Discuteremo le risposte in classe. Tenete il quaderno aperto: torneremo a questa frase a fine lezione.</p>
+    </div>
+
+    <!-- ═══ INTRODUZIONE ═══ -->
+    <div class="lesson-intro slide" data-slide-title="Chi era Quintiliano">
+      <h2>Chi era Marco Fabio Quintiliano</h2>
+      <div style="margin-bottom: 14px;">
+        <span class="context-badge autore">M. Fabius Quintilianus</span>
+        <span class="context-badge opera">Institutio oratoria (12 libri)</span>
+        <span class="context-badge data">Età flavia (35&ndash;ca. 96 d.C.)</span>
+        <span class="context-badge genere">Trattato &middot; Pedagogia &middot; Retorica</span>
+      </div>
+      <p>Nato a <span class="lat-cite">Calagurris</span> (oggi Calahorra, in Spagna) verso il 35 d.C., figlio di un maestro di retorica, si forma a Roma alla scuola del grammatico Remmio Palèmone e del retore Domizio Afro. Torna in Spagna, e nel 68 Galba lo richiama nella capitale.</p>
+      <p>A Roma esercita la professione forense e insegna retorica. Nel 78 d.C. <strong>Vespasiano</strong> gli affida la prima cattedra pubblica di retorica latina: stipendio di centomila sesterzi annui pagati dallo Stato. Domiziano gli affida l'educazione di due nipoti e gli concede gli <span class="lat-cite">ornamenta consularia</span>. Tra i suoi allievi figurano <strong>Plinio il Giovane</strong> e, con tutta probabilità, <strong>Tacito</strong>.</p>
+      <p>Si ritira dall'insegnamento intorno all'88. Tra il 93 e il 96 compone l'<em>Institutio oratoria</em>. Muore poco dopo la pubblicazione, sotto Nerva.</p>
+      <span class="nota-fonte">Fonti: passi autobiografici dell'<em>Institutio</em>; Cronaca di san Girolamo; Marziale 2, 90; Giovenale 7, 186 ss.</span>
+    </div>
+
+    <!-- ═══ COLD CALL 1 ═══ -->
+    <div class="tlac-box tlac-coldcall slide" data-slide-title="Cold call 1 — Cattedra di Stato">
+      <div class="tlac-label">Fermati e rispondi</div>
+      <p><strong>Quintiliano è il primo professore di retorica stipendiato dallo Stato. Cosa cambia, rispetto al passato, quando l'oratoria smette di essere insegnata da maestri privati e diventa istituzione pubblica?</strong></p>
+      <button class="tlac-reveal-btn" onclick="toggleHint(this)">Mostra spunto</button>
+      <div class="tlac-hint">Fino ad allora la formazione retorica era affidata al patronato privato: ciascuna famiglia sceglieva il proprio maestro. Con Vespasiano la retorica entra nelle competenze dell'amministrazione imperiale. Si forma una élite di funzionari e di senatori secondo un programma pubblico, controllabile, omogeneo. È un atto politico: il principato regola la formazione delle classi dirigenti.</div>
+    </div>
+
+    <!-- ═══ DECADENZA DELL'ELOQUENZA ═══ -->
+    <div class="content-section slide" data-slide-title="Decadenza dell'eloquenza">
+      <div class="content-header">
+        <h2>Il problema: la decadenza dell'eloquenza</h2>
+        <span class="section-ref">Tre diagnosi sotto i Flavi</span>
+      </div>
+      <div class="content-body">
+        <p>Negli anni in cui Quintiliano scrive, è opinione condivisa che l'oratoria romana sia in crisi. Le diagnosi divergono. Il manuale ne registra tre.</p>
+        <h3>1. La causa morale</h3>
+        <p>La crisi nasce dal generale infiacchimento dei costumi. Si è diffuso il malcostume della <strong>delazione</strong>: l'eloquenza è diventata strumento di ricatto. Nelle scuole, alcuni insegnanti corrotti hanno corrotto a loro volta gli allievi. È la lettura più diffusa, anche presso Quintiliano, ma non spiega tutto.</p>
+        <h3>2. La causa stilistica</h3>
+        <p>Il gusto si è degradato: trionfa lo stile «moderno», sentenzioso, costruito per l'effetto. Quintiliano ne fa risalire la responsabilità a <strong>Seneca</strong>, di cui diventa il principale avversario. Vi torneremo.</p>
+        <h3>3. La causa politica</h3>
+        <p>Questa diagnosi è la più lucida ed è esterna a Quintiliano: la espongono <strong>Tacito</strong> nel <em>Dialogus de oratoribus</em> e l'anonimo autore del trattato greco <em>Sul sublime</em>. Con la fine della <em>libertas</em> repubblicana il Foro non è più luogo di dibattito politico autentico; nei processi pesa la volontà del principe; la grande oratoria non ha più materia su cui esercitarsi. Restano le scuole, dove gli esercizi declamatori (<em>suasoriae</em> e <em>controversiae</em>) simulano cause immaginarie su situazioni paradossali.</p>
+        <p style="margin-top: 14px; padding: 12px 16px; background: var(--gold-pale); border-left: 3px solid var(--gold); border-radius: 6px;"><strong>Tenete a mente la divergenza.</strong> Quintiliano resta nel quadro morale-stilistico. Tacito andrà oltre, e dirà che la causa è politica. Quando leggeremo il <em>Dialogus</em>, riconoscerete il punto di rottura.</p>
+      </div>
+    </div>
+
+    <!-- ═══ INSTITUTIO ORATORIA ═══ -->
+    <div class="content-section slide" data-slide-title="L'opera: Institutio oratoria">
+      <div class="content-header">
+        <h2>L'opera: <em>Institutio oratoria</em></h2>
+        <span class="section-ref">Dodici libri, una sola formazione</span>
+      </div>
+      <div class="content-body">
+        <p>L'opera è composta tra il 93 e il 96 d.C. e dedicata a Vittorio Marcello, preceduta da una lettera all'editore Trifone. Quintiliano la pubblica per anticipare la circolazione di appunti scolastici trascritti dai suoi allievi senza il suo consenso.</p>
+        <p>Il progetto non è un manuale di tecnica oratoria. È un programma di formazione integrale, dalla prima infanzia all'ingresso nella vita pubblica. La novità è di prospettiva: il futuro oratore si forma <strong>prima</strong> ancora di affrontare la retorica.</p>
+
+        <div class="libri-grid">
+          <div class="lg-num">I&ndash;II</div>
+          <div class="lg-row"><strong>Pedagogia ed educazione di base.</strong> La scelta della balia e dei primi compagni; il <em>grammaticus</em>; il passaggio al <em>rhetor</em>; i doveri dell'insegnante. <em>È la parte più letta nei secoli successivi.</em></div>
+          <div class="lg-num">III&ndash;VII</div>
+          <div class="lg-row"><strong>Retorica tecnica.</strong> Le partizioni dell'arte; <em>inventio</em> (trovare gli argomenti) e <em>dispositio</em> (ordinarli); analisi delle parti del discorso giudiziario.</div>
+          <div class="lg-num">VIII&ndash;IX</div>
+          <div class="lg-row"><strong>Elocutio.</strong> Stile, tropi, figure di parola e di pensiero. Il libro VIII contiene la polemica con le <em>sententiae</em> alla maniera senecana.</div>
+          <div class="lg-num">X</div>
+          <div class="lg-row"><strong>La <em>facilitas</em> e il canone degli autori.</strong> Rassegna degli scrittori greci e latini da leggere e imitare. Da qui vengono molti dei giudizi critici diventati classici (su Menandro, Tucidide, Sallustio, Livio, Lucano).</div>
+          <div class="lg-num">XI</div>
+          <div class="lg-row"><strong><em>Memoria</em> e <em>actio</em>.</strong> Tecniche di memorizzazione, voce, gesti, postura.</div>
+          <div class="lg-num">XII</div>
+          <div class="lg-row"><strong>L'oratore come uomo.</strong> Requisiti morali, ruolo civile, rapporti con il principe. Si apre con la formula <em>vir bonus dicendi peritus</em>.</div>
+        </div>
+        <p style="font-size: 13.5px; color: var(--text-dim); font-style: italic;">Della restante produzione si conserva poco: il <em>De causis corruptae eloquentiae</em> è perduto; le <em>Declamationes maiores</em> e <em>minores</em> tramandate sotto il suo nome sono oggi giudicate spurie.</p>
+      </div>
+    </div>
+
+    <!-- ═══ BRANO XII 1, 1-3 ═══ -->
+    <div class="brano-fronte slide" data-slide-title="Brano XII 1, 1–3 — Vir bonus dicendi peritus">
+      <div class="bf-titolo">«Vir bonus dicendi peritus» <span class="bf-rif">Inst. or. XII 1, 1&ndash;3 — ed. Winterbottom 1970</span></div>
+      <div class="bf-grid">
+        <div class="bf-lat">
+          Sit ergo nobis orator quem constituimus is qui a M. Catone finitur <mark class="kw">vir bonus dicendi peritus</mark><sup class="bf-n">1</sup>, verum, id quod et ille <mark class="kw">posuit prius</mark><sup class="bf-n">2</sup> et ipsa natura potius ac maius est, utique vir bonus: id non eo tantum quod, si vis illa dicendi malitiam instruxerit, nihil sit publicis privatisque rebus perniciosius eloquentia, nosque ipsi, qui pro virili parte conferre aliquid ad facultatem dicendi conati sumus, pessime mereamur de rebus humanis si <mark class="kw">latroni</mark><sup class="bf-n">3</sup> comparamus haec arma, non militi. Quid de nobis loquor? Rerum ipsa natura, in eo quod praecipue indulsisse homini videtur quoque nos a ceteris animalibus separasse, <mark class="kw">non parens sed noverca</mark><sup class="bf-n">4</sup> fuerit si facultatem dicendi sociam scelerum, adversam innocentiae, hostem veritatis invenit. Mutos enim nasci et egere omni ratione satius fuisset quam providentiae munera in mutuam perniciem convertere. Longius tendit hoc iudicium meum. Neque enim tantum id dico, eum qui sit orator virum bonum esse oportere, sed <mark class="kw">ne futurum quidem oratorem nisi virum bonum</mark><sup class="bf-n">5</sup>.
+        </div>
+        <div class="bf-ita">
+          Sia dunque per noi oratore quello che abbiamo definito tale: colui che da M. Catone viene definito <mark class="kw-ita">«uomo onesto esperto nel dire»</mark>, ma — e ciò che pure lui ha posto al primo posto, e che la natura stessa antepone come più importante — sia in primo luogo uomo onesto. E non solo perché, se quella forza del dire armerà la malizia, nulla è più rovinoso per gli affari pubblici e privati dell'eloquenza, e noi stessi, che abbiamo cercato per quanto possiamo di apportare qualcosa alla facoltà del dire, ci comporteremmo pessimamente verso il genere umano se queste armi le procurassimo a un brigante e non a un soldato. Ma cosa parlo di noi? La natura stessa delle cose, in ciò che pare avere concesso all'uomo come dono privilegiato e per cui ci ha distinti dagli altri animali, sarebbe stata <mark class="kw-ita">non madre ma matrigna</mark> se avesse trovato la facoltà del dire alleata di delitti, contraria all'innocenza, nemica della verità. Sarebbe stato preferibile nascere muti ed essere privi di ogni ragione, piuttosto che convertire i doni della provvidenza in reciproca rovina. Più in là si spinge questo mio giudizio. Non dico infatti soltanto che chi è oratore deve essere uomo onesto, ma <mark class="kw-ita">neppure futuro oratore può esserlo se non l'uomo onesto</mark>.
+        </div>
+      </div>
+      <div class="bf-note">
+        <ol>
+          <li><strong>vir bonus dicendi peritus</strong> — formula di <strong>M. Porcio Catone il Censore</strong> (II sec. a.C.), citata da Quintiliano: «uomo onesto esperto nel dire». Quintiliano la riprende, non la conia.</li>
+          <li><strong>posuit prius</strong> — «ha posto prima»: Catone aveva collocato <em>vir bonus</em> come prima qualifica, lasciando a <em>dicendi peritus</em> il secondo posto. L'ordine è la tesi.</li>
+          <li><strong>latroni</strong> / <strong>militi</strong> — l'eloquenza è un'arma. Va consegnata al soldato (chi serve la <em>res publica</em>), non al brigante (chi la usa per delinquere).</li>
+          <li><strong>non parens sed noverca</strong> — topos lucreziano (cfr. <em>De rerum natura</em> V 195 ss.): se l'eloquenza fosse al servizio del male, la natura sarebbe matrigna. Quintiliano lo rovescia: poiché esiste l'oratore onesto, la natura è madre.</li>
+          <li><strong>ne futurum quidem oratorem nisi virum bonum</strong> — «neppure <em>futuro</em> oratore può esserlo se non l'uomo onesto»: non un'esigenza esterna alla retorica, ma <strong>condizione costitutiva</strong>. Senza onestà non si dà oratore.</li>
+        </ol>
+      </div>
+      <div class="bf-commento">
+        <strong>Cosa vedere nel testo.</strong> La formula non è di Quintiliano: è catoniana. Il contributo originale sta in <em>come</em> la legge. Catone metteva <em>vir bonus</em> al primo posto come ammonimento morale. Quintiliano lo rilegge come tesi tecnica: senza moralità non c'è eloquenza, perché l'eloquenza messa al servizio del male nuoce di più di quanto giovi. È la stessa tensione del <em>Gorgia</em> di Platone, ma con esito opposto: Platone condannava la retorica; Quintiliano la riscatta dall'interno.
+      </div>
+    </div>
+
+    <!-- ═══ COLD CALL 2 — ORDINE DELLE PAROLE ═══ -->
+    <div class="tlac-box tlac-coldcall slide" data-slide-title="Cold call 2 — l'ordine delle parole">
+      <div class="tlac-label">Fermati e rispondi</div>
+      <p><strong>Quintiliano insiste due volte sull'<em>ordine</em> di <span class="lat-cite">vir bonus dicendi peritus</span>: prima <em>vir bonus</em>, poi <em>dicendi peritus</em>. Cosa avrebbe perso la formula se Catone l'avesse scritta al contrario, <span class="lat-cite">dicendi peritus vir bonus</span>?</strong></p>
+      <button class="tlac-reveal-btn" onclick="toggleHint(this)">Mostra spunto</button>
+      <div class="tlac-hint">Nel latino, l'ordine porta significato: la prima posizione è la posizione enfatica. <em>Vir bonus dicendi peritus</em> dice che la perizia oratoria è una qualifica subordinata alla qualità morale. <em>Dicendi peritus vir bonus</em> direbbe il contrario: prima la tecnica, poi (eventualmente) la moralità. Quintiliano fa di quest'ordine il fondamento del libro XII: la tecnica senza etica è un'arma in mano al brigante.</div>
+    </div>
+
+    <!-- ═══ TRE IDEE-CHIAVE ═══ -->
+    <div class="content-section slide" data-slide-title="Tre idee-chiave del programma">
+      <div class="content-header">
+        <h2>Tre idee del programma pedagogico</h2>
+        <span class="section-ref">Libri I&ndash;II e XII</span>
+      </div>
+      <div class="content-body">
+
+        <h3>1. La pedagogia come progetto politico</h3>
+        <p>Il Foro non è più luogo di decisione politica. Eppure Quintiliano insiste sull'oratore come ideale civile. Perché?</p>
+        <p>La sua risposta operativa è la formazione: se non si può governare la <em>res publica</em>, si può comunque formare il cittadino capace di pensare, giudicare, argomentare. Il programma pedagogico è il modo in cui un sistema culturale sopravvive al regime politico che lo ha prodotto.</p>
+        <p>Il manuale di riferimento osserva, non senza durezza, che questo ideale è <em>«un'illusione del tutto infondata, quasi una negazione fatta alla realtà storica dell'Impero»</em>. Tacito, nel <em>Dialogus</em>, sarà più realista. È una tensione produttiva: terremo aperto il dibattito.</p>
+
+        <h3>2. Il gioco come metodo</h3>
+        <p>Nel libro I Quintiliano sostiene che i bambini imparano meglio se l'apprendimento ha forma di gioco. Lo studio forzato prima del tempo crea avversione permanente. La frase chiave è <span class="lat-cite">sit ergo lusus ipse</span> — «che lo studio sia lui stesso gioco».</p>
+        <p>È un punto che colpisce per modernità, ma va letto nel suo contesto: Quintiliano non sta proponendo una pedagogia ludica nel senso novecentesco. Sta dicendo, da retore esperto, che la coercizione è inefficiente. La motivazione produce risultati che il timore non produce.</p>
+
+        <h3>3. Il maestro come <em>alter parens</em></h3>
+        <p>L'insegnante deve essere come un secondo padre: esigente ma affettuoso, severo senza crudeltà. Deve conoscere i singoli allievi e adattarsi ai diversi <em>ingenia</em>. Quintiliano è ostile alle punizioni corporali, prassi diffusa nelle scuole romane: gli allievi picchiati, dice, perdono dignità e capacità di apprendimento.</p>
+      </div>
+    </div>
+
+    <!-- ═══ QUINTILIANO CONTRO SENECA ═══ -->
+    <div class="content-section slide" data-slide-title="Quintiliano contro Seneca: docere vs movere">
+      <div class="content-header">
+        <h2>Quintiliano contro Seneca: <em>docere</em> contro <em>movere</em></h2>
+        <span class="section-ref">Libro X &middot; il pivot critico</span>
+      </div>
+      <div class="content-body">
+        <p>Nel libro X Quintiliano traccia il canone degli autori da imitare. Il modello è <strong>Cicerone</strong>: <em>concinnitas</em>, equilibrio, periodo armonico. Da questa scelta nasce la polemica più nota dell'opera, contro Seneca.</p>
+        <p>Seneca è apprezzato per molte qualità, ma criticato per lo stile: troppo sentenzioso, troppo brillante, costruito su <em>sententiae</em> che spezzano il discorso e cercano l'effetto. Quintiliano cita i seguaci di Seneca per dire che, imitandolo male, hanno reso il latino un susseguirsi di <em>sensiculi</em>, «pensierini messi in pezzetti».</p>
+
+        <div class="confronto-docmov">
+          <div class="cdm-card">
+            <h4>docere</h4>
+            <div class="cdm-aut">Quintiliano (e Cicerone)</div>
+            <ul>
+              <li>Il discorso si fonda sulla <strong>sostanza delle cose</strong> (<em>rerum pondera</em>)</li>
+              <li>L'autore è l'attore primo del testo</li>
+              <li>Periodo ampio, armonico, simmetrico</li>
+              <li>Modello: Cicerone</li>
+            </ul>
+          </div>
+          <div class="cdm-card">
+            <h4>movere</h4>
+            <div class="cdm-aut">Seneca (e i moderni)</div>
+            <ul>
+              <li>Il discorso punta all'<strong>uditorio</strong>: catturare, colpire, guidare le reazioni</li>
+              <li>Il destinatario è l'attore primo del testo</li>
+              <li>Periodo spezzato, sentenzioso, costruito per l'effetto</li>
+              <li>Modello: la <em>sententia</em> brillante</li>
+            </ul>
+          </div>
+        </div>
+
+        <p>Quintiliano vince la battaglia culturale: dopo l'<em>Institutio</em>, il classicismo ciceroniano si afferma come gusto egemone. Ma la sua stessa prosa non è priva di influssi senecani: la lingua di Quintiliano cerca la perspicuità più che l'ampiezza ciceroniana, e in qualche misura ha già assorbito quel periodare più rapido che pure combatte.</p>
+      </div>
+    </div>
+
+    <!-- ═══ TURN AND TALK ═══ -->
+    <div class="tlac-box tlac-turntalk slide" data-slide-title="Turn and talk — Quintiliano vs Seneca">
+      <div class="tlac-label">Turn and Talk &mdash; Discutete con il compagno (3 min)</div>
+      <p><strong>Voi avete letto Seneca. La <em>brevitas</em> sentenziosa, le frasi brevi che colpiscono — vizio o virtù? Quintiliano vi convince quando dice che la <em>sententia</em> nasconde, anziché dire? Trovate insieme un esempio concreto da una <em>Epistula</em> che vi ricordate.</strong></p>
+    </div>
+
+    <!-- ═══ BRANI ESTENSIONE ═══ -->
+    <div class="content-section">
+      <div class="content-header">
+        <h2>Estensione &mdash; brani per la lezione successiva</h2>
+        <span class="section-ref">Inst. or. I 1, 1&ndash;3 e I 2, 18&ndash;23</span>
+      </div>
+      <div class="content-body">
+        <p style="font-size: 14px; color: var(--text-dim);">Cliccate sulle voci qui sotto per aprire i passi: li leggeremo nella lezione successiva e sono inclusi nell'<a href="handout.html">handout stampabile</a>.</p>
+
+        <details class="brano-estensione">
+          <summary>Inst. or. I 1, 1&ndash;3 &mdash; Tutti i bambini possono imparare</summary>
+          <div class="brano-fronte" style="margin-top: 14px;">
+            <div class="bf-titolo">L'ottimismo pedagogico <span class="bf-rif">Inst. or. I 1, 1&ndash;3</span></div>
+            <div class="bf-grid">
+              <div class="bf-lat">
+                Igitur nato filio pater spem de illo primum quam optimam capiat: ita diligentior a principiis fiet. <mark class="kw">Falsa enim est querela</mark><sup class="bf-n">1</sup>, paucissimis hominibus vim percipiendi quae tradantur esse concessam, plerosque vero laborem ac tempora tarditate ingenii perdere. Nam contra plures reperias et faciles in excogitando et ad discendum promptos. Quippe id est homini naturale, ac sicut aves ad volatum, equi ad cursum, ad saevitiam ferae gignuntur, ita nobis propria est <mark class="kw">mentis agitatio atque sollertia</mark><sup class="bf-n">2</sup>: unde origo animi caelestis creditur. Hebetes vero et indociles non magis secundum naturam hominis eduntur quam prodigiosa corpora et monstris insignia, sed hi pauci admodum fuerunt. Argumentum, quod in pueris elucet spes plurimorum: quae cum emoritur aetate, manifestum est <mark class="kw">non naturam defecisse sed curam</mark><sup class="bf-n">3</sup>. «Praestat tamen ingenio alius alium.» Concedo; sed plus efficiet aut minus: <mark class="kw">nemo reperitur qui sit studio nihil consecutus</mark><sup class="bf-n">4</sup>. Hoc qui perviderit, protinus ut erit parens factus, acrem quam maxime datur curam spei futuri oratoris inpendat.
+              </div>
+              <div class="bf-ita">
+                Dunque, una volta nato il figlio, il padre concepisca subito su di lui la migliore speranza possibile: così sarà più diligente fin dai primi passi. <mark class="kw-ita">È falso il lamento</mark> che a pochissimi sia concessa la facoltà di apprendere quanto si insegna, e che i più sprecherebbero fatica e tempo per la lentezza dell'ingegno. Al contrario, ne troverai parecchi pronti sia nell'ideare sia nell'apprendere. Questo è naturale per l'uomo: come gli uccelli sono fatti per il volo, i cavalli per la corsa, le fiere per la ferocia, così a noi è propria <mark class="kw-ita">l'attività e l'agilità della mente</mark>: di qui si crede che l'anima abbia origine celeste. Gli ottusi e gli indocili non sono prodotti contro la natura umana più di quanto lo siano i corpi mostruosi e segnati da prodigi, ma questi sono stati assai pochi. Prova ne è che nei bambini risplende la speranza dei più: quando essa muore con l'età, è chiaro che <mark class="kw-ita">non è venuta meno la natura, ma la cura</mark>. «E tuttavia uno supera l'altro per ingegno.» Lo concedo; ma otterrà di più o di meno: <mark class="kw-ita">non si trova nessuno che con lo studio non abbia ottenuto nulla</mark>. Chi avrà compreso a fondo questo, appena diventato genitore, dedichi alla speranza del futuro oratore la cura più intensa possibile.
+              </div>
+            </div>
+            <div class="bf-note">
+              <ol>
+                <li><strong>falsa querela</strong> — il «lamento» che Quintiliano contesta: l'opinione comune secondo cui la maggior parte degli uomini sarebbe per natura incapace di imparare. È la tesi opposta del libro: il talento è la regola, non l'eccezione.</li>
+                <li><strong>mentis agitatio atque sollertia</strong> — coppia tecnica: <em>agitatio</em> è l'attività della mente, <em>sollertia</em> è la sua agilità nell'inventare. La similitudine con uccelli/cavalli/fiere è argomento di natura.</li>
+                <li><strong>non naturam defecisse sed curam</strong> — la formula chiave: la causa della mediocrità adulta non è la natura ma la mancanza di <em>cura</em> educativa. Inversione di responsabilità: dal discente al sistema formativo.</li>
+                <li><strong>studio... consecutus</strong> — il talento si modula in più o in meno; ma con lo studio qualcosa si ottiene sempre. È l'antitesi a chi si arrende davanti al dato naturale.</li>
+              </ol>
+            </div>
+          </div>
+        </details>
+
+        <details class="brano-estensione">
+          <summary>Inst. or. I 2, 18&ndash;23 &mdash; Difesa della scuola pubblica</summary>
+          <div class="brano-fronte" style="margin-top: 14px;">
+            <div class="bf-titolo">Perché la scuola, non il maestro privato <span class="bf-rif">Inst. or. I 2, 18&ndash;23</span></div>
+            <div class="bf-grid">
+              <div class="bf-lat">
+                Ante omnia futurus orator, cui in maxima celebritate et in media rei publicae luce vivendum est, adsuescat iam a tenero non reformidare homines neque illa <mark class="kw">solitaria et velut umbratica vita</mark><sup class="bf-n">1</sup> pallescere. Excitanda mens et attollenda semper est, quae in eius modi secretis aut languescit et quendam velut in opaco situm ducit, aut contra <mark class="kw">tumescit inani persuasione</mark><sup class="bf-n">2</sup>: necesse est enim nimium tribuat sibi qui se nemini comparat. Deinde cum proferenda sunt studia, caligat in sole et omnia nova offendit, ut qui solus didicerit quod inter multos faciendum est. Mitto amicitias, quae ad senectutem usque firmissime durant religiosa quadam necessitudine inbutae: neque enim est sanctius sacris isdem quam studiis initiari. <mark class="kw">Sensum ipsum, qui communis dicitur</mark><sup class="bf-n">3</sup>, ubi discet cum se a congressu, qui non hominibus solum sed mutis quoque animalibus naturalis est, segregarit? Adde quod domi ea sola discere potest quae ipsi praecipientur, in schola etiam quae aliis. Audiet multa cotidie probari, multa corrigi, proderit alicuius obiurgata desidia, proderit laudata industria, excitabitur laude aemulatio, turpe ducet cedere pari, pulchrum superasse maiores. Accendunt omnia haec animos, et licet ipsa vitium sit ambitio, frequenter tamen <mark class="kw">causa virtutum est</mark><sup class="bf-n">4</sup>.
+              </div>
+              <div class="bf-ita">
+                Prima di tutto il futuro oratore, che dovrà vivere nella massima notorietà e nella piena luce della vita pubblica, fin da tenera età si abitui a non temere gli uomini e a non impallidire in quella <mark class="kw-ita">vita solitaria e quasi nell'ombra</mark>. La mente va sempre stimolata e sollevata: in tali isolamenti o si infiacchisce e contrae quasi una muffa nell'oscurità, oppure al contrario <mark class="kw-ita">si gonfia di vana presunzione</mark>: chi non si paragona a nessuno, finisce per attribuirsi troppo. Poi, quando deve mostrare in pubblico ciò che ha imparato, è abbagliato dal sole e si scontra con ogni novità, come chi ha imparato da solo quello che dovrà fare in mezzo a molti. Tralascio le amicizie, che durano saldissime fino alla vecchiaia, intessute di una sorta di religiosa intimità: non c'è infatti consacrazione più sacra dell'essere iniziati agli stessi studi. <mark class="kw-ita">Il senso che si dice comune</mark>, dove lo apprenderà se si separerà da quel rapporto sociale che è naturale non solo agli uomini ma anche agli animali muti? Aggiungi che a casa potrà imparare soltanto ciò che si insegna a lui, mentre a scuola anche ciò che si insegna agli altri. Sentirà ogni giorno lodare molte cose, correggerne molte; gli gioverà la pigrizia altrui rimproverata, gli gioverà l'impegno altrui lodato; dalla lode sarà accesa l'emulazione; riterrà vergognoso essere uguagliato dai pari, bello aver superato i più anziani. Tutte queste cose accendono gli animi, e benché l'ambizione di per sé sia un vizio, spesso tuttavia è <mark class="kw-ita">causa di virtù</mark>.
+              </div>
+            </div>
+            <div class="bf-note">
+              <ol>
+                <li><strong>solitaria et umbratica vita</strong> — la formazione domestica isolata. <em>Umbratica</em> evoca chi vive all'ombra, lontano dal Foro: l'opposto della <em>celebritas</em> di chi farà l'oratore.</li>
+                <li><strong>tumescit inani persuasione</strong> — «si gonfia di vana persuasione». Senza confronto con i pari, il discente sopravvaluta sé stesso. La parola chiave è <em>comparat</em>: senza paragone, niente misura.</li>
+                <li><strong>sensus communis</strong> — non il «buon senso» moderno, ma il senso del rapporto sociale, della convivenza. È un concetto romano: si forma <em>solo</em> nello stare con gli altri.</li>
+                <li><strong>causa virtutum</strong> — ammissione realistica: l'ambizione è un vizio, ma produce comportamenti virtuosi (impegno, emulazione). Quintiliano usa la psicologia del discente come leva pedagogica, non la nega.</li>
+              </ol>
+            </div>
+          </div>
+        </details>
+      </div>
+    </div>
+
+    <!-- ═══ MAPPA CONCETTUALE ═══ -->
+    <div class="content-section slide" data-slide-title="Mappa concettuale">
+      <div class="content-header">
+        <h2>Mappa concettuale interattiva</h2>
+        <span class="section-ref">Passate il mouse sui nodi per approfondire</span>
+      </div>
+      <div class="content-body">
+        <div class="mappa-container">
+          <svg class="mappa-svg" viewBox="0 0 920 580" xmlns="http://www.w3.org/2000/svg">
+            <!-- linee livello 1 -->
+            <line x1="460" y1="60" x2="160" y2="160" stroke="#d4c9b8" stroke-width="2"/>
+            <line x1="460" y1="60" x2="460" y2="160" stroke="#d4c9b8" stroke-width="2"/>
+            <line x1="460" y1="60" x2="760" y2="160" stroke="#d4c9b8" stroke-width="2"/>
+            <!-- linee livello 2 -->
+            <line x1="160" y1="210" x2="80" y2="310" stroke="#d4c9b8" stroke-width="2"/>
+            <line x1="160" y1="210" x2="240" y2="310" stroke="#d4c9b8" stroke-width="2"/>
+            <line x1="460" y1="210" x2="380" y2="310" stroke="#d4c9b8" stroke-width="2"/>
+            <line x1="460" y1="210" x2="540" y2="310" stroke="#d4c9b8" stroke-width="2"/>
+            <line x1="760" y1="210" x2="680" y2="310" stroke="#d4c9b8" stroke-width="2"/>
+            <line x1="760" y1="210" x2="840" y2="310" stroke="#d4c9b8" stroke-width="2"/>
+            <!-- frecce inferiori -->
+            <line x1="460" y1="365" x2="460" y2="445" stroke="#b8915a" stroke-width="2.5" stroke-dasharray="6,4"/>
+            <line x1="460" y1="500" x2="460" y2="535" stroke="#b8915a" stroke-width="2" stroke-dasharray="4,3"/>
+
+            <!-- nodo centrale -->
+            <g class="mappa-node" data-info="M. Fabio Quintiliano, Calagurris ~35 d.C. – Roma ~96 d.C. Prima cattedra di retorica latina di Stato (Vespasiano, 78 d.C.). Maestro di Plinio il Giovane e probabilmente di Tacito.">
+              <ellipse cx="460" cy="42" rx="155" ry="28" fill="#2c2416" stroke="#b8915a" stroke-width="2.5"/>
+              <text x="460" y="48" text-anchor="middle" fill="#f5f0e8" font-family="Libre Baskerville, serif" font-size="16" font-weight="700">QUINTILIANO</text>
+            </g>
+
+            <!-- 3 rami -->
+            <g class="mappa-node" data-info="Programma educativo integrale dalla prima infanzia. Ottimismo pedagogico (tutti possono imparare). Scuola pubblica vs istruzione domestica. Maestro come alter parens.">
+              <rect x="50" y="160" width="220" height="50" rx="12" fill="#e8f4f8" stroke="#6db5d4" stroke-width="2"/>
+              <text x="160" y="190" text-anchor="middle" fill="#1a6b8a" font-family="Libre Baskerville, serif" font-size="14" font-weight="700">Pedagogia (libri I–II)</text>
+            </g>
+
+            <g class="mappa-node" data-info="Vir bonus dicendi peritus: la formula di Catone, riletta come tesi tecnica. Senza moralità non si dà oratore. Tecnica + etica, in quest'ordine.">
+              <rect x="340" y="160" width="240" height="50" rx="12" fill="#fef3cd" stroke="#f4d35e" stroke-width="2"/>
+              <text x="460" y="190" text-anchor="middle" fill="#8a6a0a" font-family="Libre Baskerville, serif" font-size="14" font-weight="700">Vir bonus dicendi peritus</text>
+            </g>
+
+            <g class="mappa-node" data-info="Ritorno a Cicerone: concinnitas, equilibrio, periodo armonico. Polemica contro Seneca: docere (sostanza) contro movere (effetto). Contro le sententiae.">
+              <rect x="640" y="160" width="240" height="50" rx="12" fill="#e8f0e8" stroke="#78c878" stroke-width="2"/>
+              <text x="760" y="190" text-anchor="middle" fill="#2a7a2a" font-family="Libre Baskerville, serif" font-size="14" font-weight="700">Programma stilistico</text>
+            </g>
+
+            <!-- sotto-nodi -->
+            <g class="mappa-node" data-info="Falsa enim est querela: la mediocrità non è naturale ma è frutto di mancata cura educativa. Tutti i bambini hanno mentis agitatio atque sollertia.">
+              <rect x="10" y="310" width="150" height="46" rx="10" fill="#fff" stroke="#6db5d4" stroke-width="1.5"/>
+              <text x="85" y="338" text-anchor="middle" fill="#2c2416" font-family="Cardo, serif" font-size="13">Ottimismo pedagogico</text>
+            </g>
+
+            <g class="mappa-node" data-info="La scuola pubblica supera la formazione domestica: emulazione, sensus communis, paragone con i pari, abitudine alla luce della vita pubblica.">
+              <rect x="170" y="310" width="150" height="46" rx="10" fill="#fff" stroke="#6db5d4" stroke-width="1.5"/>
+              <text x="245" y="338" text-anchor="middle" fill="#2c2416" font-family="Cardo, serif" font-size="13">Scuola pubblica</text>
+            </g>
+
+            <g class="mappa-node" data-info="Vir bonus al primo posto: senza onestà l'eloquenza è arma in mano al brigante. Topos lucreziano della natura come madre o matrigna.">
+              <rect x="310" y="310" width="150" height="46" rx="10" fill="#fff" stroke="#f4d35e" stroke-width="1.5"/>
+              <text x="385" y="338" text-anchor="middle" fill="#2c2416" font-family="Cardo, serif" font-size="13">Etica + tecnica</text>
+            </g>
+
+            <g class="mappa-node" data-info="L'ordine delle parole è la tesi. Vir bonus prima, dicendi peritus dopo. Eredità catoniana, non quintilianea.">
+              <rect x="470" y="310" width="150" height="46" rx="10" fill="#fff" stroke="#f4d35e" stroke-width="1.5"/>
+              <text x="545" y="338" text-anchor="middle" fill="#2c2416" font-family="Cardo, serif" font-size="13">Eredità catoniana</text>
+            </g>
+
+            <g class="mappa-node" data-info="Il modello è Cicerone: concinnitas, equilibrio, ampiezza armonica. Quintiliano è il leader del nuovo classicismo flavio.">
+              <rect x="610" y="310" width="150" height="46" rx="10" fill="#fff" stroke="#78c878" stroke-width="1.5"/>
+              <text x="685" y="338" text-anchor="middle" fill="#2c2416" font-family="Cardo, serif" font-size="13">Modello: Cicerone</text>
+            </g>
+
+            <g class="mappa-node" data-info="Polemica contro Seneca e le sententiae: docere (sostanza delle cose) contro movere (catturare l'uditorio). I sensiculi messi in pezzetti.">
+              <rect x="770" y="310" width="150" height="46" rx="10" fill="#fff" stroke="#78c878" stroke-width="1.5"/>
+              <text x="845" y="310" text-anchor="middle" fill="#2c2416" font-family="Cardo, serif" font-size="12"><tspan x="845" dy="22">Contro Seneca:</tspan><tspan x="845" dy="16">docere vs movere</tspan></text>
+            </g>
+
+            <!-- nodo intermedio -->
+            <g class="mappa-node" data-info="Il programma è coerente: un sistema di formazione che produce cittadini capaci di pensare, giudicare, argomentare. Sopravvive al regime politico che lo ha prodotto.">
+              <rect x="280" y="445" width="360" height="50" rx="12" fill="#b8915a" stroke="#2c2416" stroke-width="2"/>
+              <text x="460" y="475" text-anchor="middle" fill="#fff" font-family="Libre Baskerville, serif" font-size="14" font-weight="700">UN PROGETTO DI FORMAZIONE INTEGRALE</text>
+            </g>
+
+            <!-- nodo finale -->
+            <g class="mappa-node" data-info="Per il manuale di riferimento, l'oratore quintilianeo è 'un'illusione del tutto infondata, quasi una negazione fatta alla realtà storica dell'Impero'. Tacito, nel Dialogus, sarà più realista. Tensione produttiva: la lezione la lascia aperta.">
+              <ellipse cx="460" cy="555" rx="220" ry="22" fill="#2c2416" stroke="#b8915a" stroke-width="2"/>
+              <text x="460" y="561" text-anchor="middle" fill="#f5f0e8" font-family="Cardo, serif" font-size="13" font-weight="700">Realismo o illusione? Tacito risponderà</text>
+            </g>
+          </svg>
+          <div class="mappa-tooltip" id="mappaTooltip"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ STRETCH IT ═══ -->
+    <div class="tlac-box tlac-stretch slide" data-slide-title="Stretch It — la domanda di fondo">
+      <div class="tlac-label">Stretch It &mdash; la domanda di fondo</div>
+      <p style="font-family:'Libre Baskerville',serif; font-size: 18px; font-style: italic; color: var(--gold); margin: 8px 0 14px 0;">Un sistema di istruzione può sopravvivere al regime politico che lo ha prodotto?</p>
+      <p>Tornate al Do Now. Il manoscritto «in carcere» a San Gallo è un libro del I secolo d.C. che ha attraversato la caduta dell'Impero, l'alto Medioevo, l'età carolingia, fino a essere quasi cancellato. Quando Poggio lo ricopia nel 1416, il sistema politico che l'aveva prodotto — il principato di Domiziano — non esiste da milletrecento anni. Eppure la formazione che quel libro descrive viene adottata dall'umanesimo, dai gesuiti, dai licei dell'Ottocento.</p>
+      <p>Quintiliano ne era convinto. Aveva ragione?</p>
+      <button class="tlac-reveal-btn" onclick="toggleHint(this)">Mostra spunto</button>
+      <div class="tlac-hint">Una risposta possibile: sì, perché la formazione retorica forma <em>capacità</em> (giudicare, argomentare, distinguere il vero dal verosimile) che non dipendono dal regime in cui si esercitano. Una risposta opposta: no, perché un programma di formazione dell'oratore senza Foro è un esercizio nostalgico, e Tacito nel <em>Dialogus</em> avrà più ragione di Quintiliano. La verità sta probabilmente nel fatto che il manuale è stato adottato proprio per <em>quello</em> che Tacito gli rimprovera: la sua indifferenza alla politica del momento.</div>
+    </div>
+
+    <!-- ═══ QUIZ ═══ -->
+    <div class="esercizio-section" id="esercizi">
+      <h2>Check for Understanding &mdash; Quiz</h2>
+
+      <h3>A. Biografia e contesto</h3>
+
+      <div class="quiz-item" data-quiz="q1">
+        <div class="quiz-q">1. In che cosa consiste la novità della cattedra affidata a Quintiliano da Vespasiano nel 78 d.C.?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">È la prima cattedra di retorica greca a Roma.</div>
+          <div class="quiz-option" data-correct="true" onclick="checkQuiz(this)">È la prima cattedra di retorica latina stipendiata dallo Stato.</div>
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">È la prima cattedra esclusivamente dedicata ai figli del principe.</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <div class="quiz-item" data-quiz="q2">
+        <div class="quiz-q">2. Quale autore, con tutta probabilità, fu allievo di Quintiliano?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">Marziale.</div>
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">Svetonio.</div>
+          <div class="quiz-option" data-correct="true" onclick="checkQuiz(this)">Plinio il Giovane (e probabilmente Tacito).</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <h3>B. Institutio oratoria</h3>
+
+      <div class="quiz-item" data-quiz="q3">
+        <div class="quiz-q">3. Da quanti libri è composta l'<em>Institutio oratoria</em>?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">Sei.</div>
+          <div class="quiz-option" data-correct="true" onclick="checkQuiz(this)">Dodici.</div>
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">Venti.</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <div class="quiz-item" data-quiz="q4">
+        <div class="quiz-q">4. I libri I&ndash;II dell'<em>Institutio</em> trattano:</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="true" onclick="checkQuiz(this)">L'educazione del bambino e la pedagogia di base, prima della retorica vera e propria.</div>
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">L'<em>actio</em> e la <em>memoria</em>.</div>
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">Il canone degli autori da imitare.</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <div class="quiz-item" data-quiz="q5">
+        <div class="quiz-q">5. Cosa contiene il libro X dell'<em>Institutio</em>?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">L'educazione dell'infanzia.</div>
+          <div class="quiz-option" data-correct="true" onclick="checkQuiz(this)">Il canone degli autori greci e latini da leggere e imitare per acquisire la <em>facilitas</em>.</div>
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">Il rapporto fra oratore e principe.</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <h3>C. Vir bonus dicendi peritus</h3>
+
+      <div class="quiz-item" data-quiz="q6">
+        <div class="quiz-q">6. Chi ha coniato la formula <span class="lat-cite">vir bonus dicendi peritus</span>?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">Quintiliano stesso.</div>
+          <div class="quiz-option" data-correct="true" onclick="checkQuiz(this)">M. Porcio Catone il Censore (II sec. a.C.); Quintiliano la riprende.</div>
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">Cicerone nel <em>De oratore</em>.</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <div class="quiz-item" data-quiz="q7">
+        <div class="quiz-q">7. Perché Quintiliano insiste sull'<em>ordine</em> di <span class="lat-cite">vir bonus</span> e <span class="lat-cite">dicendi peritus</span>?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">Per ragioni di metrica e di sonorità della formula.</div>
+          <div class="quiz-option" data-correct="true" onclick="checkQuiz(this)">Perché la prima posizione segna il primato: la moralità precede e fonda la perizia tecnica.</div>
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">Perché la formula è una citazione esatta e non può essere modificata.</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <div class="quiz-item" data-quiz="q8">
+        <div class="quiz-q">8. A cosa paragona Quintiliano l'eloquenza affidata a un uomo immorale?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="true" onclick="checkQuiz(this)">A un'arma data al brigante invece che al soldato.</div>
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">A un cavallo affidato a un cattivo cavaliere.</div>
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">A una nave senza timoniere.</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <h3>D. Polemica con Seneca</h3>
+
+      <div class="quiz-item" data-quiz="q9">
+        <div class="quiz-q">9. Qual è il modello stilistico che Quintiliano oppone allo stile di Seneca?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">Lo stile arcaizzante di Catone e Sallustio.</div>
+          <div class="quiz-option" data-correct="true" onclick="checkQuiz(this)">Cicerone, con la sua <em>concinnitas</em> ed equilibrio del periodo.</div>
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">Lo stile dell'asianesimo greco.</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <div class="quiz-item" data-quiz="q10">
+        <div class="quiz-q">10. Cosa esprime la coppia <em>docere</em> / <em>movere</em>?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="true" onclick="checkQuiz(this)">Due concezioni opposte del discorso: una fondata sulla sostanza delle cose (Quintiliano), l'altra sull'effetto sull'uditorio (Seneca).</div>
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">Le due fasi obbligatorie di ogni orazione.</div>
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">Due figure retoriche tipiche dell'asianesimo.</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <h3>E. Contesto e ricezione</h3>
+
+      <div class="quiz-item" data-quiz="q11">
+        <div class="quiz-q">11. Secondo Tacito (<em>Dialogus de oratoribus</em>), qual è la causa profonda della decadenza dell'oratoria?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">L'imitazione di modelli stilistici sbagliati.</div>
+          <div class="quiz-option" data-correct="true" onclick="checkQuiz(this)">La fine della <em>libertas</em> repubblicana e la perdita di un'arena politica reale.</div>
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">L'ingresso dei provinciali nella classe dirigente.</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <div class="quiz-item" data-quiz="q12">
+        <div class="quiz-q">12. Perché l'<em>Institutio oratoria</em> conta tanto nella storia europea della pedagogia?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">Perché contiene il primo trattato sull'alfabetizzazione di massa.</div>
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">Perché è l'unico testo latino sopravvissuto sull'oratoria.</div>
+          <div class="quiz-option" data-correct="true" onclick="checkQuiz(this)">Perché, riscoperta integra da Poggio Bracciolini nel 1416, diventa il modello della formazione umanistica e poi gesuitica.</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+    </div>
+
+    <!-- ═══ EXIT TICKET ═══ -->
+    <div class="tlac-box tlac-exit">
+      <div class="tlac-label">Exit Ticket &mdash; Verifica finale (5 min)</div>
+      <p>Rispondete per iscritto su un foglio e consegnate al docente:</p>
+      <p><strong>1.</strong> Spiegate in 4&ndash;5 righe perché la formula <span class="lat-cite">vir bonus dicendi peritus</span> non è una banale somma di morale + tecnica, ma una tesi sull'ordine fra le due.</p>
+      <p><strong>2.</strong> Riassumete in 3&ndash;4 righe l'opposizione fra <em>docere</em> e <em>movere</em> e indicate da che parte si schiera Quintiliano (e perché).</p>
+      <p><strong>3.</strong> Tornate alla domanda Stretch It: <em>«Un sistema di istruzione può sopravvivere al regime politico che lo ha prodotto?»</em> Rispondete in 5&ndash;6 righe, citando un argomento di Quintiliano e uno (anticipato) di Tacito.</p>
+    </div>
+
+    <section class="tools-section">
+      <h2>Strumenti correlati</h2>
+      <div class="tools-grid">
+        <a href="handout.html" class="tool-link" target="_blank">
+          <span class="tool-icon">&#x1F4C4;</span>
+          <span class="tool-name">Handout stampabile</span>
+        </a>
+        <a href="../../percorsi/latino5-classico.html" class="tool-link">
+          <span class="tool-icon">&#x1F4D8;</span>
+          <span class="tool-name">Latino 5 Classico</span>
+        </a>
+        <a href="../../strumenti/raccoglitore.html" class="tool-link">
+          <span class="tool-icon">&#x1F4DA;</span>
+          <span class="tool-name">Raccoglitore Testi</span>
+        </a>
+        <a href="../../strumenti/analisi_latino.html" class="tool-link">
+          <span class="tool-icon">&#x1F4DD;</span>
+          <span class="tool-name">Analisi Testi</span>
+        </a>
+      </div>
+    </section>
+  </div>
+
+  <footer>
+    <p><strong>Prof. Andrea Vaccaro</strong></p>
+    <p>Lingua e Cultura Latina &mdash; Liceo Classico e Liceo Scientifico</p>
+    <div class="footer-links">
+      <a href="../../index.html">Home</a>
+      <a href="../../strumenti/raccoglitore.html">Raccoglitore Testi</a>
+      <a href="../../strumenti/glossario-eulalia.html">Strumenti</a>
+    </div>
+  </footer>
+
+<script>
+// ═══ TLAC HINT TOGGLE ═══
+function toggleHint(btn) {
+  var hint = btn.nextElementSibling;
+  hint.classList.toggle('visible');
+  btn.textContent = hint.classList.contains('visible') ? 'Nascondi spunto' : 'Mostra spunto';
+}
+
+// ═══ MAPPA — TOOLTIP ═══
+(function() {
+  var tooltip = document.getElementById('mappaTooltip');
+  if (!tooltip) return;
+  var nodes = document.querySelectorAll('.mappa-node');
+  nodes.forEach(function(node) {
+    node.addEventListener('mouseenter', function(e) {
+      var info = node.getAttribute('data-info');
+      if (!info) return;
+      tooltip.textContent = info;
+      tooltip.style.display = 'block';
+      positionTooltip(e);
+    });
+    node.addEventListener('mousemove', positionTooltip);
+    node.addEventListener('mouseleave', function() { tooltip.style.display = 'none'; });
+  });
+  function positionTooltip(e) {
+    var x = e.clientX + 16, y = e.clientY - 10;
+    if (x + 320 > window.innerWidth) x = e.clientX - 320;
+    if (y + 100 > window.innerHeight) y = e.clientY - 100;
+    tooltip.style.left = x + 'px';
+    tooltip.style.top = y + 'px';
+  }
+})();
+
+// ═══ QUIZ ═══
+var score = 0;
+var totalQuiz = 12;
+function checkQuiz(option) {
+  var item = option.closest('.quiz-item');
+  if (item.classList.contains('answered')) return;
+  item.classList.add('answered');
+  var isCorrect = option.getAttribute('data-correct') === 'true';
+  var feedback = item.querySelector('.quiz-feedback');
+  var allOptions = item.querySelectorAll('.quiz-option');
+  allOptions.forEach(function(opt) {
+    opt.classList.add('disabled');
+    if (opt.getAttribute('data-correct') === 'true') opt.classList.add('correct');
+  });
+  if (isCorrect) {
+    option.classList.add('correct');
+    feedback.className = 'quiz-feedback show correct-fb';
+    feedback.textContent = 'Corretto.';
+    score++;
+  } else {
+    option.classList.add('wrong');
+    feedback.className = 'quiz-feedback show wrong-fb';
+    var correctText = item.querySelector('.quiz-option[data-correct="true"]').textContent;
+    feedback.innerHTML = 'Non corretto. La risposta giusta è: <strong>' + correctText + '</strong>.';
+  }
+  document.getElementById('scoreDisplay').textContent = score + ' / ' + totalQuiz;
+}
+
+// ═══ MODALITÀ LIM ═══
+(function() {
+  var slides = Array.prototype.slice.call(document.querySelectorAll('.slide'));
+  var current = 0;
+  var toggleBtn = document.getElementById('limToggle');
+  var counter = document.getElementById('limCounter');
+  var btnPrev = document.getElementById('limPrev');
+  var btnNext = document.getElementById('limNext');
+
+  function isOn() { return document.body.classList.contains('lim-mode'); }
+
+  function show(i) {
+    if (i < 0) i = 0;
+    if (i >= slides.length) i = slides.length - 1;
+    current = i;
+    slides.forEach(function(s, idx) { s.classList.toggle('lim-active', idx === current); });
+    counter.textContent = (current + 1) + ' / ' + slides.length;
+    if (isOn()) slides[current].scrollIntoView({ block: 'start', behavior: 'instant' });
+  }
+
+  function enter() {
+    document.body.classList.add('lim-mode');
+    toggleBtn.textContent = '✕ Esci LIM';
+    show(0);
+  }
+  function exit() {
+    document.body.classList.remove('lim-mode');
+    toggleBtn.textContent = '▶ Modalità LIM';
+    slides.forEach(function(s) { s.classList.remove('lim-active'); });
+  }
+  function toggle() { isOn() ? exit() : enter(); }
+
+  toggleBtn.addEventListener('click', toggle);
+  btnPrev.addEventListener('click', function() { if (isOn()) show(current - 1); });
+  btnNext.addEventListener('click', function() { if (isOn()) show(current + 1); });
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'l' || e.key === 'L') {
+      if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+      toggle();
+      e.preventDefault();
+    }
+    if (!isOn()) return;
+    if (e.key === 'ArrowRight' || e.key === ' ') { show(current + 1); e.preventDefault(); }
+    else if (e.key === 'ArrowLeft') { show(current - 1); e.preventDefault(); }
+    else if (e.key === 'Escape') { exit(); }
+    else if (e.key === 'f' || e.key === 'F') {
+      if (!document.fullscreenElement) document.documentElement.requestFullscreen();
+      else document.exitFullscreen();
+    }
+  });
+})();
+</script>
+
+<script src="../../js/alpheios-init.js"></script>
+</body>
+</html>

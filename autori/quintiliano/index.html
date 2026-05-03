@@ -230,19 +230,19 @@
   /* ═══ MODALITÀ LIM ═══ */
   .lim-toggle {
     position: fixed;
-    top: 14px;
-    right: 14px;
-    z-index: 90;
+    bottom: 24px;
+    right: 24px;
+    z-index: 200;
     background: var(--gold);
     color: #fff;
     border: none;
-    border-radius: 10px;
-    padding: 9px 14px;
+    border-radius: 12px;
+    padding: 12px 22px;
     font-family: 'Libre Baskerville', serif;
-    font-size: 13.5px;
+    font-size: 14.5px;
     font-weight: 700;
     cursor: pointer;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.18);
+    box-shadow: 0 4px 20px rgba(156, 122, 60, 0.4);
     transition: background 0.2s;
   }
   .lim-toggle:hover { background: #b8915a; }
@@ -327,7 +327,7 @@
     .brano-fronte .bf-grid { grid-template-columns: 1fr; }
     .brano-fronte .bf-lat { border-right: none; border-bottom: 1px solid var(--border-light); }
     .confronto-docmov { grid-template-columns: 1fr; }
-    .lim-toggle { font-size: 12px; padding: 7px 10px; }
+    .lim-toggle { font-size: 13px; padding: 10px 16px; bottom: 16px; right: 16px; }
   }
 </style>
 <script type="application/ld+json">
@@ -402,7 +402,7 @@
       <h2>Chi era Marco Fabio Quintiliano</h2>
       <div style="margin-bottom: 14px;">
         <span class="context-badge autore">M. Fabius Quintilianus</span>
-        <span class="context-badge opera">Institutio oratoria (12 libri)</span>
+        <span class="context-badge opera"><em>Institutio oratoria</em> (12 libri)</span>
         <span class="context-badge data">Età flavia (35&ndash;ca. 96 d.C.)</span>
         <span class="context-badge genere">Trattato &middot; Pedagogia &middot; Retorica</span>
       </div>
@@ -454,7 +454,7 @@
           <div class="lg-num">III&ndash;VII</div>
           <div class="lg-row"><strong>Retorica tecnica.</strong> Le partizioni dell'arte; <em>inventio</em> (trovare gli argomenti) e <em>dispositio</em> (ordinarli); analisi delle parti del discorso giudiziario.</div>
           <div class="lg-num">VIII&ndash;IX</div>
-          <div class="lg-row"><strong>Elocutio.</strong> Stile, tropi, figure di parola e di pensiero. Il libro VIII contiene la polemica con le <em>sententiae</em> alla maniera senecana.</div>
+          <div class="lg-row"><strong><em>Elocutio</em>.</strong> Stile, tropi, figure di parola e di pensiero. Il libro VIII contiene la polemica con le <em>sententiae</em> alla maniera senecana.</div>
           <div class="lg-num">X</div>
           <div class="lg-row"><strong>La <em>facilitas</em> e il canone degli autori.</strong> Rassegna degli scrittori greci e latini da leggere e imitare. Da qui vengono molti dei giudizi critici diventati classici (su Menandro, Tucidide, Sallustio, Livio, Lucano).</div>
           <div class="lg-num">XI</div>
@@ -468,7 +468,7 @@
 
     <!-- ═══ BRANO XII 1, 1-3 ═══ -->
     <div class="brano-fronte slide" data-slide-title="Brano XII 1, 1–3 — Vir bonus dicendi peritus">
-      <div class="bf-titolo">«Vir bonus dicendi peritus» <span class="bf-rif">Inst. or. XII 1, 1&ndash;3 — ed. Winterbottom 1970</span></div>
+      <div class="bf-titolo">«<em>Vir bonus dicendi peritus</em>» <span class="bf-rif">Inst. or. XII 1, 1&ndash;3 — ed. Winterbottom 1970</span></div>
       <div class="bf-grid">
         <div class="bf-lat">
           Sit ergo nobis orator quem constituimus is qui a M. Catone finitur <mark class="kw">vir bonus dicendi peritus</mark><sup class="bf-n">1</sup>, verum, id quod et ille <mark class="kw">posuit prius</mark><sup class="bf-n">2</sup> et ipsa natura potius ac maius est, utique vir bonus: id non eo tantum quod, si vis illa dicendi malitiam instruxerit, nihil sit publicis privatisque rebus perniciosius eloquentia, nosque ipsi, qui pro virili parte conferre aliquid ad facultatem dicendi conati sumus, pessime mereamur de rebus humanis si <mark class="kw">latroni</mark><sup class="bf-n">3</sup> comparamus haec arma, non militi. Quid de nobis loquor? Rerum ipsa natura, in eo quod praecipue indulsisse homini videtur quoque nos a ceteris animalibus separasse, <mark class="kw">non parens sed noverca</mark><sup class="bf-n">4</sup> fuerit si facultatem dicendi sociam scelerum, adversam innocentiae, hostem veritatis invenit. Mutos enim nasci et egere omni ratione satius fuisset quam providentiae munera in mutuam perniciem convertere. Longius tendit hoc iudicium meum. Neque enim tantum id dico, eum qui sit orator virum bonum esse oportere, sed <mark class="kw">ne futurum quidem oratorem nisi virum bonum</mark><sup class="bf-n">5</sup>.
@@ -479,11 +479,11 @@
       </div>
       <div class="bf-note">
         <ol>
-          <li><strong>vir bonus dicendi peritus</strong> — formula di <strong>M. Porcio Catone il Censore</strong> (II sec. a.C.), citata da Quintiliano: «uomo onesto esperto nel dire». Quintiliano la riprende, non la conia.</li>
-          <li><strong>posuit prius</strong> — «ha posto prima»: Catone aveva collocato <em>vir bonus</em> come prima qualifica, lasciando a <em>dicendi peritus</em> il secondo posto. L'ordine è la tesi.</li>
-          <li><strong>latroni</strong> / <strong>militi</strong> — l'eloquenza è un'arma. Va consegnata al soldato (chi serve la <em>res publica</em>), non al brigante (chi la usa per delinquere).</li>
-          <li><strong>non parens sed noverca</strong> — topos lucreziano (cfr. <em>De rerum natura</em> V 195 ss.): se l'eloquenza fosse al servizio del male, la natura sarebbe matrigna. Quintiliano lo rovescia: poiché esiste l'oratore onesto, la natura è madre.</li>
-          <li><strong>ne futurum quidem oratorem nisi virum bonum</strong> — «neppure <em>futuro</em> oratore può esserlo se non l'uomo onesto»: non un'esigenza esterna alla retorica, ma <strong>condizione costitutiva</strong>. Senza onestà non si dà oratore.</li>
+          <li><strong><em>vir bonus dicendi peritus</em></strong> — formula di <strong>M. Porcio Catone il Censore</strong> (II sec. a.C.), citata da Quintiliano: «uomo onesto esperto nel dire». Quintiliano la riprende, non la conia.</li>
+          <li><strong><em>posuit prius</em></strong> — «ha posto prima»: Catone aveva collocato <em>vir bonus</em> come prima qualifica, lasciando a <em>dicendi peritus</em> il secondo posto. L'ordine è la tesi.</li>
+          <li><strong><em>latroni</em></strong> / <strong><em>militi</em></strong> — l'eloquenza è un'arma. Va consegnata al soldato (chi serve la <em>res publica</em>), non al brigante (chi la usa per delinquere).</li>
+          <li><strong><em>non parens sed noverca</em></strong> — topos lucreziano (cfr. <em>De rerum natura</em> V 195 ss.): se l'eloquenza fosse al servizio del male, la natura sarebbe matrigna. Quintiliano lo rovescia: poiché esiste l'oratore onesto, la natura è madre.</li>
+          <li><strong><em>ne futurum quidem oratorem nisi virum bonum</em></strong> — «neppure <em>futuro</em> oratore può esserlo se non l'uomo onesto»: non un'esigenza esterna alla retorica, ma <strong>condizione costitutiva</strong>. Senza onestà non si dà oratore.</li>
         </ol>
       </div>
       <div class="bf-commento">
@@ -533,7 +533,7 @@
 
         <div class="confronto-docmov">
           <div class="cdm-card">
-            <h4>docere</h4>
+            <h4><em>docere</em></h4>
             <div class="cdm-aut">Quintiliano (e Cicerone)</div>
             <ul>
               <li>Il discorso si fonda sulla <strong>sostanza delle cose</strong> (<em>rerum pondera</em>)</li>
@@ -543,7 +543,7 @@
             </ul>
           </div>
           <div class="cdm-card">
-            <h4>movere</h4>
+            <h4><em>movere</em></h4>
             <div class="cdm-aut">Seneca (e i moderni)</div>
             <ul>
               <li>Il discorso punta all'<strong>uditorio</strong>: catturare, colpire, guidare le reazioni</li>
@@ -568,13 +568,13 @@
     <div class="content-section">
       <div class="content-header">
         <h2>Estensione &mdash; brani per la lezione successiva</h2>
-        <span class="section-ref">Inst. or. I 1, 1&ndash;3 e I 2, 18&ndash;23</span>
+        <span class="section-ref">Inst. or. I 1, 1&ndash;3 &middot; 13&ndash;14 &middot; 15&ndash;19 &middot; 20&ndash;24 &middot; I 2, 18&ndash;23</span>
       </div>
       <div class="content-body">
         <p style="font-size: 14px; color: var(--text-dim);">Cliccate sulle voci qui sotto per aprire i passi: li leggeremo nella lezione successiva e sono inclusi nell'<a href="handout.html">handout stampabile</a>.</p>
 
         <details class="brano-estensione">
-          <summary>Inst. or. I 1, 1&ndash;3 &mdash; Tutti i bambini possono imparare</summary>
+          <summary><em>Inst. or.</em> I 1, 1&ndash;3 &mdash; Tutti i bambini possono imparare</summary>
           <div class="brano-fronte" style="margin-top: 14px;">
             <div class="bf-titolo">L'ottimismo pedagogico <span class="bf-rif">Inst. or. I 1, 1&ndash;3</span></div>
             <div class="bf-grid">
@@ -587,17 +587,85 @@
             </div>
             <div class="bf-note">
               <ol>
-                <li><strong>falsa querela</strong> — il «lamento» che Quintiliano contesta: l'opinione comune secondo cui la maggior parte degli uomini sarebbe per natura incapace di imparare. È la tesi opposta del libro: il talento è la regola, non l'eccezione.</li>
-                <li><strong>mentis agitatio atque sollertia</strong> — coppia tecnica: <em>agitatio</em> è l'attività della mente, <em>sollertia</em> è la sua agilità nell'inventare. La similitudine con uccelli/cavalli/fiere è argomento di natura.</li>
-                <li><strong>non naturam defecisse sed curam</strong> — la formula chiave: la causa della mediocrità adulta non è la natura ma la mancanza di <em>cura</em> educativa. Inversione di responsabilità: dal discente al sistema formativo.</li>
-                <li><strong>studio... consecutus</strong> — il talento si modula in più o in meno; ma con lo studio qualcosa si ottiene sempre. È l'antitesi a chi si arrende davanti al dato naturale.</li>
+                <li><strong><em>falsa querela</em></strong> — il «lamento» che Quintiliano contesta: l'opinione comune secondo cui la maggior parte degli uomini sarebbe per natura incapace di imparare. È la tesi opposta del libro: il talento è la regola, non l'eccezione.</li>
+                <li><strong><em>mentis agitatio atque sollertia</em></strong> — coppia tecnica: <em>agitatio</em> è l'attività della mente, <em>sollertia</em> è la sua agilità nell'inventare. La similitudine con uccelli/cavalli/fiere è argomento di natura.</li>
+                <li><strong><em>non naturam defecisse sed curam</em></strong> — la formula chiave: la causa della mediocrità adulta non è la natura ma la mancanza di <em>cura</em> educativa. Inversione di responsabilità: dal discente al sistema formativo.</li>
+                <li><strong><em>studio... consecutus</em></strong> — il talento si modula in più o in meno; ma con lo studio qualcosa si ottiene sempre. È l'antitesi a chi si arrende davanti al dato naturale.</li>
               </ol>
             </div>
           </div>
         </details>
 
         <details class="brano-estensione">
-          <summary>Inst. or. I 2, 18&ndash;23 &mdash; Difesa della scuola pubblica</summary>
+          <summary><em>Inst. or.</em> I 1, 13&ndash;14 &mdash; Greco prima del latino</summary>
+          <div class="brano-fronte" style="margin-top: 14px;">
+            <div class="bf-titolo">Bilinguismo, ma con misura <span class="bf-rif">Inst. or. I 1, 13&ndash;14</span></div>
+            <div class="bf-grid">
+              <div class="bf-lat">
+                A sermone Graeco puerum incipere malo, quia Latinum, qui pluribus in usu est, <mark class="kw">vel nobis nolentibus perbibet</mark><sup class="bf-n">1</sup>, simul quia disciplinis quoque Graecis prius instituendus est, unde et nostrae fluxerunt. Non tamen hoc adeo superstitiose fieri velim ut diu tantum Graece loquatur aut discat, sicut plerisque moris est. Hoc enim accidunt et oris plurima vitia in peregrinum sonum corrupti et sermonis, cui cum Graecae <mark class="kw">figurae</mark><sup class="bf-n">2</sup> adsidua consuetudine haeserunt, in diversa quoque loquendi ratione pertinacissime durant. Non longe itaque Latina subsequi debent et cito pariter ire. Ita fiet ut, cum aequali cura linguam utramque tueri coeperimus, <mark class="kw">neutra alteri officiat</mark><sup class="bf-n">3</sup>.
+              </div>
+              <div class="bf-ita">
+                Preferisco che il bambino cominci dalla lingua greca: il latino, infatti, che è in uso presso i più, <mark class="kw-ita">lo assorbirà anche a nostro malgrado</mark>, e in più va istruito prima nelle discipline greche, dalle quali sono derivate anche le nostre. Tuttavia, non vorrei che la cosa venisse fatta con tale pedanteria da fargli parlare o studiare per troppo tempo solo in greco, come è abitudine di molti. Da ciò derivano infatti moltissimi vizi, sia di pronuncia &mdash; l'organo orale guastato in un suono straniero &mdash; sia di parlata: una volta che le <mark class="kw-ita">forme</mark> greche si saranno fissate al modo di parlare per consuetudine assidua, vi durano con grandissima tenacia anche in un sistema linguistico diverso. Il latino dunque deve seguire poco dopo e procedere subito di pari passo. Così avverrà che, avendo cominciato a coltivare entrambe le lingue con uguale cura, <mark class="kw-ita">nessuna delle due ostacolerà l'altra</mark>.
+              </div>
+            </div>
+            <div class="bf-note">
+              <ol>
+                <li><strong><em>vel nobis nolentibus perbibet</em></strong> &mdash; «lo assorbe anche se noi non vogliamo». Il latino non si studia, si respira: è la lingua della vita quotidiana romana. Per questo si può cominciare con il greco senza timore di trascurare il latino.</li>
+                <li><strong><em>figurae</em></strong> &mdash; non «figure retoriche», ma costrutti, forme sintattiche, calchi. Il rischio è la contaminazione strutturale: il greco appreso troppo a lungo lascia tracce profonde anche nel latino.</li>
+                <li><strong><em>neutra alteri officiat</em></strong> &mdash; «nessuna delle due ostacoli l'altra». Programma di bilinguismo simultaneo, non sequenziale. È un principio educativo che resterà tipico della formazione classica.</li>
+              </ol>
+            </div>
+          </div>
+        </details>
+
+        <details class="brano-estensione">
+          <summary><em>Inst. or.</em> I 1, 15&ndash;19 &mdash; A che età cominciare</summary>
+          <div class="brano-fronte" style="margin-top: 14px;">
+            <div class="bf-titolo">Contro chi rimanda <span class="bf-rif">Inst. or. I 1, 15&ndash;19</span></div>
+            <div class="bf-grid">
+              <div class="bf-lat">
+                Quidam litteris instituendos qui minores septem annis essent non putaverunt, quod illa primum aetas et intellectum disciplinarum capere et laborem pati <mark class="kw">&lt;non&gt; posset</mark><sup class="bf-n">1</sup>. In qua sententia Hesiodum esse plurimi tradunt qui ante grammaticum Aristophanen fuerunt (nam is primus &Hypsilon;&pi;&omicron;&theta;&eta;&kappa;&alpha;&sigmaf;, in quo libro scriptum hoc invenitur, negavit esse huius poetae); sed alii quoque auctores, inter quos Eratosthenes, idem praeceperunt. Melius autem qui nullum tempus vacare cura volunt, ut Chrysippus. Nam is, <mark class="kw">quamvis nutricibus triennium dederit</mark><sup class="bf-n">2</sup>, tamen ab illis quoque iam formandam quam optimis institutis mentem infantium iudicat. Cur autem non pertineat ad litteras aetas quae ad mores iam pertinet? Neque ignoro toto illo de quo loquor tempore vix tantum effici quantum conferre unus postea possit annus; sed tamen mihi qui id senserunt videntur <mark class="kw">non tam discentibus in hac parte quam docentibus pepercisse</mark><sup class="bf-n">3</sup>. Quid melius alioqui facient ex quo loqui poterunt (faciant enim aliquid necesse est)? aut cur hoc quantulumcumque est usque ad septem annos lucrum fastidiamus? Nam certe quamlibet parvum sit quod contulerit aetas prior, maiora tamen aliqua discet puer ipso illo anno quo minora didicisset. Hoc per singulos prorogatum in summam proficit, et quantum in infantia praesumptum est temporis adulescentiae adquiritur. Idem etiam de sequentibus annis praeceptum sit, ne quod cuique discendum est sero discere incipiat. Non ergo perdamus primum statim tempus, atque eo minus quod <mark class="kw">initia litterarum sola memoria constant</mark><sup class="bf-n">4</sup>, quae non modo iam est in parvis, sed tum etiam tenacissima est.
+              </div>
+              <div class="bf-ita">
+                Alcuni hanno ritenuto che <mark class="kw-ita">non si debbano istruire alle lettere</mark> i bambini al di sotto dei sette anni, perché quella prima età non potrebbe né cogliere il senso degli studi né sopportarne la fatica. Molti tramandano che di questa opinione fosse Esiodo, almeno fra coloro che vissero prima del grammatico Aristofane (fu lui infatti il primo a negare che le <em>Hypothékai</em> &mdash; il libro in cui questa massima si legge &mdash; appartenessero a quel poeta); ma anche altri autori, fra cui Eratostene, hanno dato lo stesso precetto. Fanno meglio invece coloro che non vogliono lasciare alcun tempo privo di cura, come Crisippo: <mark class="kw-ita">pur avendo concesso un triennio alle nutrici</mark>, ritiene tuttavia che già da quelle la mente dei bambini debba essere formata coi migliori insegnamenti. E perché mai non dovrebbe pertinere alle lettere un'età che già pertiene alla formazione del carattere? Non ignoro che in tutto quel tempo di cui parlo si ottiene appena quanto un solo anno potrà poi apportare; ma chi è stato di quell'opinione mi sembra abbia voluto risparmiare, su questo punto, <mark class="kw-ita">non tanto i discenti quanto i docenti</mark>. Del resto, che cosa di meglio farà il bambino da quando saprà parlare? (qualcosa deve pur fare). O perché disprezzare questo guadagno, per quanto piccolo sia, fino ai sette anni? Anche se è poco quanto avrà aggiunto l'età anteriore, il fanciullo imparerà comunque cose maggiori in quello stesso anno in cui avrebbe imparato cose minori. E ciò, ripetuto anno per anno, si accumula nel totale: tanto tempo guadagnato nell'infanzia si acquisisce per l'adolescenza. Lo stesso precetto valga per gli anni seguenti: nessuno cominci tardi a imparare ciò che gli tocca imparare. Non perdiamo dunque subito il primo tempo, e tanto meno in quanto <mark class="kw-ita">gli inizi della scrittura constano della sola memoria</mark> &mdash; che nei piccoli non solo è già presente, ma è proprio allora tenacissima.
+              </div>
+            </div>
+            <div class="bf-note">
+              <ol>
+                <li><strong><em>&lt;non&gt; posset</em></strong> &mdash; integrazione di Winterbottom (e già di Halm): senza il <em>non</em> la causale di chi sostiene di non istruire i bambini sotto i 7 anni non regge. Il senso è: l'età «non potrebbe» reggere lo studio.</li>
+                <li><strong><em>quamvis nutricibus triennium dederit</em></strong> &mdash; Crisippo (filosofo stoico, III sec. a.C.) concedeva tre anni alle nutrici prima dell'istruzione formale; ma anche le nutrici, per lui, dovevano già concorrere alla formazione. La pedagogia comincia con il latte.</li>
+                <li><strong><em>non tam discentibus... quam docentibus pepercisse</em></strong> &mdash; argomento polemico: chi vuole rimandare lo studio risparmia se stesso, non il bambino. È il rimprovero al maestro pigro.</li>
+                <li><strong><em>initia litterarum sola memoria constant</em></strong> &mdash; argomento didascalico: l'alfabeto e le prime sillabe richiedono solo memoria. E proprio nei piccoli la memoria è al massimo. Quintiliano sa di che parla: insegna a Roma da decenni.</li>
+              </ol>
+            </div>
+          </div>
+        </details>
+
+        <details class="brano-estensione">
+          <summary><em>Inst. or.</em> I 1, 20&ndash;24 &mdash; Il gioco, i premi, l'esempio di Alessandro</summary>
+          <div class="brano-fronte" style="margin-top: 14px;">
+            <div class="bf-titolo">Lusus hic sit <span class="bf-rif">Inst. or. I 1, 20&ndash;24</span></div>
+            <div class="bf-grid">
+              <div class="bf-lat">
+                Nec sum adeo aetatium inprudens ut instandum protinus teneris acerbe putem exigendamque plane operam. Nam id in primis cavere oportebit, ne studia qui amare nondum potest oderit et amaritudinem semel perceptam etiam ultra rudes annos reformidet. <mark class="kw">Lusus hic sit</mark><sup class="bf-n">1</sup>, et rogetur et laudetur et numquam non fecisse se gaudeat, aliquando ipso nolente <mark class="kw">doceatur alius cui invideat</mark><sup class="bf-n">2</sup>, contendat interim et saepius vincere se putet: praemiis etiam, quae capit illa aetas, evocetur. Parva docemus oratorem instituendum professi, sed <mark class="kw">est sua etiam studiis infantia</mark><sup class="bf-n">3</sup>, et ut corporum mox fortissimorum educatio a lacte cunisque initium ducit, ita futurus eloquentissimus edidit aliquando vagitum et loqui primum incerta voce temptavit et haesit circa formas litterarum: nec, si quid discere satis non est, ideo nec necesse est. Quodsi nemo reprehendit patrem qui haec non neglegenda in suo filio putet, cur improbetur si quis ea quae domi suae recte faceret in publicum promit? Atque eo magis quod minora etiam facilius minores percipiunt, et ut corpora ad quosdam membrorum flexus formari nisi tenera non possunt, sic animos quoque ad pleraque duriores robur ipsum facit. <mark class="kw">An Philippus Macedonum rex Alexandro filio suo prima litterarum elementa tradi ab Aristotele</mark><sup class="bf-n">4</sup> summo eius aetatis philosopho voluisset, aut ille suscepisset hoc officium, si non studiorum initia et a perfectissimo quoque optime tractari et pertinere ad summam credidisset?
+              </div>
+              <div class="bf-ita">
+                Né sono così ignaro delle età da pensare che si debba subito incalzare aspramente i piccoli ed esigere apertamente da loro lo sforzo. Bisognerà infatti guardarsi soprattutto da questo: che chi ancora non sa amare gli studi finisca per odiarli, e &mdash; provatone una volta l'amaro &mdash; ne abbia paura anche oltre gli anni acerbi. <mark class="kw-ita">Sia per lui un gioco</mark>; sia interrogato e lodato; gli accada sempre di gioire d'aver fatto qualcosa; ogni tanto, se non vuole farlo lui, <mark class="kw-ita">sia istruito un altro di cui possa essere geloso</mark>; di tanto in tanto entri in gara, e si convinca spesso di vincere; sia anche stimolato con quei premi che quell'età sa apprezzare. Ci occupiamo di piccole cose, noi che ci siamo proposti di formare un oratore &mdash; ma <mark class="kw-ita">anche gli studi hanno la loro infanzia</mark>: come l'educazione dei corpi destinati a diventare fortissimi prende inizio dal latte e dalla culla, così anche il futuro sommo oratore un tempo ha pianto da neonato, ha tentato di parlare con voce incerta, è inciampato sulle prime forme delle lettere; né, se imparare qualcosa è cosa da poco, per ciò stesso è cosa non necessaria. E se nessuno biasima il padre che ritiene queste cose non trascurabili nel proprio figlio, perché si dovrebbe disapprovare chi porta in pubblico ciò che a buon diritto farebbe in casa propria? E tanto più in quanto i più piccoli colgono più facilmente proprio le cose più piccole, e come i corpi non possono essere flessi a certe posizioni delle membra se non da teneri, così anche gli animi vengono induriti &mdash; su molte cose &mdash; proprio dal vigore stesso. <mark class="kw-ita">Forse Filippo, re dei Macedoni, avrebbe voluto che ad Alessandro suo figlio i primi rudimenti delle lettere fossero impartiti da Aristotele</mark>, il sommo filosofo del suo tempo? O quello avrebbe assunto un simile incarico, se non avesse creduto che gli inizi degli studi sono trattati al meglio anche dal più valente, e che essi pertengono al risultato finale?
+              </div>
+            </div>
+            <div class="bf-note">
+              <ol>
+                <li><strong><em>Lusus hic sit</em></strong> &mdash; «sia per lui un gioco». Principio quintilianeo del gioco come motore di apprendimento. Non è pedagogia ludica novecentesca: è psicologia del discente messa al servizio della didattica.</li>
+                <li><strong><em>doceatur alius cui invideat</em></strong> &mdash; sia istruito un altro di cui essere geloso. Quintiliano usa l'invidia infantile come leva motivazionale, senza demonizzarla. La gara fra pari produce ciò che la coercizione non produce.</li>
+                <li><strong><em>est sua etiam studiis infantia</em></strong> &mdash; «anche gli studi hanno la loro infanzia». Principio fondante del programma quintilianeo: non c'è età troppo bassa per cominciare, perché l'inizio degli studi è esso stesso uno studio.</li>
+                <li><strong><em>Aristoteles / Philippus</em></strong> &mdash; <em>exemplum</em> classico (Plutarco, <em>Alex.</em> 7): un re affida i rudimenti elementari al sommo filosofo. Conclusione retorica: anche le basi vanno trattate dai migliori, perché «pertengono al risultato finale».</li>
+              </ol>
+            </div>
+          </div>
+        </details>
+
+        <details class="brano-estensione">
+          <summary><em>Inst. or.</em> I 2, 18&ndash;23 &mdash; Difesa della scuola pubblica</summary>
           <div class="brano-fronte" style="margin-top: 14px;">
             <div class="bf-titolo">Perché la scuola, non il maestro privato <span class="bf-rif">Inst. or. I 2, 18&ndash;23</span></div>
             <div class="bf-grid">
@@ -610,10 +678,10 @@
             </div>
             <div class="bf-note">
               <ol>
-                <li><strong>solitaria et umbratica vita</strong> — la formazione domestica isolata. <em>Umbratica</em> evoca chi vive all'ombra, lontano dal Foro: l'opposto della <em>celebritas</em> di chi farà l'oratore.</li>
-                <li><strong>tumescit inani persuasione</strong> — «si gonfia di vana persuasione». Senza confronto con i pari, il discente sopravvaluta sé stesso. La parola chiave è <em>comparat</em>: senza paragone, niente misura.</li>
-                <li><strong>sensus communis</strong> — non il «buon senso» moderno, ma il senso del rapporto sociale, della convivenza. È un concetto romano: si forma <em>solo</em> nello stare con gli altri.</li>
-                <li><strong>causa virtutum</strong> — ammissione realistica: l'ambizione è un vizio, ma produce comportamenti virtuosi (impegno, emulazione). Quintiliano usa la psicologia del discente come leva pedagogica, non la nega.</li>
+                <li><strong><em>solitaria et umbratica vita</em></strong> — la formazione domestica isolata. <em>Umbratica</em> evoca chi vive all'ombra, lontano dal Foro: l'opposto della <em>celebritas</em> di chi farà l'oratore.</li>
+                <li><strong><em>tumescit inani persuasione</em></strong> — «si gonfia di vana persuasione». Senza confronto con i pari, il discente sopravvaluta sé stesso. La parola chiave è <em>comparat</em>: senza paragone, niente misura.</li>
+                <li><strong><em>sensus communis</em></strong> — non il «buon senso» moderno, ma il senso del rapporto sociale, della convivenza. È un concetto romano: si forma <em>solo</em> nello stare con gli altri.</li>
+                <li><strong><em>causa virtutum</em></strong> — ammissione realistica: l'ambizione è un vizio, ma produce comportamenti virtuosi (impegno, emulazione). Quintiliano usa la psicologia del discente come leva pedagogica, non la nega.</li>
               </ol>
             </div>
           </div>
@@ -659,7 +727,7 @@
 
             <g class="mappa-node" data-info="Vir bonus dicendi peritus: la formula di Catone, riletta come tesi tecnica. Senza moralità non si dà oratore. Tecnica + etica, in quest'ordine.">
               <rect x="340" y="160" width="240" height="50" rx="12" fill="#fef3cd" stroke="#f4d35e" stroke-width="2"/>
-              <text x="460" y="190" text-anchor="middle" fill="#8a6a0a" font-family="Libre Baskerville, serif" font-size="14" font-weight="700">Vir bonus dicendi peritus</text>
+              <text x="460" y="190" text-anchor="middle" fill="#8a6a0a" font-family="Libre Baskerville, serif" font-size="14" font-weight="700" font-style="italic">Vir bonus dicendi peritus</text>
             </g>
 
             <g class="mappa-node" data-info="Ritorno a Cicerone: concinnitas, equilibrio, periodo armonico. Polemica contro Seneca: docere (sostanza) contro movere (effetto). Contro le sententiae.">
@@ -695,7 +763,7 @@
 
             <g class="mappa-node" data-info="Polemica contro Seneca e le sententiae: docere (sostanza delle cose) contro movere (catturare l'uditorio). I sensiculi messi in pezzetti.">
               <rect x="770" y="310" width="150" height="46" rx="10" fill="#fff" stroke="#78c878" stroke-width="1.5"/>
-              <text x="845" y="310" text-anchor="middle" fill="#2c2416" font-family="Cardo, serif" font-size="12"><tspan x="845" dy="22">Contro Seneca:</tspan><tspan x="845" dy="16">docere vs movere</tspan></text>
+              <text x="845" y="310" text-anchor="middle" fill="#2c2416" font-family="Cardo, serif" font-size="12"><tspan x="845" dy="22">Contro Seneca:</tspan><tspan x="845" dy="16" font-style="italic">docere vs movere</tspan></text>
             </g>
 
             <!-- nodo intermedio -->
@@ -751,7 +819,7 @@
         <div class="quiz-feedback"></div>
       </div>
 
-      <h3>B. Institutio oratoria</h3>
+      <h3>B. <em>Institutio oratoria</em></h3>
 
       <div class="quiz-item" data-quiz="q3">
         <div class="quiz-q">3. Da quanti libri è composta l'<em>Institutio oratoria</em>?</div>

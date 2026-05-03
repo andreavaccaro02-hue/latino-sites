@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Handout — Quintiliano | Institutio oratoria, passi scelti</title>
+<meta name="description" content="Handout stampabile su Quintiliano: cinque passi dall'Institutio oratoria con testo a fronte e note essenziali. Per Latino 5 Classico.">
+<meta property="og:title" content="Handout — Quintiliano (passi scelti)">
+<meta property="og:description" content="Cinque passi dall'Institutio oratoria con testo latino a fronte, traduzione e note.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="it_IT">
+<link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+<link rel="stylesheet" href="../../css/style.css">
+<style>
+  /* ═══ HANDOUT — layout stampa A4 ═══ */
+  body {
+    background: #f5f0e8;
+  }
+  .handout-toolbar {
+    max-width: 880px;
+    margin: 22px auto 0 auto;
+    padding: 0 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .handout-toolbar .back-link {
+    display: inline-block;
+    color: var(--gold);
+    font-family: 'Cardo', serif;
+    font-size: 14.5px;
+    text-decoration: none;
+    border-bottom: 1px dashed transparent;
+  }
+  .handout-toolbar .back-link:hover { border-bottom-color: var(--gold); }
+  .handout-toolbar .print-btn {
+    background: var(--gold);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 18px;
+    font-family: 'Libre Baskerville', serif;
+    font-size: 13.5px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 3px 10px rgba(156, 122, 60, 0.35);
+  }
+  .handout-toolbar .print-btn:hover { background: #b8915a; }
+
+  .handout-page {
+    max-width: 880px;
+    margin: 22px auto 60px auto;
+    padding: 36px 44px 50px 44px;
+    background: #fff;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+    font-family: 'Cardo', serif;
+    color: #1a1410;
+    line-height: 1.65;
+  }
+
+  .handout-header {
+    text-align: center;
+    border-bottom: 2px solid #1a1410;
+    padding-bottom: 18px;
+    margin-bottom: 28px;
+  }
+  .handout-header h1 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 22px;
+    margin: 0 0 8px 0;
+    color: #1a1410;
+  }
+  .handout-header .h-sub {
+    font-style: italic;
+    font-size: 14px;
+    color: #555;
+    margin: 4px 0;
+  }
+  .handout-header .h-meta {
+    font-size: 12.5px;
+    color: #777;
+    margin-top: 8px;
+  }
+
+  .h-passo {
+    margin: 26px 0;
+    page-break-inside: avoid;
+  }
+  .h-passo h2 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 16px;
+    color: #6b4f1d;
+    border-bottom: 1px solid #b8915a;
+    padding-bottom: 6px;
+    margin: 0 0 12px 0;
+  }
+  .h-passo h2 .h-rif {
+    color: #888;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 13px;
+    margin-left: 8px;
+  }
+
+  .h-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    font-size: 13.5px;
+    line-height: 1.65;
+  }
+  .h-lat {
+    padding: 4px 14px 4px 0;
+    border-right: 1px solid #b8915a;
+    font-style: normal;
+  }
+  .h-ita {
+    padding: 4px 0 4px 4px;
+  }
+
+  .h-note {
+    margin-top: 14px;
+    font-size: 12.5px;
+    line-height: 1.55;
+    color: #2c2416;
+    padding: 10px 14px;
+    background: #f8f4ea;
+    border-left: 3px solid #b8915a;
+    border-radius: 0 6px 6px 0;
+  }
+  .h-note ol {
+    margin: 0;
+    padding-left: 20px;
+  }
+  .h-note li { margin-bottom: 4px; }
+  .h-note em { color: #6b4f1d; }
+  .h-note strong { color: #1a1410; }
+
+  /* ═══ STAMPA A4 ═══ */
+  @media print {
+    body { background: #fff; }
+    .navbar, .handout-toolbar, footer { display: none !important; }
+    .handout-page {
+      max-width: none;
+      margin: 0;
+      padding: 0;
+      box-shadow: none;
+    }
+    .handout-header h1 { font-size: 18pt; }
+    .handout-header .h-sub { font-size: 11pt; }
+    .h-passo { page-break-inside: avoid; margin: 18px 0; }
+    .h-passo h2 { font-size: 12pt; }
+    .h-grid { font-size: 10.5pt; line-height: 1.5; gap: 14px; }
+    .h-note { font-size: 9.5pt; line-height: 1.4; background: #f5f0e8; }
+    @page { size: A4; margin: 1.6cm 1.8cm; }
+  }
+
+  /* ═══ MOBILE ═══ */
+  @media (max-width: 720px) {
+    .handout-page { padding: 22px 18px 32px 18px; }
+    .h-grid { grid-template-columns: 1fr; gap: 8px; }
+    .h-lat {
+      border-right: none;
+      border-bottom: 1px solid #b8915a;
+      padding: 0 0 12px 0;
+    }
+    .h-ita { padding: 8px 0 0 0; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="container">
+    <a href="../../index.html" class="site-name">Lingua e Cultura Latina</a>
+    <div class="nav-links">
+      <a href="../../index.html">Home</a>
+      <a href="../../strumenti/raccoglitore.html">Raccoglitore</a>
+      <a href="../../grammatica/index.html">Grammatica</a>
+      <a href="../../strumenti/glossario-eulalia.html">Strumenti</a>
+      <a href="../../chi-sono.html">Su di me</a>
+    </div>
+  </div>
+</nav>
+
+<div class="handout-toolbar">
+  <a href="index.html" class="back-link">&larr; Torna alla lezione</a>
+  <button class="print-btn" onclick="window.print()">&#x1F5A8; Stampa / Salva come PDF</button>
+</div>
+
+<div class="handout-page">
+
+  <div class="handout-header">
+    <h1>Quintiliano &mdash; passi scelti dall'<em>Institutio oratoria</em></h1>
+    <div class="h-sub">Il <em>vir bonus dicendi peritus</em> &middot; La pedagogia &middot; Bilinguismo, età e gioco</div>
+    <div class="h-meta">Prof. Andrea Vaccaro &middot; Lingua e Cultura Latina &middot; Liceo Classico</div>
+  </div>
+
+  <!-- ═══ PASSO 1 — XII 1, 1–3 ═══ -->
+  <div class="h-passo">
+    <h2>1. <em>Vir bonus dicendi peritus</em> <span class="h-rif">Inst. or. XII 1, 1&ndash;3 (ed. Winterbottom 1970)</span></h2>
+    <div class="h-grid">
+      <div class="h-lat">
+        Sit ergo nobis orator quem constituimus is qui a M. Catone finitur <em>vir bonus dicendi peritus</em>, verum, id quod et ille posuit prius et ipsa natura potius ac maius est, utique vir bonus: id non eo tantum quod, si vis illa dicendi malitiam instruxerit, nihil sit publicis privatisque rebus perniciosius eloquentia, nosque ipsi, qui pro virili parte conferre aliquid ad facultatem dicendi conati sumus, pessime mereamur de rebus humanis si latroni comparamus haec arma, non militi. Quid de nobis loquor? Rerum ipsa natura, in eo quod praecipue indulsisse homini videtur quoque nos a ceteris animalibus separasse, non parens sed noverca fuerit si facultatem dicendi sociam scelerum, adversam innocentiae, hostem veritatis invenit. Mutos enim nasci et egere omni ratione satius fuisset quam providentiae munera in mutuam perniciem convertere. Longius tendit hoc iudicium meum. Neque enim tantum id dico, eum qui sit orator virum bonum esse oportere, sed ne futurum quidem oratorem nisi virum bonum.
+      </div>
+      <div class="h-ita">
+        Sia dunque per noi oratore quello che abbiamo definito tale: colui che da M. Catone viene definito «uomo onesto esperto nel dire», ma &mdash; e ciò che pure lui ha posto al primo posto, e che la natura stessa antepone come più importante &mdash; sia in primo luogo uomo onesto. E non solo perché, se quella forza del dire armerà la malizia, nulla è più rovinoso per gli affari pubblici e privati dell'eloquenza, e noi stessi, che abbiamo cercato per quanto possiamo di apportare qualcosa alla facoltà del dire, ci comporteremmo pessimamente verso il genere umano se queste armi le procurassimo a un brigante e non a un soldato. Ma cosa parlo di noi? La natura stessa delle cose, in ciò che pare avere concesso all'uomo come dono privilegiato e per cui ci ha distinti dagli altri animali, sarebbe stata non madre ma matrigna se avesse trovato la facoltà del dire alleata di delitti, contraria all'innocenza, nemica della verità. Sarebbe stato preferibile nascere muti ed essere privi di ogni ragione, piuttosto che convertire i doni della provvidenza in reciproca rovina. Più in là si spinge questo mio giudizio. Non dico infatti soltanto che chi è oratore deve essere uomo onesto, ma neppure futuro oratore può esserlo se non l'uomo onesto.
+      </div>
+    </div>
+    <div class="h-note">
+      <ol>
+        <li><strong><em>vir bonus dicendi peritus</em></strong> &mdash; formula di <strong>M. Porcio Catone il Censore</strong> (II sec. a.C.); Quintiliano la riprende, non la conia.</li>
+        <li><strong><em>posuit prius</em></strong> &mdash; «ha posto prima»: <em>vir bonus</em> precede <em>dicendi peritus</em>. L'ordine è la tesi.</li>
+        <li><strong><em>latroni</em> / <em>militi</em></strong> &mdash; l'eloquenza è un'arma. Va consegnata al soldato (chi serve la <em>res publica</em>), non al brigante.</li>
+        <li><strong><em>non parens sed noverca</em></strong> &mdash; topos lucreziano (cfr. <em>De rerum natura</em> V 195 ss.): la natura sarebbe matrigna se l'eloquenza servisse il male.</li>
+        <li><strong><em>ne futurum quidem oratorem nisi virum bonum</em></strong> &mdash; «neppure futuro oratore può esserlo se non l'uomo onesto»: condizione costitutiva, non requisito esterno.</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- ═══ PASSO 2 — I 1, 1–3 ═══ -->
+  <div class="h-passo">
+    <h2>2. L'ottimismo pedagogico <span class="h-rif">Inst. or. I 1, 1&ndash;3</span></h2>
+    <div class="h-grid">
+      <div class="h-lat">
+        Igitur nato filio pater spem de illo primum quam optimam capiat: ita diligentior a principiis fiet. Falsa enim est querela, paucissimis hominibus vim percipiendi quae tradantur esse concessam, plerosque vero laborem ac tempora tarditate ingenii perdere. Nam contra plures reperias et faciles in excogitando et ad discendum promptos. Quippe id est homini naturale, ac sicut aves ad volatum, equi ad cursum, ad saevitiam ferae gignuntur, ita nobis propria est mentis agitatio atque sollertia: unde origo animi caelestis creditur. Hebetes vero et indociles non magis secundum naturam hominis eduntur quam prodigiosa corpora et monstris insignia, sed hi pauci admodum fuerunt. Argumentum, quod in pueris elucet spes plurimorum: quae cum emoritur aetate, manifestum est non naturam defecisse sed curam. «Praestat tamen ingenio alius alium.» Concedo; sed plus efficiet aut minus: nemo reperitur qui sit studio nihil consecutus. Hoc qui perviderit, protinus ut erit parens factus, acrem quam maxime datur curam spei futuri oratoris inpendat.
+      </div>
+      <div class="h-ita">
+        Dunque, una volta nato il figlio, il padre concepisca subito su di lui la migliore speranza possibile: così sarà più diligente fin dai primi passi. È falso il lamento che a pochissimi sia concessa la facoltà di apprendere quanto si insegna, e che i più sprecherebbero fatica e tempo per la lentezza dell'ingegno. Al contrario, ne troverai parecchi pronti sia nell'ideare sia nell'apprendere. Questo è naturale per l'uomo: come gli uccelli sono fatti per il volo, i cavalli per la corsa, le fiere per la ferocia, così a noi è propria l'attività e l'agilità della mente: di qui si crede che l'anima abbia origine celeste. Gli ottusi e gli indocili non sono prodotti contro la natura umana più di quanto lo siano i corpi mostruosi e segnati da prodigi, ma questi sono stati assai pochi. Prova ne è che nei bambini risplende la speranza dei più: quando essa muore con l'età, è chiaro che non è venuta meno la natura, ma la cura. «E tuttavia uno supera l'altro per ingegno.» Lo concedo; ma otterrà di più o di meno: non si trova nessuno che con lo studio non abbia ottenuto nulla. Chi avrà compreso a fondo questo, appena diventato genitore, dedichi alla speranza del futuro oratore la cura più intensa possibile.
+      </div>
+    </div>
+    <div class="h-note">
+      <ol>
+        <li><strong><em>falsa querela</em></strong> &mdash; il «lamento» che Quintiliano contesta: l'opinione comune secondo cui la maggior parte degli uomini sarebbe per natura incapace di imparare. Tesi opposta del libro: il talento è la regola, non l'eccezione.</li>
+        <li><strong><em>mentis agitatio atque sollertia</em></strong> &mdash; <em>agitatio</em>: attività della mente; <em>sollertia</em>: agilità nell'inventare. Argomento di natura, non di privilegio sociale.</li>
+        <li><strong><em>non naturam defecisse sed curam</em></strong> &mdash; formula chiave: la causa della mediocrità adulta non è la natura ma la mancanza di <em>cura</em> educativa.</li>
+        <li><strong><em>nemo... studio nihil consecutus</em></strong> &mdash; con lo studio qualcosa si ottiene sempre. Antitesi a chi si arrende davanti al dato naturale.</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- ═══ PASSO 3 — I 1, 13–14 ═══ -->
+  <div class="h-passo">
+    <h2>3. Bilinguismo, ma con misura <span class="h-rif">Inst. or. I 1, 13&ndash;14</span></h2>
+    <div class="h-grid">
+      <div class="h-lat">
+        A sermone Graeco puerum incipere malo, quia Latinum, qui pluribus in usu est, vel nobis nolentibus perbibet, simul quia disciplinis quoque Graecis prius instituendus est, unde et nostrae fluxerunt. Non tamen hoc adeo superstitiose fieri velim ut diu tantum Graece loquatur aut discat, sicut plerisque moris est. Hoc enim accidunt et oris plurima vitia in peregrinum sonum corrupti et sermonis, cui cum Graecae figurae adsidua consuetudine haeserunt, in diversa quoque loquendi ratione pertinacissime durant. Non longe itaque Latina subsequi debent et cito pariter ire. Ita fiet ut, cum aequali cura linguam utramque tueri coeperimus, neutra alteri officiat.
+      </div>
+      <div class="h-ita">
+        Preferisco che il bambino cominci dalla lingua greca: il latino, infatti, che è in uso presso i più, lo assorbirà comunque anche a nostro malgrado; e in più va istruito prima nelle discipline greche, dalle quali sono derivate anche le nostre. Tuttavia, non vorrei che la cosa venisse fatta con tale pedanteria da fargli parlare o studiare per troppo tempo solo in greco, come è abitudine di molti. Da ciò derivano infatti moltissimi vizi, sia di pronuncia &mdash; l'organo orale guastato in un suono straniero &mdash; sia di parlata: una volta che le forme greche si saranno fissate al modo di parlare per consuetudine assidua, vi durano con grandissima tenacia anche in un sistema linguistico diverso. Il latino dunque deve seguire poco dopo e procedere subito di pari passo. Così avverrà che, avendo cominciato a coltivare entrambe le lingue con uguale cura, nessuna delle due ostacolerà l'altra.
+      </div>
+    </div>
+    <div class="h-note">
+      <ol>
+        <li><strong><em>vel nobis nolentibus perbibet</em></strong> &mdash; il latino non si studia, si respira: è la lingua della vita quotidiana. Per questo si comincia col greco senza trascurare il latino.</li>
+        <li><strong><em>figurae</em></strong> &mdash; non «figure retoriche», ma costrutti, calchi sintattici. Il rischio è la contaminazione strutturale, non solo lessicale.</li>
+        <li><strong><em>neutra alteri officiat</em></strong> &mdash; principio del bilinguismo simultaneo: nessuna delle due lingue ostacoli l'altra. Diventerà tipico della formazione classica.</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- ═══ PASSO 4 — I 1, 15–19 ═══ -->
+  <div class="h-passo">
+    <h2>4. Contro chi rimanda <span class="h-rif">Inst. or. I 1, 15&ndash;19</span></h2>
+    <div class="h-grid">
+      <div class="h-lat">
+        Quidam litteris instituendos qui minores septem annis essent non putaverunt, quod illa primum aetas et intellectum disciplinarum capere et laborem pati &lt;non&gt; posset. In qua sententia Hesiodum esse plurimi tradunt qui ante grammaticum Aristophanen fuerunt (nam is primus &Hypsilon;&pi;&omicron;&theta;&eta;&kappa;&alpha;&sigmaf;, in quo libro scriptum hoc invenitur, negavit esse huius poetae); sed alii quoque auctores, inter quos Eratosthenes, idem praeceperunt. Melius autem qui nullum tempus vacare cura volunt, ut Chrysippus. Nam is, quamvis nutricibus triennium dederit, tamen ab illis quoque iam formandam quam optimis institutis mentem infantium iudicat. Cur autem non pertineat ad litteras aetas quae ad mores iam pertinet? Neque ignoro toto illo de quo loquor tempore vix tantum effici quantum conferre unus postea possit annus; sed tamen mihi qui id senserunt videntur non tam discentibus in hac parte quam docentibus pepercisse. Quid melius alioqui facient ex quo loqui poterunt (faciant enim aliquid necesse est)? aut cur hoc quantulumcumque est usque ad septem annos lucrum fastidiamus? Nam certe quamlibet parvum sit quod contulerit aetas prior, maiora tamen aliqua discet puer ipso illo anno quo minora didicisset. Hoc per singulos prorogatum in summam proficit, et quantum in infantia praesumptum est temporis adulescentiae adquiritur. Idem etiam de sequentibus annis praeceptum sit, ne quod cuique discendum est sero discere incipiat. Non ergo perdamus primum statim tempus, atque eo minus quod initia litterarum sola memoria constant, quae non modo iam est in parvis, sed tum etiam tenacissima est.
+      </div>
+      <div class="h-ita">
+        Alcuni hanno ritenuto che non si debbano istruire alle lettere i bambini al di sotto dei sette anni, perché quella prima età non potrebbe né cogliere il senso degli studi né sopportarne la fatica. Molti tramandano che di questa opinione fosse Esiodo, almeno fra coloro che vissero prima del grammatico Aristofane (fu lui infatti il primo a negare che le <em>Hypothékai</em> &mdash; il libro in cui questa massima si legge &mdash; appartenessero a quel poeta); ma anche altri autori, fra cui Eratostene, hanno dato lo stesso precetto. Fanno meglio invece coloro che non vogliono lasciare alcun tempo privo di cura, come Crisippo: pur avendo concesso un triennio alle nutrici, ritiene tuttavia che già da quelle la mente dei bambini debba essere formata coi migliori insegnamenti. E perché mai non dovrebbe pertinere alle lettere un'età che già pertiene alla formazione del carattere? Non ignoro che in tutto quel tempo di cui parlo si ottiene appena quanto un solo anno potrà poi apportare; ma chi è stato di quell'opinione mi sembra abbia voluto risparmiare, su questo punto, non tanto i discenti quanto i docenti. Del resto, che cosa di meglio farà il bambino da quando saprà parlare? (qualcosa deve pur fare). O perché disprezzare questo guadagno, per quanto piccolo sia, fino ai sette anni? Anche se è poco quanto avrà aggiunto l'età anteriore, il fanciullo imparerà comunque cose maggiori in quello stesso anno in cui avrebbe imparato cose minori. E ciò, ripetuto anno per anno, si accumula nel totale: tanto tempo guadagnato nell'infanzia si acquisisce per l'adolescenza. Lo stesso precetto valga per gli anni seguenti: nessuno cominci tardi a imparare ciò che gli tocca imparare. Non perdiamo dunque subito il primo tempo, e tanto meno in quanto gli inizi della scrittura constano della sola memoria &mdash; che nei piccoli non solo è già presente, ma è proprio allora tenacissima.
+      </div>
+    </div>
+    <div class="h-note">
+      <ol>
+        <li><strong><em>&lt;non&gt; posset</em></strong> &mdash; integrazione di Winterbottom: senza il <em>non</em> la causale di chi sostiene di non istruire i bambini sotto i 7 anni non regge.</li>
+        <li><strong><em>quamvis nutricibus triennium dederit</em></strong> &mdash; Crisippo (filosofo stoico, III sec. a.C.) concedeva tre anni alle nutrici, ma anche da loro pretendeva una prima formazione: la pedagogia comincia con il latte.</li>
+        <li><strong><em>non tam discentibus... quam docentibus pepercisse</em></strong> &mdash; argomento polemico: chi vuole rimandare risparmia se stesso, non il bambino.</li>
+        <li><strong><em>initia litterarum sola memoria constant</em></strong> &mdash; argomento didascalico: l'alfabeto richiede solo memoria, e nei piccoli è al massimo.</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- ═══ PASSO 5 — I 1, 20–24 ═══ -->
+  <div class="h-passo">
+    <h2>5. <em>Lusus hic sit</em>: il gioco e l'esempio di Alessandro <span class="h-rif">Inst. or. I 1, 20&ndash;24</span></h2>
+    <div class="h-grid">
+      <div class="h-lat">
+        Nec sum adeo aetatium inprudens ut instandum protinus teneris acerbe putem exigendamque plane operam. Nam id in primis cavere oportebit, ne studia qui amare nondum potest oderit et amaritudinem semel perceptam etiam ultra rudes annos reformidet. Lusus hic sit, et rogetur et laudetur et numquam non fecisse se gaudeat, aliquando ipso nolente doceatur alius cui invideat, contendat interim et saepius vincere se putet: praemiis etiam, quae capit illa aetas, evocetur. Parva docemus oratorem instituendum professi, sed est sua etiam studiis infantia, et ut corporum mox fortissimorum educatio a lacte cunisque initium ducit, ita futurus eloquentissimus edidit aliquando vagitum et loqui primum incerta voce temptavit et haesit circa formas litterarum: nec, si quid discere satis non est, ideo nec necesse est. Quodsi nemo reprehendit patrem qui haec non neglegenda in suo filio putet, cur improbetur si quis ea quae domi suae recte faceret in publicum promit? Atque eo magis quod minora etiam facilius minores percipiunt, et ut corpora ad quosdam membrorum flexus formari nisi tenera non possunt, sic animos quoque ad pleraque duriores robur ipsum facit. An Philippus Macedonum rex Alexandro filio suo prima litterarum elementa tradi ab Aristotele summo eius aetatis philosopho voluisset, aut ille suscepisset hoc officium, si non studiorum initia et a perfectissimo quoque optime tractari et pertinere ad summam credidisset?
+      </div>
+      <div class="h-ita">
+        Né sono così ignaro delle età da pensare che si debba subito incalzare aspramente i piccoli ed esigere apertamente da loro lo sforzo. Bisognerà infatti guardarsi soprattutto da questo: che chi ancora non sa amare gli studi finisca per odiarli, e &mdash; provatone una volta l'amaro &mdash; ne abbia paura anche oltre gli anni acerbi. Sia per lui un gioco; sia interrogato e lodato; gli accada sempre di gioire d'aver fatto qualcosa; ogni tanto, se non vuole farlo lui, sia istruito un altro di cui possa essere geloso; di tanto in tanto entri in gara, e si convinca spesso di vincere; sia anche stimolato con quei premi che quell'età sa apprezzare. Ci occupiamo di piccole cose, noi che ci siamo proposti di formare un oratore &mdash; ma anche gli studi hanno la loro infanzia: come l'educazione dei corpi destinati a diventare fortissimi prende inizio dal latte e dalla culla, così anche il futuro sommo oratore un tempo ha pianto da neonato, ha tentato di parlare con voce incerta, è inciampato sulle prime forme delle lettere; né, se imparare qualcosa è cosa da poco, per ciò stesso è cosa non necessaria. E se nessuno biasima il padre che ritiene queste cose non trascurabili nel proprio figlio, perché si dovrebbe disapprovare chi porta in pubblico ciò che a buon diritto farebbe in casa propria? E tanto più in quanto i più piccoli colgono più facilmente proprio le cose più piccole, e come i corpi non possono essere flessi a certe posizioni delle membra se non da teneri, così anche gli animi vengono induriti &mdash; su molte cose &mdash; proprio dal vigore stesso. Forse Filippo, re dei Macedoni, avrebbe voluto che ad Alessandro suo figlio i primi rudimenti delle lettere fossero impartiti da Aristotele, il sommo filosofo del suo tempo? O quello avrebbe assunto un simile incarico, se non avesse creduto che gli inizi degli studi sono trattati al meglio anche dal più valente, e che essi pertengono al risultato finale?
+      </div>
+    </div>
+    <div class="h-note">
+      <ol>
+        <li><strong><em>Lusus hic sit</em></strong> &mdash; «sia per lui un gioco». Non pedagogia ludica novecentesca, ma psicologia del discente al servizio della didattica.</li>
+        <li><strong><em>doceatur alius cui invideat</em></strong> &mdash; sia istruito un altro di cui essere geloso. L'invidia infantile è leva motivazionale: la gara fra pari produce ciò che la coercizione non produce.</li>
+        <li><strong><em>est sua etiam studiis infantia</em></strong> &mdash; «anche gli studi hanno la loro infanzia». Non c'è età troppo bassa per cominciare, perché l'inizio degli studi è esso stesso uno studio.</li>
+        <li><strong><em>Aristoteles / Philippus</em></strong> &mdash; <em>exemplum</em> classico (Plut., <em>Alex.</em> 7): un re affida i rudimenti al sommo filosofo. Conclusione: anche le basi vanno trattate dai migliori.</li>
+      </ol>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <p><strong>Prof. Andrea Vaccaro</strong></p>
+  <p>Lingua e Cultura Latina &mdash; Liceo Classico</p>
+  <div class="footer-links">
+    <a href="../../index.html">Home</a>
+    <a href="index.html">Lezione su Quintiliano</a>
+    <a href="../../strumenti/raccoglitore.html">Raccoglitore Testi</a>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,1153 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Apuleio e le Metamorfosi — curiositas, magia, salvezza isiaca | Lezione interattiva</title>
+<meta name="description" content="Lezione interattiva su Apuleio: il processo di Sabratha, l'Apologia, le Metamorfosi, la favola di Amore e Psiche. Brano latino III, 24-25 (Lucio diventa asino). Quiz, modalità LIM.">
+<meta property="og:title" content="Apuleio e le Metamorfosi | Lezione interattiva">
+<meta property="og:description" content="Curiositas, magia, demonologia platonica, salvezza isiaca. Brano latino III, 24-25 e lettura antologica di Amore e Psiche e del Libro XI.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="it_IT">
+<meta property="og:url" content="https://andreavaccaro02-hue.github.io/latino-sites/autori/apuleio/">
+<link rel="canonical" href="https://andreavaccaro02-hue.github.io/latino-sites/autori/apuleio/">
+<link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+<link rel="stylesheet" href="../../css/style.css">
+<style>
+  /* ═══ BRANO LATINO SOLO (no traduzione affiancata) ═══ */
+  .brano-lat-solo {
+    margin: 24px 0;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--card);
+  }
+  .brano-lat-solo .bls-titolo {
+    background: var(--bg-warm);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 18px;
+    font-family: 'Libre Baskerville', serif;
+    font-weight: 700;
+    color: var(--gold);
+    font-size: 15px;
+  }
+  .brano-lat-solo .bls-titolo .bls-rif {
+    color: var(--text-dim);
+    font-weight: 400;
+    font-style: italic;
+    font-size: 13px;
+    margin-left: 8px;
+  }
+  .brano-lat-solo .bls-text {
+    padding: 22px 28px;
+    font-family: 'Cardo', serif;
+    font-size: 17px;
+    line-height: 1.95;
+    background: #faf6ec;
+    color: var(--text);
+  }
+  .brano-lat-solo .bls-text mark.kw {
+    background: rgba(156, 122, 60, 0.18);
+    border-bottom: 2px solid var(--gold);
+    padding: 0 2px;
+    color: var(--text);
+  }
+  .brano-lat-solo sup.bls-n {
+    color: var(--gold);
+    font-weight: 700;
+    font-size: 11px;
+    vertical-align: super;
+    margin-left: 1px;
+  }
+  .brano-lat-solo .bls-note {
+    background: var(--bg-warm);
+    border-top: 1px solid var(--border);
+    padding: 14px 22px;
+    font-size: 13.5px;
+    line-height: 1.65;
+    color: var(--text-dim);
+  }
+  .brano-lat-solo .bls-note ol {
+    margin: 0;
+    padding-left: 22px;
+  }
+  .brano-lat-solo .bls-note li { margin-bottom: 4px; }
+  .brano-lat-solo .bls-commento {
+    padding: 14px 22px;
+    background: var(--gold-pale);
+    border-top: 1px solid var(--border);
+    font-size: 14.5px;
+    line-height: 1.7;
+  }
+  .brano-lat-solo .bls-commento strong { color: var(--gold); }
+  .brano-lat-solo .bls-traduzione-collapse {
+    background: var(--bg);
+    border-top: 1px dashed var(--border);
+    padding: 8px 22px;
+    font-size: 14px;
+    color: var(--text-dim);
+    font-style: italic;
+  }
+
+  /* ═══ BRANO ITALIANO — solo riferimento al manuale ═══ */
+  .brano-rinvio {
+    margin: 22px 0;
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--gold);
+    border-radius: 10px;
+    background: var(--card);
+    overflow: hidden;
+  }
+  .brano-rinvio .br-titolo {
+    background: var(--bg-warm);
+    padding: 12px 18px;
+    font-family: 'Libre Baskerville', serif;
+    font-weight: 700;
+    color: var(--gold);
+    font-size: 15px;
+    border-bottom: 1px solid var(--border-light);
+  }
+  .brano-rinvio .br-titolo .br-rif {
+    color: var(--text-dim);
+    font-weight: 400;
+    font-style: italic;
+    font-size: 13px;
+    margin-left: 8px;
+  }
+  .brano-rinvio .br-body {
+    padding: 16px 22px;
+    font-size: 14.5px;
+    line-height: 1.7;
+  }
+  .brano-rinvio .br-body h4 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 14px;
+    color: var(--gold);
+    margin: 14px 0 6px 0;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .brano-rinvio .br-body ul,
+  .brano-rinvio .br-body ol {
+    margin: 6px 0;
+    padding-left: 22px;
+  }
+  .brano-rinvio .br-body li { margin-bottom: 4px; }
+  .brano-rinvio .br-leggi {
+    background: var(--bg);
+    border-top: 1px solid var(--border-light);
+    padding: 10px 22px;
+    font-size: 13.5px;
+    color: var(--text-dim);
+    font-style: italic;
+  }
+  .brano-rinvio .br-leggi strong { color: var(--gold); font-style: normal; }
+
+  /* ═══ CORNICE NARRATIVA (Antefatto / Epilogo per Psiche) ═══ */
+  .cornice-narr {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin: 20px 0;
+  }
+  .cornice-narr .cn-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px 18px;
+  }
+  .cornice-narr .cn-card h4 {
+    font-family: 'Libre Baskerville', serif;
+    color: var(--gold);
+    margin: 0 0 8px 0;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .cornice-narr .cn-card p {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--text);
+  }
+
+  /* ═══ ITER 11 LIBRI delle Metamorfosi ═══ */
+  .iter-grid {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0;
+    margin: 18px 0;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    background: var(--card);
+  }
+  .iter-grid .ig-num {
+    background: var(--bg-warm);
+    padding: 12px 16px;
+    font-family: 'Libre Baskerville', serif;
+    font-weight: 700;
+    color: var(--gold);
+    border-bottom: 1px solid var(--border-light);
+    border-right: 1px solid var(--border-light);
+    text-align: center;
+    min-width: 90px;
+    font-size: 14px;
+  }
+  .iter-grid .ig-row {
+    padding: 12px 18px;
+    border-bottom: 1px solid var(--border-light);
+    font-size: 14.5px;
+    line-height: 1.6;
+  }
+  .iter-grid .ig-num:last-of-type,
+  .iter-grid .ig-row:last-of-type { border-bottom: none; }
+  .iter-grid .ig-row strong { color: var(--gold); }
+
+  /* ═══ APPROFONDIMENTO (box C, D) ═══ */
+  .approfondimento {
+    margin: 24px 0;
+    padding: 18px 22px;
+    background: linear-gradient(180deg, var(--gold-pale), var(--bg));
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--gold);
+    border-radius: 10px;
+  }
+  .approfondimento h3 {
+    margin: 0 0 8px 0;
+    font-family: 'Libre Baskerville', serif;
+    font-size: 17px;
+    color: var(--gold);
+  }
+  .approfondimento .appro-label {
+    display: inline-block;
+    background: var(--gold);
+    color: #fff;
+    font-family: 'Libre Baskerville', serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    padding: 3px 10px;
+    border-radius: 4px;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+  }
+  .approfondimento p {
+    font-size: 14.5px;
+    line-height: 1.7;
+    margin: 8px 0;
+  }
+
+  /* ═══ MAPPA CONCETTUALE ═══ */
+  .mappa-container {
+    margin: 24px 0;
+    padding: 26px;
+    background: var(--bg);
+    border: 2px solid var(--border);
+    border-radius: 16px;
+    overflow-x: auto;
+  }
+  .mappa-svg {
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+    height: auto;
+  }
+  .mappa-node {
+    cursor: pointer;
+    transition: filter 0.2s;
+  }
+  .mappa-node:hover rect,
+  .mappa-node:hover ellipse {
+    filter: brightness(0.93);
+  }
+  .mappa-tooltip {
+    display: none;
+    position: fixed;
+    background: #2c2416;
+    color: #f5f0e8;
+    padding: 12px 16px;
+    border-radius: 10px;
+    font-size: 14px;
+    line-height: 1.5;
+    max-width: 320px;
+    z-index: 200;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.35);
+    font-family: 'Cardo', serif;
+    pointer-events: none;
+  }
+
+  /* ═══ MODALITÀ LIM ═══ */
+  .lim-toggle {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 200;
+    background: var(--gold);
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    padding: 12px 22px;
+    font-family: 'Libre Baskerville', serif;
+    font-size: 14.5px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(156, 122, 60, 0.4);
+    transition: background 0.2s;
+  }
+  .lim-toggle:hover { background: #b8915a; }
+  .lim-hud {
+    display: none;
+    position: fixed;
+    bottom: 18px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 95;
+    background: rgba(30, 26, 18, 0.92);
+    color: #f5f0e8;
+    padding: 10px 18px;
+    border-radius: 999px;
+    font-family: 'Libre Baskerville', serif;
+    font-size: 14px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.3);
+    user-select: none;
+  }
+  .lim-hud .lh-counter { color: var(--gold-light); font-weight: 700; margin: 0 6px; }
+  .lim-hud .lh-hint { font-size: 12px; color: #c9b896; margin-left: 14px; }
+  .lim-hud .lh-btn {
+    background: transparent;
+    border: 1px solid #c9b896;
+    color: #f5f0e8;
+    border-radius: 6px;
+    padding: 4px 10px;
+    margin: 0 4px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 12px;
+  }
+  .lim-hud .lh-btn:hover { background: rgba(255,255,255,0.08); }
+
+  body.lim-mode {
+    background: #f8f4ea;
+  }
+  body.lim-mode .navbar,
+  body.lim-mode .page-header,
+  body.lim-mode .back-link,
+  body.lim-mode .score-bar,
+  body.lim-mode .esercizio-section,
+  body.lim-mode .tools-section,
+  body.lim-mode footer,
+  body.lim-mode .lim-toggle { display: none !important; }
+  body.lim-mode .lim-hud { display: flex; align-items: center; gap: 6px; }
+  body.lim-mode .container { max-width: 100%; padding: 0; margin: 0; }
+  body.lim-mode .slide {
+    display: none;
+    min-height: 100vh;
+    box-sizing: border-box;
+    padding: 70px 8vw 90px 8vw;
+    margin: 0;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    background: transparent;
+    font-size: 1.3em;
+    line-height: 1.7;
+  }
+  body.lim-mode .slide.lim-active { display: block; }
+  body.lim-mode .slide h2,
+  body.lim-mode .slide h3 { font-size: 1.45em; }
+  body.lim-mode .slide .content-header { border: none; padding-bottom: 8px; }
+  body.lim-mode .slide.brano-lat-solo { padding: 0; }
+  body.lim-mode .slide.brano-lat-solo .bls-titolo { padding: 24px 8vw; font-size: 1.3em; }
+  body.lim-mode .slide.brano-lat-solo .bls-text { padding: 32px 8vw; font-size: 1.1em; }
+  body.lim-mode .slide.brano-lat-solo .bls-note,
+  body.lim-mode .slide.brano-lat-solo .bls-commento { padding: 22px 8vw; font-size: 0.9em; }
+  body.lim-mode details.brano-estensione { display: none; }
+
+  /* ═══ STAMPA ═══ */
+  @media print {
+    .lim-toggle, .lim-hud, .navbar, footer, .back-link, .score-bar,
+    .tools-section, .esercizio-section, .tlac-box { display: none !important; }
+  }
+
+  /* ═══ MOBILE ═══ */
+  @media (max-width: 768px) {
+    .cornice-narr { grid-template-columns: 1fr; }
+    .lim-toggle { font-size: 13px; padding: 10px 16px; bottom: 16px; right: 16px; }
+    .brano-lat-solo .bls-text { padding: 18px 18px; font-size: 16px; }
+  }
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "name": "Apuleio e le Metamorfosi — curiositas, magia, salvezza isiaca",
+  "description": "Lezione interattiva su Apuleio: il processo di Sabratha, l'Apologia, le Metamorfosi, la favola di Amore e Psiche. Brano latino III, 24-25.",
+  "author": { "@type": "Person", "name": "Prof. Andrea Vaccaro" },
+  "inLanguage": "it",
+  "educationalUse": "Lezione interattiva",
+  "learningResourceType": "Lesson"
+}
+</script>
+<meta property="og:image" content="https://andreavaccaro02-hue.github.io/latino-sites/og-image.svg">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/alpheios-components@latest/dist/style/style-components.min.css">
+</head>
+<body>
+  <button class="lim-toggle" id="limToggle" title="Attiva modalità presentazione (tasto L)">▶ Modalità LIM</button>
+  <div class="lim-hud" id="limHud">
+    <button class="lh-btn" id="limPrev" title="Precedente (←)">◀</button>
+    <span><span class="lh-counter" id="limCounter">1 / 1</span></span>
+    <button class="lh-btn" id="limNext" title="Successiva (→)">▶</button>
+    <span class="lh-hint">← → per navigare · Esc per uscire · F per fullscreen</span>
+  </div>
+
+  <nav class="navbar">
+    <div class="container">
+      <a href="../../index.html" class="site-name">Lingua e Cultura Latina</a>
+      <div class="nav-links">
+        <a href="../../index.html">Home</a>
+        <a href="../../strumenti/raccoglitore.html">Raccoglitore</a>
+        <a href="../../grammatica/index.html">Grammatica</a>
+        <a href="../../strumenti/glossario-eulalia.html">Strumenti</a>
+        <a href="../../chi-sono.html">Su di me</a>
+        <a href="../../pdf/cv-vaccaro-europass.pdf" target="_blank">CV</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="page-header">
+    <h1>Apuleio e le <em>Metamorfosi</em></h1>
+    <div class="divider"></div>
+    <p class="subtitle">Lezione interattiva &mdash; Latino 5 Classico</p>
+  </div>
+
+  <div class="container">
+    <a href="../../percorsi/latino5-classico.html" class="back-link">&larr; Torna a Latino 5 Classico</a>
+
+    <div class="score-bar">
+      <span class="score-label">Punteggio</span>
+      <span class="score-value" id="scoreDisplay">0 / 12</span>
+    </div>
+
+    <!-- ═══ DO NOW ═══ -->
+    <div class="tlac-box tlac-donow slide" data-slide-title="Do Now — l'invito al lettore">
+      <div class="tlac-label">Do Now &mdash; l'incipit delle Metamorfosi (3 min)</div>
+      <p style="font-family:'Cardo',serif; font-size:18px; line-height:1.7; font-style: italic; margin: 10px 0 14px 0;">
+        &laquo;<span class="lat-cite">At ego tibi sermone isto Milesio varias fabulas conseram</span> [...] <span class="lat-cite">lector intende: laetaberis</span>&raquo;
+      </p>
+      <p style="font-size:14px; color: var(--text-dim); margin-top:-6px;">«Io ti intreccerò varie favole in questo discorso milesio &mdash; lettore, presta attenzione: ne godrai.» (<em>Met.</em> I, 1)</p>
+      <p>Scrivete sul quaderno una risposta in 3&ndash;4 righe a queste tre domande, senza guardare il vicino:</p>
+      <ol>
+        <li>Che tipo di promessa fa l'autore al lettore? È un libro di filosofia, di storia, o di che altro?</li>
+        <li>Il verbo <em>laetaberis</em> &mdash; «ne godrai» &mdash; cosa fa intendere sul registro del testo?</li>
+        <li>Fidatevi davvero di una promessa di puro divertimento? Cosa potrebbe nascondersi sotto?</li>
+      </ol>
+      <p style="margin-top: 14px; font-size: 14px; color: var(--text-dim);">Discuteremo le risposte in classe. Tenete il quaderno aperto: torneremo a questa frase nello <em>Stretch It</em> finale.</p>
+    </div>
+
+    <!-- ═══ INTRODUZIONE BIOGRAFICA ═══ -->
+    <div class="lesson-intro slide" data-slide-title="Chi era Apuleio">
+      <h2>Chi era Apuleio di Madaura</h2>
+      <div style="margin-bottom: 14px;">
+        <span class="context-badge autore">Apuleius Madaurensis</span>
+        <span class="context-badge opera"><em>Metamorphoseon libri</em> (11 libri)</span>
+        <span class="context-badge data">Età degli Antonini (ca. 125 &ndash; post 170 d.C.)</span>
+        <span class="context-badge genere">Romanzo &middot; Oratoria &middot; Filosofia</span>
+      </div>
+      <p>Nato intorno al <strong>125 d.C.</strong> a <span class="lat-cite">Madaura</span> (oggi Mdaurusch, in Numidia ai confini con la Getulia, nell'odierna Algeria), da famiglia agiata: il padre è <em>duovir iuri dicundo</em> (duumviro giurisdicente, magistrato cittadino). Compie i primi studi a <strong>Cartagine</strong>, snodo culturale dell'Africa romana; poi si trasferisce ad <strong>Atene</strong>, dove approfondisce gli interessi filosofici sotto i maestri del medioplatonismo. Numerosi viaggi in Oriente come <em>conferenziere itinerante</em>: figura tipica della <strong>seconda sofistica</strong>.</p>
+      <p>Intorno al <strong>155-156 d.C.</strong>, in viaggio verso Alessandria, si ferma a <span class="lat-cite">Oea</span> (l'odierna Tripoli). Vi incontra il vecchio compagno di studi ateniese Ponziano, e sposa la madre vedova di lui, <strong>Pudentilla</strong>, ricca matrona. Il matrimonio scatena la reazione dei parenti, che lo accusano di aver sedotto la donna con la magia.</p>
+      <p>Nel <strong>158 d.C.</strong> si tiene il processo a <span class="lat-cite">Sabratha</span>: imputato di <em>magia</em> &mdash; reato capitale ai sensi della <em>lex Cornelia de sicariis et veneficis</em>. Apuleio si difende personalmente con un'orazione poi rielaborata e pubblicata: l'<em>Apologia</em> (o <em>De magia</em>). Viene assolto.</p>
+      <p>Gli ultimi anni li trascorre a <strong>Cartagine</strong>, oratore celebre e apprezzato, al centro della vita pubblica. I cittadini gli dedicano una statua. Le nostre notizie su di lui non oltrepassano il <strong>170 d.C.</strong></p>
+      <span class="nota-fonte">Fonti: l'<em>Apologia</em> stessa (autobiografica); i <em>Florida</em>; testimonianze di Agostino (<em>De civitate Dei</em>, <em>Epist.</em> 102 e 138); iscrizione onoraria di Madaura.</span>
+    </div>
+
+    <!-- ═══ COLD CALL 1 ═══ -->
+    <div class="tlac-box tlac-coldcall slide" data-slide-title="Cold call 1 — filosofo e mago">
+      <div class="tlac-label">Fermati e rispondi</div>
+      <p><strong>Un filosofo platonico, formatosi ad Atene, viene accusato di magia in tribunale. Cosa c'è di paradossale in questa accusa? E perché Apuleio, nella sua autodifesa, non rifiuta del tutto l'etichetta di «mago»?</strong></p>
+      <button class="tlac-reveal-btn" onclick="toggleHint(this)">Mostra spunto</button>
+      <div class="tlac-hint">Il filosofo platonico studia la natura, indaga il mondo invisibile, esercita la dialettica: nell'antichità tardo-imperiale queste competenze sono indistinguibili dalla «magia bianca» (comunione con la divinità attraverso pratiche rituali). Apuleio, nell'<em>Apologia</em>, ribadisce la propria dignità di <em>philosophus Platonicus</em>, ma non si cura affatto di smentire la fama di possedere conoscenze occulte: anzi, la ostenta. La distinzione tra «magia nera» (criminale) e «magia bianca» (filosofica) è ambigua &mdash; e questa ambiguità diventerà la sua eredità più duratura. Agostino, secoli dopo, lo combatterà proprio come «mago».</div>
+    </div>
+
+    <!-- ═══ OPERE FILOSOFICHE E ORATORIE ═══ -->
+    <div class="content-section slide" data-slide-title="Le opere oratorie e filosofiche">
+      <div class="content-header">
+        <h2>Le opere oratorie e filosofiche</h2>
+        <span class="section-ref">Apologia &middot; Florida &middot; trattati platonici</span>
+      </div>
+      <div class="content-body">
+        <h3>L'<em>Apologia</em> (o <em>De magia</em>)</h3>
+        <p>Unica orazione giudiziaria di età imperiale pervenutaci. Tre sezioni: (1-25) confutazione degli argomenti privati con dotte digressioni; (25-65) risposta all'accusa di magia attraverso l'affermazione della propria identità di filosofo platonico; (66-103) ricostruzione degli avvenimenti di Oea.</p>
+        <p>L'estensione del testo è inconciliabile con la recitazione processuale; la mancanza di discussione puntuale delle prove e le compiaciute digressioni su filosofia, scienza, letteratura, suggeriscono che siamo davanti a un <strong>sofisticato prodotto letterario</strong>, più che a un'arringa forense. Apuleio vi costruisce l'immagine pubblica di brillante <em>philosophus Platonicus</em>.</p>
+
+        <h3>I <em>Florida</em></h3>
+        <p>Raccolta di 23 brani oratori, stralciati da conferenze tenute a Cartagine dopo il ritorno in Africa. Documentano l'attività del <em>conferenziere itinerante della seconda sofistica</em>. Contenuti vari: discorsi politici, panegirici religiosi, saggi di erudizione, narrativa, moralistica. Stile virtuosistico, talvolta «funambolesco».</p>
+
+        <h3>I trattati filosofici</h3>
+        <p>Tre opere maggiori, di stampo platonico-medio:</p>
+        <ul>
+          <li><strong><em>De deo Socratis</em></strong> &mdash; il più importante. Espone la <strong>dottrina dei <em>daemones</em></strong>: esseri intermedi fra dèi e uomini, garanti dell'ordine provvidenziale. Il «dèmone» di Socrate è uno di questi. È <em>la più sistematica trattazione della dottrina dei dèmoni</em> dell'antichità &mdash; e fornisce la chiave per leggere la religiosità delle <em>Metamorfosi</em>.</li>
+          <li><strong><em>De Platone et eius dogmate</em></strong> (in due libri) &mdash; sintesi della fisica e dell'etica platonica.</li>
+          <li><strong><em>De mundo</em></strong> &mdash; rifacimento del <em>Perì kósmou</em> pseudo-aristotelico. Apuleio vi introduce nella lingua latina il <em>lessico tecnico specialistico delle scienze naturali</em>.</li>
+        </ul>
+        <p style="font-size: 13.5px; color: var(--text-dim); font-style: italic; margin-top: 10px;">Opere perdute o frammentarie: il romanzo <em>Hermagoras</em>, traduzioni dal <em>Fedone</em> e dalla <em>Repubblica</em> di Platone, testi enciclopedici di vario argomento.</p>
+      </div>
+    </div>
+
+    <!-- ═══ APPROFONDIMENTO C — Processo di Sabratha come spettacolo ═══ -->
+    <div class="approfondimento slide" data-slide-title="Approfondimento — il processo di Sabratha">
+      <span class="appro-label">Approfondimento</span>
+      <h3>Il processo di Sabratha come spettacolo letterario</h3>
+      <p>L'<em>Apologia</em> non è una trascrizione fedele di quanto Apuleio disse davanti al proconsole Claudio Massimo. È <strong>una rielaborazione letteraria pensata per la pubblicazione</strong>. Tre indizi lo mostrano:</p>
+      <ol>
+        <li><strong>L'estensione.</strong> Il testo, letto a voce alta, supera abbondantemente i tempi processuali tollerati nei tribunali di provincia.</li>
+        <li><strong>Le digressioni.</strong> Apuleio si concede pagine di erudizione su zoologia, ittiologia, filosofia, poesia, lessicografia greca. Conserva notizie preziose &mdash; come <em>i veri nomi delle donne cantate dagli elegiaci sotto pseudonimi</em>, Clodia per Lesbia di Catullo. Niente di tutto questo riguarda l'accusa.</li>
+        <li><strong>Il destinatario.</strong> Si rivolge spesso a un certo Marcello, colto e sensibile, partecipe di allusioni dotte: ma Marcello non era il giudice. È il <em>lettore ideale</em> che Apuleio costruisce per il pubblico colto.</li>
+      </ol>
+      <p>L'<em>Apologia</em> è dunque, come dice il manuale, «un sofisticato prodotto letterario volto a tramandare alla posterità l'immagine di brillante <em>philosophus Platonicus</em>». La similitudine con la <em>Pro Caelio</em> ciceroniana è formale &mdash; la disinvoltura nel ridicolizzare l'accusatore &mdash; ma il «colore» del discorso è completamente diverso: mescolanza di volgarismi, neologismi, arcaismi, poetismi. È già la <strong>lingua delle <em>Metamorfosi</em></strong>.</p>
+      <p style="font-size: 13.5px; color: var(--text-dim); font-style: italic; margin-top: 10px;">Citazione famosa: nella «lode della pasta dentifricia», Apuleio si difende dall'accusa di tenere a casa polveri sospette ironizzando: «non è davvero un'accusa di poco conto per un filosofo sentirsi dire che non tollera in sé niente di sporco [...] soprattutto chi si occupa della parola deve curarsi della bocca».</p>
+    </div>
+
+    <!-- ═══ METAMORFOSI — CORNICE CRITICA ═══ -->
+    <div class="content-section slide" data-slide-title="Le Metamorfosi — cornice critica">
+      <div class="content-header">
+        <h2>Le <em>Metamorfosi</em>: cornice critica</h2>
+        <span class="section-ref">Titolo, datazione, fonti, struttura</span>
+      </div>
+      <div class="content-body">
+        <h3>Titolo</h3>
+        <p>I codici trasmettono concordemente <em>Metamorphoseon libri</em> (con uniformità di tradizione). Ma <strong>Agostino</strong> (<em>De civitate Dei</em> XVIII 18) cita l'opera col titolo alternativo di <em>Asinus aureus</em>. Discusso: «aureo» è qualità del testo o colore fulvo dell'animale? Argomentazioni storico-religiose recenti privilegiano la lettura agostiniana: nel culto isiaco l'asino si identifica con <em>Tiphone-Seth</em>, dio egizio del male.</p>
+
+        <h3>Datazione</h3>
+        <p><em>Terminus post quem</em>: il processo del 158 d.C. Se il romanzo fosse già scritto, l'accusa l'avrebbe usato contro di lui. Quindi: composto <strong>dopo il 158</strong>, presumibilmente negli anni della maturità cartaginese.</p>
+
+        <h3>Fonti</h3>
+        <p>Esiste un'opera greca corrispondente, <em>Lucio o l'asino</em> (corpus pseudo-lucianeo, II sec.). Stesso intreccio, in forma più concisa. <strong>Fozio</strong> (<em>Biblioteca</em>, IX sec.) parla di una <em>Metamorfosi</em> di un altrimenti ignoto <strong>Lucio di Patre</strong>. Due ipotesi a confronto:</p>
+        <ul>
+          <li>Apuleio e lo pseudo-Luciano dipendono da una fonte comune perduta (Lucio di Patre);</li>
+          <li>lo pseudo-Luciano riprende Lucio di Patre, Apuleio rielabora la versione pseudo-lucianea.</li>
+        </ul>
+        <p>Quel che è certo: <strong>la favola di Amore e Psiche è invenzione apuleiana</strong>; anche molti episodi minori (specie quelli magici dei libri I-III) sono assenti dal modello greco e attribuibili al solo Apuleio. La differenza fondamentale è il finale: nel <em>Lucio</em> pseudo-lucianeo, l'eroe recupera la forma umana ma viene cacciato dalla matrona che lo amava da asino &mdash; in chiave di burla milesia. Nelle <em>Metamorfosi</em>, il finale è religioso: Lucio è iniziato ai misteri di <strong>Iside e Osiride</strong>. Apuleio trasforma una narrativa di intrattenimento in un racconto di salvazione.</p>
+
+        <h3>Struttura: l'itinerario di Lucio in 11 libri</h3>
+        <div class="iter-grid">
+          <div class="ig-num">I&ndash;III</div>
+          <div class="ig-row"><strong>La caduta.</strong> Lucio arriva a Hypata in Tessaglia, terra di maghe. <em>Curiositas</em>: vuole assistere alle pratiche magiche di Panfila. Con l'aiuto della servetta Fotide tenta la metamorfosi in uccello, ma sbaglia unguento e diventa <strong>asino</strong>. Per tornare umano dovrà mangiare rose.</div>
+          <div class="ig-num">IV&ndash;VII</div>
+          <div class="ig-row"><strong>Briganti e Carite.</strong> Lucio-asino è catturato dai briganti. Nella loro spelonca, una vecchia consola la prigioniera Carite raccontandole la favola di <strong>Amore e Psiche</strong> (IV 28 &mdash; VI 24). Liberazione di Carite per opera del fidanzato Tlepolemo.</div>
+          <div class="ig-num">VIII&ndash;X</div>
+          <div class="ig-row"><strong>Peregrinazione tragicomica.</strong> L'asino passa per molte mani &mdash; sacerdoti, mugnai, ortolani, soldati, cuochi. Testimone di storie di adulterio e morte. Acquistato infine per un'esibizione pubblica, fugge dall'arena per non essere accoppiato a una condannata a morte. Raggiunge una spiaggia deserta.</div>
+          <div class="ig-num">XI</div>
+          <div class="ig-row"><strong>Iside e la salvezza.</strong> Lucio prega la Luna. <strong>Iside</strong> gli appare in sogno e indica il modo della liberazione: mangiare le rose della corona portata da un sacerdote isiaco in processione. Tornato umano, è iniziato ai misteri di Iside e Osiride. Esercita l'avvocatura a Roma per volere divino.</div>
+        </div>
+        <p style="margin-top: 14px; padding: 12px 16px; background: var(--gold-pale); border-left: 3px solid var(--gold); border-radius: 6px;"><strong>Il filo conduttore:</strong> la <em>curiositas</em> di Lucio. Vizio strutturante che lo conduce alla caduta (libro III) e si riscatta solo dopo una lunga espiazione e un drastico cambiamento di vita (libro XI).</p>
+      </div>
+    </div>
+
+    <!-- ═══ BRANO LATINO III, 24-25 ═══ -->
+    <div class="brano-lat-solo slide" data-slide-title="Brano latino — Lucio diventa asino (Met. III, 24-25)">
+      <div class="bls-titolo">Lucio diventa asino <span class="bls-rif">Met. III, 24-25 &mdash; testo da tradurre in classe (pp. 590-591 dell'antologia)</span></div>
+      <div class="bls-text">
+        Haec identidem asseverans summa cum trepidatione <mark class="kw">irrepit cubiculum</mark><sup class="bls-n">1</sup> et pyxidem depromit arcula; quam ego amplexus ac deosculatus prius, utque mihi prosperis faveret volatibus deprecatus, abiectis propere laciniis totis, avide manus immersi et <mark class="kw">haurito plusculo uncto</mark><sup class="bls-n">2</sup> corporis mei membra perfricui. Iamque alternis conatibus libratis brachiis <mark class="kw">in avem similem gestiebam</mark><sup class="bls-n">3</sup>: nec ullae plumulae nec usquam pinnulae, sed plane pili mei crassantur in saetas, et cutis tenella duratur in corium, et in extimis palmulis perdito numero <mark class="kw">toti digiti coguntur in singulas ungulas</mark><sup class="bls-n">4</sup>, et de spinae meae termino grandis cauda procedit: iam facies enormis et os prolixum et nares hiantes et labiae pendulae; sic et aures immodicis horripilant auctibus. Nec ullum miserae reformationis video solacium, nisi quod mihi <mark class="kw">iam nequeunti tenere Fotidem natura crescebat</mark><sup class="bls-n">5</sup>.
+        <br><br>
+        25. Ac dum salutis inopia cuncta corporis mei <mark class="kw">considerans</mark><sup class="bls-n">6</sup> non avem me sed asinum video, querens de facto Fotidis sed iam humano gestu simul et voce privatus, quod solum poteram, <mark class="kw">postrema deiecta labia</mark><sup class="bls-n">7</sup> umidis tamen oculis obliquum respiciens ad illam tacitus expostulabam. Quae ubi primum me talem aspexit, percussit faciem suam manibus infestis et <mark class="kw">«Occisa sum misera!»</mark><sup class="bls-n">8</sup> clamavit: «me trepidatio simul et festinatio fefellit et pyxidum similitudo decepit. Sed bene, quod facilior reformationis huius medela suppeditat. Nam <mark class="kw">rosis tantum demorsicatis</mark><sup class="bls-n">9</sup> exibis asinum statimque in meum Lucium <mark class="kw">postliminio redibis</mark><sup class="bls-n">10</sup>. Atque utinam vesperi de more nobis parassem corollas aliquas, ne moram talem patereris vel noctis unius; sed primo diluculo remedium festinabitur tibi.»
+      </div>
+      <div class="bls-note">
+        <ol>
+          <li><strong><em>irrepit cubiculum</em></strong> &mdash; «si insinua nella camera». Verbo che fa entrare nel testo la <em>furtività</em> della scena magica. <em>Cubiculum</em> è accusativo di moto a luogo senza preposizione: tratto di stile elevato, frequente in poesia.</li>
+          <li><strong><em>haurito plusculo uncto</em></strong> &mdash; ablativo assoluto: «attinta un po' di unguento». <em>Plusculo</em> è diminutivo (-<em>culus</em>) che attenua e insieme intensifica: «non poco, in verità». <em>Unctum</em> è participio sostantivato: «la parte unta», «l'unguento». Forma rara, apuleiana.</li>
+          <li><strong><em>in avem similem gestiebam</em></strong> &mdash; «desideravo ardentemente trasformarmi in uccello simile (a quello di Panfila)». <em>Gestire</em> + <em>in</em> + accusativo è costrutto poetico di slancio e desiderio.</li>
+          <li><strong><em>toti digiti coguntur in singulas ungulas</em></strong> &mdash; «tutte le dita si raccolgono in zoccoli singoli»: antitesi numerica fra <em>molti</em> (le dita umane) e <em>uno</em> (l'unghia equina), evidenziata dall'iperbato <em>toti... singulas</em>. Segue un'enumerazione asindetica (<em>facies... os... nares... labiae... aures</em>) che ricorda Ovidio.</li>
+          <li><strong><em>iam nequeunti tenere Fotidem natura crescebat</em></strong> &mdash; espressione comica e oscena: «mentre ormai non potevo più tenere Fotide, il mio organo cresceva». L'elemento erotico-comico si insinua nel momento tragico della metamorfosi.</li>
+          <li><strong><em>considerans</em></strong> &mdash; participio presente da <em>considerare</em>; concorda con il soggetto sottinteso (<em>ego</em>). Costrutto del <em>cum</em> temporale-causale espresso col participio.</li>
+          <li><strong><em>postrema deiecta labia</em></strong> &mdash; «con le labbra penzolanti abbassate»: ablativo assoluto. <em>Labia</em> (n. pl.) è arcaismo o forma di registro espressivo; il <em>labrum</em> classico era prevalente.</li>
+          <li><strong><em>«Occisa sum misera!»</em></strong> &mdash; esclamazione drammatica di Fotide: «Sono morta, povera me!» <em>Occisa sum</em> è perfetto passivo iperbolico (lessico tragico della disperazione femminile). Apuleio attinge al registro della commedia plautina.</li>
+          <li><strong><em>rosis tantum demorsicatis</em></strong> &mdash; ablativo assoluto: «solo morse delle rose». <em>Demorsicare</em> è intensivo apuleiano di <em>mordere</em>, raro: «sgranocchiare», «mordicchiare ripetutamente». La <em>rosa</em> è il <em>pharmakon</em> di guarigione: anticipa Iside del libro XI, che apparirà accompagnata da una corona di rose.</li>
+          <li><strong><em>postliminio redibis</em></strong> &mdash; «ritornerai per <em>postliminium</em>». Termine giuridico romano: il <em>ius postliminii</em> permetteva al cittadino prigioniero di guerra di recuperare lo <em>status</em> civile al ritorno in patria. Qui è metafora di alto registro: il ritorno alla forma umana è un <em>rientro giuridico</em> dalla schiavitù asinina.</li>
+        </ol>
+      </div>
+      <div class="bls-commento">
+        <strong>Cosa vedere nel testo.</strong>
+        <br><br>
+        (1) <strong>L'inversione.</strong> Lucio desidera diventare uccello (<em>avem similem</em>) e diventa asino. La spinta verso l'alto si rovescia nel suo opposto.
+        <br>
+        (2) <strong>La rosa.</strong> Il rimedio promesso da Fotide rimanda per anticipazione alla corona del sacerdote isiaco nel libro XI: stesso segno simbolico in due contesti opposti.
+        <br>
+        (3) <strong>Mescolanza di registri.</strong> Lessico magico, comicità erotica, terminologia giuridica (<em>postliminio</em>), arcaismi (<em>labia</em>), neologismi (<em>demorsicare</em>): il passo è già un campionario dell'<em>elocutio novella</em> che vedremo a parte.
+      </div>
+      <div class="bls-traduzione-collapse">La <strong>traduzione la costruiamo insieme in classe</strong>: nodo per nodo, dal testo all'italiano, motivando le scelte.</div>
+    </div>
+
+    <!-- ═══ COLD CALL 2 — IL VERBO DELLA CURIOSITAS ═══ -->
+    <div class="tlac-box tlac-coldcall slide" data-slide-title="Cold call 2 — il verbo della curiositas">
+      <div class="tlac-label">Fermati e rispondi</div>
+      <p><strong>Nel passo III, 24, qual è il momento esatto in cui la <em>curiositas</em> diventa <em>atto</em>? Indicate il verbo (e il sintagma in cui compare) che marca il passaggio dal desiderio alla colpa.</strong></p>
+      <button class="tlac-reveal-btn" onclick="toggleHint(this)">Mostra spunto</button>
+      <div class="tlac-hint">Lo snodo è in «<em>avide manus immersi et haurito plusculo uncto corporis mei membra perfricui</em>»: l'avverbio <em>avide</em> qualifica moralmente il gesto, e i tre verbi in successione (<em>immersi, haurito, perfricui</em>) descrivono senza intervallo il passaggio dal desiderio all'atto. Nessuno spazio per esitazione o ripensamento.</div>
+    </div>
+
+    <!-- ═══ IL LIBRO XI E LA SVOLTA ISIACA ═══ -->
+    <div class="content-section slide" data-slide-title="Il Libro XI — la svolta isiaca">
+      <div class="content-header">
+        <h2>Il Libro XI: la salvezza isiaca</h2>
+        <span class="section-ref">Dalla curiositas alla religiosità misterica</span>
+      </div>
+      <div class="content-body">
+        <p>Dopo dieci libri di peregrinazioni asinine, il libro XI cambia tono. Lucio raggiunge una spiaggia deserta, si addormenta e si risveglia di notte: una purificazione rituale e la preghiera alla Luna introducono un <strong>clima decisamente mistico</strong>. <strong>Iside</strong> appare in sogno, si presenta come <em>«rerum naturae parens, elementorum omnium domina, saeculorum progenies initialis»</em> &mdash; «madre della natura, padrona di tutti gli elementi, primigenia delle ere» &mdash; e annuncia il rimedio: l'indomani, in processione, un sacerdote isiaco porterà una corona di rose. Lucio deve mangiarla.</p>
+        <p>Così avviene. La trasformazione inversa è descritta come <strong>rinascita religiosa</strong>: non un semplice ritorno alla forma umana, ma una <em>iniziazione</em>. Lucio si fa devoto di Iside, poi di Osiride; alla fine del libro esercita la professione di avvocato a Roma «per volere divino».</p>
+        <p style="margin-top: 14px; padding: 12px 16px; background: var(--gold-pale); border-left: 3px solid var(--gold); border-radius: 6px;"><strong>Coincidenza Lucio &harr; Apuleio.</strong> In XI, 27 il sacerdote isiaco identifica Lucio come <em>«hominem Madaurensem»</em>: ma <em>Madaurensis</em> è Apuleio, non il greco Lucio di Patre. La maschera narrativa si rompe e l'autore si lascia identificare con il personaggio.</p>
+      </div>
+    </div>
+
+    <!-- ═══ BRANO ITALIANO XI, 12-13 (lettura dal libro) ═══ -->
+    <div class="brano-rinvio slide" data-slide-title="Brano italiano — Salvo grazie a Iside (Met. XI, 12-13)">
+      <div class="br-titolo">Salvo grazie a Iside: Lucio ritorna umano <span class="br-rif">Met. XI, 12-13 &mdash; lettura antologica in italiano (pp. 593-594)</span></div>
+      <div class="br-body">
+        <h4>Cornice narrativa</h4>
+        <p>Mattino dopo l'apparizione di Iside. Il corteo processionale avanza lungo la spiaggia di Corinto, fra musiche e canti. Il sommo sacerdote, secondo il preannuncio della dea, porta nel sistro una <strong>corona di rose</strong>. Lucio-asino, paziente e devoto, si avvicina e morde le rose. La metamorfosi inversa è descritta nei minimi dettagli: i tratti animali si dissolvono uno a uno, la forma umana riemerge.</p>
+
+        <h4>Cosa osservare durante la lettura</h4>
+        <ol>
+          <li><strong>Il rovesciamento del brano III, 24-25.</strong> Confrontate <em>frase per frase</em> con la trasformazione in asino: la cauda che ritorna spina, i peli che ritornano cute, gli zoccoli che tornano dita.</li>
+          <li><strong>Il registro religioso.</strong> Annotate il lessico della <em>visione</em>, della <em>preghiera</em>, della <em>devozione</em>. Confrontatelo col lessico magico-erotico del brano in latino.</li>
+          <li><strong>Il discorso del sacerdote.</strong> Subito dopo la metamorfosi, il sacerdote pronuncia un discorso che interpreta retrospettivamente l'intera vicenda di Lucio: <em>curiositas</em>, <em>fortuna caeca</em>, schiavitù delle passioni. Funziona come chiave di lettura interna al romanzo.</li>
+          <li><strong>La <em>caeca fortuna</em> contro la <em>fortuna videns</em>.</strong> Tema-cardine: la fortuna cieca (il caso) si oppone alla provvidenza isiaca (fortuna che vede).</li>
+        </ol>
+
+        <h4>Confronto col modello pseudo-lucianeo</h4>
+        <p>Nel <em>Lucio o l'asino</em> della tradizione greca, il protagonista, ritornato umano, viene <em>cacciato</em> dalla matrona che lo amava da asino, in chiave di scherzo erotico. Apuleio sostituisce il finale comico-osceno con una <strong>conversione religiosa</strong>. La stessa scena diventa due racconti opposti: nel modello, scherzo milesio; in Apuleio, epifania isiaca. La differenza è il senso del romanzo.</p>
+
+        <h4>Domanda di lettura</h4>
+        <p style="font-style: italic;">Il manuale di riferimento (Conte/Pianezzola) chiama il finale «coronamento necessario» dell'<em>iter</em> di Lucio, ma anche «gioco ironico» dove «ogni lettore può sospettare un gesto lieve di superiore ironia». Voi, alla lettura, da che parte propenderete?</p>
+      </div>
+      <div class="br-leggi"><strong>Lettura in classe</strong> &mdash; il testo italiano della tua antologia, pp. 593-594.</div>
+    </div>
+
+    <!-- ═══ COLD CALL 3 — CONVERSIONE O IRONIA? ═══ -->
+    <div class="tlac-box tlac-coldcall slide" data-slide-title="Cold call 3 — conversione o ironia?">
+      <div class="tlac-label">Fermati e rispondi</div>
+      <p><strong>Apuleio nelle <em>Metamorfosi</em> è un autentico convertito alla religione isiaca, o un raffinato intellettuale che mette in scena una conversione per <em>far parlare il romanzo</em>? La differenza è enorme: nel primo caso il libro XI è il <em>significato vero</em> del romanzo; nel secondo, il libro XI è una <em>maschera</em>. Voi cosa argomentereste?</strong></p>
+      <button class="tlac-reveal-btn" onclick="toggleHint(this)">Mostra spunto</button>
+      <div class="tlac-hint">Argomento pro-conversione: l'identificazione di Lucio con <em>Madaurensis</em> (XI, 27) è un segnale autobiografico forte; il tono del libro XI è solenne, partecipato, lontano dalla parodia. Argomento pro-ironia: il prologo prometteva <em>laetaberis</em>, intrattenimento; il discorso del sacerdote, retrospettivamente, riscrive il romanzo come allegoria &mdash; ma è un'operazione <em>troppo</em> esplicita per essere ingenua. Il manuale di Conte commenta: «al dubbio non si può dare risposta definitiva». E questo è il punto.</div>
+    </div>
+
+    <!-- ═══ AMORE E PSICHE — ANTEFATTO + EPILOGO ═══ -->
+    <div class="content-section slide" data-slide-title="Amore e Psiche — antefatto + epilogo">
+      <div class="content-header">
+        <h2>La favola di Amore e Psiche</h2>
+        <span class="section-ref">Met. IV 28 &mdash; VI 24 &middot; il «modello in scala» del romanzo</span>
+      </div>
+      <div class="content-body">
+        <p>La favola si estende per quasi tre libri al centro esatto delle <em>Metamorfosi</em>, ed è narrata da una <strong>vecchia</strong> alla giovane <strong>Carite</strong>, prigioniera dei briganti, per consolarla. Il manuale di Conte la definisce «<em>modello in scala ridotta</em>» dell'intero romanzo: stesso schema di <em>curiositas</em>, caduta, espiazione, salvazione.</p>
+
+        <div class="cornice-narr">
+          <div class="cn-card">
+            <h4>Antefatto (IV 28 &mdash; V 20)</h4>
+            <p>Psiche è la terza figlia di un re, di bellezza così straordinaria che gli uomini la venerano come se fosse Venere stessa &mdash; il tempio della dea viene abbandonato. <strong>Venere, gelosa</strong>, ordina al figlio Cupido di farla innamorare dell'uomo più miserabile. Ma Cupido si innamora di lei.</p>
+            <p>Un oracolo prescrive ai genitori di esporre Psiche su una rupe per le nozze con un mostro. Zefiro la trasporta in un <strong>palazzo invisibile</strong> dove un misterioso sposo la raggiunge solo di notte. Le impone un divieto assoluto: <em>non vederlo mai</em>. Vivono felici. Le sorelle di Psiche, invidiose, la convincono che lo sposo è un serpente: deve ucciderlo nel sonno.</p>
+          </div>
+          <div class="cn-card">
+            <h4>Epilogo (VI 1 &mdash; VI 24)</h4>
+            <p>Cupido scoperto fugge ferito. Psiche, abbandonata, intraprende un <strong>itinerario espiatorio</strong>: cerca lo sposo perduto, è sottoposta da Venere a quattro prove impossibili, inclusa la <strong>discesa agli Inferi</strong> per chiedere a Persefone un vasetto di bellezza divina. Per <em>curiositas</em>, Psiche apre il vasetto e cade in un sonno mortale.</p>
+            <p>Cupido la salva, intercede presso Giove: Psiche è <strong>assunta in cielo</strong>, riceve l'ambrosia, sposa il dio. Nasce loro una figlia, <strong>Voluptas</strong>. La favola termina con le nozze divine.</p>
+          </div>
+        </div>
+
+        <p style="margin-top: 14px;">Lo schema parallelo a Lucio:</p>
+        <ul>
+          <li><strong>Felicità iniziale &rarr; <em>curiositas</em></strong>: Psiche viola il divieto, vuole vedere; Lucio vuole assistere alla magia.</li>
+          <li><strong>Caduta</strong>: Psiche perde lo sposo e il palazzo; Lucio perde la forma umana.</li>
+          <li><strong>Lungo itinerario di espiazione</strong>: le prove di Psiche; le peregrinazioni asinine di Lucio.</li>
+          <li><strong>Discesa agli Inferi / momento di buio</strong>: il sonno mortale di Psiche; la fuga dall'arena di Lucio.</li>
+          <li><strong>Salvazione divina</strong>: Psiche assunta in cielo da Giove tramite Cupido; Lucio salvato da Iside.</li>
+        </ul>
+        <p>La favola, narrata da una vecchia ubriacona, in cornice umile e registro fiabesco, contiene in nuce lo schema di fondo del romanzo: un racconto incastonato che riproduce, in piccolo, la traiettoria della cornice esterna.</p>
+      </div>
+    </div>
+
+    <!-- ═══ BRANO ITALIANO V, 21-24 (lettura dal libro) ═══ -->
+    <div class="brano-rinvio slide" data-slide-title="Brano italiano — Psiche scopre Cupido (Met. V, 21-24)">
+      <div class="br-titolo">Psiche scopre Cupido <span class="br-rif">Met. V, 21-24 &mdash; lettura antologica in italiano (pp. 607-608)</span></div>
+      <div class="br-body">
+        <h4>Cornice narrativa</h4>
+        <p>Psiche, istigata dalle sorelle, ha deciso: questa notte vedrà lo sposo dormente, e se è un mostro (come le sorelle hanno detto) lo ucciderà con un coltello. Si arma di lanterna e di lama. Si avvicina al letto. Solleva la lampada.</p>
+
+        <h4>Cosa osservare durante la lettura</h4>
+        <ol>
+          <li><strong>Il momento dell'epifania.</strong> Psiche scopre che lo sposo non è un mostro, ma <strong>Cupido stesso</strong>: il dio dell'amore, bellissimo, dormiente, con frecce e arco appoggiati al letto. Lo stupore la paralizza: l'intenzione omicida si rovescia in adorazione.</li>
+          <li><strong>L'ekphrasis del corpo di Cupido.</strong> Apuleio descrive il dio addormentato con sensualità raffinata. Lessico ricercato, accumulo di aggettivi, ritmo dell'incantamento. Annotate il passaggio dalla paura allo stupore al desiderio.</li>
+          <li><strong>La goccia d'olio.</strong> Snodo decisivo: una goccia d'olio bollente dalla lampada cade sulla spalla del dio. Cupido si sveglia. <em>Curiositas</em> punita. La caduta di Psiche è descritta con <strong>la stessa terminologia</strong> della caduta di Lucio: privazione, schiavitù delle passioni, errore.</li>
+          <li><strong>Il discorso di Cupido fuggente.</strong> Prima di volar via, Cupido le rinfaccia di aver violato il patto: la fuga del dio sarà essa stessa la sua punizione. La pena di Psiche non è esterna: è l'assenza del divino.</li>
+        </ol>
+
+        <h4>Confronto col brano latino III, 24-25</h4>
+        <p>Mettete fianco a fianco i due passi:</p>
+        <ul>
+          <li>Lucio sbaglia <em>unguento</em> &mdash; Psiche sbaglia <em>luce</em>.</li>
+          <li>Lucio si trasforma in <em>asino</em> &mdash; Psiche perde il dio.</li>
+          <li>Lucio dovrà mangiare <em>rose</em> per tornare &mdash; Psiche dovrà affrontare quattro <em>prove</em>.</li>
+          <li>Lucio è salvato da <em>Iside</em> &mdash; Psiche è salvata da <em>Giove</em> tramite Cupido.</li>
+        </ul>
+        <p>Stessa parola (<em>curiositas</em>), due esiti narrativi diversi che condividono lo schema di caduta, espiazione e salvazione per intervento divino.</p>
+
+        <h4>Domanda di lettura</h4>
+        <p style="font-style: italic;">Psiche, vedendo Cupido per la prima volta, lo trova <em>bellissimo</em>. Avrebbe dovuto vederlo? La domanda non è retorica: nella tradizione misterica antica, il dio non si può vedere, ma chi lo vede entra in una nuova categoria di iniziati. Psiche ha violato un divieto, o ha compiuto un'iniziazione mal preparata?</p>
+      </div>
+      <div class="br-leggi"><strong>Lettura in classe</strong> &mdash; il testo italiano della tua antologia, pp. 607-608.</div>
+    </div>
+
+    <!-- ═══ APPROFONDIMENTO D — Letture allegoriche della favola ═══ -->
+    <div class="approfondimento slide" data-slide-title="Approfondimento — letture allegoriche di Amore e Psiche">
+      <span class="appro-label">Approfondimento</span>
+      <h3>Le letture allegoriche di Amore e Psiche</h3>
+      <p>La favola ha generato fin dall'antichità una densa tradizione di letture allegoriche. Il manuale di Conte ne ricostruisce tre famiglie, segnalando i limiti di ciascuna.</p>
+
+      <h4 style="font-family:'Libre Baskerville',serif; font-size:14px; color:var(--gold); margin-top:14px; text-transform: uppercase; letter-spacing: 0.05em;">1. Lettura cristianizzante (Fulgenzio, V-VI sec.)</h4>
+      <p><strong>Fulgenzio</strong> nei <em>Mythologiarum libri</em> (3, 68) interpreta Psiche come l'Anima e Cupido come il Desiderio. È una lettura cristiana <em>ante litteram</em>, che fa di Apuleio un anticipatore del pensiero patristico. Filone discende fino a <strong>Boccaccio</strong>, che commenta la favola in chiave allegorico-morale. <em>Da escludere come progetto apuleiano</em>: nelle <em>Metamorfosi</em> stesse (9, 14) Apuleio polemizza aspramente col monoteismo ebraico. Il cristianesimo non è il suo orizzonte.</p>
+
+      <h4 style="font-family:'Libre Baskerville',serif; font-size:14px; color:var(--gold); margin-top:14px; text-transform: uppercase; letter-spacing: 0.05em;">2. Lettura platonica</h4>
+      <p>Apuleio è filosofo platonico, le <em>Metamorfosi</em> sono di filosofo. La favola sarebbe allora <strong>allegoria dell'anima</strong> che cade nel corpo, ne soffre la schiavitù delle passioni, e attraverso un'ascesi torna alla contemplazione del divino. È la lettura più solida storicamente: Apuleio nel <em>De deo Socratis</em> espone una dottrina dell'anima coerente con questo schema. Limite: <em>perché allora Apuleio scrive un romanzo licenzioso</em> per esprimere una dottrina austera?</p>
+
+      <h4 style="font-family:'Libre Baskerville',serif; font-size:14px; color:var(--gold); margin-top:14px; text-transform: uppercase; letter-spacing: 0.05em;">3. Lettura iniziatica isiaca</h4>
+      <p>Il libro XI è il vero <em>finale</em> del romanzo: la favola di Amore e Psiche è dunque <strong>profezia narrativa</strong> dell'iniziazione misterica di Lucio. Psiche-Anima cerca lo sposo divino come Lucio cerca Iside; le quattro prove di Psiche corrispondono alle quattro tappe dell'iniziazione. È la chiave privilegiata dal manuale di Conte.</p>
+
+      <p style="margin-top: 14px; padding: 12px 16px; background: var(--bg-warm); border-left: 3px solid var(--gold); border-radius: 6px; font-style: italic;"><strong>La conclusione di Conte:</strong> «elementi platonici e isiaci appaiono intrecciati e fusi indissolubilmente»; «contraddizioni di varia natura sconsigliano un'interpretazione univoca». Esempio paradossale: Carite, alla quale la favola è raccontata per consolazione, <em>morirà tragicamente</em>. La favola dunque <strong>non protegge</strong> chi la riceve, e questo limita la sua portata pedagogica. Meglio leggere la favola come <em>chiave letteraria</em> del romanzo, non come dottrina chiusa.</p>
+    </div>
+
+    <!-- ═══ TURN AND TALK ═══ -->
+    <div class="tlac-box tlac-turntalk slide" data-slide-title="Turn and talk — la curiositas che salva o che condanna?">
+      <div class="tlac-label">Turn and Talk &mdash; Discutete con il compagno (3 min)</div>
+      <p><strong>Sia Lucio sia Psiche cadono per <em>curiositas</em>: vogliono vedere ciò che non dovrebbero. Eppure il romanzo culmina in un atto religioso, l'iniziazione isiaca, che richiede di <em>vedere</em> i misteri della dea. La <em>curiositas</em> è dunque sempre colpa, o ci sono due tipi di curiosità &mdash; una che condanna e una che salva?</strong></p>
+      <p style="margin-top: 10px; font-size: 13.5px; color: var(--text-dim);">Aiuto: confrontate la <em>curiositas</em> di Lucio in III, 24 con la <em>religio</em> di Lucio in XI, 12. Stesso uomo, stesso desiderio di sapere, esiti opposti.</p>
+    </div>
+
+    <!-- ═══ LINGUA E STILE ═══ -->
+    <div class="content-section slide" data-slide-title="Lingua e stile — l'elocutio novella">
+      <div class="content-header">
+        <h2>Lingua e stile: l'<em>elocutio novella</em></h2>
+        <span class="section-ref">Tra arcaismo, neologismo e poesia</span>
+      </div>
+      <div class="content-body">
+        <p>Apuleio scrive in un'epoca di <strong>arcaismi diffusi</strong>: il movimento culturale fa capo a <strong>Frontone</strong>, maestro di Marco Aurelio, che predilige il latino di Plauto, Catone, Ennio. Apuleio condivide quest'amore per il <em>vetus sermo</em>, ma lo combina con tutto il resto della lingua disponibile.</p>
+
+        <h3>I quattro registri compresenti</h3>
+        <div class="iter-grid">
+          <div class="ig-num">Arcaismi</div>
+          <div class="ig-row">Avverbi in <em>-im</em> (come in Sisenna), forme verbali plautine, lessico catoniano. Esempio dal nostro passo: <em>labia</em> (n. pl.) invece del classico <em>labra</em>.</div>
+          <div class="ig-num">Neologismi</div>
+          <div class="ig-row">Apuleio conia parole su parole, soprattutto derivati con suffissi diminutivi (<em>-culus</em>, <em>-ulus</em>) e intensivi (<em>-icare</em>, <em>-itare</em>). Esempio: <em>demorsicare</em>, da <em>mordere</em>: «mordicchiare ripetutamente». <em>Pinnulae, plumulae</em>: diminutivi rari.</div>
+          <div class="ig-num">Volgarismi</div>
+          <div class="ig-row">Lessico del parlato, della cucina, dei mestieri, dell'erotismo popolare. Apuleio non li espunge: li mette accanto agli arcaismi.</div>
+          <div class="ig-num">Poetismi</div>
+          <div class="ig-row">Costrutti virgiliani, ovidiani, lucreziani. Inversioni audaci, accusativi di moto a luogo senza preposizione (<em>irrepit cubiculum</em>), ipallagi e iperbati.</div>
+        </div>
+
+        <h3>Architettura della frase</h3>
+        <p>La frase apuleiana cerca: <em>isocoli</em> (membri di pari lunghezza), <em>omoteleuti</em> (parole con la stessa desinenza in fine di colon), accumuli di sinonimi, ritmi prosastici elaborati. Il manuale di Conte avanza un'ipotesi affascinante: il romanzo <em>intero</em> potrebbe essere costruito secondo richiami sonori e simmetrie strutturali, <strong>come una sinfonia</strong>.</p>
+
+        <h3>Posizione storica</h3>
+        <p>Secondo Conte, la prosa di Apuleio porta il <em>sistema retorico latino</em> al suo esito espressivo più estremo, e nello stesso tempo, aprendosi a nuovi ritmi e a nuove costruzioni, prepara la <strong>prosa mediolatina</strong>.</p>
+      </div>
+    </div>
+
+    <!-- ═══ MAPPA CONCETTUALE ═══ -->
+    <div class="content-section slide" data-slide-title="Mappa concettuale">
+      <div class="content-header">
+        <h2>Mappa concettuale interattiva</h2>
+        <span class="section-ref">Passate il mouse sui nodi per approfondire</span>
+      </div>
+      <div class="content-body">
+        <div class="mappa-container">
+          <svg class="mappa-svg" viewBox="0 0 920 580" xmlns="http://www.w3.org/2000/svg">
+            <!-- linee livello 1 -->
+            <line x1="460" y1="60" x2="160" y2="160" stroke="#d4c9b8" stroke-width="2"/>
+            <line x1="460" y1="60" x2="460" y2="160" stroke="#d4c9b8" stroke-width="2"/>
+            <line x1="460" y1="60" x2="760" y2="160" stroke="#d4c9b8" stroke-width="2"/>
+            <!-- linee livello 2 -->
+            <line x1="160" y1="210" x2="80" y2="310" stroke="#d4c9b8" stroke-width="2"/>
+            <line x1="160" y1="210" x2="240" y2="310" stroke="#d4c9b8" stroke-width="2"/>
+            <line x1="460" y1="210" x2="380" y2="310" stroke="#d4c9b8" stroke-width="2"/>
+            <line x1="460" y1="210" x2="540" y2="310" stroke="#d4c9b8" stroke-width="2"/>
+            <line x1="760" y1="210" x2="680" y2="310" stroke="#d4c9b8" stroke-width="2"/>
+            <line x1="760" y1="210" x2="840" y2="310" stroke="#d4c9b8" stroke-width="2"/>
+            <!-- frecce inferiori -->
+            <line x1="460" y1="365" x2="460" y2="445" stroke="#b8915a" stroke-width="2.5" stroke-dasharray="6,4"/>
+            <line x1="460" y1="500" x2="460" y2="535" stroke="#b8915a" stroke-width="2" stroke-dasharray="4,3"/>
+
+            <!-- nodo centrale -->
+            <g class="mappa-node" data-info="Apuleio, Madaura ca. 125 – post 170 d.C. Filosofo platonico, oratore della seconda sofistica, romanziere. Processo per magia a Sabratha (158). Ultimi anni a Cartagine.">
+              <ellipse cx="460" cy="42" rx="155" ry="28" fill="#2c2416" stroke="#b8915a" stroke-width="2.5"/>
+              <text x="460" y="48" text-anchor="middle" fill="#f5f0e8" font-family="Libre Baskerville, serif" font-size="16" font-weight="700">APULEIO</text>
+            </g>
+
+            <!-- 3 rami -->
+            <g class="mappa-node" data-info="Vita e contesto: Madaura, Cartagine, Atene. Conferenziere itinerante della seconda sofistica. Processo di Sabratha 158 d.C.: accusa di magia, autodifesa nell'Apologia.">
+              <rect x="50" y="160" width="220" height="50" rx="12" fill="#e8f4f8" stroke="#6db5d4" stroke-width="2"/>
+              <text x="160" y="190" text-anchor="middle" fill="#1a6b8a" font-family="Libre Baskerville, serif" font-size="14" font-weight="700">Vita e contesto</text>
+            </g>
+
+            <g class="mappa-node" data-info="Curiositas come motore narrativo. Schema: caduta → espiazione → salvazione. Lucio (asino) e Psiche entrambi: stessa struttura, doppio livello.">
+              <rect x="340" y="160" width="240" height="50" rx="12" fill="#fef3cd" stroke="#f4d35e" stroke-width="2"/>
+              <text x="460" y="190" text-anchor="middle" fill="#8a6a0a" font-family="Libre Baskerville, serif" font-size="14" font-weight="700">Le Metamorfosi</text>
+            </g>
+
+            <g class="mappa-node" data-info="Elocutio novella: arcaismi + neologismi + volgarismi + poetismi. Architettura della frase: isocoli, omoteleuti, ritmo sinfonico. Tra retorica classica e prosa mediolatina.">
+              <rect x="640" y="160" width="240" height="50" rx="12" fill="#e8f0e8" stroke="#78c878" stroke-width="2"/>
+              <text x="760" y="190" text-anchor="middle" fill="#2a7a2a" font-family="Libre Baskerville, serif" font-size="14" font-weight="700">Lingua e stile</text>
+            </g>
+
+            <!-- sotto-nodi -->
+            <g class="mappa-node" data-info="Apologia (De magia): unica orazione giudiziaria di età imperiale. Più letteratura che processo: ostentazione di cultura, digressioni dotte, destinatario letterario.">
+              <rect x="10" y="310" width="150" height="46" rx="10" fill="#fff" stroke="#6db5d4" stroke-width="1.5"/>
+              <text x="85" y="338" text-anchor="middle" fill="#2c2416" font-family="Cardo, serif" font-size="13">Apologia</text>
+            </g>
+
+            <g class="mappa-node" data-info="De deo Socratis: la più sistematica trattazione antica della demonologia platonica. I daemones come intermediari fra dèi e uomini. Chiave per leggere le Metamorfosi.">
+              <rect x="170" y="310" width="150" height="46" rx="10" fill="#fff" stroke="#6db5d4" stroke-width="1.5"/>
+              <text x="245" y="338" text-anchor="middle" fill="#2c2416" font-family="Cardo, serif" font-size="13">De deo Socratis</text>
+            </g>
+
+            <g class="mappa-node" data-info="Curiositas: vizio morale di Lucio che lo conduce alla trasformazione asinina. Stessa colpa di Psiche nella favola interna. Salvazione solo dopo espiazione e cambiamento di vita.">
+              <rect x="310" y="310" width="150" height="46" rx="10" fill="#fff" stroke="#f4d35e" stroke-width="1.5"/>
+              <text x="385" y="338" text-anchor="middle" fill="#2c2416" font-family="Cardo, serif" font-size="13">Curiositas</text>
+            </g>
+
+            <g class="mappa-node" data-info="Amore e Psiche (IV 28 – VI 24): modello in scala del romanzo. Narrata da una vecchia a Carite. Caduta per curiosità, quattro prove, salvezza divina.">
+              <rect x="470" y="310" width="150" height="46" rx="10" fill="#fff" stroke="#f4d35e" stroke-width="1.5"/>
+              <text x="545" y="338" text-anchor="middle" fill="#2c2416" font-family="Cardo, serif" font-size="13">Amore e Psiche</text>
+            </g>
+
+            <g class="mappa-node" data-info="Libro XI: epifania di Iside, iniziazione misterica, salvezza religiosa. Identificazione Lucio = Madaurensis = Apuleio.">
+              <rect x="610" y="310" width="150" height="46" rx="10" fill="#fff" stroke="#78c878" stroke-width="1.5"/>
+              <text x="685" y="338" text-anchor="middle" fill="#2c2416" font-family="Cardo, serif" font-size="13">Iside (libro XI)</text>
+            </g>
+
+            <g class="mappa-node" data-info="Mescolanza unica di arcaismi, neologismi, volgarismi, poetismi. Strutture sintattiche audaci, prosa ritmata come un esametro. Chiude la retorica latina e apre la prosa mediolatina.">
+              <rect x="770" y="310" width="150" height="46" rx="10" fill="#fff" stroke="#78c878" stroke-width="1.5"/>
+              <text x="845" y="338" text-anchor="middle" fill="#2c2416" font-family="Cardo, serif" font-size="13">Elocutio novella</text>
+            </g>
+
+            <!-- nodo intermedio -->
+            <g class="mappa-node" data-info="Iter dalla curiositas alla salvazione. La favola di Psiche, al centro del romanzo, ripete in piccolo la traiettoria della cornice esterna: caduta, espiazione, intervento divino.">
+              <rect x="280" y="445" width="360" height="50" rx="12" fill="#b8915a" stroke="#2c2416" stroke-width="2"/>
+              <text x="460" y="475" text-anchor="middle" fill="#fff" font-family="Libre Baskerville, serif" font-size="14" font-weight="700">UN ITINERARIO INIZIATICO</text>
+            </g>
+
+            <!-- nodo finale -->
+            <g class="mappa-node" data-info="Conversione genuina o gioco ironico? Il manuale di Conte: 'al dubbio non si può dare risposta definitiva'. Dietro la salvazione di Lucio, ogni lettore può sospettare un gesto lieve di superiore ironia.">
+              <ellipse cx="460" cy="555" rx="240" ry="22" fill="#2c2416" stroke="#b8915a" stroke-width="2"/>
+              <text x="460" y="561" text-anchor="middle" fill="#f5f0e8" font-family="Cardo, serif" font-size="13" font-weight="700">Conversione o ironia? La domanda resta aperta</text>
+            </g>
+          </svg>
+          <div class="mappa-tooltip" id="mappaTooltip"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ STRETCH IT ═══ -->
+    <div class="tlac-box tlac-stretch slide" data-slide-title="Stretch It — la promessa del prologo">
+      <div class="tlac-label">Stretch It &mdash; la domanda di fondo</div>
+      <p style="font-family:'Libre Baskerville',serif; font-size: 18px; font-style: italic; color: var(--gold); margin: 8px 0 14px 0;">Apuleio promette al lettore: <em>laetaberis</em>, «ne godrai». A fine romanzo Lucio è iniziato ai misteri di Iside. Il lettore ha goduto, o ha imparato?</p>
+      <p>Tornate al Do Now. La promessa del prologo era di intrattenimento puro: <em>varias fabulas conseram</em>, «ti intreccerò varie favole». Il finale è una conversione religiosa. Le due cose non si conciliano facilmente. O Apuleio inganna il lettore promettendogli divertimento e dandogli un sermone; o il «godere» del prologo include anche la sapienza, e la conversione di Lucio è parte dell'intrattenimento.</p>
+      <p>Pensateci: il libro XI sostituisce il <em>laetari</em> del prologo col verbo <em>gaudere</em> &mdash; «rallegrarsi». Cambio di registro, o stessa parola in chiave diversa?</p>
+      <button class="tlac-reveal-btn" onclick="toggleHint(this)">Mostra spunto</button>
+      <div class="tlac-hint">Una risposta possibile: il <em>laetaberis</em> del prologo è ambiguo. Conte distingue un <em>lector scrupolosus</em> (libri I-X, che si diverte come si diverte l'asino-filosofo) e un <em>lector studiosus</em> (libro XI, che riconosce la chiave allegorica). Citazione di Conte: «coincidenze di un gioco ironico oppure passione mistica genuina? Al dubbio non si può dare risposta definitiva. Di certo: dietro la salvazione di Lucio ogni lettore può sospettare un gesto lieve di superiore ironia».</div>
+    </div>
+
+    <!-- ═══ QUIZ ═══ -->
+    <div class="esercizio-section" id="esercizi">
+      <h2>Check for Understanding &mdash; Quiz</h2>
+
+      <h3>A. Biografia e contesto</h3>
+
+      <div class="quiz-item" data-quiz="q1">
+        <div class="quiz-q">1. Dove nacque Apuleio?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">A Cartagine, dove poi studiò.</div>
+          <div class="quiz-option" data-correct="true" onclick="checkQuiz(this)">A Madaura, in Numidia ai confini della Getulia (odierna Algeria).</div>
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">A Bilbilis in Hispania, come Marziale.</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <div class="quiz-item" data-quiz="q2">
+        <div class="quiz-q">2. In che anno si tenne il processo di Sabratha?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">Nel 125 d.C., subito dopo la nascita di Apuleio.</div>
+          <div class="quiz-option" data-correct="true" onclick="checkQuiz(this)">Nel 158 d.C., circa due anni dopo le nozze con Pudentilla.</div>
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">Nel 170 d.C., negli ultimi anni della sua vita.</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <h3>B. <em>Apologia</em> e trattati filosofici</h3>
+
+      <div class="quiz-item" data-quiz="q3">
+        <div class="quiz-q">3. Cosa rivela il manuale di Conte sulla natura dell'<em>Apologia</em>?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">È la trascrizione integrale dell'orazione pronunciata in tribunale.</div>
+          <div class="quiz-option" data-correct="true" onclick="checkQuiz(this)">È un sofisticato prodotto letterario, più che un'arringa forense.</div>
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">È un'opera apocrifa, attribuita ad Apuleio in età medievale.</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <div class="quiz-item" data-quiz="q4">
+        <div class="quiz-q">4. Qual è la dottrina centrale del <em>De deo Socratis</em>?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="true" onclick="checkQuiz(this)">La dottrina dei <em>daemones</em> come intermediari fra dèi e uomini.</div>
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">La condanna della retorica e dei sofisti.</div>
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">La teoria dell'eternità dell'anima senza intervento divino.</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <h3>C. Le <em>Metamorfosi</em>: cornice critica</h3>
+
+      <div class="quiz-item" data-quiz="q5">
+        <div class="quiz-q">5. Qual è il titolo alternativo trasmesso da Agostino per le <em>Metamorfosi</em>?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)"><em>Fabulae Milesiae</em>.</div>
+          <div class="quiz-option" data-correct="true" onclick="checkQuiz(this)"><em>Asinus aureus</em>.</div>
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)"><em>De curiositate</em>.</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <div class="quiz-item" data-quiz="q6">
+        <div class="quiz-q">6. Da quanti libri sono composte le <em>Metamorfosi</em>?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">Dodici libri, come l'<em>Eneide</em>.</div>
+          <div class="quiz-option" data-correct="true" onclick="checkQuiz(this)">Undici libri.</div>
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">Quindici libri, come le <em>Metamorfosi</em> di Ovidio.</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <h3>D. La <em>curiositas</em> e l'iter di Lucio</h3>
+
+      <div class="quiz-item" data-quiz="q7">
+        <div class="quiz-q">7. Cos'è la <em>curiositas</em> nelle <em>Metamorfosi</em>?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">Una virtù filosofica esaltata dal libro XI come strada verso l'iniziazione.</div>
+          <div class="quiz-option" data-correct="true" onclick="checkQuiz(this)">Vizio morale di Lucio: motore della caduta, da cui solo l'espiazione e l'iniziazione liberano.</div>
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">Un termine tecnico della retorica, sinonimo di <em>variatio</em>.</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <div class="quiz-item" data-quiz="q8">
+        <div class="quiz-q">8. Cosa deve mangiare Lucio per tornare alla forma umana?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">Foglie di alloro, sacre ad Apollo.</div>
+          <div class="quiz-option" data-correct="true" onclick="checkQuiz(this)">Rose, prima quelle promesse da Fotide, poi quelle della corona del sacerdote isiaco.</div>
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">Pane consacrato durante il rito eleusino.</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <h3>E. Amore e Psiche</h3>
+
+      <div class="quiz-item" data-quiz="q9">
+        <div class="quiz-q">9. In quali libri delle <em>Metamorfosi</em> è collocata la favola di Amore e Psiche?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">All'inizio, fra il libro I e il libro III.</div>
+          <div class="quiz-option" data-correct="true" onclick="checkQuiz(this)">Al centro, fra il libro IV (28) e il libro VI (24).</div>
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">Alla fine, come anticipazione del libro XI.</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <div class="quiz-item" data-quiz="q10">
+        <div class="quiz-q">10. Chi narra la favola di Amore e Psiche, e a chi?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">Iside, in sogno a Lucio durante il libro XI.</div>
+          <div class="quiz-option" data-correct="true" onclick="checkQuiz(this)">Una vecchia, a Carite prigioniera dei briganti, per consolarla.</div>
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">Cupido stesso, dopo essere stato scoperto da Psiche.</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <h3>F. Lingua e ricezione</h3>
+
+      <div class="quiz-item" data-quiz="q11">
+        <div class="quiz-q">11. Come si definisce la lingua delle <em>Metamorfosi</em>?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">Latino classicheggiante, fedele al modello ciceroniano.</div>
+          <div class="quiz-option" data-correct="true" onclick="checkQuiz(this)"><em>Elocutio novella</em>: mescolanza di arcaismi, neologismi, volgarismi e poetismi.</div>
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">Latino volgare puro, anticipatore del latino tardo-popolare.</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <div class="quiz-item" data-quiz="q12">
+        <div class="quiz-q">12. Quale autore moderno ebbe un ruolo decisivo nella fortuna di Apuleio?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">Petrarca, che lo cita nelle <em>Familiares</em>.</div>
+          <div class="quiz-option" data-correct="true" onclick="checkQuiz(this)">Boccaccio, che scopre e trascrive il codice <em>Laurentianus</em>.</div>
+          <div class="quiz-option" data-correct="false" onclick="checkQuiz(this)">Poggio Bracciolini, che lo rinviene a San Gallo.</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+    </div>
+
+    <!-- ═══ EXIT TICKET ═══ -->
+    <div class="tlac-box tlac-exit">
+      <div class="tlac-label">Exit Ticket &mdash; Verifica finale (5 min)</div>
+      <p>Rispondete per iscritto su un foglio e consegnate al docente:</p>
+      <p><strong>1.</strong> Spiegate in 4&ndash;5 righe perché la favola di Amore e Psiche è chiamata «modello in scala» delle <em>Metamorfosi</em>: indicate <em>due</em> corrispondenze concrete fra le vicende di Psiche e quelle di Lucio.</p>
+      <p><strong>2.</strong> Riassumete in 3&ndash;4 righe cosa cambia, rispetto al modello pseudo-lucianeo, nel finale apuleiano (libro XI). Perché questa differenza è importante?</p>
+      <p><strong>3.</strong> Tornate alla domanda <em>Stretch It</em>: <em>«Il lettore ha goduto, o ha imparato?»</em> Rispondete in 5&ndash;6 righe argomentando una delle due letture (conversione genuina vs gioco ironico), portando un argomento testuale.</p>
+    </div>
+
+    <section class="tools-section">
+      <h2>Strumenti correlati</h2>
+      <div class="tools-grid">
+        <a href="../../percorsi/latino5-classico.html" class="tool-link">
+          <span class="tool-icon">&#x1F4D8;</span>
+          <span class="tool-name">Latino 5 Classico</span>
+        </a>
+        <a href="../../strumenti/timeline-eta-imperiale.html" class="tool-link">
+          <span class="tool-icon">&#x1F570;</span>
+          <span class="tool-name">Linea del tempo</span>
+        </a>
+        <a href="../../strumenti/raccoglitore.html" class="tool-link">
+          <span class="tool-icon">&#x1F4DA;</span>
+          <span class="tool-name">Raccoglitore Testi</span>
+        </a>
+        <a href="../../strumenti/analisi_latino.html" class="tool-link">
+          <span class="tool-icon">&#x1F4DD;</span>
+          <span class="tool-name">Analisi Testi</span>
+        </a>
+      </div>
+    </section>
+  </div>
+
+  <footer>
+    <p><strong>Prof. Andrea Vaccaro</strong></p>
+    <p>Lingua e Cultura Latina &mdash; Liceo Classico e Liceo Scientifico</p>
+    <div class="footer-links">
+      <a href="../../index.html">Home</a>
+      <a href="../../strumenti/raccoglitore.html">Raccoglitore Testi</a>
+      <a href="../../strumenti/glossario-eulalia.html">Strumenti</a>
+    </div>
+  </footer>
+
+<script>
+// ═══ TLAC HINT TOGGLE ═══
+function toggleHint(btn) {
+  var hint = btn.nextElementSibling;
+  hint.classList.toggle('visible');
+  btn.textContent = hint.classList.contains('visible') ? 'Nascondi spunto' : 'Mostra spunto';
+}
+
+// ═══ MAPPA — TOOLTIP ═══
+(function() {
+  var tooltip = document.getElementById('mappaTooltip');
+  if (!tooltip) return;
+  var nodes = document.querySelectorAll('.mappa-node');
+  nodes.forEach(function(node) {
+    node.addEventListener('mouseenter', function(e) {
+      var info = node.getAttribute('data-info');
+      if (!info) return;
+      tooltip.textContent = info;
+      tooltip.style.display = 'block';
+      positionTooltip(e);
+    });
+    node.addEventListener('mousemove', positionTooltip);
+    node.addEventListener('mouseleave', function() { tooltip.style.display = 'none'; });
+  });
+  function positionTooltip(e) {
+    var x = e.clientX + 16, y = e.clientY - 10;
+    if (x + 320 > window.innerWidth) x = e.clientX - 320;
+    if (y + 100 > window.innerHeight) y = e.clientY - 100;
+    tooltip.style.left = x + 'px';
+    tooltip.style.top = y + 'px';
+  }
+})();
+
+// ═══ QUIZ ═══
+var score = 0;
+var totalQuiz = 12;
+function checkQuiz(option) {
+  var item = option.closest('.quiz-item');
+  if (item.classList.contains('answered')) return;
+  item.classList.add('answered');
+  var isCorrect = option.getAttribute('data-correct') === 'true';
+  var feedback = item.querySelector('.quiz-feedback');
+  var allOptions = item.querySelectorAll('.quiz-option');
+  allOptions.forEach(function(opt) {
+    opt.classList.add('disabled');
+    if (opt.getAttribute('data-correct') === 'true') opt.classList.add('correct');
+  });
+  if (isCorrect) {
+    option.classList.add('correct');
+    feedback.className = 'quiz-feedback show correct-fb';
+    feedback.textContent = 'Corretto.';
+    score++;
+  } else {
+    option.classList.add('wrong');
+    feedback.className = 'quiz-feedback show wrong-fb';
+    var correctText = item.querySelector('.quiz-option[data-correct="true"]').textContent;
+    feedback.innerHTML = 'Non corretto. La risposta giusta è: <strong>' + correctText + '</strong>.';
+  }
+  document.getElementById('scoreDisplay').textContent = score + ' / ' + totalQuiz;
+}
+
+// ═══ MODALITÀ LIM ═══
+(function() {
+  var slides = Array.prototype.slice.call(document.querySelectorAll('.slide'));
+  var current = 0;
+  var toggleBtn = document.getElementById('limToggle');
+  var counter = document.getElementById('limCounter');
+  var btnPrev = document.getElementById('limPrev');
+  var btnNext = document.getElementById('limNext');
+
+  function isOn() { return document.body.classList.contains('lim-mode'); }
+
+  function show(i) {
+    if (i < 0) i = 0;
+    if (i >= slides.length) i = slides.length - 1;
+    current = i;
+    slides.forEach(function(s, idx) { s.classList.toggle('lim-active', idx === current); });
+    counter.textContent = (current + 1) + ' / ' + slides.length;
+    if (isOn()) slides[current].scrollIntoView({ block: 'start', behavior: 'instant' });
+  }
+
+  function enter() {
+    document.body.classList.add('lim-mode');
+    toggleBtn.textContent = '✕ Esci LIM';
+    show(0);
+  }
+  function exit() {
+    document.body.classList.remove('lim-mode');
+    toggleBtn.textContent = '▶ Modalità LIM';
+    slides.forEach(function(s) { s.classList.remove('lim-active'); });
+  }
+  function toggle() { isOn() ? exit() : enter(); }
+
+  toggleBtn.addEventListener('click', toggle);
+  btnPrev.addEventListener('click', function() { if (isOn()) show(current - 1); });
+  btnNext.addEventListener('click', function() { if (isOn()) show(current + 1); });
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'l' || e.key === 'L') {
+      if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+      toggle();
+      e.preventDefault();
+    }
+    if (!isOn()) return;
+    if (e.key === 'ArrowRight' || e.key === ' ') { show(current + 1); e.preventDefault(); }
+    else if (e.key === 'ArrowLeft') { show(current - 1); e.preventDefault(); }
+    else if (e.key === 'Escape') { exit(); }
+    else if (e.key === 'f' || e.key === 'F') {
+      if (!document.fullscreenElement) document.documentElement.requestFullscreen();
+      else document.exitFullscreen();
+    }
+  });
+})();
+</script>
+
+<script src="../../js/alpheios-init.js"></script>
+</body>
+</html>

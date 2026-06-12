@@ -2145,3 +2145,32 @@ body.liquid-glass::after {
   font-weight: 700;
   border: 2px solid;
 }
+
+/* ── Utilità calendari/flashcard (consolidamento inline) ── */
+.stat-box {
+  background: linear-gradient(135deg, #1e1a12, #3a3024);
+  color: #f5f0e8;
+  border: none;
+  flex: 1;
+  min-width: 180px;
+  text-align: center;
+  padding: 16px 20px;
+}
+.stat-numero {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--gold-light);
+  font-family: 'Cormorant Garamond', serif;
+}
+.stat-etichetta { font-size: 13px; opacity: .7; }
+.cella-centrata { text-align: center; width: 100%; padding: 20px; }
+.btn-stampa {
+  padding: 8px 20px;
+  border: 2px solid var(--border);
+  border-radius: 10px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  background: var(--card);
+  color: var(--text);
+  transition: all 0.2s;
+}

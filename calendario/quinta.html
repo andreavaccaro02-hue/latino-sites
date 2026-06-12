@@ -83,7 +83,7 @@
     }
   </style>
 </head>
-<body>
+<body class="liquid-glass">
   <nav class="navbar">
     <div class="container">
       <a href="../index.html" class="site-name">Lingua e Cultura Latina</a>
@@ -135,7 +135,7 @@
     </table>
 
     <div style="margin-top:20px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
-      <button onclick="window.print()" style="padding:8px 20px;border:2px solid var(--border);border-radius:10px;font-family:'Libre Baskerville',serif;font-size:0.9rem;cursor:pointer;background:var(--card);color:var(--text);transition:all 0.2s;">🖨️ Stampa</button>
+      <button onclick="window.print()" class="btn-stampa">🖨️ Stampa</button>
       <span style="font-size:0.85rem;color:var(--text-dim);font-family:'Cardo',serif;">Ultimo aggiornamento: <span id="last-update">—</span></span>
     </div>
   </div>
@@ -346,13 +346,13 @@
       var quando = diff === 0 ? 'Oggi' : diff === 1 ? 'Domani' : 'Tra ' + diff + ' giorni';
       cdEl.innerHTML =
         '<div style="display:flex;gap:12px;flex-wrap:wrap;align-items:stretch;">' +
-          '<div class="cal-stat" style="background:linear-gradient(135deg,#1e1a12,#3a3024);color:#f5f0e8;border:none;flex:1;min-width:180px;text-align:center;padding:16px 20px;">' +
-            '<div style="font-size:32px;font-weight:700;color:var(--gold-light);font-family:Cormorant Garamond,serif;">' + lezioniRimaste + '</div>' +
-            '<div style="font-size:13px;opacity:.7;">lezioni rimaste</div>' +
+          '<div class="cal-stat stat-box">' +
+            '<div class="stat-numero">' + lezioniRimaste + '</div>' +
+            '<div class="stat-etichetta">lezioni rimaste</div>' +
           '</div>' +
-          '<div class="cal-stat" style="background:linear-gradient(135deg,#1e1a12,#3a3024);color:#f5f0e8;border:none;flex:1;min-width:180px;text-align:center;padding:16px 20px;">' +
-            '<div style="font-size:32px;font-weight:700;color:var(--gold-light);font-family:Cormorant Garamond,serif;">' + oreRimaste + '</div>' +
-            '<div style="font-size:13px;opacity:.7;">ore rimaste</div>' +
+          '<div class="cal-stat stat-box">' +
+            '<div class="stat-numero">' + oreRimaste + '</div>' +
+            '<div class="stat-etichetta">ore rimaste</div>' +
           '</div>' +
           '<div class="cal-stat" style="flex:2;min-width:220px;padding:16px 20px;">' +
             '<div style="font-size:13px;color:var(--text-muted);margin-bottom:4px;">Prossima lezione</div>' +
@@ -361,7 +361,7 @@
           '</div>' +
         '</div>';
     } else {
-      cdEl.innerHTML = '<div class="cal-stat" style="text-align:center;width:100%;padding:20px;"><strong style="color:var(--gold);">Corso terminato</strong></div>';
+      cdEl.innerHTML = '<div class="cal-stat cella-centrata"><strong style="color:var(--gold);">Corso terminato</strong></div>';
     }
   }
 })();

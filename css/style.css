@@ -2117,3 +2117,11 @@ body.liquid-glass::after {
   backdrop-filter: blur(12px) saturate(var(--glass-saturate));
   border-color: var(--glass-border);
 }
+
+.mt-24 { margin-top: 24px; }
+
+/* badge verde Eulalia del raccoglitore (consolidamento inline) */
+.author-year-eulalia {
+  background: var(--eulalia-light);
+  color: #155724;
+}

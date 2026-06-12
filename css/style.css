@@ -1697,3 +1697,423 @@ button:focus-visible,
   outline-offset: 2px;
   border-radius: 4px;
 }
+
+/* ═══════════════════════════════════════════════════════════
+   LIQUID GLASS — design system v1 (Fase 2 restyling)
+   Attivazione per pagina: <body class="liquid-glass">
+   Nessun effetto sulle pagine prive della classe.
+   ═══════════════════════════════════════════════════════════ */
+
+:root {
+  /* Materiali vetro */
+  --glass-bg: rgba(250, 248, 243, 0.40);
+  --glass-bg-strong: rgba(250, 248, 243, 0.70);
+  --glass-border: rgba(255, 255, 255, 0.55);
+  --glass-border-warm: rgba(156, 122, 60, 0.18);
+  --glass-blur: 18px;
+  --glass-saturate: 1.35;
+  --glass-shadow: 0 8px 32px rgba(30, 26, 18, 0.10), inset 0 1px 0 rgba(255, 255, 255, 0.60);
+  --glass-shadow-hover: 0 16px 48px rgba(30, 26, 18, 0.14), inset 0 1px 0 rgba(255, 255, 255, 0.75);
+  --glass-highlight: linear-gradient(135deg, rgba(255, 255, 255, 0.45), rgba(255, 255, 255, 0.05) 40%);
+
+  /* Scala radius */
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+}
+
+/* ── Fondo: la "materia" dietro il vetro ── */
+body.liquid-glass {
+  background:
+    radial-gradient(900px 620px at 12% -6%, rgba(156, 122, 60, 0.17), transparent 60%),
+    radial-gradient(720px 520px at 96% 10%, rgba(139, 30, 63, 0.10), transparent 55%),
+    radial-gradient(820px 620px at 70% 108%, rgba(30, 91, 139, 0.10), transparent 55%),
+    linear-gradient(180deg, var(--bg) 0%, var(--bg-warm) 100%);
+  background-attachment: fixed;
+}
+
+/* ── Utilità vetro generica ── */
+.liquid-glass .glass {
+  background: var(--glass-bg);
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  border: 1px solid var(--glass-border);
+  border-bottom-color: var(--glass-border-warm);
+  box-shadow: var(--glass-shadow);
+  border-radius: var(--radius-md);
+}
+
+/* ── Navbar ── */
+.liquid-glass .navbar {
+  /* !important necessario: la regola base .navbar usa !important sul background */
+  background: var(--glass-bg-strong) !important;
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  border-bottom: 1px solid var(--glass-border-warm);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.55) inset, 0 8px 24px rgba(30, 26, 18, 0.05) !important;
+}
+
+.liquid-glass .nav-links a {
+  border-radius: 999px;
+}
+
+.liquid-glass .nav-links a:hover,
+.liquid-glass .nav-links a.active {
+  background: rgba(156, 122, 60, 0.14);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+/* ── Card ── */
+.liquid-glass .card {
+  background: var(--glass-bg);
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  border: 1px solid var(--glass-border);
+  border-bottom-color: var(--glass-border-warm);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--glass-shadow);
+}
+
+.liquid-glass .card:hover {
+  box-shadow: var(--glass-shadow-hover), 0 0 0 1px var(--gold-pale);
+}
+
+/* riflesso superiore */
+.liquid-glass .card::after {
+  background: var(--glass-highlight);
+  border-radius: var(--radius-lg) var(--radius-lg) 60% 60%;
+  height: 46%;
+  opacity: 0.5;
+}
+
+/* ── Tool link ── */
+.liquid-glass .tool-link {
+  background: var(--glass-bg);
+  -webkit-backdrop-filter: blur(12px) saturate(var(--glass-saturate));
+  backdrop-filter: blur(12px) saturate(var(--glass-saturate));
+  border: 1px solid var(--glass-border);
+  border-bottom-color: var(--glass-border-warm);
+  border-radius: var(--radius-md);
+  box-shadow: var(--glass-shadow);
+}
+
+.liquid-glass .tool-link:hover {
+  /* vetro scuro: ripristina il contrasto pieno dell'inversione originale */
+  background: rgba(30, 26, 18, 0.88);
+  -webkit-backdrop-filter: blur(12px) saturate(var(--glass-saturate));
+  backdrop-filter: blur(12px) saturate(var(--glass-saturate));
+  color: var(--bg);
+  border-color: rgba(255, 255, 255, 0.18);
+  box-shadow: var(--glass-shadow-hover);
+}
+
+/* ── Pannello testo lungo: SEMPRE pieno, mai vetro ── */
+.liquid-glass .panel-solid {
+  background: var(--card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  padding: 28px 32px;
+}
+
+/* ── Breadcrumb (nuovo componente, per le sezioni profonde) ── */
+.liquid-glass .breadcrumb {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 18px;
+  border-radius: 999px;
+  background: var(--glass-bg);
+  -webkit-backdrop-filter: blur(12px) saturate(var(--glass-saturate));
+  backdrop-filter: blur(12px) saturate(var(--glass-saturate));
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  font-size: 14px;
+  color: var(--text-dim);
+  margin: 20px 0;
+}
+
+.liquid-glass .breadcrumb a {
+  color: var(--gold);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.liquid-glass .breadcrumb .sep { opacity: 0.45; }
+
+/* ── Bottone vetro ── */
+.liquid-glass .btn-glass {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 22px;
+  border-radius: 999px;
+  background: var(--glass-bg-strong);
+  -webkit-backdrop-filter: blur(12px) saturate(var(--glass-saturate));
+  backdrop-filter: blur(12px) saturate(var(--glass-saturate));
+  border: 1px solid var(--glass-border);
+  border-bottom-color: var(--glass-border-warm);
+  box-shadow: var(--glass-shadow);
+  color: var(--text);
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s var(--ease-out);
+}
+
+.liquid-glass .btn-glass:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--glass-shadow-hover);
+  color: var(--gold);
+}
+
+/* ── Footer ── */
+.liquid-glass footer {
+  background: var(--glass-bg-strong);
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  backdrop-filter: blur(var(--glass-blur));
+  border-top: 1px solid var(--glass-border-warm);
+}
+
+/* ═══ FALLBACK E RISPETTO DELLE PREFERENZE ═══ */
+
+/* Browser senza backdrop-filter: superfici piene */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .liquid-glass .glass,
+  .liquid-glass .navbar,
+  .liquid-glass .card,
+  .liquid-glass .tool-link,
+  .liquid-glass .breadcrumb,
+  .liquid-glass .btn-glass,
+  .liquid-glass footer {
+    background: var(--card) !important;
+  }
+}
+
+/* Chi chiede meno trasparenza: superfici piene */
+@media (prefers-reduced-transparency: reduce) {
+  .liquid-glass .glass,
+  .liquid-glass .navbar,
+  .liquid-glass .card,
+  .liquid-glass .tool-link,
+  .liquid-glass .breadcrumb,
+  .liquid-glass .btn-glass,
+  .liquid-glass footer {
+    background: var(--card) !important;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+}
+
+/* Chi chiede meno movimento: stop ad animazioni e transizioni (vale per tutto il sito) */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ── Card links indirizzo (classico/scientifico) — sostituisce gli stili inline della home ── */
+.card-links {
+  display: flex;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.card-links a {
+  flex: 1;
+  text-align: center;
+  padding: 8px 12px;
+  border-radius: 999px;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 700;
+  transition: all 0.3s var(--ease-out);
+}
+
+.card-links .indirizzo-classico { background: #f0d4dc; color: var(--classico); }
+.card-links .indirizzo-scientifico { background: #d4e4f0; color: var(--scientifico); }
+
+/* variante vetro */
+.liquid-glass .card-links a {
+  border: 1px solid var(--glass-border);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+.liquid-glass .card-links .indirizzo-classico { background: rgba(139, 30, 63, 0.12); }
+.liquid-glass .card-links .indirizzo-scientifico { background: rgba(30, 91, 139, 0.12); }
+
+.liquid-glass .card-links .indirizzo-classico:hover { background: rgba(139, 30, 63, 0.22); }
+.liquid-glass .card-links .indirizzo-scientifico:hover { background: rgba(30, 91, 139, 0.22); }
+
+/* ── Tipografia di sistema (stile Apple/SF) per le pagine liquid glass ── */
+:root {
+  --font-system: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text',
+                 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+body.liquid-glass {
+  font-family: var(--font-system);
+  font-size: 16px;
+  letter-spacing: -0.011em; /* tracking SF */
+}
+
+.liquid-glass h1,
+.liquid-glass h2,
+.liquid-glass h3,
+.liquid-glass h4,
+.liquid-glass .site-name,
+.liquid-glass .section-title,
+.liquid-glass .tool-link .tool-name,
+.liquid-glass .hero h1,
+.liquid-glass .hero .subtitle {
+  font-family: var(--font-system);
+}
+
+.liquid-glass .hero h1 {
+  font-weight: 700;
+  letter-spacing: -0.022em; /* display tightening */
+}
+
+.liquid-glass .hero .subtitle {
+  font-style: normal;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+.liquid-glass .section-title,
+.liquid-glass .card h3 {
+  font-weight: 650;
+  letter-spacing: -0.018em;
+}
+
+.liquid-glass .nav-links a,
+.liquid-glass .tool-link .tool-name {
+  font-family: var(--font-system);
+  font-weight: 590; /* peso "medium" SF; i sistemi senza pesi variabili arrotondano a 600 */
+}
+
+/* ═══════════════════════════════════════════════════════════
+   LIQUID GLASS v1.1 — "aula viva": aurora, tinte per anno,
+   chip icona, reveal in cascata. Sempre scoped a .liquid-glass.
+   ═══════════════════════════════════════════════════════════ */
+
+/* ── Aurora animata dietro il vetro ── */
+@keyframes auroraDrift {
+  from { transform: translate3d(-3%, -2%, 0) rotate(0deg) scale(1); }
+  to   { transform: translate3d(3%, 2%, 0) rotate(4deg) scale(1.08); }
+}
+
+body.liquid-glass::after {
+  content: '';
+  position: fixed;
+  inset: -20%;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(40% 35% at 25% 30%, rgba(156, 122, 60, 0.16), transparent 70%),
+    radial-gradient(35% 30% at 75% 20%, rgba(139, 30, 63, 0.11), transparent 70%),
+    radial-gradient(45% 40% at 60% 80%, rgba(30, 91, 139, 0.11), transparent 70%);
+  filter: blur(48px);
+  animation: auroraDrift 26s ease-in-out infinite alternate;
+}
+
+/* ── Hero: titolo con riflesso dorato che scorre ── */
+.liquid-glass .hero h1 {
+  background: linear-gradient(110deg, #f5f0e8 35%, var(--gold-light) 50%, #f5f0e8 65%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: fadeInUp 0.8s var(--ease-out) both, shimmerGold 7s linear 1.2s infinite;
+}
+
+/* ── Card: icona in chip di vetro tinto per anno ── */
+.liquid-glass .card .card-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 54px;
+  height: 54px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.45);
+  border: 1px solid var(--glass-border);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7), 0 4px 12px rgba(30, 26, 18, 0.06);
+  margin-bottom: 12px;
+  transition: transform 0.45s var(--ease-spring);
+}
+
+.liquid-glass .card:hover .card-icon {
+  transform: rotate(-6deg) scale(1.12);
+}
+
+.liquid-glass .card[data-level="1"] .card-icon { background: rgba(201, 74, 74, 0.14); }
+.liquid-glass .card[data-level="2"] .card-icon { background: rgba(74, 154, 94, 0.14); }
+.liquid-glass .card[data-level="3"] .card-icon { background: rgba(74, 138, 170, 0.14); }
+.liquid-glass .card[data-level="4"] .card-icon { background: rgba(212, 168, 67, 0.16); }
+.liquid-glass .card[data-level="5"] .card-icon { background: rgba(154, 106, 181, 0.14); }
+
+/* ── Card: al passaggio si accende del colore del suo anno ── */
+.liquid-glass .card[data-level="1"]:hover { box-shadow: var(--glass-shadow-hover), 0 14px 44px rgba(201, 74, 74, 0.26); }
+.liquid-glass .card[data-level="2"]:hover { box-shadow: var(--glass-shadow-hover), 0 14px 44px rgba(74, 154, 94, 0.26); }
+.liquid-glass .card[data-level="3"]:hover { box-shadow: var(--glass-shadow-hover), 0 14px 44px rgba(74, 138, 170, 0.26); }
+.liquid-glass .card[data-level="4"]:hover { box-shadow: var(--glass-shadow-hover), 0 14px 44px rgba(212, 168, 67, 0.30); }
+.liquid-glass .card[data-level="5"]:hover { box-shadow: var(--glass-shadow-hover), 0 14px 44px rgba(154, 106, 181, 0.26); }
+
+/* ── Badge: lucentezza vetro ── */
+.liquid-glass .card .badge {
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35), 0 2px 8px rgba(30, 26, 18, 0.12);
+}
+
+/* ── Tool-link: icona in chip dorato che reagisce ── */
+.liquid-glass .tool-link .tool-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: rgba(156, 122, 60, 0.12);
+  border: 1px solid var(--glass-border);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  flex-shrink: 0;
+  transition: transform 0.4s var(--ease-spring), background 0.3s var(--ease-out);
+}
+
+.liquid-glass .tool-link:hover .tool-icon {
+  transform: scale(1.15) rotate(5deg);
+  background: rgba(255, 255, 255, 0.12);
+}
+
+/* ── Reveal in cascata dei tool-link ── */
+.liquid-glass .tools-grid .tool-link { animation: fadeInUp 0.6s var(--ease-out) both; }
+.liquid-glass .tools-grid .tool-link:nth-child(1)  { animation-delay: 0.05s; }
+.liquid-glass .tools-grid .tool-link:nth-child(2)  { animation-delay: 0.10s; }
+.liquid-glass .tools-grid .tool-link:nth-child(3)  { animation-delay: 0.15s; }
+.liquid-glass .tools-grid .tool-link:nth-child(4)  { animation-delay: 0.20s; }
+.liquid-glass .tools-grid .tool-link:nth-child(5)  { animation-delay: 0.25s; }
+.liquid-glass .tools-grid .tool-link:nth-child(6)  { animation-delay: 0.30s; }
+.liquid-glass .tools-grid .tool-link:nth-child(7)  { animation-delay: 0.35s; }
+.liquid-glass .tools-grid .tool-link:nth-child(8)  { animation-delay: 0.40s; }
+.liquid-glass .tools-grid .tool-link:nth-child(9)  { animation-delay: 0.45s; }
+.liquid-glass .tools-grid .tool-link:nth-child(10) { animation-delay: 0.50s; }
+.liquid-glass .tools-grid .tool-link:nth-child(11) { animation-delay: 0.55s; }
+.liquid-glass .tools-grid .tool-link:nth-child(12) { animation-delay: 0.60s; }
+
+/* ── Utilità spaziatura (consolidamento stili inline) ── */
+.mt-20 { margin-top: 20px; }
+
+/* ── Track tabs (percorsi) in vetro ── */
+.liquid-glass .track-tab {
+  font-family: var(--font-system);
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  background: var(--glass-bg);
+  -webkit-backdrop-filter: blur(12px) saturate(var(--glass-saturate));
+  backdrop-filter: blur(12px) saturate(var(--glass-saturate));
+  border-color: var(--glass-border);
+}

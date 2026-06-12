@@ -2125,3 +2125,10 @@ body.liquid-glass::after {
   background: var(--eulalia-light);
   color: #155724;
 }
+
+/* ── Utilità spaziatura/colore (consolidamento inline sezione autori) ── */
+.mb-14 { margin-bottom: 14px; }
+.mt-14 { margin-top: 14px; }
+.mt-1r { margin-top: 1rem; }
+.mt-2r { margin-top: 2rem; }
+.text-dim { color: var(--text-dim); }

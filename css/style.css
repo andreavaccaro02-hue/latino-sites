@@ -2132,3 +2132,16 @@ body.liquid-glass::after {
 .mt-1r { margin-top: 1rem; }
 .mt-2r { margin-top: 2rem; }
 .text-dim { color: var(--text-dim); }
+
+/* ── Utilità sezione grammatica (consolidamento inline) ── */
+.mb-30 { margin-bottom: 30px; }
+.my-20 { margin: 20px 0; }
+.nota-piccola { color: #888; font-size: 0.9em; }
+.nota-sotto { margin-top: 10px; font-size: 0.9em; color: #666; }
+.tag-funzione {
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  border: 2px solid;
+}

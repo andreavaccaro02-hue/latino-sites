@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Il Nominativo della Terza Declinazione - Lezione Interattiva</title>
+    <meta name="description" content="Le uscite del nominativo della terza declinazione: temi in consonante e in -i, nominativo sigmatico e asigmatico, tabella inversa per risalire dal genitivo al nominativo. Con quiz.">
+    <meta property="og:title" content="Il Nominativo della Terza Declinazione - Lezione Interattiva">
+    <meta property="og:description" content="Le uscite del nominativo della terza declinazione: temi in consonante e in -i, nominativo sigmatico e asigmatico, tabella inversa per risalire dal genitivo al nominativo. Con quiz.">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="it_IT">
+    <meta property="og:url" content="https://andreavaccaro02-hue.github.io/latino-sites/grammatica/nominativo_terza.html">
+    <link rel="canonical" href="https://andreavaccaro02-hue.github.io/latino-sites/grammatica/nominativo_terza.html">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #6a3093 0%, #a044ff 100%);
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #6a3093 0%, #a044ff 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: #e0e0e0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #6a3093, #a044ff);
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .section {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h2 {
+            color: #6a3093;
+            font-size: 2em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #6a3093;
+        }
+
+        h3 {
+            color: #4b2168;
+            font-size: 1.5em;
+            margin: 30px 0 15px 0;
+        }
+
+        .box {
+            background: #f7f0fd;
+            border-left: 5px solid #6a3093;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .box-warning {
+            background: #fff3cd;
+            border-left-color: #ffc107;
+        }
+
+        .box-success {
+            background: #d4edda;
+            border-left-color: #28a745;
+        }
+
+        .box-info {
+            background: #d1ecf1;
+            border-left-color: #17a2b8;
+        }
+
+        .example {
+            background: #f3ebfb;
+            border: 2px solid #6a3093;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .latin {
+            color: #c2185b;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        .translation {
+            color: #1976d2;
+            font-style: italic;
+            margin-top: 8px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        th {
+            background: linear-gradient(135deg, #6a3093, #4b2168);
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        tr:hover {
+            background: #f7f0fd;
+        }
+
+        .quiz-option {
+            background: white;
+            border: 2px solid #ddd;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .quiz-option:hover {
+            border-color: #6a3093;
+            transform: translateX(5px);
+            box-shadow: 0 2px 8px rgba(106, 48, 147, 0.3);
+        }
+
+        .quiz-option.correct {
+            background: #d4edda;
+            border-color: #28a745;
+        }
+
+        .quiz-option.wrong {
+            background: #f8d7da;
+            border-color: #dc3545;
+        }
+
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #6a3093, #a044ff);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: #e0e0e0;
+            color: #555;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .section-counter {
+            text-align: center;
+            color: #999;
+            margin-bottom: 10px;
+            font-size: 0.9em;
+        }
+
+        .highlight {
+            background: #fef9e7;
+            border: 1px solid #f39c12;
+            padding: 3px 6px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+
+        .schema-box {
+            background: linear-gradient(135deg, #f3ebfb, #e6d5f7);
+            border: 2px solid #6a3093;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .schema-box .formula {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #4b2168;
+            margin: 10px 0;
+        }
+
+        .result-box {
+            background: linear-gradient(135deg, #f3ebfb, #e6d5f7);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .result-box h3 {
+            font-size: 2em;
+            color: #6a3093;
+        }
+
+        .result-box p {
+            font-size: 1.2em;
+            color: #555;
+            margin-top: 10px;
+        }
+
+        .score-circle {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #6a3093, #a044ff);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 20px auto;
+            font-size: 2.5em;
+            font-weight: bold;
+            color: white;
+            box-shadow: 0 5px 20px rgba(106,48,147,0.4);
+        }
+
+        .nav-home {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 25px;
+            background: #6a3093;
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .nav-home:hover {
+            background: #4b2168;
+            transform: translateY(-2px);
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 0.85em;
+            font-weight: 700;
+            margin: 2px;
+        }
+
+        .tag-green { background: #d4edda; color: #155724; }
+        .tag-red { background: #f8d7da; color: #721c24; }
+        .tag-blue { background: #d1ecf1; color: #0c5460; }
+        .tag-yellow { background: #fff3cd; color: #856404; }
+        .tag-purple { background: #e6d5f7; color: #4b2168; }
+
+        .quiz-feedback {
+            margin-top: 10px;
+            padding: 10px 15px;
+            border-radius: 8px;
+            display: none;
+            font-weight: 600;
+        }
+
+        .quiz-feedback.show { display: block; }
+        .quiz-feedback.correct-fb { background: #d4edda; color: #155724; }
+        .quiz-feedback.wrong-fb { background: #f8d7da; color: #721c24; }
+
+        /* Approfondimenti a scomparsa (doppio livello) */
+        details.approfondimento {
+            background: #fdf6ec;
+            border: 2px dashed #d4a017;
+            border-radius: 10px;
+            padding: 0;
+            margin: 20px 0;
+        }
+
+        details.approfondimento summary {
+            cursor: pointer;
+            padding: 15px 20px;
+            font-weight: 700;
+            color: #8a6d00;
+            list-style: none;
+        }
+
+        details.approfondimento summary::before {
+            content: "🔎 ";
+        }
+
+        details.approfondimento summary::after {
+            content: " ▸ (per chi vuole capire il fenomeno)";
+            font-weight: 400;
+            font-size: 0.85em;
+            color: #b0925a;
+        }
+
+        details.approfondimento[open] summary::after {
+            content: " ▾";
+        }
+
+        details.approfondimento .inner {
+            padding: 0 20px 20px 20px;
+        }
+    </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "name": "Il Nominativo della Terza Declinazione - Lezione Interattiva",
+  "description": "Le uscite del nominativo della terza declinazione: temi in consonante e in -i, nominativo sigmatico e asigmatico, tabella inversa per risalire dal genitivo al nominativo. Con quiz.",
+  "author": {
+    "@type": "Person",
+    "name": "Prof. Andrea Vaccaro"
+  },
+  "inLanguage": "it",
+  "educationalUse": "Lezione interattiva",
+  "learningResourceType": "Lesson"
+}
+</script>
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<meta property="og:image" content="https://andreavaccaro02-hue.github.io/latino-sites/og-image.svg">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/alpheios-components@latest/dist/style/style-components.min.css">
+</head>
+<body class="liquid-glass">
+<nav class="navbar">
+  <div class="container">
+    <a href="../index.html" class="site-name">Lingua e Cultura Latina</a>
+    <div class="nav-links">
+      <a href="../index.html">Home</a>
+      <a href="../strumenti/raccoglitore.html">Raccoglitore</a>
+      <a href="index.html">Grammatica</a>
+      <a href="../strumenti/glossario-eulalia.html">Strumenti</a>
+      <a href="../chi-sono.html">Su di me</a>
+      <a href="../pdf/cv-vaccaro-europass.pdf" target="_blank">CV</a>
+    </div>
+  </div>
+</nav>
+
+
+<div class="container">
+    <header>
+        <h1>🧭 Il Nominativo della Terza</h1>
+        <p>Lezione interattiva — Latino 1 · Morfologia nominale</p>
+    </header>
+
+    <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+    </div>
+
+    <div class="content">
+        <div class="section-counter" id="sectionCounter">Sezione 1 di 7</div>
+
+        <!-- SEZIONE 1: Il problema -->
+        <div class="section active" id="section1">
+            <h2>1. Il problema: un nominativo «imprevedibile»</h2>
+
+            <p>Nella prima e nella seconda declinazione il nominativo è regolare: <span class="latin">rosa</span>, <span class="latin">lupus</span>, <span class="latin">donum</span>. Nella <strong>terza declinazione</strong> no: <span class="latin">miles</span>, <span class="latin">rex</span>, <span class="latin">leo</span>, <span class="latin">corpus</span>, <span class="latin">civis</span>, <span class="latin">animal</span>… uscite tutte diverse.</p>
+
+            <div class="box">
+                <strong>Il punto fermo:</strong> ciò che accomuna tutti i nomi della terza è il <strong>genitivo singolare in ‑is</strong>. Il nominativo varia, il genitivo no. Per questo il dizionario riporta sempre <em>nominativo + genitivo</em>: <span class="latin">miles, militis</span>.
+            </div>
+
+            <p>Da qui nasce il problema pratico di ogni versione: nel testo trovi <span class="latin">militis</span>, <span class="latin">virginum</span>, <span class="latin">corpora</span>… ma sul dizionario devi cercare il <strong>nominativo</strong>. Questa lezione ti insegna due cose:</p>
+
+            <ul style="margin: 15px 0 15px 25px;">
+                <li><strong>In avanti:</strong> come il latino costruisce il nominativo a partire dal tema;</li>
+                <li><strong>All'indietro:</strong> come tu, dal genitivo (o da qualunque caso obliquo), risali al nominativo per trovare la parola sul dizionario.</li>
+            </ul>
+
+            <h3>Dove si trova il tema?</h3>
+            <div class="schema-box">
+                <div class="formula">TEMA = genitivo singolare senza ‑is</div>
+                <div class="formula"><span class="latin">milit‑is</span> → tema <span class="latin">milit‑</span> &nbsp;·&nbsp; <span class="latin">reg‑is</span> → tema <span class="latin">reg‑</span> &nbsp;·&nbsp; <span class="latin">leon‑is</span> → tema <span class="latin">leon‑</span></div>
+            </div>
+
+            <div class="box box-info">
+                <strong>Parisillabi e imparisillabi:</strong> i nomi che hanno lo <em>stesso numero di sillabe</em> al nominativo e al genitivo si dicono <strong>parisillabi</strong> (<span class="latin">ci‑vis / ci‑vis</span>); quelli che al genitivo hanno <em>una sillaba in più</em> si dicono <strong>imparisillabi</strong> (<span class="latin">mi‑les / mi‑li‑tis</span>). La distinzione tornerà utile per l'ablativo e il genitivo plurale, ma già ora nota: i parisillabi hanno quasi sempre il nominativo «facile» in ‑is.
+            </div>
+        </div>
+
+        <!-- SEZIONE 2: Le due strategie -->
+        <div class="section" id="section2">
+            <h2>2. Le due strategie del latino</h2>
+
+            <p>Il latino forma il nominativo singolare della terza in due soli modi. Tutte le uscite «strane» derivano da qui.</p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Strategia</th>
+                        <th>Come funziona</th>
+                        <th>Esempi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="tag tag-purple">Nominativo SIGMATICO</span></td>
+                        <td>tema + <strong>‑s</strong> (la ‑s si «scontra» con la consonante finale del tema e la trasforma)</td>
+                        <td><span class="latin">reg‑ + s → rex</span><br><span class="latin">milit‑ + s → miles</span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="tag tag-blue">Nominativo ASIGMATICO</span></td>
+                        <td>nessuna ‑s: il nominativo è il <strong>tema puro</strong> (a volte leggermente modificato)</td>
+                        <td><span class="latin">consul‑ → consul</span><br><span class="latin">leon‑ → leo</span></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="box">
+                <strong>Chi sceglie quale?</strong> Dipende dalla consonante finale del tema:<br>
+                • temi in <strong>gutturale</strong> (c, g), <strong>labiale</strong> (p, b), <strong>dentale</strong> (t, d) → <strong>sigmatico</strong><br>
+                • temi in <strong>nasale</strong> (n), <strong>liquida</strong> (l, r), <strong>sibilante</strong> (s) → <strong>asigmatico</strong><br>
+                • i <strong>neutri</strong> non aggiungono mai ‑s (il loro nominativo è sempre il tema, eventualmente modificato).
+            </div>
+
+            <details class="approfondimento">
+                <summary>Perché la ‑s trasforma la consonante?</summary>
+                <div class="inner">
+                    <p>È pura fonetica: alcune consonanti non possono stare davanti a ‑s senza cambiare.</p>
+                    <ul style="margin: 10px 0 10px 25px;">
+                        <li><strong>Gutturale + s:</strong> i suoni /k/ o /g/ + /s/ si fondono nel segno <strong>x</strong>: <span class="latin">*duc‑s → dux</span>, <span class="latin">*reg‑s → rex</span>. La x non è una lettera «nuova»: è la grafia di c/g + s.</li>
+                        <li><strong>Dentale + s:</strong> /t/ e /d/ <em>cadono</em> davanti a s: <span class="latin">*milit‑s → miles</span>, <span class="latin">*ped‑s → pes</span>, <span class="latin">*laud‑s → laus</span>.</li>
+                        <li><strong>Labiale + s:</strong> /p/ e /b/ resistono e restano scritte: <span class="latin">princep‑s</span>, <span class="latin">urb‑s</span>, <span class="latin">pleb‑s</span>.</li>
+                    </ul>
+                    <p>In più, in molte parole la vocale dell'ultima sillaba del tema cambia timbro tra nominativo e casi obliqui (<strong>apofonia</strong>): <span class="latin">miles / milit‑is</span> (e ↔ i), <span class="latin">iudex / iudic‑is</span> (e ↔ i), <span class="latin">princeps / princip‑is</span>. Per questo il nominativo può sembrare «un'altra parola»: è la stessa, con due fenomeni fonetici sovrapposti.</p>
+                </div>
+            </details>
+        </div>
+
+        <!-- SEZIONE 3: Sigmatici -->
+        <div class="section" id="section3">
+            <h2>3. I nominativi sigmatici (temi in gutturale, labiale, dentale)</h2>
+
+            <h3>Temi in gutturale (c, g) → nominativo in ‑x</h3>
+            <table>
+                <thead>
+                    <tr><th>Tema</th><th>Nominativo</th><th>Genitivo</th><th>Traduzione</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><span class="latin">duc‑</span></td><td><span class="latin">dux</span></td><td><span class="latin">ducis</span></td><td>comandante</td></tr>
+                    <tr><td><span class="latin">reg‑</span></td><td><span class="latin">rex</span></td><td><span class="latin">regis</span></td><td>re</td></tr>
+                    <tr><td><span class="latin">voc‑</span></td><td><span class="latin">vox</span></td><td><span class="latin">vocis</span></td><td>voce</td></tr>
+                    <tr><td><span class="latin">pac‑</span></td><td><span class="latin">pax</span></td><td><span class="latin">pacis</span></td><td>pace</td></tr>
+                    <tr><td><span class="latin">iudic‑</span></td><td><span class="latin">iudex</span></td><td><span class="latin">iudicis</span></td><td>giudice</td></tr>
+                    <tr><td><span class="latin">radic‑</span></td><td><span class="latin">radix</span></td><td><span class="latin">radicis</span></td><td>radice</td></tr>
+                </tbody>
+            </table>
+
+            <div class="box box-warning">
+                <strong>Attenzione al genitivo in ‑icis:</strong> può risalire a un nominativo in <strong>‑ex</strong> (<span class="latin">iudex, index, artifex</span>) oppure in <strong>‑ix</strong> (<span class="latin">radix, felix, victrix</span>). Se la prima ipotesi non è sul dizionario, prova la seconda.
+            </div>
+
+            <h3>Temi in labiale (p, b) → nominativo in ‑ps / ‑bs</h3>
+            <table>
+                <thead>
+                    <tr><th>Tema</th><th>Nominativo</th><th>Genitivo</th><th>Traduzione</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><span class="latin">princip‑</span></td><td><span class="latin">princeps</span></td><td><span class="latin">principis</span></td><td>principe, primo</td></tr>
+                    <tr><td><span class="latin">urb‑</span></td><td><span class="latin">urbs</span></td><td><span class="latin">urbis</span></td><td>città</td></tr>
+                    <tr><td><span class="latin">pleb‑</span></td><td><span class="latin">plebs</span></td><td><span class="latin">plebis</span></td><td>plebe</td></tr>
+                </tbody>
+            </table>
+
+            <h3>Temi in dentale (t, d) → la dentale cade: nominativo in ‑s</h3>
+            <p>È il gruppo più numeroso e quello con le uscite più varie, perché insieme alla caduta della dentale spesso cambia anche la vocale:</p>
+            <table>
+                <thead>
+                    <tr><th>Tema</th><th>Nominativo</th><th>Genitivo</th><th>Traduzione</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><span class="latin">milit‑</span></td><td><span class="latin">miles</span></td><td><span class="latin">militis</span></td><td>soldato</td></tr>
+                    <tr><td><span class="latin">equit‑</span></td><td><span class="latin">eques</span></td><td><span class="latin">equitis</span></td><td>cavaliere</td></tr>
+                    <tr><td><span class="latin">civitat‑</span></td><td><span class="latin">civitas</span></td><td><span class="latin">civitatis</span></td><td>città, cittadinanza</td></tr>
+                    <tr><td><span class="latin">virtut‑</span></td><td><span class="latin">virtus</span></td><td><span class="latin">virtutis</span></td><td>valore, virtù</td></tr>
+                    <tr><td><span class="latin">ped‑</span></td><td><span class="latin">pes</span></td><td><span class="latin">pedis</span></td><td>piede</td></tr>
+                    <tr><td><span class="latin">laud‑</span></td><td><span class="latin">laus</span></td><td><span class="latin">laudis</span></td><td>lode</td></tr>
+                    <tr><td><span class="latin">custod‑</span></td><td><span class="latin">custos</span></td><td><span class="latin">custodis</span></td><td>custode</td></tr>
+                    <tr><td><span class="latin">nepot‑</span></td><td><span class="latin">nepos</span></td><td><span class="latin">nepotis</span></td><td>nipote</td></tr>
+                </tbody>
+            </table>
+
+            <div class="box">
+                <strong>Regolarità da memorizzare</strong> (valgono quasi sempre):<br>
+                genitivo <span class="highlight">‑atis</span> → nominativo <strong>‑as</strong> (<span class="latin">civitas, aetas, libertas</span>)<br>
+                genitivo <span class="highlight">‑utis</span> → nominativo <strong>‑us</strong> (<span class="latin">virtus, salus, iuventus</span>)<br>
+                genitivo <span class="highlight">‑itis</span> → nominativo <strong>‑es</strong> (<span class="latin">miles, eques, pedes</span>)<br>
+                genitivo <span class="highlight">‑otis / ‑odis</span> → nominativo <strong>‑os</strong> (<span class="latin">nepos, custos</span>)
+            </div>
+        </div>
+
+        <!-- SEZIONE 4: Asigmatici -->
+        <div class="section" id="section4">
+            <h2>4. I nominativi asigmatici (temi in nasale, liquida, sibilante)</h2>
+
+            <h3>Temi in nasale (n) → la ‑n cade: nominativo in ‑o; neutri in ‑men</h3>
+            <table>
+                <thead>
+                    <tr><th>Tema</th><th>Nominativo</th><th>Genitivo</th><th>Traduzione</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><span class="latin">leon‑</span></td><td><span class="latin">leo</span></td><td><span class="latin">leonis</span></td><td>leone</td></tr>
+                    <tr><td><span class="latin">oration‑</span></td><td><span class="latin">oratio</span></td><td><span class="latin">orationis</span></td><td>discorso</td></tr>
+                    <tr><td><span class="latin">virgin‑</span></td><td><span class="latin">virgo</span></td><td><span class="latin">virginis</span></td><td>fanciulla</td></tr>
+                    <tr><td><span class="latin">homin‑</span></td><td><span class="latin">homo</span></td><td><span class="latin">hominis</span></td><td>uomo</td></tr>
+                    <tr><td><span class="latin">nomin‑</span> (neutro)</td><td><span class="latin">nomen</span></td><td><span class="latin">nominis</span></td><td>nome</td></tr>
+                    <tr><td><span class="latin">flumin‑</span> (neutro)</td><td><span class="latin">flumen</span></td><td><span class="latin">fluminis</span></td><td>fiume</td></tr>
+                </tbody>
+            </table>
+
+            <div class="box box-warning">
+                <strong>Il caso ‑inis, il più insidioso:</strong> un genitivo in <span class="highlight">‑inis</span> può risalire a un nominativo in <strong>‑o</strong> (maschili/femminili: <span class="latin">virgo, homo, imago</span>) oppure in <strong>‑en</strong> (neutri: <span class="latin">nomen, flumen, carmen</span>). Il contesto aiuta: se nella frase la parola è soggetto/oggetto uguale al plurale in ‑a, è un neutro in ‑men.
+            </div>
+
+            <h3>Temi in liquida (l, r) → nominativo = tema puro</h3>
+            <table>
+                <thead>
+                    <tr><th>Tema</th><th>Nominativo</th><th>Genitivo</th><th>Traduzione</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><span class="latin">consul‑</span></td><td><span class="latin">consul</span></td><td><span class="latin">consulis</span></td><td>console</td></tr>
+                    <tr><td><span class="latin">sol‑</span></td><td><span class="latin">sol</span></td><td><span class="latin">solis</span></td><td>sole</td></tr>
+                    <tr><td><span class="latin">orator‑</span></td><td><span class="latin">orator</span></td><td><span class="latin">oratoris</span></td><td>oratore</td></tr>
+                    <tr><td><span class="latin">amor‑</span></td><td><span class="latin">amor</span></td><td><span class="latin">amoris</span></td><td>amore</td></tr>
+                    <tr><td><span class="latin">patr‑</span></td><td><span class="latin">pater</span></td><td><span class="latin">patris</span></td><td>padre</td></tr>
+                    <tr><td><span class="latin">matr‑</span></td><td><span class="latin">mater</span></td><td><span class="latin">matris</span></td><td>madre</td></tr>
+                </tbody>
+            </table>
+
+            <div class="box box-info">
+                <strong>Nota su pater, mater, frater:</strong> il nominativo ha una <strong>e</strong> che nei casi obliqui scompare (<span class="latin">pater → patris</span>, non <em>pateris</em>). Quindi: genitivo in <span class="highlight">‑tris</span> → nominativo in <strong>‑ter</strong>.
+            </div>
+
+            <h3>Temi in sibilante (s) → nominativo = tema puro, ma obliqui con ‑r‑</h3>
+            <table>
+                <thead>
+                    <tr><th>Tema</th><th>Nominativo</th><th>Genitivo</th><th>Traduzione</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><span class="latin">mos‑</span></td><td><span class="latin">mos</span></td><td><span class="latin">moris</span></td><td>costume</td></tr>
+                    <tr><td><span class="latin">flos‑</span></td><td><span class="latin">flos</span></td><td><span class="latin">floris</span></td><td>fiore</td></tr>
+                    <tr><td><span class="latin">corpus‑</span> (neutro)</td><td><span class="latin">corpus</span></td><td><span class="latin">corporis</span></td><td>corpo</td></tr>
+                    <tr><td><span class="latin">tempus‑</span> (neutro)</td><td><span class="latin">tempus</span></td><td><span class="latin">temporis</span></td><td>tempo</td></tr>
+                    <tr><td><span class="latin">genus‑</span> (neutro)</td><td><span class="latin">genus</span></td><td><span class="latin">generis</span></td><td>genere, stirpe</td></tr>
+                    <tr><td><span class="latin">opus‑</span> (neutro)</td><td><span class="latin">opus</span></td><td><span class="latin">operis</span></td><td>opera</td></tr>
+                </tbody>
+            </table>
+
+            <details class="approfondimento">
+                <summary>Il rotacismo: perché corpus fa corporis?</summary>
+                <div class="inner">
+                    <p>In latino arcaico una <strong>s tra due vocali</strong> si trasformò regolarmente in <strong>r</strong>: è il fenomeno detto <strong>rotacismo</strong> (dal nome greco della lettera r, <em>rho</em>).</p>
+                    <p>Nel nominativo <span class="latin">corpus</span> la s è finale, quindi resta. Nel genitivo <span class="latin">*corpos‑is</span> la s si trova tra due vocali e diventa r: <span class="latin">corporis</span>. Lo stesso vale per <span class="latin">mos / moris</span>, <span class="latin">genus / generis</span>, <span class="latin">flos / floris</span>.</p>
+                    <p>Il rotacismo spiega anche coppie di parole che conosci già: <span class="latin">es‑se</span> ma <span class="latin">er‑am</span>, e il verbo <span class="latin">gero / ges‑si / ges‑tum</span>.</p>
+                </div>
+            </details>
+
+            <h3>I neutri in ‑e, ‑al, ‑ar (temi in ‑i)</h3>
+            <p>Un piccolo gruppo di neutri ha il tema in vocale <strong>‑i</strong>: al nominativo la ‑i finale o si indebolisce in ‑e o cade del tutto:</p>
+            <table>
+                <thead>
+                    <tr><th>Nominativo</th><th>Genitivo</th><th>Traduzione</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><span class="latin">mare</span></td><td><span class="latin">maris</span></td><td>mare</td></tr>
+                    <tr><td><span class="latin">animal</span></td><td><span class="latin">animalis</span></td><td>animale</td></tr>
+                    <tr><td><span class="latin">calcar</span></td><td><span class="latin">calcaris</span></td><td>sperone</td></tr>
+                </tbody>
+            </table>
+
+            <h3>I parisillabi in ‑is: il caso «facile»</h3>
+            <p>I parisillabi (temi in ‑i) hanno il nominativo trasparente: <span class="latin">civis, civis</span> · <span class="latin">navis, navis</span> · <span class="latin">hostis, hostis</span> · <span class="latin">collis, collis</span>. Qui il nominativo coincide con la forma che vedi al genitivo: nessuna trasformazione da ricostruire. Alcuni hanno il nominativo in ‑es: <span class="latin">nubes, nubis</span> · <span class="latin">caedes, caedis</span>.</p>
+        </div>
+
+        <!-- SEZIONE 5: Tabella inversa -->
+        <div class="section" id="section5">
+            <h2>5. Dal testo al dizionario: la tabella inversa</h2>
+
+            <p>Ora il percorso <strong>all'indietro</strong>, quello che fai davvero in versione. Trovi una forma, togli la desinenza, ottieni il tema: questa tabella ti dice quali nominativi provare sul dizionario.</p>
+
+            <div class="schema-box">
+                <div class="formula">Metodo in 3 passi</div>
+                <div class="formula" style="font-size:1.05em; font-weight:400;">1️⃣ Togli la desinenza e isola il tema (<span class="latin">virgin‑um</span> → <span class="latin">virgin‑</span>)<br>
+                2️⃣ Con la tabella qui sotto ipotizza il nominativo (<span class="latin">‑in‑</span> → provo <span class="latin">virgo</span>)<br>
+                3️⃣ Verifica sul dizionario: il <strong>genitivo indicato</strong> deve combaciare (<span class="latin">virgo, ‑inis</span> ✓)</div>
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Vedo il genitivo in…</th>
+                        <th>Il nominativo sarà…</th>
+                        <th>Esempi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="highlight">‑cis / ‑gis</span></td>
+                        <td><strong>‑x</strong></td>
+                        <td><span class="latin">vocis → vox</span> · <span class="latin">regis → rex</span> · <span class="latin">pacis → pax</span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="highlight">‑icis</span></td>
+                        <td><strong>‑ex</strong> oppure <strong>‑ix</strong></td>
+                        <td><span class="latin">iudicis → iudex</span> · <span class="latin">radicis → radix</span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="highlight">‑pis / ‑bis</span></td>
+                        <td><strong>‑ps / ‑bs</strong></td>
+                        <td><span class="latin">principis → princeps</span> · <span class="latin">urbis → urbs</span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="highlight">‑atis</span></td>
+                        <td><strong>‑as</strong></td>
+                        <td><span class="latin">civitatis → civitas</span> · <span class="latin">aetatis → aetas</span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="highlight">‑utis</span></td>
+                        <td><strong>‑us</strong></td>
+                        <td><span class="latin">virtutis → virtus</span> · <span class="latin">salutis → salus</span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="highlight">‑itis</span></td>
+                        <td><strong>‑es</strong></td>
+                        <td><span class="latin">militis → miles</span> · <span class="latin">equitis → eques</span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="highlight">‑edis / ‑etis</span></td>
+                        <td><strong>‑es</strong></td>
+                        <td><span class="latin">pedis → pes</span> · <span class="latin">heredis → heres</span> · <span class="latin">quietis → quies</span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="highlight">‑otis / ‑odis</span></td>
+                        <td><strong>‑os</strong></td>
+                        <td><span class="latin">nepotis → nepos</span> · <span class="latin">custodis → custos</span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="highlight">‑onis</span></td>
+                        <td><strong>‑o</strong></td>
+                        <td><span class="latin">leonis → leo</span> · <span class="latin">orationis → oratio</span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="highlight">‑inis</span></td>
+                        <td><strong>‑o</strong> oppure <strong>‑en</strong> (neutro)</td>
+                        <td><span class="latin">virginis → virgo</span> · <span class="latin">nominis → nomen</span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="highlight">‑oris</span></td>
+                        <td><strong>‑or</strong>, oppure <strong>‑us</strong> (neutro), oppure <strong>‑os</strong></td>
+                        <td><span class="latin">oratoris → orator</span> · <span class="latin">corporis → corpus</span> · <span class="latin">moris → mos</span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="highlight">‑eris</span></td>
+                        <td><strong>‑us</strong> (neutro) oppure <strong>‑er</strong></td>
+                        <td><span class="latin">generis → genus</span> · <span class="latin">mulieris → mulier</span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="highlight">‑tris</span></td>
+                        <td><strong>‑ter</strong></td>
+                        <td><span class="latin">patris → pater</span> · <span class="latin">matris → mater</span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="highlight">‑lis</span> (dopo consonante o vocale lunga)</td>
+                        <td><strong>‑l</strong></td>
+                        <td><span class="latin">consulis → consul</span> · <span class="latin">solis → sol</span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="highlight">‑is</span> parisillabo</td>
+                        <td><strong>‑is</strong> oppure <strong>‑es</strong></td>
+                        <td><span class="latin">civis → civis</span> · <span class="latin">nubis → nubes</span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="highlight">‑alis / ‑aris</span> (neutro)</td>
+                        <td><strong>‑al / ‑ar</strong></td>
+                        <td><span class="latin">animalis → animal</span> · <span class="latin">calcaris → calcar</span></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="box box-warning">
+                <strong>Quando la tabella dà due ipotesi</strong> (‑oris, ‑eris, ‑inis, ‑icis): non tirare a indovinare. Prova la prima uscita sul dizionario; se non c'è, o se il genitivo indicato non combacia, prova la seconda. Trenta secondi in più che salvano la versione.
+            </div>
+
+            <h3>I «sorvegliati speciali»</h3>
+            <p>Alcuni nomi frequentissimi non seguono nessuno schema: vanno riconosciuti a vista.</p>
+            <table>
+                <thead>
+                    <tr><th>Nominativo</th><th>Genitivo</th><th>Traduzione</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><span class="latin">iter</span></td><td><span class="latin">itineris</span></td><td>viaggio, marcia</td></tr>
+                    <tr><td><span class="latin">senex</span></td><td><span class="latin">senis</span></td><td>vecchio</td></tr>
+                    <tr><td><span class="latin">caro</span></td><td><span class="latin">carnis</span></td><td>carne</td></tr>
+                    <tr><td><span class="latin">bos</span></td><td><span class="latin">bovis</span></td><td>bue</td></tr>
+                    <tr><td><span class="latin">Iuppiter</span></td><td><span class="latin">Iovis</span></td><td>Giove</td></tr>
+                    <tr><td><span class="latin">sanguis</span></td><td><span class="latin">sanguinis</span></td><td>sangue</td></tr>
+                    <tr><td><span class="latin">nix</span></td><td><span class="latin">nivis</span></td><td>neve</td></tr>
+                    <tr><td><span class="latin">caput</span></td><td><span class="latin">capitis</span></td><td>testa, capo</td></tr>
+                    <tr><td><span class="latin">os</span></td><td><span class="latin">oris</span></td><td>bocca, volto</td></tr>
+                    <tr><td><span class="latin">os</span></td><td><span class="latin">ossis</span></td><td>osso</td></tr>
+                </tbody>
+            </table>
+
+            <div class="box box-info">
+                <strong>Occhio al doppio os:</strong> <span class="latin">os, oris</span> (bocca) e <span class="latin">os, ossis</span> (osso) sono due parole diverse. Solo il genitivo le distingue.
+            </div>
+        </div>
+
+        <!-- SEZIONE 6: Riepilogo -->
+        <div class="section" id="section6">
+            <h2>6. Riepilogo</h2>
+
+            <div class="schema-box">
+                <p style="font-size:1.1em; margin-bottom:15px;"><strong>LE USCITE DEL NOMINATIVO — Schema Completo</strong></p>
+                <table>
+                    <thead>
+                        <tr><th>Tema in…</th><th>Strategia</th><th>Nominativo</th><th>Modello</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>gutturale (c, g)</td>
+                            <td>sigmatico</td>
+                            <td><strong>‑x</strong></td>
+                            <td><span class="latin">rex, regis</span></td>
+                        </tr>
+                        <tr>
+                            <td>labiale (p, b)</td>
+                            <td>sigmatico</td>
+                            <td><strong>‑ps, ‑bs</strong></td>
+                            <td><span class="latin">urbs, urbis</span></td>
+                        </tr>
+                        <tr>
+                            <td>dentale (t, d)</td>
+                            <td>sigmatico (dentale cade)</td>
+                            <td><strong>‑s</strong> (‑as, ‑es, ‑us, ‑os…)</td>
+                            <td><span class="latin">miles, militis</span></td>
+                        </tr>
+                        <tr>
+                            <td>nasale (n)</td>
+                            <td>asigmatico</td>
+                            <td><strong>‑o</strong>; neutri <strong>‑men</strong></td>
+                            <td><span class="latin">leo, leonis</span> · <span class="latin">nomen, nominis</span></td>
+                        </tr>
+                        <tr>
+                            <td>liquida (l, r)</td>
+                            <td>asigmatico</td>
+                            <td><strong>‑l, ‑r</strong> (‑ter)</td>
+                            <td><span class="latin">consul, consulis</span> · <span class="latin">pater, patris</span></td>
+                        </tr>
+                        <tr>
+                            <td>sibilante (s)</td>
+                            <td>asigmatico (obliqui con rotacismo)</td>
+                            <td><strong>‑s</strong> (‑us, ‑os neutro/masch.)</td>
+                            <td><span class="latin">corpus, corporis</span> · <span class="latin">mos, moris</span></td>
+                        </tr>
+                        <tr>
+                            <td>vocale ‑i (parisillabi)</td>
+                            <td>nominativo trasparente</td>
+                            <td><strong>‑is, ‑es</strong>; neutri <strong>‑e, ‑al, ‑ar</strong></td>
+                            <td><span class="latin">civis, civis</span> · <span class="latin">mare, maris</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>Le corrispondenze da sapere a memoria</h3>
+            <div style="margin: 15px 0;">
+                <span class="tag tag-purple">‑cis/‑gis → ‑x</span>
+                <span class="tag tag-purple">‑atis → ‑as</span>
+                <span class="tag tag-purple">‑utis → ‑us</span>
+                <span class="tag tag-purple">‑itis → ‑es</span>
+                <span class="tag tag-blue">‑onis → ‑o</span>
+                <span class="tag tag-blue">‑inis → ‑o / ‑en</span>
+                <span class="tag tag-yellow">‑oris → ‑or / ‑us / ‑os</span>
+                <span class="tag tag-yellow">‑eris → ‑us / ‑er</span>
+                <span class="tag tag-green">‑tris → ‑ter</span>
+                <span class="tag tag-green">‑is pari → ‑is</span>
+            </div>
+
+            <div class="box box-success">
+                <strong>Il metodo, in una frase:</strong> isola il tema togliendo la desinenza, ipotizza il nominativo con le corrispondenze, verifica sul dizionario che il genitivo combaci. Se la prima ipotesi fallisce, la tabella ti dà sempre la seconda da provare.
+            </div>
+
+            <div class="box box-info">
+                <strong>Per il ripasso visivo:</strong> tutte queste corrispondenze sono anche nello <a href="schema-nominativo-terza.html">schema a grappolo del nominativo</a>, espandibile e presentabile sulla LIM.
+            </div>
+        </div>
+
+        <!-- SEZIONE 7: Quiz -->
+        <div class="section" id="section7">
+            <h2>7. Quiz — Risali al nominativo</h2>
+            <p>Per ogni forma incontrata «in versione», scegli il nominativo da cercare sul dizionario. Un punto per ogni risposta corretta.</p>
+
+            <div id="quizContainer">
+                <!-- Domanda 1 -->
+                <div class="quiz-question mb-30" id="q1">
+                    <h3>Domanda 1 / 8</h3>
+                    <p><strong>Nel testo trovi <span class="latin">militis</span>. Che cosa cerchi sul dizionario?</strong></p>
+                    <div class="quiz-option" onclick="checkAnswer(1, this, false)">militis</div>
+                    <div class="quiz-option" onclick="checkAnswer(1, this, true)">miles</div>
+                    <div class="quiz-option" onclick="checkAnswer(1, this, false)">milit</div>
+                    <div class="quiz-option" onclick="checkAnswer(1, this, false)">milus</div>
+                    <div class="quiz-feedback" id="fb1"></div>
+                </div>
+
+                <!-- Domanda 2 -->
+                <div class="quiz-question mb-30" id="q2">
+                    <h3>Domanda 2 / 8</h3>
+                    <p><strong>Nel testo trovi <span class="latin">virginum</span> (genitivo plurale). Qual è il nominativo?</strong></p>
+                    <div class="quiz-option" onclick="checkAnswer(2, this, false)">virginus</div>
+                    <div class="quiz-option" onclick="checkAnswer(2, this, false)">virgen</div>
+                    <div class="quiz-option" onclick="checkAnswer(2, this, true)">virgo</div>
+                    <div class="quiz-option" onclick="checkAnswer(2, this, false)">virginis</div>
+                    <div class="quiz-feedback" id="fb2"></div>
+                </div>
+
+                <!-- Domanda 3 -->
+                <div class="quiz-question mb-30" id="q3">
+                    <h3>Domanda 3 / 8</h3>
+                    <p><strong>Nel testo trovi <span class="latin">corporis</span>. Qual è il nominativo?</strong></p>
+                    <div class="quiz-option" onclick="checkAnswer(3, this, false)">corpor</div>
+                    <div class="quiz-option" onclick="checkAnswer(3, this, false)">corporus</div>
+                    <div class="quiz-option" onclick="checkAnswer(3, this, true)">corpus</div>
+                    <div class="quiz-option" onclick="checkAnswer(3, this, false)">corps</div>
+                    <div class="quiz-feedback" id="fb3"></div>
+                </div>
+
+                <!-- Domanda 4 -->
+                <div class="quiz-question mb-30" id="q4">
+                    <h3>Domanda 4 / 8</h3>
+                    <p><strong>Nel testo trovi <span class="latin">urbem</span> (accusativo). Qual è il nominativo?</strong></p>
+                    <div class="quiz-option" onclick="checkAnswer(4, this, true)">urbs</div>
+                    <div class="quiz-option" onclick="checkAnswer(4, this, false)">urbus</div>
+                    <div class="quiz-option" onclick="checkAnswer(4, this, false)">urbis</div>
+                    <div class="quiz-option" onclick="checkAnswer(4, this, false)">urba</div>
+                    <div class="quiz-feedback" id="fb4"></div>
+                </div>
+
+                <!-- Domanda 5 -->
+                <div class="quiz-question mb-30" id="q5">
+                    <h3>Domanda 5 / 8</h3>
+                    <p><strong>Nel testo trovi <span class="latin">iudicis</span>. Qual è il nominativo?</strong></p>
+                    <div class="quiz-option" onclick="checkAnswer(5, this, false)">iudix</div>
+                    <div class="quiz-option" onclick="checkAnswer(5, this, true)">iudex</div>
+                    <div class="quiz-option" onclick="checkAnswer(5, this, false)">iudicus</div>
+                    <div class="quiz-option" onclick="checkAnswer(5, this, false)">iudes</div>
+                    <div class="quiz-feedback" id="fb5"></div>
+                </div>
+
+                <!-- Domanda 6 -->
+                <div class="quiz-question mb-30" id="q6">
+                    <h3>Domanda 6 / 8</h3>
+                    <p><strong>Nel testo trovi <span class="latin">itineris</span>. Qual è il nominativo?</strong></p>
+                    <div class="quiz-option" onclick="checkAnswer(6, this, false)">itinus</div>
+                    <div class="quiz-option" onclick="checkAnswer(6, this, false)">itiner</div>
+                    <div class="quiz-option" onclick="checkAnswer(6, this, true)">iter</div>
+                    <div class="quiz-option" onclick="checkAnswer(6, this, false)">itis</div>
+                    <div class="quiz-feedback" id="fb6"></div>
+                </div>
+
+                <!-- Domanda 7 -->
+                <div class="quiz-question mb-30" id="q7">
+                    <h3>Domanda 7 / 8</h3>
+                    <p><strong>Nel testo trovi <span class="latin">nominibus</span> (dativo/ablativo plurale). Qual è il nominativo?</strong></p>
+                    <div class="quiz-option" onclick="checkAnswer(7, this, false)">nomo</div>
+                    <div class="quiz-option" onclick="checkAnswer(7, this, false)">nominus</div>
+                    <div class="quiz-option" onclick="checkAnswer(7, this, false)">nomis</div>
+                    <div class="quiz-option" onclick="checkAnswer(7, this, true)">nomen</div>
+                    <div class="quiz-feedback" id="fb7"></div>
+                </div>
+
+                <!-- Domanda 8 -->
+                <div class="quiz-question mb-30" id="q8">
+                    <h3>Domanda 8 / 8</h3>
+                    <p><strong>Nel testo trovi <span class="latin">pacis</span>. Qual è il nominativo?</strong></p>
+                    <div class="quiz-option" onclick="checkAnswer(8, this, false)">pacus</div>
+                    <div class="quiz-option" onclick="checkAnswer(8, this, false)">pas</div>
+                    <div class="quiz-option" onclick="checkAnswer(8, this, true)">pax</div>
+                    <div class="quiz-option" onclick="checkAnswer(8, this, false)">pacs</div>
+                    <div class="quiz-feedback" id="fb8"></div>
+                </div>
+            </div>
+
+            <div id="resultBox" style="display:none;" class="result-box">
+                <h3>Risultato finale</h3>
+                <div class="score-circle" id="scoreCircle"></div>
+                <p id="scoreMessage"></p>
+                <br>
+                <a href="../percorsi/latino1.html" class="nav-home">← Torna a Latino 1</a>
+            </div>
+        </div>
+
+        <div class="nav-buttons">
+            <button class="btn btn-secondary" id="prevBtn" onclick="changeSection(-1)" disabled>← Indietro</button>
+            <button class="btn btn-primary" id="nextBtn" onclick="changeSection(1)">Avanti →</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    let currentSection = 1;
+    const totalSections = 7;
+    const totalQuestions = 8;
+    let quizAnswers = {};
+    let quizScore = 0;
+
+    function updateProgress() {
+        const pct = ((currentSection - 1) / (totalSections - 1)) * 100;
+        document.getElementById('progressFill').style.width = pct + '%';
+        document.getElementById('sectionCounter').textContent = `Sezione ${currentSection} di ${totalSections}`;
+    }
+
+    function changeSection(dir) {
+        document.getElementById('section' + currentSection).classList.remove('active');
+        currentSection += dir;
+        document.getElementById('section' + currentSection).classList.add('active');
+        document.getElementById('prevBtn').disabled = currentSection === 1;
+        document.getElementById('nextBtn').disabled = currentSection === totalSections;
+        updateProgress();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+
+        if (currentSection === totalSections) {
+            document.getElementById('nextBtn').textContent = 'Fine';
+        } else {
+            document.getElementById('nextBtn').textContent = 'Avanti →';
+        }
+    }
+
+    function checkAnswer(qNum, el, isCorrect) {
+        if (quizAnswers[qNum] !== undefined) return;
+        quizAnswers[qNum] = isCorrect;
+
+        const options = el.parentElement.querySelectorAll('.quiz-option');
+        options.forEach(o => o.style.pointerEvents = 'none');
+
+        const fb = document.getElementById('fb' + qNum);
+        if (isCorrect) {
+            el.classList.add('correct');
+            quizScore++;
+            fb.textContent = '✓ Corretto!';
+            fb.className = 'quiz-feedback show correct-fb';
+        } else {
+            el.classList.add('wrong');
+            fb.textContent = '✗ Non corretto. Rileggi la tabella inversa nella sezione 5.';
+            fb.className = 'quiz-feedback show wrong-fb';
+            options.forEach(o => {
+                if (o.onclick.toString().includes('true')) o.classList.add('correct');
+            });
+        }
+
+        if (Object.keys(quizAnswers).length === totalQuestions) {
+            setTimeout(showResult, 600);
+        }
+    }
+
+    function showResult() {
+        document.getElementById('resultBox').style.display = 'block';
+        document.getElementById('scoreCircle').textContent = quizScore + '/' + totalQuestions;
+        let msg = '';
+        if (quizScore === totalQuestions) msg = 'Perfetto! Nessun nominativo della terza può più sorprenderti.';
+        else if (quizScore >= 6) msg = 'Ottimo! Padroneggi il metodo. Rivedi solo le uscite che hai sbagliato.';
+        else if (quizScore >= 4) msg = 'Abbastanza bene. Ripassa la tabella inversa (sezione 5) e i sorvegliati speciali.';
+        else msg = 'Rileggi la lezione con calma, soprattutto le sezioni 3, 4 e 5, poi riprova il quiz.';
+        document.getElementById('scoreMessage').textContent = msg;
+        document.getElementById('resultBox').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    updateProgress();
+</script>
+
+<footer>
+  <p><strong>Prof. Andrea Vaccaro</strong></p>
+  <p>Lingua e Cultura Latina &mdash; Liceo Classico e Liceo Scientifico</p>
+  <div class="footer-links">
+    <a href="../index.html">Home</a>
+    <a href="../strumenti/raccoglitore.html">Raccoglitore</a>
+    <a href="../strumenti/glossario-eulalia.html">Strumenti</a>
+  </div>
+</footer>
+<script src="../js/alpheios-init.js"></script>
+</body>
+</html>

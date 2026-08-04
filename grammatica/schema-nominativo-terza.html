@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Schema a grappolo — Il nominativo della terza declinazione</title>
+<meta name="description" content="Schema interattivo: dal genitivo al nominativo della terza declinazione. Ogni uscita del genitivo con i nominativi possibili, esempi e trappole. Presentabile sulla LIM.">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="stylesheet" href="../css/style.css">
+<style>
+.grappolo{margin:32px 0}
+.cong-row{margin-bottom:32px;page-break-inside:avoid}
+.cong-node{display:inline-flex;align-items:center;gap:14px;background:linear-gradient(135deg,#14110c 0%,#2a2218 60%,#3a3024 100%);color:#f5f0e8;padding:18px 32px;border-radius:14px;font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:700;cursor:pointer;transition:all .3s;user-select:none;touch-action:manipulation;box-shadow:0 4px 20px rgba(30,26,18,.18),inset 0 1px 0 rgba(156,122,60,.15);border:1px solid rgba(156,122,60,.12)}
+.cong-node:hover{transform:scale(1.03);box-shadow:0 8px 32px rgba(30,26,18,.28),inset 0 1px 0 rgba(156,122,60,.25);border-color:rgba(156,122,60,.25)}
+.cong-node .cn-gloss{font-family:'Crimson Pro',serif;font-size:14px;font-weight:400;color:rgba(245,240,232,.6);font-style:italic;margin-left:4px}
+.cong-node .cong-toggle{font-size:18px;transition:transform .3s;margin-left:4px}
+.cong-row.open .cong-node .cong-toggle{transform:rotate(90deg)}
+.cong-branches{display:none;margin-left:44px;padding-left:32px;border-left:3px solid var(--border);margin-top:16px}
+.cong-row.open .cong-branches{display:block}
+.branch{display:flex;align-items:flex-start;gap:16px;margin-bottom:14px;position:relative;animation:brIn .3s ease both;padding:12px 16px;background:var(--card);border-radius:12px;border:1px solid var(--border-light);box-shadow:0 1px 4px rgba(30,26,18,.04)}
+.branch::before{content:'';position:absolute;left:-32px;top:22px;width:28px;height:3px;background:var(--border)}
+@keyframes brIn{from{opacity:0;transform:translateX(-12px)}to{opacity:1;transform:translateX(0)}}
+.branch:nth-child(1){animation-delay:0s}.branch:nth-child(2){animation-delay:.05s}.branch:nth-child(3){animation-delay:.1s}.branch:nth-child(4){animation-delay:.15s}.branch:nth-child(5){animation-delay:.2s}.branch:nth-child(6){animation-delay:.25s}.branch:nth-child(7){animation-delay:.3s}.branch:nth-child(8){animation-delay:.35s}.branch:nth-child(9){animation-delay:.4s}.branch:nth-child(10){animation-delay:.45s}
+.bt{flex-shrink:0;padding:10px 18px;border-radius:10px;font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:700;min-width:160px;text-align:center;border:2px solid;transition:transform .2s}
+.bt:hover{transform:scale(1.05)}
+.bt-sic{background:rgba(74,154,94,.12);color:#2a6a2a;border-color:#4a9a5e}
+.bt-dop{background:rgba(212,168,67,.12);color:#6a5a1a;border-color:#d4a843}
+.bt-neu{background:rgba(74,138,170,.12);color:#1a6b8a;border-color:#4a8aaa}
+.bt-irr{background:rgba(201,74,74,.10);color:#8a1a1a;border-color:#c94a4a}
+.bd{flex:1;padding:6px 0}
+.bd .f{font-family:'Crimson Pro',serif;font-size:16px;font-weight:600;color:var(--text);margin-bottom:3px}
+.bd .f em{color:var(--gold)}
+.bd .t{font-size:14px;color:var(--text-dim);font-style:italic}
+.bd .ex{font-family:'Crimson Pro',serif;font-size:14px;color:var(--text-dim);margin-top:5px;padding:7px 12px;background:var(--gold-pale);border-radius:8px;line-height:1.6}
+.bd .ex b{color:var(--gold)}
+.bd .n{font-size:12px;color:var(--text-muted);margin-top:3px}
+.tip{margin:12px 0;padding:16px 20px;border-radius:12px;font-size:14px;line-height:1.7;border-left:5px solid;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.tip-it{background:#fce8e8;border-color:#c94a4a;color:#5a1a1a}
+.tip-it strong{color:#c94a4a}
+.tip-trap{background:#fff4d6;border-color:#d4a843;color:#4a3a08}
+.tip-trap strong{color:#8a6a0a}
+.tip-it::before{content:'📖 ';font-size:16px}
+.tip-trap::before{content:'⚠️ ';font-size:16px}
+/* Gruppo */
+.cong-group{margin-top:48px;margin-bottom:12px;padding-bottom:10px;border-bottom:2px solid var(--border);position:relative}
+.cong-group::before{content:'';position:absolute;bottom:-2px;left:0;width:60px;height:2px;background:var(--gold)}
+.cong-group-title{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:600;color:var(--gold);text-transform:uppercase;letter-spacing:2px}
+/* Expand/LIM */
+.expand-all,.lim-toggle{font-family:'Crimson Pro',serif;font-weight:600;padding:10px 22px;border:1px solid var(--border);border-radius:10px;background:var(--card);color:var(--text-dim);cursor:pointer;transition:all .25s;touch-action:manipulation}
+.expand-all:hover,.lim-toggle:hover{border-color:var(--gold);color:var(--gold)}
+.lim-toggle{position:fixed;bottom:24px;right:24px;z-index:200;font-size:16px;padding:14px 28px;border:none;background:var(--gold);color:#fff;box-shadow:0 4px 20px rgba(156,122,60,.4);border-radius:12px}
+.lim-mode .cong-node{font-size:30px;padding:18px 34px}
+.lim-mode .bt{font-size:20px;min-width:190px;padding:12px 22px}
+.lim-mode .bd .f{font-size:19px}
+.lim-mode .bd .t{font-size:17px}
+.lim-mode .bd .ex{font-size:17px}
+.lim-mode .cong-branches{margin-left:50px;padding-left:34px}
+.lim-mode .cong-group-title{font-size:24px}
+/* Legenda */
+.leg{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 24px}
+.leg span{padding:5px 12px;border-radius:8px;font-size:12px;font-weight:700;border:2px solid}
+@media(max-width:768px){.branch{flex-direction:column;gap:6px}.bt{min-width:auto;align-self:flex-start}.cong-branches{margin-left:20px;padding-left:16px}}
+/* ═══ PRESENTAZIONE LIM ═══ */
+.pres{position:fixed;inset:0;z-index:9000;background:var(--bg);display:none;flex-direction:column;overflow:hidden}
+.pres.active{display:flex}
+.pres-bar{display:flex;align-items:center;justify-content:space-between;padding:14px 32px;background:rgba(250,248,243,.95);backdrop-filter:blur(8px);border-bottom:1px solid var(--border-light);flex-shrink:0;gap:16px}
+.pres-title{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:600;color:var(--text)}
+.pres-info{font-family:'Crimson Pro',serif;font-size:15px;color:var(--text-muted);flex:1;text-align:center}
+.pres-b{font-family:'Crimson Pro',serif;font-size:16px;font-weight:600;padding:12px 28px;border:1px solid var(--border);border-radius:10px;background:var(--card);color:var(--text-dim);cursor:pointer;transition:all .25s;touch-action:manipulation;min-height:48px}
+.pres-b:hover{border-color:var(--gold);color:var(--gold)}
+.pres-b:disabled{opacity:.3;cursor:default}
+.pres-b-go{background:var(--gold);color:#fff;border-color:var(--gold)}
+.pres-b-go:hover{background:var(--text);border-color:var(--text)}
+.pres-prog{height:4px;background:var(--border-light);flex-shrink:0}
+.pres-prog-fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--gold-light));transition:width .4s}
+.pres-body{flex:1;overflow-y:auto;padding:40px 56px;-webkit-overflow-scrolling:touch}
+.pres-nav{display:flex;justify-content:space-between;align-items:center;padding:16px 32px;background:var(--card);border-top:1px solid var(--border-light);flex-shrink:0}
+.pres-cnt{font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--text-dim)}
+@media(max-height:800px){.pres-body{padding:24px 36px}}
+@media print{.lim-toggle,.expand-all,.cong-toggle,.pres{display:none!important}.cong-branches{display:block!important}.navbar,footer{display:none!important}}
+</style>
+</head>
+<body class="liquid-glass">
+<nav class="navbar"><div class="container"><a href="../index.html" class="site-name">Lingua e Cultura Latina</a><div class="nav-links"><a href="../index.html">Home</a><a href="../strumenti/raccoglitore.html">Raccoglitore</a><a href="index.html" class="active">Grammatica</a><a href="../strumenti/glossario-eulalia.html">Strumenti</a><a href="../chi-sono.html">Su di me</a></div></div></nav>
+
+<div class="page-header">
+  <h1>Il nominativo della terza</h1>
+  <div class="divider"></div>
+  <p class="subtitle">Schema a grappolo &mdash; dal genitivo al nominativo<br><small>Compagno visivo della <a href="nominativo_terza.html">lezione interattiva</a></small></p>
+</div>
+
+<main class="container">
+  <a href="index.html" class="back-link">&larr; Grammatica</a>
+
+  <div class="intro-tesniere" style="margin-top:20px;">
+    <div class="intro-label">Come leggere lo schema</div>
+    <p>Il nodo scuro &egrave; l'<strong>uscita del genitivo</strong> che incontri nel testo. I rami sono i <strong>nominativi possibili</strong> da cercare sul dizionario. Clicca per espandere. Verde = uscita unica, giallo = seconda ipotesi da provare, azzurro = neutro, rosso = trappola.</p>
+  </div>
+
+  <div class="leg">
+    <span class="bt-sic">Uscita unica</span>
+    <span class="bt-dop">Doppia ipotesi</span>
+    <span class="bt-neu">Neutro</span>
+    <span class="bt-irr">Trappola</span>
+  </div>
+
+  <button class="expand-all" id="ea">Espandi tutto</button>
+
+  <div class="grappolo" id="grappolo">
+
+<!-- ═══════════ GUTTURALI E LABIALI ═══════════ -->
+<div class="cong-group"><span class="cong-group-title">Temi in gutturale e labiale</span></div>
+
+<div class="cong-row"><div class="cong-node"><em>&ndash;cis / &ndash;gis</em><span class="cn-gloss">gutturale + s</span><span class="cong-toggle">&#9654;</span></div>
+<div class="cong-branches">
+  <div class="tip tip-it"><strong>Il fenomeno:</strong> la x del nominativo non &egrave; una lettera «nuova»: &egrave; la grafia di <em>c/g + s</em>. <em>*reg&#8209;s &rarr; rex</em>, <em>*duc&#8209;s &rarr; dux</em>.</div>
+  <div class="branch"><div class="bt bt-sic">&ndash;x</div><div class="bd"><div class="f">gutturale + s = <strong>x</strong></div><div class="ex"><b>vocis</b> &rarr; vox &bull; <b>regis</b> &rarr; rex &bull; <b>pacis</b> &rarr; pax &bull; <b>lucis</b> &rarr; lux &bull; <b>ducis</b> &rarr; dux</div></div></div>
+</div></div>
+
+<div class="cong-row"><div class="cong-node"><em>&ndash;icis</em><span class="cn-gloss">due ipotesi</span><span class="cong-toggle">&#9654;</span></div>
+<div class="cong-branches">
+  <div class="tip tip-trap"><strong>Metodo:</strong> prova prima <strong>&ndash;ex</strong>; se sul dizionario non c'&egrave; (o il genitivo non combacia), prova <strong>&ndash;ix</strong>.</div>
+  <div class="branch"><div class="bt bt-dop">&ndash;ex</div><div class="bd"><div class="f">apofonia: e al nominativo, i nei casi obliqui</div><div class="ex"><b>iudicis</b> &rarr; iudex &bull; <b>indicis</b> &rarr; index &bull; <b>artificis</b> &rarr; artifex</div></div></div>
+  <div class="branch"><div class="bt bt-dop">&ndash;ix</div><div class="bd"><div class="f">la i resta anche al nominativo</div><div class="ex"><b>radicis</b> &rarr; radix &bull; <b>felicis</b> &rarr; felix &bull; <b>victricis</b> &rarr; victrix</div></div></div>
+</div></div>
+
+<div class="cong-row"><div class="cong-node"><em>&ndash;pis / &ndash;bis</em><span class="cn-gloss">labiale + s</span><span class="cong-toggle">&#9654;</span></div>
+<div class="cong-branches">
+  <div class="branch"><div class="bt bt-sic">&ndash;ps / &ndash;bs</div><div class="bd"><div class="f">la labiale resiste davanti a s</div><div class="ex"><b>principis</b> &rarr; princeps &bull; <b>urbis</b> &rarr; urbs &bull; <b>plebis</b> &rarr; plebs</div><div class="n">In <em>princeps / principis</em> cambia anche la vocale (apofonia e &harr; i).</div></div></div>
+</div></div>
+
+<!-- ═══════════ DENTALI ═══════════ -->
+<div class="cong-group"><span class="cong-group-title">Temi in dentale (la dentale cade davanti a s)</span></div>
+
+<div class="cong-row"><div class="cong-node"><em>&ndash;atis</em><span class="cn-gloss">i nomi astratti in &ndash;tas</span><span class="cong-toggle">&#9654;</span></div>
+<div class="cong-branches">
+  <div class="branch"><div class="bt bt-sic">&ndash;as</div><div class="bd"><div class="f">*&ndash;tat&#8209;s &rarr; &ndash;tas: la dentale cade</div><div class="ex"><b>civitatis</b> &rarr; civitas &bull; <b>aetatis</b> &rarr; aetas &bull; <b>libertatis</b> &rarr; libertas &bull; <b>veritatis</b> &rarr; veritas</div><div class="n">Gruppo enorme e regolarissimo: quasi tutti femminili astratti.</div></div></div>
+</div></div>
+
+<div class="cong-row"><div class="cong-node"><em>&ndash;utis</em><span class="cn-gloss"></span><span class="cong-toggle">&#9654;</span></div>
+<div class="cong-branches">
+  <div class="branch"><div class="bt bt-sic">&ndash;us</div><div class="bd"><div class="f">stesso meccanismo di &ndash;atis</div><div class="ex"><b>virtutis</b> &rarr; virtus &bull; <b>salutis</b> &rarr; salus &bull; <b>iuventutis</b> &rarr; iuventus</div><div class="n">Non confonderli con i neutri in &ndash;us, &ndash;oris (corpus): qui il genitivo &egrave; in &ndash;utis e il nome &egrave; femminile.</div></div></div>
+</div></div>
+
+<div class="cong-row"><div class="cong-node"><em>&ndash;itis</em><span class="cn-gloss">attenzione alla vocale</span><span class="cong-toggle">&#9654;</span></div>
+<div class="cong-branches">
+  <div class="branch"><div class="bt bt-sic">&ndash;es</div><div class="bd"><div class="f">apofonia: e al nominativo, i nei casi obliqui</div><div class="ex"><b>militis</b> &rarr; miles &bull; <b>equitis</b> &rarr; eques &bull; <b>comitis</b> &rarr; comes</div></div></div>
+  <div class="branch"><div class="bt bt-irr">&ndash;ut (neutro!)</div><div class="bd"><div class="f">un'eccezione importantissima</div><div class="ex"><b>capitis</b> &rarr; caput («testa, capo»)</div><div class="n">Neutro: accusativo = nominativo = <em>caput</em>.</div></div></div>
+</div></div>
+
+<div class="cong-row"><div class="cong-node"><em>&ndash;edis / &ndash;etis</em><span class="cn-gloss"></span><span class="cong-toggle">&#9654;</span></div>
+<div class="cong-branches">
+  <div class="branch"><div class="bt bt-sic">&ndash;es</div><div class="bd"><div class="f">la dentale cade, la e resta</div><div class="ex"><b>pedis</b> &rarr; pes &bull; <b>heredis</b> &rarr; heres &bull; <b>mercedis</b> &rarr; merces &bull; <b>quietis</b> &rarr; quies</div></div></div>
+</div></div>
+
+<div class="cong-row"><div class="cong-node"><em>&ndash;otis / &ndash;odis</em><span class="cn-gloss"></span><span class="cong-toggle">&#9654;</span></div>
+<div class="cong-branches">
+  <div class="branch"><div class="bt bt-sic">&ndash;os</div><div class="bd"><div class="f">la dentale cade, la o resta</div><div class="ex"><b>nepotis</b> &rarr; nepos &bull; <b>custodis</b> &rarr; custos &bull; <b>sacerdotis</b> &rarr; sacerdos</div></div></div>
+</div></div>
+
+<div class="cong-row"><div class="cong-node"><em>&ndash;dis / &ndash;tis</em> <small style="font-size:16px;opacity:.6">(altre vocali)</small><span class="cn-gloss">caso generale</span><span class="cong-toggle">&#9654;</span></div>
+<div class="cong-branches">
+  <div class="branch"><div class="bt bt-sic">&ndash;s</div><div class="bd"><div class="f">la dentale cade sempre davanti a s</div><div class="ex"><b>laudis</b> &rarr; laus &bull; <b>fraudis</b> &rarr; fraus &bull; <b>mentis</b> &rarr; mens &bull; <b>partis</b> &rarr; pars &bull; <b>noctis</b> &rarr; nox</div><div class="n"><em>noctis</em> &rarr; <em>nox</em>: qui la dentale + s d&agrave; la grafia x (tema <em>noct&#8209;</em>).</div></div></div>
+</div></div>
+
+<!-- ═══════════ NASALI ═══════════ -->
+<div class="cong-group"><span class="cong-group-title">Temi in nasale (la &ndash;n cade al nominativo)</span></div>
+
+<div class="cong-row"><div class="cong-node"><em>&ndash;onis</em><span class="cn-gloss">il gruppo di leo</span><span class="cong-toggle">&#9654;</span></div>
+<div class="cong-branches">
+  <div class="branch"><div class="bt bt-sic">&ndash;o</div><div class="bd"><div class="f">la n del tema cade al nominativo</div><div class="ex"><b>leonis</b> &rarr; leo &bull; <b>orationis</b> &rarr; oratio &bull; <b>nationis</b> &rarr; natio &bull; <b>sermonis</b> &rarr; sermo</div><div class="n">Tutti i nomi in &ndash;tio, &ndash;sio (azione): <em>actio, visio, missio</em>&hellip; gruppo vastissimo.</div></div></div>
+</div></div>
+
+<div class="cong-row"><div class="cong-node"><em>&ndash;inis</em><span class="cn-gloss">il pi&ugrave; insidioso</span><span class="cong-toggle">&#9654;</span></div>
+<div class="cong-branches">
+  <div class="tip tip-trap"><strong>Come scegliere:</strong> se nella frase la parola si comporta da neutro (nominativo = accusativo, plurale in &ndash;a) &rarr; <strong>&ndash;men</strong>. Altrimenti prova <strong>&ndash;o</strong>. E ricorda <em>sanguis</em>!</div>
+  <div class="branch"><div class="bt bt-dop">&ndash;o</div><div class="bd"><div class="f">maschili e femminili</div><div class="ex"><b>virginis</b> &rarr; virgo &bull; <b>hominis</b> &rarr; homo &bull; <b>imaginis</b> &rarr; imago &bull; <b>originis</b> &rarr; origo</div></div></div>
+  <div class="branch"><div class="bt bt-neu">&ndash;men (neutro)</div><div class="bd"><div class="f">i neutri in &ndash;men, &ndash;minis</div><div class="ex"><b>nominis</b> &rarr; nomen &bull; <b>fluminis</b> &rarr; flumen &bull; <b>carminis</b> &rarr; carmen &bull; <b>agminis</b> &rarr; agmen</div></div></div>
+  <div class="branch"><div class="bt bt-irr">sanguis</div><div class="bd"><div class="f">l'eccezione del gruppo</div><div class="ex"><b>sanguinis</b> &rarr; sanguis («sangue»), maschile</div></div></div>
+</div></div>
+
+<!-- ═══════════ LIQUIDE E SIBILANTI ═══════════ -->
+<div class="cong-group"><span class="cong-group-title">Temi in liquida e sibilante</span></div>
+
+<div class="cong-row"><div class="cong-node"><em>&ndash;oris</em><span class="cn-gloss">tripla ipotesi!</span><span class="cong-toggle">&#9654;</span></div>
+<div class="cong-branches">
+  <div class="tip tip-trap"><strong>Il genitivo pi&ugrave; ambiguo della terza:</strong> tre nominativi possibili. Ordine di prova: <strong>&ndash;or</strong> (il pi&ugrave; frequente), poi <strong>&ndash;us</strong> neutro, poi <strong>&ndash;os</strong>. Il genere e il contesto decidono.</div>
+  <div class="branch"><div class="bt bt-dop">&ndash;or</div><div class="bd"><div class="f">nominativo = tema puro (maschili)</div><div class="ex"><b>oratoris</b> &rarr; orator &bull; <b>amoris</b> &rarr; amor &bull; <b>laboris</b> &rarr; labor &bull; <b>victoris</b> &rarr; victor</div></div></div>
+  <div class="branch"><div class="bt bt-neu">&ndash;us (neutro)</div><div class="bd"><div class="f">rotacismo: s del nominativo &rarr; r tra vocali</div><div class="ex"><b>corporis</b> &rarr; corpus &bull; <b>temporis</b> &rarr; tempus &bull; <b>pectoris</b> &rarr; pectus</div></div></div>
+  <div class="branch"><div class="bt bt-dop">&ndash;os</div><div class="bd"><div class="f">stesso rotacismo, maschili</div><div class="ex"><b>moris</b> &rarr; mos &bull; <b>floris</b> &rarr; flos &bull; <b>honoris</b> &rarr; honos/honor</div><div class="n"><em>honos</em> &egrave; la forma antica, <em>honor</em> quella classica: le trovi entrambe.</div></div></div>
+</div></div>
+
+<div class="cong-row"><div class="cong-node"><em>&ndash;eris</em><span class="cn-gloss">due ipotesi + una trappola</span><span class="cong-toggle">&#9654;</span></div>
+<div class="cong-branches">
+  <div class="branch"><div class="bt bt-neu">&ndash;us (neutro)</div><div class="bd"><div class="f">rotacismo con vocale e</div><div class="ex"><b>generis</b> &rarr; genus &bull; <b>operis</b> &rarr; opus &bull; <b>vulneris</b> &rarr; vulnus &bull; <b>sceleris</b> &rarr; scelus</div></div></div>
+  <div class="branch"><div class="bt bt-dop">&ndash;er</div><div class="bd"><div class="f">nominativo = tema puro</div><div class="ex"><b>mulieris</b> &rarr; mulier &bull; <b>aggeris</b> &rarr; agger</div></div></div>
+  <div class="branch"><div class="bt bt-irr">iter</div><div class="bd"><div class="f">il sorvegliato speciale del gruppo</div><div class="ex"><b>itineris</b> &rarr; iter («viaggio, marcia»), neutro</div><div class="n">Tema doppio <em>iter&#8209; / itiner&#8209;</em>: impossibile da ricostruire, va saputo.</div></div></div>
+</div></div>
+
+<div class="cong-row"><div class="cong-node"><em>&ndash;tris</em><span class="cn-gloss">i nomi di parentela</span><span class="cong-toggle">&#9654;</span></div>
+<div class="cong-branches">
+  <div class="branch"><div class="bt bt-sic">&ndash;ter</div><div class="bd"><div class="f">la e del nominativo cade nei casi obliqui (sincope)</div><div class="ex"><b>patris</b> &rarr; pater &bull; <b>matris</b> &rarr; mater &bull; <b>fratris</b> &rarr; frater</div></div></div>
+</div></div>
+
+<div class="cong-row"><div class="cong-node"><em>&ndash;lis</em> <small style="font-size:16px;opacity:.6">(imparisillabo)</small><span class="cn-gloss"></span><span class="cong-toggle">&#9654;</span></div>
+<div class="cong-branches">
+  <div class="branch"><div class="bt bt-sic">&ndash;l</div><div class="bd"><div class="f">nominativo = tema puro</div><div class="ex"><b>consulis</b> &rarr; consul &bull; <b>solis</b> &rarr; sol &bull; <b>salis</b> &rarr; sal</div></div></div>
+</div></div>
+
+<!-- ═══════════ PARISILLABI E NEUTRI IN -I ═══════════ -->
+<div class="cong-group"><span class="cong-group-title">Parisillabi e neutri in &ndash;i</span></div>
+
+<div class="cong-row"><div class="cong-node"><em>&ndash;is</em> <small style="font-size:16px;opacity:.6">(parisillabo)</small><span class="cn-gloss">il caso facile</span><span class="cong-toggle">&#9654;</span></div>
+<div class="cong-branches">
+  <div class="tip tip-it"><strong>Riconoscerlo:</strong> se togliendo &ndash;is resta una parola di una sillaba in meno ma il nome &egrave; parisillabo (stesso numero di sillabe al nominativo), il nominativo coincide con la forma in &ndash;is.</div>
+  <div class="branch"><div class="bt bt-sic">&ndash;is</div><div class="bd"><div class="f">nominativo trasparente</div><div class="ex"><b>civis</b> &rarr; civis &bull; <b>navis</b> &rarr; navis &bull; <b>hostis</b> &rarr; hostis &bull; <b>collis</b> &rarr; collis</div></div></div>
+  <div class="branch"><div class="bt bt-dop">&ndash;es</div><div class="bd"><div class="f">alcuni parisillabi hanno il nominativo in &ndash;es</div><div class="ex"><b>nubis</b> &rarr; nubes &bull; <b>caedis</b> &rarr; caedes &bull; <b>cladis</b> &rarr; clades</div></div></div>
+  <div class="branch"><div class="bt bt-neu">&ndash;e (neutro)</div><div class="bd"><div class="f">neutri col tema in &ndash;i indebolito in &ndash;e</div><div class="ex"><b>maris</b> &rarr; mare</div></div></div>
+</div></div>
+
+<div class="cong-row"><div class="cong-node"><em>&ndash;alis / &ndash;aris</em><span class="cn-gloss">neutri apocopati</span><span class="cong-toggle">&#9654;</span></div>
+<div class="cong-branches">
+  <div class="branch"><div class="bt bt-neu">&ndash;al / &ndash;ar</div><div class="bd"><div class="f">la &ndash;i finale del tema cade del tutto</div><div class="ex"><b>animalis</b> &rarr; animal &bull; <b>calcaris</b> &rarr; calcar &bull; <b>vectigalis</b> &rarr; vectigal</div><div class="n">Attenzione: &ndash;alis/&ndash;aris pu&ograve; anche essere un aggettivo della seconda classe (<em>mortalis, militaris</em>): controlla il contesto.</div></div></div>
+</div></div>
+
+<!-- ═══════════ SORVEGLIATI SPECIALI ═══════════ -->
+<div class="cong-group"><span class="cong-group-title">Sorvegliati speciali</span></div>
+
+<div class="cong-row"><div class="cong-node"><em>irregolari</em><span class="cn-gloss">da riconoscere a vista</span><span class="cong-toggle">&#9654;</span></div>
+<div class="cong-branches">
+  <div class="tip tip-trap"><strong>Nessuna regola li salva:</strong> sono frequentissimi nei testi e vanno memorizzati come coppie nominativo&ndash;genitivo.</div>
+  <div class="branch"><div class="bt bt-irr">iter, itineris</div><div class="bd"><div class="f">viaggio, marcia (neutro)</div></div></div>
+  <div class="branch"><div class="bt bt-irr">senex, senis</div><div class="bd"><div class="f">vecchio &mdash; il genitivo perde una sillaba</div></div></div>
+  <div class="branch"><div class="bt bt-irr">caro, carnis</div><div class="bd"><div class="f">carne &mdash; sincope della o</div></div></div>
+  <div class="branch"><div class="bt bt-irr">bos, bovis</div><div class="bd"><div class="f">bue &mdash; tema in dittongo</div></div></div>
+  <div class="branch"><div class="bt bt-irr">Iuppiter, Iovis</div><div class="bd"><div class="f">Giove &mdash; due temi diversi (Iov&#8209; + pater)</div></div></div>
+  <div class="branch"><div class="bt bt-irr">nix, nivis</div><div class="bd"><div class="f">neve</div></div></div>
+  <div class="branch"><div class="bt bt-irr">caput, capitis</div><div class="bd"><div class="f">testa, capo (neutro)</div></div></div>
+  <div class="branch"><div class="bt bt-irr">os, oris &ne; os, ossis</div><div class="bd"><div class="f">bocca/volto &ne; osso &mdash; solo il genitivo li distingue</div></div></div>
+</div></div>
+
+  </div><!-- fine grappolo -->
+</main>
+
+<footer>
+  <p><strong>Prof. Andrea Vaccaro</strong></p>
+  <p>Lingua e Cultura Latina &mdash; Liceo Classico e Liceo Scientifico</p>
+  <div class="footer-links">
+    <a href="../index.html">Home</a>
+    <a href="../strumenti/raccoglitore.html">Raccoglitore Testi</a>
+    <a href="../strumenti/glossario-eulalia.html">Strumenti</a>
+  </div>
+</footer>
+
+<!-- Presentazione LIM -->
+<div class="pres" id="pres">
+  <div class="pres-bar">
+    <span class="pres-title" id="pres-title">Il nominativo della terza</span>
+    <span class="pres-info" id="pres-info"></span>
+    <div style="display:flex;gap:8px;">
+      <button class="pres-b" id="pres-exit">Esci</button>
+    </div>
+  </div>
+  <div class="pres-prog"><div class="pres-prog-fill" id="pres-prog"></div></div>
+  <div class="pres-body" id="pres-body"></div>
+  <div class="pres-nav">
+    <button class="pres-b" id="pres-prev">&#8592; Precedente</button>
+    <span class="pres-cnt" id="pres-cnt"></span>
+    <button class="pres-b pres-b-go" id="pres-next">Successiva &#8594;</button>
+  </div>
+</div>
+
+<button class="lim-toggle" id="lt">Presenta sulla LIM</button>
+
+<script>
+(function(){
+  document.querySelectorAll('.cong-node').forEach(function(n){
+    n.addEventListener('click', function(e){
+      e.stopPropagation();
+      this.closest('.cong-row').classList.toggle('open');
+    });
+  });
+
+  /* Espandi tutto */
+  document.getElementById('ea').addEventListener('click',function(){
+    var r=document.querySelectorAll('.cong-row');
+    var allOpen=Array.from(r).every(function(x){return x.classList.contains('open')});
+    r.forEach(function(x){ allOpen ? x.classList.remove('open') : x.classList.add('open'); });
+    this.textContent = allOpen ? 'Espandi tutto' : 'Chiudi tutto';
+  });
+
+  /* ═══ MODALITA PRESENTAZIONE ═══ */
+  var slides = [];
+  var cur = 0;
+  var presEl = document.getElementById('pres');
+
+  function collectSlides(){
+    slides = [];
+    document.querySelectorAll('#grappolo > .cong-group, #grappolo > .cong-row').forEach(function(el){
+      if(el.classList.contains('cong-group')){
+        slides.push({ type:'group', title: el.querySelector('.cong-group-title').textContent, el: el });
+      } else {
+        var node = el.querySelector('.cong-node');
+        var label = node ? node.textContent.replace(/[▶◀]/g,'').trim() : '';
+        slides.push({ type:'cong', title: label, el: el });
+      }
+    });
+  }
+
+  function showSlide(){
+    var body = document.getElementById('pres-body');
+    body.innerHTML = '';
+    if(!slides[cur]) return;
+    var s = slides[cur];
+
+    if(s.type === 'group'){
+      var div = document.createElement('div');
+      div.style.cssText = 'display:flex;align-items:center;justify-content:center;height:100%;';
+      div.innerHTML = '<h2 style="font-family:Cormorant Garamond,serif;font-size:52px;font-weight:600;color:var(--text);text-align:center;">' + s.title + '</h2>';
+      body.appendChild(div);
+    } else {
+      var clone = s.el.cloneNode(true);
+      clone.classList.add('open');
+      clone.style.marginBottom = '0';
+      clone.querySelectorAll('.cong-node').forEach(function(n){
+        n.style.fontSize = '36px';
+        n.style.padding = '22px 40px';
+        n.style.cursor = 'default';
+      });
+      clone.querySelectorAll('.cong-toggle').forEach(function(t){ t.style.display='none'; });
+      clone.querySelectorAll('.bt').forEach(function(b){
+        b.style.fontSize = '22px';
+        b.style.minWidth = '200px';
+        b.style.padding = '14px 24px';
+      });
+      clone.querySelectorAll('.bd .f').forEach(function(f){ f.style.fontSize = '20px'; });
+      clone.querySelectorAll('.bd .t').forEach(function(t){ t.style.fontSize = '18px'; });
+      clone.querySelectorAll('.bd .ex').forEach(function(e){ e.style.fontSize = '18px'; e.style.padding = '10px 16px'; });
+      clone.querySelectorAll('.bd .n').forEach(function(n){ n.style.fontSize = '14px'; });
+      clone.querySelectorAll('.cn-gloss').forEach(function(g){ g.style.fontSize = '18px'; });
+      clone.querySelectorAll('.cong-branches').forEach(function(b){
+        b.style.marginLeft = '56px';
+        b.style.paddingLeft = '36px';
+      });
+      body.appendChild(clone);
+    }
+
+    document.getElementById('pres-info').textContent = s.title;
+    document.getElementById('pres-cnt').textContent = (cur+1) + ' / ' + slides.length;
+    document.getElementById('pres-prog').style.width = Math.round(((cur+1)/slides.length)*100) + '%';
+    document.getElementById('pres-prev').disabled = cur === 0;
+    document.getElementById('pres-next').disabled = cur >= slides.length - 1;
+    body.scrollTop = 0;
+  }
+
+  function enterPres(){
+    collectSlides();
+    cur = 0;
+    presEl.classList.add('active');
+    document.getElementById('lt').style.display = 'none';
+    document.body.style.overflow = 'hidden';
+    showSlide();
+  }
+
+  function exitPres(){
+    presEl.classList.remove('active');
+    document.getElementById('lt').style.display = '';
+    document.body.style.overflow = '';
+  }
+
+  document.getElementById('lt').addEventListener('click', enterPres);
+  document.getElementById('pres-exit').addEventListener('click', exitPres);
+  document.getElementById('pres-prev').addEventListener('click', function(){ if(cur>0){cur--;showSlide();} });
+  document.getElementById('pres-next').addEventListener('click', function(){ if(cur<slides.length-1){cur++;showSlide();} });
+
+  document.addEventListener('keydown', function(e){
+    if(!presEl.classList.contains('active')) return;
+    if(e.key==='ArrowRight'||e.key===' '||e.key==='PageDown'){ if(cur<slides.length-1){cur++;showSlide();}e.preventDefault(); }
+    if(e.key==='ArrowLeft'||e.key==='PageUp'){ if(cur>0){cur--;showSlide();}e.preventDefault(); }
+    if(e.key==='Escape'){ exitPres(); }
+    if(e.key==='Home'){ cur=0;showSlide();e.preventDefault(); }
+    if(e.key==='End'){ cur=slides.length-1;showSlide();e.preventDefault(); }
+  });
+})();
+</script>
+<script src="../js/alpheios-init.js"></script>
+</body>
+</html>

@@ -180,7 +180,7 @@
   <div class="page-header">
     <h1>📚 Glossario Interattivo Eulalia</h1>
     <div class="divider"></div>
-    <p class="subtitle">Le 800 parole latine più frequenti — Progetto Eulalia, Università di Bologna</p>
+    <p class="subtitle">Le prime 100 delle 800 parole latine più frequenti — Progetto Eulalia, Università di Bologna</p>
   </div>
 
   <div class="container">
@@ -203,12 +203,8 @@
         <option value="pron">Pronomi (PRON)</option>
       </select>
       <select id="rangeFilter" onchange="filterWords()">
-        <option value="all">Tutte (1–800)</option>
+        <option value="all">Tutte (1–100)</option>
         <option value="1-100">1–100</option>
-        <option value="101-200">101–200</option>
-        <option value="201-400">201–400</option>
-        <option value="401-600">401–600</option>
-        <option value="601-800">601–800</option>
       </select>
     </div>
 
@@ -251,7 +247,7 @@
       {id:2, word:"qui", func:"PRON:rel.", funcCat:"pron", trad:"che, il quale", freq:2},
       {id:3, word:"et", func:"CONJ", funcCat:"conj", trad:"e, anche", freq:3},
       {id:4, word:"in", func:"PREP:+abl./acc.", funcCat:"prep", trad:"in, dentro; verso", freq:4},
-      {id:5, word:"is", func:"PRON:dem.", funcCat:"pron", trad:"egli, quello", freq:5},
+      {id:5, word:"is", func:"PRON:det.", funcCat:"pron", trad:"egli, quello", freq:5},
       {id:6, word:"hic", func:"PRON:dem.", funcCat:"pron", trad:"questo, costui", freq:6},
       {id:7, word:"non", func:"ADV", funcCat:"adv", trad:"non", freq:7},
       {id:8, word:"ego", func:"PRON:pers.", funcCat:"pron", trad:"io", freq:8},
@@ -294,7 +290,7 @@
       {id:43, word:"iam", func:"ADV", funcCat:"adv", trad:"già, ormai", freq:43},
       {id:44, word:"homo", func:"N:3", funcCat:"noun", trad:"uomo, essere umano", freq:44},
       {id:45, word:"nam", func:"CONJ", funcCat:"conj", trad:"infatti, poiché", freq:45},
-      {id:46, word:"idem", func:"PRON:dem.", funcCat:"pron", trad:"lo stesso, il medesimo", freq:46},
+      {id:46, word:"idem", func:"PRON:det.", funcCat:"pron", trad:"lo stesso, il medesimo", freq:46},
       {id:47, word:"bonus", func:"ADJ", funcCat:"adj", trad:"buono, onesto", freq:47},
       {id:48, word:"volo", func:"V:irreg.", funcCat:"verb", trad:"volere, desiderare", freq:48},
       {id:49, word:"animus", func:"N:2", funcCat:"noun", trad:"animo, spirito, mente", freq:49},
@@ -370,7 +366,7 @@
     function renderWords(filtered) {
       const grid = document.getElementById('wordGrid');
       if (filtered.length === 0) {
-        grid.innerHTML = '<div class="empty-state"><span class="icon">Search icon</span><h2>Nessun risultato</h2><p>Prova a modificare i filtri di ricerca.</p></div>';
+        grid.innerHTML = '<div class="empty-state"><span class="icon">🔍</span><h2>Nessun risultato</h2><p>Prova a modificare i filtri di ricerca.</p></div>';
         document.getElementById('statsText').textContent = 'Nessuna parola trovata';
         return;
       }

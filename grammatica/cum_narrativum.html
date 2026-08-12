@@ -316,7 +316,7 @@
 
             <div class="example">
                 <span class="latin">Caesar, <strong>cum</strong> id <strong>nuntiatum esset</strong>, maturius quam consuerat iter facere coepit.</span>
-                <div class="translation">→ Cesare, <u>quando ciò gli fu annunciato</u>, cominciò a marciare più in fretta del solito. <span class="author">(Caes., Gall. 1,7,1)</span></div>
+                <div class="translation">→ Cesare, <u>quando ciò gli fu annunciato</u>, cominciò a marciare più in fretta del solito. <span class="author">(adattato da Caes., Gall. 1,7,1)</span></div>
             </div>
 
             <div class="box box-info">
@@ -356,11 +356,6 @@
                 <div class="translation">→ Mentre Cesare combatteva in Gallia, Pompeo restava a Roma.</div>
             </div>
 
-            <div class="example">
-                <span class="latin">Ariovistus, cum Caesaris postulata <strong>cognovisset</strong>, respondit.</span>
-                <div class="translation">→ Ariovisto, <u>quando ebbe conosciuto</u> le richieste di Cesare, rispose. <span class="author">(Caes., Gall. 1,36)</span></div>
-            </div>
-
             <h3>Anteriorità: cum + congiuntivo piuccheperfetto</h3>
 
             <div class="timeline">
@@ -378,7 +373,12 @@
             </div>
 
             <div class="example">
-                <span class="latin">Cum Romam <strong>venisset</strong>, te statim quaesivi.</span>
+                <span class="latin">Ariovistus, cum Caesaris postulata <strong>cognovisset</strong>, respondit.</span>
+                <div class="translation">→ Ariovisto, <u>quando ebbe conosciuto</u> le richieste di Cesare, rispose. <span class="author">(adattato da Caes., Gall. 1,36)</span></div>
+            </div>
+
+            <div class="example">
+                <span class="latin">Cum Romam <strong>venissem</strong>, te statim quaesivi.</span>
                 <div class="translation">→ Quando fui arrivato a Roma, ti cercai subito.</div>
             </div>
 
@@ -413,7 +413,7 @@
         <div class="section" id="section3">
             <h2>3. Il <em>cum adversativum</em></h2>
 
-            <p>A volte il <em>cum</em> non descrive solo una circostanza temporale, ma introduce un contrasto: si parla allora di <strong><em>cum adversativum</em></strong> (detto anche <em>cum inversum</em>).</p>
+            <p>A volte il <em>cum</em> non descrive solo una circostanza temporale, ma introduce un contrasto: si parla allora di <strong><em>cum adversativum</em></strong>. (Da non confondere col <em>cum inversum</em>, che è tutt'altro costrutto: <em>cum</em> + <strong>indicativo</strong> per l'evento improvviso, «quand'ecco che».)</p>
 
             <div class="box">
                 <strong>Definizione:</strong> Il <em>cum adversativum</em> introduce una proposizione subordinata al congiuntivo che si contrappone alla reggente per <strong>opposizione</strong> o <strong>contrasto</strong>. Si traduce con <em>«mentre invece, laddove, eppure»</em>.
@@ -552,21 +552,21 @@
                     </tr>
                     <tr>
                         <td><em>cum</em> causale</td>
-                        <td><span class="tag tag-blue">Cong. imperf./piucch.</span></td>
+                        <td><span class="tag tag-blue">Cong. (tutti i tempi, secondo la consecutio)</span></td>
                         <td>«poiché, dato che»</td>
-                        <td>Sfumatura causale</td>
+                        <td>Es. <span class="latin">quae cum ita sint</span></td>
                     </tr>
                     <tr>
                         <td><em>cum</em> adversativum</td>
-                        <td><span class="tag tag-blue">Cong. imperf./piucch.</span></td>
+                        <td><span class="tag tag-blue">Cong. (tutti i tempi)</span></td>
                         <td>«mentre invece, eppure»</td>
                         <td>Contrasto con reggente</td>
                     </tr>
                     <tr>
-                        <td><em>cum</em> finale</td>
-                        <td><span class="tag tag-blue">Cong. pres./imperf.</span></td>
-                        <td>«affinché»</td>
-                        <td>Raro; di solito è <em>ut</em></td>
+                        <td><em>cum</em> concessivum</td>
+                        <td><span class="tag tag-blue">Cong. (tutti i tempi)</span></td>
+                        <td>«sebbene, benché»</td>
+                        <td>Spia: <em>tamen</em> nella reggente</td>
                     </tr>
                 </tbody>
             </table>
@@ -731,7 +731,7 @@
         let msg = '';
         if (quizScore === totalQuestions) msg = 'Perfetto! Hai dimostrato una piena padronanza del cum narrativum.';
         else if (quizScore >= 5) msg = 'Ottimo! Conosci bene le basi. Rileggi le parti che hai sbagliato.';
-        else if (quizScore >= 3) msg = 'Abbastanza bene. Ripasssa le sezioni sulla consecutio e sui diversi valori di cum.';
+        else if (quizScore >= 3) msg = 'Abbastanza bene. Ripassa le sezioni sulla consecutio e sui diversi valori di cum.';
         else msg = 'Rileggi la lezione con attenzione, soprattutto le sezioni 2 e 4.';
         document.getElementById('scoreMessage').textContent = msg;
         document.getElementById('resultBox').scrollIntoView({ behavior: 'smooth' });

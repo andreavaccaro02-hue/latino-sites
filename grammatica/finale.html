@@ -416,7 +416,7 @@
             </ul>
 
             <h3>Formule correlative nella reggente</h3>
-            <p>Nella proposizione principale possono comparire elementi che anticipano e rafforzano lo scopo. Sono detti <strong>correlativi proletici o epanalettici</strong>:</p>
+            <p>Nella proposizione principale possono comparire elementi che anticipano e rafforzano lo scopo. Sono detti <strong>correlativi prolettici o epanalettici</strong>:</p>
             <div style="margin: 12px 0;">
                 <span class="tag tag-green">eo</span>
                 <span class="tag tag-green">ideo</span>
@@ -476,12 +476,14 @@
                 <div class="translation">→ I matematici si riservano di porre alcuni postulati, per svolgere <u>più facilmente</u> le loro dimostrazioni. <span class="nota-piccola">(Cic., Off. 3,33)</span></div>
             </div>
 
-            <h3>ut non nella coordinazione (§354b)</h3>
-            <p>L'uso di <em>ut non</em> (invece di <em>ne</em>) è ammesso quando una finale negativa è <strong>coordinata con una positiva</strong>:</p>
+            <h3>ut non: la negazione di una sola parola (§354b)</h3>
+            <p>Si usa <em>ut non</em> (invece di <em>ne</em>) quando la negazione non investe l'intera proposizione ma <strong>cade su una singola parola</strong>:</p>
             <div class="example">
                 <span class="latin">Ne dolere quidem possum, <strong>ut non</strong> ingratus videar.</span>
-                <div class="translation">→ Non posso neppure dolermi, per sembrare non ingrato. <span class="nota-piccola">(Cic., Att. 4,6,2)</span></div>
+                <div class="translation">→ Non posso neppure dolermi, senza sembrare ingrato (lett.: sì da apparire <u>non-ingrato</u>: la negazione investe il solo aggettivo). <span class="nota-piccola">(Cic., Att. 4,6,2)</span></div>
             </div>
+            <h3>Finali negative coordinate: neve / neu</h3>
+            <p>Quando due finali negative sono coordinate fra loro, la seconda è introdotta da <strong>neve/neu</strong> (dopo una positiva: <em>ut&hellip; neve</em>):</p>
             <div class="example">
                 <span class="latin">…omnes conservavit militibusque suis commendavit, <strong>ne</strong> qui eorum violaretur <strong>neu</strong> quid sui desiderarent.</span>
                 <div class="translation">→ Salvò la vita a tutti e li raccomandò ai suoi soldati, perché a nessuno fosse torto un capello e non dovessero lamentare alcun danno. <span class="nota-piccola">(Caes., Civ. 3,98,2)</span></div>
@@ -509,7 +511,7 @@
             </div>
 
             <div class="example">
-                <span class="latin">Venit ut discāt.</span>
+                <span class="latin">Venit ut discat.</span>
                 <div class="translation">Reggente al presente → congiuntivo presente → Viene per imparare.</div>
             </div>
             <div class="example">
@@ -566,7 +568,7 @@
                 <div class="translation">→ Abbiamo mandato uno a prendere l'agnello da sacrificare. <span class="nota-piccola">(Cic., Div. 2,39)</span></div>
             </div>
             <div class="example">
-                <span class="latin">Rex donarat, <strong>quae ei panem praeberet</strong>, Lampsacum autem, <strong>unde vinum sumeret</strong>, Myunta, <strong>ex qua obsonium haberet</strong>.</span>
+                <span class="latin">Rex Magnesiam donarat, <strong>quae ei panem praeberet</strong>, Lampsacum autem, <strong>unde vinum sumeret</strong>, Myunta, <strong>ex qua obsonium haberet</strong>.</span>
                 <div class="translation">→ Il re aveva donato [a Temistocle Magnesia], che gli fornisse il pane, Lampsaco, da dove prendesse il vino, Miunta, da cui avesse il companatico. <span class="nota-piccola">(Nep. 2,10,3)</span></div>
             </div>
 
@@ -600,7 +602,7 @@
                     <tr>
                         <td>Participio futuro</td>
                         <td><span class="latin">pacem petituri</span></td>
-                        <td>Latino postclassico</td>
+                        <td>Dall'et&agrave; di Livio in poi</td>
                     </tr>
                     <tr>
                         <td>Genitivo gerundivo (da Livio)</td>
@@ -684,7 +686,7 @@
                         <tr>
                             <td>Participio futuro</td>
                             <td><span class="latin">pacem petituri</span></td>
-                            <td>Latino postclassico</td>
+                            <td>Dall'et&agrave; di Livio in poi</td>
                         </tr>
                         <tr>
                             <td>Gen. gerundivo (Livio)</td>
@@ -773,7 +775,7 @@
                 <!-- Domanda 5 -->
                 <div class="quiz-question mb-30" id="q5">
                     <h3>Domanda 5 / 7</h3>
-                    <p><strong>Nella frase <span class="latin">Misimus, qui afferrat agnum, quem immolemus</span> (Cic.), le relative hanno valore:</strong></p>
+                    <p><strong>Nella frase <span class="latin">Misimus, qui afferat agnum, quem immolemus</span> (Cic.), le relative hanno valore:</strong></p>
                     <div class="quiz-option" onclick="checkAnswer(5, this, false)">Causale</div>
                     <div class="quiz-option" onclick="checkAnswer(5, this, false)">Consecutivo</div>
                     <div class="quiz-option" onclick="checkAnswer(5, this, true)">Finale</div>
@@ -884,7 +886,7 @@
         let msg = '';
         if (quizScore === totalQuestions) msg = 'Perfetto! Hai dimostrato una piena padronanza della proposizione finale.';
         else if (quizScore >= 5) msg = 'Ottimo! Conosci bene la struttura della finale. Rileggi le parti che hai sbagliato.';
-        else if (quizScore >= 3) msg = 'Abbastanza bene. Ripasssa le sezioni sulle congiunzioni, i correlativi e le costruzioni implicite.';
+        else if (quizScore >= 3) msg = 'Abbastanza bene. Ripassa le sezioni sulle congiunzioni, i correlativi e le costruzioni implicite.';
         else msg = 'Rileggi la lezione con attenzione, soprattutto le sezioni 2, 3 e 4.';
         document.getElementById('scoreMessage').textContent = msg;
         document.getElementById('resultBox').scrollIntoView({ behavior: 'smooth' });

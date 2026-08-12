@@ -437,7 +437,7 @@
                 
                 <div class="box">
                     <p><strong>Prima di capire l'infinitiva, dobbiamo conoscere l'INFINITO latino.</strong></p>
-                    <p>In latino l'infinito è un modo verbale che ha TRE TEMPI (non uno solo come in italiano!):</p>
+                    <p>In latino l'infinito è un modo verbale che ha TRE TEMPI (in italiano ne abbiamo solo due: <em>vedere / aver visto</em>):</p>
                 </div>
                 
                 <h3>I tre tempi dell'infinito</h3>
@@ -471,7 +471,7 @@
                 
                 <div class="box box-warning">
                     <p><strong>⚠️ ATTENZIONE!</strong></p>
-                    <p>In italiano usiamo l'infinito presente anche per azioni passate ("Credo di aver visto Maria ieri"). In latino invece dobbiamo usare il tempo giusto dell'infinito!</p>
+                    <p>Anche l'italiano distingue <em>vedere</em> / <em>aver visto</em> ("Credo di aver visto Maria ieri"): il latino fa lo stesso, e in più ha un <strong>infinito futuro</strong> che l'italiano non possiede e deve rendere con una perifrasi ("che verrà").</p>
                 </div>
                 
                 <h3>Esercizio rapido</h3>
@@ -485,7 +485,7 @@
                     Infinito PRESENTE (venire)
                 </div>
                 <div class="quiz-option" onclick="checkInfinito('perfetto')">
-                    Infinito PERFETTO (essere venuto / aver venuto)
+                    Infinito PERFETTO (essere venuto)
                 </div>
                 <div class="quiz-option" onclick="checkInfinito('futuro')">
                     Infinito FUTURO (essere per venire)
@@ -687,11 +687,16 @@
                 </div>
                 
                 <div class="example">
-                    <p class="latin">3. Dicitur Caesarem esse fortem.</p>
-                    <p class="translation">Si dice che Cesare è coraggioso.</p>
+                    <p class="latin">3. Dictum est Romam a Romulo conditam esse.</p>
+                    <p class="translation">Si è detto che Roma fu fondata da Romolo.</p>
                     <p class="nota-sotto">
-                        → forma passiva: "è detto che..." = "si dice che..."
+                        → forma passiva composta impersonale: "è stato detto che..."
                     </p>
+                </div>
+
+                <div class="box box-warning">
+                    <p><strong>⚠️ ATTENZIONE a <em>dicor</em> e <em>videor</em>!</strong></p>
+                    <p>Con le forme semplici di <em>dicor, videor, feror, putor</em> il latino classico preferisce la <strong>costruzione personale</strong> (nominativo + infinito): <span class="latin">Caesar fortis esse <strong>dicitur</strong></span> = «si dice che Cesare sia coraggioso» (lett. «Cesare è detto essere coraggioso»); <span class="latin">Romani vicisse <strong>dicuntur</strong></span>. La costruzione impersonale con accusativo + infinito si usa con le forme composte o perifrastiche (<em>dictum est, dici potest, dicendum est</em>).</p>
                 </div>
                 
                 <div class="example">
@@ -723,7 +728,7 @@
                 <div class="feedback" id="type2Feedback"></div>
                 
                 <div class="example">
-                    <p class="latin">3. Dicitur Romam esse pulchram.</p>
+                    <p class="latin">3. Notum est Romam esse pulchram.</p>
                 </div>
                 <div class="quiz-option" onclick="checkType(3, 'ogg')">OGGETTIVA</div>
                 <div class="quiz-option" onclick="checkType(3, 'sogg')">SOGGETTIVA</div>
@@ -819,7 +824,7 @@
                 </div>
                 
                 <div class="example">
-                    <p><strong>4.</strong> <span class="latin">Dicitur Romanos vicisse.</span></p>
+                    <p><strong>4.</strong> <span class="latin">Dictum est Romanos vicisse.</span></p>
                     <input type="text" class="input-exercise" id="trans4" placeholder="Scrivi la traduzione...">
                     <button class="btn" onclick="checkTrans(4)">Verifica</button>
                     <div class="feedback" id="trans4Feedback"></div>
@@ -990,9 +995,9 @@
                 </div>
                 
                 <div class="example">
-                    <p><strong>8. Come si traduce: <span class="latin">Dicitur Romanos vicisse</span>?</strong></p>
+                    <p><strong>8. Come si traduce: <span class="latin">Dictum est Romanos vicisse</span>?</strong></p>
                     <div class="quiz-option" id="q8a" onclick="selectAnswer(8, 'a')">A) Dico che i Romani hanno vinto</div>
-                    <div class="quiz-option" id="q8b" onclick="selectAnswer(8, 'b')">B) Si dice che i Romani hanno vinto</div>
+                    <div class="quiz-option" id="q8b" onclick="selectAnswer(8, 'b')">B) Si è detto che i Romani hanno vinto</div>
                     <div class="quiz-option" id="q8c" onclick="selectAnswer(8, 'c')">C) I Romani dicono di aver vinto</div>
                 </div>
                 
@@ -1401,7 +1406,7 @@
                              answer.includes('tu') && answer.includes('sia') && answer.includes('saggio');
                     break;
                 case 2:
-                    correctAnswer = 'So che Marco è venuto / So che Marco ha venuto';
+                    correctAnswer = 'So che Marco è venuto / So che Marco è arrivato';
                     correct = answer.includes('so') && answer.includes('marco') && 
                              (answer.includes('venuto') || answer.includes('arrivato'));
                     break;
@@ -1411,12 +1416,12 @@
                              answer.includes('soldati') && answer.includes('combatt');
                     break;
                 case 4:
-                    correctAnswer = 'Si dice che i Romani hanno vinto';
-                    correct = (answer.includes('si dice') || answer.includes('è detto')) && 
+                    correctAnswer = 'Si è detto che i Romani hanno vinto';
+                    correct = (answer.includes('si è detto') || answer.includes('è stato detto') || answer.includes('si dice') || answer.includes('detto')) &&
                              answer.includes('romani') && answer.includes('vinto');
                     break;
                 case 5:
-                    correctAnswer = 'Spero che tu verrai / Spero che tu sarai per venire';
+                    correctAnswer = 'Spero che tu verrai / Spero che tu venga';
                     correct = answer.includes('spero') && answer.includes('tu') && 
                              (answer.includes('verrai') || answer.includes('venir'));
                     break;

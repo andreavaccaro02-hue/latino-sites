@@ -99,7 +99,7 @@ var TREES = [
 /* ── § 1 — divisa est ── */
 { sec:'§ 1 — divisa est',
   q:'Gallia <strong>est</strong> omnis <strong>divisa</strong> in partes tres, quarum unam <strong>incolunt</strong> Belgae, aliam [<strong>incolunt</strong>] Aquitani, tertiam quī ipsōrum linguā Celtae, nostrā [linguā] Gallī <strong>appellantur</strong>',
-  note:'<strong>Struttura:</strong> il perfetto passivo <em>divisa est</em> regge il soggetto <em>Gallia</em> e il predicativo del soggetto <em>omnis</em>. <em>In partes tres</em> è complemento di estensione/fine. La relativa <em>quarum</em> (gen. partitivo riferito a <em>partes</em>) introduce tre proposizioni coordinate: le prime due con il verbo <em>incolunt</em> (la seconda con verbo sottinteso), la terza con <em>appellantur</em>, dove <em>Celtae</em> e <em>Galli</em> sono predicativi del soggetto e <em>lingua</em> è ablativo di mezzo.',
+  note:'<strong>Struttura:</strong> <em>divisa est</em> (con valore di stato: &laquo;&egrave; divisa&raquo;) regge il soggetto <em>Gallia</em> e il predicativo del soggetto <em>omnis</em>. <em>In partes tres</em> indica il risultato della divisione (moto a luogo figurato). La relativa <em>quarum</em> (gen. partitivo riferito a <em>partes</em>) introduce tre proposizioni coordinate, tutte col verbo <em>incolunt</em> (sottinteso nella seconda e nella terza): <em>unam incolunt Belgae, aliam [incolunt] Aquitani, tertiam [incolunt] ii qui&hellip;</em>. Da quest\'ultima dipende la relativa <em>qui&hellip;appellantur</em>, dove <em>Celtae</em> e <em>Galli</em> sono predicativi del soggetto e <em>lingua</em> è ablativo di mezzo.',
   t:{w:'divisa est', t:'v', r:'verb. princ. (perf. pass.)', ch:[
     {w:'Gallia', t:'s', r:'soggetto'},
     {w:'omnis', t:'pred', r:'pred. nominativo'},
@@ -115,16 +115,18 @@ var TREES = [
             {w:'aliam', t:'o', r:'compl. oggetto'},
             {w:'Aquitani', t:'s', r:'soggetto'}
           ]},
-          {w:'appellantur', t:'sub', r:'prop. rel. coord. (tertiam)', ch:[
+          {w:'[incolunt]', t:'sub', r:'prop. coord.', ch:[
             {w:'tertiam', t:'o', r:'compl. oggetto (= partem)'},
-            {w:'qui', t:'s', r:'soggetto relativo'},
-            {w:'Celtae', t:'pred', r:'pred. nominativo', ch:[
-              {w:'lingua', t:'ind', r:'abl. di mezzo', ch:[
-                {w:'ipsorum', t:'spec', r:'gen. possessivo'}
+            {w:'appellantur', t:'sub', r:'prop. relativa (qui)', ch:[
+              {w:'qui', t:'s', r:'soggetto relativo'},
+              {w:'Celtae', t:'pred', r:'pred. nominativo', ch:[
+                {w:'lingua', t:'ind', r:'abl. di mezzo', ch:[
+                  {w:'ipsorum', t:'spec', r:'gen. possessivo'}
+                ]}
+              ]},
+              {w:'Galli', t:'pred', r:'pred. nominativo', ch:[
+                {w:'nostra', t:'ind', r:'abl. di mezzo (linguā s.e.)'}
               ]}
-            ]},
-            {w:'Galli', t:'pred', r:'pred. nominativo', ch:[
-              {w:'nostra', t:'ind', r:'abl. di mezzo (linguā s.e.)'}
             ]}
           ]}
         ]}
@@ -203,15 +205,16 @@ var TREES = [
 /* ── § 4b — commeant / important ── */
 { sec:'§ 4b — commeant / important',
   q:'minimē<em>que</em> ad eōs mercātōrēs saepe <strong>commeant</strong> atque ea quae ad effēminandōs animōs <strong>pertinent important</strong>',
-  note:'<strong>Struttura:</strong> <em>-que</em> enclitico coordina questa proposizione alla principale precedente. <em>Mercatores</em> è soggetto; <em>ad eos</em> è complemento di moto a luogo figurato; <em>minime</em> e <em>saepe</em> sono avverbi. <em>Important</em> è coordinato da <em>atque</em> con soggetto sottinteso <em>mercatores</em>. <em>Ea</em> (acc. pl. n.) è complemento oggetto di <em>important</em>, qualificato dalla relativa <em>quae…pertinent</em>. <em>Ad effeminandos animos</em>: gerundivo d\'uso (<em>effeminandos</em> concorda con <em>animos</em>, acc. pl.) con valore di scopo.',
+  note:'<strong>Struttura:</strong> <em>-que</em> enclitico coordina questa proposizione alla principale precedente. <em>Mercatores</em> è soggetto; <em>ad eos</em> è complemento di moto a luogo figurato; <em>minime</em> modifica <em>saepe</em>: il nesso <em>minime&hellip;saepe</em> vale &laquo;molto di rado&raquo;. <em>Important</em> è coordinato da <em>atque</em> con soggetto sottinteso <em>mercatores</em>. <em>Ea</em> (acc. pl. n.) è complemento oggetto di <em>important</em>, qualificato dalla relativa <em>quae…pertinent</em>. <em>Ad effeminandos animos</em>: gerundivo d\'uso (<em>effeminandos</em> concorda con <em>animos</em>, acc. pl.) con valore di scopo.',
   t:{w:'commeant', t:'v', r:'verb. coord. (minimeque)', ch:[
     {w:'-que', t:'cong', r:'cong. enclitica (coord.)'},
     {w:'mercatores', t:'s', r:'soggetto'},
     {w:'ad', t:'prep', r:'preposizione', ch:[
       {w:'eos', t:'ind', r:'acc. con prep. (ad eos)'}
     ]},
-    {w:'saepe', t:'avv', r:'avv. di frequenza'},
-    {w:'minime', t:'avv', r:'avv. di grado (superl.)'},
+    {w:'saepe', t:'avv', r:'avv. di frequenza', ch:[
+      {w:'minime', t:'avv', r:'avv. di grado (minime saepe = molto di rado)'}
+    ]},
     {w:'important', t:'sub', r:'prop. coord. (atque)', ch:[
       {w:'atque', t:'cong', r:'cong. coordinativa'},
       {w:'[mercatores]', t:'s', r:'sogg. sottinteso'},
@@ -257,7 +260,7 @@ var TREES = [
 /* ── § 5 — praecedunt ── */
 { sec:'§ 5 — praecedunt / contendunt / prohibent / gerunt',
   q:'Quā dē causā Helvētiī quoque reliquōs Gallōs virtūte <strong>praecēdunt</strong>, quod ferē cotīdiānīs proeliīs cum Germānīs <strong>contendunt</strong>, cum aut suīs fīnibus eōs <strong>prohibent</strong> aut ipsī in eōrum fīnibus bellum <strong>gerunt</strong>',
-  note:'<strong>Struttura:</strong> <em>Qua de causa</em> è nesso relativo (ablativo di causa; <em>de</em> è nodo esplicito). <em>Praecedunt</em> regge l\'accusativo <em>reliquos Gallos</em> (compl. ogg.) e l\'ablativo <em>virtute</em> (abl. di mezzo/vantaggio). La causale <em>quod…contendunt</em> dipende dalla principale. La temporale <em>cum aut…prohibent aut…gerunt</em> contiene due proposizioni coordinate da <em>aut…aut</em>: nella prima <em>eos</em> è oggetto di <em>prohibent</em>, con <em>suis finibus</em> ablativo di separazione; nella seconda <em>ipsi</em> (sogg. enfatico) e <em>in eorum finibus</em> è complemento di stato in luogo.',
+  note:'<strong>Struttura:</strong> <em>Qua de causa</em> è nesso relativo (ablativo di causa; <em>de</em> è nodo esplicito). <em>Praecedunt</em> regge l\'accusativo <em>reliquos Gallos</em> (compl. ogg.) e l\'ablativo <em>virtute</em> (abl. di limitazione: li superano <em>in valore</em>, come <em>lingua, institutis, legibus</em> al § 2). La causale <em>quod…contendunt</em> dipende dalla principale. La temporale <em>cum aut…prohibent aut…gerunt</em> contiene due proposizioni coordinate da <em>aut…aut</em>: nella prima <em>eos</em> è oggetto di <em>prohibent</em>, con <em>suis finibus</em> ablativo di separazione; nella seconda <em>ipsi</em> (sogg. enfatico) e <em>in eorum finibus</em> è complemento di stato in luogo.',
   t:{w:'praecedunt', t:'v', r:'verb. princ.', ch:[
     {w:'Helvetii', t:'s', r:'soggetto', ch:[
       {w:'quoque', t:'avv', r:'avv. aggiuntivo'}
@@ -265,7 +268,7 @@ var TREES = [
     {w:'Gallos', t:'o', r:'compl. oggetto', ch:[
       {w:'reliquos', t:'agg', r:'agg.'}
     ]},
-    {w:'virtute', t:'ind', r:'abl. di mezzo/vantaggio'},
+    {w:'virtute', t:'ind', r:'abl. di limitazione'},
     {w:'de', t:'prep', r:'preposizione', ch:[
       {w:'causa', t:'ind', r:'abl. di causa (nesso rel.)', ch:[
         {w:'Qua', t:'agg', r:'agg. relativo'}

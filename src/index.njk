@@ -1,0 +1,27 @@
+---
+layout: base.njk
+permalink: /
+---
+<section class="home-sezione">
+  <h2>Quest'anno</h2>
+  <ul class="elenco-anni">
+    {% for m in materieConProgramma %}{% for anno in m.anni %}
+    <li><a href="/{{ m.id }}/{{ anno }}/">{{ m.nome }} {{ anno }}</a></li>
+    {% endfor %}<li><a href="/{{ m.id }}/">Tutto su {{ m.nome | lower }}</a></li>{% endfor %}
+  </ul>
+  {% for m in materieConProgramma %}{% if m.pagine.length %}
+  <h3>{{ m.nome }} · pagine interattive</h3>
+  <ul class="elenco-pagine">
+    {% for p in m.pagine %}<li><a href="/{{ p.url }}">{{ p.titolo }}</a></li>{% endfor %}
+  </ul>
+  {% endif %}{% endfor %}
+</section>
+<h2 class="kicker home-sezione">Anche sul sito</h2>
+{% for s in home.sezioni %}
+<section class="home-sezione" id="{{ s.id }}">
+  <h2>{{ s.titolo }}</h2>
+  <ul class="elenco-pagine">
+    {% for l in s.link %}<li><a href="{% if l.url.startsWith('http') %}{{ l.url }}{% else %}/{{ l.url }}{% endif %}">{{ l.titolo }}</a></li>{% endfor %}
+  </ul>
+</section>
+{% endfor %}

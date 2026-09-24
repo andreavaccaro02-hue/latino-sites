@@ -8,3 +8,4 @@ fonti/
 node_modules/
 _site/
 .superpowers/
+__pycache__/

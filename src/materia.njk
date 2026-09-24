@@ -1,0 +1,25 @@
+---
+layout: base.njk
+pagination:
+  data: materieConProgramma
+  size: 1
+  alias: m
+permalink: "/{{ m.id }}/"
+eleventyComputed:
+  titolo: "{{ m.nome }}"
+  materia: "{{ m.id }}"
+---
+<article class="materia">
+  <p class="kicker">Materia</p>
+  <h1>{{ m.nome }}</h1>
+  <h2>Programma</h2>
+  <ul class="elenco-anni">
+    {% for anno in m.anni %}<li><a href="/{{ m.id }}/{{ anno }}/">{{ m.nome }} {{ anno }}</a> · {{ anno | nomeAnno }} anno</li>{% endfor %}
+  </ul>
+  {% if m.pagine.length %}
+  <h2>Pagine interattive</h2>
+  <ul class="elenco-pagine">
+    {% for p in m.pagine %}<li><a href="/{{ p.url }}">{{ p.titolo }}</a></li>{% endfor %}
+  </ul>
+  {% endif %}
+</article>

@@ -1,0 +1,32 @@
+---
+layout: base.njk
+pagination:
+  data: programmi
+  size: 1
+  alias: programma
+  resolve: values
+permalink: "/{{ programma.materia }}/{{ programma.anno }}/"
+eleventyComputed:
+  titolo: "{{ programma.materia | nomeMateria(materie) }} {{ programma.anno }}"
+  materia: "{{ programma.materia }}"
+---
+<article class="indice">
+  <p class="kicker">{{ programma.materia | nomeMateria(materie) }} · {{ programma.anno | nomeAnno }} anno</p>
+  <h1>{{ programma.materia | nomeMateria(materie) }} {{ programma.anno }}</h1>
+  {% for m in programma.moduli %}
+  <section class="indice-modulo">
+    <h2><span class="numero">Modulo {{ m.numero }}</span>{{ m.titolo }}</h2>
+    <ol class="indice-argomenti">
+      {% for a in m.argomenti %}
+      {% set lez = collections.lezioni | lezionePer(programma.materia, m.slug, a.numero) %}
+      {% set rim = moduli | rimandiPer(programma.materia, m.slug, a.numero) %}
+      <li value="{{ a.numero }}">
+        {% if lez %}<a href="{{ lez.url }}">{{ lez.data.titolo }}</a>
+        {% elif rim.length %}{{ a.titolo }} · {% for r in rim %}<a href="/{{ r }}">pagina interattiva{% if rim.length > 1 %} {{ loop.index }}{% endif %}</a>{% if not loop.last %} · {% endif %}{% endfor %}
+        {% else %}<span class="in-preparazione">{{ a.titolo }}</span>{% endif %}
+      </li>
+      {% endfor %}
+    </ol>
+  </section>
+  {% endfor %}
+</article>

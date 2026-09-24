@@ -1,0 +1,54 @@
+{
+  "sezioni": [
+    {
+      "id": "latino",
+      "titolo": "Latino",
+      "link": [
+        { "titolo": "Latino 1", "url": "percorsi/latino1.html" },
+        { "titolo": "Latino 2", "url": "percorsi/latino2.html" },
+        { "titolo": "Latino 3 · Classico", "url": "percorsi/latino3-classico.html" },
+        { "titolo": "Latino 3 · Scientifico", "url": "percorsi/latino3-scientifico.html" },
+        { "titolo": "Latino 4 · Classico", "url": "percorsi/latino4-classico.html" },
+        { "titolo": "Latino 4 · Scientifico", "url": "percorsi/latino4-scientifico.html" },
+        { "titolo": "Latino 5 · Classico", "url": "percorsi/latino5-classico.html" },
+        { "titolo": "Latino 5 · Scientifico", "url": "percorsi/latino5-scientifico.html" },
+        { "titolo": "Grammatica", "url": "grammatica/index.html" }
+      ]
+    },
+    {
+      "id": "strumenti",
+      "titolo": "Strumenti",
+      "link": [
+        { "titolo": "Glossario Eulalia", "url": "strumenti/glossario-eulalia.html" },
+        { "titolo": "Analisi Testi", "url": "strumenti/analisi_latino.html" },
+        { "titolo": "Declinazioni", "url": "grammatica/declinazioni.html" },
+        { "titolo": "Confronto Declinazioni", "url": "grammatica/declinazioni_confronto.html" },
+        { "titolo": "Diario Apprendimento", "url": "strumenti/diario_latina.html" },
+        { "titolo": "Raccoglitore Testi", "url": "strumenti/raccoglitore.html" },
+        { "titolo": "Quiz Riconoscimento", "url": "strumenti/quiz-riconoscimento.html" },
+        { "titolo": "Quiz Morfologia", "url": "strumenti/quiz-morfologia.html" },
+        { "titolo": "Schema Congiunzioni", "url": "grammatica/schema-congiunzioni-v2.html" },
+        { "titolo": "Maturità in 40 domande", "url": "strumenti/maturita-latino.html" },
+        { "titolo": "Ripasso Maturità — sito completo", "url": "https://ripasso-maturita-5ac.vercel.app" },
+        { "titolo": "Flashcard", "url": "flashcard/index.html" }
+      ]
+    },
+    {
+      "id": "calendari",
+      "titolo": "Calendari",
+      "link": [
+        { "titolo": "Terza", "url": "calendario/terza.html" },
+        { "titolo": "Quarta", "url": "calendario/quarta.html" },
+        { "titolo": "Quinta", "url": "calendario/quinta.html" }
+      ]
+    },
+    {
+      "id": "chi-sono",
+      "titolo": "Su di me",
+      "link": [
+        { "titolo": "Su di me", "url": "chi-sono.html" },
+        { "titolo": "CV", "url": "pdf/cv-vaccaro-europass.pdf" }
+      ]
+    }
+  ]
+}

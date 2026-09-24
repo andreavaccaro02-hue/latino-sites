@@ -28,9 +28,6 @@ export const PASSTHROUGH = [
   "robots.txt",
   "sitemap.xml",
   "google381d0d291942dea2.html",
-  // Pagine che il Task 8 sostituisce con modelli: finché non esistono, si copiano.
-  "index.html",
-  "geostoria/index.html",
 ];
 
 export default function (eleventyConfig) {

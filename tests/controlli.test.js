@@ -78,6 +78,22 @@ test("torna a con → e con -> passano entrambi", () => {
   assert.deepEqual(controllaLezione(testo, "a.md", PROGRAMMI), []);
 });
 
+test("torna a con virgolette tipografiche passa", () => {
+  const testo = BUONA.replace('torna a: "Che cos\'è una fonte"', `torna a: "Che cos'è una fonte"`);
+  assert.deepEqual(controllaLezione(testo, "a.md", PROGRAMMI), []);
+});
+
+test("torna a scritto male viene segnalato", () => {
+  const testo = BUONA.replace('torna a: "Che cos\'è una fonte"', `torna a: Che cos'è una fonte`);
+  const m = messaggi(controllaLezione(testo, "a.md", PROGRAMMI));
+  assert.match(m, /«torna a» scritto male/);
+});
+
+test("torna a in un testo normale non è un errore", () => {
+  const testo = BUONA.replace("Tre cose.", "Poi si torna a: casa.");
+  assert.deepEqual(controllaLezione(testo, "a.md", PROGRAMMI), []);
+});
+
 test("privacy: sigle di classe e date, non le date storiche", () => {
   const testo = BUONA.replace("Tre cose.", "In 1ALS il 23/9, poi 2A il 2026-09-30. Roma nel 753 a.C., Lucy nel 1974.");
   const m = messaggi(controllaLezione(testo, "a.md", PROGRAMMI));

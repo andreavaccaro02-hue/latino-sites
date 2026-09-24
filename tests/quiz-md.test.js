@@ -22,6 +22,14 @@ test("torna a con freccia → o con ->", () => {
   }
 });
 
+test("torna a con virgolette tipografiche o miste", () => {
+  for (const titolo of [`"Che cos'è una fonte"`, `"Che cos'è una fonte"`, `"Che cos'è una fonte"`]) {
+    const html = md.render(`??? Domanda -> torna a: ${titolo}\n- [x] sì\n- [ ] no\n`);
+    assert.match(html, /data-torna="passo-che-cos-e-una-fonte"/, titolo);
+    assert.match(html, /<p class="quiz-domanda">Domanda<\/p>/, titolo);
+  }
+});
+
 test("quiz dentro un blocco", () => {
   const html = md.render("::: uscita\n??? Q\n- [x] a\n- [ ] b\n:::\n");
   assert.match(html, /data-blocco="uscita" id="biglietto">[\s\S]*<div class="quiz">[\s\S]*<\/section>/);

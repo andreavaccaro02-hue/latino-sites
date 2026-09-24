@@ -3,6 +3,8 @@
     "id": "geostoria",
     "nome": "Geostoria",
     "colore": "#a34a28",
+    "descrizione": "Le lezioni di geostoria del primo biennio proiettate in classe: la carta del Mediterraneo, il conto del tempo, le fonti. Pagine interattive da rivedere a casa.",
+    "descrizioneOg": "Le lezioni di geostoria del primo biennio proiettate in classe: la carta del Mediterraneo, il conto del tempo, le fonti.",
     "pagine": [
       { "titolo": "DOVE · La carta del Mediterraneo", "url": "geostoria/carta-mediterraneo-lim.html" },
       { "titolo": "QUANDO · Contare il tempo", "url": "geostoria/contare-il-tempo.html" },

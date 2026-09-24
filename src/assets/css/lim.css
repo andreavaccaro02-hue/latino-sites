@@ -1,7 +1,7 @@
 :root { --carta: #fcfbf8; --inchiostro: #16140f; --grigio: #5c5647; --tenue: #77705f; --sabbia: #f1ebe0; --filetto: #d9cfbd;
   --serif: "Newsreader", Georgia, serif; --sans: "Inter", system-ui, sans-serif; }
 html, body { background: var(--carta); }
-.reveal { font-family: var(--serif); font-size: 44px; color: var(--inchiostro); line-height: 1.4; }
+.reveal { font-family: var(--serif); font-size: 38px; color: var(--inchiostro); line-height: 1.4; }
 .reveal .slides { text-align: left; }
 .reveal .slides section { height: 100%; padding: 0; }
 .reveal h1 { font-size: 2.4em; font-weight: 600; line-height: 1.05; margin: .15em 0 .2em; }
@@ -46,3 +46,14 @@ section[data-blocco="interattivo"] iframe { width: 100%; height: 760px; border: 
 .reveal .slide-number { background: none; color: var(--tenue); font-family: var(--sans); }
 .reveal .controls { color: var(--accento); }
 .reveal .progress { color: var(--accento); }
+
+/* Foto dentro i passi: a destra del testo, mai più alta della schermata. */
+.reveal section:not(.apertura) img { float: right; width: auto; max-width: 36%; max-height: 470px; object-fit: contain; margin: 0 0 .4em 1em; }
+.reveal h3 { font-size: 1em; font-weight: 600; margin: 0 0 .3em; }
+.reveal p { margin: 0 0 .5em; }
+.reveal blockquote { margin: 0 0 .5em; padding-left: .8em; border-left: 3px solid var(--filetto); }
+.reveal table { font-size: .75em; border-collapse: collapse; }
+.reveal th, .reveal td { padding: .2em .6em; border-bottom: 1px solid var(--filetto); text-align: left; }
+/* Opzioni dei quiz in riga: tre domande entrano in una schermata. */
+.quiz-opzioni { grid-template-columns: repeat(auto-fit, minmax(0, 1fr)); }
+.reveal .quiz { margin: 0 0 .6em; }

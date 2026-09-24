@@ -116,6 +116,20 @@ test("controllaCartella trova due lezioni sullo stesso argomento", () => {
   assert.match(errori[0].messaggio, /stesso argomento già trattato in .*02-a\.md/);
 });
 
+test("controllaCartella non segnala doppioni fra lezioni senza campi", () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "lezioni-"));
+  const dirProg = fs.mkdtempSync(path.join(os.tmpdir(), "programmi-"));
+  fs.writeFileSync(path.join(dirProg, "geostoria-1.json"), JSON.stringify(PROGRAMMI[0]));
+  fs.writeFileSync(path.join(dir, "a.md"), CORPO);
+  fs.writeFileSync(path.join(dir, "b.md"), CORPO);
+  fs.writeFileSync(path.join(dir, "c.md"), BUONA);
+  fs.writeFileSync(path.join(dir, "d.md"), BUONA);
+  const m = messaggi(controllaCartella(dir, dirProg));
+  assert.match(m, /manca il campo «materia»/);
+  assert.equal((m.match(/stesso argomento già trattato/g) || []).length, 1);
+  assert.match(m, /stesso argomento già trattato in .*c\.md/);
+});
+
 test("controllaCartella senza cartella delle lezioni non dà errori", () => {
   assert.deepEqual(controllaCartella("/percorso/che/non/esiste", "/percorso/che/non/esiste"), []);
 });

@@ -4,3 +4,7 @@ _admin/
 design-demo.html
 fonti/
 .claude/
+
+node_modules/
+_site/
+.superpowers/

@@ -1,0 +1,11 @@
+# Provvisorio: finché GitHub Pages pubblica dal ramo main, Jekyll non deve
+# pubblicare i sorgenti di Eleventy. Si rimuove dopo il passaggio alle Actions.
+exclude:
+  - src
+  - lib
+  - scripts
+  - tests
+  - node_modules
+  - package.json
+  - package-lock.json
+  - eleventy.config.js

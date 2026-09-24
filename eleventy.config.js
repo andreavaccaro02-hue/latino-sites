@@ -2,6 +2,7 @@ import { HtmlBasePlugin } from "@11ty/eleventy";
 import { controllaCartella, formattaErrori } from "./lib/controlli.js";
 import { creaMarkdown } from "./lib/markdown.js";
 import * as nav from "./lib/navigazione.js";
+import { inSchermate, estraiObiettivo } from "./lib/schermate.js";
 
 export const PASSTHROUGH = [
   "autori",
@@ -54,6 +55,14 @@ export default function (eleventyConfig) {
   eleventyConfig.addFilter("materia", nav.materia);
   eleventyConfig.addFilter("nomeMateria", (id, materie) => nav.materia(materie, id).nome);
   eleventyConfig.addFilter("nomeAnno", nav.nomeAnno);
+
+  eleventyConfig.addFilter("schermate", inSchermate);
+  eleventyConfig.addFilter("obiettivo", estraiObiettivo);
+  eleventyConfig.addPassthroughCopy({
+    "node_modules/reveal.js/dist/reveal.js": "assets/reveal/reveal.js",
+    "node_modules/reveal.js/dist/reveal.css": "assets/reveal/reveal.css",
+    "node_modules/reveal.js/plugin/notes/notes.js": "assets/reveal/notes.js",
+  });
 
   eleventyConfig.on("eleventy.before", () => {
     const errori = controllaCartella("src/lezioni", "src/_data/programmi");

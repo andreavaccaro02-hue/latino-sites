@@ -20,8 +20,8 @@ test("blocco obbligatorio con etichetta pubblica", () => {
 test("i passi sono numerati e hanno un'ancora", () => {
   const html = md.render('::: passo "Che cos\'è una fonte"\nA\n:::\n\n::: passo "Quanto fidarsi"\nB\n:::\n');
   assert.match(html, /id="passo-che-cos-e-una-fonte"/);
-  assert.match(html, /<span class="passo-numero">Passo 1<\/span> · Che cos'è una fonte/);
-  assert.match(html, /<span class="passo-numero">Passo 2<\/span> · Quanto fidarsi/);
+  assert.match(html, /<span class="passo-numero">Passo 1<\/span><span class="passo-sep"> · <\/span>Che cos'è una fonte/);
+  assert.match(html, /<span class="passo-numero">Passo 2<\/span><span class="passo-sep"> · <\/span>Quanto fidarsi/);
 });
 
 test("uscita ha l'ancora biglietto", () => {

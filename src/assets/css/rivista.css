@@ -41,6 +41,7 @@ h2 { font-weight: 600; font-size: 1.5rem; line-height: 1.2; }
 .blocco { margin: 2.25rem 0; }
 .blocco-etichetta { margin: 0 0 .6rem; font-family: var(--sans); font-size: .75rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--accento); }
 .blocco-passo > .blocco-etichetta { font-family: var(--serif); font-size: 1.5rem; letter-spacing: 0; text-transform: none; color: var(--inchiostro); }
+.passo-sep { display: none; }
 .passo-numero { display: block; font-family: var(--sans); font-size: .75rem; letter-spacing: .08em; text-transform: uppercase; color: var(--accento); }
 .blocco-obiettivo { margin-top: 1rem; padding-top: .6rem; border-top: 1px solid var(--inchiostro); font-family: var(--sans); font-size: 1rem; }
 .blocco-obiettivo p { margin: 0; }

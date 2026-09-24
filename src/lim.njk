@@ -1,0 +1,54 @@
+---
+pagination:
+  data: collections.lezioni
+  size: 1
+  alias: lezione
+permalink: "{{ lezione.url }}lim/"
+eleventyExcludeFromCollections: true
+---
+{%- set corpo = lezione.rawInput | md -%}
+{%- set voce = moduli | voceModulo(lezione.data.materia, lezione.data.modulo) -%}
+{%- set vic = collections.lezioni | vicine(lezione) -%}
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>{{ lezione.data.titolo }} · LIM — Prof. Andrea Vaccaro</title>
+<link rel="stylesheet" href="/assets/reveal/reveal.css">
+<link rel="stylesheet" href="/assets/css/fonts.css">
+<link rel="stylesheet" href="/assets/css/lim.css">
+<style>:root { --accento: {{ (materie | materia(lezione.data.materia)).colore }}; }</style>
+</head>
+<body>
+<div class="reveal"><div class="slides">
+<section id="apertura" data-blocco="apertura" class="apertura{% if lezione.data.immagine %} con-reperto{% endif %}">
+  <div class="apertura-testo">
+    <p class="kicker">{{ lezione.data.materia | nomeMateria(materie) }} · {{ voce.titolo_argo }} · Lezione {{ lezione.data.argomento }}</p>
+    <h1>{{ lezione.data.titolo }}</h1>
+    {% if lezione.data.sottotitolo %}<p class="sottotitolo">{{ lezione.data.sottotitolo }}</p>{% endif %}
+    <div class="obiettivo"><span class="blocco-etichetta">Obiettivo</span>{{ corpo | obiettivo | safe }}</div>
+  </div>
+  {% if lezione.data.immagine %}
+  <figure class="apertura-reperto"><img src="/{{ lezione.data.immagine }}" alt="{{ lezione.data.didascalia }}">{% if lezione.data.didascalia %}<figcaption>{{ lezione.data.didascalia }}</figcaption>{% endif %}</figure>
+  {% endif %}
+</section>
+{{ corpo | schermate | safe }}
+<section data-blocco="prosegui" class="prosegui">
+  {% if vic.successiva %}
+  <p class="kicker">Prosegui con</p>
+  <h2><a href="{{ vic.successiva.url }}lim/">{{ vic.successiva.data.titolo }} →</a></h2>
+  {% else %}
+  <p class="kicker">Fine del modulo</p>
+  <h2>{{ voce.titolo_argo }}</h2>
+  <p><a href="/{{ lezione.data.materia }}/">Torna all'indice</a></p>
+  {% endif %}
+</section>
+</div></div>
+<script src="/assets/reveal/reveal.js"></script>
+<script src="/assets/reveal/notes.js"></script>
+<script src="/assets/js/quiz.js"></script>
+<script src="/assets/js/lim.js"></script>
+</body>
+</html>

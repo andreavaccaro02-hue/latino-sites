@@ -1,0 +1,309 @@
+{
+  "materia": "geostoria",
+  "anno": 1,
+  "moduli": [
+    {
+      "numero": 1,
+      "titolo": "Prima di cominciare · Gli strumenti dello storico",
+      "slug": "strumenti-dello-storico",
+      "argomenti": [
+        {
+          "numero": 1,
+          "titolo": "Tempo e spazio come coordinate: cronologia, datazione, periodizzazione, linea del tempo"
+        },
+        {
+          "numero": 2,
+          "titolo": "Che cos'è una fonte: materiale e scritta, primaria e secondaria"
+        },
+        {
+          "numero": 3,
+          "titolo": "Come si legge una carta storica e una carta geografica"
+        },
+        {
+          "numero": 4,
+          "titolo": "Il lavoro dello storico e quello dell'archeologo"
+        }
+      ]
+    },
+    {
+      "numero": 2,
+      "titolo": "Capitolo introduttivo · La preistoria",
+      "slug": "preistoria",
+      "argomenti": [
+        {
+          "numero": 1,
+          "titolo": "Quando tutto cominciò. La preistoria e l'origine della specie umana"
+        },
+        {
+          "numero": 2,
+          "titolo": "Tracce di umanità. Il Paleolitico e l'alba della civiltà"
+        },
+        {
+          "numero": 3,
+          "titolo": "Agricoltura e città. La rivoluzione del Neolitico"
+        }
+      ]
+    },
+    {
+      "numero": 3,
+      "titolo": "Cap. 1 · Le origini della storia. Popoli e culture del Vicino Oriente",
+      "slug": "cap-01-vicino-oriente",
+      "argomenti": [
+        {
+          "numero": 1,
+          "titolo": "Una terra, molti popoli. La civiltà mesopotamica"
+        },
+        {
+          "numero": 2,
+          "titolo": "Il deserto e l'acqua. L'Egitto dei faraoni"
+        },
+        {
+          "numero": 3,
+          "titolo": "Tremila anni di civiltà. Religione, arte e saperi degli Egizi"
+        },
+        {
+          "numero": 4,
+          "titolo": "Mille anni di guerre. Il Vicino Oriente dagli Hittiti ai Persiani"
+        },
+        {
+          "numero": 5,
+          "titolo": "Fra cielo e terra. L'enigmatica storia degli Ebrei"
+        },
+        {
+          "numero": 6,
+          "titolo": "Dalla Terra di Canaan all'Atlantico. Storia, economia e cultura dei Fenici"
+        },
+        {
+          "numero": 7,
+          "titolo": "Passaggio a est. Le civiltà fluviali di India e Cina"
+        }
+      ]
+    },
+    {
+      "numero": 4,
+      "titolo": "Percorso di geografia 1 · Economia, ambiente, sviluppo",
+      "slug": "geo-1-economia-ambiente-sviluppo",
+      "argomenti": [
+        {
+          "numero": 1,
+          "titolo": "Lo sviluppo sostenibile"
+        },
+        {
+          "numero": 2,
+          "titolo": "Il valore delle risorse"
+        },
+        {
+          "numero": 3,
+          "titolo": "Il riscaldamento globale"
+        }
+      ]
+    },
+    {
+      "numero": 5,
+      "titolo": "Cap. 2 · L'alba della Grecia. L'Egeo fra II e I millennio a.C.",
+      "slug": "cap-02-alba-della-grecia",
+      "argomenti": [
+        {
+          "numero": 1,
+          "titolo": "I dominatori del mare. Creta e le origini della cultura greca"
+        },
+        {
+          "numero": 2,
+          "titolo": "I signori delle rocche. Ascesa e caduta dei Micenei"
+        },
+        {
+          "numero": 3,
+          "titolo": "Un nuovo inizio. L'età greca arcaica e l'origine della polis"
+        },
+        {
+          "numero": 4,
+          "titolo": "I Greci al di là del mare. L'epopea della seconda colonizzazione"
+        },
+        {
+          "numero": 5,
+          "titolo": "Il cielo dei Greci. Divinità e santuari di una religione panellenica"
+        }
+      ]
+    },
+    {
+      "numero": 6,
+      "titolo": "Percorso di geografia 2 · Popoli, città, migrazioni",
+      "slug": "geo-2-popoli-citta-migrazioni",
+      "argomenti": [
+        {
+          "numero": 4,
+          "titolo": "La popolazione mondiale"
+        },
+        {
+          "numero": 5,
+          "titolo": "Un mondo di città"
+        },
+        {
+          "numero": 6,
+          "titolo": "Le migrazioni internazionali"
+        }
+      ]
+    },
+    {
+      "numero": 7,
+      "titolo": "Cap. 3 · La polis e i suoi nemici. Sparta, Atene e le guerre persiane",
+      "slug": "cap-03-polis-e-nemici",
+      "argomenti": [
+        {
+          "numero": 1,
+          "titolo": "Pochi ma uguali. Sparta e il modello oligarchico"
+        },
+        {
+          "numero": 2,
+          "titolo": "L'aristocrazia e il popolo. Atene e il cammino verso la democrazia"
+        },
+        {
+          "numero": 3,
+          "titolo": "L'impero contro le città. Lo scontro fra Greci e Persiani"
+        }
+      ]
+    },
+    {
+      "numero": 8,
+      "titolo": "Cap. 4 · Atene: ascesa e declino. Dall'età di Pericle alla guerra del Peloponneso",
+      "slug": "cap-04-atene-ascesa-declino",
+      "argomenti": [
+        {
+          "numero": 1,
+          "titolo": "Nel segno di Pericle. Atene all'indomani delle guerre persiane"
+        },
+        {
+          "numero": 2,
+          "titolo": "L'età classica della Grecia. Arte e pensiero nell'Atene del V secolo a.C."
+        },
+        {
+          "numero": 3,
+          "titolo": "La guerra totale. Sparta, Atene e la guerra del Peloponneso"
+        }
+      ]
+    },
+    {
+      "numero": 9,
+      "titolo": "Cap. 5 · Dalle poleis ai regni. L'inizio dell'età ellenistica",
+      "slug": "cap-05-poleis-ai-regni",
+      "argomenti": [
+        {
+          "numero": 1,
+          "titolo": "L'impossibile egemonia. Una Grecia policentrica: Sparta, Atene, Tebe"
+        },
+        {
+          "numero": 2,
+          "titolo": "Fino ai confini del mondo. L'avventura di Alessandro Magno"
+        },
+        {
+          "numero": 3,
+          "titolo": "L'eredità di Alessandro. Società e cultura nell'età ellenistica"
+        }
+      ]
+    },
+    {
+      "numero": 10,
+      "titolo": "Cap. 6 · L'infanzia di una città. Roma e i popoli preromani",
+      "slug": "cap-06-roma-popoli-preromani",
+      "argomenti": [
+        {
+          "numero": 1,
+          "titolo": "Un mosaico di popoli. L'Italia all'inizio del I millennio a.C."
+        },
+        {
+          "numero": 2,
+          "titolo": "I signori dei metalli. Storia e cultura degli Etruschi"
+        },
+        {
+          "numero": 3,
+          "titolo": "Storie di eroi e di re. Le origini di Roma"
+        },
+        {
+          "numero": 4,
+          "titolo": "La città e il cielo. Società e religione al tempo dei re"
+        },
+        {
+          "numero": 5,
+          "titolo": "Le nuove forme del potere. Magistrature e assemblee"
+        }
+      ]
+    },
+    {
+      "numero": 11,
+      "titolo": "Cap. 7 · Da città a impero. L'espansione romana nel Mediterraneo",
+      "slug": "cap-07-da-citta-a-impero",
+      "argomenti": [
+        {
+          "numero": 1,
+          "titolo": "Prove di impero. L'espansione nel Lazio e nell'Italia meridionale"
+        },
+        {
+          "numero": 2,
+          "titolo": "L'impero flessibile. Strumenti e forme del dominio romano in Italia"
+        },
+        {
+          "numero": 3,
+          "titolo": "Il nemico assoluto. Un secolo di guerre contro Cartagine"
+        },
+        {
+          "numero": 4,
+          "titolo": "Al di là dell'Adriatico. Roma alla conquista dell'Oriente"
+        },
+        {
+          "numero": 5,
+          "titolo": "L'impero: il suo prezzo, i suoi frutti. Crisi sociale e novità culturali"
+        }
+      ]
+    },
+    {
+      "numero": 12,
+      "titolo": "Cap. 8 · Crisi di sistema. La lunga notte della repubblica romana",
+      "slug": "cap-08-crisi-repubblica",
+      "argomenti": [
+        {
+          "numero": 1,
+          "titolo": "La riforma impossibile. Ascesa e caduta dei Gracchi"
+        },
+        {
+          "numero": 2,
+          "titolo": "Il tempo dei capi militari. Mario e Silla"
+        },
+        {
+          "numero": 3,
+          "titolo": "I seguaci di Silla. Roma nell'epoca di Pompeo e Crasso"
+        },
+        {
+          "numero": 4,
+          "titolo": "Un lucido progetto. L'ascesa politica di Cesare"
+        },
+        {
+          "numero": 5,
+          "titolo": "L'agonia della repubblica. Cesare, il dittatore"
+        }
+      ]
+    },
+    {
+      "numero": 13,
+      "titolo": "Cittadinanza e Costituzione",
+      "slug": "cittadinanza-1",
+      "argomenti": [
+        {
+          "numero": 1,
+          "titolo": "Legge scritta e potere: dal codice di Hammurabi all'idea di norma pubblica"
+        },
+        {
+          "numero": 2,
+          "titolo": "Cittadinanza ed esclusioni nell'Atene classica; democrazia diretta e democrazia rappresentativa"
+        },
+        {
+          "numero": 3,
+          "titolo": "Forme di stato e forme di governo (monarchia, repubblica, oligarchia) sui casi greco e romano"
+        },
+        {
+          "numero": 4,
+          "titolo": "Il significato di democrazia e convivenza civile"
+        }
+      ]
+    }
+  ]
+}

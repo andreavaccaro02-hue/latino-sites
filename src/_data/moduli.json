@@ -1,0 +1,28 @@
+[
+  { "materia": "geostoria", "titolo_argo": "Prima di cominciare · Gli strumenti dello storico", "slug": "strumenti-dello-storico",
+    "rimandi": {
+      "1": ["geostoria/contare-il-tempo.html", "geostoria/linea-del-tempo.html"],
+      "3": ["geostoria/carta-mediterraneo-lim.html"]
+    } },
+  { "materia": "geostoria", "titolo_argo": "Capitolo introduttivo · La preistoria", "slug": "preistoria" },
+  { "materia": "geostoria", "titolo_argo": "Cap. 1 · Le origini della storia. Popoli e culture del Vicino Oriente", "slug": "cap-01-vicino-oriente" },
+  { "materia": "geostoria", "titolo_argo": "Percorso di geografia 1 · Economia, ambiente, sviluppo", "slug": "geo-1-economia-ambiente-sviluppo" },
+  { "materia": "geostoria", "titolo_argo": "Cap. 2 · L'alba della Grecia. L'Egeo fra II e I millennio a.C.", "slug": "cap-02-alba-della-grecia" },
+  { "materia": "geostoria", "titolo_argo": "Percorso di geografia 2 · Popoli, città, migrazioni", "slug": "geo-2-popoli-citta-migrazioni" },
+  { "materia": "geostoria", "titolo_argo": "Cap. 3 · La polis e i suoi nemici. Sparta, Atene e le guerre persiane", "slug": "cap-03-polis-e-nemici" },
+  { "materia": "geostoria", "titolo_argo": "Cap. 4 · Atene: ascesa e declino. Dall'età di Pericle alla guerra del Peloponneso", "slug": "cap-04-atene-ascesa-declino" },
+  { "materia": "geostoria", "titolo_argo": "Cap. 5 · Dalle poleis ai regni. L'inizio dell'età ellenistica", "slug": "cap-05-poleis-ai-regni" },
+  { "materia": "geostoria", "titolo_argo": "Cap. 6 · L'infanzia di una città. Roma e i popoli preromani", "slug": "cap-06-roma-popoli-preromani" },
+  { "materia": "geostoria", "titolo_argo": "Cap. 7 · Da città a impero. L'espansione romana nel Mediterraneo", "slug": "cap-07-da-citta-a-impero" },
+  { "materia": "geostoria", "titolo_argo": "Cap. 8 · Crisi di sistema. La lunga notte della repubblica romana", "slug": "cap-08-crisi-repubblica" },
+  { "materia": "geostoria", "titolo_argo": "Cittadinanza e Costituzione", "slug": "cittadinanza-1", "anni": [1] },
+  { "materia": "geostoria", "titolo_argo": "Cittadinanza e Costituzione", "slug": "cittadinanza-2", "anni": [2] },
+  { "materia": "geostoria", "titolo_argo": "Cap. 9 · Un nuovo inizio. L'Impero romano da Augusto ai Flavi", "slug": "cap-09-augusto-flavi" },
+  { "materia": "geostoria", "titolo_argo": "Cap. 10 · La città e il mondo. L'Impero romano da Traiano ai Severi", "slug": "cap-10-traiano-severi" },
+  { "materia": "geostoria", "titolo_argo": "Percorso di geografia 3 · L'età del mondo globale", "slug": "geo-3-mondo-globale" },
+  { "materia": "geostoria", "titolo_argo": "Cap. 11 · Crisi e trasformazione. L'Impero romano dal III al V secolo", "slug": "cap-11-impero-iii-v-secolo" },
+  { "materia": "geostoria", "titolo_argo": "Cap. 12 · Re, monaci, imperatori. L'inizio del Medioevo in Europa", "slug": "cap-12-inizio-medioevo" },
+  { "materia": "geostoria", "titolo_argo": "Cap. 13 · L'altro Medioevo. Nascita ed espansione dell'islam", "slug": "cap-13-islam" },
+  { "materia": "geostoria", "titolo_argo": "Cap. 14 · Il ritorno dell'impero. L'Europa da Carlo Magno agli Ottoni", "slug": "cap-14-carlo-magno-ottoni" },
+  { "materia": "geostoria", "titolo_argo": "Percorso di geografia 4 · Le organizzazioni sovranazionali", "slug": "geo-4-organizzazioni-sovranazionali" }
+]

@@ -1,0 +1,306 @@
+{
+  "materia": "geostoria",
+  "anno": 2,
+  "moduli": [
+    {
+      "numero": 1,
+      "titolo": "Cap. 6 · L'infanzia di una città. Roma e i popoli preromani",
+      "slug": "cap-06-roma-popoli-preromani",
+      "argomenti": [
+        {
+          "numero": 1,
+          "titolo": "Un mosaico di popoli. L'Italia all'inizio del I millennio a.C."
+        },
+        {
+          "numero": 2,
+          "titolo": "I signori dei metalli. Storia e cultura degli Etruschi"
+        },
+        {
+          "numero": 3,
+          "titolo": "Storie di eroi e di re. Le origini di Roma"
+        },
+        {
+          "numero": 4,
+          "titolo": "La città e il cielo. Società e religione al tempo dei re"
+        },
+        {
+          "numero": 5,
+          "titolo": "Le nuove forme del potere. Magistrature e assemblee"
+        }
+      ]
+    },
+    {
+      "numero": 2,
+      "titolo": "Cap. 7 · Da città a impero. L'espansione romana nel Mediterraneo",
+      "slug": "cap-07-da-citta-a-impero",
+      "argomenti": [
+        {
+          "numero": 1,
+          "titolo": "Prove di impero. L'espansione nel Lazio e nell'Italia meridionale"
+        },
+        {
+          "numero": 2,
+          "titolo": "L'impero flessibile. Strumenti e forme del dominio romano in Italia"
+        },
+        {
+          "numero": 3,
+          "titolo": "Il nemico assoluto. Un secolo di guerre contro Cartagine"
+        },
+        {
+          "numero": 4,
+          "titolo": "Al di là dell'Adriatico. Roma alla conquista dell'Oriente"
+        },
+        {
+          "numero": 5,
+          "titolo": "L'impero: il suo prezzo, i suoi frutti. Crisi sociale e novità culturali"
+        }
+      ]
+    },
+    {
+      "numero": 3,
+      "titolo": "Cap. 8 · Crisi di sistema. La lunga notte della repubblica romana",
+      "slug": "cap-08-crisi-repubblica",
+      "argomenti": [
+        {
+          "numero": 1,
+          "titolo": "La riforma impossibile. Ascesa e caduta dei Gracchi"
+        },
+        {
+          "numero": 2,
+          "titolo": "Il tempo dei capi militari. Mario e Silla"
+        },
+        {
+          "numero": 3,
+          "titolo": "I seguaci di Silla. Roma nell'epoca di Pompeo e Crasso"
+        },
+        {
+          "numero": 4,
+          "titolo": "Un lucido progetto. L'ascesa politica di Cesare"
+        },
+        {
+          "numero": 5,
+          "titolo": "L'agonia della repubblica. Cesare, il dittatore"
+        }
+      ]
+    },
+    {
+      "numero": 4,
+      "titolo": "Cap. 9 · Un nuovo inizio. L'Impero romano da Augusto ai Flavi",
+      "slug": "cap-09-augusto-flavi",
+      "argomenti": [
+        {
+          "numero": 1,
+          "titolo": "Una partita a tre. Ottaviano, Antonio, i repubblicani"
+        },
+        {
+          "numero": 2,
+          "titolo": "Una rivoluzione prudente. Augusto e la nascita del principato"
+        },
+        {
+          "numero": 3,
+          "titolo": "Organizzare il pensiero. La politica culturale di Augusto"
+        },
+        {
+          "numero": 4,
+          "titolo": "L'eredità di Augusto. Dai Giulio-Claudi ai Flavi"
+        },
+        {
+          "numero": 5,
+          "titolo": "Amministrare l'impero. Burocrazia ed esercito nel I secolo"
+        },
+        {
+          "numero": 6,
+          "titolo": "L'impero e il mondo. Controllo del territorio ed estensione dei confini nel I secolo"
+        }
+      ]
+    },
+    {
+      "numero": 5,
+      "titolo": "Cap. 10 · La città e il mondo. L'Impero romano da Traiano ai Severi",
+      "slug": "cap-10-traiano-severi",
+      "argomenti": [
+        {
+          "numero": 1,
+          "titolo": "Cambio al vertice. Dal principato adottivo agli imperatori soldati"
+        },
+        {
+          "numero": 2,
+          "titolo": "Espansione e contrazione. La politica estera da Traiano ai Severi"
+        },
+        {
+          "numero": 3,
+          "titolo": "Oltre l'impero. L'India e la Cina"
+        },
+        {
+          "numero": 4,
+          "titolo": "Splendori e miserie. Il secolo più felice della storia e le sue crepe"
+        },
+        {
+          "numero": 5,
+          "titolo": "Da setta giudaica a religione mediterranea. Nascita e ascesa del cristianesimo"
+        }
+      ]
+    },
+    {
+      "numero": 6,
+      "titolo": "Percorso di geografia 3 · L'età del mondo globale",
+      "slug": "geo-3-mondo-globale",
+      "argomenti": [
+        {
+          "numero": 1,
+          "titolo": "La globalizzazione"
+        },
+        {
+          "numero": 2,
+          "titolo": "Sviluppo e disuguaglianze"
+        },
+        {
+          "numero": 3,
+          "titolo": "Culture e religioni"
+        }
+      ]
+    },
+    {
+      "numero": 7,
+      "titolo": "Cap. 11 · Crisi e trasformazione. L'Impero romano dal III al V secolo",
+      "slug": "cap-11-impero-iii-v-secolo",
+      "argomenti": [
+        {
+          "numero": 1,
+          "titolo": "La lunga transizione. L'Impero romano nell'età dell'anarchia militare"
+        },
+        {
+          "numero": 2,
+          "titolo": "Un nuovo inizio. Diocleziano e l'alba della tarda antichità"
+        },
+        {
+          "numero": 3,
+          "titolo": "Il principe e la Chiesa. L'impero di Costantino il Grande"
+        },
+        {
+          "numero": 4,
+          "titolo": "Tramonto di un impero. Oriente e Occidente nel IV secolo"
+        },
+        {
+          "numero": 5,
+          "titolo": "La fine di un mondo. Il crollo dell'Impero d'Occidente"
+        }
+      ]
+    },
+    {
+      "numero": 8,
+      "titolo": "Cap. 12 · Re, monaci, imperatori. L'inizio del Medioevo in Europa",
+      "slug": "cap-12-inizio-medioevo",
+      "argomenti": [
+        {
+          "numero": 1,
+          "titolo": "Tempi barbarici. La nuova geografia del potere in Europa"
+        },
+        {
+          "numero": 2,
+          "titolo": "L'ultimo dei Romani. Giustiniano e l'impossibile rinascita dell'impero"
+        },
+        {
+          "numero": 3,
+          "titolo": "Dal deserto al convento. Nascita e diffusione del monachesimo"
+        },
+        {
+          "numero": 4,
+          "titolo": "«I più barbari tra i barbari». I Longobardi e l'ultima invasione germanica"
+        },
+        {
+          "numero": 5,
+          "titolo": "Le terre del papa. La Chiesa di Roma, i Longobardi e i Franchi"
+        }
+      ]
+    },
+    {
+      "numero": 9,
+      "titolo": "Cap. 13 · L'altro Medioevo. Nascita ed espansione dell'islam",
+      "slug": "cap-13-islam",
+      "argomenti": [
+        {
+          "numero": 1,
+          "titolo": "Un dio, un profeta. Storia di Maometto"
+        },
+        {
+          "numero": 2,
+          "titolo": "La religione e l'impero. Le conquiste arabe e il nuovo assetto mediterraneo"
+        },
+        {
+          "numero": 3,
+          "titolo": "La «Casa dell'islam». La civiltà dell'Impero arabo"
+        }
+      ]
+    },
+    {
+      "numero": 10,
+      "titolo": "Cap. 14 · Il ritorno dell'impero. L'Europa da Carlo Magno agli Ottoni",
+      "slug": "cap-14-carlo-magno-ottoni",
+      "argomenti": [
+        {
+          "numero": 1,
+          "titolo": "La spada e la croce. Carlo Magno e l'apogeo del Regno franco"
+        },
+        {
+          "numero": 2,
+          "titolo": "Tra passato e futuro. Carlo Magno e la rinascita dell'impero"
+        },
+        {
+          "numero": 3,
+          "titolo": "Il potere e la terra. Signori e contadini nell'Europa carolingia"
+        },
+        {
+          "numero": 4,
+          "titolo": "Tramonto di una dinastia. Crisi dell'Impero carolingio e nuove invasioni"
+        },
+        {
+          "numero": 5,
+          "titolo": "Gli Ottoni e l'impero. Ascesa e crisi di una nuova dinastia"
+        },
+        {
+          "numero": 6,
+          "titolo": "Il mondo incantato. Dio, l'essere umano e la natura nel Medioevo"
+        }
+      ]
+    },
+    {
+      "numero": 11,
+      "titolo": "Percorso di geografia 4 · Le organizzazioni sovranazionali",
+      "slug": "geo-4-organizzazioni-sovranazionali",
+      "argomenti": [
+        {
+          "numero": 4,
+          "titolo": "L'Unione europea"
+        },
+        {
+          "numero": 5,
+          "titolo": "L'Organizzazione delle Nazioni Unite"
+        }
+      ]
+    },
+    {
+      "numero": 12,
+      "titolo": "Cittadinanza e Costituzione",
+      "slug": "cittadinanza-2",
+      "argomenti": [
+        {
+          "numero": 1,
+          "titolo": "Dal diritto romano alle codificazioni moderne"
+        },
+        {
+          "numero": 2,
+          "titolo": "La Costituzione italiana: contesto storico, struttura, principi fondamentali"
+        },
+        {
+          "numero": 3,
+          "titolo": "Forme di stato e forme di governo"
+        },
+        {
+          "numero": 4,
+          "titolo": "La Dichiarazione dei diritti dell'uomo e del cittadino"
+        }
+      ]
+    }
+  ]
+}

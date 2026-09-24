@@ -23,7 +23,7 @@ test("torna a con freccia → o con ->", () => {
 });
 
 test("torna a con virgolette tipografiche o miste", () => {
-  for (const titolo of [`"Che cos'è una fonte"`, `"Che cos'è una fonte"`, `"Che cos'è una fonte"`]) {
+  for (const titolo of ["“Che cos'è una fonte”", "“Che cos'è una fonte\"", "\"Che cos'è una fonte”"]) {
     const html = md.render(`??? Domanda -> torna a: ${titolo}\n- [x] sì\n- [ ] no\n`);
     assert.match(html, /data-torna="passo-che-cos-e-una-fonte"/, titolo);
     assert.match(html, /<p class="quiz-domanda">Domanda<\/p>/, titolo);

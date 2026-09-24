@@ -79,7 +79,7 @@ test("torna a con → e con -> passano entrambi", () => {
 });
 
 test("torna a con virgolette tipografiche passa", () => {
-  const testo = BUONA.replace('torna a: "Che cos\'è una fonte"', `torna a: "Che cos'è una fonte"`);
+  const testo = BUONA.replace('torna a: "Che cos\'è una fonte"', `torna a: “Che cos'è una fonte”`);
   assert.deepEqual(controllaLezione(testo, "a.md", PROGRAMMI), []);
 });
 

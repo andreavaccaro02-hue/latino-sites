@@ -11,7 +11,7 @@ eleventyComputed:
   materia: "{{ programma.materia }}"
 ---
 <article class="indice">
-  <p class="kicker">{{ programma.materia | nomeMateria(materie) }} · {{ programma.anno | nomeAnno }} anno</p>
+  <p class="kicker">{{ programma.materia | nomeMateria(materie) }} · {{ programma.anno | annoScolastico }}</p>
   <h1>{{ programma.materia | nomeMateria(materie) }} {{ programma.anno }}</h1>
   {% for m in programma.moduli %}
   <section class="indice-modulo">

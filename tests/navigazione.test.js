@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { vicine, lezionePer, inProgrammi, voceModulo, rimandiPer, materia, nomeAnno } from "../lib/navigazione.js";
+import { vicine, lezionePer, inProgrammi, voceModulo, rimandiPer, materia, nomeAnno, annoScolastico } from "../lib/navigazione.js";
 
 const L = (argomento, modulo = "strumenti-dello-storico") => ({
   url: `/geostoria/${modulo}/l${argomento}/`,
@@ -36,4 +36,9 @@ test("voceModulo, rimandiPer, materia, nomeAnno", () => {
   assert.deepEqual(rimandiPer(moduli, "geostoria", "s", 2), []);
   assert.equal(materia([{ id: "geostoria", nome: "Geostoria", colore: "#a34a28" }], "geostoria").colore, "#a34a28");
   assert.equal(nomeAnno(2), "seconda");
+});
+
+test("annoScolastico accorda al maschile", () => {
+  assert.equal(annoScolastico(1), "primo anno");
+  assert.equal(annoScolastico(2), "secondo anno");
 });

@@ -14,7 +14,7 @@ eleventyComputed:
   <h1>{{ m.nome }}</h1>
   <h2>Programma</h2>
   <ul class="elenco-anni">
-    {% for anno in m.anni %}<li><a href="/{{ m.id }}/{{ anno }}/">{{ m.nome }} {{ anno }}</a> · {{ anno | nomeAnno }} anno</li>{% endfor %}
+    {% for anno in m.anni %}<li><a href="/{{ m.id }}/{{ anno }}/">{{ m.nome }} {{ anno }}</a> · {{ anno | annoScolastico }}</li>{% endfor %}
   </ul>
   {% if m.pagine.length %}
   <h2>Pagine interattive</h2>

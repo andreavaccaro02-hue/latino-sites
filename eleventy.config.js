@@ -52,6 +52,7 @@ export default function (eleventyConfig) {
   eleventyConfig.addFilter("materia", nav.materia);
   eleventyConfig.addFilter("nomeMateria", (id, materie) => nav.materia(materie, id).nome);
   eleventyConfig.addFilter("nomeAnno", nav.nomeAnno);
+  eleventyConfig.addFilter("annoScolastico", nav.annoScolastico);
 
   eleventyConfig.addFilter("schermate", inSchermate);
   eleventyConfig.addFilter("obiettivo", estraiObiettivo);

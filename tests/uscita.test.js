@@ -18,6 +18,7 @@ test("risolviLink gestisce relativi, assoluti col prefisso e cartelle", () => {
   assert.equal(risolviLink("geostoria/a/b/index.html", "/latino-sites/geostoria/"), "geostoria/index.html");
   assert.equal(risolviLink("index.html", "percorsi/latino1.html?x=1#top"), "percorsi/latino1.html");
   assert.equal(risolviLink("index.html", "https://esempio.it"), null);
+  assert.equal(risolviLink("geostoria/a.html", "/latino-sites"), "index.html");
 });
 
 test("fuoriPrefisso riconosce i link assoluti senza /latino-sites/", () => {

@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { fileMancanti, linkInterni, risolviLink } from "../lib/uscita.js";
+import { fileMancanti, fuoriPrefisso, linkInterni, risolviLink } from "../lib/uscita.js";
 
 test("fileMancanti elenca i file tracciati assenti dall'uscita", () => {
   const presenti = new Set(["index.html", "css/style.css"]);
@@ -18,4 +18,15 @@ test("risolviLink gestisce relativi, assoluti col prefisso e cartelle", () => {
   assert.equal(risolviLink("geostoria/a/b/index.html", "/latino-sites/geostoria/"), "geostoria/index.html");
   assert.equal(risolviLink("index.html", "percorsi/latino1.html?x=1#top"), "percorsi/latino1.html");
   assert.equal(risolviLink("index.html", "https://esempio.it"), null);
+});
+
+test("fuoriPrefisso riconosce i link assoluti senza /latino-sites/", () => {
+  assert.equal(fuoriPrefisso("/assets/x.css"), true);
+  assert.equal(fuoriPrefisso("/geostoria/"), true);
+  assert.equal(fuoriPrefisso("/latino-sites/assets/x.css"), false);
+  assert.equal(fuoriPrefisso("/latino-sites"), false);
+  assert.equal(fuoriPrefisso("../css/style.css"), false);
+  assert.equal(fuoriPrefisso("https://esempio.it/x"), false);
+  assert.equal(fuoriPrefisso("//cdn.esempio.it/x.js"), false);
+  assert.equal(fuoriPrefisso("#su"), false);
 });

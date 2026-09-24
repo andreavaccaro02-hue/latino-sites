@@ -1,6 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
-import { linkInterni, risolviLink } from "../lib/uscita.js";
+import { fuoriPrefisso, linkInterni, risolviLink } from "../lib/uscita.js";
 
 const NOTI = "scripts/link-noti.json";
 const aggiorna = process.argv.includes("--aggiorna-noti");
@@ -19,6 +19,10 @@ const rotti = [];
 for (const pagina of pagine) {
   const html = fs.readFileSync(path.join("_site", pagina), "utf8");
   for (const link of linkInterni(html)) {
+    if (fuoriPrefisso(link)) {
+      rotti.push(`${pagina} -> ${link} (manca /latino-sites/ davanti)`);
+      continue;
+    }
     const destinazione = risolviLink(pagina, link);
     if (destinazione === null) continue;
     const pieno = path.join("_site", destinazione);

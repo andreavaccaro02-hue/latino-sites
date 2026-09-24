@@ -52,6 +52,20 @@ test("--- senza riga vuota prima, con numero di riga", () => {
   assert.equal(testo.split("\n")[errori[0].riga - 1], "---");
 });
 
+test("--- con spazi davanti o trattini in più, senza riga vuota prima", () => {
+  for (const riga of [" ---", "   ---", "----"]) {
+    const testo = BUONA.replace("Testo.\n\n---", `Testo.\n${riga}`);
+    const errori = controllaLezione(testo, "a.md", PROGRAMMI).filter((e) => /riga vuota prima di ---/.test(e.messaggio));
+    assert.equal(errori.length, 1, JSON.stringify(riga));
+    assert.equal(testo.split("\n")[errori[0].riga - 1], riga);
+  }
+});
+
+test("--- con spazi davanti ma con la riga vuota prima non è un errore", () => {
+  const testo = BUONA.replace("Testo.\n\n---", "Testo.\n\n  ---");
+  assert.deepEqual(controllaLezione(testo, "a.md", PROGRAMMI), []);
+});
+
 test("quiz senza risposta giusta e torna a verso un passo inesistente", () => {
   const testo = BUONA.replace("- [x] scritta", "- [ ] scritta").replace('torna a: "Che cos\'è una fonte"', 'torna a: "Fonti"');
   const m = messaggi(controllaLezione(testo, "a.md", PROGRAMMI));

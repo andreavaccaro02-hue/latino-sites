@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Il Mediterraneo alla LIM</title>
+<link href="https://fonts.googleapis.com/css2?family=Shantell+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+  @font-face { font-family: "Shantell Sans"; src: url("fonts/ShantellSans%5BBNCE,INFM,SPAC,wght%5D.ttf"); font-weight: 300 800; }
+  :root {
+    --nero: #1D1D1D; --blu: #4465E9; --arancio: #E16919; --verde: #099268; --viola: #AE3EC9;
+    --giallo: #F1AC4B; --nota: #FFF4B8; --griglia: #C8C8C8; --grigio: #9FA8B2; --sfondo: #FAFAF7; --rosso: #E03131;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; }
+  body {
+    font-family: "Shantell Sans", "Patrick Hand", "Comic Neue", "Segoe Print", "Chalkboard", sans-serif;
+    color: var(--nero); background: var(--sfondo);
+    background-image: radial-gradient(var(--griglia) 0.9px, transparent 1px); background-size: 22px 22px;
+    display: flex; flex-direction: column; overflow: hidden;
+  }
+  header { display: flex; align-items: center; gap: 18px; padding: 14px 28px 0; }
+  .badge { font-weight: 800; font-size: 20px; padding: 6px 16px; border: 3px solid var(--blu); color: var(--blu);
+    border-radius: 12px 14px 10px 16px / 14px 10px 16px 12px; background: #4465E91f; letter-spacing: .5px; }
+  h1 { font-size: 32px; margin: 0; font-weight: 800; }
+  .spazio { flex: 1; }
+  .tab { border: 3px solid var(--nero); background: #fff; font: inherit; font-weight: 600; font-size: 20px;
+    padding: 8px 18px; cursor: pointer; border-radius: 14px 10px 16px 12px / 10px 16px 12px 14px; color: var(--nero); }
+  .tab.attiva { background: var(--nero); color: #fff; }
+  main { flex: 1; position: relative; min-height: 0; }
+  svg { width: 100%; height: 100%; display: block; }
+  .cornice { fill: #fff; stroke: var(--nero); stroke-width: 4; }
+  .luogo, .civ, .prov { opacity: 0; transition: opacity .35s; }
+  .luogo.vista, .civ.vista, .prov.vista { opacity: 1; }
+  .luogo .punto { fill: var(--rosso); stroke: #fff; stroke-width: 4; }
+  .luogo .gambo { stroke: var(--nero); stroke-width: 2.5; stroke-dasharray: 7 6; fill: none; }
+  .luogo .nome { font-size: 30px; font-weight: 800; fill: var(--nero); paint-order: stroke; stroke: #fff; stroke-width: 8; stroke-linejoin: round; }
+  .luogo .dett { font-size: 20px; font-weight: 400; fill: var(--nero); paint-order: stroke; stroke: #fff; stroke-width: 7; stroke-linejoin: round; }
+  .fiume { stroke: var(--blu); stroke-width: 7; fill: none; stroke-linecap: round; }
+  .civ .area { stroke-width: 4; fill-opacity: .22; stroke-dasharray: 10 7; }
+  .civ .nome { font-size: 30px; font-weight: 800; paint-order: stroke; stroke: #fff; stroke-width: 8; stroke-linejoin: round; }
+  .civ .dett { font-size: 19px; paint-order: stroke; stroke: #fff; stroke-width: 7; stroke-linejoin: round; fill: var(--nero); }
+  .civ.blu .area { fill: var(--blu); stroke: var(--blu); } .civ.blu .nome { fill: var(--blu); }
+  .civ.arancio .area { fill: var(--arancio); stroke: var(--arancio); } .civ.arancio .nome { fill: var(--arancio); }
+  .civ.verde .area { fill: var(--verde); stroke: var(--verde); } .civ.verde .nome { fill: var(--verde); }
+  .civ.viola .area { fill: var(--viola); stroke: var(--viola); } .civ.viola .nome { fill: var(--viola); }
+  .prov .punto { fill: var(--giallo); stroke: var(--nero); stroke-width: 3; }
+  .prov .nome { font-size: 26px; font-weight: 600; paint-order: stroke; stroke: #fff; stroke-width: 7; }
+  .bussola text { font-size: 28px; font-weight: 800; fill: var(--blu); }
+  .bussola line { stroke: var(--blu); stroke-width: 4; }
+  .titolo-mappa { font-size: 24px; font-weight: 600; fill: var(--grigio); }
+  footer { display: flex; gap: 14px; align-items: center; padding: 10px 28px 16px; flex-wrap: wrap; }
+  button.cmd { font: inherit; font-weight: 600; font-size: 22px; padding: 10px 22px; cursor: pointer; background: #fff;
+    border: 3px solid var(--nero); color: var(--nero); border-radius: 12px 16px 10px 14px / 16px 10px 14px 12px; }
+  button.cmd.primo { background: var(--verde); border-color: var(--verde); color: #fff; }
+  .hint { color: var(--grigio); font-size: 18px; margin-left: auto; }
+  #nomeProv { position: absolute; display: none; font: inherit; font-size: 24px; font-weight: 600; padding: 6px 12px; border: 3px solid var(--nero); border-radius: 12px; width: 240px; background: #fff; box-shadow: 1px 3px 6px rgba(0,0,0,.25); z-index: 5; }
+  .avviso { position: absolute; left: 50%; top: 14px; transform: translateX(-50%); background: var(--nota); padding: 10px 22px; font-size: 24px; border-radius: 6px; box-shadow: 1px 3px 4px rgba(0,0,0,.2); display: none; }
+  body.modo-prov .avviso { display: block; }
+  body.modo-prov svg { cursor: crosshair; }
+</style>
+</head>
+<body>
+<header>
+  <span class="badge">GEOSTORIA</span>
+  <h1>Il Mediterraneo</h1>
+  <span class="spazio"></span>
+  <button class="tab attiva" data-strato="luogo">1 · Le città</button>
+  <button class="tab" data-strato="civ">2 · Le civiltà</button>
+  <button class="tab" data-strato="prov">3 · Da dove veniamo</button>
+</header>
+<main>
+<svg viewBox="0 0 1920 1000" preserveAspectRatio="xMidYMid meet">
+  <rect class="cornice" x="2" y="2" width="1916" height="996"/>
+  <image href="img/carta-muta-mediterraneo.png" x="0" y="0" width="1920" height="1000"/>
+  <text class="titolo-mappa" x="700" y="150">Tutto quello che studieremo quest'anno è successo dentro questo rettangolo</text>
+  <g class="bussola"><line x1="1860" y1="120" x2="1860" y2="60"/><polygon points="1860,50 1850,72 1870,72" fill="#4465E9"/><text x="1848" y="150">N</text></g>
+
+  <!-- STRATO 1: le città (ordine di rivelazione = ordine nel DOM). Coordinate calibrate sulla carta: x = 34.6·lon + 368, y = 2298 − 43.5·lat -->
+  <g id="luoghi">
+    <g class="luogo"><path class="gambo" d="M830,638 L760,560"/><circle class="punto" cx="830" cy="638" r="10"/><text class="nome" x="640" y="548">Palermo</text><text class="dett" x="640" y="575">costa nord della Sicilia</text></g>
+    <g class="luogo"><path class="gambo" d="M836,641 L905,720"/><circle class="punto" cx="836" cy="641" r="10"/><text class="nome" x="910" y="755">Bagheria</text><text class="dett" x="910" y="781">a 15 km da Palermo, verso est: siamo qui</text></g>
+    <g class="luogo"><path class="gambo" d="M800,474 L700,400"/><circle class="punto" cx="800" cy="474" r="10"/><text class="nome" x="560" y="392">Roma</text><text class="dett" x="560" y="418">sul Tevere, a 25 km dal mare</text></g>
+    <g class="luogo"><path class="gambo" d="M1189,645 L1250,720"/><circle class="punto" cx="1189" cy="645" r="10"/><text class="nome" x="1260" y="740">Atene</text><text class="dett" x="1260" y="766">la città della democrazia</text></g>
+    <g class="luogo"><path class="fiume" d="M1421,929 C1433,952 1444,975 1450,1000"/><path class="gambo" d="M1421,929 L1330,900"/><circle class="punto" cx="1421" cy="929" r="10"/><text class="nome" x="1130" y="905">il Nilo</text><text class="dett" x="1130" y="931">scorre da sud verso nord e finisce nel Mediterraneo</text></g>
+    <g class="luogo"><path class="gambo" d="M725,694 L640,780"/><circle class="punto" cx="725" cy="694" r="10"/><text class="nome" x="470" y="810">Cartagine</text><text class="dett" x="470" y="836">sulla costa dell'Africa, a 200 km dalla Sicilia</text></g>
+    <g class="luogo"><path class="gambo" d="M1587,914 L1660,960"/><circle class="punto" cx="1587" cy="914" r="10"/><text class="nome" x="1665" y="985">Gerusalemme</text></g>
+  </g>
+
+  <!-- STRATO 2: le civiltà -->
+  <g id="civilta">
+    <g class="civ blu"><ellipse class="area" cx="1440" cy="975" rx="90" ry="45"/><text class="nome" x="1180" y="955">Egitto</text><text class="dett" x="1180" y="981">cap. 1 · vive lungo il Nilo (qui si vede solo la foce)</text></g>
+    <g class="civ blu"><ellipse class="area" cx="1805" cy="850" rx="110" ry="135"/><text class="nome" x="1520" y="700">Mesopotamia</text><text class="dett" x="1520" y="726">cap. 1 · la terra fra i fiumi Tigri ed Eufrate</text></g>
+    <g class="civ viola"><ellipse class="area" cx="1593" cy="830" rx="22" ry="55"/><text class="nome" x="1400" y="800">Fenici</text><text class="dett" x="1400" y="826">cap. 1 · mercanti, inventano l'alfabeto</text></g>
+    <g class="civ viola"><ellipse class="area" cx="1590" cy="908" rx="32" ry="30"/><text class="nome" x="1630" y="915">Ebrei</text><text class="dett" x="1630" y="941">cap. 1 · il popolo della Bibbia</text></g>
+    <g class="civ arancio"><ellipse class="area" cx="1210" cy="630" rx="150" ry="100"/><text class="nome" x="1240" y="505">Greci</text><text class="dett" x="1240" y="531">cap. 2-5 · da Creta e Micene alle città greche</text></g>
+    <g class="civ arancio"><ellipse class="area" cx="890" cy="660" rx="62" ry="52"/><text class="nome" x="960" y="710">Magna Grecia</text><text class="dett" x="960" y="736">cap. 2 · colonie greche nel Sud Italia</text></g>
+    <g class="civ viola"><ellipse class="area" cx="760" cy="420" rx="40" ry="50"/><text class="nome" x="500" y="380">Etruschi</text><text class="dett" x="500" y="406">cap. 2 e 6 · Toscana e Lazio, prima di Roma</text></g>
+    <g class="civ viola"><ellipse class="area" cx="725" cy="705" rx="45" ry="40"/><text class="dett" x="520" y="790">Cartagine: fondata dai Fenici, grande rivale di Roma (cap. 7)</text></g>
+    <g class="civ verde"><circle class="area" cx="800" cy="474" r="35"/><text class="nome" x="845" y="470">Roma</text><text class="dett" x="845" y="496">cap. 6-8 · da piccola città a impero</text></g>
+  </g>
+
+  <!-- STRATO 3: provenienze delle famiglie (si aggiungono col click) -->
+  <g id="provenienze"></g>
+</svg>
+<div class="avviso">Tocca la carta dove è nato il nonno o il genitore, scrivi il luogo, premi Invio</div>
+<input id="nomeProv" placeholder="scrivi il luogo, poi Invio">
+</main>
+<footer>
+  <button class="cmd primo" id="avanti">Avanti →</button>
+  <button class="cmd" id="indietro">← Indietro</button>
+  <button class="cmd" id="tutti">Mostra tutto</button>
+  <button class="cmd" id="azzera">Azzera</button>
+  <span class="hint" id="hint">Tasti: spazio o → avanti · ← indietro · T tutto · A azzera</span>
+</footer>
+<script>
+const strati = { luogo: "#luoghi", civ: "#civilta", prov: "#provenienze" };
+let strato = "luogo";
+const elementi = () => Array.from(document.querySelectorAll(strati[strato] + " > g"));
+function avanti() { const e = elementi().find(x => !x.classList.contains("vista")); if (e) e.classList.add("vista"); }
+function indietro() { const v = elementi().filter(x => x.classList.contains("vista")); if (v.length) v[v.length-1].classList.remove("vista"); }
+function tutti() { elementi().forEach(x => x.classList.add("vista")); }
+function azzera() { if (strato === "prov") document.querySelector("#provenienze").innerHTML = ""; else elementi().forEach(x => x.classList.remove("vista")); }
+document.querySelectorAll(".tab").forEach(t => t.addEventListener("click", () => {
+  document.querySelectorAll(".tab").forEach(x => x.classList.remove("attiva")); t.classList.add("attiva");
+  strato = t.dataset.strato; document.body.classList.toggle("modo-prov", strato === "prov");
+  chiudiCasella();
+  document.querySelector("#hint").textContent = strato === "prov"
+    ? "Tocca la carta, scrivi il luogo, Invio. Fuori dal rettangolo per i posti lontani. A cancella tutto"
+    : "Tasti: spazio o → avanti · ← indietro · T tutto · A azzera";
+}));
+document.querySelector("#avanti").onclick = avanti; document.querySelector("#indietro").onclick = indietro;
+document.querySelector("#tutti").onclick = tutti; document.querySelector("#azzera").onclick = azzera;
+document.addEventListener("keydown", e => {
+  if (e.target.tagName === "INPUT") return;
+  if (strato === "prov" && e.key.toLowerCase() !== "a") return;
+  if (e.key === " " || e.key === "ArrowRight") { e.preventDefault(); avanti(); }
+  else if (e.key === "ArrowLeft") indietro();
+  else if (e.key.toLowerCase() === "t") tutti();
+  else if (e.key.toLowerCase() === "a") azzera();
+});
+const svg = document.querySelector("svg"), main = document.querySelector("main"), casella = document.querySelector("#nomeProv");
+let inCorso = null;   // il <g> del punto appena creato, in attesa del nome
+function chiudiCasella() {
+  if (!inCorso) return;
+  const nome = casella.value.trim();
+  if (nome) inCorso.querySelector("text").textContent = nome; else inCorso.remove();
+  inCorso = null; casella.value = ""; casella.style.display = "none";
+}
+function aggiungiProv(clientX, clientY) {
+  chiudiCasella();
+  const pt = svg.createSVGPoint(); pt.x = clientX; pt.y = clientY;
+  const p = pt.matrixTransform(svg.getScreenCTM().inverse());
+  const g = document.createElementNS("http://www.w3.org/2000/svg", "g"); g.setAttribute("class", "prov vista");
+  g.innerHTML = `<circle class="punto" cx="${p.x}" cy="${p.y}" r="12"/><text class="nome" x="${p.x + 18}" y="${p.y + 8}"></text>`;
+  document.querySelector("#provenienze").appendChild(g); inCorso = g;
+  const r = main.getBoundingClientRect();
+  casella.style.left = Math.min(clientX - r.left + 16, r.width - 260) + "px";
+  casella.style.top = Math.min(clientY - r.top - 24, r.height - 60) + "px";
+  casella.style.display = "block"; casella.focus();
+}
+main.addEventListener("click", ev => { if (strato !== "prov" || ev.target === casella) return; aggiungiProv(ev.clientX, ev.clientY); });
+casella.addEventListener("keydown", ev => {
+  if (ev.key === "Enter") { ev.preventDefault(); chiudiCasella(); }
+  if (ev.key === "Escape") { ev.preventDefault(); casella.value = ""; chiudiCasella(); }
+  ev.stopPropagation();
+});
+if (location.hash.includes("prov")) document.querySelector('[data-strato="prov"]').click();
+if (location.hash.includes("test")) { const r = svg.getBoundingClientRect(); aggiungiProv(r.left + r.width * 0.4, r.top + r.height * 0.7); casella.value = "Tunisi"; chiudiCasella(); aggiungiProv(r.left + r.width * 0.6, r.top + r.height * 0.5); }
+if (location.hash.includes("civ")) document.querySelector('[data-strato="civ"]').click();
+if (location.hash.includes("tutti")) tutti();
+</script>
+<a class="torna-indice" href="index.html" title="Indice di geostoria">← Geostoria</a>
+<style>.torna-indice{position:fixed;right:14px;bottom:10px;z-index:99;font:600 14px/1 system-ui,sans-serif;color:#555;text-decoration:none;opacity:0;transition:opacity .25s;padding:6px 10px;border-radius:8px;background:rgba(255,255,255,.85)}.torna-indice:hover,.torna-indice:focus,body:hover .torna-indice{opacity:1}</style>
+</body>
+</html>

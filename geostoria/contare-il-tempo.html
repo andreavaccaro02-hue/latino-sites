@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contare il tempo</title>
+<link href="https://fonts.googleapis.com/css2?family=Shantell+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+  @font-face { font-family: "Shantell Sans"; src: url("fonts/ShantellSans%5BBNCE,INFM,SPAC,wght%5D.ttf"); font-weight: 300 800; }
+  :root {
+    --nero: #1D1D1D; --blu: #4465E9; --arancio: #E16919; --verde: #099268; --viola: #AE3EC9;
+    --giallo: #F1AC4B; --nota: #FFF4B8; --griglia: #C8C8C8; --grigio: #9FA8B2; --sfondo: #FAFAF7; --rosso: #E03131;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; }
+  body {
+    font-family: "Shantell Sans", "Patrick Hand", "Comic Neue", "Segoe Print", "Chalkboard", sans-serif;
+    color: var(--nero); background: var(--sfondo);
+    background-image: radial-gradient(var(--griglia) 0.9px, transparent 1px); background-size: 22px 22px;
+    display: flex; flex-direction: column; overflow: hidden;
+  }
+  header { display: flex; align-items: center; gap: 14px; padding: 14px 28px 0; flex-wrap: wrap; }
+  .badge { font-weight: 800; font-size: 20px; padding: 6px 16px; border: 3px solid var(--blu); color: var(--blu);
+    border-radius: 12px 14px 10px 16px / 14px 10px 16px 12px; background: #4465E91f; letter-spacing: .5px; }
+  h1 { font-size: 30px; margin: 0; font-weight: 800; }
+  .spazio { flex: 1; }
+  .tab { border: 3px solid var(--nero); background: #fff; font: inherit; font-weight: 600; font-size: 18px;
+    padding: 7px 14px; cursor: pointer; border-radius: 14px 10px 16px 12px / 10px 16px 12px 14px; color: var(--nero); }
+  .tab.attiva { background: var(--nero); color: #fff; }
+  main { flex: 1; position: relative; min-height: 0; }
+  .schermo { position: absolute; inset: 0; display: none; padding: 24px 48px; overflow: auto; }
+  .schermo.attiva { display: block; }
+  .passo { opacity: 0; transition: opacity .35s; }
+  .passo.vista { opacity: 1; }
+  .grande { font-size: 76px; font-weight: 800; display: flex; gap: 60px; justify-content: center; margin: 6px 0 4px; }
+  .grande span { padding: 4px 28px; border-radius: 18px 14px 20px 12px / 14px 20px 12px 18px; background: #fff; border: 4px solid var(--nero); }
+  .domanda { font-size: 36px; font-weight: 600; text-align: center; margin: 10px 0; }
+  .nota { background: var(--nota); padding: 16px 24px; font-size: 30px; border-radius: 6px; box-shadow: 1px 3px 4px rgba(0,0,0,.2); display: inline-block; margin: 8px 12px 8px 0; }
+  .nota.piccola { font-size: 24px; }
+  svg.linea { width: 100%; height: 230px; display: block; }
+  .asse { stroke: var(--nero); stroke-width: 6; stroke-linecap: round; fill: none; }
+  .tacca { stroke: var(--nero); stroke-width: 4; }
+  .tacca-testo { font-size: 30px; font-weight: 800; text-anchor: middle; }
+  .era { font-size: 34px; font-weight: 800; fill: var(--grigio); }
+  .freccia { font-size: 26px; fill: var(--grigio); }
+  .regola { font-size: 34px; line-height: 1.5; }
+  .regola b { color: var(--blu); }
+  .chips { display: flex; flex-wrap: wrap; gap: 18px; margin-top: 22px; }
+  .chip { font-size: 40px; font-weight: 800; padding: 12px 26px; background: #fff; border: 4px solid var(--nero); cursor: pointer;
+    border-radius: 16px 12px 18px 14px / 12px 18px 14px 16px; min-width: 200px; text-align: center; }
+  .chip .r { display: none; color: var(--verde); }
+  .chip.vista .r { display: inline; } .chip.vista .d { color: var(--grigio); }
+  .colonne { display: grid; grid-template-columns: repeat(7, 1fr); gap: 14px 20px; font-size: 38px; font-weight: 800; margin-top: 20px; }
+  .colonne div { background: #fff; border: 3px solid var(--nero); border-radius: 14px; padding: 8px 12px; text-align: center; }
+  .colonne .ar { color: var(--grigio); font-weight: 400; font-size: 28px; }
+  .parole { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 40px; font-size: 26px; margin-top: 10px; }
+  .parole b { color: var(--blu); font-size: 30px; }
+  ol.consegna { font-size: 34px; line-height: 1.6; }
+  footer { display: flex; gap: 14px; align-items: center; padding: 10px 28px 16px; flex-wrap: wrap; }
+  button.cmd { font: inherit; font-weight: 600; font-size: 22px; padding: 10px 22px; cursor: pointer; background: #fff;
+    border: 3px solid var(--nero); color: var(--nero); border-radius: 12px 16px 10px 14px / 16px 10px 14px 12px; }
+  button.cmd.primo { background: var(--verde); border-color: var(--verde); color: #fff; }
+  .hint { color: var(--grigio); font-size: 18px; margin-left: auto; }
+</style>
+</head>
+<body>
+<header>
+  <span class="badge">GEOSTORIA</span>
+  <h1>Contare il tempo</h1>
+  <span class="spazio"></span>
+  <button class="tab attiva" data-s="0">1 · Tre date</button>
+  <button class="tab" data-s="1">2 · Che secolo è?</button>
+  <button class="tab" data-s="2">3 · Numeri romani</button>
+  <button class="tab" data-s="3">4 · Parole dello storico</button>
+  <button class="tab" data-s="4">5 · Le quattro età</button>
+  <button class="tab" data-s="5">6 · Consegna</button>
+</header>
+<main>
+
+<section class="schermo attiva">
+  <div class="grande"><span>753 a.C.</span><span>480 a.C.</span><span>476 d.C.</span></div>
+  <div class="domanda passo">Quale viene prima? Quanti anni passano fra la prima e l'ultima?</div>
+  <svg class="linea passo" viewBox="0 0 1800 260">
+    <line class="asse" x1="80" y1="130" x2="1720" y2="130"/>
+    <polygon points="1740,130 1710,115 1710,145" fill="#1D1D1D"/>
+    <line class="tacca" x1="1000" y1="100" x2="1000" y2="160"/><text class="tacca-testo" x="1000" y="205">0</text>
+    <text class="tacca-testo" x="1000" y="245" style="font-size:22px;fill:#9FA8B2">nascita di Cristo</text>
+    <text class="era" x="110" y="60" style="font-size:28px">a.C. = avanti Cristo: numero più grande, più lontano nel passato</text>
+    <text class="era" x="1120" y="60" style="font-size:28px">d.C. = dopo Cristo: i numeri crescono</text>
+    <line class="tacca" x1="250" y1="110" x2="250" y2="150" stroke="#E16919"/><text class="tacca-testo" x="250" y="200" fill="#E16919">753 a.C.</text>
+    <line class="tacca" x1="520" y1="110" x2="520" y2="150" stroke="#E16919"/><text class="tacca-testo" x="520" y="200" fill="#E16919">480 a.C.</text>
+    <line class="tacca" x1="1475" y1="110" x2="1475" y2="150" stroke="#099268"/><text class="tacca-testo" x="1475" y="200" fill="#099268">476 d.C.</text>
+  </svg>
+  <div class="passo"><span class="nota">Da 753 a.C. a 476 d.C.: 753 + 476 = <b>1229 anni</b></span> <span class="nota piccola">(l'anno zero non esiste, quindi in realtà sono 1228: lo vediamo un'altra volta)</span></div>
+  <div class="passo" style="margin-top:16px"><span class="nota piccola">Prova tu: quanti anni fa era il 480 a.C.? &nbsp; 480 + 2026 = 2506 anni fa</span></div>
+</section>
+
+<section class="schermo">
+  <div class="regola">
+    <div class="passo">Anno <b>d.C.</b>: tolgo le ultime due cifre e aggiungo 1. &nbsp; 1492 → 14 + 1 = 15 → <b>XV secolo</b>. &nbsp; 2026 → 20 + 1 → <b>XXI secolo</b>.</div>
+    <div class="passo">Anno <b>a.C.</b>: stessa regola. &nbsp; 480 a.C. → 4 + 1 = 5 → <b>V secolo a.C.</b> &nbsp; 753 a.C. → 7 + 1 → <b>VIII secolo a.C.</b></div>
+    <div class="passo">Attenzione: se l'anno finisce con <b>00</b> non aggiungo niente. &nbsp; 1000 → <b>X secolo</b>. &nbsp; 1800 → <b>XVIII secolo</b>. &nbsp; <span style="color:#9FA8B2">Perché il I secolo va dall'anno 1 all'anno 100.</span></div>
+  </div>
+  <div class="chips passo">
+    <div class="chip"><span class="d">1861</span> <span class="r">→ XIX</span></div>
+    <div class="chip"><span class="d">44 a.C.</span> <span class="r">→ I a.C.</span></div>
+    <div class="chip"><span class="d">800</span> <span class="r">→ VIII</span></div>
+    <div class="chip"><span class="d">1200 a.C.</span> <span class="r">→ XII a.C.</span></div>
+    <div class="chip"><span class="d">2001</span> <span class="r">→ XXI</span></div>
+    <div class="chip"><span class="d">27 a.C.</span> <span class="r">→ I a.C.</span></div>
+    <div class="chip"><span class="d">1000</span> <span class="r">→ X</span></div>
+    <div class="chip"><span class="d">33 d.C.</span> <span class="r">→ I</span></div>
+    <div class="chip"><span class="d">218 a.C.</span> <span class="r">→ III a.C.</span></div>
+    <div class="chip"><span class="d">1492</span> <span class="r">→ XV</span></div>
+  </div>
+  <div class="passo" style="margin-top:18px"><span class="nota piccola">Che secolo è? Prima rispondete tutti insieme, poi chiamo tre di voi. Clicco sulla data e compare la risposta.</span></div>
+</section>
+
+<section class="schermo">
+  <div class="regola passo">I = 1 &nbsp;·&nbsp; V = 5 &nbsp;·&nbsp; X = 10 &nbsp;·&nbsp; L = 50 &nbsp;·&nbsp; C = 100 &nbsp;·&nbsp; D = 500 &nbsp;·&nbsp; M = 1000. &nbsp; Si sommano da sinistra a destra: VII = 5 + 1 + 1 = 7. &nbsp; Se un segno piccolo sta <b>prima</b> di uno grande, si <b>toglie</b>: IV = 5 − 1 = 4, &nbsp; IX = 10 − 1 = 9, &nbsp; XIX = 10 + 9 = 19.</div>
+  <div class="colonne passo">
+    <div>I <span class="ar">1</span></div><div>II <span class="ar">2</span></div><div>III <span class="ar">3</span></div><div>IV <span class="ar">4</span></div><div>V <span class="ar">5</span></div><div>VI <span class="ar">6</span></div><div>VII <span class="ar">7</span></div>
+    <div>VIII <span class="ar">8</span></div><div>IX <span class="ar">9</span></div><div>X <span class="ar">10</span></div><div>XI <span class="ar">11</span></div><div>XII <span class="ar">12</span></div><div>XIII <span class="ar">13</span></div><div>XIV <span class="ar">14</span></div>
+    <div>XV <span class="ar">15</span></div><div>XVI <span class="ar">16</span></div><div>XVII <span class="ar">17</span></div><div>XVIII <span class="ar">18</span></div><div>XIX <span class="ar">19</span></div><div>XX <span class="ar">20</span></div><div>XXI <span class="ar">21</span></div>
+  </div>
+  <div class="passo" style="margin-top:22px"><span class="nota piccola">Copiate la tabella sull'ultima pagina del quaderno: vi servirà tutto l'anno, perché il secolo si scrive sempre in numeri romani.</span></div>
+</section>
+
+<section class="schermo">
+  <div class="parole">
+    <div class="passo"><b>cronologia</b><br>l'ordine dei fatti nel tempo: che cosa viene prima, che cosa viene dopo</div>
+    <div class="passo"><b>secolo</b><br>un periodo di 100 anni</div>
+    <div class="passo"><b>millennio</b><br>un periodo di 1000 anni, cioè dieci secoli</div>
+    <div class="passo"><b>a.C. / d.C.</b><br>avanti Cristo e dopo Cristo: contiamo gli anni a partire dalla nascita di Cristo, il nostro punto zero</div>
+    <div class="passo"><b>era</b><br>un lungo periodo che parte da un evento scelto: l'era cristiana dalla nascita di Cristo, quella musulmana dal 622</div>
+    <div class="passo"><b>periodizzazione</b><br>dividere il tempo in grandi età (antica, medievale, moderna...) per orientarsi meglio</div>
+    <div class="passo"><b>datazione</b><br>stabilire quando è successo un fatto o quando è stato fatto un oggetto</div>
+    <div class="passo"><b>fonte</b><br>tutto ciò da cui ricaviamo notizie sul passato: un testo, un oggetto, un'immagine. <i>Ne parliamo la prossima volta.</i></div>
+  </div>
+  <div class="passo" style="margin-top:26px"><span class="nota piccola">Sulla prima pagina del quaderno scrivete «Parole dello storico». Una parola per riga, spiegata con parole vostre.</span></div>
+</section>
+
+<section class="schermo">
+  <svg class="linea" viewBox="0 0 1800 260" style="height:300px">
+    <line class="asse" x1="60" y1="150" x2="1740" y2="150"/>
+    <polygon points="1760,150 1730,135 1730,165" fill="#1D1D1D"/>
+    <g class="passo"><rect x="60" y="120" width="330" height="60" fill="#4465E9" opacity=".25"/><text class="tacca-testo" x="225" y="100">Preistoria</text></g>
+    <g class="passo"><line class="tacca" x1="390" y1="110" x2="390" y2="190"/><text class="tacca-testo" x="390" y="230" style="font-size:26px">3500 a.C.</text><text class="freccia" x="390" y="255" text-anchor="middle">la scrittura</text><rect x="390" y="120" width="660" height="60" fill="#E16919" opacity=".25"/><text class="tacca-testo" x="720" y="100">Età antica</text></g>
+    <g class="passo"><line class="tacca" x1="1050" y1="110" x2="1050" y2="190"/><text class="tacca-testo" x="1050" y="230" style="font-size:26px">476 d.C.</text><text class="freccia" x="1050" y="255" text-anchor="middle">cade l'impero d'Occidente</text><rect x="1050" y="120" width="380" height="60" fill="#AE3EC9" opacity=".25"/><text class="tacca-testo" x="1240" y="100">Medioevo</text></g>
+    <g class="passo"><line class="tacca" x1="1430" y1="110" x2="1430" y2="190"/><text class="tacca-testo" x="1430" y="230" style="font-size:26px">1492</text><text class="freccia" x="1430" y="255" text-anchor="middle">Colombo</text><rect x="1430" y="120" width="190" height="60" fill="#099268" opacity=".25"/><text class="tacca-testo" x="1525" y="100" style="font-size:22px">Età moderna</text></g>
+    <g class="passo"><line class="tacca" x1="1620" y1="110" x2="1620" y2="190"/><text class="tacca-testo" x="1620" y="230" style="font-size:26px">1789</text><text class="freccia" x="1620" y="255" text-anchor="middle">o 1815: dipende dal libro</text><rect x="1620" y="120" width="120" height="60" fill="#F1AC4B" opacity=".35"/><text class="tacca-testo" x="1690" y="62" style="font-size:22px">Contemporanea</text></g>
+  </svg>
+  <div class="passo" style="margin-top:10px"><span class="nota">Questi confini fra le età li abbiamo messi noi, molto dopo, per orientarci. Chi viveva nel 476 non sapeva di passare dall'età antica al Medioevo.</span></div>
+  <div class="passo" style="margin-top:10px"><span class="nota piccola">Il <b>volume 1</b> del libro va dalla preistoria a Cesare (cap. 0-8). &nbsp; Il <b>volume 2</b> va da Augusto agli Ottoni. &nbsp; Aprite l'indice: i colori sono gli stessi della linea del tempo.</span></div>
+</section>
+
+<section class="schermo">
+  <ol class="consegna">
+    <li class="passo">Finisci la <b>linea del tempo della tua vita</b> (1 cm = 1 anno). Aggiungi almeno un fatto della tua famiglia successo <b>prima che tu nascessi</b>.</li>
+    <li class="passo">Scrivi a quale secolo appartengono questi anni: <b>1492 · 27 a.C. · 1000 · 33 d.C. · 218 a.C.</b></li>
+    <li class="passo">Leggi le prime due pagine del capitolo introduttivo, <i>Quando tutto cominciò</i>. Se non hai ancora il libro, fattelo prestare: la prossima settimana serve a tutti.</li>
+  </ol>
+  <div class="passo"><span class="nota">La prossima volta parliamo delle <b>fonti</b>. Le schede che avete scritto mercoledì sono già una fonte: vi spiego perché.</span></div>
+</section>
+
+</main>
+<footer>
+  <button class="cmd primo" id="avanti">Avanti →</button>
+  <button class="cmd" id="indietro">← Indietro</button>
+  <button class="cmd" id="tutti">Mostra tutto</button>
+  <button class="cmd" id="azzera">Azzera</button>
+  <span class="hint">Tasti: spazio o → avanti · ← indietro · PgUp/PgDn cambia schermata · T tutto · A azzera</span>
+</footer>
+<script>
+let s = 0;
+const schermi = Array.from(document.querySelectorAll(".schermo")), tabs = Array.from(document.querySelectorAll(".tab"));
+const passi = () => Array.from(schermi[s].querySelectorAll(".passo"));
+function mostra(i) { s = Math.max(0, Math.min(schermi.length - 1, i)); schermi.forEach((x, k) => x.classList.toggle("attiva", k === s)); tabs.forEach((x, k) => x.classList.toggle("attiva", k === s)); }
+function avanti() { const p = passi().find(x => !x.classList.contains("vista")); if (p) p.classList.add("vista"); else if (s < schermi.length - 1) mostra(s + 1); }
+function indietro() { const v = passi().filter(x => x.classList.contains("vista")); if (v.length) v[v.length - 1].classList.remove("vista"); else if (s > 0) mostra(s - 1); }
+function tutti() { passi().forEach(x => x.classList.add("vista")); }
+function azzera() { passi().forEach(x => x.classList.remove("vista")); schermi[s].querySelectorAll(".chip").forEach(c => c.classList.remove("vista")); }
+tabs.forEach((t, k) => t.onclick = () => mostra(k));
+document.querySelector("#avanti").onclick = avanti; document.querySelector("#indietro").onclick = indietro;
+document.querySelector("#tutti").onclick = tutti; document.querySelector("#azzera").onclick = azzera;
+document.querySelectorAll(".chip").forEach(c => c.onclick = () => c.classList.toggle("vista"));
+document.addEventListener("keydown", e => {
+  if (e.key === " " || e.key === "ArrowRight") { e.preventDefault(); avanti(); }
+  else if (e.key === "ArrowLeft") indietro();
+  else if (e.key === "PageDown") mostra(s + 1); else if (e.key === "PageUp") mostra(s - 1);
+  else if (e.key.toLowerCase() === "t") tutti(); else if (e.key.toLowerCase() === "a") azzera();
+});
+const h = parseInt(location.hash.slice(1)); if (!isNaN(h)) mostra(h - 1); if (location.hash.includes("tutti")) tutti();
+</script>
+<a class="torna-indice" href="index.html" title="Indice di geostoria">← Geostoria</a>
+<style>.torna-indice{position:fixed;right:14px;bottom:10px;z-index:99;font:600 14px/1 system-ui,sans-serif;color:#555;text-decoration:none;opacity:0;transition:opacity .25s;padding:6px 10px;border-radius:8px;background:rgba(255,255,255,.85)}.torna-indice:hover,.torna-indice:focus,body:hover .torna-indice{opacity:1}</style>
+</body>
+</html>

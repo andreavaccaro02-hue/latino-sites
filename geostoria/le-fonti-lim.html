@@ -1,0 +1,594 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Le fonti · il tavolo dello storico</title>
+<style>
+  @font-face { font-family: "Libertinus Serif"; src: url("fonts/LibertinusSerif-Regular.otf"); font-weight: 400; font-style: normal; }
+  @font-face { font-family: "Libertinus Serif"; src: url("fonts/LibertinusSerif-Italic.otf"); font-weight: 400; font-style: italic; }
+  @font-face { font-family: "Libertinus Serif"; src: url("fonts/LibertinusSerif-Semibold.otf"); font-weight: 600; font-style: normal; }
+  @font-face { font-family: "Shantell Sans"; src: url("fonts/ShantellSans%5BBNCE,INFM,SPAC,wght%5D.ttf"); font-weight: 300 800; }
+  @font-face { font-family: "Kalam"; src: url("fonts/Kalam-Regular.ttf"); font-weight: 400; }
+
+  :root {
+    --tavolo: #D6D0C4;
+    --foglio: #FFFFFF;
+    --manila: #E6D7A3;
+    --manila-scuro: #C9B678;
+    --lavagna: #2F3A34;
+    --gesso: #F3F0E6;
+    --inchiostro: #161616;
+    --matita: #6B675F;
+    --rosso: #A9281F;
+    --ombra: 0 10px 24px rgba(40, 32, 18, .22), 0 2px 4px rgba(40, 32, 18, .18);
+    --corpo: 30px;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; }
+  body {
+    font-family: "Libertinus Serif", "Iowan Old Style", Georgia, serif;
+    font-size: var(--corpo); line-height: 1.4; color: var(--inchiostro);
+    background: var(--tavolo);
+    background-image:
+      linear-gradient(90deg, rgba(255,255,255,.06) 1px, transparent 1px),
+      linear-gradient(rgba(0,0,0,.035) 1px, transparent 1px);
+    background-size: 7px 100%, 100% 5px;
+    display: flex; flex-direction: column; overflow: hidden;
+  }
+
+  header {
+    display: flex; align-items: baseline; justify-content: space-between; gap: 20px;
+    padding: 18px 40px 0; color: var(--matita); font-size: 22px;
+  }
+  header .titolo { font-family: "Shantell Sans", cursive; font-weight: 600; color: var(--inchiostro); font-size: 26px; }
+  header .destra { display: flex; gap: 26px; align-items: baseline; }
+  header .conta { font-variant-numeric: tabular-nums; }
+  #timer { display: none; font-variant-numeric: tabular-nums; font-family: "Shantell Sans", cursive; font-weight: 600; font-size: 28px; color: var(--inchiostro); cursor: pointer; padding: 2px 14px; border: 2px solid var(--inchiostro); background: var(--foglio); }
+  #timer.attivo { display: inline-block; }
+  #timer.corre { background: var(--manila); }
+  #timer.finito { background: var(--rosso); color: var(--foglio); border-color: var(--rosso); }
+
+  main { flex: 1; min-height: 0; padding: 26px 40px 14px; }
+  .schermo { display: none; height: 100%; }
+  .schermo.attivo { display: grid; grid-template-columns: 1.05fr 1fr; gap: 44px; align-items: stretch; }
+
+  /* ---------- schermate delle fonti ---------- */
+  .foglio {
+    background: var(--foglio); box-shadow: var(--ombra); padding: 26px 26px 18px;
+    display: flex; flex-direction: column; min-height: 0;
+    transform: rotate(-0.6deg);
+  }
+  .reperto { flex: 1; min-height: 0; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+  .reperto img { max-width: 100%; max-height: 100%; object-fit: contain; display: block; }
+  .reperto .testo { font-size: 38px; line-height: 1.45; padding: 0 24px; max-width: 26ch; }
+  .reperto .testo.citazione { font-style: italic; }
+  .reperto .testo.citazione .latino { display: block; font-style: normal; font-size: .72em; color: var(--matita); margin-top: .9em; line-height: 1.3; }
+  .reperto .testo.giornale { font-weight: 600; font-size: 44px; line-height: 1.15; }
+  .reperto .testo.giornale .occhiello { display: block; font-weight: 400; font-size: 20px; letter-spacing: .04em; text-transform: uppercase; color: var(--matita); margin-bottom: 14px; }
+  .reperto .testo.giornale .sommario { display: block; font-weight: 400; font-size: 22px; font-style: italic; color: var(--matita); margin-top: 16px; }
+  .didascalia { margin-top: 16px; color: var(--matita); font-size: 22px; line-height: 1.3; opacity: 0; transition: opacity .35s ease .3s; }
+  .schermo:has(.scheda.rivelata) .didascalia { opacity: 1; }
+
+  .colonna { display: flex; flex-direction: column; gap: 18px; min-height: 0; overflow: hidden; }
+  .colonna .scheda { flex: 0 1 auto; min-height: 0; overflow: auto; }
+  .cartellino {
+    background: var(--manila); box-shadow: var(--ombra); padding: 22px 28px 24px;
+    border-left: 10px solid var(--manila-scuro); transform: rotate(0.4deg);
+    position: relative;
+  }
+  .cartellino::before {
+    content: ""; position: absolute; top: 14px; right: 18px; width: 16px; height: 16px;
+    border-radius: 50%; background: var(--tavolo); box-shadow: inset 0 1px 2px rgba(0,0,0,.35);
+  }
+  .cartellino h2 { font-family: "Shantell Sans", cursive; font-weight: 700; font-size: 46px; line-height: 1.1; margin: 0 40px 10px 0; }
+  .cartellino p { margin: 0; font-size: 28px; max-width: 36ch; }
+
+  .scheda {
+    background: var(--foglio); box-shadow: var(--ombra); padding: 20px 28px 22px;
+    cursor: pointer; position: relative; min-height: 0; flex: 0 0 auto;
+  }
+  .scheda:focus-visible { outline: 4px solid var(--rosso); outline-offset: 3px; }
+  .scheda .titolo-scheda { font-size: 22px; color: var(--matita); margin-bottom: 10px; }
+  .caselle { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 28px; margin-bottom: 14px; }
+  .casella { display: flex; align-items: center; gap: 12px; font-size: 30px; }
+  .casella svg { width: 34px; height: 34px; flex: none; }
+  .casella .box { fill: none; stroke: var(--inchiostro); stroke-width: 2; }
+  .casella .spunta { fill: none; stroke: var(--rosso); stroke-width: 4.5; stroke-linecap: round; stroke-linejoin: round;
+    stroke-dasharray: 60; stroke-dashoffset: 60; }
+  .rivelata .casella.si .spunta { stroke-dashoffset: 0; transition: stroke-dashoffset .45s ease-out; }
+  .righe { display: grid; grid-template-columns: max-content 1fr; gap: 4px 18px; font-size: 27px; line-height: 1.35; }
+  .righe dt { color: var(--matita); }
+  .righe dd { margin: 0; min-height: 1.3em; border-bottom: 1px solid rgba(0,0,0,.14); }
+  .righe dd span, .nota { color: var(--rosso); opacity: 0; }
+  .rivelata .righe dd span, .rivelata .nota { opacity: 1; transition: opacity .35s ease .3s; }
+  .nota { font-size: 25px; margin-top: 10px; font-style: italic; line-height: 1.35; }
+  .invito { position: absolute; right: 22px; bottom: 16px; color: var(--matita); font-size: 21px; }
+  .rivelata .invito { display: none; }
+
+  /* ---------- tabella ---------- */
+  .schermo.tabella.attivo, .schermo.largo.attivo { display: block; }
+  .foglio-largo { background: var(--foglio); box-shadow: var(--ombra); padding: 26px 34px 34px; max-height: 100%; overflow: auto; }
+  .foglio-largo h2 { font-family: "Shantell Sans", cursive; font-weight: 700; font-size: 44px; margin: 0 0 16px; }
+  table { border-collapse: collapse; width: 100%; font-size: 26px; }
+  th { text-align: left; font-weight: 400; color: var(--matita); padding: 8px 12px; border-bottom: 2px solid var(--inchiostro); font-size: 22px; }
+  td { padding: 10px 12px; border-bottom: 1px solid rgba(0,0,0,.14); vertical-align: top; }
+  td.spunte { color: var(--rosso); font-size: 30px; white-space: nowrap; }
+  td.vuota { color: var(--matita); font-style: italic; }
+  tr.non-rivelata td { color: var(--matita); }
+  td .dipende { display: block; font-size: .8em; color: var(--matita); font-style: italic; margin-top: 2px; }
+
+  /* ---------- schermate di testo (apertura, do now, consegne) ---------- */
+  .schermo.pagina.attivo { display: grid; grid-template-columns: 1fr; }
+  .schermo.pagina.con-lavagna.attivo { grid-template-columns: 1.1fr 1fr; }
+  .pagina .foglio-testo {
+    background: var(--foglio); box-shadow: var(--ombra); padding: 30px 40px 34px;
+    min-height: 0; overflow: auto; transform: rotate(-0.3deg);
+    display: flex; flex-direction: column; gap: 14px;
+  }
+  .pagina .sopra { font-size: 22px; color: var(--matita); }
+  .pagina h1 { font-family: "Shantell Sans", cursive; font-weight: 700; font-size: 50px; line-height: 1.1; margin: 0 0 6px; }
+  .pagina h2 { font-family: "Shantell Sans", cursive; font-weight: 600; font-size: 36px; line-height: 1.15; margin: 8px 0 0; }
+  .pagina p { margin: 0; font-size: 30px; max-width: 60ch; }
+  .pagina p.grande { font-size: 36px; }
+  .pagina ol, .pagina ul { margin: 0; padding-left: 1.2em; font-size: 30px; }
+  .pagina li { margin: 6px 0; }
+  .pagina li + li { margin-top: 12px; }
+  .pagina .risposta { color: var(--rosso); font-style: italic; margin-left: .4em; }
+  .pagina .def { font-size: 36px; border-left: 10px solid var(--manila-scuro); padding: 10px 22px; background: var(--manila); }
+  .pagina .coppia { display: grid; grid-template-columns: max-content 1fr; gap: 6px 22px; font-size: 29px; align-items: baseline; }
+  .pagina .coppia b { font-family: "Shantell Sans", cursive; font-weight: 700; font-size: 32px; }
+  .pagina .coppia span { color: var(--matita); }
+  .pagina .frase { font-size: 34px; font-style: italic; border-left: 10px solid var(--rosso); padding: 8px 22px; }
+  .pagina .parole { display: flex; gap: 28px; font-family: "Shantell Sans", cursive; font-weight: 700; font-size: 60px; flex-wrap: wrap; align-items: baseline; margin: 10px 0; }
+  .pagina .parole span { color: var(--matita); }
+  .pagina .parole span.ora { color: var(--rosso); }
+  .pagina .obiettivo { font-size: 34px; border: 3px solid var(--inchiostro); padding: 18px 26px; margin-top: 10px; }
+  .pagina .obiettivo b { font-family: "Shantell Sans", cursive; }
+  .pagina .piccolo { font-size: 24px; color: var(--matita); }
+  .pagina .griglia3 { display: grid; grid-template-columns: max-content 1fr 1fr 1fr; gap: 8px 22px; font-size: 28px; align-items: baseline; }
+  .pagina .griglia3 .testa { color: var(--matita); font-size: 22px; border-bottom: 2px solid var(--inchiostro); }
+  .pagina .griglia3 .testa:empty { border: 0; }
+  .pagina .griglia3.tre { grid-template-columns: 1.4fr 1fr 1fr; }
+  .pagina .griglia3 .risp { color: var(--rosso); min-height: 1.3em; border-bottom: 1px solid rgba(0,0,0,.14); }
+  .pagina .griglia3 .risp.piccola { font-size: 24px; }
+  .passo { opacity: 0; transform: translateY(6px); transition: opacity .35s ease, transform .35s ease; }
+  .passo.visto { opacity: 1; transform: none; }
+  .avanti-hint { margin-top: auto; font-size: 21px; color: var(--matita); text-align: right; }
+  .avanti-hint.finito { display: none; }
+
+  /* lavagna digitale: ci scrivo io in diretta */
+  .lavagna-box { display: flex; flex-direction: column; min-height: 0; }
+  .lavagna-box .etichetta { font-size: 21px; color: var(--matita); margin-bottom: 8px; display: flex; justify-content: space-between; align-items: baseline; }
+  .lavagna-box .etichetta button { font-size: 18px; padding: 4px 12px; }
+  .lavagna {
+    flex: 1; min-height: 0; overflow: auto;
+    background: var(--lavagna); color: var(--gesso); box-shadow: var(--ombra);
+    font-family: "Kalam", "Shantell Sans", cursive; font-size: 34px; line-height: 1.45;
+    padding: 22px 28px; outline: none; white-space: pre-wrap; border: 12px solid #6B5A3F;
+  }
+  .lavagna:focus { box-shadow: var(--ombra), 0 0 0 5px var(--manila-scuro); }
+
+  footer {
+    display: flex; align-items: center; justify-content: space-between; gap: 20px;
+    padding: 10px 40px 22px; font-size: 22px; color: var(--matita);
+    opacity: 0; transition: opacity .25s ease;
+  }
+  footer:hover, footer:focus-within { opacity: 1; }
+  .lavagna-box .etichetta { opacity: 0; transition: opacity .25s ease; }
+  .lavagna-box:hover .etichetta { opacity: 1; }
+  header .conta { opacity: 0; transition: opacity .25s ease; }
+  header:hover .conta { opacity: 1; }
+  button {
+    font: inherit; font-size: 24px; color: var(--inchiostro); background: var(--foglio);
+    border: 2px solid var(--inchiostro); padding: 10px 22px; cursor: pointer; box-shadow: 0 2px 0 var(--inchiostro);
+  }
+  button:active { transform: translateY(2px); box-shadow: none; }
+  button:focus-visible { outline: 4px solid var(--rosso); outline-offset: 3px; }
+  button.principale { background: var(--inchiostro); color: var(--foglio); }
+  button[disabled] { opacity: .35; cursor: default; }
+  .tasti { display: flex; gap: 14px; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .rivelata .casella.si .spunta, .rivelata .righe dd span, .rivelata .nota, .didascalia, .passo { transition: none; }
+  }
+  @media (max-width: 1000px) {
+    :root { --corpo: 22px; }
+    .schermo.attivo, .schermo.pagina.con-lavagna.attivo { grid-template-columns: 1fr; gap: 20px; overflow: auto; }
+    .cartellino h2 { font-size: 36px; }
+    .caselle { grid-template-columns: 1fr; }
+    header, main, footer { padding-left: 16px; padding-right: 16px; }
+    .pagina h1 { font-size: 36px; }
+    .pagina .parole { font-size: 40px; }
+    .lavagna { min-height: 240px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="titolo">Il tavolo dello storico</div>
+  <div class="destra">
+    <button id="timer" type="button" title="clic: parte / ferma · doppio clic: azzera"></button>
+    <div class="conta" id="conta"></div>
+  </div>
+</header>
+
+<main id="main"></main>
+
+<footer>
+  <div id="aiuto"></div>
+  <div class="tasti">
+    <button id="prima" type="button">Indietro</button>
+    <button id="rivela" type="button" class="principale">Rivela</button>
+    <button id="dopo" type="button">Avanti</button>
+  </div>
+</footer>
+
+<script>
+// ---------- parametri: ?i=9&r=all&f=3 ----------
+const q = new URLSearchParams(location.search);
+const DATA = new Date().toLocaleDateString("it-IT", { weekday: "long", day: "numeric", month: "long", year: "numeric" });
+
+// ---------- le sei fonti ----------
+const FONTI = [
+  {
+    titolo: "Una stele di pietra nera",
+    reperto: { img: "reperti/hammurabi.jpg", remoto: "https://commons.wikimedia.org/wiki/Special:FilePath/P1050763%20Louvre%20code%20Hammurabi%20face%20rwk.JPG?width=700", alt: "La stele di Hammurabi intera, basalto nero: in alto il rilievo del re in piedi davanti al dio seduto, sotto il testo cuneiforme" },
+    didascalia: "È di basalto e alta 2,25 metri. Viene da Babilonia, verso il 1750 a.C.; l'hanno trovata a Susa nel 1901 e oggi sta al Louvre.",
+    descr: "È coperta di segni a cuneo: quasi trecento leggi. In cima un re in piedi riceve qualcosa da un dio seduto.",
+    materiale: true, scritta: true, primaria: true, secondaria: false,
+    chi: "il re Hammurabi", quando: "mentre Hammurabi regnava", perche: "dire a tutti che le sue leggi vengono da un dio",
+    nota: "È un oggetto e insieme un testo: per questo è materiale e scritta. Ci dà le leggi e ci dice come il re voleva farsi vedere.",
+    breve: "Hammurabi: dire che le leggi vengono dal dio"
+  },
+  {
+    titolo: "Una moneta d'argento",
+    reperto: { img: "reperti/denario-augusto.jpg", remoto: "https://commons.wikimedia.org/wiki/Special:FilePath/Augustus%20Denarius%202300268.jpg?width=900", alt: "Denario d'argento: a sinistra la testa di Augusto con la scritta CAESAR AVGVSTVS, a destra una donna schiacciata da un mucchio di scudi" },
+    didascalia: "È un denario di 4 grammi, coniato a Roma nel 19 a.C. Ne esistono migliaia, trovati in tutto l'impero.",
+    descr: "Da un lato c'è la testa di un uomo giovane con la scritta CAESAR AVGVSTVS; dall'altro una donna che sparisce sotto un mucchio di scudi.",
+    materiale: true, scritta: false, primaria: true, secondaria: false,
+    chi: "Augusto", quando: "mentre Augusto era al potere", perche: "pagare i soldati e far conoscere la sua faccia",
+    nota: "Una moneta è anche propaganda, cioè un messaggio che il potere manda a tutti: passa di mano in mano e porta ovunque la faccia di Augusto. La donna sotto gli scudi è Tarpeia, che tradì Roma: la storia la rivedremo con Livio.",
+    breve: "Augusto: pagare i soldati, farsi conoscere"
+  },
+  {
+    titolo: "Un libro di duemila anni fa",
+    reperto: { html: '<div class="testo citazione">«La tradizione racconta che una lupa assetata, scesa dai monti vicini, corse verso il vagito dei bambini e li allattò…»<span class="latino">Tenet fama… lupam sitientem ex montibus qui circa sunt ad puerilem vagitum cursum flexisse; eam summissas infantibus adeo mitem praebuisse mammas…</span></div>' },
+    didascalia: "Tito Livio, Ab Urbe condita, libro I, capitolo 4. Scritto a Roma verso il 27 a.C.",
+    descr: "Uno scrittore romano racconta le origini di Roma, ma vive otto secoli dopo Romolo; infatti scrive «la tradizione racconta».",
+    materiale: false, scritta: true, primaria: true, secondaria: true,
+    chi: "Tito Livio, uno storico romano", quando: "otto secoli dopo Romolo", perche: "ricordare ai Romani di Augusto da dove veniva la grandezza di Roma",
+    nota: "Dipende dalla domanda. Sulle origini è secondaria, perché Livio non c'era; su che cosa pensavano i Romani al tempo di Augusto è primaria.",
+    breve: "Livio: ricordare ai Romani la loro grandezza"
+  },
+  {
+    titolo: "Il vostro manuale",
+    reperto: { img: "accoglienza/ramo-doro-copertina.jpg", alt: "Copertina del Ramo d'oro, volume 1: Dalla preistoria all'età di Cesare, di Bettini, Lentano e Puliga" },
+    didascalia: "Bettini, Lentano, Puliga, Il ramo d'oro, volume 1, Sanoma 2024. Le pagine 2-7 che avete letto: capitolo introduttivo, lezione 1, Quando tutto cominciò.",
+    descr: "Lo hanno scritto studiosi di oggi per gli studenti: mette insieme quello che sappiamo grazie a tutte le altre fonti.",
+    materiale: false, scritta: true, primaria: false, secondaria: true,
+    chi: "Maurizio Bettini, uno studioso di oggi, con due colleghi", quando: "secoli o millenni dopo i fatti", perche: "spiegarvi in poche pagine quello che gli storici hanno capito in secoli",
+    nota: "È la fonte più comoda e la più lontana dai fatti: conviene sapere da dove prende quello che dice. Per questo il manuale cita le sue fonti nei riquadri con i testi.",
+    breve: "Bettini: spiegare agli studenti"
+  },
+  {
+    titolo: "Uno scheletro di tre milioni di anni",
+    reperto: { img: "reperti/hadar-1973.jpg", remoto: "https://commons.wikimedia.org/wiki/Special:FilePath/Fonds%20Raymonde%20Bonnefille%20-%20Ethiopie%2C%20Hadar%20-%20Mission%201973%20-%20Personnes%20observant%20des%20fossiles%20dans%20la%20r%C3%A9gion%20de%20Hadar%20%28M%C3%A9diHAL%205361879%29.jpg?width=900", alt: "Hadar, Etiopia, 1973: cinque studiosi in un deserto di sabbia grigia osservano e fotografano un fossile a terra" },
+    didascalia: "Hadar, Etiopia, 1973: la spedizione che l'anno dopo troverà Lucy osserva un fossile a terra. Lucy, Australopithecus afarensis, è vissuta qui circa 3,2 milioni di anni fa.",
+    descr: "Restano molte ossa di una femmina alta un metro e dieci; tibia e ginocchio dicono che camminava eretta. Non ha scritte e non ha nome: quello che conoscete gliel'hanno dato gli scopritori.",
+    materiale: true, scritta: false, primaria: true, secondaria: false,
+    chi: "nessuno: non c'è una mano che l'abbia fatta", quando: "tre milioni di anni fa, quando è morta", perche: "nessun motivo: sono i resti di una vita",
+    nota: "È una fonte della preistoria: non mente, ma non ha voce. Parla solo quando i paleontologi la interrogano: quanti anni ha? come camminava? da che cosa lo capiamo?",
+    breve: "nessuno: i resti di una vita"
+  },
+  {
+    titolo: "Un articolo di giornale",
+    reperto: { html: '<div class="testo giornale"><small class="occhiello">Reperti dalla storia dell\'uomo, che ha 4 milioni di anni</small>Le cinquantadue ossa di miss Lucy<small class="sommario">Al «Musée de l\'Homme» di Parigi ricostruite le tappe dell\'evoluzione</small></div>' },
+    didascalia: "La Stampa, 20 febbraio 1979, pagina 3. Scrive Giovanni Arpino, romanziere, cinque anni dopo la scoperta.",
+    descr: "Uno scrittore visita per il giornale il museo di Parigi che espone le ossa venute dall'Etiopia; racconta ai lettori che cosa ha visto, sotto un titolo grande.",
+    materiale: false, scritta: true, primaria: false, secondaria: true,
+    chi: "Giovanni Arpino, uno scrittore che scrive sul giornale; allo scavo non c'era", quando: "cinque anni dopo la scoperta", perche: "informare e vendere il giornale",
+    nota: "«Quattro milioni di anni» lo dice il titolo; Lucy ne ha tre milioni e duecentomila. Il giornale arrotonda, lo scienziato misura le parole. Leggendo, chiedetevi che cosa ha detto lo scienziato.",
+    breve: "Arpino: informare, vendere il giornale"
+  }
+];
+
+// ---------- le schermate, in ordine di lezione ----------
+// tipo "pagina": testo con passi che si rivelano (class="passo"), eventuale lavagna e timer (secondi)
+// tipo "fonte": una delle sei card; tipo "tabella": riassunto che si riempie da solo
+const SCHERMATE = [
+  { tipo: "pagina", nome: "apertura", html: `
+      <div class="sopra">Geostoria · ${DATA}</div>
+      <h1>Prima di cominciare: gli strumenti dello storico</h1>
+      <div class="parole"><span>DOVE</span><span>·</span><span>QUANDO</span><span>·</span><span class="ora">COME SAPPIAMO?</span></div>
+      <p class="piccolo">Lezione 1: la carta. Lezione 2: la linea del tempo. Oggi: che cosa resta del passato.</p>
+      <div class="obiettivo passo"><b>S3/S5</b> · di ogni cosa che resta del passato so dire <b>che tipo di fonte è</b>, e <b>quanto fidarmi</b>.</div>
+      <p class="piccolo passo">Banchi a coppie, come venerdì. Quaderno aperto.</p>` },
+
+  { tipo: "pagina", nome: "per cominciare", timer: 180, html: `
+      <div class="sopra">3 minuti · in silenzio · una riga per domanda sul quaderno</div>
+      <h1>Che cosa avete letto (pp. 2-7)</h1>
+      <p class="piccolo">Chi non aveva ancora il libro non è in colpa: scrive quello che ricorda dalle medie.</p>
+      <ol>
+        <li>Dove finisce la preistoria e comincia la storia? <b>Con che cosa?</b><span class="risposta passo">con la scrittura; e il libro dice che è una convenzione</span></li>
+        <li>Due fonti della preistoria.<span class="risposta passo">fossili, utensili, tombe, strati di roccia</span></li>
+        <li>Lucy: chi era e quanti anni ha.<span class="risposta passo">un'australopiteca, 3,2 milioni di anni</span></li>
+      </ol>
+      <p class="frase passo">Se la storia comincia con la scrittura, allora le fonti scritte sono le fonti «vere»?<br><span class="piccolo">Ci torniamo alla fine dell'ora.</span></p>` },
+
+  { tipo: "pagina", nome: "la parola", lavagna: true, html: `
+      <div class="sopra">La parola</div>
+      <div class="def passo"><b>Fonte</b> è tutto ciò che resta del passato e da cui ricaviamo informazioni.</div>
+      <p class="piccolo passo">Copiatela: è la prima definizione dell'anno.</p>
+      <div class="coppia passo"><b>materiale</b><span>la foto di classe delle medie: un oggetto</span><b>scritta</b><span>il diario in cui avete scritto del primo giorno: un testo</span></div>
+      <div class="coppia passo"><b>primaria</b><span>fatta al tempo dei fatti: la foto, il diario</span><b>secondaria</b><span>ricostruita dopo da chi non c'era: il racconto che ne farà vostro nipote</span></div>
+      <p class="frase passo">Con il vicino, 30 secondi: il racconto del nonno sulla guerra, primaria o secondaria?</p>
+      <p class="passo">Primaria se il nonno c'era. Dipende da <b>chi</b> e da <b>quando</b>: tenetelo a mente.</p>` },
+
+  { tipo: "fonte", f: 0 }, { tipo: "fonte", f: 1 }, { tipo: "fonte", f: 2 },
+  { tipo: "fonte", f: 3 }, { tipo: "fonte", f: 4 }, { tipo: "fonte", f: 5 },
+  { tipo: "tabella", nome: "tabella" },
+
+  { tipo: "pagina", nome: "storico del 2126", timer: 360, lavagna: true, html: `
+      <div class="sopra">A coppie · 6 minuti · sul quaderno</div>
+      <h1>Uno storico del 2126</h1>
+      <p class="grande">Vuole ricostruire il vostro primo giorno al D'Alessandro, <b>16 settembre 2026</b>. Elencate <b>tre fonti</b> che potrebbe usare e classificatele: materiale o scritta, primaria o secondaria.</p>
+      <h2 class="passo">Da tenere</h2>
+      <ul>
+        <li class="passo">Lo <b>storico</b> lavora soprattutto con le fonti scritte, l'<b>archeologo</b> con quelle materiali. Fanno lo stesso mestiere: interrogano ciò che resta.</li>
+        <li class="passo"><b>Nessuna fonte parla da sola</b>: le si fanno domande.</li>
+        <li class="passo">Le tre domande: <b>chi</b> l'ha fatta, <b>quando</b>, <b>perché</b>. Da queste dipende quanto fidarsi.</li>
+      </ul>` },
+
+  { tipo: "pagina", nome: "quanto fidarsi", html: `
+      <div class="sopra">Le tre domande applicate</div>
+      <h1>Quanto fidarsi?</h1>
+      <div class="griglia3">
+        <div class="testa"></div><div class="testa">chi</div><div class="testa">quando</div><div class="testa">perché</div>
+        <div><b>la moneta</b></div><div class="risp passo">Augusto</div><div class="risp passo">mentre era al potere</div><div class="risp passo piccola">pagare i soldati, farsi vedere</div>
+        <div><b>Livio</b></div><div class="risp passo">uno storico romano</div><div class="risp passo">otto secoli dopo Romolo</div><div class="risp passo piccola">ricordare ai Romani la grandezza di Roma</div>
+      </div>
+      <p class="frase passo">Una fonte non è vera o falsa: è <b>più o meno vicina ai fatti</b> e ha <b>sempre un'intenzione</b>.</p>
+      <p class="passo">Per la preistoria non ci sono fonti scritte: le date sono larghe (cronologia relativa, datazione radiometrica, p. 3) e il lavoro è tutto dell'archeologo e del paleontologo.</p>
+      <p class="passo">Torniamo alla domanda dell'inizio: no, le fonti scritte non sono più «vere». Sono solo di un altro tipo.</p>
+      <div class="obiettivo passo"><b>Mercoledì 30 settembre: test d'ingresso.</b> Un'ora, senza voto, sulle cose delle medie: carta, date, parole della storia. Serve a me per capire da dove partire.</div>` },
+
+  { tipo: "pagina", nome: "biglietto d'uscita", timer: 300, html: `
+      <div class="sopra">Biglietto d'uscita · mezzo foglio · nome in alto · una parola per colonna</div>
+      <h1>Tre fonti da classificare</h1>
+      <div class="griglia3 tre">
+        <div class="testa"></div><div class="testa">materiale o scritta</div><div class="testa">primaria o secondaria</div>
+        <div>1. una <b>lapide romana</b> con un'iscrizione</div><div class="risp passo">materiale e scritta</div><div class="risp passo">primaria</div>
+        <div>2. <b>questo manuale</b></div><div class="risp passo">scritta</div><div class="risp passo">secondaria</div>
+        <div>3. un <b>post su Instagram</b> di oggi, letto da uno storico fra cent'anni</div><div class="risp passo">scritta</div><div class="risp passo">primaria</div>
+      </div>
+      <p class="piccolo">Si consegna sulla porta, con il nome.</p>` },
+
+  { tipo: "pagina", nome: "consegna", html: `
+      <div class="sopra">Per la prossima volta</div>
+      <h1>Un oggetto-fonte di famiglia</h1>
+      <p class="grande">Una foto, una lettera, un oggetto, una ricetta scritta a mano. Portatelo in classe (o una sua descrizione, se non si può).</p>
+      <p class="passo">Sul quaderno, due righe: <b>che tipo di fonte è</b> e <b>che cosa ci dice di chi l'ha fatta</b>.</p>
+      <p class="passo piccolo">Lo riprendiamo in classe, cinque minuti a rotazione, e lo leghiamo ai luoghi delle vostre famiglie usciti al World Café.</p>
+      <p class="passo piccolo">Nessun compito sul libro: questo modulo non sta nel manuale.</p>` },
+
+  { tipo: "pagina", nome: "bonus", html: `
+      <div class="sopra">Una domanda in più</div>
+      <h1>Una settima fonte</h1>
+      <p class="grande">Una registrazione audio della mia voce, oggi, ascoltata fra cent'anni: materiale, scritta, o una terza cosa?</p>
+      <p class="frase passo">Orale. Le fonti orali esistono: ne parleremo con le migrazioni.</p>` }
+];
+
+const N = SCHERMATE.length;
+const INDICE_TABELLA = SCHERMATE.findIndex(s => s.tipo === "tabella");
+const INDICE_BIGLIETTO = SCHERMATE.findIndex(s => s.nome === "biglietto d'uscita");
+const rivelate = new Set();            // fonti (0..5) con la scheda aperta
+let indice = 0;
+
+const main = document.getElementById("main");
+const conta = document.getElementById("conta");
+const bPrima = document.getElementById("prima");
+const bRivela = document.getElementById("rivela");
+const bDopo = document.getElementById("dopo");
+const bTimer = document.getElementById("timer");
+
+// ---------- costruzione ----------
+function casella(nome, si) {
+  return `<div class="casella ${si ? "si" : ""}">
+    <svg viewBox="0 0 34 34" aria-hidden="true"><rect class="box" x="3" y="3" width="28" height="28"/><path class="spunta" d="M7 18 L15 26 L28 8"/></svg>
+    <span>${nome}</span></div>`;
+}
+
+function schermoFonte(f, fi, i) {
+  const rep = f.reperto.img
+    ? `<img src="${f.reperto.img}" alt="${f.reperto.alt}" data-remoto="${f.reperto.remoto || ""}" data-descr="${f.descr.replace(/"/g, "&quot;")}">`
+    : f.reperto.html;
+  return `<section class="schermo" data-i="${i}" data-f="${fi}" aria-label="Fonte ${fi + 1}">
+    <div class="foglio">
+      <div class="reperto">${rep}</div>
+      <div class="didascalia">${f.didascalia}</div>
+    </div>
+    <div class="colonna">
+      <div class="cartellino"><h2>${f.titolo}</h2><p>${f.descr}</p></div>
+      <div class="scheda" tabindex="0" role="button" aria-label="Rivela la scheda della fonte ${fi + 1}">
+        <div class="titolo-scheda">Scheda della fonte</div>
+        <div class="caselle">
+          ${casella("materiale", f.materiale)}${casella("scritta", f.scritta)}
+          ${casella("primaria", f.primaria)}${casella("secondaria", f.secondaria)}
+        </div>
+        <dl class="righe">
+          <dt>chi</dt><dd><span>${f.chi}</span></dd>
+          <dt>quando</dt><dd><span>${f.quando}</span></dd>
+          <dt>perché</dt><dd><span>${f.perche}</span></dd>
+        </dl>
+        <div class="nota">${f.nota}</div>
+        
+      </div>
+    </div>
+  </section>`;
+}
+
+function spunte(f) {
+  const s = [];
+  if (f.materiale) s.push("materiale"); if (f.scritta) s.push("scritta");
+  if (f.primaria) s.push("primaria"); if (f.secondaria) s.push("secondaria");
+  const testo = s.map(x => "✓ " + x).join("   ");
+  return f.primaria && f.secondaria ? testo + '<span class="dipende">dipende dalla domanda</span>' : testo;
+}
+
+function schermoTabella(i) {
+  const righe = FONTI.map((f, fi) => rivelate.has(fi)
+    ? `<tr><td>${fi + 1}. ${f.titolo}</td><td class="spunte">${spunte(f)}</td><td>${f.breve}</td></tr>`
+    : `<tr class="non-rivelata"><td>${fi + 1}. ${f.titolo}</td><td class="vuota">non ancora rivelata</td><td></td></tr>`
+  ).join("");
+  return `<section class="schermo tabella" data-i="${i}" aria-label="Tabella riassuntiva">
+    <div class="foglio-largo">
+      <h2>Le sei fonti, in una tabella</h2>
+      <table>
+        <thead><tr><th>fonte</th><th>materiale o scritta, primaria o secondaria</th><th>chi l'ha fatta, e perché</th></tr></thead>
+        <tbody>${righe}</tbody>
+      </table>
+    </div>
+  </section>`;
+}
+
+function chiaveLavagna(s) { return `le-fonti-lim:${s.nome}`; }
+
+function schermoPagina(s, i) {
+  const lav = s.lavagna ? `
+    <div class="lavagna-box">
+      <div class="etichetta"><span></span><button type="button" class="pulisci" data-i="${i}">Pulisci</button></div>
+      <div class="lavagna" contenteditable="true" spellcheck="false" data-chiave="${chiaveLavagna(s)}"></div>
+    </div>` : "";
+  return `<section class="schermo pagina ${s.lavagna ? "con-lavagna" : ""}" data-i="${i}" aria-label="${s.nome}">
+    <div class="foglio-testo">${s.html}</div>${lav}
+  </section>`;
+}
+
+function disegna() {
+  main.innerHTML = SCHERMATE.map((s, i) =>
+    s.tipo === "fonte" ? schermoFonte(FONTI[s.f], s.f, i)
+    : s.tipo === "tabella" ? schermoTabella(i)
+    : schermoPagina(s, i)).join("");
+
+  main.querySelectorAll(".scheda").forEach(s => {
+    s.addEventListener("click", rivela);
+    s.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); rivela(); } });
+  });
+  // immagini: locale, poi Wikimedia, poi la descrizione
+  main.querySelectorAll(".reperto img").forEach(img => {
+    img.addEventListener("error", () => {
+      if (img.dataset.remoto && img.src !== img.dataset.remoto) { img.src = img.dataset.remoto; img.dataset.remoto = ""; return; }
+      const d = document.createElement("div"); d.className = "testo"; d.textContent = img.dataset.descr;
+      img.replaceWith(d);
+    });
+  });
+  // lavagne: si salvano da sole nel browser, per classe
+  main.querySelectorAll(".lavagna").forEach(l => {
+    try { l.textContent = localStorage.getItem(l.dataset.chiave) || ""; } catch (e) {}
+    l.addEventListener("input", () => { try { localStorage.setItem(l.dataset.chiave, l.textContent); } catch (e) {} });
+    l.addEventListener("keydown", e => { if (e.key === "Escape") l.blur(); });
+  });
+  main.querySelectorAll(".pulisci").forEach(b => b.addEventListener("click", () => {
+    const l = b.closest(".lavagna-box").querySelector(".lavagna");
+    l.textContent = ""; try { localStorage.removeItem(l.dataset.chiave); } catch (e) {}
+  }));
+  rivelate.forEach(fi => main.querySelector(`.schermo[data-f="${fi}"] .scheda`).classList.add("rivelata"));
+  mostra();
+}
+
+// ---------- passi e rivelazioni ----------
+function passiDi(i) { return [...main.querySelectorAll(`.schermo[data-i="${i}"] .passo`)]; }
+function passoProssimo(i) { return passiDi(i).find(p => !p.classList.contains("visto")); }
+
+function mostra() {
+  const s = SCHERMATE[indice];
+  main.querySelectorAll(".schermo").forEach(el => el.classList.toggle("attivo", +el.dataset.i === indice));
+
+  if (s.tipo === "fonte") {
+    conta.textContent = `fonte ${s.f + 1} di 6`;
+    bRivela.disabled = rivelate.has(s.f);
+    bRivela.textContent = rivelate.has(s.f) ? "Scheda rivelata" : "Rivela la scheda";
+  } else if (s.tipo === "tabella") {
+    conta.textContent = "tabella";
+    bRivela.disabled = true; bRivela.textContent = "Rivela";
+  } else {
+    conta.textContent = s.nome;
+    const p = passoProssimo(indice);
+    bRivela.disabled = !p; bRivela.textContent = p ? "Passo successivo" : "Tutto rivelato";
+  }
+  bPrima.disabled = indice === 0;
+  bDopo.disabled = indice === N - 1;
+  const prossima = SCHERMATE[indice + 1];
+  bDopo.textContent = !prossima ? "Fine" : prossima.tipo === "fonte" ? `Fonte ${prossima.f + 1}` : prossima.tipo === "tabella" ? "Tabella" : prossima.nome[0].toUpperCase() + prossima.nome.slice(1);
+  impostaTimer(s.timer);
+}
+
+function rivela() {
+  const s = SCHERMATE[indice];
+  if (s.tipo === "fonte") {
+    if (rivelate.has(s.f)) return;
+    rivelate.add(s.f);
+    main.querySelector(`.schermo[data-f="${s.f}"] .scheda`).classList.add("rivelata");
+    main.querySelector(".schermo.tabella").outerHTML = schermoTabella(INDICE_TABELLA);
+  } else if (s.tipo === "pagina") {
+    const p = passoProssimo(indice);
+    if (p) p.classList.add("visto");
+  }
+  mostra();
+}
+
+function vai(n) { indice = Math.max(0, Math.min(N - 1, n)); mostra(); }
+
+// ---------- timer per le scritture a tempo ----------
+let tSecondi = 0, tResto = 0, tId = null;
+function fmt(n) { return `${Math.floor(n / 60)}:${String(n % 60).padStart(2, "0")}`; }
+function impostaTimer(sec) {
+  if (tId) { clearInterval(tId); tId = null; }
+  tSecondi = tResto = sec || 0;
+  bTimer.classList.toggle("attivo", !!sec);
+  bTimer.classList.remove("corre", "finito");
+  bTimer.textContent = sec ? fmt(sec) : "";
+}
+function tick() {
+  tResto--;
+  bTimer.textContent = fmt(Math.max(0, tResto));
+  if (tResto <= 0) { clearInterval(tId); tId = null; bTimer.classList.remove("corre"); bTimer.classList.add("finito"); bTimer.textContent = "tempo"; }
+}
+bTimer.addEventListener("click", () => {
+  if (!tSecondi) return;
+  if (tId) { clearInterval(tId); tId = null; bTimer.classList.remove("corre"); return; }
+  if (tResto <= 0) tResto = tSecondi;
+  bTimer.classList.remove("finito"); bTimer.classList.add("corre"); tId = setInterval(tick, 1000);
+});
+bTimer.addEventListener("dblclick", () => impostaTimer(tSecondi));
+
+// ---------- tasti ----------
+bPrima.addEventListener("click", () => vai(indice - 1));
+bDopo.addEventListener("click", () => vai(indice + 1));
+bRivela.addEventListener("click", rivela);
+document.addEventListener("keydown", e => {
+  if (e.target.isContentEditable) return;                     // sto scrivendo alla lavagna
+  if (e.target.tagName === "BUTTON" && (e.key === " " || e.key === "Enter")) return;
+  if (e.key === "ArrowRight" || e.key === "PageDown") vai(indice + 1);
+  else if (e.key === "ArrowLeft" || e.key === "PageUp") vai(indice - 1);
+  else if (e.key === " " || e.key === "Enter") { e.preventDefault(); rivela(); }
+  else if (e.key.toLowerCase() === "t") vai(INDICE_TABELLA);
+  else if (e.key.toLowerCase() === "b") vai(INDICE_BIGLIETTO);
+  else if (e.key === "Home") vai(0);
+  else if (e.key === "End") vai(N - 1);
+});
+
+// ---------- avvio: ?r=all rivela tutto, ?i=N schermata, ?f=N fonte (1-6) ----------
+if (q.get("r") === "all") FONTI.forEach((_, fi) => rivelate.add(fi));
+if (q.has("i")) indice = Math.max(0, Math.min(N - 1, +q.get("i")));
+if (q.has("f")) indice = SCHERMATE.findIndex(s => s.tipo === "fonte" && s.f === +q.get("f") - 1);
+if (indice < 0) indice = 0;
+disegna();
+if (q.get("r") === "all") { main.querySelectorAll(".passo").forEach(p => p.classList.add("visto")); mostra(); }
+</script>
+<a class="torna-indice" href="index.html" title="Indice di geostoria">← Geostoria</a>
+<style>.torna-indice{position:fixed;right:14px;bottom:10px;z-index:99;font:600 14px/1 system-ui,sans-serif;color:#555;text-decoration:none;opacity:0;transition:opacity .25s;padding:6px 10px;border-radius:8px;background:rgba(255,255,255,.85)}.torna-indice:hover,.torna-indice:focus,body:hover .torna-indice{opacity:1}</style>
+</body>
+</html>

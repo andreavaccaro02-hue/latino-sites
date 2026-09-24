@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Linea del tempo · biennio</title>
+<link href="https://fonts.googleapis.com/css2?family=Shantell+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --nero: #1D1D1D; --blu: #4465E9; --arancio: #E16919; --verde: #099268; --viola: #AE3EC9;
+    --giallo: #F1AC4B; --nota: #FFF4B8; --griglia: #C8C8C8; --grigio: #9FA8B2; --sfondo: #FAFAF7;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; }
+  body {
+    font-family: "Shantell Sans", "Patrick Hand", "Comic Neue", "Segoe Print", "Chalkboard", sans-serif;
+    color: var(--nero); background: var(--sfondo);
+    background-image: radial-gradient(var(--griglia) 0.9px, transparent 1px);
+    background-size: 22px 22px;
+    display: flex; flex-direction: column; overflow: hidden;
+  }
+  header {
+    display: flex; align-items: center; gap: 18px; padding: 16px 28px 0;
+  }
+  .badge {
+    font-weight: 800; font-size: 20px; padding: 6px 16px; border: 3px solid var(--blu); color: var(--blu);
+    border-radius: 12px 14px 10px 16px / 14px 10px 16px 12px; background: #4465E91f; letter-spacing: .5px;
+  }
+  h1 { font-size: 34px; margin: 0; font-weight: 800; }
+  .spazio { flex: 1; }
+  .tab { border: 3px solid var(--nero); background: #fff; font: inherit; font-weight: 600; font-size: 20px;
+    padding: 8px 18px; cursor: pointer; border-radius: 14px 10px 16px 12px / 10px 16px 12px 14px; color: var(--nero); }
+  .tab.attiva { background: var(--nero); color: #fff; }
+  main { flex: 1; position: relative; }
+  .schermo { position: absolute; inset: 0; display: none; }
+  .schermo.attiva { display: block; }
+  svg { width: 100%; height: 100%; }
+  .asse { stroke: var(--nero); stroke-width: 5; stroke-linecap: round; fill: none; }
+  .tacca { stroke: var(--nero); stroke-width: 3; stroke-linecap: round; }
+  .tacca-testo { font-size: 22px; font-weight: 600; fill: var(--nero); }
+  .era { font-size: 26px; font-weight: 800; fill: var(--grigio); letter-spacing: 1px; }
+  .evento { cursor: pointer; }
+  .evento .punto { fill: #fff; stroke: var(--nero); stroke-width: 4; transition: transform .2s; }
+  .evento .domanda { font-size: 28px; font-weight: 800; fill: var(--nero); text-anchor: middle; pointer-events: none; }
+  .evento .gambo { stroke: var(--nero); stroke-width: 3; stroke-dasharray: 8 7; opacity: 0; }
+  .evento .nota { opacity: 0; transform-origin: center; }
+  .evento .nota rect { fill: var(--nota); stroke: none; filter: drop-shadow(1px 3px 3px rgba(0,0,0,.22)); }
+  .evento .nota .anno { font-size: 28px; font-weight: 800; }
+  .evento .nota .testo { font-size: 21px; font-weight: 400; }
+  .evento.vista .punto { fill: var(--nero); }
+  .evento.vista .domanda { opacity: 0; }
+  .evento.vista .gambo, .evento.vista .nota { opacity: 1; transition: opacity .35s; }
+  .evento.blu .punto { stroke: var(--blu); } .evento.blu.vista .punto { fill: var(--blu); } .evento.blu .anno { fill: var(--blu); }
+  .evento.arancio .punto { stroke: var(--arancio); } .evento.arancio.vista .punto { fill: var(--arancio); } .evento.arancio .anno { fill: var(--arancio); }
+  .evento.verde .punto { stroke: var(--verde); } .evento.verde.vista .punto { fill: var(--verde); } .evento.verde .anno { fill: var(--verde); }
+  .evento.viola .punto { stroke: var(--viola); } .evento.viola.vista .punto { fill: var(--viola); } .evento.viola .anno { fill: var(--viola); }
+  footer {
+    display: flex; gap: 14px; align-items: center; padding: 12px 28px 18px; flex-wrap: wrap;
+  }
+  button.cmd { font: inherit; font-weight: 600; font-size: 22px; padding: 10px 22px; cursor: pointer; background: #fff;
+    border: 3px solid var(--nero); border-radius: 16px 12px 14px 18px / 12px 16px 18px 12px; color: var(--nero); }
+  button.cmd.primo { background: var(--verde); border-color: var(--verde); color: #fff; }
+  .aiuto { color: var(--grigio); font-size: 18px; margin-left: auto; }
+  .legenda { display: flex; gap: 16px; font-size: 18px; }
+  .legenda span::before { content: ""; display: inline-block; width: 14px; height: 14px; border-radius: 50%; margin-right: 6px; vertical-align: -1px; }
+  .legenda .lb::before { background: var(--blu); } .legenda .la::before { background: var(--arancio); }
+  .legenda .lv::before { background: var(--verde); } .legenda .lp::before { background: var(--viola); }
+</style>
+</head>
+<body>
+<header>
+  <span class="badge">GEOSTORIA</span>
+  <h1 id="titolo">Da dove veniamo: la linea del tempo</h1>
+  <span class="spazio"></span>
+  <button class="tab attiva" data-schermo="0">1 · Ripasso</button>
+  <button class="tab" data-schermo="1">2 · Quest'anno</button>
+</header>
+<main>
+  <section class="schermo attiva" id="s0"></section>
+  <section class="schermo" id="s1"></section>
+</main>
+<footer>
+  <button class="cmd primo" id="avanti">Avanti →</button>
+  <button class="cmd" id="tutti">Mostra tutto</button>
+  <button class="cmd" id="azzera">Azzera</button>
+  <div class="legenda">
+    <span class="lb">Vicino Oriente, Egitto, islam</span><span class="la">Grecia</span><span class="lv">Roma</span><span class="lp">Altri popoli e Medioevo</span>
+  </div>
+  <span class="aiuto">clic su un punto, oppure → / spazio · R azzera · 1 e 2 cambiano schermata</span>
+</footer>
+
+<script>
+// Eventi: anno negativo = a.C. Colore: blu (Vicino Oriente, Egitto), arancio (Grecia), verde (Roma), viola (altri popoli).
+const SCHERMATE = [
+  {
+    titolo: "Ripasso: dalla preistoria ai Greci, con Roma che nasce",
+    // scala a tratti: [anno, quota di larghezza]; il tratto 10.000-3500 è compresso, 1000-700 disteso
+    tratti: [[-10000, 0], [-3500, 0.05], [-1000, 0.36], [-280, 1]],
+    didascalia: "Scala a tratti: fino al 3500 a.C. compresso, dal 1000 a.C. disteso",
+    tacche: [-10000, -2500, -1500, -1000, -753, -500, -300],
+    eventi: [
+      { anno: -10000, colore: "blu",     testo: "Rivoluzione del Neolitico: agricoltura e città", data: "10.000 a.C.", cap: "cap. 0" },
+      { anno: -3500,  colore: "blu",     testo: "Sumeri: la civiltà mesopotamica e la scrittura", data: "3500 a.C.", cap: "cap. 1" },
+      { anno: -3100,  colore: "blu",     testo: "L'Egitto dei faraoni: un fiume, un Paese", data: "3100 a.C.", cap: "cap. 1" },
+      { anno: -2550,  colore: "blu",     testo: "Le piramidi di Giza", data: "2550 a.C.", cap: "cap. 1" },
+      { anno: -2000,  colore: "arancio", testo: "Creta: i palazzi, Cnosso", data: "2000 a.C.", cap: "cap. 2" },
+      { anno: -1750,  colore: "blu",     testo: "Babilonia: il codice di Hammurabi", data: "1750 a.C.", cap: "cap. 1" },
+      { anno: -1650,  colore: "blu",     testo: "Gli Hittiti, nuova potenza in Anatolia", data: "1650 a.C.", cap: "cap. 1" },
+      { anno: -1600,  colore: "arancio", testo: "I signori delle rocche: i Micenei", data: "1600 a.C.", cap: "cap. 2" },
+      { anno: -1200,  colore: "arancio", testo: "Crollo dei palazzi: il Medioevo ellenico", data: "1200 a.C.", cap: "cap. 2" },
+      { anno: -1000,  colore: "viola",   testo: "Fenici sul mare; Ebrei: il regno di Davide", data: "1000 a.C.", cap: "cap. 1" },
+      { anno: -900,   colore: "viola",   testo: "Etruschi in Italia centrale", data: "900 a.C.", cap: "cap. 2" },
+      { anno: -800,   colore: "arancio", testo: "La svolta dell'VIII secolo: nasce la polis; alfabeto; Omero", data: "800 a.C.", cap: "cap. 2" },
+      { anno: -776,   colore: "arancio", testo: "Prima Olimpiade", data: "776 a.C.", cap: "cap. 2" },
+      { anno: -753,   colore: "verde",   testo: "Romolo fonda Roma, dice la leggenda", data: "753 a.C.", cap: "cap. 6" },
+      { anno: -734,   colore: "arancio", testo: "Seconda colonizzazione: Siracusa, la Sicilia greca", data: "734 a.C.", cap: "cap. 2" },
+      { anno: -700,   colore: "blu",     testo: "Dal dominio assiro alla rinascita babilonese", data: "700 a.C.", cap: "cap. 1" },
+      { anno: -594,   colore: "arancio", testo: "Solone, il riformatore", data: "594 a.C.", cap: "cap. 3" },
+      { anno: -550,   colore: "blu",     testo: "Ciro: i Persiani e l'idea di un impero universale", data: "550 a.C.", cap: "cap. 1" },
+      { anno: -508,   colore: "arancio", testo: "Clistene e l'alba della democrazia", data: "508 a.C.", cap: "cap. 3" },
+      { anno: -490,   colore: "arancio", testo: "L'impero contro le città: le guerre persiane", data: "490-479 a.C.", cap: "cap. 3" },
+      { anno: -450,   colore: "arancio", testo: "Nel segno di Pericle: l'età classica", data: "450 a.C.", cap: "cap. 4" },
+      { anno: -431,   colore: "arancio", testo: "La guerra totale: il Peloponneso", data: "431-404 a.C.", cap: "cap. 4" },
+      { anno: -371,   colore: "arancio", testo: "L'impossibile egemonia: Sparta, Atene, Tebe", data: "371 a.C.", cap: "cap. 5" },
+      { anno: -336,   colore: "arancio", testo: "Fino ai confini del mondo: Alessandro Magno", data: "336-323 a.C.", cap: "cap. 5" },
+    ]
+  },
+  {
+    titolo: "Quest'anno: da Roma monarchica agli Ottoni",
+    tratti: [[-800, 0], [-27, 0.46], [1040, 1]],
+    didascalia: "vol. 1 cap. 6-8 · vol. 2 cap. 9-14 · scala a tratti, repubblica distesa",
+    tacche: [-753, -500, -250, 0, 250, 500, 750, 1000],
+    eventi: [
+      { anno: -753, colore: "verde", testo: "Romolo fonda Roma: la monarchia, sette re", data: "753 a.C.", cap: "cap. 6" },
+      { anno: -509, colore: "verde", testo: "Cacciato Tarquinio: nasce la repubblica", data: "509 a.C.", cap: "cap. 6" },
+      { anno: -451, colore: "verde", testo: "Patrizi e plebei: le XII Tavole", data: "451 a.C.", cap: "cap. 6" },
+      { anno: -390, colore: "verde", testo: "Prove di impero: Galli, Lazio, Sanniti, Taranto", data: "390-272 a.C.", cap: "cap. 7" },
+      { anno: -264, colore: "verde", testo: "Il nemico assoluto: prima guerra punica, la Sicilia", data: "264-241 a.C.", cap: "cap. 7" },
+      { anno: -218, colore: "verde", testo: "Annibale e la seconda guerra punica", data: "218-202 a.C.", cap: "cap. 7" },
+      { anno: -146, colore: "verde", testo: "Il terribile anno 146: Cartagine cade, Grecia provincia", data: "146 a.C.", cap: "cap. 7" },
+      { anno: -133, colore: "verde", testo: "La riforma impossibile: i Gracchi", data: "133-121 a.C.", cap: "cap. 8" },
+      { anno: -88,  colore: "verde", testo: "Il tempo dei capi militari: Mario e Silla", data: "88-79 a.C.", cap: "cap. 8" },
+      { anno: -58,  colore: "verde", testo: "Cesare: la Gallia, la guerra civile, le idi di marzo", data: "58-44 a.C.", cap: "cap. 8" },
+      { anno: -27,  colore: "verde", testo: "Augusto: nasce il principato", data: "27 a.C.", cap: "cap. 9" },
+      { anno: 30,   colore: "viola", testo: "La predicazione di Gesù: nasce il cristianesimo", data: "30 d.C.", cap: "cap. 10" },
+      { anno: 98,   colore: "verde", testo: "Traiano: l'impero alla massima espansione", data: "98-117 d.C.", cap: "cap. 10" },
+      { anno: 284,  colore: "verde", testo: "Diocleziano: tetrarchia e tarda antichità", data: "284 d.C.", cap: "cap. 11" },
+      { anno: 313,  colore: "verde", testo: "Costantino: editto di Milano, Costantinopoli", data: "313-330 d.C.", cap: "cap. 11" },
+      { anno: 476,  colore: "viola", testo: "Il crollo dell'Impero d'Occidente", data: "476 d.C.", cap: "cap. 11" },
+      { anno: 527,  colore: "verde", testo: "L'ultimo dei Romani: Giustiniano", data: "527-565 d.C.", cap: "cap. 12" },
+      { anno: 568,  colore: "viola", testo: "I Longobardi in Italia", data: "568 d.C.", cap: "cap. 12" },
+      { anno: 622,  colore: "blu",   testo: "Maometto: l'egira, nasce l'islam", data: "622 d.C.", cap: "cap. 13" },
+      { anno: 800,  colore: "viola", testo: "Il Natale dell'800: Carlo Magno imperatore", data: "800 d.C.", cap: "cap. 14" },
+      { anno: 843,  colore: "viola", testo: "Verdun: l'impero si divide; nuove invasioni", data: "843 d.C.", cap: "cap. 14" },
+      { anno: 962,  colore: "viola", testo: "Ottone I: il Sacro romano impero", data: "962 d.C.", cap: "cap. 14" },
+    ]
+  }
+];
+
+const W = 1920, H = 900, X0 = 90, X1 = W - 90, Y = H / 2 + 20;
+const NS = "http://www.w3.org/2000/svg";
+const el = (tag, attrs = {}, cls) => { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); if (cls) e.setAttribute("class", cls); return e; };
+const fmt = a => a < 0 ? `${Math.abs(a).toLocaleString("it-IT")} a.C.` : `${a} d.C.`;
+
+function scala(s) {
+  const t = s.tratti;
+  return anno => {
+    let k = 0; while (k < t.length - 2 && anno > t[k + 1][0]) k++;
+    const [a0, q0] = t[k], [a1, q1] = t[k + 1];
+    const q = q0 + (anno - a0) / (a1 - a0) * (q1 - q0);
+    return X0 + q * (X1 - X0);
+  };
+}
+
+function costruisci(indice) {
+  const s = SCHERMATE[indice], sez = document.getElementById("s" + indice);
+  const svg = el("svg", { viewBox: `0 0 ${W} ${H}`, preserveAspectRatio: "xMidYMid meet" });
+  const x = scala(s);
+  // asse a mano: leggera ondulazione
+  let d = `M ${X0} ${Y}`; for (let px = X0 + 40; px <= X1; px += 40) d += ` L ${px} ${Y + Math.sin(px / 90) * 2.2}`;
+  svg.appendChild(el("path", { d }, "asse"));
+  svg.appendChild(el("path", { d: `M ${X1 - 26} ${Y - 16} L ${X1 + 4} ${Y} L ${X1 - 26} ${Y + 16}` }, "asse"));
+  svg.appendChild(Object.assign(el("text", { x: X0, y: 44 }, "era"), { textContent: s.titolo.toUpperCase() }));
+  if (s.didascalia) svg.appendChild(Object.assign(el("text", { x: X1, y: 44, "text-anchor": "end" }, "tacca-testo"), { textContent: s.didascalia, style: "fill:#9FA8B2;font-size:18px" }));
+  for (const t of s.tacche) {
+    const tx = x(t);
+    svg.appendChild(el("line", { x1: tx, y1: Y - 14, x2: tx, y2: Y + 14 }, "tacca"));
+    const tt = el("text", { x: tx, y: Y + 46, "text-anchor": t === s.tacche[0] ? "start" : "middle" }, "tacca-testo"); tt.textContent = fmt(t); svg.appendChild(tt);
+  }
+  // eventi: alterno sopra/sotto per non sovrapporre le note
+  const ordinati = [...s.eventi].sort((a, b) => a.anno - b.anno);
+  const corsie = [[false, 0], [true, 0], [false, 1], [true, 1], [false, 2], [true, 2]]; // [sotto, livello], a rotazione
+  const ultimoDestro = corsie.map(() => -1e9);
+  ordinati.forEach((ev, i) => {
+    const c = i % corsie.length, [sotto, livello] = corsie[c];
+    const ex = x(ev.anno);
+    const hNota = 92, wNota = 250;
+    const dist = 66 + livello * 120;
+    const ny = sotto ? Y + dist : Y - dist - hNota;
+    const g = el("g", {}, `evento ${ev.colore}`); g.dataset.ordine = i;
+    let nx = Math.min(Math.max(ex - wNota / 2, X0 - 60), X1 - wNota + 60);
+    if (nx < ultimoDestro[c] + 14) nx = ultimoDestro[c] + 14;
+    if (nx > X1 - wNota + 60) nx = X1 - wNota + 60;
+    ultimoDestro[c] = nx + wNota;
+    g.appendChild(el("line", { x1: ex, y1: sotto ? Y + 12 : Y - 12, x2: nx + wNota / 2, y2: sotto ? ny : ny + hNota }, "gambo"));
+    const nota = el("g", {}, "nota");
+    nota.appendChild(el("rect", { x: nx, y: ny, width: wNota, height: hNota, rx: 3, transform: `rotate(${(i % 3 - 1) * 1.2} ${ex} ${ny + hNota / 2})` }));
+    const anno = el("text", { x: nx + 12, y: ny + 34 }, "anno"); anno.textContent = ev.data;
+    if (ev.data.length > 9 && ev.cap) anno.setAttribute("style", "font-size:23px");
+    if (ev.cap) { const c = el("tspan", { dx: 10 }); c.textContent = ev.cap; c.setAttribute("style", "font-size:15px;fill:#9FA8B2;font-weight:600"); anno.appendChild(c); }
+    nota.appendChild(anno);
+    const testo = el("text", { x: nx + 12, y: ny + 60 }, "testo");
+    // a capo manuale a ~26 caratteri
+    const parole = ev.testo.split(" "); let riga = "", righe = [];
+    for (const p of parole) { if ((riga + " " + p).trim().length > 21) { righe.push(riga.trim()); riga = p; } else riga += " " + p; }
+    righe.push(riga.trim());
+    righe.slice(0, 2).forEach((r, k) => { const ts = el("tspan", { x: nx + 12, dy: k === 0 ? 0 : 23 }); ts.textContent = r; testo.appendChild(ts); });
+    if (righe.length > 2) { const ts = el("tspan", { x: nx + 12, dy: 23 }); ts.textContent = righe.slice(2).join(" "); testo.appendChild(ts); nota.querySelector("rect").setAttribute("height", hNota + 24); }
+    nota.appendChild(testo);
+    g.appendChild(nota);
+    g.appendChild(el("circle", { cx: ex, cy: Y, r: 15 }, "punto"));
+    const q = el("text", { x: ex, y: Y - 30 }, "domanda"); q.textContent = "?"; g.appendChild(q);
+    g.addEventListener("click", () => g.classList.toggle("vista"));
+    svg.appendChild(g);
+  });
+  sez.replaceChildren(svg);
+}
+SCHERMATE.forEach((_, i) => costruisci(i));
+
+let attiva = 0;
+function mostra(i) {
+  attiva = i;
+  document.querySelectorAll(".schermo").forEach((s, k) => s.classList.toggle("attiva", k === i));
+  document.querySelectorAll(".tab").forEach((t, k) => t.classList.toggle("attiva", k === i));
+}
+function eventiAttivi() { return [...document.querySelectorAll(`#s${attiva} .evento`)].sort((a, b) => a.dataset.ordine - b.dataset.ordine); }
+function avanti() { const n = eventiAttivi().find(e => !e.classList.contains("vista")); if (n) n.classList.add("vista"); }
+function tutti() { eventiAttivi().forEach(e => e.classList.add("vista")); }
+function azzera() { eventiAttivi().forEach(e => e.classList.remove("vista")); }
+document.getElementById("avanti").onclick = avanti;
+document.getElementById("tutti").onclick = tutti;
+document.getElementById("azzera").onclick = azzera;
+document.querySelectorAll(".tab").forEach(t => t.onclick = () => mostra(+t.dataset.schermo));
+if (location.hash.includes("2")) mostra(1);
+if (location.hash.includes("tutti")) tutti();
+document.addEventListener("keydown", e => {
+  if (e.key === "ArrowRight" || e.key === " ") { e.preventDefault(); avanti(); }
+  else if (e.key === "ArrowLeft") { const v = eventiAttivi().filter(x => x.classList.contains("vista")); if (v.length) v[v.length - 1].classList.remove("vista"); }
+  else if (e.key.toLowerCase() === "r") azzera();
+  else if (e.key.toLowerCase() === "t") tutti();
+  else if (e.key === "1") mostra(0); else if (e.key === "2") mostra(1);
+});
+</script>
+<a class="torna-indice" href="index.html" title="Indice di geostoria">← Geostoria</a>
+<style>.torna-indice{position:fixed;right:14px;bottom:10px;z-index:99;font:600 14px/1 system-ui,sans-serif;color:#555;text-decoration:none;opacity:0;transition:opacity .25s;padding:6px 10px;border-radius:8px;background:rgba(255,255,255,.85)}.torna-indice:hover,.torna-indice:focus,body:hover .torna-indice{opacity:1}</style>
+</body>
+</html>

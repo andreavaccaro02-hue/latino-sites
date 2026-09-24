@@ -1,4 +1,5 @@
 import { HtmlBasePlugin } from "@11ty/eleventy";
+import { controllaCartella, formattaErrori } from "./lib/controlli.js";
 
 export const PASSTHROUGH = [
   "autori",
@@ -32,6 +33,11 @@ export const PASSTHROUGH = [
 export default function (eleventyConfig) {
   eleventyConfig.addPlugin(HtmlBasePlugin);
   for (const p of PASSTHROUGH) eleventyConfig.addPassthroughCopy(p);
+
+  eleventyConfig.on("eleventy.before", () => {
+    const errori = controllaCartella("src/lezioni", "src/_data/programmi");
+    if (errori.length) throw new Error(`Controlli delle lezioni falliti:\n${formattaErrori(errori)}`);
+  });
 
   return {
     dir: { input: "src", includes: "_includes", data: "_data", output: "_site" },

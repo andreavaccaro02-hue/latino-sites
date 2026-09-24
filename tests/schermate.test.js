@@ -43,3 +43,10 @@ test("obiettivo e approfondimento esclusi, note nelle note del relatore", () => 
 test("estraiObiettivo restituisce il testo senza etichetta", () => {
   assert.equal(estraiObiettivo(html), "<p>Distinguere le fonti.</p>");
 });
+
+test("il blocco interattivo passa alla LIM senza data-src", () => {
+  const html = md.render("::: interattivo geostoria/linea-del-tempo.html\n:::\n");
+  const lim = inSchermate(html);
+  assert.match(lim, /<iframe src="\/geostoria\/linea-del-tempo.html"/);
+  assert.doesNotMatch(lim, /data-src=/);
+});

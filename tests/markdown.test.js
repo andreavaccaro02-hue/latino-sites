@@ -48,7 +48,7 @@ test("lavagna, interattivo, approfondimento, note", () => {
   ].join("\n"));
   assert.match(html, /data-blocco="lavagna" data-chiave="storico-e-archeologo"/);
   assert.match(html, /Rispondi sul quaderno\./);
-  assert.match(html, /data-src="\/geostoria\/linea-del-tempo.html"/);
+  assert.doesNotMatch(html, /data-src=/);
   assert.match(html, /<iframe src="\/geostoria\/linea-del-tempo.html"/);
   assert.match(html, /<details class="blocco blocco-approfondimento" data-blocco="approfondimento">\s*<summary>Per saperne di più<\/summary>/);
   assert.match(html, /<aside class="blocco blocco-note" data-blocco="note" hidden>/);

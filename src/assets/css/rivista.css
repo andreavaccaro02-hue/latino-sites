@@ -1,0 +1,82 @@
+/* Veste «rivista museale». Un solo accento, per materia, in --accento. */
+:root {
+  --carta: #fcfbf8;
+  --inchiostro: #16140f;
+  --grigio: #5c5647;
+  --tenue: #77705f;
+  --sabbia: #f1ebe0;
+  --filetto: #d9cfbd;
+  --accento: #a34a28;
+  --serif: "Newsreader", Georgia, serif;
+  --sans: "Inter", system-ui, sans-serif;
+  --colonna: 44rem;
+}
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--carta); color: var(--inchiostro); font-family: var(--serif); font-size: 1.1875rem; line-height: 1.6; }
+img, iframe { max-width: 100%; }
+a { color: var(--accento); text-underline-offset: .15em; }
+
+.testata-sito, .piede-sito, main { width: min(100% - 2rem, var(--colonna)); margin-inline: auto; }
+.testata-sito { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: baseline; justify-content: space-between; padding: 1rem 0; border-bottom: 1px solid var(--inchiostro); font-family: var(--sans); font-size: .875rem; }
+.testata-sito nav { display: flex; flex-wrap: wrap; gap: .25rem 1rem; }
+.testata-sito a { color: var(--inchiostro); text-decoration: none; }
+.marchio { font-weight: 700; }
+.piede-sito { margin-top: 4rem; padding: 1rem 0 2rem; border-top: 1px solid var(--filetto); font-family: var(--sans); font-size: .8125rem; color: var(--tenue); }
+
+.kicker { margin: 0; font-family: var(--sans); font-weight: 700; font-size: .75rem; letter-spacing: .08em; text-transform: uppercase; color: var(--accento); }
+h1 { font-weight: 600; font-size: clamp(2.2rem, 7vw, 3.2rem); line-height: 1.05; letter-spacing: -.01em; margin: .35rem 0 .4rem; }
+h2 { font-weight: 600; font-size: 1.5rem; line-height: 1.2; }
+.sottotitolo { margin: 0 0 1rem; font-style: italic; font-size: 1.3rem; color: var(--grigio); }
+
+/* Lezione */
+.reperto { margin: 1.5rem 0 0; }
+.reperto img { display: block; width: 100%; max-height: 26rem; object-fit: cover; }
+.reperto figcaption { margin-top: .4rem; font-family: var(--sans); font-size: .75rem; color: var(--tenue); }
+.lezione-testata { position: relative; margin-top: 1.5rem; }
+.programmi { margin: 0; font-family: var(--sans); font-size: .8125rem; color: var(--tenue); }
+.vista-lim { display: inline-block; margin-top: .75rem; padding: .3rem .7rem; border: 1px solid var(--accento); border-radius: 3px; font-family: var(--sans); font-size: .8125rem; font-weight: 700; text-decoration: none; }
+@media (min-width: 40rem) { .vista-lim { position: absolute; top: 0; right: 0; margin: 0; } }
+
+.blocco { margin: 2.25rem 0; }
+.blocco-etichetta { margin: 0 0 .6rem; font-family: var(--sans); font-size: .75rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--accento); }
+.blocco-passo > .blocco-etichetta { font-family: var(--serif); font-size: 1.5rem; letter-spacing: 0; text-transform: none; color: var(--inchiostro); }
+.passo-numero { display: block; font-family: var(--sans); font-size: .75rem; letter-spacing: .08em; text-transform: uppercase; color: var(--accento); }
+.blocco-obiettivo { margin-top: 1rem; padding-top: .6rem; border-top: 1px solid var(--inchiostro); font-family: var(--sans); font-size: 1rem; }
+.blocco-obiettivo p { margin: 0; }
+.blocco-do-now, .blocco-uscita, .blocco-padronanza { padding: 1rem 1.2rem; background: var(--sabbia); }
+.blocco-lavagna .lavagna { min-height: 6rem; padding: 1rem; border: 1px solid var(--filetto); background: #fff; }
+.lavagna-quaderno { margin: 0; font-style: italic; color: var(--tenue); }
+.blocco-interattivo iframe { width: 100%; aspect-ratio: 16 / 10; border: 1px solid var(--filetto); background: #fff; }
+.interattivo-apri { font-family: var(--sans); font-size: .875rem; }
+.blocco-approfondimento { border-top: 1px solid var(--filetto); padding-top: .75rem; }
+.blocco-approfondimento summary { cursor: pointer; font-family: var(--sans); font-weight: 700; font-size: .875rem; }
+.blocco-note, hr.schermata { display: none; }
+ul.rivela { padding-left: 1.2rem; }
+table { width: 100%; border-collapse: collapse; font-size: 1rem; display: block; overflow-x: auto; }
+th, td { padding: .4rem .6rem; border-bottom: 1px solid var(--filetto); text-align: left; vertical-align: top; }
+
+.lezione-nav { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--inchiostro); font-family: var(--sans); font-size: .9375rem; }
+
+/* Quiz */
+.quiz { margin: 1.25rem 0; }
+.quiz-domanda { margin: 0 0 .5rem; font-weight: 600; }
+.quiz-opzioni { list-style: none; margin: 0; padding: 0; display: grid; gap: .4rem; }
+.quiz-opzione { width: 100%; text-align: left; font: inherit; font-size: 1.05rem; padding: .55rem .8rem; background: #fff; color: var(--inchiostro); border: 1px solid var(--filetto); border-radius: 3px; cursor: pointer; }
+.quiz-opzione:hover, .quiz-opzione:focus-visible { border-color: var(--inchiostro); }
+.quiz-opzione.giusta { border-color: #2f6b3a; background: #e6f1e7; }
+.quiz-opzione.sbagliata { border-color: #9b2c1f; background: #f7e3df; }
+.quiz-opzione[aria-disabled="true"] { cursor: default; }
+.quiz-esito { margin: .5rem 0 0; font-family: var(--sans); font-size: .9375rem; }
+.quiz-riprova { font: inherit; background: none; border: 0; padding: 0; color: var(--accento); text-decoration: underline; cursor: pointer; }
+
+/* Indici */
+.indice-modulo { border-top: 1px solid var(--inchiostro); padding-top: .6rem; margin-top: 1.4rem; }
+.indice-modulo h2 { font-size: 1.25rem; margin: 0 0 .3rem; }
+.indice-modulo .numero { display: block; font-family: var(--sans); font-size: .75rem; letter-spacing: .08em; text-transform: uppercase; color: var(--accento); }
+.indice-argomenti { margin: 0; padding-left: 1.6rem; }
+.indice-argomenti li { margin: .15rem 0; }
+.in-preparazione { color: var(--tenue); }
+.elenco-anni, .elenco-pagine { padding-left: 1.2rem; }
+.home-sezione { margin-top: 2.5rem; }
+.home-sezione h2 { border-top: 1px solid var(--inchiostro); padding-top: .6rem; }

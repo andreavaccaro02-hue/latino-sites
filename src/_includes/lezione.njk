@@ -1,0 +1,28 @@
+---
+layout: base.njk
+---
+{% set voce = moduli | voceModulo(materia, modulo) %}
+{% set vic = collections.lezioni | vicine(page) %}
+{% set anni = programmi | inProgrammi(materia, modulo) %}
+<article class="lezione">
+  {% if immagine %}
+  <figure class="reperto">
+    <img src="/{{ immagine }}" alt="{{ didascalia }}">
+    {% if didascalia %}<figcaption>{{ didascalia }}</figcaption>{% endif %}
+  </figure>
+  {% endif %}
+  <header class="lezione-testata">
+    <p class="kicker">{{ materia | nomeMateria(materie) }} · {{ voce.titolo_argo }} · Lezione {{ argomento }}</p>
+    <h1>{{ titolo }}</h1>
+    {% if sottotitolo %}<p class="sottotitolo">{{ sottotitolo }}</p>{% endif %}
+    <p class="programmi">Nel programma di: {% for a in anni %}{{ a.anno | nomeAnno }} (modulo {{ a.numero }}){% if not loop.last %}, {% endif %}{% endfor %}</p>
+    <a class="vista-lim" href="{{ page.url }}lim/">Vista LIM</a>
+  </header>
+  <div class="lezione-corpo">
+{{ content | safe }}
+  </div>
+  <nav class="lezione-nav" aria-label="Lezioni del modulo">
+    {% if vic.precedente %}<a rel="prev" href="{{ vic.precedente.url }}">← {{ vic.precedente.data.titolo }}</a>{% else %}<span></span>{% endif %}
+    {% if vic.successiva %}<a rel="next" href="{{ vic.successiva.url }}">{{ vic.successiva.data.titolo }} →</a>{% endif %}
+  </nav>
+</article>

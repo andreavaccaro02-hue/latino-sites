@@ -1,5 +1,7 @@
 import { HtmlBasePlugin } from "@11ty/eleventy";
 import { controllaCartella, formattaErrori } from "./lib/controlli.js";
+import { creaMarkdown } from "./lib/markdown.js";
+import * as nav from "./lib/navigazione.js";
 
 export const PASSTHROUGH = [
   "autori",
@@ -33,6 +35,25 @@ export const PASSTHROUGH = [
 export default function (eleventyConfig) {
   eleventyConfig.addPlugin(HtmlBasePlugin);
   for (const p of PASSTHROUGH) eleventyConfig.addPassthroughCopy(p);
+
+  const md = creaMarkdown();
+  eleventyConfig.setLibrary("md", md);
+
+  eleventyConfig.addPassthroughCopy({ "src/assets": "assets" });
+  eleventyConfig.addPassthroughCopy({
+    "node_modules/@fontsource-variable/newsreader/files/newsreader-latin*-wght-*.woff2": "assets/fonts",
+    "node_modules/@fontsource-variable/inter/files/inter-latin*-wght-normal.woff2": "assets/fonts",
+  });
+
+  eleventyConfig.addFilter("md", (testo) => md.render(testo ?? ""));
+  eleventyConfig.addFilter("vicine", nav.vicine);
+  eleventyConfig.addFilter("lezionePer", nav.lezionePer);
+  eleventyConfig.addFilter("inProgrammi", nav.inProgrammi);
+  eleventyConfig.addFilter("voceModulo", nav.voceModulo);
+  eleventyConfig.addFilter("rimandiPer", nav.rimandiPer);
+  eleventyConfig.addFilter("materia", nav.materia);
+  eleventyConfig.addFilter("nomeMateria", (id, materie) => nav.materia(materie, id).nome);
+  eleventyConfig.addFilter("nomeAnno", nav.nomeAnno);
 
   eleventyConfig.on("eleventy.before", () => {
     const errori = controllaCartella("src/lezioni", "src/_data/programmi");

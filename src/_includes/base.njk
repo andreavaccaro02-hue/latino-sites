@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% if titolo %}{{ titolo }} — {% endif %}Prof. Andrea Vaccaro</title>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="stylesheet" href="/assets/css/fonts.css">
+<link rel="stylesheet" href="/assets/css/rivista.css">
+<style>:root { --accento: {{ (materie | materia(materia)).colore if materia else "#16140f" }}; }</style>
+</head>
+<body>
+<header class="testata-sito">
+  <a class="marchio" href="/">Prof. Andrea Vaccaro</a>
+  <nav aria-label="Sezioni">
+    <a href="/geostoria/">Geostoria</a>
+    <a href="/grammatica/index.html">Grammatica</a>
+    <a href="/strumenti/glossario-eulalia.html">Strumenti</a>
+    <a href="/strumenti/raccoglitore.html">Raccoglitore</a>
+    <a href="/chi-sono.html">Su di me</a>
+    <a href="/pdf/cv-vaccaro-europass.pdf">CV</a>
+  </nav>
+</header>
+<main>
+{{ content | safe }}
+</main>
+<footer class="piede-sito"><p>Prof. Andrea Vaccaro · <a href="/chi-sono.html">Su di me</a></p></footer>
+<script src="/assets/js/quiz.js" defer></script>
+</body>
+</html>

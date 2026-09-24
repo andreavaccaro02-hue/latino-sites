@@ -1,0 +1,15 @@
+[
+  {
+    "id": "geostoria",
+    "nome": "Geostoria",
+    "colore": "#a34a28",
+    "pagine": [
+      { "titolo": "DOVE · La carta del Mediterraneo", "url": "geostoria/carta-mediterraneo-lim.html" },
+      { "titolo": "QUANDO · Contare il tempo", "url": "geostoria/contare-il-tempo.html" },
+      { "titolo": "COME SAPPIAMO? · Le fonti", "url": "geostoria/le-fonti-lim.html" },
+      { "titolo": "La linea del tempo", "url": "geostoria/linea-del-tempo.html" },
+      { "titolo": "Da dove veniamo, la mappa dei luoghi da cui vengono le famiglie della classe (serve la rete)", "url": "geostoria/da-dove-veniamo.html" }
+    ]
+  },
+  { "id": "latino", "nome": "Latino", "colore": "#8B1E3F", "pagine": [] }
+]

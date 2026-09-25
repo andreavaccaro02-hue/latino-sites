@@ -228,7 +228,6 @@
 <script>
 // ---------- parametri: ?i=9&r=all&f=3 ----------
 const q = new URLSearchParams(location.search);
-const DATA = new Date().toLocaleDateString("it-IT", { weekday: "long", day: "numeric", month: "long", year: "numeric" });
 
 // ---------- le sei fonti ----------
 const FONTI = [
@@ -299,12 +298,12 @@ const FONTI = [
 // tipo "fonte": una delle sei card; tipo "tabella": riassunto che si riempie da solo
 const SCHERMATE = [
   { tipo: "pagina", nome: "apertura", html: `
-      <div class="sopra">Geostoria · ${DATA}</div>
+      <div class="sopra">Geostoria</div>
       <h1>Prima di cominciare: gli strumenti dello storico</h1>
       <div class="parole"><span>DOVE</span><span>·</span><span>QUANDO</span><span>·</span><span class="ora">COME SAPPIAMO?</span></div>
-      <p class="piccolo">Lezione 1: la carta. Lezione 2: la linea del tempo. Oggi: che cosa resta del passato.</p>
+      <p class="piccolo">Prima la carta, poi la linea del tempo. Ora: che cosa resta del passato.</p>
       <div class="obiettivo passo"><b>S3/S5</b> · di ogni cosa che resta del passato so dire <b>che tipo di fonte è</b>, e <b>quanto fidarmi</b>.</div>
-      <p class="piccolo passo">Banchi a coppie, come venerdì. Quaderno aperto.</p>` },
+      <p class="piccolo passo">Banchi a coppie. Quaderno aperto.</p>` },
 
   { tipo: "pagina", nome: "per cominciare", timer: 180, html: `
       <div class="sopra">3 minuti · in silenzio · una riga per domanda sul quaderno</div>
@@ -333,7 +332,7 @@ const SCHERMATE = [
   { tipo: "pagina", nome: "storico del 2126", timer: 360, lavagna: true, html: `
       <div class="sopra">A coppie · 6 minuti · sul quaderno</div>
       <h1>Uno storico del 2126</h1>
-      <p class="grande">Vuole ricostruire il vostro primo giorno al D'Alessandro, <b>16 settembre 2026</b>. Elencate <b>tre fonti</b> che potrebbe usare e classificatele: materiale o scritta, primaria o secondaria.</p>
+      <p class="grande">Vuole ricostruire il vostro <b>primo giorno di scuola superiore</b>. Elencate <b>tre fonti</b> che potrebbe usare e classificatele: materiale o scritta, primaria o secondaria.</p>
       <h2 class="passo">Da tenere</h2>
       <ul>
         <li class="passo">Lo <b>storico</b> lavora soprattutto con le fonti scritte, l'<b>archeologo</b> con quelle materiali. Fanno lo stesso mestiere: interrogano ciò che resta.</li>
@@ -351,8 +350,7 @@ const SCHERMATE = [
       </div>
       <p class="frase passo">Una fonte non è vera o falsa: è <b>più o meno vicina ai fatti</b> e ha <b>sempre un'intenzione</b>.</p>
       <p class="passo">Per la preistoria non ci sono fonti scritte: le date sono larghe (cronologia relativa, datazione radiometrica, p. 3) e il lavoro è tutto dell'archeologo e del paleontologo.</p>
-      <p class="passo">Torniamo alla domanda dell'inizio: no, le fonti scritte non sono più «vere». Sono solo di un altro tipo.</p>
-      <div class="obiettivo passo"><b>Mercoledì 30 settembre: test d'ingresso.</b> Un'ora, senza voto, sulle cose delle medie: carta, date, parole della storia. Serve a me per capire da dove partire.</div>` },
+      <p class="passo">Torniamo alla domanda dell'inizio: no, le fonti scritte non sono più «vere». Sono solo di un altro tipo.</p>` },
 
   { tipo: "pagina", nome: "biglietto d'uscita", timer: 300, html: `
       <div class="sopra">Biglietto d'uscita · mezzo foglio · nome in alto · una parola per colonna</div>
@@ -366,11 +364,10 @@ const SCHERMATE = [
       <p class="piccolo">Si consegna sulla porta, con il nome.</p>` },
 
   { tipo: "pagina", nome: "consegna", html: `
-      <div class="sopra">Per la prossima volta</div>
+      <div class="sopra">Consegna</div>
       <h1>Un oggetto-fonte di famiglia</h1>
       <p class="grande">Una foto, una lettera, un oggetto, una ricetta scritta a mano. Portatelo in classe (o una sua descrizione, se non si può).</p>
       <p class="passo">Sul quaderno, due righe: <b>che tipo di fonte è</b> e <b>che cosa ci dice di chi l'ha fatta</b>.</p>
-      <p class="passo piccolo">Lo riprendiamo in classe, cinque minuti a rotazione, e lo leghiamo ai luoghi delle vostre famiglie usciti al World Café.</p>
       <p class="passo piccolo">Nessun compito sul libro: questo modulo non sta nel manuale.</p>` },
 
   { tipo: "pagina", nome: "bonus", html: `

@@ -3,6 +3,7 @@ import { controllaCartella, formattaErrori } from "./lib/controlli.js";
 import { creaMarkdown } from "./lib/markdown.js";
 import * as nav from "./lib/navigazione.js";
 import { inSchermate, estraiObiettivo } from "./lib/schermate.js";
+import { preparaIndicizzazione } from "./lib/sitemap.js";
 
 export const PASSTHROUGH = [
   "autori",
@@ -26,7 +27,6 @@ export const PASSTHROUGH = [
   "favicon.svg",
   "og-image.svg",
   "robots.txt",
-  "sitemap.xml",
   "google381d0d291942dea2.html",
 ];
 
@@ -65,6 +65,15 @@ export default function (eleventyConfig) {
   eleventyConfig.on("eleventy.before", () => {
     const errori = controllaCartella("src/lezioni", "src/_data/programmi");
     if (errori.length) throw new Error(`Controlli delle lezioni falliti:\n${formattaErrori(errori)}`);
+  });
+
+  eleventyConfig.on("eleventy.after", ({ directories, runMode }) => {
+    if (runMode !== "build") return;
+    const { url, senzaDescrizione } = preparaIndicizzazione(directories.output);
+    console.log(`[sitemap] ${url.length} pagine indicizzabili in sitemap.xml`);
+    if (senzaDescrizione.length) {
+      console.warn(`[sitemap] ${senzaDescrizione.length} pagine senza <meta name="description">:\n  ` + senzaDescrizione.join("\n  "));
+    }
   });
 
   return {

@@ -9,6 +9,7 @@ permalink: "/{{ programma.materia }}/{{ programma.anno }}/"
 eleventyComputed:
   titolo: "{{ programma.materia | nomeMateria(materie) }} {{ programma.anno }}"
   materia: "{{ programma.materia }}"
+  descrizione: "{{ programma.materia | nomeMateria(materie) }} {{ programma.anno }}, {{ programma.anno | annoScolastico }}: il programma diviso in moduli, con le lezioni e le pagine interattive."
 ---
 <article class="indice">
   <p class="kicker">{{ programma.materia | nomeMateria(materie) }} · {{ programma.anno | annoScolastico }}</p>

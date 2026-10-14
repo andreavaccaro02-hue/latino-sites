@@ -126,7 +126,7 @@ document.querySelectorAll(".tab").forEach(t => t.addEventListener("click", () =>
   strato = t.dataset.strato; document.body.classList.toggle("modo-prov", strato === "prov");
   chiudiCasella();
   document.querySelector("#hint").textContent = strato === "prov"
-    ? "Tocca la carta, scrivi il luogo, Invio. Fuori dal rettangolo per i posti lontani. A cancella tutto"
+    ? "Tocca la carta, scrivi il luogo, Invio. Fuori dal rettangolo per i posti lontani. Tasto A: cancella tutto"
     : "Tasti: spazio o → avanti · ← indietro · T tutto · A azzera";
 }));
 document.querySelector("#avanti").onclick = avanti; document.querySelector("#indietro").onclick = indietro;

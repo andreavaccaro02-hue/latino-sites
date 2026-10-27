@@ -186,12 +186,12 @@ Le città sumere si fanno guerra per le terre migliori. Verso il 2370 a.C. arriv
 + Suo nipote **Naram-Sin** si proclama **dio**. I re sumeri potevano essere sacerdoti, ma non dèi.
 + Naram-Sin si fa chiamare «re delle quattro parti del mondo», cioè di tutte le terre: nasce l'**ideologia dell'impero** (p. 35).
 
+---
+
 ??? Che cosa c'è di nuovo in Naram-Sin?
 - [ ] è il primo re della Mesopotamia
 - [x] dice di essere un dio
 - [ ] inventa la scrittura
-
----
 
 ### Chi vince, e chi resta
 
@@ -394,6 +394,8 @@ Sul foglio, prima dei quiz: **tre popoli della Mesopotamia in ordine di tempo, e
 - [ ] solo dal danno
 - [x] dal danno e dalla classe della vittima
 - [ ] dalla volontà del giudice
+
+---
 
 ??? Che cos'è una ziqqurat? -> torna a: "La città-stato sumera"
 - [x] una torre a piani con un tempio in cima

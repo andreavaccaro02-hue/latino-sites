@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>La Mesopotamia ieri e oggi</title>
+<link href="https://fonts.googleapis.com/css2?family=Shantell+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+  @font-face { font-family: "Shantell Sans"; src: url("fonts/ShantellSans%5BBNCE,INFM,SPAC,wght%5D.ttf"); font-weight: 300 800; }
+  :root {
+    --nero: #1D1D1D; --blu: #4465E9; --arancio: #E16919; --verde: #099268; --rosso: #C2410C;
+    --nota: #FFF4B8; --griglia: #C8C8C8; --grigio: #8A939C; --sfondo: #FAFAF7;
+    --mare: #D9E4FA; --terra: #F3EADB; --fiume: #4465E9;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; }
+  body {
+    font-family: "Shantell Sans", "Patrick Hand", "Comic Neue", "Segoe Print", "Chalkboard", sans-serif;
+    color: var(--nero); background: var(--sfondo);
+    background-image: radial-gradient(var(--griglia) 0.9px, transparent 1px); background-size: 22px 22px;
+    display: flex; flex-direction: column; overflow: hidden;
+  }
+  header { display: flex; align-items: center; gap: 18px; padding: 14px 28px 0; flex-wrap: wrap; }
+  .badge { font-weight: 800; font-size: 20px; padding: 6px 16px; border: 3px solid var(--blu); color: var(--blu);
+    border-radius: 12px 14px 10px 16px / 14px 10px 16px 12px; background: #4465E91f; letter-spacing: .5px; }
+  h1 { font-size: 32px; margin: 0; font-weight: 800; }
+  .spazio { flex: 1; }
+  .tab { border: 3px solid var(--nero); background: #fff; font: inherit; font-weight: 600; font-size: 22px;
+    padding: 8px 20px; cursor: pointer; border-radius: 14px 10px 16px 12px / 10px 16px 12px 14px; color: var(--nero); }
+  .tab.attiva { background: var(--nero); color: #fff; }
+  main { flex: 1; min-height: 0; display: grid; grid-template-columns: 56% minmax(0, 1fr); gap: 24px; padding: 12px 28px 18px; }
+  svg { width: 100%; height: 100%; display: block; }
+  aside { align-self: center; font-size: 25px; line-height: 1.4; }
+  aside .vista { display: none; }
+  body.modo-dove aside .v-dove, body.modo-ieri aside .v-ieri, body.modo-oggi aside .v-oggi, body.modo-insieme aside .v-insieme { display: block; }
+  aside h2 { font-size: 30px; margin: 0 0 .4em; }
+  aside ul { margin: 0; padding-left: 1.1em; }
+  aside li { margin: 0 0 .5em; }
+  aside .domanda { background: var(--nota); padding: 12px 18px; border-radius: 6px; box-shadow: 1px 3px 4px rgba(0,0,0,.18); }
+  aside .fonte { font-size: 15px; color: var(--grigio); margin-top: 1.4em; }
+
+  .mare { fill: var(--mare); }
+  .terra { fill: var(--terra); }
+  .lago { fill: var(--mare); stroke: var(--fiume); stroke-width: 1; }
+  .fiume { fill: none; stroke: var(--fiume); stroke-width: 4.5; stroke-linecap: round; stroke-linejoin: round; }
+  .golfo { fill: var(--mare); }
+  .costa-antica { fill: none; stroke: var(--rosso); stroke-width: 4; stroke-dasharray: 12 8; stroke-linecap: round; }
+  .confine { fill: none; stroke: var(--nero); stroke-width: 2.5; stroke-dasharray: 2 6; stroke-linecap: round; }
+  .cornice { fill: none; stroke: var(--nero); stroke-width: 4; }
+
+  text { paint-order: stroke; stroke-linejoin: round; }
+  .acqua { font-size: 28px; font-style: italic; fill: #2F4FBF; stroke: var(--mare); stroke-width: 6; }
+  .acqua.piccola { font-size: 18px; }
+  .rilievo { font-size: 26px; fill: #7A6A50; stroke: var(--terra); stroke-width: 6; letter-spacing: 1px; }
+  .nome-fiume { font-size: 28px; font-weight: 800; fill: var(--fiume); stroke: var(--terra); stroke-width: 7; }
+  .regione { font-size: 40px; font-weight: 800; fill: var(--rosso); stroke: var(--terra); stroke-width: 8; letter-spacing: 3px; opacity: .85; }
+  .stato { font-size: 30px; font-weight: 800; fill: var(--nero); stroke: var(--terra); stroke-width: 7; letter-spacing: 3px; opacity: .7; }
+  .punto { stroke: #fff; stroke-width: 3.5; }
+  .antica .punto { fill: var(--rosso); }
+  .moderna .punto { fill: var(--nero); }
+  .nome { font-size: 29px; font-weight: 800; stroke: #fff; stroke-width: 7; }
+  .antica .nome { fill: var(--rosso); }
+  .moderna .nome { fill: var(--nero); }
+
+  .confine-largo { fill: none; stroke: var(--nero); stroke-width: 4; stroke-dasharray: 3 12; stroke-linecap: round; }
+  .riquadro-meso { fill: #C2410C14; stroke: var(--rosso); stroke-width: 12; stroke-dasharray: 34 20; }
+  .l-mare { font-size: 82px; font-style: italic; fill: #2F4FBF; stroke: var(--mare); stroke-width: 16; }
+  .l-stato { font-size: 76px; font-weight: 800; fill: var(--nero); stroke: var(--terra); stroke-width: 16; letter-spacing: 6px; opacity: .75; }
+  .l-nota { font-size: 66px; fill: var(--nero); stroke: #fff; stroke-width: 14; }
+  .l-meso { font-size: 104px; font-weight: 800; fill: var(--rosso); stroke: #fff; stroke-width: 18; letter-spacing: 6px; }
+  .l-noi { font-size: 80px; font-weight: 800; fill: var(--verde); stroke: #fff; stroke-width: 16; }
+  .l-noi-punto { fill: var(--verde); stroke: #fff; stroke-width: 9; }
+
+  .ieri, .oggi, .largo { transition: opacity 1.2s ease; opacity: 0; }
+  .vicino { transition: opacity 1.2s ease; opacity: 1; }
+  body.modo-dove .largo { opacity: 1; }
+  body.modo-dove .vicino { opacity: 0; }
+  body.modo-ieri .ieri, body.modo-oggi .oggi, body.modo-insieme .ieri, body.modo-insieme .oggi { opacity: 1; }
+  .golfo { transition: fill-opacity 1.2s ease; }
+  body.modo-insieme .golfo { fill-opacity: .5; }
+
+  footer { display: flex; gap: 14px; align-items: center; padding: 0 28px 14px; }
+  .hint { color: var(--grigio); font-size: 18px; margin-left: auto; }
+</style>
+</head>
+<body class="modo-dove">
+<header>
+  <span class="badge">GEOSTORIA</span>
+  <h1>La Mesopotamia</h1>
+  <span class="spazio"></span>
+  <button class="tab attiva" data-modo="dove">1 · Dove si trova</button>
+  <button class="tab" data-modo="ieri">2 · Intorno al 3000 a.C.</button>
+  <button class="tab" data-modo="oggi">3 · Oggi</button>
+  <button class="tab" data-modo="insieme">4 · Insieme</button>
+</header>
+<main>
+<!--SVG-->
+<aside>
+  <div class="vista v-dove">
+    <h2>Dove si trova</h2>
+    <ul>
+      <li>Noi siamo qui: <b>Bagheria</b>, in Sicilia, al centro del Mediterraneo.</li>
+      <li>Verso est: la Grecia, poi l'<b>Anatolia</b>, la penisola che oggi è la Turchia.</li>
+      <li>Più a sud-est, fra il Mediterraneo e il <b>Golfo Persico</b>: la <b>Mesopotamia</b>.</li>
+      <li>Da Bagheria a Baghdad, in linea d'aria: circa <b>2800 km</b>.</li>
+    </ul>
+  </div>
+  <div class="vista v-ieri">
+    <h2>Intorno al 3000 a.C.</h2>
+    <ul>
+      <li>Il mare arriva molto più a nord: <b>Ur</b> ed <b>Eridu</b> sono quasi sulla costa.</li>
+      <li>Il <b>Tigri</b> e l'<b>Eufrate</b> sfociano nel golfo <b>separati</b>.</li>
+      <li>Non ci sono Stati: ci sono <b>città-stato</b>, ognuna con il suo re.</li>
+    </ul>
+  </div>
+  <div class="vista v-oggi">
+    <h2>Oggi</h2>
+    <ul>
+      <li>La costa è molto più a sud: Ur è a circa <b>200 km</b> dal mare.</li>
+      <li>Il Tigri e l'Eufrate si uniscono e formano lo <b>Shatt al-Arab</b>.</li>
+      <li>Quasi tutta la Mesopotamia è in <b>Iraq</b>. La capitale, <b>Baghdad</b>, è a circa 90 km dalle rovine di Babilonia.</li>
+    </ul>
+  </div>
+  <div class="vista v-insieme">
+    <h2>Insieme</h2>
+    <p class="domanda">Trovate <b>Babilonia</b> e <b>Baghdad</b>.<br>Poi trovate <b>Ur</b>: dov'era il mare allora, e dov'è oggi?</p>
+  </div>
+  <p class="fonte">Confini, coste e fiumi: Natural Earth, pubblico dominio. Città antiche: Pleiades; città di oggi: Wikidata. La costa antica (linea rossa tratteggiata) è una ricostruzione approssimativa.</p>
+</aside>
+</main>
+<footer>
+  <span class="hint">Tasti: 1 · 2 · 3 · 4, oppure ← →</span>
+</footer>
+<script>
+const MODI = ["dove", "ieri", "oggi", "insieme"];
+let modo = "dove";
+const svg = document.querySelector("svg"), taglio = document.querySelector("#taglio");
+const numeri = (a) => svg.dataset[a].split(" ").map(Number);
+let corrente = numeri("largo"), corsa = 0;
+function inquadra(v) {
+  corrente = v;
+  svg.setAttribute("viewBox", v.join(" "));
+  ["x", "y", "width", "height"].forEach((k, i) => taglio.setAttribute(k, v[i]));
+}
+// lo zoom dalla carta larga al riquadro della Mesopotamia, e ritorno
+function zoom(arrivo, ms = 1600) {
+  const partenza = corrente.slice(), t0 = performance.now(), id = ++corsa;
+  const passo = (t) => {
+    if (id !== corsa) return;
+    const p = Math.min((t - t0) / ms, 1), e = p < .5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2;
+    inquadra(partenza.map((a, i) => a + (arrivo[i] - a) * e));
+    if (p < 1) requestAnimationFrame(passo);
+  };
+  requestAnimationFrame(passo);
+}
+function vai(m, subito) {
+  const arrivo = numeri(m === "dove" ? "largo" : "vicino");
+  if (subito) inquadra(arrivo); else if (arrivo.join() !== corrente.join()) zoom(arrivo);
+  modo = m;
+  document.body.className = "modo-" + m;
+  document.querySelectorAll(".tab").forEach(t => t.classList.toggle("attiva", t.dataset.modo === m));
+}
+document.querySelectorAll(".tab").forEach(t => t.addEventListener("click", () => vai(t.dataset.modo)));
+document.addEventListener("keydown", e => {
+  const i = MODI.indexOf(modo);
+  if (e.key >= "1" && e.key <= "4") vai(MODI[e.key - 1]);
+  else if (e.key === "ArrowRight" || e.key === " ") { e.preventDefault(); vai(MODI[Math.min(i + 1, 3)]); }
+  else if (e.key === "ArrowLeft") vai(MODI[Math.max(i - 1, 0)]);
+});
+const h = location.hash.slice(1);
+if (MODI.includes(h)) vai(h, true);
+</script>
+<a class="torna-indice" href="index.html" title="Indice di geostoria">← Geostoria</a>
+<style>.torna-indice{position:fixed;right:14px;bottom:10px;z-index:99;font:600 14px/1 system-ui,sans-serif;color:#555;text-decoration:none;opacity:0;transition:opacity .25s;padding:6px 10px;border-radius:8px;background:rgba(255,255,255,.85)}.torna-indice:hover,.torna-indice:focus,body:hover .torna-indice{opacity:1}</style>
+</body>
+</html>

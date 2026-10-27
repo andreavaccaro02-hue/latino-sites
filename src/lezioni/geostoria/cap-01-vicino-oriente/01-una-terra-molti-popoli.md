@@ -33,6 +33,10 @@ Le prime città della storia nascono in una terra senza pietra, senza legno, con
 :::
 
 ::: passo "La terra fra i due fiumi"
+<iframe class="carta-viva" src="/geostoria/mesopotamia-ieri-oggi.html" title="La Mesopotamia: dove si trova, com'era intorno al 3000 a.C. e com'è oggi. Carta interattiva"></iframe>
+
+---
+
 ![Carta della Mesopotamia meridionale: il Tigri, l'Eufrate, le terre di Accad e di Sumer con le loro città, il deserto arabico e i monti Zagros](/geostoria/reperti/carta-sumer-akkad.png)
 
 *Le città di Sumer e di Accad. Carta di Cattette, CC BY 4.0. Il golfo Persico arrivava molto più a nord di oggi.*
@@ -42,10 +46,6 @@ Le prime città della storia nascono in una terra senza pietra, senza legno, con
 + Il Tigri e l'Eufrate **nascono in Anatolia**, l'attuale Turchia.
 + A ovest il **deserto dell'Arabia**, a est i **monti Zagros**.
 + In mezzo, **pianure alluvionali**: terra fertile portata dai fiumi.
-
----
-
-<iframe class="carta-viva" src="/geostoria/mesopotamia-ieri-oggi.html" title="La Mesopotamia intorno al 3000 a.C. e oggi: carta interattiva"></iframe>
 
 ---
 

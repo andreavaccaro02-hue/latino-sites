@@ -33,6 +33,14 @@ export const PASSTHROUGH = [
 
 export default function (eleventyConfig) {
   eleventyConfig.addPlugin(HtmlBasePlugin);
+
+  // Le pagine dentro gli iframe ricevono un numero di versione a ogni costruzione del sito:
+  // GitHub Pages le fa tenere in memoria 10 minuti e il browser mostrerebbe quella vecchia.
+  const versione = Date.now().toString(36);
+  eleventyConfig.addTransform("versione-iframe", (contenuto, percorso) =>
+    percorso?.endsWith(".html")
+      ? contenuto.replace(/(<iframe\b[^>]*\bsrc="[^"?#]+\.html)"/g, `$1?v=${versione}"`)
+      : contenuto);
   for (const p of PASSTHROUGH) eleventyConfig.addPassthroughCopy(p);
 
   const md = creaMarkdown();

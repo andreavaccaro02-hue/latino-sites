@@ -2,7 +2,7 @@
 import json, math, sys
 
 NE, OUT = sys.argv[1], sys.argv[2]
-LON0, LON1, LAT0, LAT1 = 34.8, 49.8, 28.5, 38.5
+LON0, LON1, LAT0, LAT1 = 31.8, 49.2, 28.5, 38.5
 K = 100.0
 CX = math.cos(math.radians(33.5))
 W, H = round((LON1 - LON0) * CX * K), round((LAT1 - LAT0) * K)
@@ -69,10 +69,10 @@ def punto(classe, nome, lon, lat, lato="d", dy=8):
     return (f'<g class="{classe}"><circle class="punto" cx="{x:.0f}" cy="{y:.0f}" r="9"/>'
             f'<text class="nome" x="{x + dx:.0f}" y="{y + dy:.0f}" text-anchor="{a}">{nome}</text></g>')
 
-def scritta(classe, testo, lon, lat, ruota=0):
+def scritta(classe, testo, lon, lat, ruota=0, anchor="middle"):
     x, y = xy(lon, lat)
     r = f' transform="rotate({ruota} {x:.0f} {y:.0f})"' if ruota else ""
-    return f'<text class="{classe}" x="{x:.0f}" y="{y:.0f}" text-anchor="middle"{r}>{testo}</text>'
+    return f'<text class="{classe}" x="{x:.0f}" y="{y:.0f}" text-anchor="{anchor}"{r}>{testo}</text>'
 
 # coordinate: Pleiades per i siti antichi (reprPoint), Wikidata P625 per le città di oggi, verificate il 27/10/2026
 ANTICHE = [("Babilonia", 44.425, 32.537, "s"), ("Kish", 44.593, 32.546, "d"), ("Nippur", 45.231, 32.127, "d"),
@@ -80,7 +80,7 @@ ANTICHE = [("Babilonia", 44.425, 32.537, "s"), ("Kish", 44.593, 32.546, "d"), ("
            ("Ur", 46.105, 30.961, "d"), ("Eridu", 45.996, 30.820, "s")]
 MODERNE = [("Baghdad", 44.366, 33.315, "d"), ("Bassora", 47.810, 30.515, "s"), ("Mosul", 43.129, 36.342, "d"),
            ("Kuwait", 47.980, 29.375, "d"), ("Damasco", 36.292, 33.513, "d")]
-STATI = [("IRAQ", 41.3, 32.9), ("SIRIA", 38.6, 35.3), ("TURCHIA", 41.0, 38.15), ("IRAN", 48.6, 32.5),
+STATI = [("IRAQ", 41.3, 32.9), ("SIRIA", 38.6, 35.3), ("TURCHIA", 41.0, 38.15), ("IRAN", 48.1, 32.9),
          ("ARABIA SAUDITA", 42.6, 29.2), ("GIORDANIA", 37.3, 30.9)]
 
 # vista larga, dalla Sicilia al Golfo Persico: stessa proiezione, viewBox più ampio
@@ -120,6 +120,16 @@ LARGO = [
     grande("l-noi", "Bagheria", 14.5, 38.0, anchor="start"), grande("l-nota", "noi siamo qui", 14.5, 37.25, anchor="start"),
     '</g>']
 
+# Israele e Palestina: la striscia è sottile, le scritte stanno fuori con linee guida
+def guida(lon0, lat0, lon1, lat1):
+    (x0, y0), (x1, y1) = xy(lon0, lat0), xy(lon1, lat1)
+    return f'<path class="guida" d="M{x0:.0f},{y0:.0f} L{x1:.0f},{y1:.0f}"/>'
+ISRAELE_PALESTINA = [
+    guida(34.2, 32.68, 34.98, 32.75), scritta("stato piccolo", "ISRAELE", 31.95, 32.6, anchor="start"),
+    guida(34.5, 31.82, 34.42, 31.47), guida(34.5, 31.82, 35.25, 31.98),
+    scritta("stato piccolo", "PALESTINA", 31.95, 31.75, anchor="start"),
+]
+
 svg = [f'<svg viewBox="{LVX:.0f} {LVY:.0f} {LW:.0f} {LH:.0f}" preserveAspectRatio="xMidYMid meet" role="img" '
        f'aria-label="Carta della Mesopotamia: dove si trova, com\'era intorno al 3000 a.C. e com\'è oggi" '
        f'data-largo="{LVX:.0f} {LVY:.0f} {LW:.0f} {LH:.0f}" data-vicino="0 0 {W} {H}">',
@@ -135,8 +145,8 @@ svg = [f'<svg viewBox="{LVX:.0f} {LVY:.0f} {LW:.0f} {LH:.0f}" preserveAspectRati
        '<g class="oggi"><path class="confine" d="' + "".join(confini) + '"/></g>',
        *LARGO,
        '<g class="vicino">',
-       scritta("acqua", "Golfo Persico", 48.6, 28.85),
-       scritta("acqua", "Mar Mediterraneo", 35.15, 34.6, -90),
+       scritta("acqua", "Golfo Persico", 48.0, 28.8),
+       scritta("acqua", "Mar", 33.2, 33.85), scritta("acqua", "Mediterraneo", 33.2, 33.5),
        scritta("rilievo", "Monti Zagros", 46.6, 34.4, -48),
        scritta("rilievo", "Deserto arabico", 40.0, 31.4),
        scritta("nome-fiume", "Tigri", 43.75, 35.75, -62),
@@ -153,6 +163,7 @@ svg = [f'<svg viewBox="{LVX:.0f} {LVY:.0f} {LW:.0f} {LH:.0f}" preserveAspectRati
        *[scritta("stato", n, lo, la) for n, lo, la in STATI],
        scritta("acqua piccola", "Shatt al-Arab", 48.75, 30.45, 52),
        *[punto("moderna", n, lo, la, l) for n, lo, la, l in MODERNE],
+       *ISRAELE_PALESTINA,
        '</g>',
        f'<rect class="cornice vicino" x="2" y="2" width="{W - 4}" height="{H - 4}"/>',
        '</g>',

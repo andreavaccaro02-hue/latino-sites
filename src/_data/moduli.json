@@ -5,7 +5,10 @@
       "3": ["geostoria/carta-mediterraneo-lim.html"]
     } },
   { "materia": "geostoria", "titolo_argo": "Capitolo introduttivo · La preistoria", "slug": "preistoria" },
-  { "materia": "geostoria", "titolo_argo": "Cap. 1 · Le origini della storia. Popoli e culture del Vicino Oriente", "slug": "cap-01-vicino-oriente" },
+  { "materia": "geostoria", "titolo_argo": "Cap. 1 · Le origini della storia. Popoli e culture del Vicino Oriente", "slug": "cap-01-vicino-oriente",
+    "rimandi": {
+      "1": ["geostoria/mesopotamia-ieri-oggi.html"]
+    } },
   { "materia": "geostoria", "titolo_argo": "Percorso di geografia 1 · Economia, ambiente, sviluppo", "slug": "geo-1-economia-ambiente-sviluppo" },
   { "materia": "geostoria", "titolo_argo": "Cap. 2 · L'alba della Grecia. L'Egeo fra II e I millennio a.C.", "slug": "cap-02-alba-della-grecia" },
   { "materia": "geostoria", "titolo_argo": "Percorso di geografia 2 · Popoli, città, migrazioni", "slug": "geo-2-popoli-citta-migrazioni" },

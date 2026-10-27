@@ -20,6 +20,7 @@ export const PASSTHROUGH = [
   "geostoria/da-dove-veniamo.html",
   "geostoria/le-fonti-lim.html",
   "geostoria/linea-del-tempo.html",
+  "geostoria/mesopotamia-ieri-oggi.html",
   "geostoria/fonts",
   "geostoria/img",
   "geostoria/reperti",

@@ -45,6 +45,10 @@ Le prime città della storia nascono in una terra senza pietra, senza legno, con
 
 ---
 
+<iframe class="carta-viva" src="/geostoria/mesopotamia-ieri-oggi.html" title="La Mesopotamia intorno al 3000 a.C. e oggi: carta interattiva"></iframe>
+
+---
+
 ??? In quale Stato si trova oggi quasi tutta la Mesopotamia?
 - [ ] Turchia
 - [x] Iraq

@@ -48,6 +48,7 @@ h2 { font-weight: 600; font-size: 1.5rem; line-height: 1.2; }
 .blocco-do-now, .blocco-uscita, .blocco-padronanza { padding: 1rem 1.2rem; background: var(--sabbia); }
 .blocco-lavagna .lavagna { min-height: 6rem; padding: 1rem; border: 1px solid var(--filetto); background: #fff; }
 .lavagna-quaderno { margin: 0; font-style: italic; color: var(--tenue); }
+iframe.carta-viva { display: block; width: 100%; aspect-ratio: 16 / 10; border: 1px solid var(--filetto); background: #fff; }
 .blocco-interattivo iframe { width: 100%; aspect-ratio: 16 / 10; border: 1px solid var(--filetto); background: #fff; }
 .interattivo-apri { font-family: var(--sans); font-size: .875rem; }
 .blocco-approfondimento { border-top: 1px solid var(--filetto); padding-top: .75rem; }

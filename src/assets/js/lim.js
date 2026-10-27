@@ -1,4 +1,11 @@
 /* global Reveal, RevealNotes */
+// Le pagine interattive dentro le schermate si caricano solo quando la schermata si apre:
+// un iframe caricato in una schermata nascosta in alcuni browser resta bianco.
+for (const iframe of document.querySelectorAll(".reveal iframe[src]")) {
+  iframe.dataset.src = iframe.getAttribute("src");
+  iframe.removeAttribute("src");
+}
+
 Reveal.initialize({
   hash: true,
   controls: true,

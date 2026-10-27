@@ -59,6 +59,19 @@ Le prime città della storia nascono in una terra senza pietra, senza legno, con
 Con il vicino, trenta secondi: chi scava i canali, se servono migliaia di braccia?
 
 + Qualcuno che organizza e comanda. Teniamo questa risposta: è l'inizio della città-stato.
+
+---
+
+### Pianura e montagna (p. 33)
+
++ Nelle **pianure** vivono i contadini, lungo i canali.
++ Sui **monti Zagros** vivono pastori **nomadi**. In primavera scendono all'Eufrate per abbeverare le greggi: incontri, e a volte scontri, con i contadini.
++ L'ambiente resta **a rischio**: la siccità, e i suoli che si impoveriscono se si sfruttano troppo.
+
+??? Chi abita i monti Zagros?
+- [ ] contadini che coltivano il grano
+- [x] pastori nomadi con le loro greggi
+- [ ] i re delle città sumere
 :::
 
 ::: note
@@ -138,6 +151,18 @@ Con il vicino: oggi quale foglio scritto vi dà un diritto o vi protegge?
 ::: lavagna "Sumeri: città-stato, ziqqurat, scrittura"
 :::
 
+::: passo "Per ricominciare"
+Quaderno chiuso, da soli, due minuti. Quello che abbiamo visto l'ultima volta.
+
+1. Perché la Mesopotamia è fertile, e perché è facile da invadere?
+2. Le quattro cose di una città-stato sumera.
+3. Le quattro tappe della scrittura, in ordine.
+
++ Acqua e terra portate dai fiumi; nessuna barriera naturale.
++ Il re, il tempio, il palazzo, la terra con chi la lavora.
++ Pittogrammi, segni per i suoni, cuneiforme, alfabeto.
+:::
+
 ::: passo "Il primo impero"
 ![Testa di bronzo di un re accadico, con barba e capelli lavorati a riccioli](/geostoria/reperti/testa-accadica.jpg)
 
@@ -198,7 +223,21 @@ Gancio per chi chiede di più: la leggenda della nascita di Sargon, abbandonato 
 - [ ] il nobile viene messo a morte
 
 + Una **mina** è circa mezzo chilo d'argento.
-+ La pena dipende da **chi** è la vittima. Le classi sono tre: **liberi**, **dipendenti**, **schiavi** (p. 36).
++ La pena dipende da **chi** è la vittima.
+
+---
+
+### Tre classi (p. 36)
+
++ **Liberi**, *awilum*: nobili, mercanti, proprietari di terre.
++ **Dipendenti**, *muskenum*: la gran massa. Artigiani, contadini, piccoli commercianti che lavorano per il tempio o per il palazzo.
++ **Schiavi**, *wardum*: prigionieri di guerra, o persone che non hanno pagato un debito o hanno violato una legge.
++ Ma lo schiavo può possedere beni e sposare una persona libera. E a volte la schiavitù **finisce**, dopo un tempo stabilito.
+
+??? Chi sono i *muskenum*?
+- [ ] i nobili
+- [x] chi lavora alle dipendenze del tempio o del palazzo
+- [ ] gli schiavi
 :::
 
 ::: note
@@ -206,6 +245,14 @@ Il § 199, sullo schiavo, lo fanno da soli nella pratica. Domanda per chi corre:
 :::
 
 ::: passo "La linea del tempo"
+### Il declino di Babilonia (p. 36)
+
++ Dopo Hammurabi l'impero si **indebolisce**: alcune regioni si staccano.
++ Altri popoli vogliono la Mesopotamia. Verso il 1550 a.C. Babilonia cade per mano degli **Hittiti**.
++ Poi arrivano i **Cassiti**, da nord-est, e la tengono fino al XII secolo a.C.
+
+---
+
 Mille anni e più, in sei tappe. Prima la data, poi chi.
 
 + **IV millennio a.C.** · i Sumeri: le prime città-stato.
@@ -228,7 +275,15 @@ Mille anni e più, in sei tappe. Prima la data, poi chi.
 + **Religione**: tanti dèi, con aspetto e passioni umani. In cima An (cielo), Enlil (aria e terra), Enki (acque).
 + **Aldilà**: una caverna buia, dove i morti bevono acqua torbida.
 + **Letteratura**: l'*Epopea di Gilgamesh*, il più antico poema epico che conosciamo.
-+ **Numeri**: un sistema in base **60**, il sistema sessagesimale (p. 40).
+
+---
+
+### Stelle e numeri (pp. 39-40)
+
++ **Il cielo**: osservano gli astri, le fasi della Luna, le eclissi. Individuano lo **zodiaco**: molti nomi delle costellazioni sono ancora i loro, Toro, Gemelli, Leone.
++ **Il calendario**: 12 mesi lunari, divisi in **settimane**. I giorni sono dedicati al Sole, alla Luna e ai pianeti.
++ **Il mondo**: la Terra è un disco piatto, al centro dell'universo.
++ **I numeri**: contano in base **60**, il sistema sessagesimale. E il valore di una cifra cambia con il **posto** che occupa, come nei nostri numeri.
 
 ??? Che cosa usiamo ancora oggi del sistema in base 60?
 - [ ] i centimetri
@@ -260,6 +315,18 @@ Quaderno, da soli. Libro chiuso per i punti 1 e 2.
 3. **La domanda di oggi.** Perché le prime città nascono proprio fra il Tigri e l'Eufrate? Rispondi con **due prove**.
 
 Se finite prima: secondo voi il Codice di Hammurabi protegge il debole o il forte? Un argomento per parte.
+
+---
+
+### Discorso di sintesi, a coppie
+
+Con lo schema e la linea del tempo davanti, preparate un discorso sulla civiltà mesopotamica: **da 2 a 5 minuti**, in ordine logico e cronologico.
+
+1. **Introduzione**: dove siamo e quando. La terra fra i due fiumi, il dono e i rischi.
+2. **Corpo**: Sumeri, Accadi, Babilonesi, in ordine. Per ciascuno una data e una novità, e perché la novità conta.
+3. **Conclusione**: che cosa ci hanno lasciato. Scegliete due cose che usiamo ancora.
+
+Uno parla, l'altro ascolta con lo schema e segna che cosa manca. Poi vi scambiate. Alcune coppie espongono alla classe.
 :::
 
 ::: approfondimento

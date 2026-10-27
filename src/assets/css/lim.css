@@ -57,3 +57,17 @@ section[data-blocco="interattivo"] iframe { width: 100%; height: 760px; border: 
 /* Opzioni dei quiz in riga: tre domande entrano in una schermata. */
 .quiz-opzioni { grid-template-columns: repeat(auto-fit, minmax(0, 1fr)); }
 .reveal .quiz { margin: 0 0 .6em; }
+
+/* Leggibilità alla LIM (indicazioni di reveal.js: poco testo per schermata, immagini grandi, frammento corrente in evidenza). */
+/* Righe non più lunghe di circa 70 caratteri, anche quando la schermata non ha foto. */
+.reveal section:not(.apertura) > p, .reveal section:not(.apertura) > ul, .reveal section:not(.apertura) > ol, .reveal section:not(.apertura) > blockquote { max-width: 34em; }
+.reveal li { margin: .35em 0; }
+/* Foto più grandi; le carte ancora di più, perché vanno lette. */
+.reveal section:not(.apertura) img { max-width: 42%; max-height: 720px; }
+.reveal section:not(.apertura) img[src*="/carta"] { max-width: 50%; max-height: 740px; }
+/* Didascalia e crediti sotto la foto: piccoli e grigi, non concorrono con il testo. */
+.reveal section:not(.apertura) p:has(> img) + p:has(> em:only-child) { float: right; clear: right; width: 42%; margin: -.6em 0 .8em 1em; font-family: var(--sans); font-size: .42em; line-height: 1.3; color: var(--tenue); }
+.reveal section:not(.apertura) p:has(> img[src*="/carta"]) + p:has(> em:only-child) { width: 50%; }
+.reveal section:not(.apertura) p:has(> img) + p:has(> em:only-child) em { font-style: normal; }
+/* Il punto appena comparso ha il pallino nel colore della materia. */
+.reveal li.fragment.current-fragment::marker { color: var(--accento); }

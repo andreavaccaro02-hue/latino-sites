@@ -151,7 +151,19 @@ Con il vicino: oggi quale foglio scritto vi dà un diritto o vi protegge?
 ::: lavagna "Sumeri: città-stato, ziqqurat, scrittura"
 :::
 
-::: passo "Per ricominciare"
+::: passo "Ora 1 · Prima di uscire"
+Quaderno chiuso, da soli, tre minuti.
+
+1. Perché le prime città nascono proprio fra il Tigri e l'Eufrate? **Due prove.**
+2. Perché i Sumeri inventano la scrittura?
+
++ C'erano acqua e terra fertile; e per governare le piene con i canali serviva qualcuno che organizzasse il lavoro di tutti.
++ Per registrare conti, tasse e magazzini.
+
+A casa: pp. 30-33 del manuale, e le domande di «Acquisire un metodo» a p. 33.
+:::
+
+::: passo "Ora 2 · Per ricominciare"
 Quaderno chiuso, da soli, due minuti. Quello che abbiamo visto l'ultima volta.
 
 1. Perché la Mesopotamia è fertile, e perché è facile da invadere?
@@ -241,7 +253,40 @@ Gancio per chi chiede di più: la leggenda della nascita di Sargon, abbandonato 
 :::
 
 ::: note
-Il § 199, sullo schiavo, lo fanno da soli nella pratica. Domanda per chi corre: il prologo dice «che il forte non opprima il debole». I §§ 198-199 lo rispettano?
+Il § 199, sullo schiavo, lo fanno da soli nel passo che segue. Domanda per chi corre: il prologo dice «che il forte non opprima il debole». I §§ 198-199 lo rispettano?
+:::
+
+::: passo "Ora 2 · Tocca a voi"
+### § 199, da soli
+
+«Se egli cava l'occhio o rompe l'osso dello schiavo di un altro nobile, dovrà pagare la metà del suo prezzo.»
+
+Sul quaderno, due righe: **chi riceve i soldi? Che cosa ci dice questo dello schiavo?**
+
++ Li riceve il padrone, non lo schiavo: lo schiavo è trattato come una cosa che ha un prezzo.
+
+---
+
+### Prima di uscire
+
+Quaderno chiuso: chi è **Sargon**, chi è **Hammurabi**? Una riga ciascuno, con una data.
+
++ Sargon, re degli Accadi, verso il 2370 a.C.: il primo impero della Mesopotamia.
++ Hammurabi, re di Babilonia, 1792-1750 a.C.: uno Stato forte e il Codice di leggi scritte.
+
+A casa: pp. 34-37 del manuale, e le domande sotto la fonte di p. 37.
+:::
+
+::: passo "Ora 3 · Per ricominciare"
+Quaderno chiuso, da soli, due minuti.
+
+1. Che cosa c'è di nuovo in Naram-Sin?
+2. Nel Codice di Hammurabi, da che cosa dipende la pena?
+3. Le tre classi della società babilonese.
+
++ Si proclama dio: nasce l'ideologia dell'impero.
++ Dal danno e da chi è la vittima.
++ Liberi, dipendenti, schiavi.
 :::
 
 ::: passo "La linea del tempo"
@@ -308,11 +353,10 @@ Con lo schema davanti, trenta secondi da soli: **perché proprio lì?**
 :::
 
 ::: pratica
-Quaderno, da soli. Libro chiuso per i punti 1 e 2.
+Quaderno, da soli, libro chiuso.
 
 1. **Linea del tempo.** Metti in ordine, con una data e una novità ciascuno: Babilonesi, Sumeri, Accadi.
-2. **Tocca a voi · § 199.** «Se egli cava l'occhio o rompe l'osso dello schiavo di un altro nobile, dovrà pagare la metà del suo prezzo.» Chi riceve i soldi? Che cosa ci dice questo dello schiavo? Due righe.
-3. **La domanda di oggi.** Perché le prime città nascono proprio fra il Tigri e l'Eufrate? Rispondi con **due prove**.
+2. **Lo schema.** Ricopia lo schema di sintesi e aggiungi per ogni popolo una cosa che non c'è.
 
 Se finite prima: secondo voi il Codice di Hammurabi protegge il debole o il forte? Un argomento per parte.
 

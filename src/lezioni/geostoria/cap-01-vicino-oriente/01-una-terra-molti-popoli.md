@@ -33,7 +33,7 @@ Le prime città della storia nascono in una terra senza pietra, senza legno, con
 :::
 
 ::: passo "La terra fra i due fiumi"
-<iframe class="carta-viva" src="/geostoria/mesopotamia-ieri-oggi.html" title="La Mesopotamia: dove si trova, com'era intorno al 3000 a.C. e com'è oggi. Carta interattiva"></iframe>
+<iframe class="interattiva" src="/geostoria/mesopotamia-ieri-oggi.html" title="La Mesopotamia: dove si trova, com'era intorno al 3000 a.C. e com'è oggi. Carta interattiva"></iframe>
 
 ---
 
@@ -128,6 +128,10 @@ Un minuto, da soli: le **quattro cose** che ci sono in una città-stato sumera.
 *Tavoletta con un conto di malto e orzo, circa 3100-2900 a.C. Metropolitan Museum of Art, New York, CC0.*
 
 In città ci sono magazzini, tasse, debiti. Bisogna **registrare**. Per quanto ne sappiamo, i Sumeri sono il primo popolo a inventare una scrittura (p. 32).
+
+---
+
+<iframe class="interattiva" src="/geostoria/dal-disegno-al-segno.html" title="Dal disegno al segno: pittogramma, segni per i suoni, cuneiforme, alfabeto. Animazione"></iframe>
 
 ---
 
@@ -311,6 +315,10 @@ Quaderno chiuso, da soli, due minuti.
 + Dopo Hammurabi l'impero si **indebolisce**: alcune regioni si staccano.
 + Altri popoli vogliono la Mesopotamia. Verso il 1550 a.C. Babilonia cade per mano degli **Hittiti**.
 + Poi arrivano i **Cassiti**, da nord-est, e tengono Babilonia fino al XII secolo a.C.
+
+---
+
+<iframe class="interattiva" src="/geostoria/mesopotamia-linea-del-tempo.html" title="Mesopotamia, la linea del tempo in scala. Animazione"></iframe>
 
 ---
 

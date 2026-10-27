@@ -30,7 +30,7 @@ section[data-blocco="do-now"], section[data-blocco="uscita"], section[data-blocc
 .lavagna:focus { border-color: var(--inchiostro); }
 .lavagna-pulisci { margin-top: .3em; font-family: var(--sans); font-size: .4em; background: none; border: 1px solid var(--filetto); padding: .2em .6em; cursor: pointer; opacity: 0; }
 .mouse-attivo .lavagna-pulisci, .lavagna-pulisci:focus { opacity: 1; }
-.reveal iframe.carta-viva { display: block; width: 100%; height: 720px; border: 1px solid var(--filetto); background: #fff; }
+.reveal iframe.interattiva { display: block; width: 100%; height: 720px; border: 1px solid var(--filetto); background: #fff; }
 section[data-blocco="interattivo"] iframe { width: 100%; height: 760px; border: 1px solid var(--filetto); background: #fff; }
 .interattivo-apri { font-family: var(--sans); font-size: .45em; }
 

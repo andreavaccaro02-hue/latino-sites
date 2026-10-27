@@ -4,6 +4,16 @@
 for (const iframe of document.querySelectorAll(".reveal iframe[src]")) {
   iframe.dataset.src = iframe.getAttribute("src");
   iframe.removeAttribute("src");
+  // dentro la pagina interattiva: PagGiù e PagSu (il telecomando) cambiano schermata, Esc ridà i tasti alle slide
+  iframe.addEventListener("load", () => {
+    try {
+      iframe.contentDocument.addEventListener("keydown", (e) => {
+        if (e.key === "PageDown") { e.preventDefault(); Reveal.next(); }
+        else if (e.key === "PageUp") { e.preventDefault(); Reveal.prev(); }
+        else if (e.key === "Escape") { iframe.blur(); window.focus(); }
+      });
+    } catch { /* pagina di un altro sito: i tasti restano a lei */ }
+  });
 }
 
 Reveal.initialize({

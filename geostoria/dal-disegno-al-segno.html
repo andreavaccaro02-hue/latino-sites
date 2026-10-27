@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dal disegno al segno</title>
+<link href="https://fonts.googleapis.com/css2?family=Shantell+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+  @font-face { font-family: "Shantell Sans"; src: url("fonts/ShantellSans%5BBNCE,INFM,SPAC,wght%5D.ttf"); font-weight: 300 800; }
+  :root {
+    --nero: #1D1D1D; --blu: #4465E9; --verde: #099268; --rosso: #C2410C;
+    --nota: #FFF4B8; --griglia: #C8C8C8; --grigio: #8A939C; --sfondo: #FAFAF7; --argilla: #E9D3B4; --argilla-scura: #B98E5E;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; }
+  body {
+    font-family: "Shantell Sans", "Patrick Hand", "Comic Neue", "Segoe Print", "Chalkboard", sans-serif;
+    color: var(--nero); background: var(--sfondo);
+    background-image: radial-gradient(var(--griglia) 0.9px, transparent 1px); background-size: 22px 22px;
+    display: flex; flex-direction: column; overflow: hidden;
+  }
+  header { display: flex; align-items: center; gap: 18px; padding: 14px 28px 0; flex-wrap: wrap; }
+  .badge { font-weight: 800; font-size: 20px; padding: 6px 16px; border: 3px solid var(--blu); color: var(--blu);
+    border-radius: 12px 14px 10px 16px / 14px 10px 16px 12px; background: #4465E91f; letter-spacing: .5px; }
+  h1 { font-size: 32px; margin: 0; font-weight: 800; }
+  .spazio { flex: 1; }
+  .tab { border: 3px solid var(--nero); background: #fff; font: inherit; font-weight: 600; font-size: 22px;
+    padding: 8px 18px; cursor: pointer; border-radius: 14px 10px 16px 12px / 10px 16px 12px 14px; color: var(--nero); }
+  .tab.attiva { background: var(--nero); color: #fff; }
+  main { flex: 1; min-height: 0; display: grid; grid-template-columns: 52% minmax(0, 1fr); gap: 28px; padding: 14px 28px 18px; }
+  svg { width: 100%; height: 100%; display: block; }
+  aside { align-self: center; font-size: 27px; line-height: 1.4; }
+  aside h2 { font-size: 32px; margin: 0 0 .4em; }
+  aside p { margin: 0 0 .6em; }
+  aside .passo { opacity: 0; transform: translateY(8px); transition: opacity .6s, transform .6s; }
+  aside .passo.vista { opacity: 1; transform: none; }
+  aside .nota { font-size: 16px; color: var(--grigio); margin-top: 1.2em; }
+  .tavoletta { fill: var(--argilla); stroke: var(--argilla-scura); stroke-width: 5; }
+  .disegno { fill: none; stroke: #5B3B1E; stroke-width: 9; stroke-linecap: round; stroke-linejoin: round; }
+  .cuneo { fill: #5B3B1E; }
+  .lettera { font-family: Georgia, "Times New Roman", serif; font-size: 300px; fill: var(--nero); }
+  .didascalia { font-size: 34px; font-weight: 800; fill: var(--nero); text-anchor: middle; }
+  .suono { font-size: 44px; font-weight: 800; fill: var(--rosso); text-anchor: middle; font-style: italic; }
+  .scena { opacity: 0; transition: opacity .5s; }
+  .scena.vista { opacity: 1; }
+  .el { transition: opacity .8s ease, transform 1.4s ease; transform-box: fill-box; transform-origin: center; }
+  .nascosto { opacity: 0; }
+  .girato { transform: rotate(-90deg); }
+  .girato-a { transform: rotate(90deg); }
+  footer { display: flex; gap: 14px; align-items: center; padding: 0 28px 14px; }
+  button.cmd { font: inherit; font-weight: 600; font-size: 20px; padding: 8px 18px; cursor: pointer; background: #fff;
+    border: 3px solid var(--nero); color: var(--nero); border-radius: 12px 16px 10px 14px / 16px 10px 14px 12px; }
+  .hint { color: var(--grigio); font-size: 18px; margin-left: auto; }
+</style>
+</head>
+<body>
+<header>
+  <span class="badge">GEOSTORIA</span>
+  <h1>Dal disegno al segno</h1>
+  <span class="spazio"></span>
+  <button class="tab attiva" data-tappa="0">1 · Disegni</button>
+  <button class="tab" data-tappa="1">2 · Suoni</button>
+  <button class="tab" data-tappa="2">3 · Cuneiforme</button>
+  <button class="tab" data-tappa="3">4 · Alfabeto</button>
+</header>
+<main>
+<svg viewBox="0 0 800 640" role="img" aria-label="Come cambia un segno di scrittura, dal disegno alla lettera A">
+  <defs>
+    <!-- la testa di bue disegnata sull'argilla -->
+    <g id="bue">
+      <path class="disegno" d="M330,290 C290,250 285,205 310,170"/>
+      <path class="disegno" d="M470,290 C510,250 515,205 490,170"/>
+      <path class="disegno" d="M330,290 L470,290 L445,430 Q400,460 355,430 Z"/>
+      <circle class="cuneo" cx="370" cy="335" r="8"/><circle class="cuneo" cx="430" cy="335" r="8"/>
+      <path class="disegno" d="M375,405 Q400,418 425,405"/>
+    </g>
+    <!-- un cuneo: la testa triangolare lasciata dallo stilo e la coda -->
+    <g id="cuneo"><path class="cuneo" d="M0,-16 L30,0 L0,16 Z"/><path class="cuneo" d="M24,-4 L110,-2 L110,2 L24,4 Z"/></g>
+  </defs>
+  <rect class="tavoletta" x="110" y="80" width="580" height="470" rx="60"/>
+
+  <!-- 1 · pittogramma -->
+  <g class="scena" id="s0">
+    <use href="#bue" class="el" id="s0-bue"/>
+    <text class="didascalia" x="400" y="600">un disegno = una cosa: «bue»</text>
+  </g>
+
+  <!-- 2 · segni per i suoni: la freccia, ti -->
+  <g class="scena" id="s1">
+    <g class="el" id="s1-freccia">
+      <path class="disegno" d="M220,320 L560,320"/>
+      <path class="disegno" d="M520,285 L575,320 L520,355"/>
+      <path class="disegno" d="M220,320 L190,285 M250,320 L220,285 M220,320 L190,355 M250,320 L220,355"/>
+    </g>
+    <text class="suono el nascosto" id="s1-ti" x="400" y="250">ti</text>
+    <text class="didascalia el nascosto" id="s1-a" x="250" y="440">ti = freccia</text>
+    <text class="didascalia el nascosto" id="s1-b" x="550" y="440">ti = vita</text>
+    <text class="didascalia el nascosto" id="s1-c" x="400" y="600">lo stesso segno, due parole</text>
+  </g>
+
+  <!-- 3 · cuneiforme: il bue si gira di lato, poi diventa fatto di cunei -->
+  <g class="scena" id="s2">
+    <use href="#bue" class="el" id="s2-bue"/>
+    <g class="el nascosto" id="s2-cunei">
+      <use href="#cuneo" transform="translate(300,250)"/>
+      <use href="#cuneo" transform="translate(300,390)"/>
+      <use href="#cuneo" transform="translate(330,320) scale(1.5,1)"/>
+      <use href="#cuneo" transform="translate(470,250) rotate(90)"/>
+      <use href="#cuneo" transform="translate(520,265) rotate(90) scale(.9,1)"/>
+      <use href="#cuneo" transform="translate(445,300) rotate(35) scale(.6,1)"/>
+      <use href="#cuneo" transform="translate(445,345) rotate(-35) scale(.6,1)"/>
+    </g>
+    <text class="didascalia el nascosto" id="s2-a" x="400" y="600">lo stilo di canna lascia «cunei»</text>
+  </g>
+
+  <!-- 4 · alfabeto: alef, il bue dei Fenici, diventa la A -->
+  <g class="scena" id="s3">
+    <g transform="translate(30,120) scale(.5)"><g class="el" id="s3-bue"><use href="#bue"/></g></g>
+    <text class="didascalia el" id="s3-bue-t" x="230" y="410" style="font-size:28px">il bue</text>
+    <text class="didascalia el nascosto" id="s3-freccia" x="365" y="330" style="font-size:54px">→</text>
+    <g class="el nascosto" id="s3-alef">
+      <path class="disegno" d="M580,250 L480,310 L580,370" style="stroke-width:14"/>
+      <path class="disegno" d="M530,230 L530,390" style="stroke-width:14"/>
+    </g>
+    <text class="didascalia el nascosto" id="s3-alef-t" x="530" y="470">alef, per i Fenici</text>
+    <text class="lettera el nascosto" id="s3-A" x="400" y="420" text-anchor="middle">A</text>
+    <text class="didascalia el nascosto" id="s3-a" x="400" y="600">alef → alfa → A</text>
+  </g>
+</svg>
+<aside>
+  <div class="testo" data-tappa="0">
+    <h2>1 · Pittogrammi</h2>
+    <p class="passo">Sull'argilla fresca si disegna la cosa: una testa di bue vuol dire «bue».</p>
+    <p class="passo">Funziona per le cose che si vedono. Ma come si scrive «vita», o «domani»?</p>
+  </div>
+  <div class="testo" data-tappa="1">
+    <h2>2 · Segni per i suoni</h2>
+    <p class="passo">In sumerico «freccia» si dice <i>ti</i>.</p>
+    <p class="passo">Anche «vita» si dice <i>ti</i>.</p>
+    <p class="passo">Così il disegno della freccia vale anche per «vita»: il segno indica un <b>suono</b>, non più solo una cosa.</p>
+  </div>
+  <div class="testo" data-tappa="2">
+    <h2>3 · Cuneiforme</h2>
+    <p class="passo">I segni si girano di lato e si semplificano.</p>
+    <p class="passo">Lo stilo di canna, premuto nell'argilla, lascia tratti <b>a forma di cuneo</b>: è la scrittura cuneiforme.</p>
+    <p class="passo">Si usa in tutto il Vicino Oriente, anche per lingue diverse dal sumerico.</p>
+  </div>
+  <div class="testo" data-tappa="3">
+    <h2>4 · Alfabeto</h2>
+    <p class="passo">Per i Fenici la prima lettera si chiama <i>alef</i>, «bue», e all'inizio era proprio una testa di bue.</p>
+    <p class="passo">I Greci la girano e la chiamano <i>alfa</i>. Noi la scriviamo <b>A</b>.</p>
+    <p class="passo">Un segno per ogni suono: bastano poco più di venti lettere (lezione 6).</p>
+  </div>
+  <p class="nota">Disegni semplificati: mostrano il percorso, non la forma esatta di ogni segno.</p>
+</aside>
+</main>
+<footer>
+  <button class="cmd" id="rivedi">↺ Rivedi</button>
+  <span class="hint">Tasti: 1 · 2 · 3 · 4, oppure ← → · Esc: torna alle slide</span>
+</footer>
+<script>
+const $ = (s) => document.querySelector(s);
+let tappa = 0, timer = [];
+const dopo = (ms, f) => timer.push(setTimeout(f, ms));
+const mostra = (id) => $(id).classList.remove("nascosto");
+const nascondi = (id) => $(id).classList.add("nascosto");
+// ogni tappa: lo stato iniziale, poi i passi uno dopo l'altro
+const TAPPE = [
+  () => {},
+  () => { dopo(900, () => mostra("#s1-ti")); dopo(1900, () => mostra("#s1-a")); dopo(3000, () => mostra("#s1-b")); dopo(4100, () => mostra("#s1-c")); },
+  () => {
+    dopo(900, () => $("#s2-bue").classList.add("girato"));
+    dopo(2700, () => { $("#s2-bue").classList.add("nascosto"); mostra("#s2-cunei"); });
+    dopo(3700, () => mostra("#s2-a"));
+  },
+  () => {
+    dopo(900, () => { mostra("#s3-freccia"); mostra("#s3-alef"); mostra("#s3-alef-t"); });
+    dopo(2600, () => { nascondi("#s3-bue"); nascondi("#s3-bue-t"); nascondi("#s3-freccia"); nascondi("#s3-alef-t"); $("#s3-alef").classList.add("girato-a"); });
+    dopo(4100, () => { nascondi("#s3-alef"); mostra("#s3-A"); mostra("#s3-a"); });
+  },
+];
+const INIZIO = {
+  1: () => ["#s1-ti", "#s1-a", "#s1-b", "#s1-c"].forEach(nascondi),
+  2: () => { $("#s2-bue").classList.remove("girato", "nascosto"); ["#s2-cunei", "#s2-a"].forEach(nascondi); },
+  3: () => { ["#s3-bue", "#s3-bue-t"].forEach((s) => $(s).classList.remove("nascosto")); $("#s3-alef").classList.remove("girato-a"); ["#s3-freccia", "#s3-alef", "#s3-alef-t", "#s3-A", "#s3-a"].forEach(nascondi); },
+};
+function vai(n) {
+  timer.forEach(clearTimeout); timer = [];
+  tappa = n;
+  document.querySelectorAll(".tab").forEach((t) => t.classList.toggle("attiva", +t.dataset.tappa === n));
+  document.querySelectorAll(".scena").forEach((s, i) => s.classList.toggle("vista", i === n));
+  document.querySelectorAll(".testo").forEach((t) => { t.hidden = +t.dataset.tappa !== n; });
+  const passi = [...document.querySelectorAll(`.testo[data-tappa="${n}"] .passo`)];
+  passi.forEach((p) => p.classList.remove("vista"));
+  passi.forEach((p, i) => dopo(300 + i * 1300, () => p.classList.add("vista")));
+  INIZIO[n]?.();
+  TAPPE[n]();
+}
+document.querySelectorAll(".tab").forEach((t) => t.addEventListener("click", () => vai(+t.dataset.tappa)));
+$("#rivedi").addEventListener("click", () => vai(tappa));
+document.addEventListener("keydown", (e) => {
+  if (e.key >= "1" && e.key <= "4") vai(e.key - 1);
+  else if (e.key === "ArrowRight" || e.key === " ") { e.preventDefault(); vai(Math.min(tappa + 1, 3)); }
+  else if (e.key === "ArrowLeft") vai(Math.max(tappa - 1, 0));
+});
+const h = parseInt(location.hash.slice(1), 10);
+vai(h >= 1 && h <= 4 ? h - 1 : 0);
+</script>
+<a class="torna-indice" href="index.html" title="Indice di geostoria">← Geostoria</a>
+<style>.torna-indice{position:fixed;right:14px;bottom:10px;z-index:99;font:600 14px/1 system-ui,sans-serif;color:#555;text-decoration:none;opacity:0;transition:opacity .25s;padding:6px 10px;border-radius:8px;background:rgba(255,255,255,.85)}.torna-indice:hover,.torna-indice:focus,body:hover .torna-indice{opacity:1}</style>
+</body>
+</html>

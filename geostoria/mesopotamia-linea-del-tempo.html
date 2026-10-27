@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mesopotamia, la linea del tempo</title>
+<link href="https://fonts.googleapis.com/css2?family=Shantell+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+  @font-face { font-family: "Shantell Sans"; src: url("fonts/ShantellSans%5BBNCE,INFM,SPAC,wght%5D.ttf"); font-weight: 300 800; }
+  :root {
+    --nero: #1D1D1D; --blu: #4465E9; --verde: #099268; --rosso: #C2410C; --viola: #AE3EC9; --grigio: #8A939C;
+    --nota: #FFF4B8; --griglia: #C8C8C8; --sfondo: #FAFAF7;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; }
+  body {
+    font-family: "Shantell Sans", "Patrick Hand", "Comic Neue", "Segoe Print", "Chalkboard", sans-serif;
+    color: var(--nero); background: var(--sfondo);
+    background-image: radial-gradient(var(--griglia) 0.9px, transparent 1px); background-size: 22px 22px;
+    display: flex; flex-direction: column; overflow: hidden;
+  }
+  header { display: flex; align-items: center; gap: 18px; padding: 14px 28px 0; }
+  .badge { font-weight: 800; font-size: 20px; padding: 6px 16px; border: 3px solid var(--blu); color: var(--blu);
+    border-radius: 12px 14px 10px 16px / 14px 10px 16px 12px; background: #4465E91f; letter-spacing: .5px; }
+  h1 { font-size: 32px; margin: 0; font-weight: 800; }
+  .spazio { flex: 1; }
+  .contatore { font-size: 22px; color: var(--grigio); font-weight: 600; }
+  .didascalia { margin: 10px 28px 0; min-height: 2.8em; font-size: 28px; line-height: 1.35; }
+  .didascalia b { color: var(--rosso); }
+  main { flex: 1; min-height: 0; padding: 0 20px; }
+  svg { width: 100%; height: 100%; display: block; }
+  .asse { stroke: var(--nero); stroke-width: 4; }
+  .tacca { stroke: var(--nero); stroke-width: 3; }
+  .anno { font-size: 24px; text-anchor: middle; fill: var(--nero); }
+  .fascia { stroke-width: 3; transition: opacity .7s ease; }
+  .tappa { opacity: 0; transition: opacity .7s ease; }
+  .tappa.vista { opacity: 1; }
+  .tappa .crescita { transform-box: fill-box; transform-origin: left center; transform: scaleX(0); transition: transform 1.1s ease; }
+  .tappa.vista .crescita { transform: scaleX(1); }
+  .nome { font-size: 27px; font-weight: 800; paint-order: stroke; stroke: var(--sfondo); stroke-width: 7; stroke-linejoin: round; }
+  .dett { font-size: 21px; fill: var(--nero); paint-order: stroke; stroke: var(--sfondo); stroke-width: 6; stroke-linejoin: round; }
+  .rosso { fill: var(--rosso); } .verde { fill: var(--verde); } .blu { fill: var(--blu); } .viola { fill: var(--viola); } .grigio { fill: var(--grigio); }
+  .fascia.rosso { stroke: var(--rosso); fill-opacity: .35; } .fascia.verde { stroke: var(--verde); fill-opacity: .35; }
+  .fascia.blu { stroke: var(--blu); fill-opacity: .35; } .fascia.viola { stroke: var(--viola); fill-opacity: .3; }
+  .fascia.grigio { stroke: var(--grigio); fill-opacity: .3; }
+  .segno { stroke: var(--nero); stroke-width: 3; stroke-dasharray: 6 5; }
+  footer { display: flex; gap: 14px; align-items: center; padding: 6px 28px 14px; }
+  button.cmd { font: inherit; font-weight: 600; font-size: 22px; padding: 10px 22px; cursor: pointer; background: #fff;
+    border: 3px solid var(--nero); color: var(--nero); border-radius: 12px 16px 10px 14px / 16px 10px 14px 12px; }
+  button.cmd.primo { background: var(--verde); border-color: var(--verde); color: #fff; }
+  .hint { color: var(--grigio); font-size: 18px; margin-left: auto; }
+</style>
+</head>
+<body>
+<header>
+  <span class="badge">GEOSTORIA</span>
+  <h1>Mesopotamia, la linea del tempo</h1>
+  <span class="spazio"></span>
+  <span class="contatore" id="contatore"></span>
+</header>
+<p class="didascalia" id="didascalia"></p>
+<main>
+<svg viewBox="0 0 1500 640" role="img" aria-label="Linea del tempo della Mesopotamia, dal IV millennio al XII secolo a.C., in scala">
+  <g id="asse"></g>
+  <g id="tappe"></g>
+</svg>
+</main>
+<footer>
+  <button class="cmd primo" id="avanti">Avanti →</button>
+  <button class="cmd" id="indietro">← Indietro</button>
+  <button class="cmd" id="tutto">Mostra tutto</button>
+  <span class="hint">Tasti: spazio o → avanti · ← indietro · T tutto · Esc: torna alle slide</span>
+</footer>
+<script>
+// scala: dal 3600 al 1000 a.C., mezzo punto per anno; gli anni a.C. vanno verso destra man mano che diminuiscono
+const INIZIO = 3600, FINE = 1000, X0 = 70, PER_ANNO = 0.52;
+const x = (anno) => X0 + (INIZIO - anno) * PER_ANNO;
+const SVG = "http://www.w3.org/2000/svg";
+const ASSE_Y = 470;
+
+// date della lezione (manuale, pp. 31-36)
+const TAPPE = [
+  { testo: "<b>IV millennio a.C.</b> · i <b>Sumeri</b> costruiscono le prime città-stato.",
+    fasce: [{ da: 3500, a: 2370, y: 70, colore: "rosso", nome: "Sumeri", dett: "le città-stato" }] },
+  { testo: "<b>2900-2350 a.C.</b> · il periodo protodinastico: accanto al tempio nasce il <b>palazzo</b>.",
+    fasce: [{ da: 2900, a: 2350, y: 150, colore: "rosso", nome: "", dett: "protodinastico: nasce il palazzo", basso: true }] },
+  { testo: "<b>2370 a.C.</b> · <b>Sargon</b> e gli Accadi: il primo impero. Crolla verso il 2200, sotto i Gutei.",
+    fasce: [{ da: 2370, a: 2200, y: 230, colore: "verde", nome: "Accadi", dett: "Sargon, il primo impero" }] },
+  { testo: "<b>XXI secolo a.C.</b> · torna potente <b>Ur</b>: la rinascita neosumerica.",
+    fasce: [{ da: 2100, a: 2000, y: 70, colore: "rosso", nome: "Ur", dett: "rinascita neosumerica" }] },
+  { testo: "<b>1792-1750 a.C.</b> · <b>Hammurabi</b> re di Babilonia: uno Stato forte e il Codice.",
+    fasce: [{ da: 1792, a: 1750, y: 310, colore: "blu", nome: "Hammurabi", dett: "1792-1750, il Codice" }] },
+  { testo: "<b>1550 a.C. circa</b> · Babilonia cade: prima gli <b>Hittiti</b>, poi i <b>Cassiti</b>, che la tengono fino al XII secolo.",
+    fasce: [{ da: 1550, a: 1150, y: 390, colore: "viola", nome: "Cassiti", dett: "fino al XII secolo" }] },
+  { testo: "Dai Sumeri alla caduta di Babilonia passano <b>quasi duemila anni</b>: tanto quanto da Augusto a oggi.",
+    confronto: true },
+];
+
+function el(nome, attr, padre) {
+  const e = document.createElementNS(SVG, nome);
+  for (const [k, v] of Object.entries(attr)) e.setAttribute(k, v);
+  padre.appendChild(e);
+  return e;
+}
+function testo(classe, x, y, contenuto, padre, ancora = "start") {
+  const t = el("text", { class: classe, x, y, "text-anchor": ancora }, padre);
+  t.textContent = contenuto;
+  return t;
+}
+
+// l'asse con le tacche ogni 500 anni
+const asse = document.querySelector("#asse");
+el("line", { class: "asse", x1: x(INIZIO), y1: ASSE_Y, x2: x(FINE) + 20, y2: ASSE_Y }, asse);
+for (let a = 3500; a >= 1000; a -= 500) {
+  el("line", { class: "tacca", x1: x(a), y1: ASSE_Y - 12, x2: x(a), y2: ASSE_Y + 12 }, asse);
+  testo("anno", x(a), ASSE_Y + 44, `${a} a.C.`, asse, "middle");
+}
+
+const gruppi = TAPPE.map((t) => {
+  const g = el("g", { class: "tappa" }, document.querySelector("#tappe"));
+  for (const f of t.fasce ?? []) {
+    const larghezza = Math.max(x(f.a) - x(f.da), 14), alta = f.basso ? 34 : 56;
+    el("rect", { class: `fascia crescita ${f.colore}`, x: x(f.da), y: f.y, width: larghezza, height: alta, rx: 10 }, g);
+    el("line", { class: "segno", x1: x(f.da), y1: f.y + alta, x2: x(f.da), y2: ASSE_Y }, g);
+    // l'etichetta va dentro la fascia se c'è posto, altrimenti a destra; vicino al bordo, a sinistra
+    const stima = (f.nome ? f.nome.length * 18 + 14 : 0) + f.dett.length * 11;
+    const dentro = larghezza > stima + 28;
+    const aSinistra = !dentro && x(f.da) + larghezza + 12 + stima > 1490;
+    const lx = dentro ? x(f.da) + 14 : aSinistra ? x(f.da) - 12 - stima : x(f.da) + larghezza + 12;
+    if (f.nome) testo(`nome ${f.colore}`, lx, f.y + 37, f.nome, g);
+    const dx = f.nome ? lx + f.nome.length * 18 + 14 : lx;
+    testo("dett", dx, f.y + (f.basso ? 25 : 37), f.dett, g);
+  }
+  if (t.confronto) {
+    const y1 = 540, da = 3500, a = 1550, lung = (da - a) * PER_ANNO, augusto = (27 + 2026) * PER_ANNO;
+    el("rect", { class: "fascia crescita rosso", x: x(da), y: y1, width: lung, height: 26, rx: 8 }, g);
+    testo("dett", x(da) + 14, y1 + 20, "dai Sumeri alla caduta di Babilonia: circa 1950 anni", g);
+    el("rect", { class: "fascia crescita grigio", x: x(da), y: y1 + 40, width: augusto, height: 26, rx: 8 }, g);
+    testo("dett", x(da) + 14, y1 + 60, "da Augusto a oggi: circa 2050 anni, alla stessa scala", g);
+  }
+  return g;
+});
+
+let n = 0;
+function aggiorna() {
+  gruppi.forEach((g, i) => g.classList.toggle("vista", i < n));
+  document.querySelector("#didascalia").innerHTML = n ? TAPPE[n - 1].testo : "Premete <b>Avanti</b>: le tappe compaiono una alla volta, alla giusta distanza.";
+  document.querySelector("#contatore").textContent = `${n} / ${TAPPE.length}`;
+}
+const avanti = () => { n = Math.min(n + 1, TAPPE.length); aggiorna(); };
+const indietro = () => { n = Math.max(n - 1, 0); aggiorna(); };
+const tutto = () => { n = TAPPE.length; aggiorna(); };
+document.querySelector("#avanti").onclick = avanti;
+document.querySelector("#indietro").onclick = indietro;
+document.querySelector("#tutto").onclick = tutto;
+document.addEventListener("keydown", (e) => {
+  if (e.key === " " || e.key === "ArrowRight") { e.preventDefault(); avanti(); }
+  else if (e.key === "ArrowLeft") indietro();
+  else if (e.key.toLowerCase() === "t") tutto();
+});
+if (location.hash.includes("tutto")) n = TAPPE.length;
+aggiorna();
+</script>
+<a class="torna-indice" href="index.html" title="Indice di geostoria">← Geostoria</a>
+<style>.torna-indice{position:fixed;right:14px;bottom:10px;z-index:99;font:600 14px/1 system-ui,sans-serif;color:#555;text-decoration:none;opacity:0;transition:opacity .25s;padding:6px 10px;border-radius:8px;background:rgba(255,255,255,.85)}.torna-indice:hover,.torna-indice:focus,body:hover .torna-indice{opacity:1}</style>
+</body>
+</html>

@@ -19,7 +19,7 @@ Sul quaderno, una riga per domanda. Libro chiuso.
 2. Le tre età dei metalli, in ordine.
 3. Il bronzo: di che cosa è fatto?
 
-+ Mestieri diversi dal contadino, edifici comuni (tempio, mura, magazzini), qualcuno che comanda e organizza.
++ Mestieri diversi da quello del contadino, edifici comuni (tempio, mura, magazzini), qualcuno che comanda e organizza.
 + Rame, bronzo, ferro.
 + Rame e stagno fusi insieme.
 
@@ -33,11 +33,11 @@ Le prime città della storia nascono in una terra senza pietra, senza legno, con
 :::
 
 ::: passo "La terra fra i due fiumi"
-![Carta della Mesopotamia meridionale: il Tigri, l'Eufrate, le terre di Akkad e di Sumer con le loro città, il deserto arabico e i monti Zagros](/geostoria/reperti/carta-sumer-akkad.png)
+![Carta della Mesopotamia meridionale: il Tigri, l'Eufrate, le terre di Accad e di Sumer con le loro città, il deserto arabico e i monti Zagros](/geostoria/reperti/carta-sumer-akkad.png)
 
-*Le città di Sumer e di Akkad. Carta di Cattette, CC BY 4.0. Il golfo Persico arrivava molto più a nord di oggi.*
+*Le città di Sumer e di Accad. Carta di Cattette, CC BY 4.0. Il golfo Persico arrivava molto più a nord di oggi.*
 
-*Mesopotamia* è una parola greca: «terra in mezzo ai fiumi» (p. 30).
+*Mesopotamia* è una parola greca: «terra in mezzo ai fiumi» (p. 30). Oggi è in gran parte in Iraq.
 
 + Il Tigri e l'Eufrate **nascono in Anatolia**, l'attuale Turchia.
 + A ovest il **deserto dell'Arabia**, a est i **monti Zagros**.
@@ -56,7 +56,7 @@ Le prime città della storia nascono in una terra senza pietra, senza legno, con
 + **Primo rischio**: le piene arrivano nel periodo del raccolto. Bisogna scavare **canali**.
 + **Secondo rischio**: non ci sono **barriere naturali**. Dal IV al I millennio a.C. arrivano popoli diversi, uno dopo l'altro.
 
-Con il vicino, trenta secondi: chi scava i canali, se servono migliaia di braccia?
+Con il vicino, trenta secondi: chi fa scavare i canali, se servono migliaia di braccia?
 
 + Qualcuno che organizza e comanda. Teniamo questa risposta: è l'inizio della città-stato.
 
@@ -66,7 +66,7 @@ Con il vicino, trenta secondi: chi scava i canali, se servono migliaia di bracci
 
 + Nelle **pianure** vivono i contadini, lungo i canali.
 + Sui **monti Zagros** vivono pastori **nomadi**. In primavera scendono all'Eufrate per abbeverare le greggi: incontri, e a volte scontri, con i contadini.
-+ L'ambiente resta **a rischio**: la siccità, e i suoli che si impoveriscono se si sfruttano troppo.
++ L'ambiente resta **fragile**: siccità e suoli che, sfruttati troppo, si impoveriscono.
 
 ??? Chi abita i monti Zagros?
 - [ ] contadini che coltivano il grano
@@ -81,20 +81,20 @@ Indicare sulla carta Ur, Uruk, Lagash, Umma, Nippur, e far notare che al tempo d
 ::: passo "La città-stato sumera"
 ![La ziqqurat di Ur, grande torre a gradoni di mattoni con una scalinata centrale](/geostoria/reperti/ziqqurat-ur.jpg)
 
-*La ziqqurat di Ur, intorno al 2100 a.C., restaurata. Foto di Hardnfast, CC BY 3.0.*
+*La ziqqurat di Ur, costruita intorno al 2100 a.C., oggi restaurata. Foto di Hardnfast, CC BY 3.0.*
 
 A metà del IV millennio a.C. i **Sumeri** costruiscono le prime città: è la **rivoluzione urbana** (p. 31). Sono anche un popolo di inventori.
 
 + Fondono rame e stagno e ottengono il **bronzo**.
-+ La **ruota** del tornio del vasaio passa ai **carri** da traino (p. 31).
++ La **ruota** nasce per il tornio del vasaio, poi passa ai **carri** da traino (p. 31).
 + Manca la pietra: costruiscono con **mattoni d'argilla**, seccati al sole o cotti nei forni (p. 40).
 
 ---
 
 ### Che cosa c'è in una città-stato
 
-+ **Il re**, *lugal*, «uomo grande»: governa, ha compiti religiosi, è considerato sacro.
-+ **Il tempio**, la casa del dio che protegge la città. Spesso è una **ziqqurat**, da *zaqaru*, «essere alto».
++ **Il re**, *lugal*, «uomo grande»: governa la sua città, ha compiti religiosi, è considerato sacro.
++ **Il tempio**, la casa del dio che protegge la città. Spesso sorge in cima a una **ziqqurat**, una torre a gradoni: il nome viene da *zaqaru*, «essere alto».
 + **Il palazzo**, dal 2900 a.C. circa: controlla l'economia e l'esercito (p. 32).
 + **La terra**: quasi tutta del tempio e del palazzo. Molti contadini sono **schiavi**: prigionieri di guerra o debitori che non pagano.
 
@@ -117,14 +117,14 @@ Un minuto, da soli: le **quattro cose** che ci sono in una città-stato sumera.
 
 *Tavoletta con un conto di malto e orzo, circa 3100-2900 a.C. Metropolitan Museum of Art, New York, CC0.*
 
-In città ci sono magazzini, tasse, debiti. Bisogna **registrare**. I Sumeri sono il primo popolo a noi noto che inventa una scrittura (p. 32).
+In città ci sono magazzini, tasse, debiti. Bisogna **registrare**. Per quanto ne sappiamo, i Sumeri sono il primo popolo a inventare una scrittura (p. 32).
 
 ---
 
 ### Quattro tappe
 
 + **Pittogrammi**: un disegno per ogni oggetto. Una testa di bue vuol dire «bue».
-+ **Segni per i suoni**: «freccia» e «vita» si dicono *ti*. Così il disegno della freccia vuol dire anche «vita».
++ **Segni per i suoni**: in sumerico «freccia» e «vita» si dicono *ti*. Così il disegno della freccia vuol dire anche «vita».
 + **Cuneiforme**: segni stilizzati «a forma di cuneo», incisi sull'argilla fresca. Si diffonde in tutto il Vicino Oriente.
 + **Alfabeto**: un segno per ogni suono. Lo introducono i Fenici (lezione 6).
 
@@ -137,7 +137,7 @@ In città ci sono magazzini, tasse, debiti. Bisogna **registrare**. I Sumeri son
 
 ### Che cosa cambia
 
-Prima tutto si ricorda **a voce**, e la memoria si perde. Con la scrittura si conservano conti, leggi, racconti.
+Prima tutto si tramanda **a voce**, e ciò che si dimentica va perso. Con la scrittura si conservano conti, leggi, racconti.
 
 + Chi scrive può controllare i magazzini e i debiti anche da lontano.
 + Una legge scritta resta uguale nel tempo.
@@ -164,7 +164,7 @@ A casa: pp. 30-33 del manuale, e le domande di «Acquisire un metodo» a p. 33.
 :::
 
 ::: passo "Ora 2 · Per ricominciare"
-Quaderno chiuso, da soli, due minuti. Quello che abbiamo visto l'ultima volta.
+Quaderno chiuso, da soli, due minuti.
 
 1. Perché la Mesopotamia è fertile, e perché è facile da invadere?
 2. Le quattro cose di una città-stato sumera.
@@ -183,8 +183,8 @@ Quaderno chiuso, da soli, due minuti. Quello che abbiamo visto l'ultima volta.
 Le città sumere si fanno guerra per le terre migliori. Verso il 2370 a.C. arriva un re che le unisce tutte.
 
 + **Sargon**, re degli **Accadi**, fonda il **primo impero** della Mesopotamia. Capitale: Accad (p. 34).
-+ Suo nipote **Naram-Sin** si proclama **dio**. I re sumeri erano sacerdoti, non dèi.
-+ Si fa chiamare «re delle quattro parti del mondo», cioè di tutte le terre: nasce l'**ideologia dell'impero** (p. 35).
++ Suo nipote **Naram-Sin** si proclama **dio**. I re sumeri potevano essere sacerdoti, ma non dèi.
++ Naram-Sin si fa chiamare «re delle quattro parti del mondo», cioè di tutte le terre: nasce l'**ideologia dell'impero** (p. 35).
 
 ??? Che cosa c'è di nuovo in Naram-Sin?
 - [ ] è il primo re della Mesopotamia
@@ -195,9 +195,9 @@ Le città sumere si fanno guerra per le terre migliori. Verso il 2370 a.C. arriv
 
 ### Chi vince, e chi resta
 
-+ Gli Accadi parlano una **lingua semitica**, i Sumeri no. Ma gli Accadi **assimilano** la cultura sumera: dèi, scienze, scrittura.
++ Gli Accadi parlano una **lingua semitica**, della stessa famiglia dell'ebraico e dell'arabo. Non è la lingua dei Sumeri, ma ne **fanno propria** la cultura: dèi, scienze, scrittura.
 + Verso il 2200 a.C. l'impero crolla sotto i **Gutei**, nomadi dei monti Zagros.
-+ Nel XXI secolo a.C. rinasce **Ur**, con il re Urnammu: la rinascita neosumerica.
++ Nel XXI secolo a.C. torna potente **Ur**, con il re Urnammu: è la rinascita neosumerica.
 :::
 
 ::: note
@@ -209,8 +209,8 @@ Gancio per chi chiede di più: la leggenda della nascita di Sargon, abbandonato 
 
 *La stele del Codice di Hammurabi, alta più di due metri. Louvre, Parigi. Foto di Mbzt, CC BY 3.0.*
 
-+ All'inizio del II millennio gli **Amorrei** fondano **Babilonia**, sull'Eufrate.
-+ **Hammurabi**, 1792-1750 a.C., unifica di nuovo la Mesopotamia in uno **Stato forte**. Sopra tutti gli dèi mette **Marduk**.
++ All'inizio del II millennio a.C. gli **Amorrei** fondano **Babilonia**, sull'Eufrate.
++ **Hammurabi**, 1792-1750 a.C., unifica di nuovo la Mesopotamia in uno **Stato forte**. Sopra tutti gli dèi mette **Marduk**, il dio di Babilonia.
 + Fa scrivere un **codice**: 282 leggi, incise su stele esposte nei templi (p. 36).
 
 ---
@@ -261,9 +261,9 @@ Il § 199, sullo schiavo, lo fanno da soli nel passo che segue. Domanda per chi 
 
 «Se egli cava l'occhio o rompe l'osso dello schiavo di un altro nobile, dovrà pagare la metà del suo prezzo.»
 
-Sul quaderno, due righe: **chi riceve i soldi? Che cosa ci dice questo dello schiavo?**
+Sul quaderno, due righe: **chi riceve l'argento? Che cosa ci dice questa legge dello schiavo?**
 
-+ Li riceve il padrone, non lo schiavo: lo schiavo è trattato come una cosa che ha un prezzo.
++ Lo riceve il padrone, non lo schiavo: lo schiavo è trattato come una cosa che ha un prezzo.
 
 ---
 
@@ -284,7 +284,7 @@ Quaderno chiuso, da soli, due minuti.
 2. Nel Codice di Hammurabi, da che cosa dipende la pena?
 3. Le tre classi della società babilonese.
 
-+ Si proclama dio: nasce l'ideologia dell'impero.
++ Si proclama dio e «re delle quattro parti del mondo»: nasce l'ideologia dell'impero.
 + Dal danno e da chi è la vittima.
 + Liberi, dipendenti, schiavi.
 :::
@@ -294,16 +294,16 @@ Quaderno chiuso, da soli, due minuti.
 
 + Dopo Hammurabi l'impero si **indebolisce**: alcune regioni si staccano.
 + Altri popoli vogliono la Mesopotamia. Verso il 1550 a.C. Babilonia cade per mano degli **Hittiti**.
-+ Poi arrivano i **Cassiti**, da nord-est, e la tengono fino al XII secolo a.C.
++ Poi arrivano i **Cassiti**, da nord-est, e tengono Babilonia fino al XII secolo a.C.
 
 ---
 
-Mille anni e più, in sei tappe. Prima la data, poi chi.
+Duemila anni, in sei tappe. Prima la data, poi chi.
 
 + **IV millennio a.C.** · i Sumeri: le prime città-stato.
 + **2900-2350 a.C.** · il periodo protodinastico: accanto al tempio nasce il palazzo.
 + **2370 a.C.** · Sargon e gli Accadi: il primo impero.
-+ **XXI secolo a.C.** · Ur: la rinascita sumera.
++ **XXI secolo a.C.** · Ur: la rinascita neosumerica.
 + **1792-1750 a.C.** · Hammurabi: l'impero di Babilonia.
 + **1550 a.C. circa** · Babilonia cade: prima gli Hittiti, poi i Cassiti.
 
@@ -325,7 +325,7 @@ Mille anni e più, in sei tappe. Prima la data, poi chi.
 
 ### Stelle e numeri (pp. 39-40)
 
-+ **Il cielo**: osservano gli astri, le fasi della Luna, le eclissi. Individuano lo **zodiaco**: molti nomi delle costellazioni sono ancora i loro, Toro, Gemelli, Leone.
++ **Il cielo**: osservano gli astri, le fasi della Luna, le eclissi. Individuano lo **zodiaco**: molti nomi delle costellazioni sono ancora i loro, come Toro, Gemelli e Leone.
 + **Il calendario**: 12 mesi lunari, divisi in **settimane**. I giorni sono dedicati al Sole, alla Luna e ai pianeti.
 + **Il mondo**: la Terra è un disco piatto, al centro dell'universo.
 + **I numeri**: contano in base **60**, il sistema sessagesimale. E il valore di una cifra cambia con il **posto** che occupa, come nei nostri numeri.
@@ -355,8 +355,8 @@ Con lo schema davanti, trenta secondi da soli: **perché proprio lì?**
 ::: pratica
 Quaderno, da soli, libro chiuso.
 
-1. **Linea del tempo.** Metti in ordine, con una data e una novità ciascuno: Babilonesi, Sumeri, Accadi.
-2. **Lo schema.** Ricopia lo schema di sintesi e aggiungi per ogni popolo una cosa che non c'è.
+1. **Linea del tempo.** Mettete in ordine, con una data e una novità ciascuno: Babilonesi, Sumeri, Accadi.
+2. **Lo schema.** Ricopiate lo schema di sintesi e aggiungete per ogni popolo una cosa che non c'è.
 
 Se finite prima: secondo voi il Codice di Hammurabi protegge il debole o il forte? Un argomento per parte.
 

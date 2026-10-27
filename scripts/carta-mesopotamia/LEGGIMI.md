@@ -11,6 +11,6 @@ Dati: Natural Earth (pubblico dominio), da scaricare in una cartella a parte:
 
 Rigenerare, dalla cartella del sito:
 
-    python3 -I sorgenti/carta-mesopotamia/genera_carta.py /tmp/ne geostoria/mesopotamia-ieri-oggi.html sorgenti/carta-mesopotamia/modello-carta.html
+    python3 -I scripts/carta-mesopotamia/genera_carta.py /tmp/ne geostoria/mesopotamia-ieri-oggi.html scripts/carta-mesopotamia/modello-carta.html
 
 Coordinate delle città: Pleiades per i siti antichi, Wikidata per le città di oggi (verificate il 27/10/2026). La costa antica è una ricostruzione approssimativa.

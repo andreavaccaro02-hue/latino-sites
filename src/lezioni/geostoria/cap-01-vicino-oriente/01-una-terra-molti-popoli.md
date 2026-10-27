@@ -70,7 +70,11 @@ Indicare sulla carta Ur, Uruk, Lagash, Umma, Nippur, e far notare che al tempo d
 
 *La ziqqurat di Ur, intorno al 2100 a.C., restaurata. Foto di Hardnfast, CC BY 3.0.*
 
-A metà del IV millennio a.C. i **Sumeri** costruiscono le prime città: è la **rivoluzione urbana** (p. 31). Scoprono il **bronzo** e forse inventano il **carro con le ruote**.
+A metà del IV millennio a.C. i **Sumeri** costruiscono le prime città: è la **rivoluzione urbana** (p. 31). Sono anche un popolo di inventori.
+
++ Fondono rame e stagno e ottengono il **bronzo**.
++ La **ruota** del tornio del vasaio passa ai **carri** da traino (p. 31).
++ Manca la pietra: costruiscono con **mattoni d'argilla**, seccati al sole o cotti nei forni (p. 40).
 
 ---
 
@@ -201,6 +205,21 @@ Gancio per chi chiede di più: la leggenda della nascita di Sargon, abbandonato 
 Il § 199, sullo schiavo, lo fanno da soli nella pratica. Domanda per chi corre: il prologo dice «che il forte non opprima il debole». I §§ 198-199 lo rispettano?
 :::
 
+::: passo "La linea del tempo"
+Mille anni e più, in sei tappe. Prima la data, poi chi.
+
++ **IV millennio a.C.** · i Sumeri: le prime città-stato.
++ **2900-2350 a.C.** · il periodo protodinastico: accanto al tempio nasce il palazzo.
++ **2370 a.C.** · Sargon e gli Accadi: il primo impero.
++ **XXI secolo a.C.** · Ur: la rinascita sumera.
++ **1792-1750 a.C.** · Hammurabi: l'impero di Babilonia.
++ **1550 a.C. circa** · Babilonia cade: prima gli Hittiti, poi i Cassiti.
+
+??? Chi viene prima?
+- [x] Sargon
+- [ ] Hammurabi
+:::
+
 ::: passo "Dèi, stelle, numeri"
 ![Lo Stendardo di Ur, pannello della guerra: carri, soldati e prigionieri su fondo blu di lapislazzuli](/geostoria/reperti/stendardo-ur-guerra.jpg)
 
@@ -215,6 +234,22 @@ Il § 199, sullo schiavo, lo fanno da soli nella pratica. Domanda per chi corre:
 - [ ] i centimetri
 - [x] i 60 minuti dell'ora e i 60 secondi del minuto
 - [ ] i giorni della settimana
+:::
+
+::: passo "Tutto in uno schema"
+### Mesopotamia, la terra in mezzo ai fiumi
+
++ **Terre fertili**, quindi agricoltura, quindi città.
++ **Nessuna barriera naturale**, quindi invasioni: i popoli arrivano uno dopo l'altro e si stratificano.
++ **Sumeri**: città-stato, scrittura cuneiforme, ruota.
++ **Accadi**: il primo impero, con Sargon.
++ **Babilonesi**: uno Stato forte e il Codice di Hammurabi.
+
+---
+
+Con lo schema davanti, trenta secondi da soli: **perché proprio lì?**
+
++ Perché c'erano acqua e terra fertile, e perché per governare le piene con i canali serviva qualcuno che organizzasse il lavoro di tutti.
 :::
 
 ::: pratica

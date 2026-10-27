@@ -35,8 +35,14 @@ def carica(nome):
 
 # colore di ogni Stato: MAPCOLOR7 di Natural Earth (vicini con colori diversi);
 # Israele e Palestina lì hanno lo stesso numero, la Palestina passa al 7
+# Cipro del Nord (riconosciuta solo dalla Turchia) ha lo stesso colore di Cipro e nessun confine interno
+CIPRO = {"Cyprus", "N. Cyprus"}
 def colore(f):
-    return 7 if f["properties"]["NAME"] == "Palestine" else f["properties"]["MAPCOLOR7"]
+    n = f["properties"]["NAME"]
+    if n == "Iraq": return 0          # l'Iraq ha un colore tutto suo: è la Mesopotamia di oggi
+    if n == "Palestine": return 7
+    if n in CIPRO: return 5
+    return f["properties"]["MAPCOLOR7"]
 def politica(paesi, classe):
     return f'<g class="{classe}">' + "".join(f'<path class="stato-{c}" d="{p}"/>' for p, c in paesi) + "</g>"
 
@@ -46,7 +52,7 @@ for f in carica("ne_50m_admin_0_countries"):
     if not rr: continue
     p = "".join(d(r, True) for r in rr)
     terre.append(p); paesi.append((p, colore(f)))
-confini = terre
+    if f["properties"]["NAME"] not in CIPRO: confini.append(p)
 
 # Tharthar, Habbaniyah, Razzaza, Assad: bacini artificiali del Novecento, solo nella carta di oggi
 laghi, bacini = [], []
@@ -86,23 +92,24 @@ ANTICHE = [("Babilonia", 44.425, 32.537, "s"), ("Kish", 44.593, 32.546, "d"), ("
            ("Umma", 45.887, 31.668, "d"), ("Uruk", 45.639, 31.323, "s"), ("Lagash", 46.410, 31.419, "d"),
            ("Ur", 46.105, 30.961, "d"), ("Eridu", 45.996, 30.820, "s")]
 MODERNE = [("Baghdad", 44.366, 33.315, "d"), ("Bassora", 47.810, 30.515, "s"), ("Mosul", 43.129, 36.342, "d"),
-           ("Kuwait", 47.980, 29.375, "d"), ("Damasco", 36.292, 33.513, "d")]
+           ("Kuwait", 47.980, 29.375, "s"), ("Damasco", 36.292, 33.513, "d")]
 STATI = [("IRAQ", 41.3, 32.9), ("SIRIA", 38.6, 35.3), ("TURCHIA", 41.0, 38.15), ("IRAN", 48.1, 32.9),
          ("ARABIA SAUDITA", 42.6, 29.2), ("GIORDANIA", 37.3, 30.9)]
 
 # vista larga, dalla Sicilia al Golfo Persico: stessa proiezione, viewBox più ampio
-LX0, LX1, LCLAT = 11.0, 54.0, 36.0
+LX0, LX1, LCLAT = 11.0, 54.0, 35.4
 LW = (LX1 - LX0) * CX * K
 LH = LW * H / W
 LVX, LVY = (LX0 - LON0) * CX * K, (LAT1 - (LCLAT + LH / K / 2)) * K
 def nel_largo(r):
     return any(LX0 - 3 < p[0] < LX1 + 3 and 18 < p[1] < 54 for p in r)
-terre_l, paesi_l = [], []
+terre_l, paesi_l, confini_l = [], [], []
 for f in carica("ne_110m_admin_0_countries"):
     rr = [r for r in anelli(f["geometry"]) if nel_largo(r)]
     if rr:
         p = "".join(d(r, True) for r in rr)
         terre_l.append(p); paesi_l.append((p, colore(f)))
+        if f["properties"]["NAME"] not in CIPRO: confini_l.append(p)
 
 def grande(classe, testo, lon, lat, ruota=0, anchor="middle"):
     x, y = xy(lon, lat)
@@ -111,19 +118,19 @@ def grande(classe, testo, lon, lat, ruota=0, anchor="middle"):
 bx, by = xy(13.500, 38.083)
 LARGO = [
     '<g class="largo">',
-    '<path class="confine-largo" d="' + "".join(terre_l) + '"/>',
+    '<path class="confine-largo" d="' + "".join(confini_l) + '"/>',
     f'<rect class="riquadro-meso" x="0" y="0" width="{W}" height="{H}"/>',
     grande("l-meso", "MESOPOTAMIA", 42.3, 33.6),
     grande("l-mare", "Mar Mediterraneo", 19.5, 34.4),
     grande("l-mare", "Mar Nero", 34.5, 43.3),
     grande("l-mare", "Mar Caspio", 50.9, 41.6, 72),
-    grande("l-mare", "Mar Rosso", 37.2, 24.6, 58),
+    grande("l-mare", "Mar Rosso", 35.9, 25.9, 58),
     grande("l-mare", "Golfo", 51.6, 27.6), grande("l-mare", "Persico", 51.6, 26.7),
     grande("l-stato", "ITALIA", 13.6, 43.4),
     grande("l-stato", "GRECIA", 22.0, 40.4),
     grande("l-stato", "TURCHIA", 33.0, 39.9), grande("l-nota", "l'antica Anatolia", 33.0, 39.15),
     grande("l-stato", "EGITTO", 29.5, 26.5),
-    grande("l-stato", "ARABIA SAUDITA", 44.5, 23.9),
+    grande("l-stato", "ARABIA SAUDITA", 44.5, 24.6),
     grande("l-stato", "IRAN", 52.6, 33.4),
     f'<circle class="l-noi-punto" cx="{bx:.0f}" cy="{by:.0f}" r="26"/>',
     grande("l-noi", "Bagheria", 14.5, 38.0, anchor="start"), grande("l-nota", "noi siamo qui", 14.5, 37.25, anchor="start"),
@@ -172,7 +179,7 @@ svg = [f'<svg viewBox="{LVX:.0f} {LVY:.0f} {LW:.0f} {LH:.0f}" preserveAspectRati
        '</g>',
        '<g class="oggi">',
        *[scritta("stato", n, lo, la) for n, lo, la in STATI],
-       scritta("acqua piccola", "Shatt al-Arab", 48.75, 30.45, 52),
+       scritta("acqua piccola", "Shatt al-Arab", 49.12, 29.72, anchor="end"),
        *[punto("moderna", n, lo, la, l) for n, lo, la, l in MODERNE],
        *ISRAELE_PALESTINA,
        '</g>',

@@ -43,6 +43,8 @@ Le prime città della storia nascono in una terra senza pietra, senza legno, con
 + A ovest il **deserto dell'Arabia**, a est i **monti Zagros**.
 + In mezzo, **pianure alluvionali**: terra fertile portata dai fiumi.
 
+---
+
 ??? In quale Stato si trova oggi quasi tutta la Mesopotamia?
 - [ ] Turchia
 - [x] Iraq
@@ -67,6 +69,8 @@ Con il vicino, trenta secondi: chi fa scavare i canali, se servono migliaia di b
 + Nelle **pianure** vivono i contadini, lungo i canali.
 + Sui **monti Zagros** vivono pastori **nomadi**. In primavera scendono all'Eufrate per abbeverare le greggi: incontri, e a volte scontri, con i contadini.
 + L'ambiente resta **fragile**: siccità e suoli che, sfruttati troppo, si impoveriscono.
+
+---
 
 ??? Chi abita i monti Zagros?
 - [ ] contadini che coltivano il grano
@@ -98,6 +102,8 @@ A metà del IV millennio a.C. i **Sumeri** costruiscono le prime città: è la *
 + **Il palazzo**, dal 2900 a.C. circa: controlla l'economia e l'esercito (p. 32).
 + **La terra**: quasi tutta del tempio e del palazzo. Molti contadini sono **schiavi**: prigionieri di guerra o debitori che non pagano.
 
+---
+
 ??? Ogni città sumera…
 - [x] è indipendente, con il suo re
 - [ ] obbedisce a un unico re di tutti i Sumeri
@@ -127,6 +133,8 @@ In città ci sono magazzini, tasse, debiti. Bisogna **registrare**. Per quanto n
 + **Segni per i suoni**: in sumerico «freccia» e «vita» si dicono *ti*. Così il disegno della freccia vuol dire anche «vita».
 + **Cuneiforme**: segni stilizzati «a forma di cuneo», incisi sull'argilla fresca. Si diffonde in tutto il Vicino Oriente.
 + **Alfabeto**: un segno per ogni suono. Lo introducono i Fenici (lezione 6).
+
+---
 
 ??? Perché la freccia che vuol dire «vita» è un passo avanti?
 - [ ] perché è più bella da disegnare
@@ -193,6 +201,8 @@ Le città sumere si fanno guerra per le terre migliori. Verso il 2370 a.C. arriv
 - [x] dice di essere un dio
 - [ ] inventa la scrittura
 
+---
+
 ### Chi vince, e chi resta
 
 + Gli Accadi parlano una **lingua semitica**, della stessa famiglia dell'ebraico e dell'arabo. Non è la lingua dei Sumeri, ma ne **fanno propria** la cultura: dèi, scienze, scrittura.
@@ -245,6 +255,8 @@ Gancio per chi chiede di più: la leggenda della nascita di Sargon, abbandonato 
 + **Dipendenti**, *muskenum*: la gran massa. Artigiani, contadini, piccoli commercianti che lavorano per il tempio o per il palazzo.
 + **Schiavi**, *wardum*: prigionieri di guerra, o persone che non hanno pagato un debito o hanno violato una legge.
 + Ma lo schiavo può possedere beni e sposare una persona libera. E a volte la schiavitù **finisce**, dopo un tempo stabilito.
+
+---
 
 ??? Chi sono i *muskenum*?
 - [ ] i nobili
@@ -307,6 +319,8 @@ Duemila anni, in sei tappe. Prima la data, poi chi.
 + **1792-1750 a.C.** · Hammurabi: l'impero di Babilonia.
 + **1550 a.C. circa** · Babilonia cade: prima gli Hittiti, poi i Cassiti.
 
+---
+
 ??? Chi viene prima?
 - [x] Sargon
 - [ ] Hammurabi
@@ -329,6 +343,8 @@ Duemila anni, in sei tappe. Prima la data, poi chi.
 + **Il calendario**: 12 mesi lunari, divisi in **settimane**. I giorni sono dedicati al Sole, alla Luna e ai pianeti.
 + **Il mondo**: la Terra è un disco piatto, al centro dell'universo.
 + **I numeri**: contano in base **60**, il sistema sessagesimale. E il valore di una cifra cambia con il **posto** che occupa, come nei nostri numeri.
+
+---
 
 ??? Che cosa usiamo ancora oggi del sistema in base 60?
 - [ ] i centimetri

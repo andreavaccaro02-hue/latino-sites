@@ -28,9 +28,9 @@
   .tab { border: 3px solid var(--nero); background: #fff; font: inherit; font-weight: 600; font-size: 22px;
     padding: 8px 20px; cursor: pointer; border-radius: 14px 10px 16px 12px / 10px 16px 12px 14px; color: var(--nero); }
   .tab.attiva { background: var(--nero); color: #fff; }
-  main { flex: 1; min-height: 0; display: grid; grid-template-columns: 56% minmax(0, 1fr); gap: 24px; padding: 12px 28px 18px; }
+  main { flex: 1; min-height: 0; display: grid; grid-template-columns: 60% minmax(0, 1fr); gap: 24px; padding: 12px 28px 18px; }
   svg { width: 100%; height: 100%; display: block; }
-  aside { align-self: center; font-size: 25px; line-height: 1.4; }
+  aside { align-self: center; font-size: 24px; line-height: 1.4; }
   aside .vista { display: none; }
   body.modo-dove aside .v-dove, body.modo-ieri aside .v-ieri, body.modo-oggi aside .v-oggi, body.modo-insieme aside .v-insieme { display: block; }
   aside h2 { font-size: 30px; margin: 0 0 .4em; }
@@ -49,28 +49,28 @@
   .cornice { fill: none; stroke: var(--nero); stroke-width: 4; }
 
   text { paint-order: stroke; stroke-linejoin: round; }
-  .acqua { font-size: 28px; font-style: italic; fill: #2F4FBF; stroke: var(--mare); stroke-width: 6; }
-  .acqua.piccola { font-size: 21px; }
-  .rilievo { font-size: 26px; fill: #7A6A50; stroke: var(--terra); stroke-width: 6; letter-spacing: 1px; }
-  .nome-fiume { font-size: 28px; font-weight: 800; fill: var(--fiume); stroke: var(--terra); stroke-width: 7; }
-  .regione { font-size: 40px; font-weight: 800; fill: var(--rosso); stroke: var(--terra); stroke-width: 8; letter-spacing: 3px; opacity: .85; }
+  .acqua { font-size: 33px; font-style: italic; fill: #2F4FBF; stroke: var(--mare); stroke-width: 6; }
+  .acqua.piccola { font-size: 26px; }
+  .rilievo { font-size: 30px; fill: #7A6A50; stroke: var(--terra); stroke-width: 6; letter-spacing: 1px; }
+  .nome-fiume { font-size: 34px; font-weight: 800; fill: var(--fiume); stroke: var(--terra); stroke-width: 7; }
+  .regione { font-size: 44px; font-weight: 800; fill: var(--rosso); stroke: var(--terra); stroke-width: 8; letter-spacing: 3px; opacity: .85; }
   .guida { fill: none; stroke: var(--nero); stroke-width: 2.5; stroke-dasharray: 6 5; }
-  .stato { font-size: 30px; font-weight: 800; fill: var(--nero); stroke: var(--terra); stroke-width: 7; letter-spacing: 3px; opacity: .7; }
-  .stato.piccolo { font-size: 24px; letter-spacing: 2px; opacity: .85; }
+  .stato { font-size: 35px; font-weight: 800; fill: var(--nero); stroke: var(--terra); stroke-width: 7; letter-spacing: 3px; opacity: .7; }
+  .stato.piccolo { font-size: 29px; letter-spacing: 2px; opacity: .85; }
   .punto { stroke: #fff; stroke-width: 3.5; }
   .antica .punto { fill: var(--rosso); }
   .moderna .punto { fill: var(--nero); }
-  .nome { font-size: 29px; font-weight: 800; stroke: #fff; stroke-width: 7; }
+  .nome { font-size: 35px; font-weight: 800; stroke: #fff; stroke-width: 7; }
   .antica .nome { fill: var(--rosso); }
   .moderna .nome { fill: var(--nero); }
 
   .confine-largo { fill: none; stroke: var(--nero); stroke-width: 4; stroke-dasharray: 3 12; stroke-linecap: round; }
   .riquadro-meso { fill: #C2410C14; stroke: var(--rosso); stroke-width: 12; stroke-dasharray: 34 20; }
-  .l-mare { font-size: 82px; font-style: italic; fill: #2F4FBF; stroke: var(--mare); stroke-width: 16; }
-  .l-stato { font-size: 76px; font-weight: 800; fill: var(--nero); stroke: var(--terra); stroke-width: 16; letter-spacing: 6px; opacity: .75; }
-  .l-nota { font-size: 66px; fill: var(--nero); stroke: #fff; stroke-width: 14; }
+  .l-mare { font-size: 92px; font-style: italic; fill: #2F4FBF; stroke: var(--mare); stroke-width: 16; }
+  .l-stato { font-size: 88px; font-weight: 800; fill: var(--nero); stroke: var(--terra); stroke-width: 16; letter-spacing: 6px; opacity: .75; }
+  .l-nota { font-size: 80px; fill: var(--nero); stroke: #fff; stroke-width: 14; }
   .l-meso { font-size: 104px; font-weight: 800; fill: var(--rosso); stroke: #fff; stroke-width: 18; letter-spacing: 6px; }
-  .l-noi { font-size: 80px; font-weight: 800; fill: var(--verde); stroke: #fff; stroke-width: 16; }
+  .l-noi { font-size: 92px; font-weight: 800; fill: var(--verde); stroke: #fff; stroke-width: 16; }
   .l-noi-punto { fill: var(--verde); stroke: #fff; stroke-width: 9; }
 
   /* gli Stati di oggi, ognuno col suo colore: niente azzurri, per non confonderli col mare */
@@ -137,7 +137,7 @@
 <text class="l-nota" x="-1443" y="125" text-anchor="start">noi siamo qui</text>
 </g>
 <g class="vicino">
-<text class="acqua" x="1351" y="970" text-anchor="middle">Golfo Persico</text>
+<text class="acqua" x="1447" y="975" text-anchor="end">Golfo Persico</text>
 <text class="acqua" x="117" y="465" text-anchor="middle">Mar</text>
 <text class="acqua" x="117" y="500" text-anchor="middle">Mediterraneo</text>
 <text class="rilievo" x="1234" y="410" text-anchor="middle" transform="rotate(-48 1234 410)">Monti Zagros</text>
@@ -147,9 +147,10 @@
 </g>
 <g class="ieri">
 <text class="regione" x="959" y="560" text-anchor="middle">ACCAD</text>
-<text class="regione" x="1001" y="770" text-anchor="middle">SUMER</text>
+<text class="regione" x="951" y="765" text-anchor="middle">SUMER</text>
 <text class="rilievo" x="467" y="35" text-anchor="middle">Anatolia</text>
-<text class="acqua" x="1318" y="845" text-anchor="middle">il mare di allora</text>
+<text class="acqua piccola" x="1384" y="755" text-anchor="middle">il mare</text>
+<text class="acqua piccola" x="1384" y="780" text-anchor="middle">di allora</text>
 <g class="antica"><circle class="punto" cx="1053" cy="596" r="9"/><text class="nome" x="1037" y="604" text-anchor="end">Babilonia</text></g>
 <g class="antica"><circle class="punto" cx="1067" cy="595" r="9"/><text class="nome" x="1083" y="603" text-anchor="start">Kish</text></g>
 <g class="antica"><circle class="punto" cx="1120" cy="637" r="9"/><text class="nome" x="1136" y="645" text-anchor="start">Nippur</text></g>

@@ -60,7 +60,7 @@
 </header>
 <p class="didascalia" id="didascalia"></p>
 <main>
-<svg viewBox="0 0 1500 640" role="img" aria-label="Linea del tempo della Mesopotamia, dal IV millennio al XII secolo a.C., in scala">
+<svg viewBox="0 0 1500 550" role="img" aria-label="Linea del tempo della Mesopotamia, dal IV millennio al XII secolo a.C., in scala">
   <g id="asse"></g>
   <g id="tappe"></g>
 </svg>
@@ -76,23 +76,23 @@
 const INIZIO = 3600, FINE = 1000, X0 = 70, PER_ANNO = 0.52;
 const x = (anno) => X0 + (INIZIO - anno) * PER_ANNO;
 const SVG = "http://www.w3.org/2000/svg";
-const ASSE_Y = 470;
+const ASSE_Y = 395;
 
 // date della lezione (manuale, pp. 31-36)
 const TAPPE = [
   { testo: "<b>IV millennio a.C.</b> · i <b>Sumeri</b> costruiscono le prime città-stato.",
-    fasce: [{ da: 3500, a: 2370, y: 70, colore: "rosso", nome: "Sumeri", dett: "le città-stato" }] },
+    fasce: [{ da: 3500, a: 2370, y: 30, colore: "rosso", nome: "Sumeri", dett: "le città-stato" }] },
   { testo: "<b>2900-2350 a.C.</b> · il periodo protodinastico: accanto al tempio nasce il <b>palazzo</b>.",
-    fasce: [{ da: 2900, a: 2350, y: 150, colore: "rosso", nome: "", dett: "protodinastico: nasce il palazzo", basso: true }] },
-  { testo: "<b>2370 a.C.</b> · <b>Sargon</b> e gli Accadi: il primo impero. Crolla verso il 2200, sotto i Gutei.",
-    fasce: [{ da: 2370, a: 2200, y: 230, colore: "verde", nome: "Accadi", dett: "Sargon, il primo impero" }] },
+    fasce: [{ da: 2900, a: 2350, y: 96, colore: "rosso", nome: "", dett: "protodinastico: nasce il palazzo", basso: true }] },
+  { testo: "<b>2370 a.C.</b> · <b>Sargon</b> e gli Accadi: il primo impero. L'impero crolla verso il 2200, sotto i Gutei.",
+    fasce: [{ da: 2370, a: 2200, y: 150, colore: "verde", nome: "Accadi", dett: "Sargon, il primo impero" }] },
   { testo: "<b>XXI secolo a.C.</b> · torna potente <b>Ur</b>: la rinascita neosumerica.",
-    fasce: [{ da: 2100, a: 2000, y: 70, colore: "rosso", nome: "Ur", dett: "rinascita neosumerica" }] },
+    fasce: [{ da: 2100, a: 2000, y: 30, colore: "rosso", nome: "Ur", dett: "rinascita neosumerica" }] },
   { testo: "<b>1792-1750 a.C.</b> · <b>Hammurabi</b> re di Babilonia: uno Stato forte e il Codice.",
-    fasce: [{ da: 1792, a: 1750, y: 310, colore: "blu", nome: "Hammurabi", dett: "1792-1750, il Codice" }] },
-  { testo: "<b>1550 a.C. circa</b> · Babilonia cade: prima gli <b>Hittiti</b>, poi i <b>Cassiti</b>, che la tengono fino al XII secolo.",
-    fasce: [{ da: 1550, a: 1150, y: 390, colore: "viola", nome: "Cassiti", dett: "fino al XII secolo" }] },
-  { testo: "Dai Sumeri alla caduta di Babilonia passano <b>quasi duemila anni</b>: tanto quanto da Augusto a oggi.",
+    fasce: [{ da: 1792, a: 1750, y: 216, colore: "blu", nome: "Hammurabi", dett: "1792-1750, il Codice" }] },
+  { testo: "<b>1550 a.C. circa</b> · Babilonia cade: la conquistano prima gli <b>Hittiti</b>, poi i <b>Cassiti</b>, che la tengono fino al XII secolo.",
+    fasce: [{ da: 1550, a: 1150, y: 282, colore: "viola", nome: "Cassiti", dett: "fino al XII secolo" }] },
+  { testo: "Dai Sumeri alla caduta di Babilonia passano <b>quasi duemila anni</b>: più o meno quanto da Augusto a oggi.",
     confronto: true },
 ];
 
@@ -119,7 +119,7 @@ for (let a = 3500; a >= 1000; a -= 500) {
 const gruppi = TAPPE.map((t) => {
   const g = el("g", { class: "tappa" }, document.querySelector("#tappe"));
   for (const f of t.fasce ?? []) {
-    const larghezza = Math.max(x(f.a) - x(f.da), 14), alta = f.basso ? 34 : 56;
+    const larghezza = Math.max(x(f.a) - x(f.da), 14), alta = f.basso ? 34 : 50;
     el("rect", { class: `fascia crescita ${f.colore}`, x: x(f.da), y: f.y, width: larghezza, height: alta, rx: 10 }, g);
     el("line", { class: "segno", x1: x(f.da), y1: f.y + alta, x2: x(f.da), y2: ASSE_Y }, g);
     // l'etichetta va dentro la fascia se c'è posto, altrimenti a destra; vicino al bordo, a sinistra
@@ -127,12 +127,12 @@ const gruppi = TAPPE.map((t) => {
     const dentro = larghezza > stima + 28;
     const aSinistra = !dentro && x(f.da) + larghezza + 12 + stima > 1490;
     const lx = dentro ? x(f.da) + 14 : aSinistra ? x(f.da) - 12 - stima : x(f.da) + larghezza + 12;
-    if (f.nome) testo(`nome ${f.colore}`, lx, f.y + 37, f.nome, g);
+    if (f.nome) testo(`nome ${f.colore}`, lx, f.y + 34, f.nome, g);
     const dx = f.nome ? lx + f.nome.length * 18 + 14 : lx;
-    testo("dett", dx, f.y + (f.basso ? 25 : 37), f.dett, g);
+    testo("dett", dx, f.y + (f.basso ? 25 : 34), f.dett, g);
   }
   if (t.confronto) {
-    const y1 = 540, da = 3500, a = 1550, lung = (da - a) * PER_ANNO, augusto = (27 + 2026) * PER_ANNO;
+    const y1 = 462, da = 3500, a = 1550, lung = (da - a) * PER_ANNO, augusto = (27 + 2026) * PER_ANNO;
     el("rect", { class: "fascia crescita rosso", x: x(da), y: y1, width: lung, height: 26, rx: 8 }, g);
     testo("dett", x(da) + 14, y1 + 20, "dai Sumeri alla caduta di Babilonia: circa 1950 anni", g);
     el("rect", { class: "fascia crescita grigio", x: x(da), y: y1 + 40, width: augusto, height: 26, rx: 8 }, g);
@@ -144,7 +144,7 @@ const gruppi = TAPPE.map((t) => {
 let n = 0;
 function aggiorna() {
   gruppi.forEach((g, i) => g.classList.toggle("vista", i < n));
-  document.querySelector("#didascalia").innerHTML = n ? TAPPE[n - 1].testo : "Premete <b>Avanti</b>: le tappe compaiono una alla volta, alla giusta distanza.";
+  document.querySelector("#didascalia").innerHTML = n ? TAPPE[n - 1].testo : "Premete <b>Avanti</b>: le tappe compaiono una alla volta, in scala.";
   document.querySelector("#contatore").textContent = `${n} / ${TAPPE.length}`;
 }
 const avanti = () => { n = Math.min(n + 1, TAPPE.length); aggiorna(); };

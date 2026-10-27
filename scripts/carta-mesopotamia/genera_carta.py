@@ -33,12 +33,19 @@ def d(r, chiudi):
 def carica(nome):
     return json.load(open(f"{NE}/{nome}.geojson"))["features"]
 
-terre, confini = [], []
+# colore di ogni Stato: MAPCOLOR7 di Natural Earth (vicini con colori diversi);
+# Israele e Palestina lì hanno lo stesso numero, la Palestina passa al 7
+def colore(f):
+    return 7 if f["properties"]["NAME"] == "Palestine" else f["properties"]["MAPCOLOR7"]
+def politica(paesi, classe):
+    return f'<g class="{classe}">' + "".join(f'<path class="stato-{c}" d="{p}"/>' for p, c in paesi) + "</g>"
+
+terre, confini, paesi = [], [], []
 for f in carica("ne_50m_admin_0_countries"):
     rr = [r for r in anelli(f["geometry"]) if vicino(r)]
     if not rr: continue
     p = "".join(d(r, True) for r in rr)
-    terre.append(p)
+    terre.append(p); paesi.append((p, colore(f)))
 confini = terre
 
 # Tharthar, Habbaniyah, Razzaza, Assad: bacini artificiali del Novecento, solo nella carta di oggi
@@ -90,10 +97,12 @@ LH = LW * H / W
 LVX, LVY = (LX0 - LON0) * CX * K, (LAT1 - (LCLAT + LH / K / 2)) * K
 def nel_largo(r):
     return any(LX0 - 3 < p[0] < LX1 + 3 and 18 < p[1] < 54 for p in r)
-terre_l = []
+terre_l, paesi_l = [], []
 for f in carica("ne_110m_admin_0_countries"):
     rr = [r for r in anelli(f["geometry"]) if nel_largo(r)]
-    if rr: terre_l.append("".join(d(r, True) for r in rr))
+    if rr:
+        p = "".join(d(r, True) for r in rr)
+        terre_l.append(p); paesi_l.append((p, colore(f)))
 
 def grande(classe, testo, lon, lat, ruota=0, anchor="middle"):
     x, y = xy(lon, lat)
@@ -138,6 +147,8 @@ svg = [f'<svg viewBox="{LVX:.0f} {LVY:.0f} {LW:.0f} {LH:.0f}" preserveAspectRati
        f'<rect class="mare" x="{LVX - 500:.0f}" y="{LVY - 500:.0f}" width="{LW + 1000:.0f}" height="{LH + 1000:.0f}"/>',
        '<path class="terra" d="' + "".join(terre_l) + '"/>',
        '<path class="terra" d="' + "".join(terre) + '"/>',
+       politica(paesi_l, "politica-largo"),
+       politica(paesi, "politica"),
        '<path class="lago" d="' + "".join(laghi) + '"/>',
        '<path class="fiume" d="' + "".join(fiumi) + '"/>',
        '<g class="oggi"><path class="lago" d="' + "".join(bacini) + '"/><path class="fiume" d="' + "".join(shatt) + '"/></g>',

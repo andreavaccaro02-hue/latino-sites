@@ -73,6 +73,12 @@
   .l-noi { font-size: 80px; font-weight: 800; fill: var(--verde); stroke: #fff; stroke-width: 16; }
   .l-noi-punto { fill: var(--verde); stroke: #fff; stroke-width: 9; }
 
+  /* gli Stati di oggi, ognuno col suo colore: niente azzurri, per non confonderli col mare */
+  .stato-1 { fill: #F4C7A1; } .stato-2 { fill: #D6E8B8; } .stato-3 { fill: #F3CBD3; } .stato-4 { fill: #E3D5F0; }
+  .stato-5 { fill: #FBEDA6; } .stato-6 { fill: #EADBC5; } .stato-7 { fill: #CFE8D8; }
+  .politica, .politica-largo { transition: opacity 1.2s ease; opacity: 0; }
+  body.modo-dove .politica-largo, body.modo-oggi .politica, body.modo-insieme .politica { opacity: 1; }
+  body.modo-insieme .politica { opacity: .6; }
   .ieri, .oggi, .largo { transition: opacity 1.2s ease; opacity: 0; }
   .vicino { transition: opacity 1.2s ease; opacity: 1; }
   body.modo-dove .largo { opacity: 1; }

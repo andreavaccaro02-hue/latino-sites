@@ -21,6 +21,8 @@ export const PASSTHROUGH = [
   "geostoria/le-fonti-lim.html",
   "geostoria/linea-del-tempo.html",
   "geostoria/dal-disegno-al-segno.html",
+  "geostoria/egitto-linea-del-tempo.html",
+  "geostoria/egitto-regione-chiusa.html",
   "geostoria/mesopotamia-ieri-oggi.html",
   "geostoria/mesopotamia-linea-del-tempo.html",
   "geostoria/fonts",

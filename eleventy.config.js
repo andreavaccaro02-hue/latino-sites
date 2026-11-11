@@ -28,6 +28,7 @@ export const PASSTHROUGH = [
   "geostoria/fonts",
   "geostoria/img",
   "geostoria/reperti",
+  "geostoria/slidev",
   "chi-sono.html",
   "favicon.svg",
   "og-image.svg",

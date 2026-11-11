@@ -125,15 +125,18 @@ addEventListener('keydown', e => {
 const q = new URLSearchParams(location.search).get('t'); vai(q ? +q : 0);
 
 // ponte con Slidev (vedi REGOLE-SLIDE.md): tasti alla pagina quando la slide è visibile; oltre i bordi si passa alle slide.
+function __restituisci() {
+  try { if (window.frameElement) window.frameElement.blur(); window.parent.focus(); } catch (e) {}
+}
 function __passa(dir) {
-  try { const n = window.parent !== window && window.parent.__slidev__ && window.parent.__slidev__.nav; if (n) { dir > 0 ? n.next() : n.prev(); } } catch (e) {}
+  try { const n = window.parent !== window && window.parent.__slidev__ && window.parent.__slidev__.nav; if (n) { dir > 0 ? n.next() : n.prev(); __restituisci(); } } catch (e) {}
 }
 (function () {
   if (window.parent === window) return;
   let relatore = false; try { const l = window.parent.location; relatore = (l.pathname + l.hash).includes('presenter'); } catch (e) {}
   if (relatore) return;
   const fe = window.frameElement; let era = false;
-  setInterval(() => { const vis = !!fe && fe.getBoundingClientRect().height > 0; if (vis && !era) window.focus(); era = vis; }, 250);
+  setInterval(() => { const vis = !!fe && fe.getBoundingClientRect().height > 0; if (vis && !era) window.focus(); if (!vis && era) __restituisci(); era = vis; }, 250);
 })();
 </script>
 </body>

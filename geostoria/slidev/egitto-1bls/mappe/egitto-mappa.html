@@ -132,7 +132,7 @@ vt('verso il Levante', 34.1, 31.95); vt('verso il mar Rosso', 33.6, 26.55); vt('
 // unificazione: da Ieracompoli a Menfi
 const gU = el('g', {class: 'ev'});
 el('path', {d: curva([[32.95,25.2],[32.4,26.6],[31.5,27.8],[31.15,29.0],[31.25,29.75]]), fill: 'none', stroke: '#b8322a', 'stroke-width': 4, 'marker-end': 'url(#punta)'}, gU);
-{ const [x, y] = P(33.15, 27.9); el('text', {x, y, class: 'et', fill: '#b8322a'}, gU, 'Menes / Narmer'); el('text', {x, y: y + 18, class: 'et', fill: '#b8322a', 'font-size': 13}, gU, 'il sud conquista il nord'); }
+{ const [x, y] = P(30.55, 27.75); el('text', {x, y, class: 'et', fill: '#b8322a', 'text-anchor': 'end'}, gU, 'Menes / Narmer'); el('text', {x, y: y + 18, class: 'et', fill: '#b8322a', 'font-size': 13, 'text-anchor': 'end'}, gU, 'il sud conquista il nord'); }
 // città
 const CITTA = [['Menfi', 31.25, 29.85, 'end'], ['Tebe', 32.65, 25.7, 'start'], ['Ieracompoli', 32.78, 25.1, 'start'], ['Abido', 31.92, 26.18, 'end'], ['Assuan', 32.9, 24.09, 'start'], ['Rosetta', 30.42, 31.4, 'end']];
 const gC = el('g', {}); const CT = {};
@@ -177,15 +177,18 @@ const q = new URLSearchParams(location.search).get('t'); vai(q ? +q : 0);
 
 // ponte con Slidev: la pagina prende i tasti quando la sua slide è visibile;
 // avanti dopo l'ultima tappa e indietro dalla prima passano alle slide. Non attivo nella vista relatore.
+function __restituisci() {
+  try { if (window.frameElement) window.frameElement.blur(); window.parent.focus(); } catch (e) {}
+}
 function __passa(dir) {
-  try { const n = window.parent !== window && window.parent.__slidev__ && window.parent.__slidev__.nav; if (n) { dir > 0 ? n.next() : n.prev(); } } catch (e) {}
+  try { const n = window.parent !== window && window.parent.__slidev__ && window.parent.__slidev__.nav; if (n) { dir > 0 ? n.next() : n.prev(); __restituisci(); } } catch (e) {}
 }
 (function () {
   if (window.parent === window) return;
   let relatore = false; try { const l = window.parent.location; relatore = (l.pathname + l.hash).includes('presenter'); } catch (e) {}
   if (relatore) return;
   const fe = window.frameElement; let era = false;
-  setInterval(() => { const vis = !!fe && fe.getBoundingClientRect().height > 0; if (vis && !era) window.focus(); era = vis; }, 250);
+  setInterval(() => { const vis = !!fe && fe.getBoundingClientRect().height > 0; if (vis && !era) window.focus(); if (!vis && era) __restituisci(); era = vis; }, 250);
 })();
 </script>
 </body>

@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>L'anno del Nilo</title>
+<!--
+Animazione per la LIM: la piena del Nilo in una sezione della valle (cap. 1, lez. 2 §1, p. 44).
+Stagioni egizie: akhet (inondazione, circa luglio-ottobre), peret (crescita, circa novembre-febbraio), shemu (raccolto, circa marzo-giugno).
+La piena viene soprattutto dalle piogge estive sugli altopiani d'Etiopia (Nilo Azzurro, circa il 70% dell'acqua della piena: Britannica, «Nile River»).
+Inno a Hapi (Medio Regno), trad. inglese J.A. Wilson in Pritchard, ANET 1955, pp. 372-373; italiano adattato (come nel fascicolo L10-1BLS).
+Disegno schematico, non in scala. Comandi: frecce, pulsanti. ?t=N.
+-->
+<style>
+:root{--roma:#b8322a;--lapis:#1f4e8c;--ocra:#c8962e;--testo:#1d2430;--grigio:#6b7280}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:#fff;color:var(--testo);font-family:Lexend,"Atkinson Hyperlegible",system-ui,sans-serif;overflow:hidden}
+.tutto{display:grid;grid-template-columns:57% 43%;height:100vh}
+.sx{background:linear-gradient(180deg,#d9ecf7 0%,#f4f0e3 100%)}
+svg{width:100%;height:100vh;display:block}
+.pannello{display:flex;flex-direction:column;padding:2.4vh 2.2vw 1.8vh 2vw;gap:1.2vh}
+.sopra{font-size:2.3vh;font-weight:600;color:var(--grigio);text-transform:uppercase;letter-spacing:.08em}
+.titolo{font-size:4.8vh;font-weight:700;color:var(--roma);line-height:1.08}
+.testo{font-size:3.05vh;line-height:1.38}
+.testo b{color:var(--lapis)}
+.inno{font-size:2.7vh;line-height:1.35;font-style:italic;color:#5b4410;border-left:.5vh solid #c9b991;padding-left:1vw}
+.domanda{margin-top:auto;font-size:2.7vh;line-height:1.3;border-left:.6vh solid var(--ocra);padding:.7vh 0 .7vh 1vw;color:#4a3a12;background:#faf3e3;border-radius:0 .6vh .6vh 0}
+.tempo{display:flex;gap:.5vw}
+.tempo button{flex:1;font:inherit;font-size:1.9vh;padding:.8vh 0;border:none;border-radius:.7vh;background:#e5e7eb;color:var(--testo);cursor:pointer}
+.tempo button.ora{background:var(--roma);color:#fff;font-weight:700}
+.comandi{display:flex;gap:.7vw}
+.comandi button{flex:1;font:inherit;font-size:2.4vh;padding:.9vh;border-radius:.8vh;border:2px solid var(--lapis);background:#fff;color:var(--lapis);cursor:pointer}
+.comandi button:disabled{opacity:.35;cursor:default}
+.nota{font-size:1.5vh;color:var(--grigio)}
+.acqua{transition:transform 1.6s ease-in-out}
+.ev{transition:opacity .9s}
+.pianta{transition:transform 1.2s ease, fill 1s;transform-box:fill-box;transform-origin:bottom center}
+.et{font-size:16px;font-weight:700;paint-order:stroke;stroke:#fff;stroke-width:4.5px;stroke-linejoin:round}
+.stag{font-size:15px;font-weight:700;text-anchor:middle;transition:fill .6s}
+</style>
+</head>
+<body>
+<div class="tutto">
+  <div class="sx"><svg id="s" viewBox="0 0 600 560" aria-label="Sezione della valle del Nilo"></svg></div>
+  <div class="pannello">
+    <div class="sopra" id="sopra"></div>
+    <div class="titolo" id="titolo"></div>
+    <div class="testo" id="testo"></div>
+    <div class="inno" id="inno"></div>
+    <div class="domanda" id="domanda"></div>
+    <div class="tempo" id="tempo"></div>
+    <div class="comandi"><button id="ind">◀ indietro</button><button id="av">avanti ▶</button></div>
+    <div class="nota">Sezione schematica della valle · manuale p. 44 · Inno a Hapi (trad. Wilson, ANET 1955), italiano adattato</div>
+  </div>
+</div>
+<script>
+const NS = 'http://www.w3.org/2000/svg', s = document.getElementById('s');
+function el(t, a, p = s, x) { const e = document.createElementNS(NS, t); for (const k in a) e.setAttribute(k, a[k]); if (x != null) e.textContent = x; p.appendChild(e); return e; }
+const SUOLO = 440;
+// stagioni in alto
+const STAG = [['akhet', 'inondazione', 'lug-ott'], ['peret', 'crescita', 'nov-feb'], ['shemu', 'raccolto', 'mar-giu']];
+const gS = STAG.map((st, i) => {
+  const x = 100 + i * 200; const g = el('g', {});
+  const r = el('rect', {x: x - 90, y: 14, width: 180, height: 52, rx: 10, fill: '#fff', stroke: '#c9b991', 'stroke-width': 2}, g);
+  const t = el('text', {x, y: 37, class: 'stag', fill: '#8a6d3b'}, g, st[0] + ' · ' + st[1]);
+  el('text', {x, y: 57, 'text-anchor': 'middle', 'font-size': 13, fill: '#6b7280'}, g, st[2]);
+  return {r, t};
+});
+// pareti del deserto (Terra rossa) e fondo valle
+el('path', {d: `M0,150 L95,150 L120,${SUOLO - 20} L480,${SUOLO - 20} L505,150 L600,150 L600,560 L0,560 Z`, fill: '#d9a46a'});
+el('text', {x: 48, y: 140, 'text-anchor': 'middle', class: 'et', fill: '#a0522d'}, s, 'Terra rossa');
+el('text', {x: 552, y: 140, 'text-anchor': 'middle', class: 'et', fill: '#a0522d'}, s, 'Terra rossa');
+// tombe nella parete
+for (const x of [40, 70, 548]) el('rect', {x, y: 230, width: 14, height: 20, rx: 2, fill: '#7a4a24'});
+el('text', {x: 56, y: 275, 'text-anchor': 'middle', 'font-size': 14, fill: '#7a4a24'}, s, 'tombe');
+// campi (Terra nera) e canale del fiume
+const campi = el('path', {d: `M120,${SUOLO - 20} L480,${SUOLO - 20} L480,${SUOLO + 30} L120,${SUOLO + 30} Z`, fill: '#8a6a45', class: 'ev'});
+const limo = el('rect', {x: 120, y: SUOLO - 26, width: 360, height: 7, fill: '#3b2f22', class: 'ev', opacity: 0});
+el('text', {x: 300, y: SUOLO + 60, 'text-anchor': 'middle', class: 'et', fill: '#3f6b22'}, s, 'Terra nera');
+// villaggio su un rialzo
+const vill = el('g', {});
+el('path', {d: `M140,${SUOLO - 20} L150,${SUOLO - 48} L205,${SUOLO - 48} L215,${SUOLO - 20} Z`, fill: '#b98a55'}, vill);
+for (const x of [155, 177]) { el('rect', {x, y: SUOLO - 72, width: 18, height: 24, fill: '#efe0c2', stroke: '#8a6d3b'}, vill); el('rect', {x: x + 6, y: SUOLO - 60, width: 6, height: 12, fill: '#8a6d3b'}, vill); }
+el('text', {x: 180, y: SUOLO - 80, 'text-anchor': 'middle', 'font-size': 13, fill: '#6b5232'}, vill, 'villaggio');
+// piante
+const PIANTE = [];
+for (let x = 235; x < 470; x += 14) { if (x > 285 && x < 345) continue; PIANTE.push(el('rect', {x, y: SUOLO - 58, width: 5, height: 38, rx: 2, fill: '#4f8a2c', class: 'pianta', style: 'transform:scaleY(0)'})); }
+// fiume: alveo e acqua che sale
+el('path', {d: `M290,${SUOLO - 20} Q315,${SUOLO + 12} 340,${SUOLO - 20} Z`, fill: '#3e7cb5'});
+const defs = el('defs', {}); defs.innerHTML = `<clipPath id="sopra-campi"><rect x="0" y="0" width="600" height="${SUOLO - 20}"/></clipPath>`;
+const gA = el('g', {'clip-path': 'url(#sopra-campi)'});
+const acqua = el('rect', {x: 112, y: SUOLO - 80, width: 376, height: 60, fill: '#3e7cb5', opacity: .8, class: 'acqua', style: 'transform:translateY(90px)'}, gA);
+el('text', {x: 315, y: SUOLO - 2, 'text-anchor': 'middle', 'font-size': 13, fill: '#fff'}, s, 'Nilo');
+// argini, canale, granaio (tappa finale)
+const opere = el('g', {class: 'ev', opacity: 0});
+for (const x of [258, 372]) el('path', {d: `M${x},${SUOLO - 20} l8,-22 l14,0 l8,22 Z`, fill: '#7a5a3a'}, opere);
+el('path', {d: `M222,${SUOLO - 22} L475,${SUOLO - 22}`, stroke: '#3e7cb5', 'stroke-width': 4, 'stroke-dasharray': '10 6'}, opere);
+el('text', {x: 265, y: SUOLO - 50, class: 'et', fill: '#7a5a3a', 'font-size': 14}, opere, 'argini');
+el('text', {x: 420, y: SUOLO - 30, class: 'et', fill: '#2f6db0', 'font-size': 14}, opere, 'canali');
+el('path', {d: `M520,${SUOLO - 20} l0,-30 q20,-26 40,0 l0,30 Z`, fill: '#e2c48a', stroke: '#8a6d3b'}, opere);
+el('text', {x: 540, y: SUOLO - 80, 'text-anchor': 'middle', class: 'et', fill: '#8a6d3b', 'font-size': 14}, opere, 'granai');
+// avvisi
+const avv = el('text', {x: 300, y: 115, 'text-anchor': 'middle', 'font-size': 26, 'font-weight': 700, class: 'ev', opacity: 0, fill: '#b8322a'}, s, '');
+const freccia = el('g', {class: 'ev', opacity: 0});
+el('text', {x: 300, y: 112, 'text-anchor': 'middle', class: 'et', fill: '#2f78b8'}, freccia, 'piogge d’estate in Etiopia: l’acqua arriva da sud');
+
+const INNO = {
+  festa: '«Quando tu sali, la terra è in festa, ogni ventre si rallegra, ogni schiena ride.»',
+  lento: '«Se sei lento, i nasi si chiudono e tutti diventano poveri.»',
+  salve: '«Salve a te, Hapi, che esci dalla terra e vieni a far vivere l’Egitto!»'
+};
+const TAPPE = [
+  {sopra: 'Akhet · luglio-ottobre', titolo: 'Arriva la piena', testo: 'In estate piove sugli altopiani dell’<b>Etiopia</b>. Settimane dopo il Nilo si gonfia e <b>copre i campi</b>. I villaggi stanno sui rialzi.', inno: INNO.salve, dom: 'Perché i villaggi sono costruiti in alto?', stag: 0, acqua: 42, freccia: 1},
+  {sopra: 'Akhet · l’acqua si ritira', titolo: 'Resta il limo', testo: 'In autunno l’acqua scende e lascia sui campi uno strato di <b>limo</b>, fango nero e fertile. Ogni anno la terra è concimata gratis.', inno: INNO.festa, dom: 'Da dove viene il nome «Terra nera»?', stag: 0, acqua: 70, limo: 1},
+  {sopra: 'Peret · novembre-febbraio', titolo: 'Semina e crescita', testo: 'Sul limo umido si semina: <b>orzo</b>, <b>grano</b>, <b>lino</b>. Le piante crescono nei mesi freschi.', inno: '', dom: 'Che cosa succederebbe senza il limo?', stag: 1, acqua: 90, limo: 1, piante: .6},
+  {sopra: 'Shemu · marzo-giugno', titolo: 'Il raccolto', testo: 'In primavera si <b>raccoglie</b>. Poi la terra si secca, e si aspetta la piena successiva.', inno: '', dom: 'Perché il raccolto dipende dalla piena dell’anno prima?', stag: 2, acqua: 90, piante: 1, oro: 1},
+  {sopra: 'Quando va male', titolo: 'Piena troppo alta', testo: 'Se la piena è troppo forte, l’acqua arriva anche ai <b>villaggi</b>: case distrutte, animali annegati.', inno: '', dom: 'Che cosa si potrebbe costruire per difendersi?', stag: 0, acqua: 6, avviso: 'inondazione'},
+  {sopra: 'Quando va male', titolo: 'Piena troppo bassa', testo: 'Se la piena è debole, l’acqua resta nell’alveo: i campi lontani restano <b>secchi</b>, il raccolto non basta. È la <b>carestia</b>.', inno: INNO.lento, dom: 'Che cosa vuol dire «i nasi si chiudono»?', stag: 0, acqua: 64, secco: 1, avviso: 'carestia'},
+  {sopra: 'Il Nilo e il potere', titolo: 'Argini, canali, granai', testo: '<b>Argini</b> contro le piene, <b>canali</b> per portare l’acqua lontano, <b>granai</b> per gli anni magri. Servono migliaia di lavoratori e qualcuno che li organizzi: un <b>potere centrale</b>.', inno: '', dom: 'Perché un fiume così aiuta la nascita di un unico Stato?', stag: -1, acqua: 70, limo: 1, piante: 1, opere: 1}
+];
+const tempo = document.getElementById('tempo');
+const bt = TAPPE.map((t, i) => { const b = document.createElement('button'); b.textContent = i + 1; b.onclick = () => vai(i); tempo.appendChild(b); return b; });
+let ora = 0;
+function vai(i) {
+  ora = Math.max(0, Math.min(TAPPE.length - 1, i)); const t = TAPPE[ora];
+  for (const k of ['sopra', 'titolo', 'testo', 'inno']) document.getElementById(k).innerHTML = t[k];
+  document.getElementById('inno').style.display = t.inno ? '' : 'none';
+  document.getElementById('domanda').textContent = t.dom;
+  bt.forEach((b, j) => b.classList.toggle('ora', j === ora));
+  document.getElementById('ind').disabled = ora === 0; document.getElementById('av').disabled = ora === TAPPE.length - 1;
+  gS.forEach((g, j) => { const on = j === t.stag; g.r.setAttribute('fill', on ? '#fbe7e4' : '#fff'); g.r.setAttribute('stroke', on ? '#b8322a' : '#c9b991'); g.t.setAttribute('fill', on ? '#b8322a' : '#8a6d3b'); });
+  acqua.style.transform = `translateY(${t.acqua}px)`;
+  limo.setAttribute('opacity', t.limo ? 1 : 0);
+  campi.setAttribute('fill', t.secco ? '#c9a77a' : '#8a6a45');
+  PIANTE.forEach((p, j) => { p.style.transitionDelay = (j * .04) + 's'; p.style.transform = `scaleY(${t.piante || 0})`; p.setAttribute('fill', t.oro ? '#d8a928' : '#4f8a2c'); });
+  opere.setAttribute('opacity', t.opere ? 1 : 0);
+  freccia.setAttribute('opacity', t.freccia ? 1 : 0);
+  avv.textContent = t.avviso || ''; avv.setAttribute('opacity', t.avviso ? 1 : 0);
+}
+document.getElementById('av').onclick = () => vai(ora + 1);
+document.getElementById('ind').onclick = () => vai(ora - 1);
+addEventListener('keydown', e => {
+  if (['ArrowRight', 'ArrowDown', ' ', 'PageDown'].includes(e.key)) { e.preventDefault(); (ora === TAPPE.length - 1 ? __passa(1) : vai(ora + 1)); }
+  if (['ArrowLeft', 'ArrowUp', 'PageUp'].includes(e.key)) { e.preventDefault(); (ora === 0 ? __passa(-1) : vai(ora - 1)); }
+});
+const q = new URLSearchParams(location.search).get('t'); vai(q ? +q : 0);
+
+// ponte con Slidev (vedi REGOLE-SLIDE.md): tasti alla pagina quando la slide è visibile; oltre i bordi si passa alle slide.
+function __passa(dir) {
+  try { const n = window.parent !== window && window.parent.__slidev__ && window.parent.__slidev__.nav; if (n) { dir > 0 ? n.next() : n.prev(); } } catch (e) {}
+}
+(function () {
+  if (window.parent === window) return;
+  let relatore = false; try { const l = window.parent.location; relatore = (l.pathname + l.hash).includes('presenter'); } catch (e) {}
+  if (relatore) return;
+  const fe = window.frameElement; let era = false;
+  setInterval(() => { const vis = !!fe && fe.getBoundingClientRect().height > 0; if (vis && !era) window.focus(); era = vis; }, 250);
+})();
+</script>
+</body>
+</html>

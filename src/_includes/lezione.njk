@@ -17,6 +17,9 @@ layout: base.njk
     {% if sottotitolo %}<p class="sottotitolo">{{ sottotitolo }}</p>{% endif %}
     <p class="programmi">Nel programma di: {% for a in anni %}{{ a.anno | nomeAnno }} (modulo {{ a.numero }}){% if not loop.last %}, {% endif %}{% endfor %}</p>
     <a class="vista-lim" href="{{ page.url }}lim/">Vista LIM</a>
+    {% for d in slide | slidePer(materia, modulo, argomento) %}
+    <p class="slide-lezione"><a href="/{{ d.url }}">Rivedi le slide della lezione</a> <span>{{ d.titolo }}</span></p>
+    {% endfor %}
   </header>
   <div class="lezione-corpo">
 {{ content | safe }}

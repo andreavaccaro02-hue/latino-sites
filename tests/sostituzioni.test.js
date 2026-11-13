@@ -8,13 +8,18 @@ const CASI = [
   { vecchia: "tests/fixtures/vecchio-indice-geostoria.html", posto: "geostoria/index.html" },
 ];
 
+// Tolti apposta il 13/11/2026: i calendari 2025-26 sono finiti, il CV resta solo in chi-sono.html.
+const RIMOSSI = new Set(["calendario/terza.html", "calendario/quarta.html", "calendario/quinta.html", "pdf/cv-vaccaro-europass.pdf"]);
+
 const destinazioni = (html, posto) => new Set(linkInterni(html).map((l) => risolviLink(posto, l)).filter(Boolean));
 
 for (const { vecchia, posto } of CASI) {
-  test(`la nuova ${posto} conserva i link interni della vecchia`, { skip: !fs.existsSync(`_site/${posto}`) && "manca _site: esegui npm run build" }, () => {
+  test(`la nuova ${posto} conserva i link interni della vecchia, in home o in archivio`, { skip: !fs.existsSync(`_site/${posto}`) && "manca _site: esegui npm run build" }, () => {
     const prima = destinazioni(fs.readFileSync(vecchia, "utf8"), posto);
     const dopo = destinazioni(fs.readFileSync(`_site/${posto}`, "utf8"), posto);
-    const persi = [...prima].filter((d) => !dopo.has(d) && !d.startsWith("css/") && d !== "favicon.svg");
+    // Gli strumenti stanno nella home (la barra ci porta con «Strumenti»), i materiali degli anni passati in /archivio/.
+    for (const altra of ["index.html", "archivio/index.html"]) for (const d of destinazioni(fs.readFileSync(`_site/${altra}`, "utf8"), altra)) dopo.add(d);
+    const persi = [...prima].filter((d) => !dopo.has(d) && !RIMOSSI.has(d) && !d.startsWith("css/") && d !== "favicon.svg");
     assert.deepEqual(persi, []);
   });
 }

@@ -27,5 +27,22 @@
   { "materia": "geostoria", "titolo_argo": "Cap. 12 · Re, monaci, imperatori. L'inizio del Medioevo in Europa", "slug": "cap-12-inizio-medioevo" },
   { "materia": "geostoria", "titolo_argo": "Cap. 13 · L'altro Medioevo. Nascita ed espansione dell'islam", "slug": "cap-13-islam" },
   { "materia": "geostoria", "titolo_argo": "Cap. 14 · Il ritorno dell'impero. L'Europa da Carlo Magno agli Ottoni", "slug": "cap-14-carlo-magno-ottoni" },
-  { "materia": "geostoria", "titolo_argo": "Percorso di geografia 4 · Le organizzazioni sovranazionali", "slug": "geo-4-organizzazioni-sovranazionali" }
+  { "materia": "geostoria", "titolo_argo": "Percorso di geografia 4 · Le organizzazioni sovranazionali", "slug": "geo-4-organizzazioni-sovranazionali" },
+  { "materia": "latino", "titolo_argo": "Cap. XII · Miles Romanus", "slug": "cap-12-miles-romanus" },
+  { "materia": "latino", "titolo_argo": "Cap. XIII · Annus et menses", "slug": "cap-13-annus-et-menses" },
+  { "materia": "latino", "titolo_argo": "Cap. XIV · Novus dies", "slug": "cap-14-novus-dies" },
+  { "materia": "latino", "titolo_argo": "Cap. XV · Magister et discipuli", "slug": "cap-15-magister-et-discipuli" },
+  { "materia": "latino", "titolo_argo": "Cap. XVI · Tempestas", "slug": "cap-16-tempestas" },
+  { "materia": "latino", "titolo_argo": "Cap. XVII · Numeri difficiles", "slug": "cap-17-numeri-difficiles" },
+  { "materia": "latino", "titolo_argo": "Cap. XVIII · Litterae Latinae", "slug": "cap-18-litterae-latinae" },
+  { "materia": "latino", "titolo_argo": "Cap. XIX · Maritus et uxor", "slug": "cap-19-maritus-et-uxor" },
+  { "materia": "latino", "titolo_argo": "Cap. XX · Parentes", "slug": "cap-20-parentes" },
+  { "materia": "latino", "titolo_argo": "Cap. XXI · Pugna discipulorum", "slug": "cap-21-pugna-discipulorum" },
+  { "materia": "latino", "titolo_argo": "Cap. XXII · Cave canem", "slug": "cap-22-cave-canem" },
+  { "materia": "latino", "titolo_argo": "Cap. XXIII · Epistula magistri", "slug": "cap-23-epistula-magistri" },
+  { "materia": "latino", "titolo_argo": "Cap. XXIV · Puer aegrotus", "slug": "cap-24-puer-aegrotus" },
+  { "materia": "latino", "titolo_argo": "Cap. XXV · Theseus et Minotaurus", "slug": "cap-25-theseus-et-minotaurus" },
+  { "materia": "latino", "titolo_argo": "Cap. XXVI · Daedalus et Icarus", "slug": "cap-26-daedalus-et-icarus" },
+  { "materia": "latino", "titolo_argo": "Cap. XXVII · Res rusticae", "slug": "cap-27-res-rusticae" },
+  { "materia": "latino", "titolo_argo": "Cap. XXVIII · Pericula maris", "slug": "cap-28-pericula-maris" }
 ]

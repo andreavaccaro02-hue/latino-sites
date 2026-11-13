@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Calendarium</title>
+<meta name="description" content="Il calendario romano per la LIM: i dodici mesi e i loro nomi, Kalendae, Nonae e Idus con la data romana di ogni giorno, la data di oggi in latino, le quattro stagioni.">
+<link href="https://fonts.googleapis.com/css2?family=Shantell+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+  @font-face { font-family: "Shantell Sans"; src: url("../geostoria/fonts/ShantellSans-variabile.woff2") format("woff2"); font-display: swap; font-weight: 300 800; }
+  :root {
+    --nero: #1D1D1D; --blu: #4465E9; --verde: #099268; --rosso: #8B1E3F; --giallo: #F1AC4B;
+    --nota: #FFF4B8; --griglia: #C8C8C8; --grigio: #8A939C; --sfondo: #FAFAF7;
+    --ver: #099268; --aestas: #E16919; --autumnus: #A0522D; --hiems: #4465E9;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; }
+  body {
+    font-family: "Shantell Sans", "Patrick Hand", "Comic Neue", "Segoe Print", "Chalkboard", sans-serif;
+    color: var(--nero); background: var(--sfondo);
+    background-image: radial-gradient(var(--griglia) 0.9px, transparent 1px); background-size: 22px 22px;
+    display: flex; flex-direction: column; overflow: hidden;
+  }
+  header { display: flex; align-items: center; gap: 14px; padding: 14px 28px 0; flex-wrap: wrap; }
+  .badge { font-weight: 800; font-size: 20px; padding: 6px 16px; border: 3px solid var(--rosso); color: var(--rosso);
+    border-radius: 12px 14px 10px 16px / 14px 10px 16px 12px; background: #8B1E3F1f; letter-spacing: .5px; }
+  h1 { font-size: 30px; margin: 0; font-weight: 800; }
+  .spazio { flex: 1; }
+  .tab { border: 3px solid var(--nero); background: #fff; font: inherit; font-weight: 600; font-size: 18px;
+    padding: 7px 14px; cursor: pointer; border-radius: 14px 10px 16px 12px / 10px 16px 12px 14px; color: var(--nero); }
+  .tab.attiva { background: var(--nero); color: #fff; }
+  main { flex: 1; position: relative; min-height: 0; }
+  .schermo { position: absolute; inset: 0; display: none; padding: 18px 40px; overflow: auto; }
+  .schermo.attiva { display: block; }
+  .passo { opacity: 0; transition: opacity .35s; }
+  .passo.vista { opacity: 1; }
+  .domanda { font-size: 32px; font-weight: 600; margin: 4px 0 14px; }
+  .nota { background: var(--nota); padding: 12px 20px; font-size: 26px; border-radius: 6px; box-shadow: 1px 3px 4px rgba(0,0,0,.2); display: inline-block; margin: 8px 12px 8px 0; }
+
+  /* 1 · menses */
+  .mesi { display: grid; grid-template-columns: repeat(6, 1fr); gap: 14px; }
+  .mese { background: #fff; border: 3px solid var(--nero); padding: 10px 12px; cursor: pointer; text-align: center;
+    border-radius: 16px 12px 18px 14px / 12px 18px 14px 16px; border-top-width: 10px; }
+  .mese .num { font-size: 22px; color: var(--grigio); font-weight: 800; }
+  .mese .nome { font-size: 30px; font-weight: 800; }
+  .mese .ord, .mese .dies, .mese .unde { font-size: 19px; display: none; }
+  .mese .ord { font-style: italic; }
+  .mese .unde { color: var(--rosso); }
+  .mese.vista .ord, .mese.vista .dies, .mese.vista .unde { display: block; }
+  .ver { border-top-color: var(--ver); } .aestas { border-top-color: var(--aestas); }
+  .autumnus { border-top-color: var(--autumnus); } .hiems { border-top-color: var(--hiems); }
+
+  /* 2 · kalendae, nonae, idus */
+  .scegli { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
+  .scegli button { font: inherit; font-size: 18px; font-weight: 600; padding: 4px 10px; background: #fff; cursor: pointer;
+    border: 2px solid var(--nero); border-radius: 10px; }
+  .scegli button.attiva { background: var(--rosso); color: #fff; border-color: var(--rosso); }
+  .giorni { display: grid; grid-template-columns: repeat(8, 1fr); gap: 8px; }
+  .giorno { background: #fff; border: 2px solid var(--griglia); border-radius: 10px; padding: 6px 4px; text-align: center; cursor: pointer; min-height: 62px; }
+  .giorno .n { font-size: 15px; color: var(--grigio); }
+  .giorno .r { font-size: 18px; font-weight: 800; }
+  .giorno.k { border: 3px solid var(--rosso); background: #8B1E3F14; }
+  .giorno.no { border: 3px solid var(--verde); background: #09926814; }
+  .giorno.id { border: 3px solid var(--blu); background: #4465E914; }
+  .giorno.sel { outline: 4px solid var(--giallo); }
+  .lettura { font-size: 30px; font-weight: 800; margin-top: 16px; min-height: 2.6em; }
+  .lettura small { display: block; font-size: 20px; font-weight: 400; color: var(--grigio); }
+  .legenda { font-size: 18px; color: var(--grigio); margin: 0 0 10px; }
+  .legenda b.k { color: var(--rosso); } .legenda b.no { color: var(--verde); } .legenda b.id { color: var(--blu); }
+
+  /* 3 · hodie */
+  .hodie { font-size: 64px; font-weight: 800; margin: 30px 0 10px; color: var(--rosso); }
+  .hodie-pieno { font-size: 34px; margin-bottom: 26px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 16px; }
+  .chip { font-size: 28px; font-weight: 600; padding: 10px 22px; background: #fff; border: 3px solid var(--nero); cursor: pointer;
+    border-radius: 16px 12px 18px 14px / 12px 18px 14px 16px; }
+  .chip .r { display: none; color: var(--verde); font-weight: 800; }
+  .chip.vista .r { display: inline; }
+
+  /* 4 · tempora anni */
+  .tempora { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+  .tempus { background: #fff; border: 3px solid var(--nero); border-top-width: 12px; padding: 14px 16px;
+    border-radius: 16px 12px 18px 14px / 12px 18px 14px 16px; }
+  .tempus h2 { margin: 0 0 6px; font-size: 34px; }
+  .tempus .menses { font-size: 20px; color: var(--grigio); margin-bottom: 8px; }
+  .tempus p { font-size: 22px; margin: 6px 0; }
+
+  footer { display: flex; gap: 14px; align-items: center; padding: 10px 28px 14px; flex-wrap: wrap; }
+  button.cmd { font: inherit; font-weight: 600; font-size: 20px; padding: 8px 18px; cursor: pointer; background: #fff;
+    border: 3px solid var(--nero); color: var(--nero); border-radius: 12px 16px 10px 14px / 16px 10px 14px 12px; }
+  button.cmd.primo { background: var(--nero); color: #fff; }
+  .hint { color: var(--grigio); font-size: 16px; margin-left: auto; }
+
+  /* dentro la pagina della lezione l'iframe è stretto: tutto più piccolo, griglie più strette */
+  @media (max-width: 900px) {
+    header { padding: 10px 14px 0; gap: 8px; }
+    h1 { font-size: 22px; } .badge { font-size: 14px; padding: 3px 10px; }
+    .tab { font-size: 14px; padding: 4px 9px; }
+    .schermo { padding: 12px 14px; }
+    .domanda { font-size: 21px; }
+    .nota { font-size: 18px; }
+    .mesi { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+    .mese .nome { font-size: 19px; } .mese .num { font-size: 15px; }
+    .mese .ord, .mese .dies, .mese .unde { font-size: 14px; }
+    .scegli button { font-size: 13px; padding: 3px 7px; }
+    .giorni { grid-template-columns: repeat(4, 1fr); gap: 5px; }
+    .giorno .r { font-size: 13px; } .giorno .n { font-size: 12px; }
+    .lettura { font-size: 20px; } .lettura small { font-size: 15px; }
+    .legenda { font-size: 14px; }
+    .hodie { font-size: 36px; margin: 12px 0 6px; } .hodie-pieno { font-size: 20px; }
+    .chip { font-size: 17px; padding: 6px 12px; }
+    .tempora { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .tempus h2 { font-size: 22px; } .tempus p { font-size: 16px; } .tempus .menses { font-size: 14px; }
+    footer { padding: 6px 14px 10px; gap: 8px; }
+    button.cmd { font-size: 14px; padding: 5px 10px; }
+    .hint { display: none; }
+  }
+</style>
+</head>
+<body>
+<header>
+  <span class="badge">LATINE</span>
+  <h1>Calendarium</h1>
+  <span class="spazio"></span>
+  <button class="tab attiva">1 · Menses</button>
+  <button class="tab">2 · Kalendae, Nonae, Idus</button>
+  <button class="tab">3 · Hodie</button>
+  <button class="tab">4 · Tempora anni</button>
+</header>
+<main>
+  <section class="schermo attiva">
+    <p class="domanda">Annus duodecim mensēs habet. Quis mēnsis prīmus est? Quis postrēmus?</p>
+    <div class="mesi" id="mesi"></div>
+    <p class="passo nota">Antīquīs temporibus Mārtius mēnsis prīmus erat: ergō September erat mēnsis septimus.</p>
+  </section>
+
+  <section class="schermo">
+    <p class="legenda">Tre giorni del mese hanno un nome: <b class="k">Kalendae</b> · <b class="no">Nōnae</b> · <b class="id">Īdūs</b>. Gli altri si contano <i>prima</i> del giorno con nome che viene dopo, contando anche i due estremi.</p>
+    <div class="scegli" id="scegli"></div>
+    <div class="giorni" id="giorni"></div>
+    <div class="lettura" id="lettura">Tocca un giorno.</div>
+  </section>
+
+  <section class="schermo">
+    <p class="domanda">Quis diēs est hodiē?</p>
+    <div class="hodie" id="hodie"></div>
+    <div class="hodie-pieno" id="hodie-pieno"></div>
+    <div class="chips">
+      <span class="chip">Quī mēnsis est? <span class="r" id="r-mensis"></span></span>
+      <span class="chip">Quod tempus annī est? <span class="r" id="r-tempus"></span></span>
+      <span class="chip">Quot diēs hic mēnsis habet? <span class="r" id="r-dies"></span></span>
+    </div>
+  </section>
+
+  <section class="schermo">
+    <p class="domanda">Quattuor sunt tempora annī. Quod tempus annī maximē amās?</p>
+    <div class="tempora">
+      <div class="tempus ver"><h2>Vēr</h2><div class="menses">Mārtius · Aprīlis · Māius</div>
+        <p class="passo">Herba nova in campīs est.</p><p class="passo">Avēs rūrsus canunt.</p></div>
+      <div class="tempus aestas"><h2>Aestās</h2><div class="menses">Iūnius · Iūlius · Augustus</div>
+        <p class="passo">Diēs longī sunt, noctēs brevēs.</p><p class="passo">Āēr calidus est.</p></div>
+      <div class="tempus autumnus"><h2>Autumnus</h2><div class="menses">September · Octōber · November</div>
+        <p class="passo">Folia dē arboribus cadunt.</p><p class="passo">Diēs breviōrēs fīunt.</p></div>
+      <div class="tempus hiems"><h2>Hiems</h2><div class="menses">December · Iānuārius · Februārius</div>
+        <p class="passo">Āēr frīgidus est: nix cadit.</p><p class="passo">Lacūs glaciē operiuntur.</p></div>
+    </div>
+  </section>
+</main>
+<footer>
+  <button class="cmd primo" id="avanti">Avanti →</button>
+  <button class="cmd" id="indietro">← Indietro</button>
+  <button class="cmd" id="tutti">Mostra tutto</button>
+  <button class="cmd" id="azzera">Azzera</button>
+  <span class="hint">Tasti: spazio o → avanti · ← indietro · PgUp/PgDn cambia schermata · T tutto · A azzera</span>
+</footer>
+<script>
+// nome, ordinale, giorni, stagione, origine del nome, aggettivo all'accusativo e all'ablativo plurale, abbreviazione
+const MESI = [
+  ["Iānuārius", "prīmus", 31, "hiems", "ā deō Iānō", "Iānuāriās", "Iānuāriīs", "Ian."],
+  ["Februārius", "secundus", 28, "hiems", "ā februīs, sacrīs purgātiōnis", "Februāriās", "Februāriīs", "Feb."],
+  ["Mārtius", "tertius", 31, "ver", "ā deō Mārte", "Mārtiās", "Mārtiīs", "Mart."],
+  ["Aprīlis", "quārtus", 30, "ver", "fortasse ab aperīre: terra sē aperit", "Aprīlēs", "Aprīlibus", "Apr."],
+  ["Māius", "quīntus", 31, "ver", "ā deā Māiā", "Māiās", "Māiīs", "Mai."],
+  ["Iūnius", "sextus", 30, "aestas", "ā deā Iūnōne", "Iūniās", "Iūniīs", "Iun."],
+  ["Iūlius", "septimus", 31, "aestas", "ā C. Iūliō Caesare (anteā Quīntīlis)", "Iūliās", "Iūliīs", "Iul."],
+  ["Augustus", "octāvus", 31, "aestas", "ā Caesare Augustō (anteā Sextīlis)", "Augustās", "Augustīs", "Aug."],
+  ["September", "nōnus", 30, "autumnus", "ā numerō septem", "Septembrēs", "Septembribus", "Sept."],
+  ["Octōber", "decimus", 31, "autumnus", "ā numerō octō", "Octōbrēs", "Octōbribus", "Oct."],
+  ["November", "ūndecimus", 30, "autumnus", "ā numerō novem", "Novembrēs", "Novembribus", "Nov."],
+  ["December", "duodecimus", 31, "hiems", "ā numerō decem", "Decembrēs", "Decembribus", "Dec."],
+];
+const STAGIONI = { ver: "vēr", aestas: "aestās", autumnus: "autumnus", hiems: "hiems" };
+const ORDINALI = ["", "", "", "tertium", "quārtum", "quīntum", "sextum", "septimum", "octāvum", "nōnum", "decimum",
+  "ūndecimum", "duodecimum", "tertium decimum", "quārtum decimum", "quīntum decimum", "sextum decimum",
+  "septimum decimum", "duodēvīcēsimum", "ūndēvīcēsimum"];
+const ROMANI = n => [[10, "X"], [9, "IX"], [5, "V"], [4, "IV"], [1, "I"]].reduce((s, [v, c]) => { while (n >= v) { s += c; n -= v; } return s; }, "");
+const CARDINALI = ["", "ūnum", "duo", "tria"];
+
+// Nonae il 7 e Idus il 15 a marzo, maggio, luglio, ottobre; negli altri mesi il 5 e il 13
+const nonae = m => [2, 4, 6, 9].includes(m) ? 7 : 5;
+const idus = m => nonae(m) + 8;
+
+// la data romana di un giorno: forma abbreviata e forma intera
+function dataRomana(m, d) {
+  const N = nonae(m), I = idus(m), M = MESI[m], P = MESI[(m + 1) % 12];
+  if (d === 1) return [`Kal. ${M[7]}`, `Kalendīs ${M[6]}`, "k"];
+  if (d === N) return [`Non. ${M[7]}`, `Nōnīs ${M[6]}`, "no"];
+  if (d === I) return [`Id. ${M[7]}`, `Īdibus ${M[6]}`, "id"];
+  let n, nome, breve, agg, abbr;
+  if (d < N) { n = N - d + 1; nome = "Nōnās"; breve = "Non."; agg = M[5]; abbr = M[7]; }
+  else if (d < I) { n = I - d + 1; nome = "Īdūs"; breve = "Id."; agg = M[5]; abbr = M[7]; }
+  else { n = M[2] - d + 2; nome = "Kalendās"; breve = "Kal."; agg = P[5]; abbr = P[7]; }
+  if (n === 2) return [`prid. ${breve} ${abbr}`, `prīdiē ${nome} ${agg}`, ""];
+  return [`a. d. ${ROMANI(n)} ${breve} ${abbr}`, `ante diem ${ORDINALI[n]} ${nome} ${agg}`, ""];
+}
+
+// 1 · menses
+const mesi = document.querySelector("#mesi");
+MESI.forEach((M, i) => {
+  const el = document.createElement("div");
+  el.className = `mese ${M[3]}`;
+  el.innerHTML = `<div class="num">${ROMANI(i + 1)}</div><div class="nome">${M[0]}</div>`
+    + `<div class="ord">mēnsis ${M[1]}</div><div class="dies">${ROMANI(M[2])} diēs</div><div class="unde">${M[4]}</div>`;
+  el.onclick = () => el.classList.toggle("vista");
+  mesi.append(el);
+});
+
+// 2 · kalendae, nonae, idus
+let meseScelto = new Date().getMonth();
+const scegli = document.querySelector("#scegli"), giorni = document.querySelector("#giorni"), lettura = document.querySelector("#lettura");
+function disegnaMese() {
+  scegli.querySelectorAll("button").forEach((b, i) => b.classList.toggle("attiva", i === meseScelto));
+  giorni.innerHTML = "";
+  lettura.innerHTML = "Tocca un giorno.";
+  for (let d = 1; d <= MESI[meseScelto][2]; d++) {
+    const [breve, intero, tipo] = dataRomana(meseScelto, d);
+    const el = document.createElement("div");
+    el.className = `giorno ${tipo}`;
+    el.innerHTML = `<div class="n">${d}</div><div class="r">${breve}</div>`;
+    el.onclick = () => {
+      giorni.querySelectorAll(".sel").forEach(x => x.classList.remove("sel"));
+      el.classList.add("sel");
+      lettura.innerHTML = `${intero}<small>${d} ${MESI[meseScelto][0].toLowerCase()} · ${breve}</small>`;
+    };
+    giorni.append(el);
+  }
+}
+MESI.forEach((M, i) => {
+  const b = document.createElement("button");
+  b.textContent = M[0];
+  b.onclick = () => { meseScelto = i; disegnaMese(); };
+  scegli.append(b);
+});
+disegnaMese();
+
+// 3 · hodie
+const oggi = new Date(), mo = oggi.getMonth(), [hb, hi] = dataRomana(mo, oggi.getDate());
+document.querySelector("#hodie").textContent = hb;
+document.querySelector("#hodie-pieno").textContent = `Hodiē est ${hi}.`;
+document.querySelector("#r-mensis").textContent = `Mēnsis ${MESI[mo][0]}, ${MESI[mo][1]}.`;
+document.querySelector("#r-tempus").textContent = `${STAGIONI[MESI[mo][3]][0].toUpperCase()}${STAGIONI[MESI[mo][3]].slice(1)}.`;
+document.querySelector("#r-dies").textContent = `${ROMANI(MESI[mo][2])} diēs.`;
+
+// navigazione, come nelle pagine di geostoria
+let s = 0;
+const schermi = Array.from(document.querySelectorAll(".schermo")), tabs = Array.from(document.querySelectorAll(".tab"));
+const passi = () => Array.from(schermi[s].querySelectorAll(".passo, .mese, .chip"));
+function mostra(i) { s = Math.max(0, Math.min(schermi.length - 1, i)); schermi.forEach((x, k) => x.classList.toggle("attiva", k === s)); tabs.forEach((x, k) => x.classList.toggle("attiva", k === s)); }
+function avanti() { const p = passi().find(x => !x.classList.contains("vista")); if (p) p.classList.add("vista"); else if (s < schermi.length - 1) mostra(s + 1); }
+function indietro() { const v = passi().filter(x => x.classList.contains("vista")); if (v.length) v[v.length - 1].classList.remove("vista"); else if (s > 0) mostra(s - 1); }
+function tutti() { passi().forEach(x => x.classList.add("vista")); }
+function azzera() { passi().forEach(x => x.classList.remove("vista")); }
+tabs.forEach((t, k) => t.onclick = () => mostra(k));
+document.querySelector("#avanti").onclick = avanti; document.querySelector("#indietro").onclick = indietro;
+document.querySelector("#tutti").onclick = tutti; document.querySelector("#azzera").onclick = azzera;
+document.querySelectorAll(".chip").forEach(c => c.onclick = () => c.classList.toggle("vista"));
+document.addEventListener("keydown", e => {
+  if (e.key === " " || e.key === "ArrowRight") { e.preventDefault(); avanti(); }
+  else if (e.key === "ArrowLeft") indietro();
+  else if (e.key === "PageDown") mostra(s + 1); else if (e.key === "PageUp") mostra(s - 1);
+  else if (e.key.toLowerCase() === "t") tutti(); else if (e.key.toLowerCase() === "a") azzera();
+});
+const h = parseInt(location.hash.slice(1)); if (!isNaN(h)) mostra(h - 1); if (location.hash.includes("tutti")) tutti();
+</script>
+</body>
+</html>

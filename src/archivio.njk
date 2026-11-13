@@ -1,0 +1,17 @@
+---
+layout: base.njk
+permalink: /archivio/
+titolo: Archivio
+descrizione: "I materiali di latino degli anni passati, dal 2022 al 2026: percorsi del biennio e del triennio, classico e scientifico, e il ripasso per la maturità."
+---
+<article class="materia">
+  <p class="kicker">Archivio</p>
+  <h1>Materiali degli anni passati</h1>
+  <p>Quello che ho preparato dal 2022 al 2026 per le classi di latino del liceo classico e dello scientifico. Resta qui per chi lo cerca; il lavoro di quest'anno è in <a href="/">prima pagina</a>.</p>
+  {% for s in archivio.sezioni %}
+  <h2>{{ s.titolo }}</h2>
+  <ul class="elenco-pagine">
+    {% for l in s.link %}<li><a href="{% if l.url.startsWith('http') %}{{ l.url }}{% else %}/{{ l.url }}{% endif %}">{{ l.titolo }}</a></li>{% endfor %}
+  </ul>
+  {% endfor %}
+</article>

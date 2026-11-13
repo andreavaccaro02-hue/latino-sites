@@ -1,0 +1,193 @@
+{
+  "materia": "latino",
+  "anno": 2,
+  "moduli": [
+    {
+      "numero": 1,
+      "titolo": "Cap. XII · Miles Romanus",
+      "slug": "cap-12-miles-romanus",
+      "argomenti": [
+        {
+          "numero": 1,
+          "titolo": "Miles Romanus"
+        }
+      ]
+    },
+    {
+      "numero": 2,
+      "titolo": "Cap. XIII · Annus et menses",
+      "slug": "cap-13-annus-et-menses",
+      "argomenti": [
+        {
+          "numero": 1,
+          "titolo": "Annus et menses. Il calendario romano, la quinta declinazione, il superlativo"
+        }
+      ]
+    },
+    {
+      "numero": 3,
+      "titolo": "Cap. XIV · Novus dies",
+      "slug": "cap-14-novus-dies",
+      "argomenti": [
+        {
+          "numero": 1,
+          "titolo": "Novus dies"
+        }
+      ]
+    },
+    {
+      "numero": 4,
+      "titolo": "Cap. XV · Magister et discipuli",
+      "slug": "cap-15-magister-et-discipuli",
+      "argomenti": [
+        {
+          "numero": 1,
+          "titolo": "Magister et discipuli"
+        }
+      ]
+    },
+    {
+      "numero": 5,
+      "titolo": "Cap. XVI · Tempestas",
+      "slug": "cap-16-tempestas",
+      "argomenti": [
+        {
+          "numero": 1,
+          "titolo": "Tempestas"
+        }
+      ]
+    },
+    {
+      "numero": 6,
+      "titolo": "Cap. XVII · Numeri difficiles",
+      "slug": "cap-17-numeri-difficiles",
+      "argomenti": [
+        {
+          "numero": 1,
+          "titolo": "Numeri difficiles"
+        }
+      ]
+    },
+    {
+      "numero": 7,
+      "titolo": "Cap. XVIII · Litterae Latinae",
+      "slug": "cap-18-litterae-latinae",
+      "argomenti": [
+        {
+          "numero": 1,
+          "titolo": "Litterae Latinae"
+        }
+      ]
+    },
+    {
+      "numero": 8,
+      "titolo": "Cap. XIX · Maritus et uxor",
+      "slug": "cap-19-maritus-et-uxor",
+      "argomenti": [
+        {
+          "numero": 1,
+          "titolo": "Maritus et uxor"
+        }
+      ]
+    },
+    {
+      "numero": 9,
+      "titolo": "Cap. XX · Parentes",
+      "slug": "cap-20-parentes",
+      "argomenti": [
+        {
+          "numero": 1,
+          "titolo": "Parentes"
+        }
+      ]
+    },
+    {
+      "numero": 10,
+      "titolo": "Cap. XXI · Pugna discipulorum",
+      "slug": "cap-21-pugna-discipulorum",
+      "argomenti": [
+        {
+          "numero": 1,
+          "titolo": "Pugna discipulorum"
+        }
+      ]
+    },
+    {
+      "numero": 11,
+      "titolo": "Cap. XXII · Cave canem",
+      "slug": "cap-22-cave-canem",
+      "argomenti": [
+        {
+          "numero": 1,
+          "titolo": "Cave canem"
+        }
+      ]
+    },
+    {
+      "numero": 12,
+      "titolo": "Cap. XXIII · Epistula magistri",
+      "slug": "cap-23-epistula-magistri",
+      "argomenti": [
+        {
+          "numero": 1,
+          "titolo": "Epistula magistri"
+        }
+      ]
+    },
+    {
+      "numero": 13,
+      "titolo": "Cap. XXIV · Puer aegrotus",
+      "slug": "cap-24-puer-aegrotus",
+      "argomenti": [
+        {
+          "numero": 1,
+          "titolo": "Puer aegrotus"
+        }
+      ]
+    },
+    {
+      "numero": 14,
+      "titolo": "Cap. XXV · Theseus et Minotaurus",
+      "slug": "cap-25-theseus-et-minotaurus",
+      "argomenti": [
+        {
+          "numero": 1,
+          "titolo": "Theseus et Minotaurus"
+        }
+      ]
+    },
+    {
+      "numero": 15,
+      "titolo": "Cap. XXVI · Daedalus et Icarus",
+      "slug": "cap-26-daedalus-et-icarus",
+      "argomenti": [
+        {
+          "numero": 1,
+          "titolo": "Daedalus et Icarus"
+        }
+      ]
+    },
+    {
+      "numero": 16,
+      "titolo": "Cap. XXVII · Res rusticae",
+      "slug": "cap-27-res-rusticae",
+      "argomenti": [
+        {
+          "numero": 1,
+          "titolo": "Res rusticae"
+        }
+      ]
+    },
+    {
+      "numero": 17,
+      "titolo": "Cap. XXVIII · Pericula maris",
+      "slug": "cap-28-pericula-maris",
+      "argomenti": [
+        {
+          "numero": 1,
+          "titolo": "Pericula maris"
+        }
+      ]
+    }
+  ]
+}

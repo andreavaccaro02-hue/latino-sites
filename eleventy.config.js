@@ -7,7 +7,6 @@ import { preparaIndicizzazione } from "./lib/sitemap.js";
 
 export const PASSTHROUGH = [
   "autori",
-  "calendario",
   "css",
   "flashcard",
   "grammatica",
@@ -15,20 +14,7 @@ export const PASSTHROUGH = [
   "pdf",
   "percorsi",
   "strumenti",
-  "geostoria/carta-mediterraneo-lim.html",
-  "geostoria/contare-il-tempo.html",
-  "geostoria/da-dove-veniamo.html",
-  "geostoria/le-fonti-lim.html",
-  "geostoria/linea-del-tempo.html",
-  "geostoria/dal-disegno-al-segno.html",
-  "geostoria/egitto-linea-del-tempo.html",
-  "geostoria/egitto-regione-chiusa.html",
-  "geostoria/mesopotamia-ieri-oggi.html",
-  "geostoria/mesopotamia-linea-del-tempo.html",
-  "geostoria/fonts",
-  "geostoria/img",
-  "geostoria/reperti",
-  "geostoria/slidev",
+  "geostoria",
   "chi-sono.html",
   "favicon.svg",
   "og-image.svg",
@@ -63,6 +49,7 @@ export default function (eleventyConfig) {
   eleventyConfig.addFilter("inProgrammi", nav.inProgrammi);
   eleventyConfig.addFilter("voceModulo", nav.voceModulo);
   eleventyConfig.addFilter("rimandiPer", nav.rimandiPer);
+  eleventyConfig.addFilter("slidePer", nav.slidePer);
   eleventyConfig.addFilter("materia", nav.materia);
   eleventyConfig.addFilter("nomeMateria", (id, materie) => nav.materia(materie, id).nome);
   eleventyConfig.addFilter("nomeAnno", nav.nomeAnno);

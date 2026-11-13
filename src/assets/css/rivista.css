@@ -36,6 +36,9 @@ h2 { font-weight: 600; font-size: 1.5rem; line-height: 1.2; }
 .lezione-testata { position: relative; margin-top: 1.5rem; }
 .programmi { margin: 0; font-family: var(--sans); font-size: .8125rem; color: var(--tenue); }
 .vista-lim { display: inline-block; margin-top: .75rem; padding: .3rem .7rem; border: 1px solid var(--accento); border-radius: 3px; font-family: var(--sans); font-size: .8125rem; font-weight: 700; text-decoration: none; }
+.slide-lezione { margin: .9rem 0 0; font-family: var(--sans); font-size: .9rem; }
+.slide-lezione a { display: inline-block; padding: .45rem .9rem; background: var(--accento); color: #fff; border-radius: 3px; font-weight: 700; text-decoration: none; }
+.slide-lezione span { display: block; margin-top: .3rem; color: var(--grigio, #6b6b6b); font-size: .8125rem; }
 @media (min-width: 40rem) { .vista-lim { position: absolute; top: 0; right: 0; margin: 0; } }
 
 .blocco { margin: 2.25rem 0; }
@@ -82,3 +85,4 @@ th, td { padding: .4rem .6rem; border-bottom: 1px solid var(--filetto); text-ali
 .elenco-anni, .elenco-pagine { padding-left: 1.2rem; }
 .home-sezione { margin-top: 2.5rem; }
 .home-sezione h2 { border-top: 1px solid var(--inchiostro); padding-top: .6rem; }
+.home-archivio { margin-top: 3rem; font-size: .9rem; opacity: .8; }

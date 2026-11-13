@@ -1,0 +1,60 @@
+{
+  "sezioni": [
+    {
+      "id": "percorsi",
+      "titolo": "Percorsi di latino, 2022-2026",
+      "link": [
+        {
+          "titolo": "Latino 1",
+          "url": "percorsi/latino1.html"
+        },
+        {
+          "titolo": "Latino 2",
+          "url": "percorsi/latino2.html"
+        },
+        {
+          "titolo": "Latino 3 · Classico",
+          "url": "percorsi/latino3-classico.html"
+        },
+        {
+          "titolo": "Latino 3 · Scientifico",
+          "url": "percorsi/latino3-scientifico.html"
+        },
+        {
+          "titolo": "Latino 4 · Classico",
+          "url": "percorsi/latino4-classico.html"
+        },
+        {
+          "titolo": "Latino 4 · Scientifico",
+          "url": "percorsi/latino4-scientifico.html"
+        },
+        {
+          "titolo": "Latino 5 · Classico",
+          "url": "percorsi/latino5-classico.html"
+        },
+        {
+          "titolo": "Latino 5 · Scientifico",
+          "url": "percorsi/latino5-scientifico.html"
+        }
+      ]
+    },
+    {
+      "id": "maturita",
+      "titolo": "Maturità",
+      "link": [
+        {
+          "titolo": "Maturità in 40 domande",
+          "url": "strumenti/maturita-latino.html"
+        },
+        {
+          "titolo": "Ripasso per la maturità, sito completo",
+          "url": "https://ripasso-maturita-5ac.vercel.app"
+        },
+        {
+          "titolo": "Linea del tempo dell'età imperiale",
+          "url": "strumenti/timeline-eta-imperiale.html"
+        }
+      ]
+    }
+  ]
+}

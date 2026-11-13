@@ -16,5 +16,14 @@
       { "titolo": "Da dove veniamo, la mappa dei luoghi da cui vengono le famiglie della classe (serve la rete)", "url": "geostoria/da-dove-veniamo.html" }
     ]
   },
-  { "id": "latino", "nome": "Latino", "colore": "#8B1E3F", "pagine": [] }
+  {
+    "id": "latino",
+    "nome": "Latino",
+    "colore": "#8B1E3F",
+    "descrizione": "Le lezioni di latino col Metodo natura (Ørberg, Familia Romana): domande in latino, giochi di lessico e di morfologia, pagine da proiettare in classe e da rivedere a casa. Il testo si legge sul libro.",
+    "descrizioneOg": "Le lezioni di latino col Metodo natura (Ørberg, Familia Romana): domande in latino e pagine interattive.",
+    "pagine": [
+      { "titolo": "Calendarium · i mesi, Kalendae, Nonae, Idus, la data di oggi in latino", "url": "strumenti/calendarium.html" }
+    ]
+  }
 ]

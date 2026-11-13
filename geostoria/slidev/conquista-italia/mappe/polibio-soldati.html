@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Polibio, i soldati del 225 a.C.</title>
+<!--
+Grafico animato per la LIM: Polibio, Storie II 24 (lista del 225 a.C.); Annibale «con meno di 20.000 uomini» (II 24, 17).
+Una figura = 10.000 fanti. Numeri di Polibio (fanti), traduzione del docente. Cap. 7, lez. 2.
+Comandi: frecce o spazio, pulsanti. ?t=N per aprire la tappa N.
+-->
+<style>
+:root{--roma:#b8322a;--all:#e8958c;--lapis:#1f4e8c;--ocra:#c8962e;--testo:#1d2430;--grigio:#6b7280}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:#fff;color:var(--testo);font-family:Lexend,"Atkinson Hyperlegible",system-ui,sans-serif;overflow:hidden}
+.tutto{display:grid;grid-template-columns:57% 43%;height:100vh}
+.sx{background:linear-gradient(180deg,#fbf7ee,#f3ecdc)}
+svg{width:100%;height:100vh;display:block}
+.pannello{display:flex;flex-direction:column;padding:2.4vh 2.2vw 1.8vh 2vw;gap:1.3vh}
+.sopra{font-size:2.3vh;font-weight:600;color:var(--grigio);text-transform:uppercase;letter-spacing:.08em}
+.titolo{font-size:4.8vh;font-weight:700;color:var(--roma);line-height:1.08}
+.testo{font-size:3.1vh;line-height:1.38}
+.testo b{color:var(--lapis)}
+.domanda{margin-top:auto;font-size:2.7vh;line-height:1.3;border-left:.6vh solid var(--ocra);padding:.7vh 0 .7vh 1vw;color:#4a3a12;background:#faf3e3;border-radius:0 .6vh .6vh 0}
+.tempo{display:flex;gap:.5vw}
+.tempo button{flex:1;font:inherit;font-size:1.9vh;padding:.8vh 0;border:none;border-radius:.7vh;background:#e5e7eb;color:var(--testo);cursor:pointer}
+.tempo button.ora{background:var(--roma);color:#fff;font-weight:700}
+.comandi{display:flex;gap:.7vw}
+.comandi button{flex:1;font:inherit;font-size:2.4vh;padding:.9vh;border-radius:.8vh;border:2px solid var(--lapis);background:#fff;color:var(--lapis);cursor:pointer}
+.comandi button:disabled{opacity:.35;cursor:default}
+.nota{font-size:1.55vh;color:var(--grigio)}
+.fig{transition:transform 1.2s cubic-bezier(.45,.05,.3,1),opacity .5s}
+.rig{font-size:15px;font-weight:600;fill:#4b5563;transition:opacity .6s}
+.num{font-size:15px;font-weight:700;fill:var(--roma);transition:opacity .6s}
+@keyframes batte{50%{transform:scale(1.25)}}
+.pulsa use{animation:batte 1s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
+.grande{font-size:30px;font-weight:700;transition:opacity .8s}
+</style>
+</head>
+<body>
+<div class="tutto">
+  <div class="sx"><svg id="s" viewBox="0 0 600 560" aria-label="Soldati di Roma e degli alleati"></svg></div>
+  <div class="pannello">
+    <div class="sopra" id="sopra"></div>
+    <div class="titolo" id="titolo"></div>
+    <div class="testo" id="testo"></div>
+    <div class="domanda" id="domanda"></div>
+    <div class="tempo" id="tempo"></div>
+    <div class="comandi"><button id="ind">◀ indietro</button><button id="av">avanti ▶</button></div>
+    <div class="nota">Una figura = 10.000 fanti · Polibio, Storie II 24 · trad. del docente</div>
+  </div>
+</div>
+<script>
+const NS = 'http://www.w3.org/2000/svg', s = document.getElementById('s');
+function el(t, a, p = s, x) { const e = document.createElementNS(NS, t); for (const k in a) e.setAttribute(k, a[k]); if (x != null) e.textContent = x; p.appendChild(e); return e; }
+const defs = el('defs', {});
+defs.innerHTML = `<symbol id="sold" viewBox="0 0 20 34"><circle cx="10" cy="6" r="5"/><path d="M3 14 q7-4 14 0 v11 h-3 v9 h-8 v-9 h-3z"/></symbol>
+<symbol id="lancia" viewBox="0 0 20 34"><circle cx="10" cy="6" r="5"/><path d="M3 14 q7-4 14 0 v11 h-3 v9 h-8 v-9 h-3z"/><rect x="17" y="0" width="1.6" height="34"/></symbol>`;
+const RIGHE = [
+  {n: 'Romani e Campani', k: 25, c: 'var(--roma)', t: '250.000'},
+  {n: 'Latini', k: 8, c: 'var(--all)', t: '80.000'},
+  {n: 'Sanniti', k: 7, c: 'var(--all)', t: '70.000'},
+  {n: 'Iapigi e Messapi', k: 5, c: 'var(--all)', t: '50.000'},
+  {n: 'Lucani', k: 3, c: 'var(--all)', t: '30.000'},
+  {n: 'Marsi, Marrucini, Frentani, Vestini', k: 2, c: 'var(--all)', t: '20.000'}
+];
+const X0 = 30, DX = 21.5, W = 19, H = 32;
+const R = RIGHE.map((r, i) => {
+  const y = 40 + i * 74;
+  const lab = el('text', {x: X0, y: y, class: 'rig'}, s, r.n);
+  const num = el('text', {x: 575, y: y, class: 'num', 'text-anchor': 'end'}, s, r.t);
+  const g = el('g', {}); const F = [];
+  for (let j = 0; j < r.k; j++) { const u = el('use', {href: '#sold', x: X0 + j * DX, y: y + 8, width: W, height: H, fill: r.c, class: 'fig'}, g); F.push(u); }
+  return {...r, y, lab, num, g, F};
+});
+const dubbio = el('text', {x: 300, y: 330, 'text-anchor': 'middle', 'font-size': 220, 'font-weight': 700, fill: '#e2d6bc', style: 'transition:opacity .6s'}, s, '?');
+const somma = el('text', {x: 300, y: 300, 'text-anchor': 'middle', class: 'grande', fill: 'var(--roma)', opacity: 0}, s, '250.000 = 250.000');
+const ann = el('g', {opacity: 0, style: 'transition:opacity .8s'});
+el('text', {x: X0, y: 470, class: 'rig'}, ann, 'Annibale, quando invade l’Italia (218)');
+el('text', {x: 575, y: 470, class: 'num', 'text-anchor': 'end', fill: '#374151'}, ann, 'meno di 20.000');
+for (let j = 0; j < 2; j++) el('use', {href: '#lancia', x: X0 + j * DX, y: 478, width: W, height: H, fill: '#374151'}, ann);
+
+const TAPPE = [
+  {sopra: 'Polibio, 225 a.C.', titolo: 'Quanti uomini ha Roma?', testo: 'Nel 225 i <b>Galli</b> minacciano l’Italia. Roma fa contare tutti gli uomini che possono combattere, suoi e degli alleati. Polibio copia le liste.', dom: 'Chi pensi che abbia più soldati: Roma o i suoi alleati?', n: 0},
+  {sopra: 'Una figura = 10.000 fanti', titolo: 'Romani e Campani', testo: 'I cittadini romani, con i Campani che hanno la cittadinanza: <b>250.000 fanti</b>.', dom: 'Quante figure sono?', n: 1},
+  {sopra: 'Una figura = 10.000 fanti', titolo: 'Gli alleati', testo: 'Poi i <b>socii</b>: Latini, Sanniti, Iapigi e Messapi, Lucani, Marsi e vicini.', dom: 'Prova a contare a occhio: sono più o meno dei Romani?', n: 6},
+  {sopra: 'Fate il conto', titolo: 'Metà e metà', testo: '80.000 + 70.000 + 50.000 + 30.000 + 20.000 = <b>250.000</b>. Gli alleati sono quanti i Romani: <b>metà dell’esercito</b> di Roma.', dom: 'Che cosa succederebbe a Roma se gli alleati la abbandonassero?', n: 6, unisci: 1},
+  {sopra: 'Una sorpresa', titolo: 'I Sanniti', testo: 'Nemici di Roma per cinquant’anni, fino al 290. Ora, vinti e legati da un trattato, sono <b>alleati</b>: 70.000 fanti per Roma.', dom: 'Perché Roma non li ha distrutti?', n: 6, sanniti: 1},
+  {sopra: 'Polibio II 24', titolo: 'E Annibale?', testo: 'Quando Annibale entra in Italia, nel 218, ha <b>meno di 20.000 fanti</b>. Roma e gli alleati, in tutto, potevano armare <b>oltre 700.000 fanti e 70.000 cavalieri</b>.', dom: 'Chi può permettersi di perdere una battaglia?', n: 6, ann: 1}
+];
+const tempo = document.getElementById('tempo');
+const bt = TAPPE.map((t, i) => { const b = document.createElement('button'); b.textContent = i + 1; b.onclick = () => vai(i); tempo.appendChild(b); return b; });
+let ora = 0;
+function vai(i) {
+  ora = Math.max(0, Math.min(TAPPE.length - 1, i)); const t = TAPPE[ora];
+  for (const k of ['sopra', 'titolo', 'testo']) document.getElementById(k).innerHTML = t[k];
+  document.getElementById('domanda').textContent = t.dom;
+  bt.forEach((b, j) => b.classList.toggle('ora', j === ora));
+  document.getElementById('ind').disabled = ora === 0; document.getElementById('av').disabled = ora === TAPPE.length - 1;
+  let pos = 0;
+  R.forEach((r, i) => {
+    const on = i < t.n;
+    r.lab.style.opacity = on && !(t.unisci && i > 1) ? 1 : 0;
+    r.num.style.opacity = on && !(t.unisci && i > 0) ? 1 : 0;
+    if (t.unisci && i === 1) { r.lab.textContent = 'tutti gli alleati'; } else if (i === 1) r.lab.textContent = r.n;
+    r.g.classList.toggle('pulsa', !!t.sanniti && i === 2);
+    r.F.forEach((f, j) => {
+      f.style.transitionDelay = on && !t.unisci ? (j * 0.04) + 's' : (i > 0 ? (pos * 0.03) + 's' : '0s');
+      f.style.opacity = on ? 1 : 0;
+      if (t.unisci && i > 0) { f.style.transform = `translate(${(pos - j) * DX}px, ${R[1].y - r.y}px)`; pos++; }
+      else f.style.transform = '';
+    });
+  });
+  if (t.unisci) { R[1].num.style.opacity = 1; R[1].num.textContent = '250.000'; } else R[1].num.textContent = '80.000';
+  somma.style.opacity = t.unisci ? 1 : 0;
+  dubbio.style.opacity = t.n === 0 ? 1 : 0;
+  ann.style.opacity = t.ann ? 1 : 0;
+}
+document.getElementById('av').onclick = () => vai(ora + 1);
+document.getElementById('ind').onclick = () => vai(ora - 1);
+addEventListener('keydown', e => {
+  if (['ArrowRight', 'ArrowDown', ' ', 'PageDown'].includes(e.key)) { e.preventDefault(); (ora === TAPPE.length - 1 ? __passa(1) : vai(ora + 1)); }
+  if (['ArrowLeft', 'ArrowUp', 'PageUp'].includes(e.key)) { e.preventDefault(); (ora === 0 ? __passa(-1) : vai(ora - 1)); }
+});
+const q = new URLSearchParams(location.search).get('t'); vai(q ? +q : 0);
+
+// ponte con Slidev: la pagina prende i tasti quando la sua slide è visibile;
+// avanti dopo l'ultima tappa e indietro dalla prima passano alle slide. Non attivo nella vista relatore.
+function __restituisci() {
+  try { if (window.frameElement) window.frameElement.blur(); window.parent.focus(); } catch (e) {}
+}
+function __passa(dir) {
+  try { const n = window.parent !== window && window.parent.__slidev__ && window.parent.__slidev__.nav; if (n) { dir > 0 ? n.next() : n.prev(); __restituisci(); } } catch (e) {}
+}
+(function () {
+  if (window.parent === window) return;
+  let relatore = false; try { relatore = window.parent.location.pathname.includes('presenter'); } catch (e) {}
+  if (relatore) return;
+  const fe = window.frameElement; let era = false;
+  setInterval(() => { const vis = !!fe && fe.getBoundingClientRect().height > 0; if (vis && !era) window.focus(); if (!vis && era) __restituisci(); era = vis; }, 250);
+})();
+</script>
+</body>
+</html>

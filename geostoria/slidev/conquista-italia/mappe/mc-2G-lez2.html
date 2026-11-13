@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mappa · L’impero flessibile</title>
+<!--
+Mappa concettuale, 2G, cap. 7, lez. 2 «L'impero flessibile», pp. 372-379. Struttura come «La lezione in breve» di p. 379, parole del docente; Livio VIII 14 e Polibio II 24 dal fascicolo.
+Motore: lib/mappa-concettuale.js (Cytoscape.js, MIT). Comandi: frecce o spazio, pulsanti; «Mettiti alla prova» copre i riquadri.
+-->
+</head>
+<body>
+<script src="lib/cytoscape.min.js"></script>
+<script>
+window.MAPPA = {
+ "sopra": "Mappa · cap. 7, lezione 2",
+ "nota": "Manuale pp. 372-379 · «La lezione in breve», p. 379 · Livio VIII 14 · Polibio II 24",
+ "tappe": [
+  {
+   "titolo": "La domanda",
+   "testo": "Roma ha conquistato l’Italia. Ma come fa a <b>tenerla</b>?",
+   "dom": "Prova a indovinare: con che cosa?"
+  },
+  {
+   "titolo": "Due strumenti",
+   "testo": "Un <b>esercito</b> forte e un modo intelligente di trattare le <b>città vinte</b>.",
+   "dom": "Quale dei due ti sembra più importante?"
+  },
+  {
+   "titolo": "L’esercito",
+   "testo": "La legione divisa in <b>manipoli</b>, su tre file; i soldati ricevono lo <b>stipendium</b>.",
+   "dom": "Perché i manipoli funzionano meglio della falange?"
+  },
+  {
+   "titolo": "Le strade",
+   "testo": "Le legioni si spostano veloci sulle strade: la prima è la <b>via Appia</b>, da Roma a Capua.",
+   "dom": "Perché proprio fino a Capua?"
+  },
+  {
+   "titolo": "Tre modi per le città",
+   "testo": "<b>Colonie</b> nuove, <b>municipi</b> con la cittadinanza, <b>alleati</b> legati da un trattato.",
+   "dom": "Che differenza c’è fra un municipio e una colonia?"
+  },
+  {
+   "titolo": "Il segreto: gli alleati",
+   "testo": "Gli alleati non pagano tasse ma danno <b>soldati</b>; e non possono allearsi <b>fra loro</b>.",
+   "dom": "Perché questo sistema è «flessibile»?"
+  }
+ ],
+ "nodi": [
+  {
+   "id": "dom",
+   "t": "COME ROMA TIENE L’ITALIA",
+   "x": 1.6,
+   "y": 0,
+   "tipo": "centro",
+   "tappa": 0
+  },
+  {
+   "id": "eserc",
+   "t": "un esercito forte",
+   "x": 0.4,
+   "y": 1,
+   "tipo": "fatto",
+   "tappa": 1
+  },
+  {
+   "id": "strum",
+   "t": "tre modi di trattare le città",
+   "x": 2.6,
+   "y": 1,
+   "tipo": "fatto",
+   "tappa": 1
+  },
+  {
+   "id": "legio",
+   "t": "manipoli su tre file",
+   "x": 0,
+   "y": 2.1,
+   "tipo": "fatto",
+   "tappa": 2
+  },
+  {
+   "id": "stip",
+   "t": "stipendium: la paga dallo Stato",
+   "x": 0.95,
+   "y": 3.2,
+   "tipo": "nota",
+   "tappa": 2
+  },
+  {
+   "id": "strade",
+   "t": "via Appia, 312 a.C.",
+   "x": -0.1,
+   "y": 3.2,
+   "tipo": "fatto",
+   "tappa": 3
+  },
+  {
+   "id": "col",
+   "t": "COLONIE\ncittà nuove",
+   "x": 1.65,
+   "y": 2.1,
+   "tipo": "esito",
+   "tappa": 4
+  },
+  {
+   "id": "mun",
+   "t": "MUNICIPI\ncittà vinte con la cittadinanza",
+   "x": 2.6,
+   "y": 2.1,
+   "tipo": "esito",
+   "tappa": 4
+  },
+  {
+   "id": "soc",
+   "t": "ALLEATI (socii)\nun trattato: il foedus",
+   "x": 3.55,
+   "y": 2.1,
+   "tipo": "esito",
+   "tappa": 4
+  },
+  {
+   "id": "divid",
+   "t": "fra loro no, solo con Roma: dividi e comanda",
+   "x": 2.6,
+   "y": 3.25,
+   "tipo": "causa",
+   "tappa": 5
+  },
+  {
+   "id": "polib",
+   "t": "danno soldati: metà dell’esercito",
+   "x": 3.55,
+   "y": 3.25,
+   "tipo": "nota",
+   "tappa": 5
+  }
+ ],
+ "archi": [
+  {
+   "da": "dom",
+   "a": "eserc",
+   "t": "grazie a",
+   "tappa": 1
+  },
+  {
+   "da": "dom",
+   "a": "strum",
+   "t": "e a",
+   "tappa": 1
+  },
+  {
+   "da": "eserc",
+   "a": "legio",
+   "t": "diviso in",
+   "tappa": 2
+  },
+  {
+   "da": "eserc",
+   "a": "stip",
+   "t": "pagato",
+   "tappa": 2
+  },
+  {
+   "da": "legio",
+   "a": "strade",
+   "t": "marcia sulla",
+   "tappa": 3
+  },
+  {
+   "da": "strum",
+   "a": "col",
+   "t": "",
+   "tappa": 4
+  },
+  {
+   "da": "strum",
+   "a": "mun",
+   "t": "",
+   "tappa": 4
+  },
+  {
+   "da": "strum",
+   "a": "soc",
+   "t": "",
+   "tappa": 4
+  },
+  {
+   "da": "soc",
+   "a": "polib",
+   "t": "",
+   "tappa": 5
+  },
+  {
+   "da": "soc",
+   "a": "divid",
+   "t": "",
+   "tappa": 5
+  }
+ ],
+ "dx": 205,
+ "larghezza": 165,
+ "dy": 125
+};
+</script>
+<script src="lib/mappa-concettuale.js"></script>
+</body>
+</html>

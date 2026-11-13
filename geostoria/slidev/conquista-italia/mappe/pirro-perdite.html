@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Una vittoria di Pirro</title>
+<!--
+Grafico animato per la LIM: perché Pirro vince e perde (cap. 7, lez. 1, p. 370).
+Numeri delle fonti antiche, incerti e diversi fra autore e autore:
+- esercito di Pirro: 20.000 fanti, 3.000 cavalieri, 2.000 arcieri, 500 frombolieri, 20 elefanti (Plutarco, Pirro 15);
+- Eraclea 280: circa 7.000 Romani e meno di 4.000 uomini di Pirro, secondo Ieronimo (Plutarco, Pirro 17; Dionigi dava 15.000 e 13.000);
+- Ascoli 279: 6.000 Romani secondo Ieronimo, 3.505 uomini di Pirro secondo le memorie del re (Plutarco, Pirro 21, nel manuale);
+- riserva di Roma: oltre 700.000 fanti e 70.000 cavalieri nel 225 (Polibio II 24): cinquant'anni dopo, ordine di grandezza.
+Un quadratino = 1.000 uomini. Comandi: frecce, pulsanti. ?t=N.
+-->
+<style>
+:root{--roma:#b8322a;--pirro:#3d2f8f;--lapis:#1f4e8c;--ocra:#c8962e;--testo:#1d2430;--grigio:#6b7280}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:#fff;color:var(--testo);font-family:Lexend,"Atkinson Hyperlegible",system-ui,sans-serif;overflow:hidden}
+.tutto{display:grid;grid-template-columns:57% 43%;height:100vh}
+.sx{background:linear-gradient(180deg,#f8f6fb,#eeebf4)}
+svg{width:100%;height:100vh;display:block}
+.pannello{display:flex;flex-direction:column;padding:2.4vh 2.2vw 1.8vh 2vw;gap:1.3vh}
+.sopra{font-size:2.3vh;font-weight:600;color:var(--grigio);text-transform:uppercase;letter-spacing:.08em}
+.titolo{font-size:4.8vh;font-weight:700;color:var(--roma);line-height:1.08}
+.testo{font-size:3vh;line-height:1.38}
+.testo b{color:var(--lapis)}
+.testo q{font-style:italic;quotes:"«" "»"}
+.domanda{margin-top:auto;font-size:2.7vh;line-height:1.3;border-left:.6vh solid var(--ocra);padding:.7vh 0 .7vh 1vw;color:#4a3a12;background:#faf3e3;border-radius:0 .6vh .6vh 0}
+.tempo{display:flex;gap:.5vw}
+.tempo button{flex:1;font:inherit;font-size:1.9vh;padding:.8vh 0;border:none;border-radius:.7vh;background:#e5e7eb;color:var(--testo);cursor:pointer}
+.tempo button.ora{background:var(--roma);color:#fff;font-weight:700}
+.comandi{display:flex;gap:.7vw}
+.comandi button{flex:1;font:inherit;font-size:2.4vh;padding:.9vh;border-radius:.8vh;border:2px solid var(--lapis);background:#fff;color:var(--lapis);cursor:pointer}
+.comandi button:disabled{opacity:.35;cursor:default}
+.nota{font-size:1.5vh;color:var(--grigio)}
+.q{transition:fill .7s, opacity .7s}
+.tit{font-size:19px;font-weight:700}
+.sub{font-size:14px;fill:#4b5563}
+.perc{font-size:26px;font-weight:700;transition:opacity .7s}
+</style>
+</head>
+<body>
+<div class="tutto">
+  <div class="sx"><svg id="s" viewBox="0 0 600 560" aria-label="Uomini di Pirro e uomini di Roma"></svg></div>
+  <div class="pannello">
+    <div class="sopra" id="sopra"></div>
+    <div class="titolo" id="titolo"></div>
+    <div class="testo" id="testo"></div>
+    <div class="domanda" id="domanda"></div>
+    <div class="tempo" id="tempo"></div>
+    <div class="comandi"><button id="ind">◀ indietro</button><button id="av">avanti ▶</button></div>
+    <div class="nota">Un quadratino = 1.000 uomini · numeri delle fonti antiche, incerti (Plutarco, Pirro 15, 17, 21; Polibio II 24)</div>
+  </div>
+</div>
+<script>
+const NS = 'http://www.w3.org/2000/svg', s = document.getElementById('s');
+function el(t, a, p = s, x) { const e = document.createElementNS(NS, t); for (const k in a) e.setAttribute(k, a[k]); if (x != null) e.textContent = x; p.appendChild(e); return e; }
+const Q = 11, G = 2.6;
+// Pirro: 25 quadratini (5 x 5) + elefanti
+el('text', {x: 30, y: 40, class: 'tit', fill: 'var(--pirro)'}, s, 'Pirro');
+el('text', {x: 30, y: 60, class: 'sub'}, s, '25.500 uomini e 20 elefanti, venuti dall’Epiro');
+const PQ = [];
+for (let i = 0; i < 25; i++) PQ.push(el('rect', {x: 30 + (i % 5) * (Q + G), y: 74 + Math.floor(i / 5) * (Q + G), width: Q, height: Q, rx: 1.5, fill: 'var(--pirro)', class: 'q'}));
+el('text', {x: 105, y: 140, 'font-size': 26}, s, '🐘');
+const pPerc = el('text', {x: 160, y: 130, class: 'perc', fill: 'var(--pirro)', opacity: 0}, s, '');
+// Roma: 700 quadratini (35 x 20)
+el('text', {x: 30, y: 185, class: 'tit', fill: 'var(--roma)'}, s, 'Roma: cittadini e alleati');
+el('text', {x: 30, y: 205, class: 'sub'}, s, 'oltre 700.000 fanti (Polibio, nel 225: ordine di grandezza)');
+const RQ = [];
+for (let i = 0; i < 700; i++) RQ.push(el('rect', {x: 30 + (i % 35) * (Q + G + .9), y: 220 + Math.floor(i / 35) * (Q + G), width: Q, height: Q, rx: 1.5, fill: 'var(--roma)', class: 'q'}));
+const rPerc = el('text', {x: 300, y: 540, class: 'perc', fill: 'var(--roma)', 'text-anchor': 'middle', opacity: 0}, s, '');
+
+const PERSO = '#b9bcc4', PERSOR = '#b9bcc4';
+const pDelta = el('text', {x: 160, y: 104, class: 'perc', fill: '#4b5563', opacity: 0, 'font-size': 20}, s, '');
+const rDelta = el('text', {x: 570, y: 185, class: 'perc', fill: '#4b5563', opacity: 0, 'font-size': 20, 'text-anchor': 'end'}, s, '');
+const TAPPE = [
+  {sopra: 'Prima delle battaglie', titolo: 'Due eserciti, due riserve', testo: 'Pirro sbarca con circa <b>25.500 uomini</b> e 20 elefanti. Roma può chiamare alle armi cittadini e alleati: <b>centinaia di migliaia</b>.', dom: 'Guarda i due blocchi: che cosa noti?', p: 0, r: 0},
+  {dp: '−4.000', dr: '−7.000', sopra: 'Eraclea, 280 a.C.', titolo: 'Vince Pirro', testo: 'Secondo Ieronimo, citato da Plutarco, muoiono circa <b>7.000 Romani</b> e quasi <b>4.000 uomini di Pirro</b>. Altri storici antichi danno numeri più alti.', dom: 'Chi ha perso più uomini? Chi ha vinto?', p: 4, r: 7, rRosso: 7},
+  {dp: 'nessun rinforzo', dr: '+7.000 nuovi soldati', sopra: 'Dopo Eraclea', titolo: 'Roma rimpiazza', testo: 'Roma arruola <b>nuovi soldati</b> fra cittadini e alleati: i vuoti si richiudono. Pirro no: i suoi veterani, gli amici e i generali venuti dall’Epiro non tornano.', dom: 'Perché Pirro non può rimpiazzare i suoi uomini?', p: 4, r: 0},
+  {dp: '−3.505', dr: '−6.000', sopra: 'Ascoli Satriano, 279 a.C.', titolo: 'Vince ancora Pirro', testo: 'Muoiono <b>6.000 Romani</b> (secondo Ieronimo) e <b>3.505 uomini di Pirro</b> (secondo le memorie del re). Li riporta Plutarco: è la Fonte di p. 370.', dom: 'Quanto resta a Pirro dei suoi 25.500 uomini?', p: 8, r: 6, rRosso: 6},
+  {sopra: 'Plutarco, Pirro 21', titolo: '«Un’altra vittoria così…»', testo: '<q>Se vinceremo ancora una battaglia contro i Romani, saremo completamente rovinati.</q> Pirro ha perso quasi <b>un terzo</b> dei suoi; Roma meno di <b>due su cento</b>, e li ha già sostituiti.', dom: 'Spiega con questo grafico che cosa vuol dire «vittoria di Pirro».', p: 8, r: 0, perc: 1}
+];
+const tempo = document.getElementById('tempo');
+const bt = TAPPE.map((t, i) => { const b = document.createElement('button'); b.textContent = i + 1; b.onclick = () => vai(i); tempo.appendChild(b); return b; });
+let ora = 0;
+function vai(i) {
+  ora = Math.max(0, Math.min(TAPPE.length - 1, i)); const t = TAPPE[ora];
+  for (const k of ['sopra', 'titolo', 'testo']) document.getElementById(k).innerHTML = t[k];
+  document.getElementById('domanda').textContent = t.dom;
+  bt.forEach((b, j) => b.classList.toggle('ora', j === ora));
+  document.getElementById('ind').disabled = ora === 0; document.getElementById('av').disabled = ora === TAPPE.length - 1;
+  // Pirro: le perdite si tolgono dal fondo e non tornano
+  PQ.forEach((q, j) => { const perso = j >= 25 - t.p; q.setAttribute('fill', perso ? PERSO : 'var(--pirro)'); q.style.transitionDelay = perso ? ((24 - j) * .12) + 's' : '0s'; });
+  // Roma: le perdite compaiono e poi vengono rimpiazzate
+  RQ.forEach((q, j) => { const perso = j < t.r; q.setAttribute('fill', perso ? PERSOR : 'var(--roma)'); q.style.transitionDelay = perso ? (j * .12) + 's' : (j < 7 ? (j * .15) + 's' : '0s'); });
+  pDelta.textContent = t.dp || ''; pDelta.setAttribute('opacity', t.dp ? 1 : 0);
+  rDelta.textContent = t.dr || ''; rDelta.setAttribute('opacity', t.dr ? 1 : 0);
+  pPerc.textContent = t.perc ? 'persi quasi 1 su 3' : ''; pPerc.setAttribute('opacity', t.perc ? 1 : 0);
+  rPerc.textContent = t.perc ? 'persi meno di 2 su 100, già sostituiti' : ''; rPerc.setAttribute('opacity', t.perc ? 1 : 0);
+}
+document.getElementById('av').onclick = () => vai(ora + 1);
+document.getElementById('ind').onclick = () => vai(ora - 1);
+addEventListener('keydown', e => {
+  if (['ArrowRight', 'ArrowDown', ' ', 'PageDown'].includes(e.key)) { e.preventDefault(); (ora === TAPPE.length - 1 ? __passa(1) : vai(ora + 1)); }
+  if (['ArrowLeft', 'ArrowUp', 'PageUp'].includes(e.key)) { e.preventDefault(); (ora === 0 ? __passa(-1) : vai(ora - 1)); }
+});
+const q = new URLSearchParams(location.search).get('t'); vai(q ? +q : 0);
+
+// ponte con Slidev: la pagina prende i tasti quando la sua slide è visibile;
+// avanti dopo l'ultima tappa e indietro dalla prima passano alle slide. Non attivo nella vista relatore.
+function __restituisci() {
+  try { if (window.frameElement) window.frameElement.blur(); window.parent.focus(); } catch (e) {}
+}
+function __passa(dir) {
+  try { const n = window.parent !== window && window.parent.__slidev__ && window.parent.__slidev__.nav; if (n) { dir > 0 ? n.next() : n.prev(); __restituisci(); } } catch (e) {}
+}
+(function () {
+  if (window.parent === window) return;
+  let relatore = false; try { relatore = window.parent.location.pathname.includes('presenter'); } catch (e) {}
+  if (relatore) return;
+  const fe = window.frameElement; let era = false;
+  setInterval(() => { const vis = !!fe && fe.getBoundingClientRect().height > 0; if (vis && !era) window.focus(); if (!vis && era) __restituisci(); era = vis; }, 250);
+})();
+</script>
+</body>
+</html>

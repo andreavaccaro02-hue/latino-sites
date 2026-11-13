@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>I geroglifici</title>
+<!--
+Schema a tappe per la LIM: la scrittura egizia (cap. 1, lez. 2, p. 47) e la stele di Rosetta.
+Segni (codici Gardiner): D21 bocca = r; Y5 scacchiera = mn; D36 braccio; Q3 p, X1 t, V4 o (w), E23 l (rw), Aa15 m, M17A i, S29 s; V31 k, M17 i, G1 a, D46 t (d).
+Cartigli semplificati: Tolomeo nella grafia breve; in Cleopatra si omettono i due segni finali (desinenza femminile e determinativo).
+Rosetta: decreto dei sacerdoti di Menfi per Tolomeo V, 196 a.C.; trovata nel 1799 a Rashid; British Museum. Champollion, Lettre à M. Dacier, 1822.
+Font: Noto Sans Egyptian Hieroglyphs (SIL OFL). Foto: Wikimedia Commons, pubblico dominio. Comandi: frecce, pulsanti. ?t=N.
+-->
+<style>
+@font-face{font-family:Geroglifici;src:local('Noto Sans Egyptian Hieroglyphs'),url('font/NotoSansEgyptianHieroglyphs-Regular.ttf') format('truetype')}
+:root{--roma:#b8322a;--lapis:#1f4e8c;--ocra:#c8962e;--testo:#1d2430;--grigio:#6b7280}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:#fff;color:var(--testo);font-family:Lexend,"Atkinson Hyperlegible",system-ui,sans-serif;overflow:hidden}
+.tutto{display:grid;grid-template-columns:57% 43%;height:100vh}
+.sx{position:relative;background:linear-gradient(180deg,#fbf6ea,#f1e6cc);overflow:hidden}
+.scena{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4vh;opacity:0;transition:opacity .6s;pointer-events:none}
+.scena.on{opacity:1}
+.g{font-family:Geroglifici;line-height:1}
+.pannello{display:flex;flex-direction:column;padding:2.4vh 2.2vw 1.8vh 2vw;gap:1.3vh}
+.sopra{font-size:2.3vh;font-weight:600;color:var(--grigio);text-transform:uppercase;letter-spacing:.08em}
+.titolo{font-size:4.8vh;font-weight:700;color:var(--roma);line-height:1.08}
+.testo{font-size:3.05vh;line-height:1.38}
+.testo b{color:var(--lapis)}
+.domanda{margin-top:auto;font-size:2.7vh;line-height:1.3;border-left:.6vh solid var(--ocra);padding:.7vh 0 .7vh 1vw;color:#4a3a12;background:#faf3e3;border-radius:0 .6vh .6vh 0}
+.tempo{display:flex;gap:.5vw}
+.tempo button{flex:1;font:inherit;font-size:1.9vh;padding:.8vh 0;border:none;border-radius:.7vh;background:#e5e7eb;color:var(--testo);cursor:pointer}
+.tempo button.ora{background:var(--roma);color:#fff;font-weight:700}
+.comandi{display:flex;gap:.7vw}
+.comandi button{flex:1;font:inherit;font-size:2.4vh;padding:.9vh;border-radius:.8vh;border:2px solid var(--lapis);background:#fff;color:var(--lapis);cursor:pointer}
+.comandi button:disabled{opacity:.35;cursor:default}
+.nota{font-size:1.5vh;color:var(--grigio)}
+/* scena 1: segni e rebus */
+.riga{display:flex;align-items:flex-end;gap:1.4vw}
+.segno{display:flex;flex-direction:column;align-items:center;gap:1vh;transition:opacity .6s}
+.segno .g{font-size:16vh;color:#3a2a10}
+.segno .cosa{font-size:2.5vh;color:var(--grigio)}
+.segno .suono{font-size:3.4vh;font-weight:700;color:var(--lapis);font-style:italic}
+.op{font-size:7vh;color:var(--grigio);padding-bottom:9vh;transition:opacity .6s}
+.det .g{color:var(--roma)}
+.det .suono{color:var(--roma);font-style:normal;font-size:2.4vh}
+.risultato{font-size:4.6vh;font-weight:700;transition:opacity .6s}
+.risultato i{color:var(--lapis)}
+/* scena 2: Rosetta */
+.stele{position:relative;height:88vh;aspect-ratio:1375/1600}
+.stele img{width:100%;height:100%;display:block;border-radius:.6vh}
+.fascia{position:absolute;left:8%;width:79%;border:.5vh solid;border-radius:.6vh;transition:opacity .6s,background .6s}
+.fascia span{position:absolute;right:2%;top:50%;transform:translateY(-50%);font-size:2.6vh;font-weight:700;color:#fff;padding:.4vh .8vw;border-radius:.5vh;white-space:nowrap}
+/* scena 3: cartigli */
+.cartiglio{display:flex;align-items:flex-end;gap:.6vw;padding:1.6vh 2.2vw 1.2vh 1.6vw;border:.55vh solid #3a2a10;border-radius:6vh;position:relative;background:#fffaf0}
+.cartiglio::after{content:"";position:absolute;right:-1.6vh;top:15%;height:70%;border-right:.55vh solid #3a2a10}
+.lettera{display:flex;flex-direction:column;align-items:center;gap:.6vh;min-width:4.6vh;transition:color .5s,opacity .5s}
+.lettera .g{font-size:8.5vh;color:#3a2a10;transition:color .5s}
+.lettera b{font-size:3vh;color:var(--lapis);transition:color .5s}
+.lettera.com .g,.lettera.com b{color:var(--roma)}
+.lettera.t2 .g,.lettera.t2 b{color:#4f8a2c}
+.nome{font-size:2.6vh;font-weight:700;color:var(--grigio);text-transform:uppercase;letter-spacing:.08em;margin-bottom:-2.5vh}
+.cartigli{display:flex;flex-direction:column;align-items:center;gap:3.5vh}
+.cp{transition:opacity .6s;display:flex;flex-direction:column;align-items:center;gap:3vh}
+.anno{font-size:3.4vh;font-weight:700;color:var(--roma);transition:opacity .6s}
+</style>
+</head>
+<body>
+<div class="tutto">
+  <div class="sx">
+    <div class="scena" id="sc1">
+      <div class="riga">
+        <div class="segno" id="s-r"><div class="g">𓂋</div><div class="cosa">bocca</div><div class="suono">re</div></div>
+        <div class="op" id="op1">+</div>
+        <div class="segno" id="s-m"><div class="g">𓏠</div><div class="cosa">scacchiera</div><div class="suono">men</div></div>
+        <div class="op" id="op2">+</div>
+        <div class="segno det" id="s-d"><div class="g">𓂝</div><div class="cosa">braccio</div><div class="suono">(non si legge)</div></div>
+      </div>
+      <div class="risultato" id="ris">= <i>remen</i>, «braccio»</div>
+    </div>
+    <div class="scena" id="sc2">
+      <div class="stele">
+        <img src="../img/stele-rosetta.jpg" alt="La stele di Rosetta, British Museum">
+        <div class="fascia" id="f1" style="top:5%;height:24%;border-color:#c8962e"><span style="background:#c8962e">geroglifico</span></div>
+        <div class="fascia" id="f2" style="top:30%;height:30%;border-color:#1f4e8c"><span style="background:#1f4e8c">demotico</span></div>
+        <div class="fascia" id="f3" style="top:61%;height:34%;border-color:#b8322a"><span style="background:#b8322a">greco</span></div>
+      </div>
+    </div>
+    <div class="scena" id="sc3">
+      <div class="cartigli">
+        <div class="cp" id="c1"><div class="nome">Tolomeo</div><div class="cartiglio" id="tol"></div></div>
+        <div class="cp" id="c2"><div class="nome">Cleopatra</div><div class="cartiglio" id="cle"></div></div>
+        <div class="anno" id="anno">Champollion, 1822: i geroglifici si leggono</div>
+      </div>
+    </div>
+  </div>
+  <div class="pannello">
+    <div class="sopra" id="sopra"></div>
+    <div class="titolo" id="titolo"></div>
+    <div class="testo" id="testo"></div>
+    <div class="domanda" id="domanda"></div>
+    <div class="tempo" id="tempo"></div>
+    <div class="comandi"><button id="ind">◀ indietro</button><button id="av">avanti ▶</button></div>
+    <div class="nota">Cartigli semplificati · manuale p. 47 · font Noto Sans Egyptian Hieroglyphs · foto: stele di Rosetta, British Museum (Wikimedia Commons)</div>
+  </div>
+</div>
+<script>
+// cartigli: [segno, lettera, classe]
+const TOL = [['𓊪', 'p', 'com'], ['𓏏', 't', 't1'], ['𓍯', 'o', 'com'], ['𓃭', 'l', 'com'], ['𓐝', 'm'], ['𓇌', 'i'], ['𓋴', 's']];
+const CLE = [['𓎡', 'k'], ['𓃭', 'l', 'com'], ['𓇋', 'e'], ['𓍯', 'o', 'com'], ['𓊪', 'p', 'com'], ['𓄿', 'a'], ['𓂧', 't', 't2'], ['𓂋', 'r'], ['𓄿', 'a']];
+function riempi(id, arr) {
+  const c = document.getElementById(id);
+  return arr.map(([g, l, k]) => { const d = document.createElement('div'); d.className = 'lettera'; d.dataset.k = k || ''; d.innerHTML = `<div class="g">${g}</div><b>${l}</b>`; c.appendChild(d); return d; });
+}
+const LT = riempi('tol', TOL), LC = riempi('cle', CLE);
+const $ = id => document.getElementById(id);
+const op = (id, v) => $(id).style.opacity = v;
+
+const TAPPE = [
+  {sopra: 'La scrittura egizia', titolo: 'Disegno o suono?', testo: 'Un geroglifico è un piccolo disegno. A volte vuol dire <b>la cosa</b> che mostra: la bocca è «bocca». Altre volte vale solo per il <b>suono</b>: la bocca si legge <i>re</i>, la scacchiera <i>men</i>.', dom: 'Anche noi usiamo disegni al posto delle parole: dove?', sc: 1, f: s => { op('s-r', 1); op('s-m', 1); op('op1', 0); op('op2', 0); op('s-d', 0); op('ris', 0); }},
+  {sopra: 'Un rebus', titolo: 'Re + men = remen', testo: 'Metti insieme i suoni: <i>re</i> + <i>men</i> fa <i>remen</i>, «braccio». Alla fine lo scriba aggiunge il disegno del braccio: <b>non si legge</b>, serve a capire di che parola si tratta.', dom: 'Bocca e scacchiera non c’entrano col braccio: perché li usa?', sc: 1, f: () => { ['s-r', 's-m', 'op1', 'op2', 's-d', 'ris'].forEach(i => op(i, 1)); }},
+  {sopra: 'Una pietra, tre scritture', titolo: 'La stele di Rosetta', testo: 'Un decreto dei sacerdoti per il faraone Tolomeo V, del <b>196 a.C.</b> Lo stesso testo è scritto <b>tre volte</b>: in geroglifico, in <b>demotico</b> (la scrittura veloce di tutti i giorni) e in <b>greco</b>.', dom: 'Perché scrivere lo stesso testo in tre modi?', sc: 2, f: () => { ['f1', 'f2', 'f3'].forEach(i => op(i, 1)); }},
+  {sopra: 'La chiave', titolo: 'Il greco si sa leggere', testo: 'La stele viene trovata nel <b>1799</b> a Rashid, nel delta (oggi è al British Museum). Il greco gli studiosi lo leggono già: sanno <b>che cosa dice</b> il testo. Ora bisogna capire <b>come</b> lo dicono i geroglifici.', dom: 'Che cosa cerchereste per primo nel testo greco?', sc: 2, f: () => { op('f1', 1); op('f2', .25); op('f3', 1); }},
+  {sopra: 'Lettera per lettera', titolo: 'Il nome di Tolomeo', testo: 'Nei geroglifici alcuni segni sono chiusi in un ovale, il <b>cartiglio</b>: dentro c’è il nome di un re. Il greco dice «Tolomeo», quindi quei segni devono leggersi <i>p-t-o-l-m-i-s</i>.', dom: 'Quanti segni ha il cartiglio? E quante lettere «Ptolmis»?', sc: 3, f: () => { op('c1', 1); op('c2', 0); op('anno', 0); colora(false); }},
+  {sopra: 'La prova', titolo: 'Il nome di Cleopatra', testo: 'Un altro cartiglio, Cleopatra: se il metodo è giusto, i segni di <b>p</b>, <b>o</b>, <b>l</b> devono essere gli stessi. E lo sono. Per la <b>t</b> c’è un segno diverso: uno stesso suono può avere due segni.', dom: 'Trovate nei due cartigli i segni uguali.', sc: 3, f: () => { op('c1', 1); op('c2', 1); op('anno', 0); colora(true); }},
+  {sopra: 'Champollion, 1822', titolo: 'Si torna a leggere', testo: 'Partendo dai nomi, il francese <b>Jean-François Champollion</b> ricostruisce i suoni dei segni e nel <b>1822</b> annuncia di saper leggere i geroglifici. Dopo quasi millecinquecento anni, gli Egizi tornano a parlare.', dom: 'Perché si è partiti proprio dai nomi dei re?', sc: 3, f: () => { op('c1', 1); op('c2', 1); op('anno', 1); colora(true); }}
+];
+function colora(on) {
+  [...LT, ...LC].forEach(d => { d.classList.toggle('com', on && d.dataset.k === 'com'); d.classList.toggle('t2', on && (d.dataset.k === 't1' || d.dataset.k === 't2')); });
+}
+const tempo = $('tempo');
+const bt = TAPPE.map((t, i) => { const b = document.createElement('button'); b.textContent = i + 1; b.onclick = () => vai(i); tempo.appendChild(b); return b; });
+let ora = 0;
+function vai(i) {
+  ora = Math.max(0, Math.min(TAPPE.length - 1, i)); const t = TAPPE[ora];
+  for (const k of ['sopra', 'titolo', 'testo']) $(k).innerHTML = t[k];
+  $('domanda').textContent = t.dom;
+  bt.forEach((b, j) => b.classList.toggle('ora', j === ora));
+  $('ind').disabled = ora === 0; $('av').disabled = ora === TAPPE.length - 1;
+  [1, 2, 3].forEach(n => $('sc' + n).classList.toggle('on', n === t.sc));
+  t.f();
+}
+$('av').onclick = () => vai(ora + 1);
+$('ind').onclick = () => vai(ora - 1);
+addEventListener('keydown', e => {
+  if (['ArrowRight', 'ArrowDown', ' ', 'PageDown'].includes(e.key)) { e.preventDefault(); (ora === TAPPE.length - 1 ? __passa(1) : vai(ora + 1)); }
+  if (['ArrowLeft', 'ArrowUp', 'PageUp'].includes(e.key)) { e.preventDefault(); (ora === 0 ? __passa(-1) : vai(ora - 1)); }
+});
+const q = new URLSearchParams(location.search).get('t'); vai(q ? +q : 0);
+
+// ponte con Slidev (vedi REGOLE-SLIDE.md): tasti alla pagina quando la slide è visibile; oltre i bordi si passa alle slide.
+function __restituisci() {
+  try { if (window.frameElement) window.frameElement.blur(); window.parent.focus(); } catch (e) {}
+}
+function __passa(dir) {
+  try { const n = window.parent !== window && window.parent.__slidev__ && window.parent.__slidev__.nav; if (n) { dir > 0 ? n.next() : n.prev(); __restituisci(); } } catch (e) {}
+}
+(function () {
+  if (window.parent === window) return;
+  let relatore = false; try { const l = window.parent.location; relatore = (l.pathname + l.hash).includes('presenter'); } catch (e) {}
+  if (relatore) return;
+  const fe = window.frameElement; let era = false;
+  setInterval(() => { const vis = !!fe && fe.getBoundingClientRect().height > 0; if (vis && !era) window.focus(); if (!vis && era) __restituisci(); era = vis; }, 250);
+})();
+</script>
+</body>
+</html>

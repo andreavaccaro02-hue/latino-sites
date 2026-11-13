@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sotto il giogo</title>
+<!--
+Animazione per la LIM: le Forche Caudine, 321 a.C. (cap. 7, lez. 1, p. 367 «Il giorno della vergogna»; Livio IX 6).
+Il giogo come lo descrive il manuale: un'asta orizzontale tenuta da altre due piantate nel terreno.
+Foto: Stretta di Arpaia vista da Montesarchio, Decan, CC BY-SA 4.0 (Wikimedia Commons). Comandi: frecce, pulsanti. ?t=N.
+-->
+<style>
+:root{--roma:#b8322a;--lapis:#1f4e8c;--ocra:#c8962e;--testo:#1d2430;--grigio:#6b7280}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:#fff;color:var(--testo);font-family:Lexend,"Atkinson Hyperlegible",system-ui,sans-serif;overflow:hidden}
+.tutto{display:grid;grid-template-columns:57% 43%;height:100vh}
+.sx{position:relative;overflow:hidden;background:linear-gradient(180deg,#dfe9f1 0%,#eef2e4 62%,#cdbf98 62%,#bfae84 100%)}
+.foto{position:absolute;inset:0;background:url(/img/stretta-arpaia.jpg) center/cover;transition:opacity 1s}
+.foto span{position:absolute;left:1.2vw;bottom:1.2vh;font-size:1.6vh;color:#fff;text-shadow:0 1px 3px #000a}
+svg{position:absolute;inset:0;width:100%;height:100vh;display:block}
+.pannello{display:flex;flex-direction:column;padding:2.4vh 2.2vw 1.8vh 2vw;gap:1.3vh}
+.sopra{font-size:2.3vh;font-weight:600;color:var(--grigio);text-transform:uppercase;letter-spacing:.08em}
+.titolo{font-size:4.8vh;font-weight:700;color:var(--roma);line-height:1.08}
+.testo{font-size:3.05vh;line-height:1.38}
+.testo b{color:var(--lapis)}
+.testo q{font-style:italic;quotes:"«" "»"}
+.domanda{margin-top:auto;font-size:2.7vh;line-height:1.3;border-left:.6vh solid var(--ocra);padding:.7vh 0 .7vh 1vw;color:#4a3a12;background:#faf3e3;border-radius:0 .6vh .6vh 0}
+.tempo{display:flex;gap:.5vw}
+.tempo button{flex:1;font:inherit;font-size:1.9vh;padding:.8vh 0;border:none;border-radius:.7vh;background:#e5e7eb;color:var(--testo);cursor:pointer}
+.tempo button.ora{background:var(--roma);color:#fff;font-weight:700}
+.comandi{display:flex;gap:.7vw}
+.comandi button{flex:1;font:inherit;font-size:2.4vh;padding:.9vh;border-radius:.8vh;border:2px solid var(--lapis);background:#fff;color:var(--lapis);cursor:pointer}
+.comandi button:disabled{opacity:.35;cursor:default}
+.nota{font-size:1.5vh;color:var(--grigio)}
+.vis{transition:opacity .8s}
+.parola{font-size:44px;font-weight:700;fill:#111;paint-order:stroke;stroke:#fff;stroke-width:8px;stroke-linejoin:round}
+.spieg{font-size:20px;fill:#111;paint-order:stroke;stroke:#fff;stroke-width:6px;stroke-linejoin:round}
+</style>
+</head>
+<body>
+<div class="tutto">
+  <div class="sx"><div class="foto" id="foto"><span>Stretta di Arpaia (Benevento) · foto Decan, CC BY-SA 4.0</span></div><svg id="s" viewBox="0 0 600 560" aria-label="Soldati romani che passano sotto il giogo"></svg></div>
+  <div class="pannello">
+    <div class="sopra" id="sopra"></div>
+    <div class="titolo" id="titolo"></div>
+    <div class="testo" id="testo"></div>
+    <div class="domanda" id="domanda"></div>
+    <div class="tempo" id="tempo"></div>
+    <div class="comandi"><button id="ind">◀ indietro</button><button id="av">avanti ▶</button></div>
+    <div class="nota">Manuale p. 367 · Livio IX 6, trad. del docente · disegno schematico</div>
+  </div>
+</div>
+<script src="lib/anime.umd.min.js"></script>
+<script>
+const NS = 'http://www.w3.org/2000/svg', s = document.getElementById('s');
+function el(t, a, p = s, x) { const e = document.createElementNS(NS, t); for (const k in a) e.setAttribute(k, a[k]); if (x != null) e.textContent = x; p.appendChild(e); return e; }
+const SUOLO = 400, GX = 300;
+// giogo: due aste piantate e una orizzontale
+const giogo = el('g', {class: 'vis', opacity: 0});
+el('line', {x1: GX - 45, y1: SUOLO + 8, x2: GX - 45, y2: SUOLO - 118, stroke: '#5b3a1e', 'stroke-width': 7, 'stroke-linecap': 'round'}, giogo);
+el('line', {x1: GX + 45, y1: SUOLO + 8, x2: GX + 45, y2: SUOLO - 118, stroke: '#5b3a1e', 'stroke-width': 7, 'stroke-linecap': 'round'}, giogo);
+el('line', {x1: GX - 62, y1: SUOLO - 100, x2: GX + 62, y2: SUOLO - 100, stroke: '#6d4626', 'stroke-width': 8, 'stroke-linecap': 'round'}, giogo);
+for (const x of [GX - 45, GX + 45]) el('path', {d: `M${x - 6},${SUOLO - 118} L${x},${SUOLO - 140} L${x + 6},${SUOLO - 118}z`, fill: '#8b8f98'}, giogo);
+// Sanniti armati ai lati
+const sanniti = el('g', {class: 'vis', opacity: 0});
+function sannita(x, dir) {
+  const g = el('g', {transform: `translate(${x},${SUOLO})`}, sanniti);
+  el('rect', {x: -9, y: -58, width: 18, height: 40, rx: 6, fill: '#5f6672'}, g);
+  el('circle', {cx: 0, cy: -70, r: 10, fill: '#d8b48c'}, g);
+  el('path', {d: 'M-11,-74 q11,-16 22,0z', fill: '#4a4f58'}, g);
+  el('rect', {x: -8, y: -18, width: 6, height: 18, fill: '#4a4f58'}, g); el('rect', {x: 2, y: -18, width: 6, height: 18, fill: '#4a4f58'}, g);
+  el('line', {x1: 14 * dir, y1: 0, x2: 14 * dir, y2: -110, stroke: '#3a3f47', 'stroke-width': 3}, g);
+  el('path', {d: `M${14 * dir - 4},-108 L${14 * dir},-124 L${14 * dir + 4},-108z`, fill: '#8b8f98'}, g);
+}
+[70, 130, 190, 410, 470, 530].forEach((x, i) => sannita(x, i < 3 ? 1 : -1));
+// Romani in fila: entrano da destra, si chinano sotto il giogo, escono a sinistra
+const fila = el('g', {});
+const ROM = [];
+function romano(cons) {
+  const g = el('g', {}, fila); const b = el('g', {}, g);
+  el('rect', {x: -9, y: -58, width: 18, height: 40, rx: 6, fill: cons ? '#f2ede2' : '#b8322a'}, b);
+  el('circle', {cx: 0, cy: -70, r: 10, fill: '#e2bf98'}, b);
+  el('rect', {x: -8, y: -18, width: 6, height: 18, fill: '#7a5a3a'}, g); el('rect', {x: 2, y: -18, width: 6, height: 18, fill: '#7a5a3a'}, g);
+  return {g, b, cons};
+}
+for (let i = 0; i < 12; i++) ROM.push(romano(i < 2));
+const ign = el('g', {class: 'vis', opacity: 0});
+el('text', {x: 300, y: 120, 'text-anchor': 'middle', class: 'parola'}, ign, 'ignominia');
+el('text', {x: 300, y: 155, 'text-anchor': 'middle', class: 'spieg'}, ign, 'in- «senza» + nomen «nome»: perdere il nome, l’onore');
+
+let modo = 0, t0 = performance.now();
+function anima(now) {
+  const dt = (now - t0) / 1000;
+  ROM.forEach((r, i) => {
+    let vis = modo >= 2 && (modo >= 3 || r.cons);
+    const passo = modo === 4 ? 0 : 1;
+    const ritardo = i * .75;
+    let x = 620 - ((dt - ritardo) * 95 * passo) % 780;
+    if (modo === 4) x = 560 - i * 42;
+    if (dt < ritardo && modo !== 4) vis = false;
+    const d = Math.abs(x - GX);
+    const chino = d < 70 ? (1 - d / 70) : 0;
+    r.g.setAttribute('transform', `translate(${x},${SUOLO})`);
+    r.b.setAttribute('transform', `translate(0,${chino * 22}) rotate(${-chino * 55},0,-18)`);
+    r.g.style.opacity = vis ? 1 : 0;
+  });
+  requestAnimationFrame(anima);
+}
+requestAnimationFrame(anima);
+
+const TAPPE = [
+  {sopra: '321 a.C.', titolo: 'Le Forche Caudine', testo: 'Una <b>stretta valle</b> vicino all’odierna Benevento. L’esercito romano ci entra, i Sanniti chiudono le uscite: nessuna via di fuga. I Romani devono arrendersi.', dom: 'Guarda la foto: perché qui è facile intrappolare un esercito?', m: 0},
+  {sopra: 'Manuale, p. 367', titolo: 'Il giogo', testo: 'Il <b>giogo</b>: un’asta orizzontale tenuta in piedi da altre due piantate nel terreno. Così basso che per passarci sotto bisogna <b>chinarsi</b>.', dom: 'Perché proprio chinarsi? Che cosa vuol dire quel gesto?', m: 1},
+  {sopra: 'Livio IX 6', titolo: 'Prima i consoli', testo: '<q>Per primi furono fatti passare sotto il giogo i consoli, quasi nudi</q>: senza armi né insegne, con una sola veste.', dom: 'Perché cominciare proprio dai consoli?', m: 2},
+  {sopra: 'Livio IX 6', titolo: 'Poi le legioni', testo: 'Poi gli ufficiali, secondo il grado, e le <b>legioni</b>, una dopo l’altra. Intorno i Sanniti armati <b>insultano e deridono</b>.', dom: 'Che cosa provano i soldati? Trova una parola.', m: 3},
+  {sopra: 'Il giorno della vergogna', titolo: 'Peggio della morte', testo: 'Il vinto passa sotto il giogo e <b>riconosce la sconfitta</b> davanti a tutti. Per i Romani è <b>ignominia</b>: perdere il nome, l’onore. Ma Roma non si arrende: la guerra riprende.', dom: 'Oggi diciamo «passare sotto le forche caudine»: in che situazione?', m: 4}
+];
+const tempo = document.getElementById('tempo');
+const bt = TAPPE.map((t, i) => { const b = document.createElement('button'); b.textContent = i + 1; b.onclick = () => vai(i); tempo.appendChild(b); return b; });
+let ora = 0, prec = null;
+const A = window.anime || null, corsa = [];
+const pezzi = [...giogo.children];            // aste, traversa, punte
+const SAN = [...sanniti.children], IGN = [...ign.children];
+function azzera() {
+  while (corsa.length) { try { corsa.pop().pause(); } catch (e) {} }
+  [...pezzi, ...SAN, ...IGN].forEach(e => { e.style.transform = ''; e.style.opacity = ''; });
+}
+function vai(i) {
+  azzera();
+  ora = Math.max(0, Math.min(TAPPE.length - 1, i)); const t = TAPPE[ora];
+  const avanti = A && prec !== null && ora === prec + 1; prec = ora;
+  if (avanti && t.m === 1) {
+    pezzi.forEach(e => { e.style.transformBox = 'fill-box'; });
+    pezzi.slice(0, 2).forEach(e => { e.style.transformOrigin = 'bottom'; });
+    corsa.push(A.animate(pezzi.slice(0, 2), {scaleY: [0, 1], duration: 700, delay: A.stagger(250, {start: 200}), ease: 'outCubic'}));
+    corsa.push(A.animate(pezzi[2], {translateY: [-160, 0], opacity: [0, 1], duration: 900, delay: 1000, ease: 'outBounce'}));
+    corsa.push(A.animate(pezzi.slice(3), {opacity: [0, 1], duration: 400, delay: 1100}));
+  }
+  if (avanti && t.m === 3) {
+    corsa.push(A.animate(SAN, {opacity: [0, 1], duration: 500, delay: A.stagger(220), ease: 'outQuad'}));  // solo opacità: i gruppi sono posizionati con l'attributo transform
+  }
+  if (avanti && t.m === 4) {
+    IGN.forEach(e => { e.style.transformBox = 'fill-box'; e.style.transformOrigin = 'center'; });
+    corsa.push(A.animate(IGN, {opacity: [0, 1], scale: [.3, 1], duration: 800, delay: A.stagger(500, {start: 300}), ease: 'outBack(2)'}));
+  }
+  for (const k of ['sopra', 'titolo', 'testo']) document.getElementById(k).innerHTML = t[k];
+  document.getElementById('domanda').textContent = t.dom;
+  bt.forEach((b, j) => b.classList.toggle('ora', j === ora));
+  document.getElementById('ind').disabled = ora === 0; document.getElementById('av').disabled = ora === TAPPE.length - 1;
+  if (t.m !== modo && (t.m === 2 || t.m === 3)) t0 = performance.now();
+  modo = t.m;
+  document.getElementById('foto').style.opacity = modo === 0 ? 1 : 0;
+  giogo.setAttribute('opacity', modo >= 1 ? 1 : 0);
+  sanniti.setAttribute('opacity', modo >= 3 ? 1 : 0);
+  ign.setAttribute('opacity', modo === 4 ? 1 : 0);
+}
+document.getElementById('av').onclick = () => vai(ora + 1);
+document.getElementById('ind').onclick = () => vai(ora - 1);
+addEventListener('keydown', e => {
+  if (['ArrowRight', 'ArrowDown', ' ', 'PageDown'].includes(e.key)) { e.preventDefault(); (ora === TAPPE.length - 1 ? __passa(1) : vai(ora + 1)); }
+  if (['ArrowLeft', 'ArrowUp', 'PageUp'].includes(e.key)) { e.preventDefault(); (ora === 0 ? __passa(-1) : vai(ora - 1)); }
+});
+const q = new URLSearchParams(location.search).get('t'); vai(q ? +q : 0);
+
+// ponte con Slidev: la pagina prende i tasti quando la sua slide è visibile;
+// avanti dopo l'ultima tappa e indietro dalla prima passano alle slide. Non attivo nella vista relatore.
+function __restituisci() {
+  try { if (window.frameElement) window.frameElement.blur(); window.parent.focus(); } catch (e) {}
+}
+function __passa(dir) {
+  try { const n = window.parent !== window && window.parent.__slidev__ && window.parent.__slidev__.nav; if (n) { dir > 0 ? n.next() : n.prev(); __restituisci(); } } catch (e) {}
+}
+(function () {
+  if (window.parent === window) return;
+  let relatore = false; try { relatore = window.parent.location.pathname.includes('presenter'); } catch (e) {}
+  if (relatore) return;
+  const fe = window.frameElement; let era = false;
+  setInterval(() => { const vis = !!fe && fe.getBoundingClientRect().height > 0; if (vis && !era) window.focus(); if (!vis && era) __restituisci(); era = vis; }, 250);
+})();
+</script>
+</body>
+</html>

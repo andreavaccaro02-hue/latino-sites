@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>La macchina della conquista</title>
+<!--
+Schema animato per la LIM, sintesi delle lezz. 1-2 del cap. 7: i motivi dell'espansione (manuale p. 364: situazioni contingenti,
+interessi economici, consenso) e il ciclo alleati-soldati (riassunto del docente da M. Beard, SPQR, Mondadori 2016,
+cap. «Il grande balzo in avanti»). Comandi: frecce, pulsanti. ?t=N.
+-->
+<style>
+:root{--roma:#b8322a;--lapis:#1f4e8c;--ocra:#c8962e;--testo:#1d2430;--grigio:#6b7280}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:#fff;color:var(--testo);font-family:Lexend,"Atkinson Hyperlegible",system-ui,sans-serif;overflow:hidden}
+.tutto{display:grid;grid-template-columns:57% 43%;height:100vh}
+.sx{background:radial-gradient(circle at 50% 50%,#fffaf0,#f1e9d6)}
+svg{width:100%;height:100vh;display:block}
+.pannello{display:flex;flex-direction:column;padding:2.4vh 2.2vw 1.8vh 2vw;gap:1.3vh}
+.sopra{font-size:2.3vh;font-weight:600;color:var(--grigio);text-transform:uppercase;letter-spacing:.08em}
+.titolo{font-size:4.8vh;font-weight:700;color:var(--roma);line-height:1.08}
+.testo{font-size:3.05vh;line-height:1.38}
+.testo b{color:var(--lapis)}
+.domanda{margin-top:auto;font-size:2.7vh;line-height:1.3;border-left:.6vh solid var(--ocra);padding:.7vh 0 .7vh 1vw;color:#4a3a12;background:#faf3e3;border-radius:0 .6vh .6vh 0}
+.tempo{display:flex;gap:.5vw}
+.tempo button{flex:1;font:inherit;font-size:1.9vh;padding:.8vh 0;border:none;border-radius:.7vh;background:#e5e7eb;color:var(--testo);cursor:pointer}
+.tempo button.ora{background:var(--roma);color:#fff;font-weight:700}
+.comandi{display:flex;gap:.7vw}
+.comandi button{flex:1;font:inherit;font-size:2.4vh;padding:.9vh;border-radius:.8vh;border:2px solid var(--lapis);background:#fff;color:var(--lapis);cursor:pointer}
+.comandi button:disabled{opacity:.35;cursor:default}
+.nota{font-size:1.5vh;color:var(--grigio)}
+.nodo{transition:opacity .7s}
+.nodo rect{transition:fill .6s,stroke .6s}
+.nodo text{font-size:17px;font-weight:600;text-anchor:middle}
+.tag{font-size:10.5px;font-weight:700;letter-spacing:.03em;text-transform:uppercase;text-anchor:middle;fill:var(--ocra)}
+.arco{fill:none;stroke:#c9b991;stroke-width:4;transition:stroke .6s,opacity .6s}
+.arco.on{stroke:var(--roma)}
+.centro{transition:opacity .9s}
+@keyframes gira{to{transform:rotate(360deg)}}
+.ruota{transform-origin:300px 272px;animation:gira 14s linear infinite}
+</style>
+</head>
+<body>
+<div class="tutto">
+  <div class="sx"><svg id="s" viewBox="0 0 600 560" aria-label="Il ciclo della conquista romana"></svg></div>
+  <div class="pannello">
+    <div class="sopra" id="sopra"></div>
+    <div class="titolo" id="titolo"></div>
+    <div class="testo" id="testo"></div>
+    <div class="domanda" id="domanda"></div>
+    <div class="tempo" id="tempo"></div>
+    <div class="comandi"><button id="ind">◀ indietro</button><button id="av">avanti ▶</button></div>
+    <div class="nota">Manuale p. 364 · riassunto da M. Beard, SPQR, cap. «Il grande balzo in avanti»</div>
+  </div>
+</div>
+<script>
+const NS = 'http://www.w3.org/2000/svg', s = document.getElementById('s');
+function el(t, a, p = s, x) { const e = document.createElementNS(NS, t); for (const k in a) e.setAttribute(k, a[k]); if (x != null) e.textContent = x; p.appendChild(e); return e; }
+const CX = 300, CY = 280, RR = 200;
+const NODI = [
+  {t: ['Una guerra', 'vinta'], tag: ''},
+  {t: ['Bottino e terre', 'tolte ai vinti'], tag: 'interessi economici'},
+  {t: ['Tutti vogliono', 'altre guerre'], tag: 'consenso'},
+  {t: ['I vinti diventano', 'alleati (socii)'], tag: 'foedus'},
+  {t: ['Gli alleati danno', 'soldati'], tag: 'Polibio'},
+  {t: ['Confini più lontani:', 'nuovi nemici, nuove', 'richieste di aiuto'], tag: 'situazioni contingenti'}
+];
+const defs = el('defs', {});
+defs.innerHTML = `<marker id="pt" markerWidth="12" markerHeight="12" refX="6" refY="6" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,1 L12,6 L0,11z" fill="context-stroke"/></marker>`;
+const pos = NODI.map((n, i) => { const a = -Math.PI / 2 + i * 2 * Math.PI / NODI.length; return [CX + 192 * Math.cos(a), CY + RR * Math.sin(a)]; });
+// archi
+const ARCHI = pos.map((p, i) => {
+  const a1 = -Math.PI / 2 + i * 2 * Math.PI / 6 + .32, a2 = -Math.PI / 2 + (i + 1) * 2 * Math.PI / 6 - .32;
+  const x1 = CX + 192 * Math.cos(a1), y1 = CY + RR * Math.sin(a1), x2 = CX + 192 * Math.cos(a2), y2 = CY + RR * Math.sin(a2);
+  return el('path', {d: `M${x1},${y1} A192,${RR} 0 0 1 ${x2},${y2}`, class: 'arco', 'marker-end': 'url(#pt)', opacity: 0});
+});
+// nodi
+const N = NODI.map((n, i) => {
+  const [x, y] = pos[i]; const g = el('g', {class: 'nodo', opacity: 0});
+  const h = 26 + n.t.length * 20;
+  const r = el('rect', {x: x - 88, y: y - h / 2, width: 176, height: h, rx: 12, fill: '#fff', stroke: '#c9b991', 'stroke-width': 2.5}, g);
+  n.t.forEach((riga, j) => el('text', {x, y: y - h / 2 + 30 + j * 20}, g, riga));
+  if (n.tag) el('text', {x, y: y + h / 2 + 16, class: 'tag'}, g, n.tag);
+  return {g, r};
+});
+const centro = el('g', {class: 'centro', opacity: 0});
+const ruota = el('g', {class: 'ruota'}, centro);
+const W = CY - 8;
+for (let k = 0; k < 8; k++) el('rect', {x: CX - 5, y: W - 44, width: 10, height: 14, rx: 2, fill: '#e8c9a0', transform: `rotate(${k * 45},${CX},${W})`}, ruota);
+el('circle', {cx: CX, cy: W, r: 34, fill: '#e8c9a0'}, ruota);
+el('circle', {cx: CX, cy: W, r: 15, fill: '#fffaf0'}, ruota);
+el('text', {x: CX, y: CY + 56, 'text-anchor': 'middle', 'font-size': 17, 'font-weight': 700, fill: 'var(--roma)'}, centro, 'una macchina');
+el('text', {x: CX, y: CY + 74, 'text-anchor': 'middle', 'font-size': 13.5, fill: 'var(--roma)'}, centro, 'che si alimenta da sola');
+
+const TAPPE = [
+  {sopra: 'Manuale, p. 364', titolo: 'Il giro della conquista', testo: 'Rimettiamo insieme le due ore. Roma non segue un piano deciso dall’inizio: una guerra tira l’altra. Seguiamo il giro.', dom: 'Dove comincia il giro?', n: 1},
+  {sopra: 'Interessi economici', titolo: 'Bottino e terre', testo: 'Dopo ogni vittoria ci sono <b>bottino</b> da dividere e <b>terre</b> tolte ai vinti, da dare ai cittadini o alle colonie.', dom: 'Chi guadagna da una guerra vinta?', n: 2},
+  {sopra: 'Consenso', titolo: 'Tutti d’accordo', testo: 'Aristocratici e popolo hanno motivi diversi, ma <b>tutti</b> vogliono nuove conquiste. Questo diffuso consenso spinge avanti.', dom: 'Perché anche i contadini poveri sono favorevoli?', n: 3},
+  {sopra: 'Foedus', titolo: 'I vinti diventano alleati', testo: 'Roma non distrugge i vinti: li lega a sé con un <b>trattato</b>. Diventano <b>socii</b>, alleati.', dom: 'Ricordi un popolo nemico diventato alleato?', n: 4},
+  {sopra: 'Polibio', titolo: 'Gli alleati danno soldati', testo: 'Gli alleati non pagano tributi: devono <b>mandare soldati</b>. Ogni vittoria rende l’esercito più grande.', dom: 'Quanti fanti davano gli alleati nel 225? (Polibio)', n: 5},
+  {sopra: 'Situazioni contingenti', titolo: 'Nuovi confini, nuove guerre', testo: 'Più Roma cresce, più ha <b>vicini nuovi</b>: nemici che la temono, città che le chiedono aiuto. E si ricomincia.', dom: 'Quale città chiede aiuto a Roma contro i Sanniti? E contro Taranto?', n: 6},
+  {sopra: 'Gli storici oggi', titolo: 'Una macchina', testo: 'Per la storica Mary Beard la conquista dell’Italia funziona come <b>una macchina che si alimenta da sola</b>: ogni guerra vinta porta i soldati per la guerra successiva. Fino a uscire dall’Italia.', dom: 'Dove porterà questa macchina dopo il 272? Guarda la Sicilia.', n: 6, centro: 1}
+];
+const tempo = document.getElementById('tempo');
+const bt = TAPPE.map((t, i) => { const b = document.createElement('button'); b.textContent = i + 1; b.onclick = () => vai(i); tempo.appendChild(b); return b; });
+let ora = 0;
+function vai(i) {
+  ora = Math.max(0, Math.min(TAPPE.length - 1, i)); const t = TAPPE[ora];
+  for (const k of ['sopra', 'titolo', 'testo']) document.getElementById(k).innerHTML = t[k];
+  document.getElementById('domanda').textContent = t.dom;
+  bt.forEach((b, j) => b.classList.toggle('ora', j === ora));
+  document.getElementById('ind').disabled = ora === 0; document.getElementById('av').disabled = ora === TAPPE.length - 1;
+  N.forEach((x, j) => {
+    x.g.setAttribute('opacity', j < t.n ? 1 : 0);
+    const att = j === t.n - 1 && !t.centro;
+    x.r.setAttribute('fill', att ? '#fbe7e4' : '#fff'); x.r.setAttribute('stroke', att ? 'var(--roma)' : '#c9b991');
+  });
+  ARCHI.forEach((a, j) => { a.setAttribute('opacity', j < t.n - 1 || (t.n === 6 && j === 5) ? 1 : 0); a.classList.toggle('on', !!t.centro); });
+  centro.setAttribute('opacity', t.centro ? 1 : 0);
+}
+document.getElementById('av').onclick = () => vai(ora + 1);
+document.getElementById('ind').onclick = () => vai(ora - 1);
+addEventListener('keydown', e => {
+  if (['ArrowRight', 'ArrowDown', ' ', 'PageDown'].includes(e.key)) { e.preventDefault(); (ora === TAPPE.length - 1 ? __passa(1) : vai(ora + 1)); }
+  if (['ArrowLeft', 'ArrowUp', 'PageUp'].includes(e.key)) { e.preventDefault(); (ora === 0 ? __passa(-1) : vai(ora - 1)); }
+});
+const q = new URLSearchParams(location.search).get('t'); vai(q ? +q : 0);
+
+// ponte con Slidev: la pagina prende i tasti quando la sua slide è visibile;
+// avanti dopo l'ultima tappa e indietro dalla prima passano alle slide. Non attivo nella vista relatore.
+function __restituisci() {
+  try { if (window.frameElement) window.frameElement.blur(); window.parent.focus(); } catch (e) {}
+}
+function __passa(dir) {
+  try { const n = window.parent !== window && window.parent.__slidev__ && window.parent.__slidev__.nav; if (n) { dir > 0 ? n.next() : n.prev(); __restituisci(); } } catch (e) {}
+}
+(function () {
+  if (window.parent === window) return;
+  let relatore = false; try { relatore = window.parent.location.pathname.includes('presenter'); } catch (e) {}
+  if (relatore) return;
+  const fe = window.frameElement; let era = false;
+  setInterval(() => { const vis = !!fe && fe.getBoundingClientRect().height > 0; if (vis && !era) window.focus(); if (!vis && era) __restituisci(); era = vis; }, 250);
+})();
+</script>
+</body>
+</html>

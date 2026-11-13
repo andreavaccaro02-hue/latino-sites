@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mappa · Prove di impero</title>
+<!--
+Mappa concettuale, 2G, cap. 7, lez. 1 «Prove di impero», pp. 364-371. Struttura come «La lezione in breve» di p. 371, parole del docente.
+Motore: lib/mappa-concettuale.js (Cytoscape.js, MIT). Comandi: frecce o spazio, pulsanti; «Mettiti alla prova» copre i riquadri.
+-->
+</head>
+<body>
+<script src="lib/cytoscape.min.js"></script>
+<script>
+window.MAPPA = {
+ "sopra": "Mappa · cap. 7, lezione 1",
+ "nota": "Manuale pp. 364-371 · «La lezione in breve», p. 371",
+ "tappe": [
+  {
+   "titolo": "Perché?",
+   "testo": "Roma non segue un piano: <b>una guerra tira l’altra</b>. Il manuale (p. 364) dà tre motivi.",
+   "dom": "Qual è, secondo te, il motivo più forte?"
+  },
+  {
+   "titolo": "Prima il Lazio",
+   "testo": "Tre tappe nel V secolo: i <b>Latini</b>, poi <b>Equi e Volsci</b>, poi la città etrusca di <b>Veio</b>.",
+   "dom": "Quale di queste è un’alleanza e non una vittoria?"
+  },
+  {
+   "titolo": "Roma domina il Lazio",
+   "testo": "Il Lazio è di Roma. Ma nel <b>390</b> arrivano i Galli e la saccheggiano.",
+   "dom": "Perché il sacco dei Galli non ferma Roma?"
+  },
+  {
+   "titolo": "Contro i Sanniti",
+   "testo": "Tre guerre in cinquant’anni, anche con una sconfitta umiliante. Alla fine Roma prende la <b>Campania</b>.",
+   "dom": "Chi aveva chiesto aiuto a Roma contro i Sanniti?"
+  },
+  {
+   "titolo": "Verso nord",
+   "testo": "Roma batte <b>Etruschi</b> e <b>Galli Boi</b> e arriva fino a <b>Rimini</b>.",
+   "dom": "Su quale mare si affaccia ora Roma?"
+  },
+  {
+   "titolo": "Contro Taranto e Pirro",
+   "testo": "Taranto chiama <b>Pirro</b>. Pirro vince, ma perde troppi uomini. Alla fine le città greche del Sud si arrendono.",
+   "dom": "Che cosa vuol dire «vittoria di Pirro»?"
+  },
+  {
+   "titolo": "Roma padrona dell’Italia",
+   "testo": "Nel <b>272 a.C.</b> tutta l’Italia centro-meridionale è nelle mani di Roma.",
+   "dom": "Racconta la mappa a un compagno, dall’alto in basso, in un minuto."
+  }
+ ],
+ "nodi": [
+  {
+   "id": "perche",
+   "t": "PERCHÉ?\nuna guerra tira l’altra · bottino e terre · consenso",
+   "x": 1,
+   "y": -1,
+   "tipo": "causa",
+   "tappa": 0
+  },
+  {
+   "id": "l1",
+   "t": "496-493\nalleanza con i Latini",
+   "x": 0,
+   "y": 0,
+   "tipo": "fatto",
+   "tappa": 1
+  },
+  {
+   "id": "l2",
+   "t": "458\nvinti Equi e Volsci",
+   "x": 1,
+   "y": 0,
+   "tipo": "fatto",
+   "tappa": 1
+  },
+  {
+   "id": "l3",
+   "t": "396\nconquistata Veio",
+   "x": 2,
+   "y": 0,
+   "tipo": "fatto",
+   "tappa": 1
+  },
+  {
+   "id": "lazio",
+   "t": "ROMA DOMINA IL LAZIO",
+   "x": 1,
+   "y": 1,
+   "tipo": "esito",
+   "tappa": 2
+  },
+  {
+   "id": "galli",
+   "t": "390: i Galli saccheggiano Roma",
+   "x": 2.1,
+   "y": 1,
+   "tipo": "nota",
+   "tappa": 2
+  },
+  {
+   "id": "sann",
+   "t": "343-290\ntre guerre contro i Sanniti\n(321 Forche Caudine)",
+   "x": 0,
+   "y": 2.1,
+   "tipo": "fatto",
+   "tappa": 3
+  },
+  {
+   "id": "etr",
+   "t": "284-280\nEtruschi e Galli Boi",
+   "x": 1,
+   "y": 2.1,
+   "tipo": "fatto",
+   "tappa": 4
+  },
+  {
+   "id": "tar",
+   "t": "280-272\nTaranto chiama Pirro\n(vittorie di Pirro)",
+   "x": 2,
+   "y": 2.1,
+   "tipo": "fatto",
+   "tappa": 5
+  },
+  {
+   "id": "camp",
+   "t": "prende la Campania",
+   "x": 0,
+   "y": 3.2,
+   "tipo": "esito",
+   "tappa": 3
+  },
+  {
+   "id": "rim",
+   "t": "arriva fino a Rimini",
+   "x": 1,
+   "y": 3.2,
+   "tipo": "esito",
+   "tappa": 4
+  },
+  {
+   "id": "mg",
+   "t": "si arrende la Magna Grecia",
+   "x": 2,
+   "y": 3.2,
+   "tipo": "esito",
+   "tappa": 5
+  },
+  {
+   "id": "italia",
+   "t": "ROMA DOMINA L’ITALIA\ncentro-meridionale · 272 a.C.",
+   "x": 1,
+   "y": 4.25,
+   "tipo": "centro",
+   "tappa": 6
+  }
+ ],
+ "archi": [
+  {
+   "da": "perche",
+   "a": "l2",
+   "t": "spinge",
+   "tappa": 1
+  },
+  {
+   "da": "l1",
+   "a": "lazio",
+   "t": "",
+   "tappa": 2
+  },
+  {
+   "da": "l2",
+   "a": "lazio",
+   "t": "",
+   "tappa": 2
+  },
+  {
+   "da": "l3",
+   "a": "lazio",
+   "t": "",
+   "tappa": 2
+  },
+  {
+   "da": "lazio",
+   "a": "galli",
+   "t": "ma",
+   "tappa": 2
+  },
+  {
+   "da": "lazio",
+   "a": "sann",
+   "t": "poi",
+   "tappa": 3
+  },
+  {
+   "da": "sann",
+   "a": "camp",
+   "t": "alla fine",
+   "tappa": 3
+  },
+  {
+   "da": "lazio",
+   "a": "etr",
+   "t": "poi",
+   "tappa": 4
+  },
+  {
+   "da": "etr",
+   "a": "rim",
+   "t": "",
+   "tappa": 4
+  },
+  {
+   "da": "lazio",
+   "a": "tar",
+   "t": "poi",
+   "tappa": 5
+  },
+  {
+   "da": "tar",
+   "a": "mg",
+   "t": "alla fine",
+   "tappa": 5
+  },
+  {
+   "da": "camp",
+   "a": "italia",
+   "t": "",
+   "tappa": 6
+  },
+  {
+   "da": "rim",
+   "a": "italia",
+   "t": "",
+   "tappa": 6
+  },
+  {
+   "da": "mg",
+   "a": "italia",
+   "t": "",
+   "tappa": 6
+  }
+ ],
+ "dx": 230,
+ "dy": 118
+};
+</script>
+<script src="lib/mappa-concettuale.js"></script>
+</body>
+</html>

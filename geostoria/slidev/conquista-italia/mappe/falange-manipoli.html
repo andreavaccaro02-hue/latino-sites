@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Falange e manipoli</title>
+<!--
+Animazione per la LIM: dalla falange allo schieramento manipolare (cap. 7, lez. 2, pp. 372-373).
+Schema semplificato: proporzioni indicative, non in scala. «Res ad triarios rediit»: Livio VIII 8, 11.
+Comandi: frecce o spazio, pulsanti, pallini. Parametro ?t=N per aprire la tappa N.
+-->
+<style>
+:root{--roma:#b8322a;--lapis:#1f4e8c;--ocra:#c8962e;--testo:#1d2430;--grigio:#6b7280;
+  --hastati:#d9534a;--principes:#a52a22;--triarii:#6e1b16}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:#fff;color:var(--testo);font-family:Lexend,"Atkinson Hyperlegible",system-ui,sans-serif;overflow:hidden}
+.tutto{display:grid;grid-template-columns:57% 43%;height:100vh}
+.campo{background:linear-gradient(180deg,#eef3e2,#dfe9cc)}
+svg{width:100%;height:100vh;display:block}
+.pannello{display:flex;flex-direction:column;padding:2.4vh 2.2vw 1.8vh 2vw;gap:1.3vh;background:linear-gradient(180deg,#fffdf8,#fff)}
+.sopra{font-size:2.4vh;font-weight:600;color:var(--grigio);text-transform:uppercase;letter-spacing:.08em}
+.titolo{font-size:5vh;font-weight:700;color:var(--roma);line-height:1.08}
+.testo{font-size:3.1vh;line-height:1.38}
+.testo b{color:var(--lapis)}
+.domanda{margin-top:auto;font-size:2.7vh;line-height:1.3;border-left:.6vh solid var(--ocra);padding:.7vh 0 .7vh 1vw;color:#4a3a12;background:#faf3e3;border-radius:0 .6vh .6vh 0}
+.tempo{display:flex;gap:.5vw}
+.tempo button{flex:1;font:inherit;font-size:1.9vh;padding:.8vh 0;border:none;border-radius:.7vh;background:#e5e7eb;color:var(--testo);cursor:pointer}
+.tempo button.f{background:#efe6d3}
+.tempo button.ora{background:var(--roma);color:#fff;font-weight:700}
+.comandi{display:flex;gap:.7vw}
+.comandi button{flex:1;font:inherit;font-size:2.4vh;padding:.9vh;border-radius:.8vh;border:2px solid var(--lapis);background:#fff;color:var(--lapis);cursor:pointer}
+.comandi button:disabled{opacity:.35;cursor:default}
+.nota{font-size:1.55vh;color:var(--grigio)}
+.mov{transition:transform 1.4s cubic-bezier(.45,.05,.3,1),opacity .8s}
+.coll{transition:opacity .8s}
+.lbl{font-size:17px;font-weight:700;paint-order:stroke;stroke:#f3f6ea;stroke-width:4px;stroke-linejoin:round}
+</style>
+</head>
+<body>
+<div class="tutto">
+  <div class="campo"><svg id="s" viewBox="0 0 600 560" aria-label="Schieramento sul campo di battaglia"></svg></div>
+  <div class="pannello">
+    <div class="sopra" id="sopra"></div>
+    <div class="titolo" id="titolo"></div>
+    <div class="testo" id="testo"></div>
+    <div class="domanda" id="domanda"></div>
+    <div class="tempo" id="tempo"></div>
+    <div class="comandi"><button id="ind">◀ indietro</button><button id="av">avanti ▶</button></div>
+    <div class="nota">Schema semplificato, non in scala · manuale pp. 372-373</div>
+  </div>
+</div>
+<script>
+const NS = 'http://www.w3.org/2000/svg', s = document.getElementById('s');
+function el(t, a, p = s, x) { const e = document.createElementNS(NS, t); for (const k in a) e.setAttribute(k, a[k]); if (x != null) e.textContent = x; p.appendChild(e); return e; }
+const tr = (e, x, y) => { e.style.transform = `translate(${x}px,${y}px)`; };
+
+// colline (terreno accidentato)
+const colline = el('g', {class: 'coll', opacity: 0});
+for (const [cx, cy, rx, ry] of [[150, 300, 110, 55], [430, 250, 95, 50], [300, 420, 120, 45], [520, 400, 70, 40]]) {
+  el('ellipse', {cx, cy, rx, ry, fill: '#b9a27a', opacity: .45}, colline);
+  el('ellipse', {cx, cy: cy - 6, rx: rx * .6, ry: ry * .55, fill: '#a68c60', opacity: .4}, colline);
+}
+// nemico
+el('rect', {x: 20, y: 22, width: 560, height: 46, rx: 8, fill: '#8b8f98', opacity: .85});
+el('text', {x: 300, y: 52, 'text-anchor': 'middle', fill: '#fff', 'font-size': 19, 'font-weight': 700}, s, 'il nemico');
+
+// FALANGE: 16 x 7 soldati
+const fal = el('g', {});
+const FD = [];
+let seme = 7; const rnd = () => (seme = (seme * 9301 + 49297) % 233280) / 233280;
+for (let r = 0; r < 7; r++) for (let c = 0; c < 16; c++) {
+  const g = el('g', {class: 'mov'}, fal);
+  el('circle', {cx: 150 + c * 20, cy: 300 + r * 20, r: 7, fill: '#b8322a', stroke: '#fff', 'stroke-width': 1.5}, g);
+  FD.push({g, dx: (rnd() - .5) * 120, dy: (rnd() - .5) * 90 + (r > 3 ? 40 : 0)});
+}
+const falT = el('text', {x: 300, y: 548, 'text-anchor': 'middle', class: 'lbl', fill: 'var(--roma)'}, s, 'la falange: un solo blocco');
+
+// MANIPOLI: 3 file x 8 manipoli, a scacchiera
+const FILE = [{n: 'hastati', y: 200, c: 'var(--hastati)', w: 44, off: 0}, {n: 'principes', y: 290, c: 'var(--principes)', w: 44, off: 33}, {n: 'triarii', y: 380, c: 'var(--triarii)', w: 26, off: 0}];
+const man = el('g', {}); const M = {hastati: [], principes: [], triarii: []};
+FILE.forEach(f => {
+  for (let i = 0; i < 7; i++) {
+    const x = 30 + f.off + i * 66 + (f.n === 'triarii' ? 9 : 0);
+    const g = el('g', {class: 'mov'}, man);
+    el('rect', {x, y: f.y, width: f.w, height: 26, rx: 4, fill: f.c, stroke: '#fff', 'stroke-width': 1.5}, g);
+    M[f.n].push(g);
+  }
+});
+const etich = el('g', {class: 'coll'});
+const ET = FILE.map(f => el('text', {x: 518, y: f.y + 19, 'text-anchor': 'start', class: 'lbl', fill: f.c}, etich, f.n));
+const fr = el('g', {class: 'coll', opacity: 0});
+el('text', {x: 300, y: 515, 'text-anchor': 'middle', class: 'lbl', fill: '#6e1b16'}, fr, '«Si è arrivati ai triarii»: siamo all’ultima riserva');
+
+const TAPPE = [
+  {k: 'f', sopra: 'La falange', titolo: 'Un muro di lance', testo: 'All’inizio la legione combatte a <b>falange</b>: una schiera compatta, con lunghe lance puntate in avanti. In <b>campo aperto</b> fa paura.', dom: 'Che cosa serve perché una falange funzioni bene?',
+   fal: 'ok'},
+  {k: 'f', sopra: 'La falange', titolo: 'In montagna si rompe', testo: 'Nel <b>Sannio</b> si combatte su colline e in valli strette. Il blocco non riesce a restare compatto: si aprono buchi, le file si confondono.', dom: 'Perché il terreno del Sannio è un problema per la falange?',
+   fal: 'rotta', coll: 1},
+  {k: 'f', sopra: 'La falange', titolo: 'Non si torna indietro', testo: 'La falange non sa <b>arretrare</b> in ordine né mandare avanti soldati riposati. Se il blocco cede, cede tutto l’esercito.', dom: 'Che cosa succede se la prima fila viene sfondata?',
+   fal: 'fuga', coll: 1},
+  {k: 'm', sopra: 'I manipoli', titolo: 'Tre file a scacchiera', testo: 'La legione si divide in <b>manipoli</b>, piccoli reparti. Davanti gli <b>hastati</b>, giovani; poi i <b>principes</b>, più esperti; in fondo i <b>triarii</b>, veterani. Fra un manipolo e l’altro resta un varco.', dom: 'A che cosa servono i varchi fra i manipoli?',
+   man: 'base'},
+  {k: 'm', sopra: 'I manipoli', titolo: 'Attaccano gli hastati', testo: 'Gli <b>hastati</b> avanzano e combattono per primi.', dom: 'Perché mandare avanti per primi i più giovani?',
+   man: 'attacco'},
+  {k: 'm', sopra: 'I manipoli', titolo: 'Il cambio', testo: 'Gli hastati stanchi <b>arretrano nei varchi</b>; i <b>principes</b>, freschi, passano avanti. Il fronte non si rompe.', dom: 'Che cosa ha in più la legione rispetto alla falange?',
+   man: 'cambio'},
+  {k: 'm', sopra: 'I manipoli', titolo: 'L’ultima riserva', testo: 'Se anche i principes cedono, tocca ai <b>triarii</b>. I Romani dicevano «si è arrivati ai triarii» per dire: siamo alla fine, ultima possibilità (Livio).', dom: 'Conosci un modo di dire italiano con lo stesso senso?',
+   man: 'triarii'},
+  {k: 'm', sopra: 'I manipoli', titolo: 'Su ogni terreno', testo: 'Ogni manipolo si muove da solo: <b>aggira le colline</b>, avanza, arretra. Se un manipolo è sconfitto, gli altri tengono.', dom: 'Riassumi: tre vantaggi dei manipoli sulla falange.',
+   man: 'terreno', coll: 1}
+];
+const tempo = document.getElementById('tempo');
+const bt = TAPPE.map((t, i) => { const b = document.createElement('button'); b.textContent = i + 1; if (t.k === 'f') b.classList.add('f'); b.onclick = () => vai(i); tempo.appendChild(b); return b; });
+let ora = 0, prec = null;
+// avanti di una tappa: movimenti a scaglioni; indietro o salti: istantanei
+function ritmo(e, ms, avanti) { e.style.transition = avanti ? '' : 'none'; e.style.transitionDelay = avanti ? ms + 'ms' : '0ms'; }
+function vai(i) {
+  ora = Math.max(0, Math.min(TAPPE.length - 1, i)); const t = TAPPE[ora];
+  const avanti = prec !== null && ora === prec + 1; prec = ora;
+  FD.forEach((d, j) => ritmo(d.g, (j * 37) % 600, avanti));
+  M.hastati.forEach((g, j) => ritmo(g, j * 70, avanti));
+  M.principes.forEach((g, j) => ritmo(g, 250 + j * 70, avanti));
+  M.triarii.forEach((g, j) => ritmo(g, 500 + j * 70, avanti));
+  ET.forEach(e => ritmo(e, 300, avanti));
+  for (const k of ['sopra', 'titolo', 'testo', 'domanda']) document.getElementById(k).innerHTML = t[k === 'domanda' ? 'dom' : k];
+  bt.forEach((b, j) => b.classList.toggle('ora', j === ora));
+  document.getElementById('ind').disabled = ora === 0; document.getElementById('av').disabled = ora === TAPPE.length - 1;
+  colline.setAttribute('opacity', t.coll ? 1 : 0);
+  // falange
+  fal.style.opacity = t.fal ? 1 : 0; falT.style.opacity = t.fal ? 1 : 0;
+  falT.textContent = t.fal === 'rotta' ? 'il blocco si rompe' : t.fal === 'fuga' ? 'nessuna ritirata in ordine' : 'la falange: un solo blocco';
+  FD.forEach(d => {
+    d.g.style.opacity = t.fal ? 1 : 0;
+    if (t.fal === 'rotta') tr(d.g, d.dx * .6, d.dy * .5);
+    else if (t.fal === 'fuga') tr(d.g, d.dx, d.dy * .8 + 30);
+    else tr(d.g, 0, 0);
+  });
+  // manipoli
+  const vis = !!t.man; man.style.opacity = vis ? 1 : 0; etich.setAttribute('opacity', vis ? 1 : 0);
+  const H = M.hastati, Pr = M.principes, T = M.triarii;
+  [...H, ...Pr, ...T].forEach(g => tr(g, 0, 0));
+  let ly = [0, 0, 0];
+  if (t.man === 'attacco') { H.forEach(g => tr(g, 0, -110)); ly = [-110, 0, 0]; }
+  if (t.man === 'cambio') { H.forEach(g => tr(g, 0, 95)); Pr.forEach(g => tr(g, 0, -200)); ly = [95, -200, 0]; }
+  if (t.man === 'triarii') { H.forEach(g => tr(g, 0, 95)); Pr.forEach(g => tr(g, 0, 90)); T.forEach(g => tr(g, 0, -290)); ly = [95, 90, -290]; }
+  if (t.man === 'terreno') {
+    const dx = [-18, -26, 6, 14, -10, 20, 16];
+    H.forEach((g, i) => tr(g, dx[i], -30 - (i % 3) * 14)); Pr.forEach((g, i) => tr(g, -dx[i] * .7, (i % 2) * 18)); T.forEach((g, i) => tr(g, dx[i] * .4, 26));
+  }
+  ET.forEach((e, i) => { e.classList.add('mov'); tr(e, 0, t.man === 'terreno' ? 0 : ly[i]); e.style.opacity = t.man === 'cambio' && i === 0 ? .9 : 1; });
+  fr.setAttribute('opacity', t.man === 'triarii' ? 1 : 0);
+}
+document.getElementById('av').onclick = () => vai(ora + 1);
+document.getElementById('ind').onclick = () => vai(ora - 1);
+addEventListener('keydown', e => {
+  if (['ArrowRight', 'ArrowDown', ' ', 'PageDown'].includes(e.key)) { e.preventDefault(); (ora === TAPPE.length - 1 ? __passa(1) : vai(ora + 1)); }
+  if (['ArrowLeft', 'ArrowUp', 'PageUp'].includes(e.key)) { e.preventDefault(); (ora === 0 ? __passa(-1) : vai(ora - 1)); }
+});
+const q = new URLSearchParams(location.search).get('t'); vai(q ? +q : 0);
+
+// ponte con Slidev: la pagina prende i tasti quando la sua slide è visibile;
+// avanti dopo l'ultima tappa e indietro dalla prima passano alle slide. Non attivo nella vista relatore.
+function __restituisci() {
+  try { if (window.frameElement) window.frameElement.blur(); window.parent.focus(); } catch (e) {}
+}
+function __passa(dir) {
+  try { const n = window.parent !== window && window.parent.__slidev__ && window.parent.__slidev__.nav; if (n) { dir > 0 ? n.next() : n.prev(); __restituisci(); } } catch (e) {}
+}
+(function () {
+  if (window.parent === window) return;
+  let relatore = false; try { relatore = window.parent.location.pathname.includes('presenter'); } catch (e) {}
+  if (relatore) return;
+  const fe = window.frameElement; let era = false;
+  setInterval(() => { const vis = !!fe && fe.getBoundingClientRect().height > 0; if (vis && !era) window.focus(); if (!vis && era) __restituisci(); era = vis; }, 250);
+})();
+</script>
+</body>
+</html>

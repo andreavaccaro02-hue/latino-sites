@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mappa · Una storia lunghissima</title>
+<!--
+Mappa concettuale, 1BLS, cap. 1, lez. 2 §3 «Una storia lunghissima», pp. 48-53. Segue «La lezione in breve» (p. 53).
+Motore: lib/mappa-concettuale.js (Cytoscape.js, MIT). Comandi: frecce o spazio, pulsanti; «Mettiti alla prova» copre i riquadri.
+-->
+</head>
+<body>
+<script src="lib/cytoscape.min.js"></script>
+<script>
+window.MAPPA = {
+ "sopra": "Mappa · cap. 1, lezione 2 · §3",
+ "nota": "Manuale pp. 48-53 · «La lezione in breve» p. 53",
+ "tappe": [
+  {
+   "titolo": "Tre fasi di unità",
+   "testo": "La storia egizia è lunghissima: <b>tre Regni</b> forti, separati da <b>periodi intermedi</b> di crisi.",
+   "dom": "Quanti anni dura, più o meno, la storia dei faraoni?"
+  },
+  {
+   "titolo": "L'Antico Regno",
+   "testo": "2686-2180 a.C.: il potere del faraone si consolida; le <b>piramidi</b>.",
+   "dom": "Che cosa costruiscono i faraoni dell'Antico Regno?"
+  },
+  {
+   "titolo": "La prima crisi",
+   "testo": "Le tasse restano ai <b>governatori</b>: il faraone si indebolisce. Primo periodo intermedio.",
+   "dom": "Perché il faraone perde potere?"
+  },
+  {
+   "titolo": "Il Medio Regno",
+   "testo": "2055-1775 a.C.: espansione verso Nubia e Siria; bonifica del Fayyum. Poi arrivano gli <b>Hyksos</b>.",
+   "dom": "Che cosa portano gli Hyksos in Egitto?"
+  },
+  {
+   "titolo": "Il Nuovo Regno",
+   "testo": "1550-1070 a.C.: massima estensione e splendore. Akhenaton, Ramses II, <b>Kadesh</b> (1275).",
+   "dom": "Contro chi combatte Ramses II a Kadesh?"
+  },
+  {
+   "titolo": "La fine",
+   "testo": "<b>Popoli del mare</b> e sacerdoti potenti; poi Assiri (671), Persiani (525), Alessandro (332).",
+   "dom": "Racconta la mappa in un minuto, da sinistra a destra."
+  }
+ ],
+ "nodi": [
+  {
+   "id": "eg",
+   "t": "LA STORIA EGIZIA\ntre fasi di unità",
+   "x": 1.5,
+   "y": 0,
+   "tipo": "centro",
+   "tappa": 0
+  },
+  {
+   "id": "int",
+   "t": "in mezzo:\nperiodi intermedi (crisi)",
+   "x": 3,
+   "y": 0,
+   "tipo": "nota",
+   "tappa": 0
+  },
+  {
+   "id": "ar",
+   "t": "2686-2180\nAntico Regno",
+   "x": 0,
+   "y": 1.1,
+   "tipo": "fatto",
+   "tappa": 1
+  },
+  {
+   "id": "pir",
+   "t": "le piramidi\n(Giza)",
+   "x": 0,
+   "y": 2.2,
+   "tipo": "esito",
+   "tappa": 1
+  },
+  {
+   "id": "cr",
+   "t": "tasse ai governatori:\nil faraone si indebolisce",
+   "x": 0,
+   "y": 3.3,
+   "tipo": "causa",
+   "tappa": 2
+  },
+  {
+   "id": "mr",
+   "t": "2055-1775\nMedio Regno",
+   "x": 1.5,
+   "y": 1.1,
+   "tipo": "fatto",
+   "tappa": 3
+  },
+  {
+   "id": "fay",
+   "t": "Nubia, Siria;\nbonifica del Fayyum",
+   "x": 1.5,
+   "y": 2.2,
+   "tipo": "esito",
+   "tappa": 3
+  },
+  {
+   "id": "hyk",
+   "t": "1700 circa: Hyksos\ncavallo e carro",
+   "x": 1.5,
+   "y": 3.3,
+   "tipo": "causa",
+   "tappa": 3
+  },
+  {
+   "id": "nr",
+   "t": "1550-1070\nNuovo Regno",
+   "x": 3,
+   "y": 1.1,
+   "tipo": "fatto",
+   "tappa": 4
+  },
+  {
+   "id": "kad",
+   "t": "Akhenaton; Ramses II\nKadesh 1275",
+   "x": 3,
+   "y": 2.2,
+   "tipo": "esito",
+   "tappa": 4
+  },
+  {
+   "id": "fine",
+   "t": "popoli del mare;\nAssiri, Persiani, Alessandro 332",
+   "x": 3,
+   "y": 3.3,
+   "tipo": "causa",
+   "tappa": 5
+  }
+ ],
+ "archi": [
+  {
+   "da": "eg",
+   "a": "int",
+   "t": "",
+   "tappa": 0
+  },
+  {
+   "da": "eg",
+   "a": "ar",
+   "t": "",
+   "tappa": 1
+  },
+  {
+   "da": "ar",
+   "a": "pir",
+   "t": "costruisce",
+   "tappa": 1
+  },
+  {
+   "da": "pir",
+   "a": "cr",
+   "t": "poi",
+   "tappa": 2
+  },
+  {
+   "da": "eg",
+   "a": "mr",
+   "t": "",
+   "tappa": 3
+  },
+  {
+   "da": "mr",
+   "a": "fay",
+   "t": "espansione",
+   "tappa": 3
+  },
+  {
+   "da": "fay",
+   "a": "hyk",
+   "t": "poi",
+   "tappa": 3
+  },
+  {
+   "da": "eg",
+   "a": "nr",
+   "t": "",
+   "tappa": 4
+  },
+  {
+   "da": "nr",
+   "a": "kad",
+   "t": "splendore",
+   "tappa": 4
+  },
+  {
+   "da": "kad",
+   "a": "fine",
+   "t": "poi",
+   "tappa": 5
+  }
+ ],
+ "dy": 130,
+ "dx": 240
+};
+</script>
+<script src="lib/mappa-concettuale.js"></script>
+</body>
+</html>

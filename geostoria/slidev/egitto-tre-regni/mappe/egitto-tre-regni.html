@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Antico, Medio e Nuovo Regno</title>
+<!--
+Linea del tempo a tappe per la LIM: le fasi della storia egizia (cap. 1, lez. 2 §3 «Una storia lunghissima», pp. 48-52).
+Date come nel manuale (linea del tempo di p. 48 e testo), tutte approssimative: lo dice il manuale stesso (p. 46).
+Riga della Mesopotamia ripresa dalla stessa linea del tempo di p. 48.
+Comandi: frecce o spazio, pulsanti; ?t=N apre la tappa N (da 0).
+-->
+<style>
+:root{--roma:#b8322a;--lapis:#1f4e8c;--ocra:#c8962e;--testo:#1d2430;--grigio:#6b7280}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:#fff;color:var(--testo);font-family:Lexend,"Atkinson Hyperlegible",system-ui,sans-serif;overflow:hidden}
+.tutto{display:grid;grid-template-columns:57% 43%;height:100vh}
+.sx{position:relative;background:linear-gradient(180deg,#fbf6ea,#f1e6cc)}
+svg{width:100%;height:100vh;display:block}
+.pannello{display:flex;flex-direction:column;padding:2.4vh 2.2vw 1.8vh 2vw;gap:1.3vh}
+.sopra{font-size:2.3vh;font-weight:600;color:var(--grigio);text-transform:uppercase;letter-spacing:.08em}
+.titolo{font-size:4.8vh;font-weight:700;color:var(--roma);line-height:1.08}
+.testo{font-size:3.05vh;line-height:1.38}
+.testo b{color:var(--lapis)}
+.domanda{margin-top:auto;font-size:2.7vh;line-height:1.3;border-left:.6vh solid var(--ocra);padding:.7vh 0 .7vh 1vw;color:#4a3a12;background:#faf3e3;border-radius:0 .6vh .6vh 0}
+.tempo{display:flex;gap:.5vw}
+.tempo button{flex:1;font:inherit;font-size:1.9vh;padding:.8vh 0;border:none;border-radius:.7vh;background:#e5e7eb;color:var(--testo);cursor:pointer}
+.tempo button.ora{background:var(--roma);color:#fff;font-weight:700}
+.comandi{display:flex;gap:.7vw}
+.comandi button{flex:1;font:inherit;font-size:2.4vh;padding:.9vh;border-radius:.8vh;border:2px solid var(--lapis);background:#fff;color:var(--lapis);cursor:pointer}
+.comandi button:disabled{opacity:.35;cursor:default}
+.nota{font-size:1.5vh;color:var(--grigio)}
+.fase,.ev,.ico,.mes{transition:opacity .6s}
+.fase rect{transition:fill .5s,stroke .5s}
+.ft{font-size:13px;font-weight:700;text-anchor:middle;pointer-events:none}
+.ax{font-size:12px;fill:#6b7280;text-anchor:middle}
+.lab{font-size:13px;font-weight:700;paint-order:stroke;stroke:#fbf6ea;stroke-width:4px;stroke-linejoin:round}
+.big{font-size:40px;font-weight:700;text-anchor:middle}
+.bigs{font-size:17px;font-weight:600;text-anchor:middle;fill:#4b5563}
+.riga{font-size:13px;font-weight:700;fill:#6b7280}
+</style>
+</head>
+<body>
+<div class="tutto">
+  <div class="sx"><svg id="s" viewBox="0 0 600 560" aria-label="Linea del tempo della storia egizia"></svg></div>
+  <div class="pannello">
+    <div class="sopra" id="sopra"></div>
+    <div class="titolo" id="titolo"></div>
+    <div class="testo" id="testo"></div>
+    <div class="domanda" id="domanda"></div>
+    <div class="tempo" id="tempo"></div>
+    <div class="comandi"><button id="ind">◀ indietro</button><button id="av">avanti ▶</button></div>
+    <div class="nota">Date approssimative, come nel manuale · pp. 48-52 · linea del tempo semplificata da p. 48</div>
+  </div>
+</div>
+<script>
+const NS = 'http://www.w3.org/2000/svg', s = document.getElementById('s');
+function el(t, a, p = s, x) { const e = document.createElementNS(NS, t); for (const k in a) e.setAttribute(k, a[k]); if (x != null) e.textContent = x; p.appendChild(e); return e; }
+// scala: 3000 a.C. a sinistra, 300 a.C. a destra
+const X0 = 40, X1 = 570, A0 = 3000, A1 = 300;
+const X = a => X0 + (A0 - a) * (X1 - X0) / (A0 - A1);
+const Y = 210, HB = 54;
+el('text', {x: 24, y: Y - 10, class: 'riga'}, s, 'EGITTO');
+// asse
+el('line', {x1: X0, y1: Y + HB + 14, x2: X1, y2: Y + HB + 14, stroke: '#9ca3af', 'stroke-width': 1.5});
+for (let a = 3000; a >= 500; a -= 500) {
+  el('line', {x1: X(a), y1: Y + HB + 9, x2: X(a), y2: Y + HB + 19, stroke: '#9ca3af', 'stroke-width': 1.5});
+  el('text', {x: X(a), y: Y + HB + 34, class: 'ax'}, s, a === 3000 ? '3000 a.C.' : a);
+}
+// fasi: [inizio, fine, nome breve, colore acceso, forte?]
+const FASI = [
+  [3000, 2686, '', '#cfc6b0', 0],
+  [2686, 2180, 'Antico', '#b8322a', 1],
+  [2180, 2055, '', '#d9cdb0', 0],
+  [2055, 1775, 'Medio', '#1f4e8c', 1],
+  [1775, 1550, '', '#d9cdb0', 0],
+  [1550, 1070, 'Nuovo', '#c8962e', 1],
+  [1070, 747, '', '#d9cdb0', 0],
+  [747, 332, 'declino', '#8a8577', 0]
+];
+const FR = FASI.map(f => {
+  const g = el('g', {class: 'fase', opacity: 0});
+  const r = el('rect', {x: X(f[0]), y: Y, width: X(f[1]) - X(f[0]), height: HB, fill: '#efe3c6', stroke: '#c9b991', 'stroke-width': 1.5, rx: 3}, g);
+  const t = el('text', {x: (X(f[0]) + X(f[1])) / 2, y: Y + HB / 2 + 5, class: 'ft', fill: '#1d2430'}, g, f[2]);
+  return {g, r, t, f};
+});
+// riga della Mesopotamia (p. 48), sempre tenue
+const M = el('g', {class: 'mes', opacity: 0});
+el('text', {x: 24, y: 330, class: 'riga'}, M, 'MESOPOTAMIA E ANATOLIA');
+[[3300, 2350, 'Sumeri', 0], [2370, 2200, 'Accadi', 1], [2000, 1200, 'Babilonesi', 0], [1600, 1200, 'Hittiti', 1], [1200, 612, 'Assiri', 0]].forEach(([a, b, n, alto]) => {
+  const xa = X(Math.min(a, 3000)), xb = X(b), y = 342 + (alto ? 26 : 0);
+  el('rect', {x: xa, y, width: xb - xa, height: 20, fill: '#e7e1d2', stroke: '#c9c1ad', rx: 3}, M);
+  el('text', {x: (xa + xb) / 2, y: y + 15, 'font-size': 11.5, 'text-anchor': 'middle', fill: '#4b5563', 'font-weight': 600}, M, n);
+});
+// eventi sopra la barra: [anno, etichetta, tappa da cui compare, alto]
+const EV = [
+  [2589, 'Cheope: Giza', 0, 165, 'middle'], [2200, 'crisi', 1, 130, 'middle'], [2055, 'Montuhotep II', 2, 165, 'middle'],
+  [1700, 'Hyksos', 3, 130, 'middle'], [1550, 'Amose', 4, 165, 'middle'], [1350, 'Akhenaton', 5, 60, 'middle'],
+  [1275, 'Kadesh', 6, 95, 'middle'], [1200, 'popoli del mare', 7, 130, 'start'], [671, 'Assiri', 7, 60, 'middle'], [525, 'Persiani', 7, 95, 'middle'], [332, 'Alessandro', 7, 165, 'end']
+];
+const EVG = EV.map(([a, n, t, yl, an]) => {
+  const g = el('g', {class: 'ev', opacity: 0});
+  el('line', {x1: X(a), y1: yl + 6, x2: X(a), y2: Y, stroke: '#4b5563', 'stroke-width': 1.5, 'stroke-dasharray': '3 3'}, g);
+  el('circle', {cx: X(a), cy: Y, r: 4.5, fill: '#1d2430'}, g);
+  el('text', {x: X(a) + (an === 'start' ? -4 : an === 'end' ? 4 : 0), y: yl, class: 'lab', fill: '#1d2430', 'text-anchor': an}, g, n);
+  return {g, t};
+});
+// icone in basso, una per tappa
+const IY = 470;
+function ico(fn) { const g = el('g', {class: 'ico', opacity: 0}); fn(g); return g; }
+const ICO = [
+  ico(g => { el('path', {d: 'M200,505 L260,425 L320,505 Z', fill: '#e2c48a', stroke: '#8a6d3b', 'stroke-width': 2}, g); el('path', {d: 'M300,505 L345,445 L390,505 Z', fill: '#d6b36f', stroke: '#8a6d3b', 'stroke-width': 2}, g); el('path', {d: 'M375,505 L405,465 L435,505 Z', fill: '#e2c48a', stroke: '#8a6d3b', 'stroke-width': 2}, g); }),
+  ico(g => { [230, 300, 370].forEach((x, i) => { el('circle', {cx: x, cy: 470, r: 26, fill: '#efe3c6', stroke: '#8a6a45', 'stroke-width': 2}, g); el('text', {x, y: 477, 'text-anchor': 'middle', 'font-size': 18, 'font-weight': 700, fill: '#8a6a45'}, g, '★'); }); el('text', {x: 300, y: 527, 'text-anchor': 'middle', 'font-size': 14, fill: '#4b5563', 'font-weight': 600}, g, 'tanti governatori, nessun centro'); }),
+  ico(g => { for (let i = 0; i < 4; i++) el('path', {d: `M190,${445 + i * 16} q25,-10 50,0 t50,0 t50,0 t50,0 t50,0`, fill: 'none', stroke: '#1f4e8c', 'stroke-width': 3}, g); el('text', {x: 300, y: 527, 'text-anchor': 'middle', 'font-size': 14, fill: '#4b5563', 'font-weight': 600}, g, 'Fayyum: bonifica e irrigazione'); }),
+  ico(g => { el('circle', {cx: 300, cy: 470, r: 34, fill: 'none', stroke: '#8a6d3b', 'stroke-width': 5}, g); for (let k = 0; k < 6; k++) { const a = k * Math.PI / 3; el('line', {x1: 300, y1: 470, x2: 300 + 34 * Math.cos(a), y2: 470 + 34 * Math.sin(a), stroke: '#8a6d3b', 'stroke-width': 3}, g); } el('circle', {cx: 300, cy: 470, r: 6, fill: '#8a6d3b'}, g); el('text', {x: 300, y: 527, 'text-anchor': 'middle', 'font-size': 14, fill: '#4b5563', 'font-weight': 600}, g, 'cavallo e carro da guerra'); }),
+  ico(g => { [250, 280, 310, 340].forEach(x => el('rect', {x, y: 440, width: 16, height: 60, fill: '#e2c48a', stroke: '#8a6d3b'}, g)); el('rect', {x: 240, y: 428, width: 126, height: 12, fill: '#d6b36f', stroke: '#8a6d3b'}, g); el('text', {x: 303, y: 527, 'text-anchor': 'middle', 'font-size': 14, fill: '#4b5563', 'font-weight': 600}, g, 'Tebe capitale · Valle dei re'); }),
+  ico(g => { el('circle', {cx: 300, cy: 455, r: 26, fill: '#e8b93c'}, g); for (let k = 0; k < 9; k++) { const a = Math.PI * (0.15 + 0.7 * k / 8); el('line', {x1: 300 + 30 * Math.cos(a), y1: 455 + 30 * Math.sin(a), x2: 300 + 70 * Math.cos(a), y2: 455 + 70 * Math.sin(a), stroke: '#e8b93c', 'stroke-width': 3}, g); } el('text', {x: 300, y: 545, 'text-anchor': 'middle', 'font-size': 14, fill: '#4b5563', 'font-weight': 600}, g, 'Aton, il disco solare'); }),
+  ico(g => { el('text', {x: 300, y: 485, class: 'big', fill: '#b8322a'}, g, '1275 a.C.'); el('text', {x: 300, y: 515, class: 'bigs'}, g, 'Egizi contro Hittiti: nessun vincitore'); }),
+  ico(g => { el('text', {x: 300, y: 485, class: 'big', fill: '#4b5563'}, g, '332 a.C.'); el('text', {x: 300, y: 515, class: 'bigs'}, g, 'l’Egitto non è più indipendente'); })
+];
+const TAPPE = [
+  {sopra: '2686-2180 a.C.', titolo: 'L’Antico Regno', testo: 'I faraoni piegano i <b>governatori</b> dei distretti e uniscono tutto il Paese. È l’età delle <b>piramidi</b>: Zoser a Saqqara, a gradoni; poi Cheope, Chefren e Micerino a <b>Giza</b>. Capitale: <b>Menfi</b>.', dom: 'Chi costruiva le piramidi, e in quale stagione?', on: [1], ev: 0},
+  {sopra: '2180-2055 a.C.', titolo: 'La crisi: Primo periodo intermedio', testo: 'Le <b>tasse</b> restano nelle mani dei funzionari locali e dei templi. I <b>governatori</b> diventano indipendenti, lasciano la carica ai figli, hanno eserciti propri. Instabilità e <b>guerra civile</b>.', dom: 'Se le tasse non arrivano al faraone, che cosa gli succede?', on: [2], ev: 1},
+  {sopra: '2055-1775 a.C.', titolo: 'Il Medio Regno', testo: '<b>Montuhotep II</b>, governatore di Tebe, riunifica l’Egitto. Il faraone controlla meglio i funzionari. Conquiste verso il <b>Sinai</b>, la Palestina, la Siria e la <b>Nubia</b>; bonifica del <b>Fayyum</b>.', dom: 'Perché bonificare il Fayyum? Pensa a quante bocche da sfamare.', on: [3], ev: 2},
+  {sopra: 'verso il 1700 a.C.', titolo: 'Gli Hyksos', testo: 'Dall’Asia, attraverso il <b>delta</b>, arrivano gli <b>Hyksos</b>, «re dei Paesi stranieri», e dominano l’Egitto (Secondo periodo intermedio). Ma imitano i faraoni: titoli, arte, geroglifici. Portano il <b>cavallo</b> e il <b>carro da guerra</b>.', dom: 'Sono gli Hyksos a cambiare l’Egitto o l’Egitto a cambiare loro?', on: [4], ev: 3},
+  {sopra: '1550-1070 a.C.', titolo: 'Il Nuovo Regno', testo: 'Da <b>Tebe</b>, rimasta libera, <b>Amose</b> caccia gli Hyksos (1550). Tebe è la capitale, la <b>Valle dei re</b> la tomba dei faraoni. <b>Thutmosi III</b> arriva fino all’<b>Eufrate</b>: massima espansione.', dom: 'Da dove parte la riscossa, e perché proprio da lì?', on: [5], ev: 4},
+  {sopra: 'verso il 1350 a.C.', titolo: 'Akhenaton e Nefertiti', testo: '<b>Amenofi IV</b> e la regina <b>Nefertiti</b> impongono un solo dio, <b>Aton</b>, il disco solare. Lui si fa chiamare <b>Akhenaton</b> e fonda una nuova capitale. Dopo di lui, <b>Tutankhamon</b> rimette gli antichi dèi.', dom: 'Perché i sacerdoti di Amon, a Tebe, sono contrari?', on: [5], ev: 5},
+  {sopra: '1279-1213 a.C.', titolo: 'Ramses II e Kadesh', testo: 'Con <b>Ramses II</b> templi e palazzi in tutto il Paese. Ma in Siria l’Egitto si scontra con gli <b>Hittiti</b>: a <b>Kadesh</b> (1275) nessuno vince davvero. Qualche anno dopo le due potenze si riconoscono.', dom: 'Ramses si fa ritrarre mentre travolge i nemici. Ha vinto?', on: [5], ev: 6},
+  {sopra: '1200-332 a.C.', titolo: 'Il tramonto', testo: 'Verso il 1200 i <b>popoli del mare</b>; i <b>sacerdoti</b> tolgono potere al faraone. Nel 1070 finisce il Nuovo Regno. Poi i dominatori stranieri: <b>Assiri</b> (671), <b>Persiani</b> (525), <b>Alessandro Magno</b> (332).', dom: 'Racconta la linea del tempo da sinistra a destra, con le parole del libro.', on: [6, 7], ev: 7}
+];
+const tempo = document.getElementById('tempo');
+const bt = TAPPE.map((t, i) => { const b = document.createElement('button'); b.textContent = i + 1; b.onclick = () => vai(i); tempo.appendChild(b); return b; });
+let ora = 0;
+function vai(i) {
+  ora = Math.max(0, Math.min(TAPPE.length - 1, i)); const t = TAPPE[ora];
+  for (const k of ['sopra', 'titolo', 'testo']) document.getElementById(k).innerHTML = t[k];
+  document.getElementById('domanda').textContent = t.dom;
+  bt.forEach((b, j) => b.classList.toggle('ora', j === ora));
+  document.getElementById('ind').disabled = ora === 0; document.getElementById('av').disabled = ora === TAPPE.length - 1;
+  const ultima = Math.max(...t.on);
+  FR.forEach((x, j) => {
+    x.g.setAttribute('opacity', j <= ultima ? 1 : 0);
+    const acceso = t.on.includes(j);
+    x.r.setAttribute('fill', acceso ? x.f[3] : (x.f[4] ? '#e9dcc0' : '#efe3c6'));
+    x.r.setAttribute('stroke', acceso ? x.f[3] : '#c9b991');
+    x.t.setAttribute('fill', acceso ? '#fff' : '#1d2430');
+  });
+  M.setAttribute('opacity', 1);
+  EVG.forEach(x => x.g.setAttribute('opacity', x.t <= t.ev ? (x.t === t.ev ? 1 : .45) : 0));
+  ICO.forEach((g, j) => g.setAttribute('opacity', j === ora ? 1 : 0));
+}
+document.getElementById('av').onclick = () => vai(ora + 1);
+document.getElementById('ind').onclick = () => vai(ora - 1);
+addEventListener('keydown', e => {
+  if (['ArrowRight', 'ArrowDown', ' ', 'PageDown'].includes(e.key)) { e.preventDefault(); (ora === TAPPE.length - 1 ? __passa(1) : vai(ora + 1)); }
+  if (['ArrowLeft', 'ArrowUp', 'PageUp'].includes(e.key)) { e.preventDefault(); (ora === 0 ? __passa(-1) : vai(ora - 1)); }
+});
+const q = new URLSearchParams(location.search).get('t'); vai(q ? +q : 0);
+
+// ponte con Slidev (vedi REGOLE-SLIDE.md): tasti alla pagina quando la slide è visibile; oltre i bordi si passa alle slide.
+function __restituisci() {
+  try { if (window.frameElement) window.frameElement.blur(); window.parent.focus(); } catch (e) {}
+}
+function __passa(dir) {
+  try { const n = window.parent !== window && window.parent.__slidev__ && window.parent.__slidev__.nav; if (n) { dir > 0 ? n.next() : n.prev(); __restituisci(); } } catch (e) {}
+}
+(function () {
+  if (window.parent === window) return;
+  let relatore = false; try { const l = window.parent.location; relatore = (l.pathname + l.hash).includes('presenter'); } catch (e) {}
+  if (relatore) return;
+  const fe = window.frameElement; let era = false;
+  setInterval(() => { const vis = !!fe && fe.getBoundingClientRect().height > 0; if (vis && !era) window.focus(); if (!vis && era) __restituisci(); era = vis; }, 250);
+})();
+</script>
+</body>
+</html>
